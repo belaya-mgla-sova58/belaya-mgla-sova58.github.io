@@ -8132,3 +8132,152 @@ body:not(.is-home-route) .hero #uiRouteTitle{
 .route-page[data-route="castle"] .castle-reward-names{
   margin:0;
 }
+
+
+/* v279: Битва за замок — компактное оформление наград */
+.route-page[data-route="castle"] .castle-reward-groups{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin-top:10px;
+}
+.route-page[data-route="castle"] .castle-reward-group{
+  padding:11px;
+  border:1px solid #dce8f7;
+  border-radius:13px;
+  background:linear-gradient(145deg,#f8fbff,#eef6ff);
+}
+.route-page[data-route="castle"] .castle-reward-group>strong{
+  display:block;
+  margin-bottom:8px;
+  color:#173c79;
+  font-size:14px;
+}
+.route-page[data-route="castle"] .castle-reward-chip{
+  padding:7px 9px;
+  margin-top:6px;
+  border-radius:9px;
+  background:#fff;
+  border:1px solid #e4edf8;
+  color:#405875;
+  font-size:13px;
+  line-height:1.25;
+}
+@media(max-width:760px){
+  .route-page[data-route="castle"] .castle-reward-groups{
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+  .route-page[data-route="castle"] .castle-reward-group{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:6px;
+  }
+  .route-page[data-route="castle"] .castle-reward-group>strong{
+    grid-column:1/-1;
+    margin-bottom:1px;
+  }
+  .route-page[data-route="castle"] .castle-reward-chip{
+    margin-top:0;
+  }
+}
+
+
+/* v280: Мобилизация альянса — компактное оформление */
+.alliance-mob-compact{display:block;}
+.am-quick-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin:14px 0 16px;
+}
+.am-quick-card,
+.am-info-card{
+  border:1px solid #d9e5f5;
+  border-radius:16px;
+  background:linear-gradient(145deg,#ffffff,#f3f8ff);
+  box-shadow:0 10px 24px rgba(23,58,115,.06);
+}
+.am-quick-card{padding:14px 15px;}
+.am-quick-card b{display:block;color:#173c79;margin-bottom:6px;font-size:15px;}
+.am-quick-card span{display:block;color:#5f7089;line-height:1.45;}
+.am-anchor-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin:14px 0 18px;
+}
+.am-anchor-grid a{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:48px;
+  padding:10px 12px;
+  text-align:center;
+  border-radius:14px;
+  border:1px solid #d9e5f5;
+  background:#fff;
+  color:#173c79;
+  text-decoration:none;
+  font-weight:700;
+}
+.am-accordion{
+  margin:12px 0;
+  border:1px solid #d9e5f5;
+  border-radius:18px;
+  background:linear-gradient(145deg,#ffffff,#f6faff);
+  overflow:hidden;
+  box-shadow:0 12px 28px rgba(23,58,115,.07);
+}
+.am-accordion summary{
+  list-style:none;
+  cursor:pointer;
+  padding:15px 16px;
+  font-weight:800;
+  color:#173c79;
+  font-size:16px;
+  background:linear-gradient(145deg,#eef5ff,#f8fbff);
+}
+.am-accordion summary::-webkit-details-marker{display:none;}
+.am-accordion[open] summary{border-bottom:1px solid #d9e5f5;}
+.am-accordion-body{padding:14px;}
+.am-card-grid{display:grid;gap:12px;}
+.am-card-grid.two{grid-template-columns:repeat(2,minmax(0,1fr));}
+.am-info-card{padding:14px 15px;}
+.am-info-card h4{
+  margin:0 0 10px;
+  color:#173c79;
+  font-size:16px;
+}
+.am-info-card p:last-child,
+.am-info-card ul:last-child,
+.am-info-card ol:last-child{margin-bottom:0;}
+.am-info-card.warn{
+  border-left:5px solid #d99a20;
+  background:linear-gradient(145deg,#fffdf5,#fff6de);
+}
+.am-info-card.good{
+  border-left:5px solid #3a8b61;
+  background:linear-gradient(145deg,#fbfffc,#eef9f2);
+}
+.am-bad-list{display:grid;gap:10px;}
+.am-bad-list>div{
+  border:1px solid #ead6b0;
+  border-radius:14px;
+  background:linear-gradient(145deg,#fffaf0,#fff3da);
+  padding:12px 14px;
+}
+.am-bad-list b{display:block;color:#8d5700;margin-bottom:5px;}
+.am-bad-list span{display:block;color:#6c634f;line-height:1.5;}
+@media(max-width:900px){
+  .am-anchor-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media(max-width:700px){
+  .am-quick-grid,
+  .am-card-grid.two,
+  .am-anchor-grid{grid-template-columns:1fr;}
+  .am-accordion summary{font-size:15px;padding:14px;}
+  .am-accordion-body{padding:12px;}
+  .am-quick-card,
+  .am-info-card{padding:13px 14px;}
+}
