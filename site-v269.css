@@ -8364,3 +8364,39 @@ h4 .catalog-inline-item-icon{
     min-width:28px;
   }
 }
+
+
+/* v286: зафиксированные изображения — Учебный лагерь, Рыбалка, Чемпионат альянса */
+.site-photo-card{
+  margin:14px auto 18px;
+  max-width:760px;
+  border:1px solid #d9e5f5;
+  border-radius:16px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:0 10px 26px rgba(23,58,115,.08);
+}
+.site-photo-card img{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:contain;
+  background:#eef5ff;
+}
+.site-photo-card figcaption{
+  padding:10px 13px 12px;
+  color:#5f7089;
+  font-size:14px;
+  line-height:1.45;
+}
+.training-camp-photo{max-width:560px;}
+.fishing-guide-photo{max-width:520px;}
+.championship-lines-photo{max-width:520px;}
+.training-camp-section h3{margin-top:20px;}
+@media(max-width:700px){
+  .site-photo-card,
+  .training-camp-photo,
+  .fishing-guide-photo,
+  .championship-lines-photo{max-width:100%;border-radius:14px;}
+  .site-photo-card figcaption{font-size:13px;padding:9px 11px 11px;}
+}
