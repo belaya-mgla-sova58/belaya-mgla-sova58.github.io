@@ -8403,6 +8403,28 @@ h4 .catalog-inline-item-icon{
 
 
 /* v287: отдельный раздел Новости */
+.news-menu-icon-img{
+  width:34px !important;
+  height:34px !important;
+  border-radius:11px;
+  object-fit:cover;
+  box-shadow:0 5px 14px rgba(87,53,160,.25);
+  flex:0 0 auto;
+}
+.news-title-row{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.news-title-icon{
+  width:54px;
+  height:54px;
+  border-radius:16px;
+  object-fit:cover;
+  box-shadow:0 10px 22px rgba(60,42,110,.18);
+  flex:0 0 auto;
+}
+
 .news-menu-icon{
   display:inline-flex !important;
   align-items:center;
@@ -8502,6 +8524,8 @@ h4 .catalog-inline-item-icon{
   .news-page-heading h2{font-size:25px;}
   .news-category-grid{grid-template-columns:1fr;gap:12px;}
   .news-category-card{min-height:112px;font-size:18px;border-radius:18px;}
+  .news-title-row{gap:10px;}
+  .news-title-icon{width:46px;height:46px;border-radius:14px;}
   .news-empty-space{height:420px;}
 }
 
