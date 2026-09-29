@@ -1005,63 +1005,54 @@
 })();
 
 
-// v297: instant visual response for CounterAPI vote widgets on News cards.
+// v298: static visible heart buttons on News cards; CounterAPI syncs in background.
 (function(){
   function parseCount(text){
-    var m=String(text||'').replace(/\s+/g,' ').match(/(\d[\d\s.,]*)/);
-    if(!m) return 0;
-    var n=parseInt(m[1].replace(/[^\d]/g,''),10);
-    return Number.isFinite(n)?n:0;
+    var m=String(text||'').replace(/\s+/g,'').match(/\d+/g);
+    return m ? parseInt(m[m.length-1],10)||0 : 0;
   }
-  function likeStorageKey(key){ return 'belaya-mgla-fast-liked-' + key; }
-  function initFastCardLikes(){
-    document.querySelectorAll('.news-category-card .news-card-counter').forEach(function(counter){
-      var card=counter.closest('.news-category-card');
-      if(!card || card.querySelector('.news-card-fast-like')) return;
-      var key=counter.getAttribute('key') || counter.getAttribute('data-key') || '';
-      var btn=document.createElement('button');
-      btn.type='button';
-      btn.className='news-card-fast-like';
-      btn.setAttribute('aria-label','Поставить лайк');
-      btn.innerHTML='<span class="fast-like-heart" aria-hidden="true">♥</span><span class="fast-like-count" aria-live="polite">0</span>';
-      card.appendChild(btn);
+  function storageKey(key){return 'belaya-mgla-fast-liked-'+key;}
+  function initStaticNewsLikes(){
+    document.querySelectorAll('.news-category-card').forEach(function(card){
+      var btn=card.querySelector('.news-card-fast-like');
+      var counter=card.querySelector('.news-card-counter');
+      if(!btn) return;
+      var key=btn.getAttribute('data-like-key') || (counter && counter.getAttribute('key')) || '';
       var countEl=btn.querySelector('.fast-like-count');
-      var sync=function(){
+      var voted=key && localStorage.getItem(storageKey(key))==='1';
+      if(voted){btn.classList.add('is-liked'); btn.disabled=true;}
+
+      function syncFromCounter(){
+        if(!counter || !countEl) return;
         var real=parseCount(counter.textContent);
-        if(real>=0 && !btn.classList.contains('is-pending')) countEl.textContent=String(real);
-      };
-      new MutationObserver(function(){
-        var real=parseCount(counter.textContent);
-        if(real>=0){
-          countEl.textContent=String(real);
-          btn.classList.remove('is-pending');
-        }
-      }).observe(counter,{subtree:true,childList:true,characterData:true,attributes:true});
-      setTimeout(sync,250); setTimeout(sync,1000); setTimeout(sync,2500);
-      if(key && localStorage.getItem(likeStorageKey(key))==='1'){
-        btn.classList.add('is-liked');
-        btn.disabled=true;
-        btn.setAttribute('aria-label','Лайк уже поставлен');
+        if(real>=0) countEl.textContent=String(real);
       }
-      function fireRealVote(attempt){
-        var target=counter.querySelector('button,[role="button"],a') || counter;
-        try{ target.click(); return; }catch(e){}
-        if(attempt<20) setTimeout(function(){fireRealVote(attempt+1);},250);
+      if(counter){
+        new MutationObserver(syncFromCounter).observe(counter,{subtree:true,childList:true,characterData:true,attributes:true});
+        setTimeout(syncFromCounter,800);
+        setTimeout(syncFromCounter,2500);
       }
+
       btn.addEventListener('click',function(ev){
         ev.preventDefault(); ev.stopPropagation();
         if(btn.disabled) return;
-        var current=parseCount(countEl.textContent);
+        var current=parseInt(countEl.textContent,10)||0;
         countEl.textContent=String(current+1);
-        btn.classList.add('is-liked','is-pending');
+        btn.classList.add('is-liked');
         btn.disabled=true;
-        btn.setAttribute('aria-label','Лайк уже поставлен');
-        if(key) localStorage.setItem(likeStorageKey(key),'1');
-        fireRealVote(0);
+        if(key) localStorage.setItem(storageKey(key),'1');
+
+        // Let the official CounterAPI widget record the real vote when it is ready.
+        function fire(attempt){
+          if(!counter) return;
+          var target=counter.querySelector('button,[role="button"],a');
+          if(target){ target.click(); return; }
+          if(attempt<30) setTimeout(function(){fire(attempt+1);},250);
+        }
+        fire(0);
       });
-      counter.classList.add('news-card-counter-hidden');
     });
   }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initFastCardLikes,{once:true});
-  else initFastCardLikes();
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initStaticNewsLikes,{once:true});
+  else initStaticNewsLikes();
 })();
