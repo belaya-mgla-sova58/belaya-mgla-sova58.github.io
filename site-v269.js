@@ -932,4 +932,74 @@
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',addFooter,{once:true});
   else addFooter();
 })();
-\n\n// v292: shared likes for News pages using CounterAPI\n(function(){\n  var namespace = 'belaya-mgla-sova58.github.io';\n  var action = 'like';\n\n  function apiUrl(key, readOnly){\n    var url = 'https://counterapi.com/api/' + encodeURIComponent(namespace) + '/' + encodeURIComponent(action) + '/' + encodeURIComponent(key) + '?behavior=vote';\n    if(readOnly) url += '&readOnly=true';\n    return url;\n  }\n\n  function storageKey(key){ return 'belaya-mgla-liked-' + key; }\n\n  function setCount(button, value){\n    var count = button.querySelector('.news-like-count');\n    if(count && typeof value !== 'undefined' && value !== null) count.textContent = value;\n  }\n\n  async function loadCount(button){\n    var key = button.getAttribute('data-like-key');\n    if(!key) return;\n    button.classList.add('is-loading');\n    try{\n      var res = await fetch(apiUrl(key, true), {cache:'no-store'});\n      if(!res.ok) throw new Error('counter read failed');\n      var data = await res.json();\n      setCount(button, data.value || 0);\n    }catch(e){\n      // Keep the control usable if the third-party counter is temporarily unavailable.\n    }finally{\n      button.classList.remove('is-loading');\n    }\n    if(localStorage.getItem(storageKey(key)) === '1'){\n      button.classList.add('is-liked');\n      button.disabled = true;\n      button.setAttribute('aria-label','Лайк уже поставлен');\n    }\n  }\n\n  async function like(button){\n    var key = button.getAttribute('data-like-key');\n    if(!key || localStorage.getItem(storageKey(key)) === '1') return;\n    button.disabled = true;\n    button.classList.add('is-loading');\n    try{\n      var res = await fetch(apiUrl(key, false), {cache:'no-store'});\n      if(!res.ok) throw new Error('counter vote failed');\n      var data = await res.json();\n      setCount(button, data.value || 0);\n      localStorage.setItem(storageKey(key), '1');\n      button.classList.add('is-liked');\n      button.setAttribute('aria-label','Лайк уже поставлен');\n    }catch(e){\n      button.disabled = false;\n    }finally{\n      button.classList.remove('is-loading');\n    }\n  }\n\n  function initLikes(){\n    document.querySelectorAll('.news-like-button').forEach(function(button){\n      loadCount(button);\n      button.addEventListener('click', function(){ like(button); });\n    });\n  }\n\n  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initLikes);\n  else initLikes();\n})();\n
+
+
+// v292: shared likes for News pages using CounterAPI
+(function(){
+  var namespace = 'belaya-mgla-sova58.github.io';
+  var action = 'like';
+
+  function apiUrl(key, readOnly){
+    var url = 'https://counterapi.com/api/' + encodeURIComponent(namespace) + '/' + encodeURIComponent(action) + '/' + encodeURIComponent(key) + '?behavior=vote';
+    if(readOnly) url += '&readOnly=true';
+    return url;
+  }
+
+  function storageKey(key){ return 'belaya-mgla-liked-' + key; }
+
+  function setCount(button, value){
+    var count = button.querySelector('.news-like-count');
+    if(count && typeof value !== 'undefined' && value !== null) count.textContent = value;
+  }
+
+  async function loadCount(button){
+    var key = button.getAttribute('data-like-key');
+    if(!key) return;
+    button.classList.add('is-loading');
+    try{
+      var res = await fetch(apiUrl(key, true), {cache:'no-store'});
+      if(!res.ok) throw new Error('counter read failed');
+      var data = await res.json();
+      setCount(button, data.value || 0);
+    }catch(e){
+      // Keep the control usable if the third-party counter is temporarily unavailable.
+    }finally{
+      button.classList.remove('is-loading');
+    }
+    if(localStorage.getItem(storageKey(key)) === '1'){
+      button.classList.add('is-liked');
+      button.disabled = true;
+      button.setAttribute('aria-label','Лайк уже поставлен');
+    }
+  }
+
+  async function like(button){
+    var key = button.getAttribute('data-like-key');
+    if(!key || localStorage.getItem(storageKey(key)) === '1') return;
+    button.disabled = true;
+    button.classList.add('is-loading');
+    try{
+      var res = await fetch(apiUrl(key, false), {cache:'no-store'});
+      if(!res.ok) throw new Error('counter vote failed');
+      var data = await res.json();
+      setCount(button, data.value || 0);
+      localStorage.setItem(storageKey(key), '1');
+      button.classList.add('is-liked');
+      button.setAttribute('aria-label','Лайк уже поставлен');
+    }catch(e){
+      button.disabled = false;
+    }finally{
+      button.classList.remove('is-loading');
+    }
+  }
+
+  function initLikes(){
+    document.querySelectorAll('.news-like-button').forEach(function(button){
+      loadCount(button);
+      button.addEventListener('click', function(){ like(button); });
+    });
+  }
+
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initLikes);
+  else initLikes();
+})();
