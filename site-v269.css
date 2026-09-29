@@ -8677,3 +8677,54 @@ h4 .catalog-inline-item-icon{
 @media(max-width:700px){
   .news-card-counter{right:12px;bottom:12px;min-height:38px;}
 }
+
+
+/* v297: instant likes on News cards */
+.news-card-counter-hidden{
+  position:absolute !important;
+  right:12px !important;
+  bottom:12px !important;
+  width:66px !important;
+  height:40px !important;
+  opacity:0 !important;
+  pointer-events:none !important;
+  overflow:hidden !important;
+}
+.news-card-fast-like{
+  position:absolute;
+  right:12px;
+  bottom:12px;
+  z-index:4;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  min-width:66px;
+  height:40px;
+  padding:0 12px;
+  border:0;
+  border-radius:999px;
+  background:rgba(255,255,255,.96);
+  box-shadow:0 4px 12px rgba(35,25,75,.16);
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.news-card-fast-like .fast-like-heart{
+  color:#ef3340;
+  font-size:25px;
+  line-height:1;
+  transform:translateY(-1px);
+}
+.news-card-fast-like .fast-like-count{
+  color:#6f6f7a;
+  font-size:14px;
+  font-weight:800;
+  line-height:1;
+  min-width:10px;
+  text-align:center;
+}
+.news-card-fast-like:active{transform:scale(.95);}
+.news-card-fast-like.is-liked .fast-like-heart{animation:newsHeartPop .28s ease-out;}
+@keyframes newsHeartPop{0%{transform:scale(.82)}60%{transform:scale(1.22)}100%{transform:scale(1)}}
+.news-card-fast-like:disabled{cursor:default;opacity:1;}
+@media(max-width:700px){.news-card-fast-like{right:12px;bottom:12px;height:38px;min-width:64px;padding:0 11px;}}
