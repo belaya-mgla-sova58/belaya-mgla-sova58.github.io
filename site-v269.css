@@ -8681,13 +8681,6 @@ h4 .catalog-inline-item-icon{
 
 /* v298: static always-visible hearts on news category cards */
 .news-category-card{position:relative;}
-.news-card-counter-hidden{
-  position:absolute !important;
-  width:1px !important;height:1px !important;
-  overflow:hidden !important;opacity:0 !important;
-  pointer-events:none !important;
-  right:0 !important;bottom:0 !important;
-}
 .news-card-fast-like{
   position:absolute;
   right:14px;

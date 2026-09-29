@@ -1005,54 +1005,81 @@
 })();
 
 
-// v298: static visible heart buttons on News cards; CounterAPI syncs in background.
+// v299: permanent static heart buttons + CounterAPI JSONP sync.
+// No CounterAPI embed is loaded, so third-party code cannot replace our buttons.
 (function(){
-  function parseCount(text){
-    var m=String(text||'').replace(/\s+/g,'').match(/\d+/g);
-    return m ? parseInt(m[m.length-1],10)||0 : 0;
-  }
+  var namespace='belaya-mgla-sova58.github.io';
+  var action='like';
+  var seq=0;
+
   function storageKey(key){return 'belaya-mgla-fast-liked-'+key;}
+
+  function jsonp(key, readOnly, callback){
+    seq+=1;
+    var cb='__bmLikeCb'+Date.now()+'_'+seq;
+    var script=document.createElement('script');
+    var done=false;
+    function cleanup(){
+      if(done) return;
+      done=true;
+      try{delete window[cb];}catch(e){window[cb]=undefined;}
+      if(script.parentNode) script.parentNode.removeChild(script);
+    }
+    window[cb]=function(data){
+      cleanup();
+      callback(null,data||{});
+    };
+    var url='https://counterapi.com/api/'+encodeURIComponent(namespace)+'/'+encodeURIComponent(action)+'/'+encodeURIComponent(key)+'?behavior=vote&callback='+encodeURIComponent(cb);
+    if(readOnly) url+='&readOnly=true';
+    script.src=url;
+    script.async=true;
+    script.onerror=function(){cleanup(); callback(new Error('counter unavailable'));};
+    document.head.appendChild(script);
+    setTimeout(function(){if(!done){cleanup(); callback(new Error('counter timeout'));}},8000);
+  }
+
   function initStaticNewsLikes(){
-    document.querySelectorAll('.news-category-card').forEach(function(card){
-      var btn=card.querySelector('.news-card-fast-like');
-      var counter=card.querySelector('.news-card-counter');
-      if(!btn) return;
-      var key=btn.getAttribute('data-like-key') || (counter && counter.getAttribute('key')) || '';
+    document.querySelectorAll('.news-card-fast-like').forEach(function(btn){
+      var key=btn.getAttribute('data-like-key');
       var countEl=btn.querySelector('.fast-like-count');
-      var voted=key && localStorage.getItem(storageKey(key))==='1';
-      if(voted){btn.classList.add('is-liked'); btn.disabled=true;}
+      if(!key || !countEl) return;
 
-      function syncFromCounter(){
-        if(!counter || !countEl) return;
-        var real=parseCount(counter.textContent);
-        if(real>=0) countEl.textContent=String(real);
-      }
-      if(counter){
-        new MutationObserver(syncFromCounter).observe(counter,{subtree:true,childList:true,characterData:true,attributes:true});
-        setTimeout(syncFromCounter,800);
-        setTimeout(syncFromCounter,2500);
-      }
-
-      btn.addEventListener('click',function(ev){
-        ev.preventDefault(); ev.stopPropagation();
-        if(btn.disabled) return;
-        var current=parseInt(countEl.textContent,10)||0;
-        countEl.textContent=String(current+1);
+      var voted=false;
+      try{voted=localStorage.getItem(storageKey(key))==='1';}catch(e){}
+      if(voted){
         btn.classList.add('is-liked');
         btn.disabled=true;
-        if(key) localStorage.setItem(storageKey(key),'1');
+        btn.setAttribute('aria-label','Лайк уже поставлен');
+      }
 
-        // Let the official CounterAPI widget record the real vote when it is ready.
-        function fire(attempt){
-          if(!counter) return;
-          var target=counter.querySelector('button,[role="button"],a');
-          if(target){ target.click(); return; }
-          if(attempt<30) setTimeout(function(){fire(attempt+1);},250);
-        }
-        fire(0);
+      // Read the shared count without changing the visible button structure.
+      jsonp(key,true,function(err,data){
+        if(!err && typeof data.value!=='undefined') countEl.textContent=String(data.value);
+      });
+
+      btn.addEventListener('click',function(ev){
+        ev.preventDefault();
+        ev.stopPropagation();
+        if(btn.disabled) return;
+
+        var current=parseInt(countEl.textContent,10)||0;
+        countEl.textContent=String(current+1); // instant feedback
+        btn.classList.add('is-liked');
+        btn.disabled=true;
+        btn.setAttribute('aria-label','Лайк уже поставлен');
+        try{localStorage.setItem(storageKey(key),'1');}catch(e){}
+
+        jsonp(key,false,function(err,data){
+          if(!err && typeof data.value!=='undefined'){
+            countEl.textContent=String(data.value);
+          }
+          // On network failure we keep the immediate visual response;
+          // the shared total will be refreshed next time the page opens.
+        });
       });
     });
   }
+
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initStaticNewsLikes,{once:true});
   else initStaticNewsLikes();
 })();
