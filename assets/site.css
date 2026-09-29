@@ -6666,3 +6666,60 @@ body.is-svs-route .hero .ui-route-copy {
     visibility:visible !important;
   }
 }
+/* v292: общие лайки в разделе Новости */
+.news-like-wrap{
+  display:flex;
+  justify-content:flex-end;
+  margin-top:24px;
+  padding-top:18px;
+  border-top:1px solid rgba(113,79,185,.14);
+}
+.news-like-button{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  min-height:42px;
+  padding:9px 14px;
+  border:1px solid #f0c9d0;
+  border-radius:999px;
+  background:linear-gradient(145deg,#fff,#fff6f7);
+  color:#6b4860;
+  font:inherit;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 6px 16px rgba(121,65,84,.08);
+  transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.news-like-button:hover{
+  transform:translateY(-1px);
+  box-shadow:0 9px 20px rgba(121,65,84,.13);
+  border-color:#e9aeb9;
+}
+.news-like-heart{
+  color:#e53935;
+  font-size:24px;
+  line-height:1;
+  filter:drop-shadow(0 2px 3px rgba(229,57,53,.18));
+}
+.news-like-count{
+  min-width:1.2em;
+  color:#9c3040;
+  font-weight:800;
+}
+.news-like-button.is-liked{
+  background:linear-gradient(145deg,#fff1f3,#ffe7eb);
+  border-color:#e99caa;
+}
+.news-like-button.is-liked .news-like-heart{
+  transform:scale(1.08);
+}
+.news-like-button:disabled{
+  cursor:default;
+  opacity:1;
+}
+.news-like-button.is-loading .news-like-count{opacity:.45;}
+@media(max-width:700px){
+  .news-like-wrap{justify-content:center;margin-top:18px;padding-top:14px;}
+  .news-like-button{min-height:40px;padding:8px 13px;}
+  .news-like-heart{font-size:22px;}
+}
