@@ -8599,3 +8599,64 @@ h4 .catalog-inline-item-icon{
   .news-like-button{min-height:40px;padding:8px 13px;}
   .news-like-heart{font-size:22px;}
 }
+
+/* v293: likes visible directly on News category cards */
+.news-category-card{
+  position:relative;
+  display:flex;
+  align-items:stretch;
+  justify-content:space-between;
+  padding:0 !important;
+  overflow:hidden;
+}
+.news-category-link{
+  flex:1 1 auto;
+  min-width:0;
+  display:flex;
+  align-items:flex-end;
+  padding:20px 88px 20px 20px;
+  color:#fff !important;
+  text-decoration:none !important;
+}
+.news-card-like{
+  position:absolute;
+  right:14px;
+  bottom:14px;
+  min-width:58px;
+  height:40px;
+  border:1px solid rgba(255,255,255,.45);
+  border-radius:999px;
+  background:rgba(255,255,255,.94);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  padding:6px 10px;
+  cursor:pointer;
+  box-shadow:0 6px 15px rgba(36,24,70,.18);
+  z-index:2;
+}
+.news-card-like .news-like-heart{
+  color:#e43145;
+  font-size:24px;
+  line-height:1;
+}
+.news-card-like .news-like-count{
+  color:#5b3552;
+  font-size:14px;
+  font-weight:900;
+  min-width:12px;
+}
+.news-card-like.is-liked{
+  background:#fff2f4;
+  border-color:#ffc5ce;
+}
+.news-card-like.is-liked .news-like-heart{
+  transform:scale(1.08);
+}
+.news-card-like:disabled{cursor:default;opacity:1;}
+@media(max-width:700px){
+  .news-category-link{padding:18px 82px 18px 18px;}
+  .news-card-like{right:12px;bottom:12px;height:38px;min-width:56px;}
+  .news-card-like .news-like-heart{font-size:22px;}
+}
