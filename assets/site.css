@@ -6784,3 +6784,20 @@ body.is-svs-route .hero .ui-route-copy {
   .news-card-like{right:12px;bottom:12px;height:38px;min-width:56px;}
   .news-card-like .news-like-heart{font-size:22px;}
 }
+
+/* v296: CounterAPI vote widget on News cards */
+.news-category-card{position:relative;}
+.news-card-counter{
+  position:absolute;
+  right:14px;
+  bottom:14px;
+  z-index:4;
+  min-height:40px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.news-card-counter *{box-sizing:border-box;}
+@media(max-width:700px){
+  .news-card-counter{right:12px;bottom:12px;min-height:38px;}
+}

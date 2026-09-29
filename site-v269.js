@@ -934,46 +934,38 @@
 })();
 
 
-// v295: shared likes for News pages using CounterAPI browser library
+// v292: shared likes for News pages using CounterAPI
 (function(){
   var namespace = 'belaya-mgla-sova58.github.io';
   var action = 'like';
-  var options = {behavior:'vote'};
+
+  function apiUrl(key, readOnly){
+    var url = 'https://counterapi.com/api/' + encodeURIComponent(namespace) + '/' + encodeURIComponent(action) + '/' + encodeURIComponent(key) + '?behavior=vote';
+    if(readOnly) url += '&readOnly=true';
+    return url;
+  }
 
   function storageKey(key){ return 'belaya-mgla-liked-' + key; }
 
   function setCount(button, value){
     var count = button.querySelector('.news-like-count');
-    if(count && value !== undefined && value !== null) count.textContent = String(value);
+    if(count && typeof value !== 'undefined' && value !== null) count.textContent = value;
   }
 
-  function markLiked(button, key){
-    localStorage.setItem(storageKey(key), '1');
-    button.classList.add('is-liked');
-    button.disabled = true;
-    button.setAttribute('aria-label','Лайк уже поставлен');
-  }
-
-  function waitForCounterApi(callback, attempts){
-    attempts = attempts || 0;
-    if(window.counterApi && typeof window.counterApi.read === 'function'){
-      callback();
-      return;
-    }
-    if(attempts >= 40) return;
-    setTimeout(function(){ waitForCounterApi(callback, attempts + 1); }, 150);
-  }
-
-  function loadCount(button){
+  async function loadCount(button){
     var key = button.getAttribute('data-like-key');
     if(!key) return;
     button.classList.add('is-loading');
-    waitForCounterApi(function(){
-      window.counterApi.read(key, action, namespace, options, function(err, res){
-        button.classList.remove('is-loading');
-        if(!err && res && res.value !== undefined) setCount(button, res.value);
-      });
-    });
+    try{
+      var res = await fetch(apiUrl(key, true), {cache:'no-store'});
+      if(!res.ok) throw new Error('counter read failed');
+      var data = await res.json();
+      setCount(button, data.value || 0);
+    }catch(e){
+      // Keep the control usable if the third-party counter is temporarily unavailable.
+    }finally{
+      button.classList.remove('is-loading');
+    }
     if(localStorage.getItem(storageKey(key)) === '1'){
       button.classList.add('is-liked');
       button.disabled = true;
@@ -981,32 +973,30 @@
     }
   }
 
-  function like(button){
+  async function like(button){
     var key = button.getAttribute('data-like-key');
     if(!key || localStorage.getItem(storageKey(key)) === '1') return;
     button.disabled = true;
     button.classList.add('is-loading');
-    waitForCounterApi(function(){
-      window.counterApi.increment(key, action, namespace, options, function(err, res){
-        button.classList.remove('is-loading');
-        if(err || !res || res.value === undefined){
-          button.disabled = false;
-          return;
-        }
-        setCount(button, res.value);
-        markLiked(button, key);
-      });
-    });
+    try{
+      var res = await fetch(apiUrl(key, false), {cache:'no-store'});
+      if(!res.ok) throw new Error('counter vote failed');
+      var data = await res.json();
+      setCount(button, data.value || 0);
+      localStorage.setItem(storageKey(key), '1');
+      button.classList.add('is-liked');
+      button.setAttribute('aria-label','Лайк уже поставлен');
+    }catch(e){
+      button.disabled = false;
+    }finally{
+      button.classList.remove('is-loading');
+    }
   }
 
   function initLikes(){
     document.querySelectorAll('.news-like-button').forEach(function(button){
       loadCount(button);
-      button.addEventListener('click', function(ev){
-        ev.preventDefault();
-        ev.stopPropagation();
-        like(button);
-      });
+      button.addEventListener('click', function(){ like(button); });
     });
   }
 
