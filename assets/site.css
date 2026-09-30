@@ -6872,31 +6872,28 @@ body.is-svs-route .hero .ui-route-copy {
 }
 
 
-/* v317: selected final illustrated backgrounds for News cards */
+/* v318: selected News art at reduced scale, preserving more of each image */
 .news-category-card.eu{
   background:
-    linear-gradient(90deg,rgba(34,29,112,.30) 0%,rgba(25,47,125,.08) 46%,rgba(19,37,102,.10) 100%),
-    url("assets/news-eu-selected.jpg") center center / cover no-repeat !important;
-  box-shadow:0 14px 30px rgba(61,49,154,.20);
+    linear-gradient(90deg,rgba(34,29,112,.18),rgba(25,47,125,.04)),
+    url("assets/news-eu-selected-normal.jpg") center center / 100% 100% no-repeat !important;
 }
 .news-category-card.ru{
   background:
-    linear-gradient(90deg,rgba(15,86,144,.30) 0%,rgba(18,111,173,.08) 46%,rgba(13,80,130,.10) 100%),
-    url("assets/news-ru-selected.jpg") center center / cover no-repeat !important;
-  box-shadow:0 14px 30px rgba(31,122,168,.20);
+    linear-gradient(90deg,rgba(15,86,144,.18),rgba(18,111,173,.04)),
+    url("assets/news-ru-selected-normal.jpg") center center / 100% 100% no-repeat !important;
 }
 .news-category-card.creative{
   background:
-    linear-gradient(90deg,rgba(55,48,145,.34) 0%,rgba(81,57,147,.08) 48%,rgba(51,42,115,.10) 100%),
-    url("assets/news-creative-selected.jpg") center center / cover no-repeat !important;
-  box-shadow:0 14px 30px rgba(70,53,149,.20);
+    linear-gradient(90deg,rgba(55,48,145,.20),rgba(81,57,147,.04)),
+    url("assets/news-creative-selected-normal.jpg") center center / 100% 100% no-repeat !important;
 }
 .news-category-card.eu .news-category-link,
 .news-category-card.ru .news-category-link,
 .news-category-card.creative .news-category-link{
   position:relative;
   z-index:3;
-  text-shadow:0 2px 7px rgba(15,22,65,.52);
+  text-shadow:0 2px 7px rgba(15,22,65,.50);
 }
 .news-category-card.eu .news-card-like,
 .news-category-card.ru .news-card-like,
