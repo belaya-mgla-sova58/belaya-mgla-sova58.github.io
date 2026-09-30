@@ -149,3 +149,6 @@ v313: Elena news card maple leaves reshaped to broader natural 5-lobed autumn le
 
 
 v314: Elena card leaves repositioned and reshaped to match approved reference more closely: fuller maple silhouette, orange/red gradient, visible veins, larger corner clusters, less clipping.
+
+
+v315: Elena card now uses the approved autumn maple image itself as the card background instead of drawn SVG leaves.
