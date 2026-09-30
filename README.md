@@ -152,3 +152,6 @@ v314: Elena card leaves repositioned and reshaped to match approved reference mo
 
 
 v315: Elena card now uses the approved autumn maple image itself as the card background instead of drawn SVG leaves.
+
+
+v317: Final selected News card art: EU map+crystals, RU owl+letter, Creative winter workshop. Elena remains exactly from v315. Live titles and Firebase heart counters stay over the images.
