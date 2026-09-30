@@ -155,3 +155,6 @@ v315: Elena card now uses the approved autumn maple image itself as the card bac
 
 
 v320: EU/RU/Creative use almost the full approved banner composition. Embedded titles and heart badges removed before use; no zoom/crop. Elena unchanged from v315. Firebase unchanged.
+
+
+v321: EU News card replaced with selected variant 1, preserving wide composition and live site title/Firebase heart counter.

@@ -8776,3 +8776,11 @@ h4 .catalog-inline-item-icon{
 .news-category-card.creative .news-card-like{
   z-index:4 !important;
 }
+
+
+/* v321: final selected EU banner */
+.news-category-card.eu{
+  background:
+    linear-gradient(90deg,rgba(32,28,110,.14),rgba(26,53,135,.02)),
+    url("assets/news-eu-final.jpg") center center / 100% 100% no-repeat !important;
+}
