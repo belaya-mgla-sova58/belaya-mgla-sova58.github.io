@@ -8856,17 +8856,39 @@ h4 .catalog-inline-item-icon{
   .news-sub-banner span{font-size:20px}
 }
 
-/* v328 - force new Creative Corner artwork */
-.news-category-card.creative {
-  background-image:
-    linear-gradient(90deg,rgba(26,18,66,.08),rgba(26,18,66,.01)),
-    url("assets/creative-corner-new-v328.jpg") !important;
+/* v329: category-specific LARGE top backgrounds; small banners unchanged */
+
+body.news-top-eu .hero,
+body.news-top-eu .page-hero,
+body.news-top-eu .site-hero {
+  background-image: linear-gradient(rgba(14,44,90,.12),rgba(38,26,100,.12)), url("assets/news-eu-final-fullbleed.jpg") !important;
   background-size: cover !important;
   background-position: center center !important;
   background-repeat: no-repeat !important;
 }
-.news-sub-banner-creative {
-  background-image: url("assets/creative-corner-new-v328.jpg") !important;
+
+body.news-top-ru .hero,
+body.news-top-ru .page-hero,
+body.news-top-ru .site-hero {
+  background-image: linear-gradient(rgba(14,44,90,.12),rgba(38,26,100,.12)), url("assets/news-ru-final-fullbleed.jpg") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+body.news-top-whitefox .hero,
+body.news-top-whitefox .page-hero,
+body.news-top-whitefox .site-hero {
+  background-image: linear-gradient(rgba(14,44,90,.12),rgba(38,26,100,.12)), url("assets/elena-autumn-maple-banner.png") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+body.news-top-creative .hero,
+body.news-top-creative .page-hero,
+body.news-top-creative .site-hero {
+  background-image: linear-gradient(rgba(14,44,90,.12),rgba(38,26,100,.12)), url("assets/news-creative-final-fullbleed.jpg") !important;
   background-size: cover !important;
   background-position: center center !important;
   background-repeat: no-repeat !important;
