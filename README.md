@@ -131,3 +131,9 @@ V269
 
 
 v306: Elena header updated from burgundy tint to a clearer red tint.
+
+
+v308: Elena header variant (bright red).
+
+
+v310: Selected bright red Elena header plus subtle 3D red maple leaves along both edges.

@@ -6830,15 +6830,62 @@ body.is-svs-route .hero .ui-route-copy {
   transform:scale(1.08);
 }
 
-/* v306: Elena news header - clear red tint */
+/* v308: Elena news header - bright red */
 body[data-static-route="news-elena"] .news-hero{
-  background:linear-gradient(120deg,#5f254e 0%,#c72e43 50%,#e4484c 100%) !important;
+  background:linear-gradient(120deg,#6b1f36 0%,#d92d3f 50%,#ff4f4f 100%) !important;
 }
 body[data-static-route="news-elena"] .news-title-strip{
-  background:linear-gradient(90deg,#b8263f 0%,#df3d46 52%,#a92b47 100%) !important;
+  background:linear-gradient(90deg,#cf1f35 0%,#f1393f 52%,#c42640 100%) !important;
 }
 body[data-static-route="news-elena"] .news-kicker{
-  color:#b82038;
+  color:#c91b31;
   background:#fff1f2;
-  border-color:#f3b8c2;
+  border-color:#f6b7c1;
+}
+
+
+/* v310: 3D red maple leaves on Elena header */
+body[data-static-route="news-elena"] .news-hero{
+  position:relative;
+  overflow:hidden;
+}
+body[data-static-route="news-elena"] .news-hero .hero-inner{
+  position:relative;
+  z-index:3;
+}
+.elena-maple-decor{
+  position:absolute;
+  inset-block:0;
+  width:150px;
+  pointer-events:none;
+  z-index:2;
+  filter:drop-shadow(0 10px 10px rgba(77,5,22,.28));
+}
+.elena-maple-left{left:-24px;}
+.elena-maple-right{right:-24px;}
+.elena-leaf{
+  position:absolute;
+  width:88px;
+  height:88px;
+  filter:
+    drop-shadow(0 5px 4px rgba(70,0,15,.28))
+    drop-shadow(0 1px 0 rgba(255,255,255,.24));
+}
+.elena-leaf.leaf-a{left:5px;top:10px;transform:rotate(-24deg) scale(1.04);}
+.elena-leaf.leaf-b{left:57px;bottom:7px;transform:rotate(22deg) scale(.72);opacity:.92;}
+.elena-leaf.leaf-c{right:3px;top:7px;transform:rotate(27deg) scale(1.02);}
+.elena-leaf.leaf-d{right:57px;bottom:5px;transform:rotate(-18deg) scale(.70);opacity:.92;}
+.elena-leaf path:first-of-type{
+  stroke:rgba(255,192,176,.34);
+  stroke-width:1.2;
+}
+@media (max-width:760px){
+  .elena-maple-decor{width:105px;}
+  .elena-maple-left{left:-31px;}
+  .elena-maple-right{right:-31px;}
+  .elena-leaf{width:72px;height:72px;}
+  .elena-leaf.leaf-a{top:8px;left:0;transform:rotate(-24deg) scale(.94);}
+  .elena-leaf.leaf-b{left:42px;bottom:3px;transform:rotate(22deg) scale(.58);}
+  .elena-leaf.leaf-c{top:6px;right:0;transform:rotate(27deg) scale(.92);}
+  .elena-leaf.leaf-d{right:42px;bottom:2px;transform:rotate(-18deg) scale(.56);}
 }
