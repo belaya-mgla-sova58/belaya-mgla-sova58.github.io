@@ -6801,3 +6801,14 @@ body.is-svs-route .hero .ui-route-copy {
 @media(max-width:700px){
   .news-card-counter{right:12px;bottom:12px;min-height:38px;}
 }
+
+
+/* v301: stable native heart counters */
+.news-card-counter{display:none !important;}
+.news-card-like{
+  display:inline-flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
+}
+.news-like-button.like-pop .news-like-heart{transform:scale(1.22);}
+.news-like-button .news-like-heart{transition:transform .18s ease;}

@@ -934,72 +934,58 @@
 })();
 
 
-// v292: shared likes for News pages using CounterAPI
+// v301: stable News likes stored locally in the visitor's browser
 (function(){
-  var namespace = 'belaya-mgla-sova58.github.io';
-  var action = 'like';
+  function countKey(key){ return 'belaya-mgla-like-count-' + key; }
+  function likedKey(key){ return 'belaya-mgla-liked-' + key; }
 
-  function apiUrl(key, readOnly){
-    var url = 'https://counterapi.com/api/' + encodeURIComponent(namespace) + '/' + encodeURIComponent(action) + '/' + encodeURIComponent(key) + '?behavior=vote';
-    if(readOnly) url += '&readOnly=true';
-    return url;
+  function readCount(key){
+    var n = parseInt(localStorage.getItem(countKey(key)) || '0', 10);
+    return Number.isFinite(n) && n >= 0 ? n : 0;
   }
 
-  function storageKey(key){ return 'belaya-mgla-liked-' + key; }
-
-  function setCount(button, value){
-    var count = button.querySelector('.news-like-count');
-    if(count && typeof value !== 'undefined' && value !== null) count.textContent = value;
+  function setAllCounts(key, value){
+    document.querySelectorAll('.news-like-button[data-like-key="' + key + '"] .news-like-count')
+      .forEach(function(el){ el.textContent = String(value); });
   }
 
-  async function loadCount(button){
-    var key = button.getAttribute('data-like-key');
-    if(!key) return;
-    button.classList.add('is-loading');
-    try{
-      var res = await fetch(apiUrl(key, true), {cache:'no-store'});
-      if(!res.ok) throw new Error('counter read failed');
-      var data = await res.json();
-      setCount(button, data.value || 0);
-    }catch(e){
-      // Keep the control usable if the third-party counter is temporarily unavailable.
-    }finally{
-      button.classList.remove('is-loading');
-    }
-    if(localStorage.getItem(storageKey(key)) === '1'){
-      button.classList.add('is-liked');
-      button.disabled = true;
-      button.setAttribute('aria-label','Лайк уже поставлен');
-    }
-  }
-
-  async function like(button){
-    var key = button.getAttribute('data-like-key');
-    if(!key || localStorage.getItem(storageKey(key)) === '1') return;
-    button.disabled = true;
-    button.classList.add('is-loading');
-    try{
-      var res = await fetch(apiUrl(key, false), {cache:'no-store'});
-      if(!res.ok) throw new Error('counter vote failed');
-      var data = await res.json();
-      setCount(button, data.value || 0);
-      localStorage.setItem(storageKey(key), '1');
-      button.classList.add('is-liked');
-      button.setAttribute('aria-label','Лайк уже поставлен');
-    }catch(e){
-      button.disabled = false;
-    }finally{
-      button.classList.remove('is-loading');
-    }
+  function markLiked(key){
+    document.querySelectorAll('.news-like-button[data-like-key="' + key + '"]')
+      .forEach(function(button){
+        button.classList.add('is-liked');
+        button.disabled = true;
+        button.setAttribute('aria-label','Лайк уже поставлен');
+      });
   }
 
   function initLikes(){
     document.querySelectorAll('.news-like-button').forEach(function(button){
-      loadCount(button);
-      button.addEventListener('click', function(){ like(button); });
+      var key = button.getAttribute('data-like-key');
+      if(!key) return;
+
+      setAllCounts(key, readCount(key));
+      if(localStorage.getItem(likedKey(key)) === '1') markLiked(key);
+
+      button.addEventListener('click', function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        if(localStorage.getItem(likedKey(key)) === '1') return;
+
+        var next = readCount(key) + 1;
+        localStorage.setItem(countKey(key), String(next));
+        localStorage.setItem(likedKey(key), '1');
+        setAllCounts(key, next);
+        markLiked(key);
+
+        button.classList.add('like-pop');
+        setTimeout(function(){ button.classList.remove('like-pop'); }, 260);
+      });
     });
   }
 
-  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initLikes);
-  else initLikes();
+  if(document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLikes, {once:true});
+  } else {
+    initLikes();
+  }
 })();
