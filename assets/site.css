@@ -6910,3 +6910,11 @@ body.is-svs-route .hero .ui-route-copy {
     linear-gradient(90deg,rgba(30,27,108,.12),rgba(24,49,132,.02)),
     url("assets/news-eu-final-fullbleed.jpg") center center / cover no-repeat !important;
 }
+
+
+/* v323: final selected RU banner */
+.news-category-card.ru{
+  background:
+    linear-gradient(90deg,rgba(13,82,142,.12),rgba(19,108,171,.02)),
+    url("assets/news-ru-final-fullbleed.jpg") center center / cover no-repeat !important;
+}

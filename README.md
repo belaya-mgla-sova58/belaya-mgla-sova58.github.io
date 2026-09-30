@@ -161,3 +161,6 @@ v321: EU News card replaced with selected variant 1, preserving wide composition
 
 
 v322: EU selected variant now fills the entire card edge-to-edge with no blurred side bars.
+
+
+v323: RU News card replaced with selected variant 5. Full-bleed like EU, no blurred side bars, live title and Firebase heart retained.
