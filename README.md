@@ -164,3 +164,6 @@ v322: EU selected variant now fills the entire card edge-to-edge with no blurred
 
 
 v323: RU News card replaced with selected variant 5. Full-bleed like EU, no blurred side bars, live title and Firebase heart retained.
+
+
+v324: Creative Corner uses selected variant 3 in the approved full-bleed news-card format. EU, RU, Elena and Firebase likes preserved.

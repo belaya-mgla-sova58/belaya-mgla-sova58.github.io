@@ -8794,3 +8794,11 @@ h4 .catalog-inline-item-icon{
     linear-gradient(90deg,rgba(13,82,142,.12),rgba(19,108,171,.02)),
     url("assets/news-ru-final-fullbleed.jpg") center center / cover no-repeat !important;
 }
+
+
+/* v324: selected Creative Corner variant 3, full-bleed */
+.news-category-card.creative{
+  background:
+    linear-gradient(90deg,rgba(26,18,66,.10),rgba(26,18,66,.02)),
+    url("assets/news-creative-final-fullbleed.jpg") center center / cover no-repeat !important;
+}
