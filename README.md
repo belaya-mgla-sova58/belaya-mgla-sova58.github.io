@@ -154,4 +154,4 @@ v314: Elena card leaves repositioned and reshaped to match approved reference mo
 v315: Elena card now uses the approved autumn maple image itself as the card background instead of drawn SVG leaves.
 
 
-v319: EU/RU/Creative backgrounds rebuilt from clean artwork-only crops. Embedded source titles and heart badges are excluded. Elena remains from v315. Firebase likes unchanged.
+v320: EU/RU/Creative use almost the full approved banner composition. Embedded titles and heart badges removed before use; no zoom/crop. Elena unchanged from v315. Firebase unchanged.
