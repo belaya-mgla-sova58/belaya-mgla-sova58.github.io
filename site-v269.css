@@ -8778,9 +8778,11 @@ h4 .catalog-inline-item-icon{
 }
 
 
-/* v321: final selected EU banner */
+
+
+/* v322: EU full-bleed banner, no blurred side bars */
 .news-category-card.eu{
   background:
-    linear-gradient(90deg,rgba(32,28,110,.14),rgba(26,53,135,.02)),
-    url("assets/news-eu-final.jpg") center center / 100% 100% no-repeat !important;
+    linear-gradient(90deg,rgba(30,27,108,.12),rgba(24,49,132,.02)),
+    url("assets/news-eu-final-fullbleed.jpg") center center / cover no-repeat !important;
 }

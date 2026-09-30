@@ -158,3 +158,6 @@ v320: EU/RU/Creative use almost the full approved banner composition. Embedded t
 
 
 v321: EU News card replaced with selected variant 1, preserving wide composition and live site title/Firebase heart counter.
+
+
+v322: EU selected variant now fills the entire card edge-to-edge with no blurred side bars.
