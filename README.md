@@ -140,3 +140,6 @@ v310: Selected bright red Elena header plus subtle 3D red maple leaves along bot
 
 
 v311: Elena styling moved to the category card on News page. Card is bright red with 3D-style maple leaves at the edges. Elena subpage header restored to standard News styling.
+
+
+v312: Maple leaves reshaped to broader five-lobed realistic maple silhouettes with veins and stronger 3D shadows.
