@@ -8802,3 +8802,56 @@ h4 .catalog-inline-item-icon{
     linear-gradient(90deg,rgba(26,18,66,.10),rgba(26,18,66,.02)),
     url("assets/news-creative-final-fullbleed.jpg") center center / cover no-repeat !important;
 }
+
+
+/* v326: matching category banners inside News subpages */
+.news-sub-banner{
+  position:relative;
+  min-height:116px;
+  border-radius:22px;
+  overflow:hidden;
+  display:flex;
+  align-items:flex-end;
+  padding:18px 20px;
+  box-sizing:border-box;
+  background-position:center center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  box-shadow:0 10px 24px rgba(55,46,110,.14);
+}
+.news-sub-banner::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.45) 100%);
+  pointer-events:none;
+}
+.news-sub-banner span{
+  position:relative;
+  z-index:1;
+  color:#fff;
+  font-weight:900;
+  font-size:clamp(20px,4vw,30px);
+  text-shadow:0 2px 8px rgba(0,0,0,.45);
+}
+.news-sub-banner-eu{
+  background-image:url("assets/news-eu-final-fullbleed.jpg");
+}
+.news-sub-banner-ru{
+  background-image:url("assets/news-ru-final-fullbleed.jpg");
+}
+.news-sub-banner-elena{
+  background-image:url("assets/elena-autumn-maple-banner.png");
+  background-color:#d71920;
+}
+.news-sub-banner-creative{
+  background-image:url("assets/news-creative-final-fullbleed.jpg");
+}
+@media (max-width:700px){
+  .news-sub-banner{
+    min-height:104px;
+    border-radius:18px;
+    padding:15px 16px;
+  }
+  .news-sub-banner span{font-size:20px}
+}
