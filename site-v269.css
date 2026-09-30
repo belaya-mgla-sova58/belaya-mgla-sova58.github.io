@@ -8706,62 +8706,107 @@ h4 .catalog-inline-item-icon{
   transform:scale(1.08);
 }
 
-/* v308: Elena news header - bright red */
-body[data-static-route="news-elena"] .news-hero{
-  background:linear-gradient(120deg,#6b1f36 0%,#d92d3f 50%,#ff4f4f 100%) !important;
-}
-body[data-static-route="news-elena"] .news-title-strip{
-  background:linear-gradient(90deg,#cf1f35 0%,#f1393f 52%,#c42640 100%) !important;
-}
-body[data-static-route="news-elena"] .news-kicker{
-  color:#c91b31;
-  background:#fff1f2;
-  border-color:#f6b7c1;
-}
 
 
-/* v310: 3D red maple leaves on Elena header */
-body[data-static-route="news-elena"] .news-hero{
+
+
+
+/* v311: red Elena category card with 3D maple leaves */
+.news-category-card.elena{
   position:relative;
   overflow:hidden;
+  background:
+    radial-gradient(circle at 72% 28%, rgba(255,98,94,.22), transparent 32%),
+    linear-gradient(135deg,#b90f22 0%,#e21e2f 48%,#f04447 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.22),
+    inset 0 -12px 22px rgba(123,0,19,.10),
+    0 14px 30px rgba(139,12,34,.20);
 }
-body[data-static-route="news-elena"] .news-hero .hero-inner{
+.news-category-card.elena .news-category-link{
   position:relative;
-  z-index:3;
+  z-index:4;
+  text-shadow:0 2px 5px rgba(85,0,16,.34);
 }
-.elena-maple-decor{
+.news-category-card.elena .news-card-like{
+  z-index:7 !important;
+}
+.elena-card-maples{
   position:absolute;
-  inset-block:0;
-  width:150px;
-  pointer-events:none;
+  inset:0;
   z-index:2;
-  filter:drop-shadow(0 10px 10px rgba(77,5,22,.28));
+  pointer-events:none;
+  overflow:hidden;
 }
-.elena-maple-left{left:-24px;}
-.elena-maple-right{right:-24px;}
-.elena-leaf{
+.elena-card-maples .maple-leaf{
   position:absolute;
-  width:88px;
-  height:88px;
   filter:
-    drop-shadow(0 5px 4px rgba(70,0,15,.28))
-    drop-shadow(0 1px 0 rgba(255,255,255,.24));
+    drop-shadow(0 7px 6px rgba(77,0,14,.32))
+    drop-shadow(0 1px 0 rgba(255,255,255,.22));
 }
-.elena-leaf.leaf-a{left:5px;top:10px;transform:rotate(-24deg) scale(1.04);}
-.elena-leaf.leaf-b{left:57px;bottom:7px;transform:rotate(22deg) scale(.72);opacity:.92;}
-.elena-leaf.leaf-c{right:3px;top:7px;transform:rotate(27deg) scale(1.02);}
-.elena-leaf.leaf-d{right:57px;bottom:5px;transform:rotate(-18deg) scale(.70);opacity:.92;}
-.elena-leaf path:first-of-type{
-  stroke:rgba(255,192,176,.34);
-  stroke-width:1.2;
+.elena-card-maples .maple-leaf path:first-child{
+  stroke:rgba(255,176,165,.24);
+  stroke-width:1;
+}
+.elena-card-maples .maple-tl.maple-large{
+  width:72px;
+  height:80px;
+  left:6px;
+  top:-10px;
+  transform:rotate(-23deg);
+}
+.elena-card-maples .maple-tl.maple-small{
+  width:46px;
+  height:52px;
+  left:58px;
+  top:-4px;
+  transform:rotate(18deg);
+}
+.elena-card-maples .maple-tr{
+  width:55px;
+  height:62px;
+  right:-5px;
+  top:-8px;
+  transform:rotate(22deg);
+}
+.elena-card-maples .maple-br.maple-large{
+  width:70px;
+  height:78px;
+  right:31px;
+  bottom:-18px;
+  transform:rotate(-18deg);
+}
+.elena-card-maples .maple-br.maple-small{
+  width:45px;
+  height:51px;
+  right:4px;
+  bottom:-3px;
+  transform:rotate(19deg);
+}
+.elena-card-maples .maple-ghost{
+  width:62px;
+  height:68px;
+  opacity:.12;
+  filter:none;
+}
+.elena-card-maples .ghost-a{
+  left:43%;
+  bottom:-20px;
+  transform:rotate(22deg);
+}
+.elena-card-maples .ghost-b{
+  right:17%;
+  top:-21px;
+  transform:rotate(-20deg);
 }
 @media (max-width:760px){
-  .elena-maple-decor{width:105px;}
-  .elena-maple-left{left:-31px;}
-  .elena-maple-right{right:-31px;}
-  .elena-leaf{width:72px;height:72px;}
-  .elena-leaf.leaf-a{top:8px;left:0;transform:rotate(-24deg) scale(.94);}
-  .elena-leaf.leaf-b{left:42px;bottom:3px;transform:rotate(22deg) scale(.58);}
-  .elena-leaf.leaf-c{top:6px;right:0;transform:rotate(27deg) scale(.92);}
-  .elena-leaf.leaf-d{right:42px;bottom:2px;transform:rotate(-18deg) scale(.56);}
+  .elena-card-maples .maple-tl.maple-large{width:66px;height:73px;left:2px;top:-9px;}
+  .elena-card-maples .maple-tl.maple-small{width:40px;height:46px;left:49px;top:-2px;}
+  .elena-card-maples .maple-tr{width:48px;height:55px;right:-7px;top:-6px;}
+  .elena-card-maples .maple-br.maple-large{width:63px;height:70px;right:28px;bottom:-18px;}
+  .elena-card-maples .maple-br.maple-small{width:39px;height:45px;right:1px;bottom:-1px;}
+  .news-category-card.elena .news-category-link{
+    padding-left:18px;
+    padding-right:82px;
+  }
 }
