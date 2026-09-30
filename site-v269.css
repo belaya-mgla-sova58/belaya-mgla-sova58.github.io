@@ -8677,31 +8677,3 @@ h4 .catalog-inline-item-icon{
 @media(max-width:700px){
   .news-card-counter{right:12px;bottom:12px;min-height:38px;}
 }
-
-
-/* v298: static always-visible hearts on news category cards */
-.news-category-card{position:relative;}
-.news-card-fast-like{
-  position:absolute;
-  right:14px;
-  bottom:14px;
-  z-index:4;
-  height:40px;
-  min-width:64px;
-  padding:0 12px;
-  border:0;
-  border-radius:999px;
-  background:rgba(255,255,255,.96);
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
-  box-shadow:0 5px 16px rgba(39,30,78,.18);
-  cursor:pointer;
-}
-.news-card-fast-like .fast-like-heart{font-size:23px;line-height:1;color:#ef3340;}
-.news-card-fast-like .fast-like-count{font-weight:800;font-size:14px;color:#6f6f7a;min-width:10px;text-align:center;}
-.news-card-fast-like:active{transform:scale(.95);}
-.news-card-fast-like.is-liked .fast-like-heart{animation:newsHeartPop .28s ease-out;}
-.news-card-fast-like:disabled{opacity:1;cursor:default;}
-@media(max-width:700px){.news-card-fast-like{right:12px;bottom:12px;height:38px;min-width:60px;padding:0 10px;}}
