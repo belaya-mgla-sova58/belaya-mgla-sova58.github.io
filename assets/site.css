@@ -6839,90 +6839,83 @@ body.is-svs-route .hero .ui-route-copy {
 
 
 
-/* v313: Elena card closely matching the approved autumn reference */
+
+
+/* v314: Elena card leaves matched more closely to the approved reference */
 .news-category-card.elena{
   position:relative;
   overflow:hidden;
   background:
-    radial-gradient(circle at 72% 23%,rgba(255,108,83,.28),transparent 34%),
-    radial-gradient(circle at 35% 84%,rgba(255,76,66,.18),transparent 32%),
-    linear-gradient(135deg,#bb1023 0%,#e41f30 49%,#f34a45 100%) !important;
+    radial-gradient(circle at 68% 30%,rgba(255,115,95,.30),transparent 34%),
+    linear-gradient(135deg,#bb1023 0%,#e51f30 48%,#f24a45 100%) !important;
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.24),
-    inset 0 -13px 24px rgba(123,0,18,.12),
+    inset 0 1px 0 rgba(255,255,255,.22),
+    inset 0 -12px 24px rgba(118,0,18,.12),
     0 14px 30px rgba(139,12,34,.22);
 }
 .news-category-card.elena .news-category-link{
   position:relative;
   z-index:5;
-  text-shadow:0 2px 5px rgba(85,0,16,.36);
+  text-shadow:0 2px 5px rgba(85,0,16,.34);
 }
 .news-category-card.elena .news-card-like{z-index:9 !important;}
 
 .elena-card-maples{
   position:absolute;
   inset:0;
-  z-index:3;
   pointer-events:none;
+  z-index:3;
   overflow:hidden;
 }
 .elena-card-maples .maple-leaf{
   position:absolute;
-  transform-origin:center;
   filter:
-    drop-shadow(0 8px 8px rgba(72,0,13,.34))
-    drop-shadow(0 2px 1px rgba(255,187,145,.14));
+    drop-shadow(0 7px 7px rgba(74,0,12,.30))
+    drop-shadow(0 1px 0 rgba(255,226,188,.18));
 }
 .elena-card-maples .leaf-body{
-  stroke:rgba(255,203,167,.24);
+  stroke:rgba(255,218,177,.25);
   stroke-width:1.1;
 }
-.elena-card-maples .maple-tl.maple-large{
-  width:90px;height:90px;
-  left:-13px;top:-20px;
-  transform:rotate(-16deg);
+.elena-card-maples .maple-a{
+  width:86px;height:94px;
+  left:-3px;top:-5px;
+  transform:rotate(-18deg);
 }
-.elena-card-maples .maple-tl.maple-small{
-  width:51px;height:51px;
-  left:57px;top:-4px;
-  transform:rotate(18deg);
+.elena-card-maples .maple-b{
+  width:47px;height:53px;
+  left:58px;top:3px;
+  transform:rotate(17deg);
 }
-.elena-card-maples .maple-tr{
-  width:67px;height:67px;
-  right:-10px;top:-16px;
+.elena-card-maples .maple-c{
+  width:61px;height:68px;
+  right:-5px;top:-5px;
   transform:rotate(20deg);
 }
-.elena-card-maples .maple-br.maple-large{
-  width:83px;height:83px;
-  right:34px;bottom:-29px;
-  transform:rotate(-19deg);
+.elena-card-maples .maple-d{
+  width:82px;height:90px;
+  right:28px;bottom:-20px;
+  transform:rotate(-17deg);
 }
-.elena-card-maples .maple-br.maple-small{
-  width:48px;height:48px;
-  right:-3px;bottom:-4px;
-  transform:rotate(16deg);
-}
-.elena-card-maples .maple-ghost{
-  width:68px;height:68px;
-  opacity:.13;
+.elena-card-maples .maple-e{
+  width:68px;height:75px;
+  left:44%;bottom:-27px;
+  transform:rotate(19deg);
+  opacity:.12;
   filter:none;
 }
-.elena-card-maples .ghost-a{
-  left:44%;
-  bottom:-23px;
-  transform:rotate(18deg);
-}
-.elena-card-maples .ghost-b{
-  right:20%;
-  top:-25px;
-  transform:rotate(-19deg);
+.elena-card-maples .maple-f{
+  width:60px;height:66px;
+  right:18%;top:-22px;
+  transform:rotate(-18deg);
+  opacity:.10;
+  filter:none;
 }
 @media (max-width:760px){
-  .elena-card-maples .maple-tl.maple-large{width:82px;height:82px;left:-16px;top:-18px;}
-  .elena-card-maples .maple-tl.maple-small{width:45px;height:45px;left:50px;top:-2px;}
-  .elena-card-maples .maple-tr{width:59px;height:59px;right:-12px;top:-13px;}
-  .elena-card-maples .maple-br.maple-large{width:76px;height:76px;right:31px;bottom:-27px;}
-  .elena-card-maples .maple-br.maple-small{width:43px;height:43px;right:-5px;bottom:-3px;}
-  .elena-card-maples .maple-ghost{width:61px;height:61px;}
-  .news-category-card.elena .news-category-link{padding-left:18px;padding-right:82px;}
+  .elena-card-maples .maple-a{width:79px;height:86px;left:-5px;top:-4px;}
+  .elena-card-maples .maple-b{width:43px;height:48px;left:52px;top:4px;}
+  .elena-card-maples .maple-c{width:56px;height:62px;right:-6px;top:-3px;}
+  .elena-card-maples .maple-d{width:75px;height:82px;right:27px;bottom:-19px;}
+  .elena-card-maples .maple-e{width:61px;height:67px;bottom:-24px;}
+  .elena-card-maples .maple-f{width:54px;height:60px;top:-20px;}
 }

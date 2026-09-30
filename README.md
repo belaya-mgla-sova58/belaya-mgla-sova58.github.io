@@ -146,3 +146,6 @@ v312: Maple leaves reshaped to broader five-lobed realistic maple silhouettes wi
 
 
 v313: Elena news card maple leaves reshaped to broader natural 5-lobed autumn leaves with orange-red gradients, veins, translucent background leaves and deeper 3D shadows to closely match approved reference.
+
+
+v314: Elena card leaves repositioned and reshaped to match approved reference more closely: fuller maple silhouette, orange/red gradient, visible veins, larger corner clusters, less clipping.
