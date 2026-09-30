@@ -934,56 +934,126 @@
 })();
 
 
-// v301: stable News likes stored locally in the visitor's browser
+// v304: shared News likes via Firebase Realtime Database REST API
 (function(){
-  function countKey(key){ return 'belaya-mgla-like-count-' + key; }
-  function likedKey(key){ return 'belaya-mgla-liked-' + key; }
+  var FIREBASE_BASE = 'https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/';
+  var LIKED_PREFIX = 'belaya-mgla-firebase-liked-';
 
-  function readCount(key){
-    var n = parseInt(localStorage.getItem(countKey(key)) || '0', 10);
-    return Number.isFinite(n) && n >= 0 ? n : 0;
+  function urlFor(key){
+    return FIREBASE_BASE + encodeURIComponent(key) + '.json';
   }
 
-  function setAllCounts(key, value){
-    document.querySelectorAll('.news-like-button[data-like-key="' + key + '"] .news-like-count')
-      .forEach(function(el){ el.textContent = String(value); });
+  function getButtons(key){
+    return document.querySelectorAll('.news-like-button[data-like-key="' + key + '"]');
   }
 
-  function markLiked(key){
-    document.querySelectorAll('.news-like-button[data-like-key="' + key + '"]')
-      .forEach(function(button){
-        button.classList.add('is-liked');
-        button.disabled = true;
-        button.setAttribute('aria-label','Лайк уже поставлен');
-      });
-  }
-
-  function initLikes(){
-    document.querySelectorAll('.news-like-button').forEach(function(button){
-      var key = button.getAttribute('data-like-key');
-      if(!key) return;
-
-      setAllCounts(key, readCount(key));
-      if(localStorage.getItem(likedKey(key)) === '1') markLiked(key);
-
-      button.addEventListener('click', function(event){
-        event.preventDefault();
-        event.stopPropagation();
-        if(localStorage.getItem(likedKey(key)) === '1') return;
-
-        var next = readCount(key) + 1;
-        localStorage.setItem(countKey(key), String(next));
-        localStorage.setItem(likedKey(key), '1');
-        setAllCounts(key, next);
-        markLiked(key);
-
-        button.classList.add('like-pop');
-        setTimeout(function(){ button.classList.remove('like-pop'); }, 260);
-      });
+  function setCount(key, value){
+    var safe = Number.isFinite(Number(value)) ? Math.max(0, Number(value)) : 0;
+    getButtons(key).forEach(function(button){
+      var count = button.querySelector('.news-like-count');
+      if(count) count.textContent = String(safe);
     });
   }
 
-  if(document.readyState === 'loading') {
+  function setLiked(key, liked){
+    getButtons(key).forEach(function(button){
+      button.classList.toggle('is-liked', !!liked);
+      button.disabled = !!liked;
+      button.setAttribute('aria-label', liked ? 'Лайк уже поставлен' : 'Поставить лайк');
+    });
+  }
+
+  function setBusy(key, busy){
+    getButtons(key).forEach(function(button){
+      button.classList.toggle('is-loading', !!busy);
+      if(!localStorage.getItem(LIKED_PREFIX + key)){
+        button.disabled = !!busy;
+      }
+    });
+  }
+
+  async function loadCount(key){
+    try{
+      var response = await fetch(urlFor(key), {
+        method: 'GET',
+        cache: 'no-store',
+        headers: {'Accept':'application/json'}
+      });
+      if(!response.ok) throw new Error('HTTP ' + response.status);
+      var value = await response.json();
+      setCount(key, typeof value === 'number' ? value : 0);
+    }catch(err){
+      console.warn('Firebase like read failed for', key, err);
+      setCount(key, 0);
+    }
+  }
+
+  async function incrementCount(key){
+    var response = await fetch(urlFor(key), {
+      method: 'PUT',
+      cache: 'no-store',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({'.sv': {'increment': 1}})
+    });
+    if(!response.ok){
+      var body = '';
+      try { body = await response.text(); } catch(e) {}
+      throw new Error('Firebase write failed ' + response.status + ' ' + body);
+    }
+    var value = await response.json();
+    return typeof value === 'number' ? value : null;
+  }
+
+  function initLikes(){
+    var keys = new Set();
+
+    document.querySelectorAll('.news-like-button[data-like-key]').forEach(function(button){
+      var key = button.getAttribute('data-like-key');
+      if(!key) return;
+      keys.add(key);
+
+      if(localStorage.getItem(LIKED_PREFIX + key) === '1'){
+        setLiked(key, true);
+      }
+
+      button.addEventListener('click', async function(event){
+        event.preventDefault();
+        event.stopPropagation();
+
+        if(localStorage.getItem(LIKED_PREFIX + key) === '1') return;
+
+        var countEl = button.querySelector('.news-like-count');
+        var before = countEl ? parseInt(countEl.textContent || '0', 10) || 0 : 0;
+
+        // Instant visual response.
+        setCount(key, before + 1);
+        setBusy(key, true);
+
+        try{
+          var serverValue = await incrementCount(key);
+          localStorage.setItem(LIKED_PREFIX + key, '1');
+          setLiked(key, true);
+          if(serverValue !== null) setCount(key, serverValue);
+          else await loadCount(key);
+        }catch(err){
+          console.warn('Firebase like write failed for', key, err);
+          setCount(key, before);
+          setBusy(key, false);
+        }
+      });
+    });
+
+    keys.forEach(function(key){ loadCount(key); });
+
+    // Refresh counts after returning to the tab.
+    document.addEventListener('visibilitychange', function(){
+      if(document.visibilityState === 'visible'){
+        keys.forEach(function(key){ loadCount(key); });
+      }
+    });
+  }
+
+  if(document.readyState === 'loading'){
     document.addEventListener('DOMContentLoaded', initLikes, {once:true});
   } else {
     initLikes();

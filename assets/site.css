@@ -6812,3 +6812,20 @@ body.is-svs-route .hero .ui-route-copy {
 }
 .news-like-button.like-pop .news-like-heart{transform:scale(1.22);}
 .news-like-button .news-like-heart{transition:transform .18s ease;}
+
+
+/* v304: Firebase shared likes */
+.news-like-button{
+  -webkit-tap-highlight-color:transparent;
+}
+.news-like-button.is-loading .news-like-count{
+  opacity:.55;
+}
+.news-like-button.is-liked{
+  background:#fff1f3 !important;
+  border-color:#ffc2cc !important;
+}
+.news-like-button.is-liked .news-like-heart{
+  color:#d71936 !important;
+  transform:scale(1.08);
+}
