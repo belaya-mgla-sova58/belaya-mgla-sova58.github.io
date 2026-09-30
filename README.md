@@ -128,3 +128,6 @@ V269
 - Disabled backdrop-filter on mobile cards and sections.
 - Building card grids forced to one stable full-width column.
 - No content changes.
+
+
+v306: Elena header updated from burgundy tint to a clearer red tint.

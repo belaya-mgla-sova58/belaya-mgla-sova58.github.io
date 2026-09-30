@@ -6830,15 +6830,15 @@ body.is-svs-route .hero .ui-route-copy {
   transform:scale(1.08);
 }
 
-/* v305: Elena news header - subtle warm red tint */
+/* v306: Elena news header - clear red tint */
 body[data-static-route="news-elena"] .news-hero{
-  background:linear-gradient(120deg,#643c73 0%,#875067 48%,#9d5a66 100%) !important;
+  background:linear-gradient(120deg,#5f254e 0%,#c72e43 50%,#e4484c 100%) !important;
 }
 body[data-static-route="news-elena"] .news-title-strip{
-  background:linear-gradient(90deg,#70415f 0%,#874c62 52%,#6b4775 100%) !important;
+  background:linear-gradient(90deg,#b8263f 0%,#df3d46 52%,#a92b47 100%) !important;
 }
 body[data-static-route="news-elena"] .news-kicker{
-  color:#8d4053;
-  background:#fff0f2;
-  border-color:#f1c6ce;
+  color:#b82038;
+  background:#fff1f2;
+  border-color:#f3b8c2;
 }
