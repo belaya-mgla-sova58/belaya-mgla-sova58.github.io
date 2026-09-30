@@ -143,3 +143,6 @@ v311: Elena styling moved to the category card on News page. Card is bright red 
 
 
 v312: Maple leaves reshaped to broader five-lobed realistic maple silhouettes with veins and stronger 3D shadows.
+
+
+v313: Elena news card maple leaves reshaped to broader natural 5-lobed autumn leaves with orange-red gradients, veins, translucent background leaves and deeper 3D shadows to closely match approved reference.
