@@ -9049,3 +9049,26 @@ main::before,
     inset:0 !important;
   }
 }
+
+
+/* v342: remove the real 58/60px reserved gap and restore the original blue */
+@media (max-width:1200px), (hover:none) and (pointer:coarse){
+  body{
+    padding-top:0 !important;
+  }
+
+  .mobile-topbar{
+    display:none !important;
+  }
+
+  /* Keep the original dark-blue mobile navigation colour. */
+  .nav-wrap{
+    top:0 !important;
+    height:100dvh !important;
+    background:linear-gradient(180deg,#0d3260,#164a82) !important;
+  }
+
+  .mobile-nav-overlay{
+    inset:0 !important;
+  }
+}
