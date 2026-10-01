@@ -9150,3 +9150,26 @@ body.news-subpage header.hero {
     padding-top:0 !important;
   }
 }
+
+
+/* v345: larger news description block, same lower-left position */
+.news-hero-note-v343{
+  width: 360px !important;
+  max-width: 62% !important;
+  padding: 10px 13px !important;
+  border-radius: 11px !important;
+  font-size: 14px !important;
+  line-height: 1.32 !important;
+}
+@media (max-width:640px){
+  .news-hero-note-v343{
+    left: 9px !important;
+    bottom: 9px !important;
+    width: 285px !important;
+    max-width: 64% !important;
+    padding: 8px 10px !important;
+    border-radius: 9px !important;
+    font-size: 11.5px !important;
+    line-height: 1.28 !important;
+  }
+}
