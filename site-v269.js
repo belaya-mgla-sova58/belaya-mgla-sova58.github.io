@@ -1209,55 +1209,49 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-/* v356 — article view counters for WhiteFox News + Creative Corner */
+/* v357 — article views are shown on publication cards.
+   Article pages only record a visit; they no longer render the eye badge. */
 (() => {
-  const articleMap = {
-    "whitefox-elena-38-39.html": {
-      key: "whitefox-elena-38-39",
-      label: "Просмотров"
-    },
-    "creative-roman48.html": {
-      key: "creative-roman48",
-      label: "Просмотров"
-    }
+  const file = (location.pathname.split("/").pop() || "").toLowerCase();
+  const map = {
+    "whitefox-elena-38-39.html":"whitefox-elena-38-39",
+    "creative-roman48.html":"creative-roman48"
   };
-
-  const file = (location.pathname.split("/").pop() || "index.html").toLowerCase();
-  const cfg = articleMap[file];
-  if (!cfg) return;
-
-  const render = (count) => {
-    let el = document.querySelector(".article-views-v356");
-    if (!el) {
-      el = document.createElement("div");
-      el.className = "article-views-v356";
-      el.innerHTML = `<span aria-hidden="true">👁</span><span class="article-views-label">${cfg.label}</span><b class="article-views-count">0</b>`;
-
-      const like = document.querySelector(".creative-poem-like-v354, .news-like-wrap, .news-like-button");
-      const main = document.querySelector("main");
-      if (like && like.parentElement) {
-        if (like.classList.contains("news-like-button")) like.parentElement.insertBefore(el, like);
-        else like.parentElement.insertBefore(el, like);
-      } else if (main) {
-        main.appendChild(el);
-      } else {
-        document.body.appendChild(el);
-      }
-    }
-    const n = el.querySelector(".article-views-count");
-    if (n) n.textContent = String(count);
-  };
-
-  /* Local fallback. Each browser/device counts an article only once.
-     If the site's Firebase like backend is later exposed for views, this UI can
-     be switched to a shared global counter without changing article markup. */
-  const seenKey = "belaya-mgla-viewed:" + cfg.key;
-  const countKey = "belaya-mgla-views:" + cfg.key;
+  const key = map[file];
+  if (!key) return;
+  const seenKey = "belaya-mgla-viewed:" + key;
+  const countKey = "belaya-mgla-views:" + key;
   let count = parseInt(localStorage.getItem(countKey) || "0", 10);
   if (!localStorage.getItem(seenKey)) {
     count += 1;
     localStorage.setItem(countKey, String(count));
     localStorage.setItem(seenKey, "1");
   }
-  render(count);
+})();
+
+
+/* v357 — show article views on WhiteFox/Creative publication cards */
+(() => {
+  const page = (location.pathname.split("/").pop() || "").toLowerCase();
+  const configs = {
+    "creative-corner.html": { href:"creative-roman48.html", key:"creative-roman48" },
+    "news-elena.html": { href:"whitefox-elena-38-39.html", key:"whitefox-elena-38-39" }
+  };
+  const cfg = configs[page];
+  if (!cfg) return;
+
+  const run = () => {
+    const links = [...document.querySelectorAll(`a[href*="${cfg.href}"]`)];
+    const card = links.find(a => a.offsetParent !== null) || links[0];
+    if (!card || card.querySelector(".article-card-views-v357")) return;
+
+    const count = parseInt(localStorage.getItem("belaya-mgla-views:" + cfg.key) || "0", 10);
+    const badge = document.createElement("span");
+    badge.className = "article-card-views-v357";
+    badge.innerHTML = `<span aria-hidden="true">👁</span><b>${count}</b>`;
+    card.appendChild(badge);
+  };
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded",run);
+  else run();
 })();

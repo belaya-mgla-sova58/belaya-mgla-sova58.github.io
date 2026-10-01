@@ -9842,3 +9842,39 @@ body.news-subpage header.hero {
   color:#405d80;
   font-size:11px;
 }
+
+
+/* v357 — compact view count on publication cards */
+.article-card-views-v357{
+  position:absolute;
+  right:12px;
+  bottom:10px;
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  padding:5px 8px;
+  border:1px solid rgba(91,118,154,.16);
+  border-radius:999px;
+  background:rgba(255,255,255,.78);
+  color:#667b96;
+  font-size:10px;
+  line-height:1;
+  box-shadow:0 2px 8px rgba(41,67,99,.05);
+  pointer-events:none;
+}
+.article-card-views-v357 b{
+  color:#455f7f;
+  font-size:10px;
+}
+.creative-v349-card,
+a[href*="whitefox-elena-38-39.html"]{
+  position:relative;
+}
+@media(max-width:640px){
+  .article-card-views-v357{
+    right:10px;
+    bottom:8px;
+    padding:4px 7px;
+    font-size:9px;
+  }
+}
