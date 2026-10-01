@@ -8922,3 +8922,7 @@ body.news-top-creative .site-hero {
 .news-top-elena .news-category-description{border-color:rgba(219,58,70,.24);}
 .news-top-creative .news-category-description{border-color:rgba(204,130,58,.25);}
 @media(max-width:640px){.news-category-description{margin:12px 12px 0;padding:13px 14px;border-radius:15px}.news-category-description h2{font-size:17px}.news-category-description p{font-size:13.5px;line-height:1.48}}
+
+/* v334: News descriptions sit directly under the large category header */
+.news-subpage .news-category-description{margin:0 18px 0 !important;border-radius:0 0 18px 18px !important;border-top:0 !important;}
+@media(max-width:640px){.news-subpage .news-category-description{margin:0 12px 0 !important;padding:13px 14px !important;border-radius:0 0 15px 15px !important;}}
