@@ -9430,3 +9430,191 @@ body.news-subpage header.hero {
   .whitefox-publication-name{font-size:12.5px;}
   .whitefox-index-title h2{font-size:18px;}
 }
+
+/* v348 Elena clickable subcategory card */
+.whitefox-elena-card{
+  position:relative;
+  overflow:hidden;
+  display:block !important;
+  box-sizing:border-box;
+  min-height:142px;
+  padding:18px 55px 17px 18px !important;
+  border:1px solid rgba(169,55,45,.20) !important;
+  border-radius:20px !important;
+  background:
+    radial-gradient(circle at 92% 15%,rgba(255,190,80,.28),transparent 31%),
+    linear-gradient(145deg,#fff6e9 0%,#fff 55%,#fff0e2 100%) !important;
+  box-shadow:0 9px 25px rgba(77,45,64,.10) !important;
+  text-decoration:none !important;
+}
+.whitefox-elena-card-content{position:relative;z-index:2}
+.whitefox-elena-card-kicker{
+  display:inline-block;
+  padding:5px 10px;
+  margin-bottom:9px;
+  border-radius:999px;
+  background:#8d2f2a;
+  color:#fff;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.05em;
+}
+.whitefox-elena-card-title{
+  color:#542b47;
+  font-size:25px;
+  line-height:1.05;
+  font-weight:900;
+}
+.whitefox-elena-card-week{
+  margin-top:6px;
+  color:#a24a36;
+  font-size:15px;
+  font-weight:850;
+}
+.whitefox-elena-card-hint{
+  margin-top:13px;
+  color:#756270;
+  font-size:11px;
+  font-weight:700;
+}
+.whitefox-elena-card-hint span{
+  color:#a24a36;
+  font-size:17px;
+  vertical-align:-1px;
+}
+.whitefox-elena-card-leaf{
+  position:absolute;
+  right:18px;
+  bottom:1px;
+  z-index:1;
+  font-size:58px;
+  opacity:.15;
+  transform:rotate(-12deg);
+}
+@media(max-width:640px){
+  .whitefox-elena-card{
+    min-height:132px;
+    padding:15px 45px 14px 14px !important;
+    border-radius:18px !important;
+  }
+  .whitefox-elena-card-title{font-size:22px}
+  .whitefox-elena-card-week{font-size:14px}
+  .whitefox-elena-card-leaf{font-size:51px}
+}
+
+
+/* v349 — Creative Corner: minimalist, no new artwork */
+.creative-v349-index,
+.creative-v349-article-shell{
+  padding:14px !important;
+}
+.creative-v349-list,
+.creative-v349-article{
+  max-width:760px;
+  margin:0 auto;
+}
+.creative-v349-card{
+  position:relative;
+  display:block;
+  box-sizing:border-box;
+  padding:18px 52px 18px 18px;
+  border:1px solid rgba(78,96,132,.17);
+  border-radius:15px;
+  background:rgba(255,255,255,.96);
+  box-shadow:0 5px 16px rgba(42,61,95,.06);
+  text-decoration:none !important;
+}
+.creative-v349-kind{
+  color:#65769a;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.07em;
+}
+.creative-v349-card h2,
+.creative-v349-head h2{
+  margin:7px 0 0;
+  color:#293852;
+  font-size:24px;
+  line-height:1.08;
+}
+.creative-v349-author{
+  margin-top:8px;
+  color:#778398;
+  font-size:13px;
+  font-weight:700;
+}
+.creative-v349-arrow{
+  position:absolute;
+  right:18px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#7888a5;
+  font-size:29px;
+  line-height:1;
+}
+.creative-v349-back{
+  display:inline-block;
+  margin:0 0 11px 2px;
+  color:#627493;
+  font-size:12px;
+  font-weight:750;
+  text-decoration:none !important;
+}
+.creative-v349-head{
+  padding:19px 20px 17px;
+  border:1px solid rgba(78,96,132,.16);
+  border-bottom:0;
+  border-radius:16px 16px 0 0;
+  background:#fff;
+}
+.creative-v349-text{
+  padding:21px 20px 5px;
+  border-left:1px solid rgba(78,96,132,.16);
+  border-right:1px solid rgba(78,96,132,.16);
+  background:#fff;
+}
+.creative-v349-stanza{
+  margin:0 0 21px;
+  color:#334158;
+  font-size:15px;
+  line-height:1.65;
+  font-weight:500;
+}
+.creative-v349-signature{
+  padding:2px 20px 19px;
+  border:1px solid rgba(78,96,132,.16);
+  border-top:0;
+  border-radius:0 0 16px 16px;
+  background:#fff;
+  color:#65769a;
+  font-size:13px;
+  font-weight:800;
+  text-align:right;
+}
+@media(max-width:640px){
+  .creative-v349-index,
+  .creative-v349-article-shell{
+    padding:10px !important;
+  }
+  .creative-v349-card{
+    padding:15px 43px 15px 14px;
+  }
+  .creative-v349-card h2,
+  .creative-v349-head h2{
+    font-size:22px;
+  }
+  .creative-v349-head{
+    padding:16px 15px 14px;
+  }
+  .creative-v349-text{
+    padding:18px 15px 3px;
+  }
+  .creative-v349-stanza{
+    font-size:14px;
+    line-height:1.58;
+    margin-bottom:19px;
+  }
+  .creative-v349-signature{
+    padding:1px 15px 16px;
+  }
+}
