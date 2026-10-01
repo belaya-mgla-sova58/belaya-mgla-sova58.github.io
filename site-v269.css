@@ -9667,3 +9667,139 @@ body.news-subpage header.hero {
     font-size:9px;
   }
 }
+
+
+/* v353 — smart owl helper */
+.sova-smart-panel{
+  position:fixed;
+  right:16px;
+  bottom:92px;
+  z-index:10040;
+  width:min(350px,calc(100vw - 24px));
+  box-sizing:border-box;
+  padding:13px;
+  border:1px solid rgba(94,121,164,.24);
+  border-radius:18px;
+  background:rgba(250,253,255,.98);
+  box-shadow:0 14px 38px rgba(16,42,78,.22);
+  transform:translateY(12px) scale(.98);
+  opacity:0;
+  pointer-events:none;
+  transition:.18s ease;
+}
+.sova-smart-panel.is-open{
+  transform:none;
+  opacity:1;
+  pointer-events:auto;
+}
+.sova-smart-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+}
+.sova-smart-head strong{
+  display:block;
+  color:#183d68;
+  font-size:16px;
+}
+.sova-smart-head small{
+  display:block;
+  margin-top:2px;
+  color:#72839a;
+  font-size:10px;
+}
+.sova-smart-close{
+  width:29px;height:29px;
+  border:0;border-radius:9px;
+  background:#edf3fa;color:#56708e;
+  font-size:20px;line-height:1;cursor:pointer;
+}
+.sova-smart-search{
+  display:flex;
+  gap:6px;
+}
+.sova-smart-search input{
+  min-width:0;flex:1;
+  padding:10px 11px;
+  border:1px solid #cfdbea;
+  border-radius:11px;
+  outline:none;
+  background:#fff;
+  color:#273b55;
+  font-size:12px;
+}
+.sova-smart-search button{
+  border:0;border-radius:11px;
+  padding:0 12px;
+  background:#285f98;color:#fff;
+  font-size:11px;font-weight:800;
+  cursor:pointer;
+}
+.sova-smart-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6px;
+  margin-top:8px;
+}
+.sova-smart-actions button{
+  padding:8px 7px;
+  border:1px solid #dbe5f0;
+  border-radius:10px;
+  background:#f5f9fd;
+  color:#405a78;
+  font-size:10px;
+  font-weight:750;
+  cursor:pointer;
+}
+.sova-smart-results{margin-top:9px}
+.sova-smart-welcome,.sova-smart-empty{
+  padding:9px 10px;
+  border-radius:10px;
+  background:#f7f9fc;
+  color:#697b91;
+  font-size:10px;
+  line-height:1.4;
+}
+.sova-smart-result{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:9px 10px;
+  margin-top:5px;
+  border:1px solid #e1e8f1;
+  border-radius:10px;
+  background:#fff;
+  text-decoration:none !important;
+}
+.sova-smart-result span{
+  color:#334b68;
+  font-size:11px;
+  font-weight:750;
+}
+.sova-smart-result b{
+  flex:0 0 auto;
+  color:#4778a8;
+  font-size:9px;
+}
+.sova-smart-trigger{
+  position:fixed;
+  right:17px;bottom:18px;
+  z-index:10039;
+  width:56px;height:56px;
+  border:0;border-radius:50%;
+  background:#173e6e;
+  box-shadow:0 7px 20px rgba(15,44,82,.25);
+  font-size:28px;
+  cursor:pointer;
+}
+@media(max-width:640px){
+  .sova-smart-panel{
+    right:10px;
+    bottom:82px;
+    width:calc(100vw - 20px);
+    max-width:360px;
+  }
+}

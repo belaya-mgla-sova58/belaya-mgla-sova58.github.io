@@ -1059,3 +1059,154 @@
     initLikes();
   }
 })();
+
+
+/* v353 — Sova helper: quick actions + local natural-language search */
+(() => {
+  const normalize = (s) => (s || "")
+    .toLowerCase()
+    .replace(/ё/g,"е")
+    .replace(/[^\p{L}\p{N}\s-]/gu," ")
+    .replace(/\s+/g," ")
+    .trim();
+
+  const pages = [
+    ["newbie.html","Новичкам","топка новичок начало очередь стройка исследование альянс мощность"],
+    ["heroes.html","Герои","герой герои учебный лагерь наставник опыт поколение"],
+    ["gear.html","Снаряжение","снаряжение одежда героя комплект усиление"],
+    ["buildings.html","Здания","здание здания топка строительство"],
+    ["research.html","Исследования","исследование развитие экономика битва"],
+    ["troops.html","Войска","войска пехота стрелок копейщик отряд"],
+    ["alliance.html","Альянс","альянс помощь технологии магазин территория штаб стяг"],
+    ["resources.html","Ресурсы","ресурс ресурсы сбор плитка грузоподъемность"],
+    ["governor.html","Губернатор","губернатор снаряжение талисман"],
+    ["farm.html","Ферма","ферма второй персонаж"],
+    ["experts.html","Эксперты","эксперт эксперты агнес сирилла хольгер"],
+    ["pets.html","Питомцы","питомец питомцы пещерный лев снежный примат"],
+    ["bear.html","Охота на медведя","медведь мишка охота сбор герои рейд"],
+    ["crazy-joe.html","Безумный Джо","джо безумный джо"],
+    ["forts.html","Форты","форт форты крепость"],
+    ["foundry.html","Литейная","литейная"],
+    ["castle.html","Битва за замок","замок битва замок"],
+    ["svs-prep.html","Подготовка к SvS","svs свс подготовка"],
+    ["svs.html","SvS: боевая фаза","svs свс боевая фаза"],
+    ["snowplow.html","Снегоуборщики","снегоуборщик снегоуборщики"],
+    ["fishing.html","Рыбалка","рыбалка рыба"],
+    ["alliance-championship.html","Чемпионат альянса","чемпионат альянса"],
+    ["alliance-mobilization.html","Мобилизация альянса","мобилизация"],
+    ["brothers-in-arms.html","Братья по оружию","братья оружию щит атака"],
+    ["winter-siege.html","Зимняя осада","зимняя осада"],
+    ["news.html","Новости","новости что нового"],
+    ["news-eu.html","Обновления EU","eu европа обновления"],
+    ["news-ru.html","Обновления RU","ru русская версия обновления"],
+    ["news-elena.html","WhiteFox News","whitefox fox новости государства гос 58 елена elena"],
+    ["creative-corner.html","Творческий уголок","творчество стих стихи рассказы рисунки уголок"]
+  ].map(([url,title,keys]) => ({url,title,keys:normalize(title+" "+keys)}));
+
+  const aliases = {
+    "мишка":"медведь",
+    "медведя":"медведь",
+    "свс":"svs",
+    "героев":"герои",
+    "героя":"герои",
+    "петы":"питомцы",
+    "пет":"питомцы",
+    "исследы":"исследования",
+    "войск":"войска",
+    "новое":"новости"
+  };
+
+  function search(q){
+    let nq = normalize(q);
+    Object.entries(aliases).forEach(([a,b]) => nq = nq.replace(new RegExp(`\\b${a}\\b`,"g"),b));
+    const words = nq.split(" ").filter(w => w.length > 1);
+    return pages.map(p => {
+      let score = 0;
+      words.forEach(w => {
+        if (p.keys.includes(w)) score += 3;
+        if (normalize(p.title).includes(w)) score += 4;
+      });
+      if (p.keys.includes(nq)) score += 5;
+      return {...p,score};
+    }).filter(x => x.score > 0).sort((a,b) => b.score-a.score).slice(0,5);
+  }
+
+  function findExistingHelper(){
+    return document.querySelector(
+      '#owlAssistant, .owl-assistant, .assistant-owl, .owl-helper, [data-owl-helper], #assistantOwl'
+    );
+  }
+
+  function createPanel(){
+    if (document.getElementById("sovaSmartPanel")) return;
+    const panel = document.createElement("div");
+    panel.id = "sovaSmartPanel";
+    panel.className = "sova-smart-panel";
+    panel.innerHTML = `
+      <div class="sova-smart-head">
+        <div><strong>Помощник Сова</strong><small>Найду нужное в «Белой Мгле»</small></div>
+        <button type="button" class="sova-smart-close" aria-label="Закрыть">×</button>
+      </div>
+      <form class="sova-smart-search">
+        <input type="search" placeholder="Например: герои на мишку" autocomplete="off">
+        <button type="submit">Найти</button>
+      </form>
+      <div class="sova-smart-actions">
+        <button type="button" data-q="что качать герои снаряжение">⚙️ Что качать?</button>
+        <button type="button" data-q="события">⚔️ События</button>
+        <button type="button" data-q="новости">📰 Новости</button>
+        <button type="button" data-q="новичкам">❄️ Новичку</button>
+      </div>
+      <div class="sova-smart-results">
+        <div class="sova-smart-welcome">Напиши, что ищешь. Я покажу подходящий раздел сайта.</div>
+      </div>`;
+    document.body.appendChild(panel);
+
+    const input = panel.querySelector("input");
+    const results = panel.querySelector(".sova-smart-results");
+
+    function render(q){
+      const found = search(q);
+      if (!found.length){
+        results.innerHTML = `<div class="sova-smart-empty">Ничего точного не нашла. Попробуй короче: <b>медведь</b>, <b>Мия</b>, <b>питомцы</b>, <b>SvS</b>.</div>`;
+        return;
+      }
+      results.innerHTML = found.map(x =>
+        `<a class="sova-smart-result" href="${x.url}">
+          <span>${x.title}</span><b>Открыть ›</b>
+        </a>`).join("");
+    }
+
+    panel.querySelector("form").addEventListener("submit", e => {
+      e.preventDefault();
+      render(input.value);
+    });
+    panel.querySelectorAll("[data-q]").forEach(b => b.addEventListener("click", () => {
+      input.value = b.dataset.q;
+      render(b.dataset.q);
+    }));
+    panel.querySelector(".sova-smart-close").addEventListener("click", () => panel.classList.remove("is-open"));
+
+    // Open from existing owl if we can identify it.
+    const owl = findExistingHelper();
+    if (owl){
+      owl.addEventListener("click", e => {
+        // Do not break existing internal controls.
+        if (e.target.closest("a,input,button") && e.target !== owl) return;
+        panel.classList.toggle("is-open");
+        if (panel.classList.contains("is-open")) setTimeout(() => input.focus(),80);
+      });
+    } else {
+      const trigger = document.createElement("button");
+      trigger.className = "sova-smart-trigger";
+      trigger.type = "button";
+      trigger.setAttribute("aria-label","Открыть помощника");
+      trigger.textContent = "🦉";
+      document.body.appendChild(trigger);
+      trigger.addEventListener("click", () => panel.classList.toggle("is-open"));
+    }
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded",createPanel);
+  else createPanel();
+})();
