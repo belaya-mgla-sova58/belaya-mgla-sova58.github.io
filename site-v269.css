@@ -9803,3 +9803,14 @@ body.news-subpage header.hero {
     max-width:360px;
   }
 }
+
+
+/* v354 — poem like counter */
+.creative-poem-like-v354{
+  display:flex;
+  justify-content:center;
+  margin:16px 0 6px;
+}
+.creative-poem-like-v354 .news-like-button{
+  min-width:72px;
+}
