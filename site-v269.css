@@ -9012,3 +9012,40 @@ main::before,
     padding-top: 0 !important;
   }
 }
+
+
+/* v341: remove the ACTUAL empty blue mobile topbar, not the page spacing */
+@media (max-width:980px), (hover:none) and (pointer:coarse){
+  .mobile-topbar{
+    height:0 !important;
+    min-height:0 !important;
+    padding:0 !important;
+    margin:0 !important;
+    background:transparent !important;
+    border:0 !important;
+    box-shadow:none !important;
+    overflow:visible !important;
+    pointer-events:none !important;
+  }
+
+  /* Keep only the menu button usable as a floating control. */
+  .mobile-topbar #mobileMenuToggle{
+    pointer-events:auto !important;
+  }
+
+  /* The hero begins immediately at the top of the site viewport. */
+  header.hero,
+  body.is-home-route header.hero,
+  body:not(.is-home-route) header.hero{
+    margin-top:0 !important;
+  }
+
+  /* Drawer/overlay no longer reserve the removed blue strip. */
+  .nav-wrap{
+    top:0 !important;
+    height:100dvh !important;
+  }
+  .mobile-nav-overlay{
+    inset:0 !important;
+  }
+}
