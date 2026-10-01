@@ -9814,3 +9814,6 @@ body.news-subpage header.hero {
 .creative-poem-like-v354 .news-like-button{
   min-width:72px;
 }
+
+/* v355 */
+.sova-smart-trigger{display:none!important;}

@@ -1196,17 +1196,14 @@
         panel.classList.toggle("is-open");
         if (panel.classList.contains("is-open")) setTimeout(() => input.focus(),80);
       });
-    } else {
-      const trigger = document.createElement("button");
-      trigger.className = "sova-smart-trigger";
-      trigger.type = "button";
-      trigger.setAttribute("aria-label","Открыть помощника");
-      trigger.textContent = "🦉";
-      document.body.appendChild(trigger);
-      trigger.addEventListener("click", () => panel.classList.toggle("is-open"));
     }
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded",createPanel);
   else createPanel();
 })();
+
+/* v355 — never show a second owl */
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".sova-smart-trigger").forEach(el => el.remove());
+});
