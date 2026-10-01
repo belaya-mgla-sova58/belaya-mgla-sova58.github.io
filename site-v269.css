@@ -9904,3 +9904,14 @@ a[href*="whitefox-elena-38-39.html"]{
     height:64px !important;
   }
 }
+
+
+/* v362 — mobile assistant higher, directly on the hero/header */
+@media(max-width:700px){
+  .sova-widget{
+    top:16px !important;
+    right:5px !important;
+    bottom:auto !important;
+    left:auto !important;
+  }
+}
