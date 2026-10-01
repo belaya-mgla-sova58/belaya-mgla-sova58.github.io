@@ -1217,7 +1217,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* v359 — shared article views via the same Firebase database as likes */
 (() => {
-  const FIREBASE_VIEWS = 'https://belaya-mgla-likes-default-rtdb.firebaseio.com/views/';
+  const FIREBASE_VIEWS = 'https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/';
   const articles = {
     "creative-roman48.html": "creative-roman48",
     "whitefox-elena-38-39.html": "whitefox-elena-38-39"
@@ -1233,7 +1233,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  const urlFor = key => FIREBASE_VIEWS + encodeURIComponent(key) + '.json';
+  const urlFor = key => FIREBASE_VIEWS + encodeURIComponent('__views__' + key) + '.json';
 
   async function readCount(key){
     const r = await fetch(urlFor(key), {
