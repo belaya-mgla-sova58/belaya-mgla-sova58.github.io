@@ -9915,3 +9915,14 @@ a[href*="whitefox-elena-38-39.html"]{
     left:auto !important;
   }
 }
+
+
+/* v363 — mobile assistant moved to the user's marked area below the right quick button */
+@media(max-width:700px){
+  .sova-widget{
+    top:294px !important;
+    right:14px !important;
+    bottom:auto !important;
+    left:auto !important;
+  }
+}
