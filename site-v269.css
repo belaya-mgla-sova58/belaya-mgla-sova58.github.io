@@ -8893,3 +8893,19 @@ body.news-top-creative .site-hero {
   background-position: center center !important;
   background-repeat: no-repeat !important;
 }
+
+/* v330: correct Creative Corner artwork */
+.news-category-card.creative {
+ background-image:linear-gradient(90deg,rgba(18,16,45,.08),rgba(18,16,45,.01)),url("assets/creative-corner-art-v330.jpg") !important;
+ background-size:cover !important;background-position:center !important;background-repeat:no-repeat !important;
+}
+body.news-top-creative .hero,
+body.news-top-creative .page-hero,
+body.news-top-creative .site-hero {
+ background-image:linear-gradient(rgba(14,35,70,.08),rgba(45,24,72,.08)),url("assets/creative-corner-art-v330.jpg") !important;
+ background-size:cover !important;background-position:center !important;background-repeat:no-repeat !important;
+}
+.news-sub-banner-creative {
+ background-image:url("assets/creative-corner-art-v330.jpg") !important;
+ background-size:cover !important;background-position:center !important;background-repeat:no-repeat !important;
+}
