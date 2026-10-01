@@ -1248,7 +1248,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const count = parseInt(localStorage.getItem("belaya-mgla-views:" + cfg.key) || "0", 10);
     const badge = document.createElement("span");
     badge.className = "article-card-views-v357";
-    badge.innerHTML = `<span aria-hidden="true">👁</span><b>${count}</b>`;
+    badge.innerHTML = `<span aria-hidden="true">👀</span><b>${count}</b>`;
     card.appendChild(badge);
   };
 

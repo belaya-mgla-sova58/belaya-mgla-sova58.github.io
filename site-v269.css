@@ -9878,3 +9878,10 @@ a[href*="whitefox-elena-38-39.html"]{
     font-size:9px;
   }
 }
+
+
+/* v358 — Creative Corner card cleanup */
+.creative-v349-card::after{
+  content:none !important;
+  display:none !important;
+}
