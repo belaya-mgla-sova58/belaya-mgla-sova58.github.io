@@ -9926,3 +9926,18 @@ a[href*="whitefox-elena-38-39.html"]{
     left:auto !important;
   }
 }
+
+
+/* v364 — assistant parked at the right edge so it does not cover reading text */
+@media(max-width:700px){
+  .sova-widget{
+    position:fixed !important;
+    top:118px !important;
+    right:-8px !important;
+    bottom:auto !important;
+    left:auto !important;
+    z-index:9999 !important;
+    transform:scale(.78) !important;
+    transform-origin:top right !important;
+  }
+}
