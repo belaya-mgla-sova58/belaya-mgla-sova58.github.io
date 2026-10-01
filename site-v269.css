@@ -8978,59 +8978,37 @@ body.news-top-creative .site-hero {
  }
 }
 
-/* v338: description is text only in the small lower-left marked area; never overlays the full artwork */
-.news-subpage .news-hero-description{
-  position:absolute!important;
-  left:14px!important;
-  right:auto!important;
-  bottom:6px!important;
-  width:42%!important;
-  max-width:390px!important;
-  height:auto!important;
-  min-height:0!important;
-  background:transparent!important;
-  border:0!important;
-  box-shadow:none!important;
-  backdrop-filter:none!important;
-  -webkit-backdrop-filter:none!important;
+
+/* v340: remove empty horizontal strip below the top navigation on every page */
+body > main,
+.page,
+.page-shell,
+main,
+main.content,
+.site-main,
+.content-wrap,
+.app-main {
+  margin-top: 0 !important;
 }
-.news-subpage .news-hero-description .news-category-description,
-.news-subpage .news-hero-description .news-category-description-overlay{
-  display:block!important;
-  width:auto!important;
-  max-width:100%!important;
-  height:auto!important;
-  min-height:0!important;
-  margin:0!important;
-  padding:4px 6px!important;
-  background:rgba(8,27,54,.36)!important;
-  border:0!important;
-  border-radius:6px!important;
-  box-shadow:none!important;
-  backdrop-filter:none!important;
-  -webkit-backdrop-filter:none!important;
+
+.page::before,
+.page-shell::before,
+main::before,
+.site-main::before {
+  margin-top: 0 !important;
 }
-.news-subpage .news-hero-description p{
-  margin:0!important;
-  font-size:10px!important;
-  line-height:1.18!important;
-  color:#fff!important;
-  text-shadow:0 1px 3px rgba(0,0,0,.8)!important;
-}
-@media(max-width:640px){
-  .news-subpage .news-hero-description{
-    left:12px!important;
-    bottom:5px!important;
-    width:46%!important;
-    max-width:none!important;
-  }
-  .news-subpage .news-hero-description .news-category-description,
-  .news-subpage .news-hero-description .news-category-description-overlay{
-    padding:3px 5px!important;
-    border-radius:5px!important;
-  }
-  .news-subpage .news-hero-description p{
-    font-size:7.3px!important;
-    line-height:1.14!important;
+
+/* Mobile: first visible page block starts immediately below the top navigation */
+@media (max-width: 900px) {
+  body > main,
+  .page,
+  .page-shell,
+  main,
+  main.content,
+  .site-main,
+  .content-wrap,
+  .app-main {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
   }
 }
