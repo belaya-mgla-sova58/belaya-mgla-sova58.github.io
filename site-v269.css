@@ -9885,3 +9885,22 @@ a[href*="whitefox-elena-38-39.html"]{
   content:none !important;
   display:none !important;
 }
+
+
+/* v361 — mobile assistant moved to the marked top-right area */
+@media(max-width:700px){
+  .sova-widget{
+    position:fixed !important;
+    top:72px !important;
+    right:4px !important;
+    bottom:auto !important;
+    left:auto !important;
+    z-index:9999 !important;
+  }
+  .sova-widget .sova-btn,
+  .sova-widget .sova-character,
+  .sova-widget .sova-character-img{
+    width:64px !important;
+    height:64px !important;
+  }
+}
