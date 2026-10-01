@@ -1209,49 +1209,118 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-/* v357 — article views are shown on publication cards.
-   Article pages only record a visit; they no longer render the eye badge. */
+
+
+
+
+
+
+/* v359 — shared article views via the same Firebase database as likes */
 (() => {
-  const file = (location.pathname.split("/").pop() || "").toLowerCase();
-  const map = {
-    "whitefox-elena-38-39.html":"whitefox-elena-38-39",
-    "creative-roman48.html":"creative-roman48"
+  const FIREBASE_VIEWS = 'https://belaya-mgla-likes-default-rtdb.firebaseio.com/views/';
+  const articles = {
+    "creative-roman48.html": "creative-roman48",
+    "whitefox-elena-38-39.html": "whitefox-elena-38-39"
   };
-  const key = map[file];
-  if (!key) return;
-  const seenKey = "belaya-mgla-viewed:" + key;
-  const countKey = "belaya-mgla-views:" + key;
-  let count = parseInt(localStorage.getItem(countKey) || "0", 10);
-  if (!localStorage.getItem(seenKey)) {
-    count += 1;
-    localStorage.setItem(countKey, String(count));
-    localStorage.setItem(seenKey, "1");
+  const categoryCards = {
+    "creative-corner.html": {
+      href: "creative-roman48.html",
+      key: "creative-roman48"
+    },
+    "news-elena.html": {
+      href: "whitefox-elena-38-39.html",
+      key: "whitefox-elena-38-39"
+    }
+  };
+
+  const urlFor = key => FIREBASE_VIEWS + encodeURIComponent(key) + '.json';
+
+  async function readCount(key){
+    const r = await fetch(urlFor(key), {
+      method:'GET',
+      cache:'no-store',
+      headers:{'Accept':'application/json'}
+    });
+    if(!r.ok) throw new Error('view read HTTP ' + r.status);
+    const v = await r.json();
+    return typeof v === 'number' ? Math.max(0, v) : 0;
   }
-})();
 
+  async function incrementCount(key){
+    const r = await fetch(urlFor(key), {
+      method:'PUT',
+      cache:'no-store',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({'.sv':{increment:1}})
+    });
+    if(!r.ok){
+      let body = '';
+      try { body = await r.text(); } catch(e) {}
+      throw new Error('view write HTTP ' + r.status + ' ' + body);
+    }
+    const v = await r.json();
+    return typeof v === 'number' ? Math.max(0, v) : 0;
+  }
 
-/* v357 — show article views on WhiteFox/Creative publication cards */
-(() => {
-  const page = (location.pathname.split("/").pop() || "").toLowerCase();
-  const configs = {
-    "creative-corner.html": { href:"creative-roman48.html", key:"creative-roman48" },
-    "news-elena.html": { href:"whitefox-elena-38-39.html", key:"whitefox-elena-38-39" }
-  };
-  const cfg = configs[page];
-  if (!cfg) return;
+  function putBadge(card,count){
+    let badge = card.querySelector('.article-card-views-v357');
+    if(!badge){
+      badge = document.createElement('span');
+      badge.className = 'article-card-views-v357';
+      card.appendChild(badge);
+    }
+    badge.innerHTML = '<span aria-hidden="true">👀</span><b>' + count + '</b>';
+  }
 
-  const run = () => {
-    const links = [...document.querySelectorAll(`a[href*="${cfg.href}"]`)];
-    const card = links.find(a => a.offsetParent !== null) || links[0];
-    if (!card || card.querySelector(".article-card-views-v357")) return;
+  async function init(){
+    const page = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
 
-    const count = parseInt(localStorage.getItem("belaya-mgla-views:" + cfg.key) || "0", 10);
-    const badge = document.createElement("span");
-    badge.className = "article-card-views-v357";
-    badge.innerHTML = `<span aria-hidden="true">👀</span><b>${count}</b>`;
-    card.appendChild(badge);
-  };
+    // Opening an article adds one shared view per browser session.
+    const articleKey = articles[page];
+    if(articleKey){
+      const sessionKey = 'belaya-mgla-view-session:' + articleKey;
+      try{
+        if(!sessionStorage.getItem(sessionKey)){
+          await incrementCount(articleKey);
+          sessionStorage.setItem(sessionKey,'1');
+        }
+      }catch(err){
+        console.warn('Shared article view increment failed:', err);
+      }
+      return;
+    }
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded",run);
-  else run();
+    // Category pages show the shared total on the publication card.
+    const cfg = categoryCards[page];
+    if(!cfg) return;
+
+    const card = [...document.querySelectorAll('a[href*="' + cfg.href + '"]')]
+      .find(a => a.offsetParent !== null) ||
+      document.querySelector('a[href*="' + cfg.href + '"]');
+
+    if(!card) return;
+
+    try{
+      putBadge(card, await readCount(cfg.key));
+    }catch(err){
+      console.warn('Shared article view read failed:', err);
+      putBadge(card, 0);
+    }
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init, {once:true});
+  }else{
+    init();
+  }
+
+  // Refresh count when returning to a category page with browser Back.
+  window.addEventListener('pageshow', () => {
+    const page = (location.pathname.split('/').pop() || '').toLowerCase();
+    const cfg = categoryCards[page];
+    if(!cfg) return;
+    const card = document.querySelector('a[href*="' + cfg.href + '"]');
+    if(!card) return;
+    readCount(cfg.key).then(v => putBadge(card,v)).catch(()=>{});
+  });
 })();
