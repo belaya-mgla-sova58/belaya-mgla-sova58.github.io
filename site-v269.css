@@ -10029,3 +10029,10 @@ a[href*="whitefox-elena-38-39.html"]{
     top:22vh !important;
   }
 }
+
+/* v377: Other guides farm icon + raise floating menu a little more */
+@media (max-width:1200px), (hover:none) and (pointer:coarse){
+  body.is-other-route #mobileMenuToggle{
+    top:17vh !important;
+  }
+}
