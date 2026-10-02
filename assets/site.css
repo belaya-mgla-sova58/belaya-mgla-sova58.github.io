@@ -6918,3 +6918,9 @@ body.is-svs-route .hero .ui-route-copy {
     linear-gradient(90deg,rgba(13,82,142,.12),rgba(19,108,171,.02)),
     url("assets/news-ru-final-fullbleed.jpg") center center / cover no-repeat !important;
 }
+
+/* v379 — exact current building levels for Furnace calculator */
+.calc-buildings-v379{margin:14px 0;padding:16px;border:1px solid rgba(65,132,190,.28);border-radius:18px;background:linear-gradient(180deg,rgba(239,248,255,.95),rgba(255,255,255,.98))}
+.calc-buildings-v379 h2{margin:0 0 4px;font-size:18px;color:#173e67}.calc-buildings-v379 p{margin:0 0 12px;color:#557089;font-size:13px;line-height:1.45}
+.calc-building-grid-v379{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.calc-building-grid-v379 label{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 10px;border:1px solid rgba(72,131,181,.18);border-radius:12px;background:#fff}.calc-building-grid-v379 label span{font-weight:700;color:#254d73;font-size:13px}.calc-building-grid-v379 select{min-width:82px;padding:8px;border:1px solid #b9d0e3;border-radius:10px;background:#f8fcff;color:#173e67;font-weight:700}
+@media(max-width:700px){.calc-building-grid-v379{grid-template-columns:1fr}.calc-buildings-v379{padding:13px}.calc-building-grid-v379 label{min-height:48px}}
