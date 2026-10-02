@@ -9986,3 +9986,25 @@ a[href*="whitefox-elena-38-39.html"]{
     grid-column:1/-1;width:100%;min-height:38px;
   }
 }
+
+/* v367 — separate likes and views for each Creative Corner work */
+.creative-v349-card{position:relative}
+.creative-card-stats-v367{
+  display:flex;align-items:center;gap:7px;
+  position:absolute;right:34px;bottom:10px;z-index:3;
+}
+.creative-card-like-v367,.creative-card-views-v367{
+  display:inline-flex;align-items:center;gap:4px;
+  min-height:25px;padding:3px 8px;border-radius:999px;
+  border:1px solid rgba(92,119,154,.15);
+  background:rgba(255,255,255,.86);
+  color:#657890;font:inherit;font-size:11px;
+}
+.creative-card-like-v367{cursor:pointer}
+.creative-card-like-v367>span{color:#a9b4c5;font-size:15px;line-height:1}
+.creative-card-like-v367.is-liked>span{color:#d65f78}
+.creative-card-stats-v367 b{font-weight:700}
+@media(max-width:640px){
+ .creative-card-stats-v367{right:31px;bottom:8px;gap:5px}
+ .creative-card-like-v367,.creative-card-views-v367{font-size:10px;padding:2px 6px;min-height:23px}
+}

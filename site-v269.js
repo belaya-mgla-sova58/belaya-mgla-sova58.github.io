@@ -1324,3 +1324,54 @@ document.addEventListener("DOMContentLoaded", () => {
     readCount(cfg.key).then(v => putBadge(card,v)).catch(()=>{});
   });
 })();
+
+/* v367 — Creative Corner independent card likes + views */
+(() => {
+  const BASE='https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/';
+  const page=(location.pathname.split('/').pop()||'').toLowerCase();
+
+  const get = async key => {
+    try { const r=await fetch(BASE+encodeURIComponent(key)+'.json',{cache:'no-store'}); const v=await r.json(); return typeof v==='number'?v:0; }
+    catch(e){ return 0; }
+  };
+  const put = async (key,val) => {
+    try { await fetch(BASE+encodeURIComponent(key)+'.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(val)}); }
+    catch(e){}
+  };
+
+  async function refreshCards(){
+    document.querySelectorAll('[data-creative-like]').forEach(async el=>{
+      const key=el.dataset.creativeLike;
+      el.querySelector('b').textContent=await get(key);
+      const local='creative-liked:'+key;
+      if(localStorage.getItem(local)==='1') el.classList.add('is-liked');
+      el.onclick=async ev=>{
+        ev.preventDefault(); ev.stopPropagation();
+        if(localStorage.getItem(local)==='1') return;
+        const now=await get(key); await put(key,now+1);
+        localStorage.setItem(local,'1'); el.classList.add('is-liked');
+        el.querySelector('b').textContent=now+1;
+      };
+    });
+    document.querySelectorAll('[data-creative-view]').forEach(async el=>{
+      el.querySelector('b').textContent=await get('__views__'+el.dataset.creativeView);
+    });
+  }
+
+  // Count one view per browser session for each individual work.
+  const articleKeys={
+    'creative-roman48.html':'creative-roman48',
+    'creative-amoress-painting.html':'creative-amoress-painting'
+  };
+  const vk=articleKeys[page];
+  if(vk){
+    const sk='creative-viewed-session:'+vk;
+    if(!sessionStorage.getItem(sk)){
+      (async()=>{ const k='__views__'+vk; const now=await get(k); await put(k,now+1); sessionStorage.setItem(sk,'1'); })();
+    }
+  }
+  if(page==='creative-corner.html'){
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',refreshCards,{once:true}); else refreshCards();
+    window.addEventListener('pageshow',refreshCards);
+  }
+})();
