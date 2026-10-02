@@ -1361,7 +1361,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Count one view per browser session for each individual work.
   const articleKeys={
     'creative-roman48.html':'creative-roman48',
-    'creative-amoress-painting.html':'creative-amoress-painting'
+    'creative-amoress-painting.html':'creative-amoress-painting-v2'
   };
   const vk=articleKeys[page];
   if(vk){
