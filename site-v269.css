@@ -9949,3 +9949,40 @@ a[href*="whitefox-elena-38-39.html"]{
 .creative-amoress-figure-v365 img{display:block;max-width:100%;width:auto;max-height:920px;margin:auto;border-radius:12px;box-shadow:0 10px 28px rgba(30,50,80,.13)}
 .creative-amoress-figure-v365 figcaption{max-width:620px;margin:12px auto 0;padding:10px 12px;border:1px solid rgba(91,118,154,.16);border-radius:10px;background:rgba(255,255,255,.75);color:#526b89;font-size:13px;line-height:1.45}
 @media(max-width:640px){.creative-amoress-figure-v365 figcaption{font-size:11px;padding:8px 9px}}
+
+/* v366 — Creative Corner submission notice */
+.creative-submit-v366{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:14px;
+  margin:0 0 16px;
+  padding:15px 16px;
+  border:1px solid rgba(94,123,166,.22);
+  border-radius:14px;
+  background:linear-gradient(135deg,rgba(246,250,255,.98),rgba(249,247,255,.98));
+  box-shadow:0 7px 20px rgba(42,65,100,.07);
+}
+.creative-submit-v366-icon{font-size:28px;line-height:1}
+.creative-submit-v366 h2{margin:0 0 5px;font-size:17px;color:#324d72}
+.creative-submit-v366 p{margin:0;color:#61738d;font-size:12.5px;line-height:1.42}
+.creative-submit-v366-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:40px;padding:0 14px;border-radius:10px;
+  background:#eaf3ff;border:1px solid #bfd5f0;color:#315f91;
+  font-weight:700;font-size:12.5px;text-decoration:none;white-space:nowrap;
+}
+.creative-submit-v366-btn:hover{background:#deedff}
+@media(max-width:640px){
+  .creative-submit-v366{
+    grid-template-columns:auto 1fr;
+    gap:9px 10px;
+    padding:12px;
+  }
+  .creative-submit-v366-icon{font-size:23px}
+  .creative-submit-v366 h2{font-size:14px}
+  .creative-submit-v366 p{font-size:11px}
+  .creative-submit-v366-btn{
+    grid-column:1/-1;width:100%;min-height:38px;
+  }
+}
