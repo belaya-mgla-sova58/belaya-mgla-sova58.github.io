@@ -10008,3 +10008,9 @@ a[href*="whitefox-elena-38-39.html"]{
  .creative-card-stats-v367{right:31px;bottom:8px;gap:5px}
  .creative-card-like-v367,.creative-card-views-v367{font-size:10px;padding:2px 6px;min-height:23px}
 }
+
+/* v369 — individual works have no standalone heart buttons */
+.creative-v349-article-shell .creative-poem-like-v354,
+.creative-v349-article-shell .creative-work-like-v367 {
+  display: none !important;
+}
