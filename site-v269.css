@@ -9941,3 +9941,11 @@ a[href*="whitefox-elena-38-39.html"]{
     transform-origin:top right !important;
   }
 }
+
+/* v365 Amoress painting */
+.creative-amoress-card-v365{margin-top:12px;position:relative}
+.creative-amoress-v365{max-width:760px;margin:0 auto}
+.creative-amoress-figure-v365{margin:16px auto 4px;text-align:center}
+.creative-amoress-figure-v365 img{display:block;max-width:100%;width:auto;max-height:920px;margin:auto;border-radius:12px;box-shadow:0 10px 28px rgba(30,50,80,.13)}
+.creative-amoress-figure-v365 figcaption{max-width:620px;margin:12px auto 0;padding:10px 12px;border:1px solid rgba(91,118,154,.16);border-radius:10px;background:rgba(255,255,255,.75);color:#526b89;font-size:13px;line-height:1.45}
+@media(max-width:640px){.creative-amoress-figure-v365 figcaption{font-size:11px;padding:8px 9px}}
