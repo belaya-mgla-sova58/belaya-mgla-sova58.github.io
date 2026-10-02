@@ -10022,3 +10022,10 @@ a[href*="whitefox-elena-38-39.html"]{
 
 /* v374 governor orders */
 .orders-grid-v374 .mini-card span{display:inline-block;margin-top:8px;font-weight:700;color:#315c8c}.orders-swap-v374{display:grid;gap:9px;margin:14px 0}.orders-swap-v374>div{padding:12px 14px;border-radius:14px;background:#f4f8fd;border:1px solid #d8e5f3;font-weight:700}.super-combo-v374{border:2px solid #e5a62d!important;background:linear-gradient(180deg,#fffaf0,#fff)!important}.combo-chain-v374{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:16px 0}.combo-chain-v374>div{padding:14px 10px;border-radius:15px;background:#fff;border:1px solid #efd08a;text-align:center;box-shadow:0 4px 12px rgba(83,62,22,.07)}.combo-chain-v374 span{display:block;margin-top:6px;font-size:.9em;color:#725c2d}.combo-chain-v374 .combo-go-v374{grid-column:1/-1;background:#fff1c8;font-size:1.08em}@media(max-width:700px){.combo-chain-v374{grid-template-columns:1fr 1fr}.combo-chain-v374 .combo-go-v374{grid-column:1/-1}.orders-grid-v374{grid-template-columns:1fr!important}}
+
+/* v375: on Other guides page keep the floating MENU tab above the guide list */
+@media (max-width:1200px), (hover:none) and (pointer:coarse){
+  body.is-other-route #mobileMenuToggle{
+    top:22vh !important;
+  }
+}
