@@ -1219,14 +1219,9 @@ document.addEventListener("DOMContentLoaded", () => {
 (() => {
   const FIREBASE_VIEWS = 'https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/';
   const articles = {
-    "creative-roman48.html": "creative-roman48",
     "whitefox-elena-38-39.html": "whitefox-elena-38-39"
   };
   const categoryCards = {
-    "creative-corner.html": {
-      href: "creative-roman48.html",
-      key: "creative-roman48"
-    },
     "news-elena.html": {
       href: "whitefox-elena-38-39.html",
       key: "whitefox-elena-38-39"
