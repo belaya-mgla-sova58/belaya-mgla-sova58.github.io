@@ -24,6 +24,10 @@
     <div class="whitefox-elena-card-kicker">✒️ ELENA</div>
     <div class="whitefox-elena-card-title">Новости госа 58</div>
     <div class="whitefox-elena-card-week">Недели 40–41</div>
+    <div class="elena-4041-card-stats" style="display:flex;gap:12px;align-items:center;margin-top:9px;font-weight:700;color:#5a5071;">
+      <span aria-label="Лайки">♥ <b id="elena4041CardLikes">0</b></span>
+      <span aria-label="Просмотры">👀 <b id="elena4041CardViews">0</b></span>
+    </div>
     <div class="whitefox-elena-card-hint">Открыть публикацию <span>›</span></div>
   </div>
   <div class="whitefox-elena-card-leaf" aria-hidden="true">🍁</div>
@@ -40,4 +44,24 @@
 </a>
   </div>
 </section>
+
+<script>
+(function(){
+  const BASE='https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/';
+  const likeKey='news-elena-40-41-v1';
+  const viewKey='__views__whitefox-elena-40-41';
+  const likeEl=document.getElementById('elena4041CardLikes');
+  const viewEl=document.getElementById('elena4041CardViews');
+  async function get(key){
+    try{ const r=await fetch(BASE+encodeURIComponent(key)+'.json',{cache:'no-store'}); const v=await r.json(); return typeof v==='number'?Math.max(0,v):0; }catch(e){ return 0; }
+  }
+  async function refresh(){
+    const vals=await Promise.all([get(likeKey),get(viewKey)]);
+    if(likeEl) likeEl.textContent=vals[0];
+    if(viewEl) viewEl.textContent=vals[1];
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',refresh,{once:true}); else refresh();
+  window.addEventListener('pageshow',refresh);
+})();
+</script>
 <div class="footer news-footer">Белая Мгла • Автор - Sova</div></div></main><div class="sova-widget" id="sovaWidget"><div aria-live="polite" class="sova-bubble" id="sovaBubble"><div class="title"><span>Sova</span><button aria-label="Скрыть" class="sova-close" id="sovaClose">×</button></div><div class="text" id="sovaText">Хочешь интересный факт?</div><div class="hint" id="sovaHint">Нажми на сову, и она расскажет подсказку по игре.</div><div class="sova-search" id="sovaSearch"><div class="sova-search-row"><input aria-label="Поиск по гайдам" autocomplete="off" id="sovaSearchInput" placeholder="Что найти в гайдах?" type="search"/><button aria-label="Найти" id="sovaSearchButton" type="button">Найти</button></div><div aria-live="polite" class="sova-search-results" id="sovaSearchResults"></div></div></div><button aria-label="Помощник" class="sova-btn" id="sovaBtn"><span class="sova-character"><img alt="Белая сова Sova" class="sova-character-img" decoding="async" draggable="false" fetchpriority="low" id="sovaOwlImg" loading="lazy" src="assets/img_3f4e1ca66eb153fe.webp"/></span></button></div><button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button></body></html>

@@ -1372,3 +1372,67 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener('pageshow',refreshCards);
   }
 })();
+
+
+/* v392 — Elena 40–41: shared views on article and WhiteFox publication card */
+(() => {
+  const BASE = 'https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/';
+  const VIEW_KEY = 'whitefox-elena-40-41';
+  const ARTICLE = 'whitefox-elena-40-41.html';
+  const CATEGORY = 'news-elena.html';
+  const url = BASE + encodeURIComponent('__views__' + VIEW_KEY) + '.json';
+
+  async function readCount(){
+    const r = await fetch(url,{method:'GET',cache:'no-store',headers:{'Accept':'application/json'}});
+    if(!r.ok) throw new Error('view read HTTP '+r.status);
+    const v = await r.json();
+    return typeof v === 'number' ? Math.max(0,v) : 0;
+  }
+  async function increment(){
+    const r = await fetch(url,{method:'PUT',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify({'.sv':{increment:1}})});
+    if(!r.ok) throw new Error('view write HTTP '+r.status);
+    const v = await r.json();
+    return typeof v === 'number' ? Math.max(0,v) : 0;
+  }
+  function setArticleCount(v){
+    document.querySelectorAll('[data-elena-view="'+VIEW_KEY+'"] .article-views-count').forEach(el=>el.textContent=String(v));
+  }
+  function setCardCount(v){
+    const card=document.querySelector('a.whitefox-elena-card[href="'+ARTICLE+'"]');
+    if(!card) return;
+    let badge=card.querySelector('.article-card-views-v357');
+    if(!badge){
+      badge=document.createElement('span');
+      badge.className='article-card-views-v357';
+      card.appendChild(badge);
+    }
+    badge.innerHTML='<span aria-hidden="true">👀</span><b>'+v+'</b>';
+  }
+  async function refresh(){
+    try{
+      const v=await readCount();
+      setArticleCount(v); setCardCount(v);
+    }catch(e){ console.warn('Elena 40–41 view read failed:',e); }
+  }
+  async function init(){
+    const page=(location.pathname.split('/').pop()||'index.html').toLowerCase();
+    if(page===ARTICLE){
+      const sk='belaya-mgla-view-session:'+VIEW_KEY;
+      try{
+        let v;
+        if(!sessionStorage.getItem(sk)){
+          v=await increment();
+          sessionStorage.setItem(sk,'1');
+        }else{ v=await readCount(); }
+        setArticleCount(v);
+      }catch(e){ console.warn('Elena 40–41 view increment failed:',e); }
+    }else if(page===CATEGORY){
+      await refresh();
+    }
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true}); else init();
+  window.addEventListener('pageshow',()=>{
+    const page=(location.pathname.split('/').pop()||'').toLowerCase();
+    if(page===CATEGORY) refresh();
+  });
+})();

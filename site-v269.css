@@ -9867,7 +9867,8 @@ body.news-subpage header.hero {
   font-size:10px;
 }
 .creative-v349-card,
-a[href*="whitefox-elena-38-39.html"]{
+a[href*="whitefox-elena-38-39.html"],
+a[href*="whitefox-elena-40-41.html"]{
   position:relative;
 }
 @media(max-width:640px){
