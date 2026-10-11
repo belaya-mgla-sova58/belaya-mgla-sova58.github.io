@@ -38,6 +38,10 @@
     <div class="whitefox-elena-card-kicker">✒️ ELENA</div>
     <div class="whitefox-elena-card-title">Новости госа 58</div>
     <div class="whitefox-elena-card-week">Неделя 38–39</div>
+    <div class="elena-3839-card-stats" style="display:flex;gap:12px;align-items:center;margin-top:9px;font-weight:700;color:#5a5071;">
+      <span aria-label="Лайки">♥ <b id="elena3839CardLikes">0</b></span>
+      <span aria-label="Просмотры">👀 <b id="elena3839CardViews">0</b></span>
+    </div>
     <div class="whitefox-elena-card-hint">Открыть публикацию <span>›</span></div>
   </div>
   <div class="whitefox-elena-card-leaf" aria-hidden="true">🍁</div>
@@ -45,20 +49,28 @@
   </div>
 </section>
 
+<style>
+/* v393: обе карточки Elena показывают лайки и просмотры в одном месте */
+.news-page .article-card-views-v357{display:none!important;}
+</style>
 <script>
 (function(){
   const BASE='https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/';
-  const likeKey='news-elena-40-41-v1';
-  const viewKey='__views__whitefox-elena-40-41';
-  const likeEl=document.getElementById('elena4041CardLikes');
-  const viewEl=document.getElementById('elena4041CardViews');
+  const counters=[
+    ['news-elena-40-41-v1','__views__whitefox-elena-40-41','elena4041CardLikes','elena4041CardViews'],
+    ['news-elena-v2','__views__whitefox-elena-38-39','elena3839CardLikes','elena3839CardViews']
+  ];
   async function get(key){
     try{ const r=await fetch(BASE+encodeURIComponent(key)+'.json',{cache:'no-store'}); const v=await r.json(); return typeof v==='number'?Math.max(0,v):0; }catch(e){ return 0; }
   }
   async function refresh(){
-    const vals=await Promise.all([get(likeKey),get(viewKey)]);
-    if(likeEl) likeEl.textContent=vals[0];
-    if(viewEl) viewEl.textContent=vals[1];
+    await Promise.all(counters.map(async function(row){
+      const vals=await Promise.all([get(row[0]),get(row[1])]);
+      const likeEl=document.getElementById(row[2]);
+      const viewEl=document.getElementById(row[3]);
+      if(likeEl) likeEl.textContent=vals[0];
+      if(viewEl) viewEl.textContent=vals[1];
+    }));
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',refresh,{once:true}); else refresh();
   window.addEventListener('pageshow',refresh);
