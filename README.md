@@ -167,3 +167,6 @@ v323: RU News card replaced with selected variant 5. Full-bleed like EU, no blur
 
 
 v324: Creative Corner uses selected variant 3 in the approved full-bleed news-card format. EU, RU, Elena and Firebase likes preserved.
+
+
+v385: добавлена подкатегория «Руководство для президента» в разделе «Должности на государстве».
