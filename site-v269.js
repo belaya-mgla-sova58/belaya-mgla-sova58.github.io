@@ -576,15 +576,29 @@
   function decorate(route, regexSource, cls, title, limit=1, extra=''){
     const root=routeRoot(route); if(!root) return;
     let left=limit;
+
+    // v401: защита от дублей игровых иконок.
+    // Если в том же смысловом блоке уже стоит такая же иконка вручную
+    // или её ранее добавил скрипт, вторую не вставляем.
+    const blockFor = p => p.closest('p,li,h1,h2,h3,h4,h5,h6,td,th,.mini-card,.guide-callout,.rule,.savebox') || p;
+    const hasSameIcon = p => {
+      const block=blockFor(p);
+      if(!block) return false;
+      if(block.querySelector('.catalog-game-icon.ci-'+cls)) return true;
+      return !!block.querySelector('img.catalog-inline-item-icon[src$="catalog-'+cls+'.png"]');
+    };
+
     const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){
       if(left<=0 || !n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
       const p=n.parentElement; if(!p) return NodeFilter.FILTER_REJECT;
       if(p.closest('script,style,.catalog-term,.catalog-icon-strip')) return NodeFilter.FILTER_REJECT;
+      if(hasSameIcon(p)) return NodeFilter.FILTER_REJECT;
       return NodeFilter.FILTER_ACCEPT;
     }});
     const nodes=[]; while(left>0 && walker.nextNode()) nodes.push(walker.currentNode);
     for(const n of nodes){
       if(left<=0) break;
+      const p=n.parentElement; if(!p || hasSameIcon(p)) continue;
       const re=new RegExp(regexSource,'i'); const m=n.nodeValue.match(re); if(!m) continue;
       const idx=m.index, len=m[0].length;
       const frag=document.createDocumentFragment();
