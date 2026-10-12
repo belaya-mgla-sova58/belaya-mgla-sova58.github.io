@@ -732,8 +732,9 @@
   // Event catalog icons intentionally disabled in v176.
 
   // Newly approved catalog item icons: only where matching content already exists.
-  addStrip('gear',' Мифрил',[[ 'mithril','Мифрил' ]]);
-  ['gear','alliance-showdown','svs-prep','armament-competition','state-power','alliance-mobilization'].forEach(r=>decorate(r,'Мифрил','mithril','Мифрил',3));
+  // v397: on the Gear page the Mithril icon is already placed manually in the heading.
+  // Do not add an icon strip or auto-decorate the word there, otherwise the same icon is duplicated.
+  ['alliance-showdown','svs-prep','armament-competition','state-power','alliance-mobilization'].forEach(r=>decorate(r,'Мифрил','mithril','Мифрил',3));
   addStrip('experts',' Материалы экспертов',[
     ['seal_agnes','Печать Агнес'],['seal_cyrilla','Печать Сириллы'],['seal_holger','Печать Хольгера']
   ]);
