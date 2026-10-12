@@ -623,8 +623,7 @@
 
   // Gear and governor materials.
   decorate('gear','Компонент усиления опыта для снаряжения','gear_component','Компонент усиления опыта для снаряжения',2);
-  // v399: на странице «Снаряжение» иконка Камней эссенции уже стоит вручную в заголовке.
-  // Автодекор отключён, чтобы не появлялись дубли в заголовке, тексте и навигационных метках.
+  // v400: gear already has one approved essence icon in the heading; do not auto-insert duplicates.
   addStrip('gear',' Материалы',[
     ['gear_component','Компонент усиления опыта для снаряжения'],['essence','Камни эссенции']
   ]);
