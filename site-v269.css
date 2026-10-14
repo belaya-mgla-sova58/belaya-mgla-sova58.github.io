@@ -16364,3 +16364,165 @@ body.is-home-route.star-glass-v436 .home-stamped-hero-v441{
     min-height:64px !important;
   }
 }
+
+
+/* =========================================================
+   v444 — COSMOS MUST BE VISIBLE
+   Final hard override based on approved mobile mockup.
+   ========================================================= */
+
+/* The same chosen nebula is painted on the root AND the actual content canvas.
+   This is intentionally redundant: it makes the background visible even in
+   mobile WebViews that mishandle fixed body layers. */
+html,
+body.cosmic-visible-v444{
+  background-color:#020713 !important;
+  background-image:url("assets/cosmic-nebula-visible-v444.webp") !important;
+  background-repeat:no-repeat !important;
+  background-position:center top !important;
+  background-size:cover !important;
+  min-height:100% !important;
+}
+
+body.cosmic-visible-v444{
+  min-height:100vh !important;
+}
+
+/* Disable all previous helper layers so they cannot darken the background. */
+body.cosmic-visible-v444::before,
+body.cosmic-visible-v444::after,
+body.cosmic-visible-v444 .site-cosmic-background-v442{
+  display:none !important;
+  content:none !important;
+  background:none !important;
+}
+
+/* Home uses the background directly on the canvas too. */
+body.cosmic-visible-v444.is-home-route #appMain,
+body.cosmic-visible-v444.is-home-route main,
+body.cosmic-visible-v444.is-home-route .route-page,
+body.cosmic-visible-v444.is-home-route .route-page[data-route="home"],
+body.cosmic-visible-v444.is-home-route .modern-home-v424{
+  background-color:transparent !important;
+  background-image:url("assets/cosmic-nebula-visible-v444.webp") !important;
+  background-repeat:no-repeat !important;
+  background-position:center top !important;
+  background-size:cover !important;
+}
+
+/* These layout wrappers must be fully clear. */
+body.cosmic-visible-v444.is-home-route .modern-home-columns-v424,
+body.cosmic-visible-v444.is-home-route .modern-home-columns-bottom-v424,
+body.cosmic-visible-v444.is-home-route .modern-card-grid-v424,
+body.cosmic-visible-v444.is-home-route .modern-list-v424,
+body.cosmic-visible-v444.is-home-route .home-news-grid-v442{
+  background:transparent !important;
+  background-image:none !important;
+}
+
+/* Strong glass look, close to the approved preview. */
+body.cosmic-visible-v444.is-home-route .modern-panel-v424{
+  background:linear-gradient(145deg,rgba(4,19,52,.20),rgba(2,10,31,.11)) !important;
+  border-color:rgba(116,191,255,.30) !important;
+  box-shadow:0 10px 28px rgba(0,3,16,.14), inset 0 1px 0 rgba(255,255,255,.07) !important;
+  backdrop-filter:blur(8px) saturate(1.14) !important;
+  -webkit-backdrop-filter:blur(8px) saturate(1.14) !important;
+}
+
+body.cosmic-visible-v444.is-home-route .modern-home-strip-v424 > a,
+body.cosmic-visible-v444.is-home-route .modern-topic-card-v424,
+body.cosmic-visible-v444.is-home-route .modern-list-v424 > a,
+body.cosmic-visible-v444.is-home-route .home-news-card-v442{
+  background:linear-gradient(145deg,rgba(5,30,76,.25),rgba(3,12,37,.14)) !important;
+  border-color:rgba(123,199,255,.32) !important;
+  box-shadow:0 8px 20px rgba(0,3,16,.12), inset 0 1px 0 rgba(255,255,255,.075) !important;
+  backdrop-filter:blur(7px) saturate(1.16) !important;
+  -webkit-backdrop-filter:blur(7px) saturate(1.16) !important;
+}
+
+/* Purple glass */
+body.cosmic-visible-v444.is-home-route .modern-home-strip-v424 > a:nth-child(2),
+body.cosmic-visible-v444.is-home-route .modern-topic-card-v424:nth-child(2),
+body.cosmic-visible-v444.is-home-route .modern-topic-card-v424:nth-child(4),
+body.cosmic-visible-v444.is-home-route .modern-topic-card-v424:nth-child(6),
+body.cosmic-visible-v444.is-home-route .modern-list-v424 > a:nth-child(even),
+body.cosmic-visible-v444.is-home-route .home-news-card-v442:nth-child(even){
+  background:linear-gradient(145deg,rgba(108,47,197,.27),rgba(22,16,67,.14)) !important;
+  border-color:rgba(194,132,255,.36) !important;
+}
+
+/* Cyan glass */
+body.cosmic-visible-v444.is-home-route .modern-home-strip-v424 > a:nth-child(3),
+body.cosmic-visible-v444.is-home-route .modern-topic-card-v424:nth-child(3),
+body.cosmic-visible-v444.is-home-route .modern-topic-card-v424:nth-child(5){
+  background:linear-gradient(145deg,rgba(5,116,159,.26),rgba(4,27,67,.13)) !important;
+  border-color:rgba(83,222,244,.34) !important;
+}
+
+/* Gold glass */
+body.cosmic-visible-v444.is-home-route .modern-home-strip-v424 > a:nth-child(4),
+body.cosmic-visible-v444.is-home-route .modern-topic-card-v424:nth-child(7){
+  background:linear-gradient(145deg,rgba(139,91,21,.25),rgba(42,28,45,.13)) !important;
+  border-color:rgba(235,190,89,.34) !important;
+}
+
+/* Keep the official main picture, while letting the cosmic background show around it. */
+body.cosmic-visible-v444.is-home-route .modern-home-hero-v424.home-stamped-hero-v441{
+  background:rgba(3,13,35,.08) !important;
+  border-color:rgba(135,202,255,.30) !important;
+  box-shadow:0 10px 25px rgba(0,3,16,.14) !important;
+}
+
+/* Search + bottom bar remain readable but translucent. */
+body.cosmic-visible-v444 .site-search-box-v426,
+body.cosmic-visible-v444 .mobile-topbar,
+body.cosmic-visible-v444 .mobile-bottom-v424{
+  background:rgba(3,17,47,.42) !important;
+  border-color:rgba(116,190,255,.32) !important;
+  backdrop-filter:blur(12px) saturate(1.16) !important;
+  -webkit-backdrop-filter:blur(12px) saturate(1.16) !important;
+}
+
+/* Ensure text is bright enough over visible space. */
+body.cosmic-visible-v444.is-home-route .modern-panel-v424 h2,
+body.cosmic-visible-v444.is-home-route .modern-topic-card-v424 b,
+body.cosmic-visible-v444.is-home-route .modern-list-v424 b,
+body.cosmic-visible-v444.is-home-route .home-news-card-v442 b{
+  color:#fff !important;
+  text-shadow:0 2px 6px rgba(0,0,0,.45) !important;
+}
+body.cosmic-visible-v444.is-home-route .modern-topic-card-v424 small,
+body.cosmic-visible-v444.is-home-route .modern-list-v424 small,
+body.cosmic-visible-v444.is-home-route .home-news-card-v442 small{
+  color:rgba(229,241,255,.84) !important;
+}
+
+/* Phone: use the same image but pin it visually to the viewport. */
+@media(max-width:980px){
+  html,
+  body.cosmic-visible-v444{
+    background-image:url("assets/cosmic-nebula-visible-v444.webp") !important;
+    background-position:center top !important;
+    background-size:auto 100vh !important;
+    background-repeat:repeat-y !important;
+  }
+
+  body.cosmic-visible-v444.is-home-route #appMain,
+  body.cosmic-visible-v444.is-home-route main,
+  body.cosmic-visible-v444.is-home-route .route-page[data-route="home"],
+  body.cosmic-visible-v444.is-home-route .modern-home-v424{
+    background-image:url("assets/cosmic-nebula-visible-v444.webp") !important;
+    background-position:center top !important;
+    background-size:auto 100vh !important;
+    background-repeat:repeat-y !important;
+  }
+
+  body.cosmic-visible-v444.is-home-route .modern-panel-v424,
+  body.cosmic-visible-v444.is-home-route .modern-home-strip-v424 > a,
+  body.cosmic-visible-v444.is-home-route .modern-topic-card-v424,
+  body.cosmic-visible-v444.is-home-route .modern-list-v424 > a,
+  body.cosmic-visible-v444.is-home-route .home-news-card-v442{
+    backdrop-filter:blur(5px) saturate(1.12) !important;
+    -webkit-backdrop-filter:blur(5px) saturate(1.12) !important;
+  }
+}
