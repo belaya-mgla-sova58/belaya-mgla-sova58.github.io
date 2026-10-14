@@ -10704,3 +10704,174 @@ body.site-hq-v407:not(.is-home-route) header.hero .ui-route-copy p{font-size:cla
   .copy-block-v409{font-size:10px;padding:5px 7px;}
   .home-hq-changes-v405 > a.home-hq-change-link-v409{grid-template-columns:1fr;gap:3px;padding:12px 13px;}
 }
+
+
+/* ===== v411: final visual polish =====
+   Quieter surfaces, cleaner spacing, one primary Sova on the homepage. */
+
+/* Homepage banner: same approved artwork, with the official stamp reduced ~13%. */
+body.is-home-route.home-hq-v406 header.hero.home-hq-hero-v406{
+  background-image:url('assets/home-hero-polish-v411.png') !important;
+}
+
+/* Welcome block: less repetition after the information-rich hero. */
+body.is-home-route .home-hq-welcome-v405{
+  padding:22px 26px !important;
+}
+body.is-home-route .home-hq-welcome-v405 h1{
+  margin-top:0 !important;
+  margin-bottom:9px !important;
+}
+body.is-home-route .home-hq-welcome-v405 p{
+  max-width:860px !important;
+  margin:0 !important;
+}
+
+/* The owl in the hero is the visual mascot; do not repeat another large owl in the daily panel. */
+body.is-home-route .home-hq-sova-v405{display:none !important;}
+
+/* Compact helper on the homepage. Function is unchanged. */
+body.is-home-route .sova-btn{
+  width:52px !important;
+  height:52px !important;
+  min-width:52px !important;
+  min-height:52px !important;
+  padding:5px !important;
+  border-radius:50% !important;
+  background:linear-gradient(160deg,rgba(28,93,145,.98),rgba(10,48,87,.98)) !important;
+  border:1px solid rgba(126,198,243,.38) !important;
+  box-shadow:0 5px 14px rgba(0,14,31,.18) !important;
+}
+body.is-home-route .sova-btn .sova-character,
+body.is-home-route .sova-btn .sova-character-img{
+  width:100% !important;
+  height:100% !important;
+}
+body.is-home-route .sova-btn .sova-character-img{
+  object-fit:contain !important;
+  transform:none !important;
+  filter:none !important;
+}
+
+/* Quieter homepage panels and cards. */
+body.is-home-route.home-hq-v405 .home-hq-welcome-v405,
+body.is-home-route.home-hq-v405 .home-hq-panel-v405{
+  border-color:rgba(117,193,245,.28) !important;
+  box-shadow:0 7px 18px rgba(0,12,28,.13),inset 0 1px 0 rgba(255,255,255,.035) !important;
+}
+body.is-home-route.home-hq-v405 .home-hq-welcome-v405::before,
+body.is-home-route.home-hq-v405 .home-hq-panel-v405::before{
+  opacity:.42 !important;
+}
+body.is-home-route.home-hq-v405 .home-hq-mini-v405,
+body.is-home-route.home-hq-v405 .home-hq-changes-v405>div,
+body.is-home-route.home-hq-v405 .home-hq-changes-v405>a.home-hq-change-link-v409{
+  border-color:rgba(126,190,233,.20) !important;
+  box-shadow:none !important;
+}
+body.is-home-route.home-hq-v405 a.home-hq-link-card-v409:hover{
+  transform:none !important;
+  border-color:rgba(126,198,243,.34)!important;
+  box-shadow:none !important;
+}
+body.is-home-route.home-hq-v405 .home-hq-shell-v405{gap:16px !important;}
+body.is-home-route.home-hq-v405 .home-hq-grid-v405{gap:12px !important;}
+body.is-home-route.home-hq-v405 .home-hq-panel-v405{padding:22px 23px !important;}
+body.is-home-route.home-hq-v405 .home-hq-panel-head-v405{margin-bottom:14px !important;}
+
+/* Site-wide surfaces: preserve the dark HQ identity, reduce glow and visual noise. */
+body.site-hq-v407{
+  --hq-line:rgba(107,185,244,.30);
+  --hq-soft-line:rgba(129,193,236,.18);
+}
+body.site-hq-v407 .nav-wrap{
+  box-shadow:7px 0 20px rgba(0,12,28,.17) !important;
+}
+body.site-hq-v407 .nav-wrap nav a.active,
+body.site-hq-v407 .nav-wrap nav a[aria-current="page"]{
+  box-shadow:0 0 8px rgba(71,174,242,.12),inset 0 0 0 1px rgba(255,255,255,.055) !important;
+}
+body.site-hq-v407 header.hero{
+  box-shadow:inset 0 -24px 52px rgba(3,20,40,.12),0 5px 16px rgba(0,14,31,.12) !important;
+}
+body.site-hq-v407 header.hero .ui-route-copy{
+  border-color:rgba(122,194,244,.27) !important;
+  box-shadow:0 6px 18px rgba(0,14,32,.13),inset 0 0 0 1px rgba(255,255,255,.025) !important;
+}
+body.site-hq-v407 .guide-section,
+body.site-hq-v407 .section,
+body.site-hq-v407 .intro,
+body.site-hq-v407 .savebox,
+body.site-hq-v407 .rule,
+body.site-hq-v407 .guide-nav-card,
+body.site-hq-v407 .building-info-card,
+body.site-hq-v407 .am-info-card,
+body.site-hq-v407 .mercenary-fact-card,
+body.site-hq-v407 .news-shell,
+body.site-hq-v407 .news-page,
+body.site-hq-v407 .creative-boss-text-v372{
+  border-color:rgba(107,185,244,.27) !important;
+  box-shadow:0 6px 17px rgba(0,12,28,.12),inset 0 1px 0 rgba(255,255,255,.03) !important;
+}
+body.site-hq-v407 .mini-card,
+body.site-hq-v407 main [class$="-card"],
+body.site-hq-v407 main [class*="-card-v"]{
+  border-color:rgba(129,193,236,.17) !important;
+  box-shadow:none !important;
+}
+body.site-hq-v407 .breadcrumbs-v409,
+body.site-hq-v407 .page-toc-v409{
+  box-shadow:none !important;
+  border-color:rgba(117,193,245,.19) !important;
+}
+body.site-hq-v407 .page-toc-links-v409 a{
+  border-color:rgba(117,193,245,.10) !important;
+}
+
+/* Consistent vertical rhythm for article pages. */
+body.site-hq-v407 .guide-page-v69 > .guide-section{
+  margin-top:15px !important;
+  margin-bottom:0 !important;
+  padding:22px 24px !important;
+}
+body.site-hq-v407 .guide-page-v69 > .guide-section:first-of-type{margin-top:0 !important;}
+body.site-hq-v407 .guide-section > h2{
+  margin-top:0 !important;
+  margin-bottom:13px !important;
+  line-height:1.2 !important;
+}
+body.site-hq-v407 .guide-section > p:first-of-type{margin-top:0 !important;}
+body.site-hq-v407 .guide-section > p:last-child,
+body.site-hq-v407 .guide-section > ul:last-child,
+body.site-hq-v407 .guide-section > ol:last-child{margin-bottom:0 !important;}
+body.site-hq-v407 .page-toc-v409{margin:10px 0 15px !important;}
+body.site-hq-v407 .breadcrumbs-v409{margin-bottom:10px !important;}
+
+/* Keep gold as a scarce emphasis color: logo and warning states retain it; ordinary surfaces stay blue/white. */
+body.site-hq-v407 .topic-pill,
+body.site-hq-v407 .breadcrumbs-v409,
+body.site-hq-v407 .page-toc-v409,
+body.site-hq-v407 .copy-block-v409{
+  text-shadow:none !important;
+}
+
+@media(max-width:980px), (hover:none) and (pointer:coarse){
+  body.is-home-route .sova-btn{
+    width:46px !important;height:46px !important;min-width:46px !important;min-height:46px !important;padding:4px !important;
+  }
+  body.is-home-route.home-hq-v405 .home-hq-welcome-v405{padding:18px 15px !important;}
+  body.is-home-route.home-hq-v405 .home-hq-panel-v405{padding:17px 14px !important;}
+  body.is-home-route.home-hq-v405 .home-hq-shell-v405{gap:11px !important;}
+  body.site-hq-v407 .guide-page-v69 > .guide-section{
+    margin-top:11px !important;padding:17px 14px !important;
+  }
+  body.site-hq-v407 .guide-section > h2{margin-bottom:10px !important;}
+}
+
+@media(max-width:430px){
+  body.is-home-route .sova-btn{
+    width:42px !important;height:42px !important;min-width:42px !important;min-height:42px !important;padding:4px !important;
+  }
+  body.is-home-route.home-hq-v405 .home-hq-welcome-v405 h1{font-size:22px !important;}
+  body.site-hq-v407 .guide-page-v69 > .guide-section{padding:15px 12px !important;}
+}
