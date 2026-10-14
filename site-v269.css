@@ -16003,3 +16003,160 @@ body.star-glass-v436 .news-hero-v424{
     font-size:11px !important;
   }
 }
+
+
+/* =========================================================
+   v441 — restore main stamped photo + make cosmic bg truly visible
+   ========================================================= */
+
+/* The cosmic artwork is now a real fixed page layer, not a CSS body background.
+   This avoids mobile/emulator issues with background-attachment: fixed. */
+html{
+  background:#020713 !important;
+}
+body.star-glass-v436{
+  position:relative !important;
+  min-height:100vh !important;
+  background:transparent !important;
+  background-image:none !important;
+  isolation:isolate !important;
+}
+body.star-glass-v436::before{
+  content:"" !important;
+  position:fixed !important;
+  inset:0 !important;
+  z-index:0 !important;
+  pointer-events:none !important;
+  background-image:
+    linear-gradient(180deg,rgba(1,5,18,.05),rgba(1,5,18,.18)),
+    url("assets/cosmic-nebula-frame-v440.webp") !important;
+  background-size:cover !important;
+  background-position:center center !important;
+  background-repeat:no-repeat !important;
+  opacity:1 !important;
+  transform:translateZ(0) !important;
+}
+body.star-glass-v436::after{
+  content:"" !important;
+  position:fixed !important;
+  inset:0 !important;
+  z-index:0 !important;
+  pointer-events:none !important;
+  background:
+    radial-gradient(circle at 14% 14%,rgba(64,177,255,.08),transparent 28%),
+    radial-gradient(circle at 86% 28%,rgba(165,86,255,.08),transparent 30%) !important;
+}
+
+/* Keep all actual site UI above the fixed cosmic layer. */
+body.star-glass-v436 > .mobile-topbar,
+body.star-glass-v436 > .mobile-nav-overlay,
+body.star-glass-v436 > .nav-wrap,
+body.star-glass-v436 > main,
+body.star-glass-v436 > .back-to-top,
+body.star-glass-v436 > .mobile-bottom-v424,
+body.star-glass-v436 > header,
+body.star-glass-v436 > footer{
+  position:relative !important;
+  z-index:2 !important;
+}
+body.star-glass-v436 > .nav-wrap,
+body.star-glass-v436 > .mobile-topbar,
+body.star-glass-v436 > .mobile-bottom-v424{
+  position:fixed !important;
+}
+
+/* Remove every full-page opaque canvas that can hide the cosmic layer. */
+body.star-glass-v436 #appMain,
+body.star-glass-v436 main,
+body.star-glass-v436 .route-page,
+body.star-glass-v436 .route-page.active,
+body.star-glass-v436 .modern-home-v424,
+body.star-glass-v436 .modern-home-columns-v424,
+body.star-glass-v436 .modern-home-columns-bottom-v424,
+body.star-glass-v436 .guide-page-v69,
+body.star-glass-v436 .kb-page-v415,
+body.star-glass-v436 .news-shell,
+body.star-glass-v436 .page-shell,
+body.star-glass-v436 .content-wrap{
+  background:transparent !important;
+  background-image:none !important;
+}
+
+/* Restore the exact stamped home photo. */
+body.is-home-route.star-glass-v436 .modern-home-hero-v424.home-stamped-hero-v441{
+  display:block !important;
+  min-height:0 !important;
+  padding:0 !important;
+  margin:0 0 10px !important;
+  overflow:hidden !important;
+  border:1px solid rgba(148,207,255,.30) !important;
+  border-radius:16px !important;
+  background:rgba(3,15,40,.12) !important;
+  box-shadow:0 12px 30px rgba(0,3,16,.16) !important;
+  backdrop-filter:blur(4px) !important;
+  -webkit-backdrop-filter:blur(4px) !important;
+}
+body.is-home-route.star-glass-v436 .home-stamped-img-v441{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  object-fit:contain !important;
+  border-radius:15px !important;
+}
+
+/* Homepage glass is deliberately very light so the nebula remains visible. */
+body.is-home-route.star-glass-v436 .modern-panel-v424,
+body.is-home-route.star-glass-v436 .modern-topic-card-v424,
+body.is-home-route.star-glass-v436 .modern-list-v424 > a,
+body.is-home-route.star-glass-v436 .modern-home-strip-v424 > a,
+body.is-home-route.star-glass-v436 .home-hq-welcome-v405,
+body.is-home-route.star-glass-v436 .home-hq-panel-v405,
+body.is-home-route.star-glass-v436 .home-hq-mini-v405,
+body.is-home-route.star-glass-v436 a.home-hq-mini-v405{
+  background:linear-gradient(145deg,rgba(8,25,66,.20),rgba(3,13,36,.12)) !important;
+  border-color:rgba(152,211,255,.26) !important;
+  box-shadow:0 8px 22px rgba(0,3,14,.10),inset 0 1px 0 rgba(255,255,255,.055) !important;
+  backdrop-filter:blur(9px) saturate(1.13) !important;
+  -webkit-backdrop-filter:blur(9px) saturate(1.13) !important;
+}
+body.is-home-route.star-glass-v436 .modern-home-strip-v424 > a:nth-child(2){
+  background:linear-gradient(145deg,rgba(105,48,184,.24),rgba(24,18,67,.13)) !important;
+}
+body.is-home-route.star-glass-v436 .modern-home-strip-v424 > a:nth-child(3){
+  background:linear-gradient(145deg,rgba(7,105,148,.23),rgba(5,29,70,.12)) !important;
+}
+body.is-home-route.star-glass-v436 .modern-home-strip-v424 > a:nth-child(4){
+  background:linear-gradient(145deg,rgba(118,80,21,.22),rgba(40,28,44,.12)) !important;
+}
+
+/* Inner pages remain glassy but a little stronger for readability. */
+body.star-glass-v436:not(.is-home-route) .modern-panel-v424,
+body.star-glass-v436:not(.is-home-route) .guide-page-v69 > details.guide-fold-v414,
+body.star-glass-v436:not(.is-home-route) .guide-section,
+body.star-glass-v436:not(.is-home-route) .guide-callout,
+body.star-glass-v436:not(.is-home-route) .news-card,
+body.star-glass-v436:not(.is-home-route) .kb-group-v415,
+body.star-glass-v436:not(.is-home-route) .kb-tools-v415,
+body.star-glass-v436:not(.is-home-route) .kb-more-v415,
+body.star-glass-v436:not(.is-home-route) .kb-card-textonly-v416{
+  background:linear-gradient(145deg,rgba(7,28,73,.34),rgba(4,18,49,.26)) !important;
+  border-color:rgba(113,183,255,.30) !important;
+}
+
+/* Mobile: same fixed cosmic canvas, centered for tall phone screens. */
+@media(max-width:980px){
+  body.star-glass-v436::before{
+    background-image:
+      linear-gradient(180deg,rgba(1,5,18,.02),rgba(1,5,18,.12)),
+      url("assets/cosmic-nebula-frame-v440.webp") !important;
+    background-size:cover !important;
+    background-position:center center !important;
+  }
+  body.is-home-route.star-glass-v436 .modern-home-hero-v424.home-stamped-hero-v441{
+    margin-bottom:8px !important;
+    border-radius:13px !important;
+  }
+  body.is-home-route.star-glass-v436 .home-stamped-img-v441{
+    border-radius:12px !important;
+  }
+}
