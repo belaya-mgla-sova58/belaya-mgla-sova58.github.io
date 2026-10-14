@@ -16350,3 +16350,17 @@ body.is-home-route.star-glass-v436 .home-stamped-hero-v441{
     font-size:7.5px;
   }
 }
+
+
+/* ===== v443: homepage news cleanup ===== */
+.home-news-v442 .home-news-grid-v442{
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+}
+@media(max-width:520px){
+  .home-news-v442 .home-news-grid-v442{
+    grid-template-columns:1fr !important;
+  }
+  .home-news-v442 .home-news-card-v442{
+    min-height:64px !important;
+  }
+}
