@@ -11787,3 +11787,64 @@ body.site-hq-v407 .furnace-calc-v379 .calc-select-v378 select{
     font-size:17px !important;
   }
 }
+
+
+/* ===== v419: Knowledge Base card typography =====
+   Larger and brighter text for fast reading on phones. */
+body.is-other-route .kb-card-v415.kb-card-textonly-v416{
+  background:linear-gradient(145deg,rgba(17,68,108,.98),rgba(9,43,79,.99)) !important;
+  border-color:rgba(123,202,249,.28) !important;
+}
+body.is-other-route .kb-card-v415 .kb-card-texts-v415 strong{
+  margin-bottom:6px !important;
+  color:#ffffff !important;
+  font-size:15.5px !important;
+  font-weight:900 !important;
+  line-height:1.18 !important;
+  text-shadow:0 1px 0 rgba(0,0,0,.12) !important;
+}
+body.is-other-route .kb-card-v415 .kb-card-texts-v415 small{
+  display:block !important;
+  color:#d7ecf9 !important;
+  font-size:12px !important;
+  font-weight:650 !important;
+  line-height:1.38 !important;
+}
+body.is-other-route .kb-card-v415 .kb-card-arrow-v415{
+  background:rgba(218,241,255,.92) !important;
+  border-color:rgba(255,255,255,.35) !important;
+  color:#145f94 !important;
+  box-shadow:0 2px 7px rgba(0,20,40,.16) !important;
+}
+
+@media(max-width:760px){
+  body.is-other-route .kb-card-v415.kb-card-textonly-v416{
+    min-height:94px !important;
+    padding:10px 9px 10px !important;
+  }
+  body.is-other-route .kb-card-v415 .kb-card-texts-v415 strong{
+    margin-bottom:5px !important;
+    font-size:12.5px !important;
+    line-height:1.18 !important;
+  }
+  body.is-other-route .kb-card-v415 .kb-card-texts-v415 small{
+    font-size:10.2px !important;
+    font-weight:650 !important;
+    line-height:1.32 !important;
+  }
+  body.is-other-route .kb-card-v415 .kb-card-arrow-v415{
+    width:20px !important;
+    height:20px !important;
+    flex-basis:20px !important;
+    font-size:16px !important;
+  }
+}
+
+@media(max-width:350px){
+  body.is-other-route .kb-card-v415 .kb-card-texts-v415 strong{
+    font-size:12px !important;
+  }
+  body.is-other-route .kb-card-v415 .kb-card-texts-v415 small{
+    font-size:9.8px !important;
+  }
+}
