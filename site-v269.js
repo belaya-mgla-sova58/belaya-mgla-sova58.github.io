@@ -10,24 +10,20 @@
   function showRoute(){
     var route=(document.body.dataset.staticRoute||'home');
     var page=document.querySelector('.route-page[data-route="'+route+'"]');
-    if(!page){ route='home'; page=document.querySelector('.route-page[data-route="home"]'); }
-    document.querySelectorAll('.route-page').forEach(function(p){p.classList.remove('active');});
-    page.classList.add('active');
+    if(!page) page=document.querySelector('.route-page.active') || document.querySelector('.route-page');
+    if(page){
+      document.querySelectorAll('.route-page').forEach(function(p){p.classList.remove('active');});
+      page.classList.add('active');
+    }
+    // Static multipage navigation already contains the correct active item.
+    // Do not overwrite it with the old hash-route logic.
     document.querySelectorAll('.nav-wrap nav a').forEach(function(a){
-      var eventSubroutes=['alliance-showdown','tundra-trade-route','endless-trial','mercenary-prestige','frostfire-mine','crazy-joe','alliance-championship','fishing','forts','castle','foundry','svs-prep','svs','armament-competition','state-power','alliance-mobilization','brothers-in-arms','winter-siege','dreams','snowplow','bear'];
-      var buildingSubroutes=['buildings-before-fire','buildings-after-fire'];
-      var otherSubroutes=['governor','farm','arena','beacon','mails','labyrinth','exploration'];
-      var navRoute=eventSubroutes.indexOf(route)!==-1?'events':(buildingSubroutes.indexOf(route)!==-1?'buildings':(otherSubroutes.indexOf(route)!==-1?'other':route));
-      var isActive=a.getAttribute('href')==='#'+navRoute;
-      a.classList.toggle('active',isActive);
+      if(a.classList.contains('active')) a.setAttribute('aria-current','page');
+      else a.removeAttribute('aria-current');
       a.style.removeProperty('background');
       a.style.removeProperty('color');
-      if(isActive) a.setAttribute('aria-current','page');
-      else a.removeAttribute('aria-current');
     });
-    window.scrollTo({top:0,behavior:'instant'});
   }
-  window.addEventListener('hashchange',showRoute);
   document.addEventListener('DOMContentLoaded',showRoute);
   showRoute();
 })();
@@ -399,6 +395,8 @@
     document.body.classList.toggle('is-svs-prep-route',route==='svs-prep');
     document.body.classList.toggle('is-svs-route',route==='svs');
     document.body.classList.toggle('is-alliance-mobilization-route',route==='alliance-mobilization');
+    // v409 multipage pages carry their final header text in HTML; do not overwrite it with the legacy SPA header updater.
+    if(document.body.classList.contains('site-hq-v407')) return;
     let data=meta[route];
     const guideHero=page&&page.querySelector('.guide-page-v69 > .guide-hero');
     const guideTitle=guideHero&&guideHero.querySelector('.guide-hero-text h1');
@@ -1450,4 +1448,52 @@ document.addEventListener("DOMContentLoaded", () => {
     const page=(location.pathname.split('/').pop()||'').toLowerCase();
     if(page===CATEGORY) refresh();
   });
+})();
+
+
+/* v409 — cleaner multipage navigation, contents, and copyable short notes */
+(() => {
+  function initV409(){
+    document.addEventListener('keydown',e=>{
+      const el=e.target.closest?.('[role=\"button\"][tabindex=\"0\"]');
+      if(!el || (e.key!=='Enter' && e.key!==' ')) return;
+      e.preventDefault(); el.click();
+    });
+    // Keep long contents compact on phones, expanded on desktop.
+    document.querySelectorAll('.page-toc-v409').forEach(toc=>{
+      if(window.matchMedia('(max-width:760px)').matches) toc.removeAttribute('open');
+      toc.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click',e=>{
+          const id=a.getAttribute('href').slice(1), target=document.getElementById(id);
+          if(!target) return;
+          e.preventDefault();
+          target.scrollIntoView({behavior:'smooth',block:'start'});
+          if(window.matchMedia('(max-width:760px)').matches) toc.removeAttribute('open');
+          try{history.replaceState(null,'','#'+id)}catch(_e){}
+        });
+      });
+    });
+
+    // Copy only short memo/callout blocks explicitly marked by the page.
+    document.querySelectorAll('.copy-block-v409').forEach(btn=>{
+      btn.addEventListener('click',async e=>{
+        e.preventDefault(); e.stopPropagation();
+        const box=btn.parentElement;
+        if(!box) return;
+        const clone=box.cloneNode(true);
+        clone.querySelectorAll('.copy-block-v409').forEach(x=>x.remove());
+        const text=clone.innerText.trim();
+        try{ await navigator.clipboard.writeText(text); }
+        catch(err){
+          const ta=document.createElement('textarea');
+          ta.value=text; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.opacity='0';
+          document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+        }
+        const old=btn.textContent;
+        btn.textContent='Скопировано ✓'; btn.classList.add('copied');
+        setTimeout(()=>{btn.textContent=old;btn.classList.remove('copied')},1400);
+      });
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initV409,{once:true}); else initV409();
 })();
