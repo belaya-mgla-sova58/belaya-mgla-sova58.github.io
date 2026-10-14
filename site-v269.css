@@ -14942,3 +14942,405 @@ body.modern-v424 .page-heading-v424.frost-header-v431{
     -webkit-backdrop-filter:blur(22px) saturate(1.18) !important;
   }
 }
+
+
+/* =========================================================
+   v435 — FULL SITE STAR PASS
+   Проверка и перекраска всех страниц: звёздное небо, акценты,
+   стеклянные панели, более живые кнопки и раскрывающиеся блоки.
+   ========================================================= */
+
+/* ---------- universal background on every page ---------- */
+body.modern-v424{
+  background:
+    linear-gradient(rgba(1,7,22,.08), rgba(1,7,22,.22)),
+    url("assets/starry-sky-v435.svg") center top / cover fixed no-repeat !important;
+  background-color:#020a22 !important;
+}
+
+body.modern-v424::before{
+  content:"" !important;
+  position:fixed !important;
+  inset:0 !important;
+  z-index:-1 !important;
+  pointer-events:none !important;
+  background:
+    radial-gradient(circle at 15% 18%, rgba(43,120,255,.12), transparent 26%),
+    radial-gradient(circle at 82% 26%, rgba(153,78,248,.10), transparent 22%),
+    radial-gradient(circle at 74% 70%, rgba(39,206,230,.07), transparent 20%) !important;
+  opacity:1 !important;
+}
+
+/* Base text color cleanup */
+body.modern-v424,
+body.modern-v424 p,
+body.modern-v424 li,
+body.modern-v424 span,
+body.modern-v424 div{
+  color-scheme:dark;
+}
+
+/* Keep main app transparent */
+body.modern-v424 #appMain,
+body.modern-v424 .page-shell-v424,
+body.modern-v424 main{
+  background:transparent !important;
+}
+
+/* ---------- generic glass containers ---------- */
+body.modern-v424 .modern-panel-v424,
+body.modern-v424 .guide-page-v69 > details.guide-fold-v414,
+body.modern-v424 .guide-section,
+body.modern-v424 .guide-callout,
+body.modern-v424 .news-card,
+body.modern-v424 .kb-group-v415,
+body.modern-v424 .kb-tools-v415,
+body.modern-v424 .kb-more-v415,
+body.modern-v424 .kb-card-textonly-v416,
+body.modern-v424 .hero-card-v424,
+body.modern-v424 .section-card-v424,
+body.modern-v424 .category-card-v424,
+body.modern-v424 .calc-card-v424,
+body.modern-v424 .stat-card-v424,
+body.modern-v424 .content-card-v424,
+body.modern-v424 .article-card-v424{
+  background:
+    linear-gradient(145deg, rgba(6,28,72,.66), rgba(5,19,52,.58)) !important;
+  border:1px solid rgba(90,163,248,.28) !important;
+  box-shadow:
+    0 14px 34px rgba(0,5,24,.24),
+    inset 0 1px 0 rgba(255,255,255,.04) !important;
+  backdrop-filter:blur(16px) saturate(1.10) !important;
+  -webkit-backdrop-filter:blur(16px) saturate(1.10) !important;
+}
+
+/* Page headers / hero areas */
+body.modern-v424 .page-heading-v424,
+body.modern-v424 .page-heading-v424.frost-header-v431,
+body.modern-v424 .modern-home-hero-v424,
+body.modern-v424 .guide-hero-v424,
+body.modern-v424 .news-hero-v424{
+  background:
+    linear-gradient(105deg, rgba(6,21,56,.76), rgba(7,30,75,.56) 56%, rgba(58,31,117,.28)),
+    url("assets/starry-sky-v435.svg") center 20% / cover no-repeat !important;
+  border-color:rgba(100,170,250,.34) !important;
+  box-shadow:0 16px 36px rgba(0,6,28,.28) !important;
+}
+
+/* Search and top bar */
+body.modern-v424 .site-search-box-v426,
+body.modern-v424 .mobile-topbar,
+body.modern-v424 .topbar-v424,
+body.modern-v424 .search-shell-v424{
+  background:rgba(5,24,61,.64) !important;
+  border:1px solid rgba(91,168,255,.35) !important;
+  box-shadow:0 10px 22px rgba(0,6,28,.22) !important;
+  backdrop-filter:blur(18px) saturate(1.12) !important;
+  -webkit-backdrop-filter:blur(18px) saturate(1.12) !important;
+}
+
+/* Breadcrumbs */
+body.modern-v424 .breadcrumbs-v409{
+  background:rgba(4,20,50,.54) !important;
+  border-color:rgba(85,160,243,.24) !important;
+  backdrop-filter:blur(12px) !important;
+}
+
+/* ---------- buttons / chips / pills ---------- */
+body.modern-v424 .chip-v424,
+body.modern-v424 .filter-chip-v424,
+body.modern-v424 .guide-chip,
+body.modern-v424 .hero-tag-v424,
+body.modern-v424 .badge-v424,
+body.modern-v424 .tag-v424{
+  background:rgba(8,45,104,.58) !important;
+  border:1px solid rgba(99,183,255,.26) !important;
+  color:#e8f4ff !important;
+  box-shadow:0 6px 16px rgba(0,7,26,.16) !important;
+}
+
+/* Accent cycle */
+body.modern-v424 .accent-purple,
+body.modern-v424 .is-purple,
+body.modern-v424 .purple-card{
+  background:
+    linear-gradient(145deg, rgba(74,38,145,.72), rgba(26,29,88,.62)) !important;
+  border-color:rgba(178,120,255,.34) !important;
+}
+body.modern-v424 .accent-cyan,
+body.modern-v424 .is-cyan,
+body.modern-v424 .cyan-card{
+  background:
+    linear-gradient(145deg, rgba(7,84,122,.68), rgba(7,31,80,.60)) !important;
+  border-color:rgba(76,216,240,.30) !important;
+}
+
+/* Generic links / CTA buttons */
+body.modern-v424 .btn,
+body.modern-v424 .btn-primary,
+body.modern-v424 .btn-secondary,
+body.modern-v424 button,
+body.modern-v424 .link-button-v424,
+body.modern-v424 .section-link-v424,
+body.modern-v424 .card-action-v424{
+  border-radius:12px !important;
+}
+body.modern-v424 .btn-primary,
+body.modern-v424 .primary-action-v424,
+body.modern-v424 .cta-button-v424{
+  background:
+    linear-gradient(145deg, rgba(42,134,255,.88), rgba(18,85,208,.82)) !important;
+  border-color:rgba(144,207,255,.30) !important;
+  color:#fff !important;
+  box-shadow:0 10px 20px rgba(18,88,208,.24) !important;
+}
+body.modern-v424 .btn-secondary,
+body.modern-v424 .secondary-action-v424{
+  background:
+    linear-gradient(145deg, rgba(118,67,221,.82), rgba(62,37,153,.80)) !important;
+  border-color:rgba(198,140,255,.26) !important;
+  color:#fff !important;
+  box-shadow:0 10px 20px rgba(85,54,190,.22) !important;
+}
+
+body.modern-v424 button:hover,
+body.modern-v424 .btn:hover,
+body.modern-v424 a:hover .guide-chip,
+body.modern-v424 .modern-panel-v424:hover{
+  filter:brightness(1.05);
+}
+
+/* ---------- accordion / detail sections ----------
+   This fixes pages like "Эксперты" where blocks were still plain blue/gray.
+*/
+body.modern-v424 details.guide-fold-v414{
+  overflow:hidden !important;
+  border-radius:16px !important;
+  margin-bottom:10px !important;
+  border:1px solid rgba(86,162,245,.28) !important;
+  background:
+    linear-gradient(145deg, rgba(6,28,72,.62), rgba(4,20,52,.56)) !important;
+  box-shadow:0 12px 28px rgba(0,5,22,.18) !important;
+  backdrop-filter:blur(14px) !important;
+  -webkit-backdrop-filter:blur(14px) !important;
+}
+
+body.modern-v424 details.guide-fold-v414 > summary{
+  list-style:none !important;
+  cursor:pointer !important;
+  border:none !important;
+  background:
+    linear-gradient(90deg, rgba(7,39,92,.86), rgba(10,61,122,.62) 72%, rgba(78,49,157,.56)) !important;
+  color:#f7fbff !important;
+  font-weight:700 !important;
+  box-shadow:inset 0 -1px 0 rgba(255,255,255,.05) !important;
+}
+
+body.modern-v424 details.guide-fold-v414[open] > summary{
+  background:
+    linear-gradient(90deg, rgba(13,61,132,.88), rgba(58,79,174,.74) 60%, rgba(116,67,205,.70)) !important;
+}
+
+body.modern-v424 details.guide-fold-v414 > summary *,
+body.modern-v424 details.guide-fold-v414[open] > summary *{
+  color:#f7fbff !important;
+}
+
+body.modern-v424 .guide-fold-content-v414,
+body.modern-v424 .guide-fold-body-v414{
+  background:
+    linear-gradient(145deg, rgba(7,28,70,.48), rgba(4,18,47,.46)) !important;
+  color:#d8e7f8 !important;
+}
+
+body.modern-v424 .guide-callout{
+  border-left:3px solid rgba(117,194,255,.58) !important;
+}
+body.modern-v424 .guide-callout.info,
+body.modern-v424 .guide-callout.blue{
+  background:
+    linear-gradient(145deg, rgba(8,56,118,.54), rgba(5,27,67,.52)) !important;
+}
+body.modern-v424 .guide-callout.purple,
+body.modern-v424 .guide-callout.tip{
+  background:
+    linear-gradient(145deg, rgba(70,36,135,.54), rgba(16,24,76,.52)) !important;
+}
+body.modern-v424 .guide-callout.cyan,
+body.modern-v424 .guide-callout.note{
+  background:
+    linear-gradient(145deg, rgba(8,88,124,.52), rgba(5,26,68,.50)) !important;
+}
+
+/* Tables */
+body.modern-v424 .guide-table-wrap,
+body.modern-v424 table{
+  background:rgba(5,23,58,.42) !important;
+  border-color:rgba(89,163,247,.24) !important;
+}
+body.modern-v424 table th{
+  background:rgba(10,44,104,.74) !important;
+  color:#f7fbff !important;
+}
+body.modern-v424 table td{
+  background:rgba(7,25,58,.48) !important;
+  color:#d7e7fa !important;
+  border-color:rgba(89,163,247,.16) !important;
+}
+body.modern-v424 table tr:nth-child(even) td{
+  background:rgba(36,28,79,.42) !important;
+}
+
+/* ---------- Knowledge base full treatment ---------- */
+body.is-other-route.modern-v424 .kb-intro-v415{
+  border:1px solid rgba(143,103,255,.42) !important;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(128,71,238,.20), transparent 44%),
+    linear-gradient(145deg, rgba(47,24,103,.62), rgba(7,29,72,.58)) !important;
+}
+
+body.is-other-route.modern-v424 .kb-intro-icon-v415{
+  border-color:rgba(190,137,255,.45) !important;
+  background:linear-gradient(145deg, rgba(132,76,236,.80), rgba(67,45,158,.72)) !important;
+  color:#fff !important;
+}
+
+body.is-other-route.modern-v424 .kb-group-v415{
+  border:1px solid rgba(80,152,241,.28) !important;
+  background:
+    linear-gradient(145deg, rgba(6,31,78,.61), rgba(4,20,54,.56)) !important;
+}
+
+body.is-other-route.modern-v424 .kb-group-head-v415 h2{
+  color:#f7fbff !important;
+}
+body.is-other-route.modern-v424 .kb-group-head-v415 span{
+  color:#95b2d1 !important;
+}
+
+body.is-other-route.modern-v424 .kb-card-v415.kb-card-textonly-v416{
+  border:1px solid rgba(80,162,255,.34) !important;
+  background:
+    radial-gradient(circle at 90% 0%, rgba(37,118,225,.18), transparent 48%),
+    linear-gradient(145deg, rgba(6,44,98,.70), rgba(5,25,61,.66)) !important;
+}
+body.is-other-route.modern-v424 .kb-grid-v415 .kb-card-v415:nth-child(2),
+body.is-other-route.modern-v424 .kb-grid-v415 .kb-card-v415:nth-child(5),
+body.is-other-route.modern-v424 .kb-grid-v415 .kb-card-v415:nth-child(8){
+  border-color:rgba(171,106,255,.42) !important;
+  background:
+    radial-gradient(circle at 90% 0%, rgba(146,72,246,.23), transparent 48%),
+    linear-gradient(145deg, rgba(52,27,111,.67), rgba(12,23,66,.65)) !important;
+}
+body.is-other-route.modern-v424 .kb-grid-v415 .kb-card-v415:nth-child(3),
+body.is-other-route.modern-v424 .kb-grid-v415 .kb-card-v415:nth-child(6),
+body.is-other-route.modern-v424 .kb-grid-v415 .kb-card-v415:nth-child(9){
+  border-color:rgba(48,205,235,.38) !important;
+  background:
+    radial-gradient(circle at 90% 0%, rgba(31,192,224,.20), transparent 48%),
+    linear-gradient(145deg, rgba(5,73,108,.64), rgba(5,25,60,.66)) !important;
+}
+
+body.is-other-route.modern-v424 .kb-card-texts-v415 strong{
+  color:#f8fbff !important;
+}
+body.is-other-route.modern-v424 .kb-card-texts-v415 small{
+  color:#b5c6dc !important;
+}
+body.is-other-route.modern-v424 .kb-card-arrow-v415{
+  background:rgba(9,49,105,.64) !important;
+  border-color:rgba(100,184,255,.34) !important;
+  color:#dff5ff !important;
+}
+
+body.is-other-route.modern-v424 .kb-tools-v415,
+body.is-other-route.modern-v424 .kb-more-v415{
+  border-color:rgba(109,101,237,.30) !important;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(107,66,210,.12), transparent 34%),
+    linear-gradient(145deg, rgba(7,31,77,.60), rgba(4,20,52,.57)) !important;
+}
+
+body.is-other-route.modern-v424 .kb-tools-grid-v415 a{
+  border-color:rgba(76,153,240,.27) !important;
+  background:rgba(7,39,91,.57) !important;
+}
+body.is-other-route.modern-v424 .kb-tools-grid-v415 a:nth-child(even){
+  border-color:rgba(160,100,255,.30) !important;
+  background:rgba(48,26,99,.53) !important;
+}
+
+/* ---------- card grids / section tiles ----------
+   Add color variety across common tiles used on home, events, heroes, etc.
+*/
+body.modern-v424 .card-grid-v424 > *:nth-child(3n+1),
+body.modern-v424 .section-grid-v424 > *:nth-child(3n+1),
+body.modern-v424 .quick-links-v424 > *:nth-child(3n+1),
+body.modern-v424 .home-grid-v424 > *:nth-child(3n+1){
+  background:
+    linear-gradient(145deg, rgba(6,47,104,.68), rgba(5,26,65,.62)) !important;
+  border-color:rgba(96,177,255,.30) !important;
+}
+body.modern-v424 .card-grid-v424 > *:nth-child(3n+2),
+body.modern-v424 .section-grid-v424 > *:nth-child(3n+2),
+body.modern-v424 .quick-links-v424 > *:nth-child(3n+2),
+body.modern-v424 .home-grid-v424 > *:nth-child(3n+2){
+  background:
+    linear-gradient(145deg, rgba(58,32,118,.66), rgba(10,24,68,.62)) !important;
+  border-color:rgba(176,114,255,.30) !important;
+}
+body.modern-v424 .card-grid-v424 > *:nth-child(3n),
+body.modern-v424 .section-grid-v424 > *:nth-child(3n),
+body.modern-v424 .quick-links-v424 > *:nth-child(3n),
+body.modern-v424 .home-grid-v424 > *:nth-child(3n){
+  background:
+    linear-gradient(145deg, rgba(7,86,120,.64), rgba(7,30,77,.60)) !important;
+  border-color:rgba(70,214,239,.28) !important;
+}
+
+/* ---------- mobile bottom nav ---------- */
+body.modern-v424 .mobile-bottom-v424{
+  background:rgba(4,22,57,.70) !important;
+  border-color:rgba(86,165,251,.36) !important;
+  box-shadow:0 -10px 24px rgba(0,6,26,.24) !important;
+  backdrop-filter:blur(22px) saturate(1.18) !important;
+  -webkit-backdrop-filter:blur(22px) saturate(1.18) !important;
+}
+body.modern-v424 .mobile-bottom-v424 .nav-item-v424.is-active,
+body.modern-v424 .mobile-bottom-v424 .nav-item-v424[aria-current="page"]{
+  background:
+    linear-gradient(145deg, rgba(60,147,255,.32), rgba(88,73,235,.26)) !important;
+  border-radius:18px !important;
+  box-shadow:0 0 0 1px rgba(112,190,255,.18) inset !important;
+}
+
+/* ---------- mobile tuning ---------- */
+@media(max-width:980px), (hover:none) and (pointer:coarse){
+  body.modern-v424 .modern-panel-v424,
+  body.modern-v424 .guide-page-v69 > details.guide-fold-v414,
+  body.modern-v424 .guide-section,
+  body.modern-v424 .guide-callout,
+  body.modern-v424 .news-card,
+  body.modern-v424 .kb-group-v415,
+  body.modern-v424 .kb-tools-v415,
+  body.modern-v424 .kb-more-v415,
+  body.modern-v424 .kb-card-textonly-v416{
+    border-radius:14px !important;
+  }
+
+  body.modern-v424 details.guide-fold-v414 > summary{
+    font-size:15px !important;
+  }
+
+  body.modern-v424 .page-heading-v424,
+  body.modern-v424 .modern-home-hero-v424{
+    background-position:center top !important;
+  }
+
+  body.modern-v424 .guide-callout,
+  body.modern-v424 .news-card,
+  body.modern-v424 .modern-panel-v424{
+    padding-left:12px !important;
+    padding-right:12px !important;
+  }
+}
