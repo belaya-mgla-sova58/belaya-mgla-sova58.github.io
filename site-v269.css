@@ -15872,3 +15872,134 @@ body.is-home-route.star-glass-v436 .modern-home-strip-v424 > a{
     ) !important;
   }
 }
+
+
+/* =========================================================
+   v440 — true global cosmic background, no image inside home header
+   ========================================================= */
+body.star-glass-v436{
+  background:
+    linear-gradient(180deg,rgba(1,5,18,.14),rgba(1,5,18,.32)),
+    url("assets/cosmic-nebula-frame-v440.webp") center top / cover fixed no-repeat !important;
+  background-color:#020816 !important;
+}
+
+/* Home masthead is now text-only transparent glass. */
+body.is-home-route.star-glass-v436 .modern-home-hero-v424.home-cosmic-title-v440{
+  min-height:230px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  margin:0 0 10px !important;
+  padding:26px 18px !important;
+  border:1px solid rgba(155,214,255,.20) !important;
+  border-radius:18px !important;
+  background:linear-gradient(145deg,rgba(7,24,63,.10),rgba(31,17,68,.07)) !important;
+  background-image:linear-gradient(145deg,rgba(7,24,63,.10),rgba(31,17,68,.07)) !important;
+  box-shadow:0 10px 26px rgba(0,4,18,.10),inset 0 1px 0 rgba(255,255,255,.06) !important;
+  backdrop-filter:blur(6px) saturate(1.10) !important;
+  -webkit-backdrop-filter:blur(6px) saturate(1.10) !important;
+  overflow:hidden !important;
+}
+body.is-home-route.star-glass-v436 .home-cosmic-title-inner-v440{
+  width:100%;
+  max-width:760px;
+  text-align:center;
+}
+body.is-home-route.star-glass-v436 .home-cosmic-badge-v440{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:10px;
+  padding:6px 11px;
+  border:1px solid rgba(153,213,255,.26);
+  border-radius:999px;
+  background:rgba(4,19,50,.18);
+  color:#ccecff;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+body.is-home-route.star-glass-v436 .home-cosmic-title-inner-v440 h1{
+  margin:0 !important;
+  color:#fff !important;
+  font-family:Georgia,"Times New Roman",serif !important;
+  font-size:clamp(46px,8vw,82px) !important;
+  line-height:.92 !important;
+  letter-spacing:-.04em !important;
+  text-shadow:0 3px 16px rgba(0,0,0,.38),0 0 18px rgba(102,190,255,.12) !important;
+}
+body.is-home-route.star-glass-v436 .home-cosmic-subtitle-v440{
+  margin-top:8px;
+  color:#ffd66f;
+  font-size:clamp(16px,2.5vw,24px);
+  font-weight:950;
+  letter-spacing:.10em;
+  text-shadow:0 2px 10px rgba(0,0,0,.35);
+}
+body.is-home-route.star-glass-v436 .home-cosmic-title-inner-v440 p{
+  max-width:620px;
+  margin:12px auto 0 !important;
+  color:rgba(237,247,255,.88) !important;
+  font-size:14px !important;
+  line-height:1.45 !important;
+}
+
+/* Make the whole home dashboard considerably clearer / more transparent. */
+body.is-home-route.star-glass-v436 .modern-panel-v424,
+body.is-home-route.star-glass-v436 .modern-topic-card-v424,
+body.is-home-route.star-glass-v436 .modern-list-v424 > a,
+body.is-home-route.star-glass-v436 .modern-home-strip-v424 > a,
+body.is-home-route.star-glass-v436 .home-hq-welcome-v405,
+body.is-home-route.star-glass-v436 .home-hq-panel-v405,
+body.is-home-route.star-glass-v436 .home-hq-mini-v405,
+body.is-home-route.star-glass-v436 a.home-hq-mini-v405{
+  background:linear-gradient(145deg,rgba(6,22,58,.13),rgba(3,13,36,.07)) !important;
+  border-color:rgba(151,211,255,.20) !important;
+  box-shadow:0 8px 20px rgba(0,3,14,.08),inset 0 1px 0 rgba(255,255,255,.05) !important;
+  backdrop-filter:blur(7px) saturate(1.10) !important;
+  -webkit-backdrop-filter:blur(7px) saturate(1.10) !important;
+}
+body.is-home-route.star-glass-v436 .modern-home-strip-v424 > a:nth-child(2){
+  background:linear-gradient(145deg,rgba(104,49,184,.17),rgba(25,19,69,.08)) !important;
+}
+body.is-home-route.star-glass-v436 .modern-home-strip-v424 > a:nth-child(3){
+  background:linear-gradient(145deg,rgba(8,104,148,.16),rgba(5,29,70,.07)) !important;
+}
+body.is-home-route.star-glass-v436 .modern-home-strip-v424 > a:nth-child(4){
+  background:linear-gradient(145deg,rgba(116,78,20,.15),rgba(40,28,44,.07)) !important;
+}
+
+/* No dedicated image backgrounds in page headers. The global body is the only cosmic image. */
+body.star-glass-v436 .page-heading-v424,
+body.star-glass-v436 .page-heading-v424.frost-header-v431,
+body.star-glass-v436 .guide-hero-v424,
+body.star-glass-v436 .news-hero-v424{
+  background:linear-gradient(105deg,rgba(4,18,48,.16),rgba(10,31,72,.10) 58%,rgba(78,41,143,.08)) !important;
+  background-image:linear-gradient(105deg,rgba(4,18,48,.16),rgba(10,31,72,.10) 58%,rgba(78,41,143,.08)) !important;
+}
+
+@media(max-width:980px), (hover:none) and (pointer:coarse){
+  body.star-glass-v436{
+    background:
+      linear-gradient(180deg,rgba(1,5,18,.10),rgba(1,5,18,.27)),
+      url("assets/cosmic-nebula-frame-v440.webp") center top / cover fixed no-repeat !important;
+  }
+  body.is-home-route.star-glass-v436 .modern-home-hero-v424.home-cosmic-title-v440{
+    min-height:180px !important;
+    margin:0 0 7px !important;
+    padding:22px 14px !important;
+    border-radius:13px !important;
+    background:linear-gradient(145deg,rgba(7,24,63,.08),rgba(31,17,68,.05)) !important;
+  }
+  body.is-home-route.star-glass-v436 .home-cosmic-title-inner-v440 h1{
+    font-size:clamp(40px,13vw,58px) !important;
+  }
+  body.is-home-route.star-glass-v436 .home-cosmic-subtitle-v440{
+    font-size:15px;
+  }
+  body.is-home-route.star-glass-v436 .home-cosmic-title-inner-v440 p{
+    font-size:11px !important;
+  }
+}
