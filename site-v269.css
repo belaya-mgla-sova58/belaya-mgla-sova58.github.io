@@ -15344,3 +15344,228 @@ body.modern-v424 .mobile-bottom-v424 .nav-item-v424[aria-current="page"]{
     padding-right:12px !important;
   }
 }
+
+
+/* =========================================================
+   v436 — GLASS TRANSPARENCY MATCH
+   Transparency tuned to the reference screenshot:
+   star field stays clearly visible through all cards/panels.
+   ========================================================= */
+
+body.star-glass-v436.modern-v424{
+  background:
+    linear-gradient(rgba(1,5,18,.02),rgba(1,5,18,.08)),
+    url("assets/starry-sky-v436.svg") center top / cover fixed no-repeat !important;
+  background-color:#02091e !important;
+}
+
+body.star-glass-v436::before{
+  content:"" !important;
+  position:fixed !important;
+  inset:0 !important;
+  z-index:-1 !important;
+  pointer-events:none !important;
+  background:
+    radial-gradient(circle at 16% 18%,rgba(44,118,255,.10),transparent 25%),
+    radial-gradient(circle at 84% 45%,rgba(155,72,245,.11),transparent 26%) !important;
+  opacity:1 !important;
+}
+
+/* Kill opaque page canvases so stars show between blocks. */
+body.star-glass-v436 main,
+body.star-glass-v436 #appMain,
+body.star-glass-v436 .route-page,
+body.star-glass-v436 .guide-page-v69,
+body.star-glass-v436 .news-shell,
+body.star-glass-v436 .kb-page-v415,
+body.star-glass-v436 .page-shell,
+body.star-glass-v436 .content-wrap{
+  background:transparent !important;
+  background-image:none !important;
+}
+
+/* Shared glass recipe: intentionally much more transparent than before. */
+body.star-glass-v436 .modern-panel-v424,
+body.star-glass-v436 .modern-topic-card-v424,
+body.star-glass-v436 .modern-list-v424 > a,
+body.star-glass-v436 .guide-page-v69 > details.guide-fold-v414,
+body.star-glass-v436 .guide-section,
+body.star-glass-v436 .guide-callout,
+body.star-glass-v436 .news-card,
+body.star-glass-v436 .kb-group-v415,
+body.star-glass-v436 .kb-tools-v415,
+body.star-glass-v436 .kb-more-v415,
+body.star-glass-v436 .kb-card-textonly-v416,
+body.star-glass-v436 .kb-intro-v415{
+  background:
+    linear-gradient(145deg,rgba(7,31,78,.36),rgba(4,18,49,.28)) !important;
+  border-color:rgba(103,177,255,.32) !important;
+  box-shadow:
+    0 12px 28px rgba(0,5,24,.18),
+    inset 0 1px 0 rgba(255,255,255,.055) !important;
+  backdrop-filter:blur(10px) saturate(1.14) !important;
+  -webkit-backdrop-filter:blur(10px) saturate(1.14) !important;
+}
+
+/* Purple cards: same alpha, stronger hue instead of more opacity. */
+body.star-glass-v436 .modern-card-grid-v424 .modern-topic-card-v424:nth-child(2),
+body.star-glass-v436 .modern-card-grid-v424 .modern-topic-card-v424:nth-child(4),
+body.star-glass-v436 .modern-card-grid-v424 .modern-topic-card-v424:nth-child(6),
+body.star-glass-v436 .modern-list-v424 > a:nth-child(even),
+body.star-glass-v436 .kb-grid-v415 .kb-card-v415:nth-child(3n+2){
+  background:
+    radial-gradient(circle at 88% 0%,rgba(150,77,255,.20),transparent 48%),
+    linear-gradient(145deg,rgba(74,35,145,.34),rgba(21,21,67,.28)) !important;
+  border-color:rgba(181,119,255,.38) !important;
+}
+
+/* Cyan cards. */
+body.star-glass-v436 .modern-card-grid-v424 .modern-topic-card-v424:nth-child(3),
+body.star-glass-v436 .modern-card-grid-v424 .modern-topic-card-v424:nth-child(5),
+body.star-glass-v436 .kb-grid-v415 .kb-card-v415:nth-child(3n){
+  background:
+    radial-gradient(circle at 88% 0%,rgba(31,198,226,.16),transparent 48%),
+    linear-gradient(145deg,rgba(7,84,122,.32),rgba(6,28,67,.27)) !important;
+  border-color:rgba(62,210,236,.34) !important;
+}
+
+/* Gold card stays translucent too. */
+body.star-glass-v436 .modern-card-grid-v424 .modern-topic-card-v424:nth-child(7){
+  background:
+    radial-gradient(circle at 88% 0%,rgba(218,169,58,.16),transparent 48%),
+    linear-gradient(145deg,rgba(96,67,17,.31),rgba(34,27,47,.27)) !important;
+  border-color:rgba(226,184,83,.34) !important;
+}
+
+/* Home top quick cards: transparency like the reference. */
+body.star-glass-v436 .modern-home-strip-v424 > a{
+  background:
+    linear-gradient(145deg,rgba(8,52,119,.38),rgba(5,28,68,.30)) !important;
+  border-color:rgba(91,178,255,.36) !important;
+  backdrop-filter:blur(10px) saturate(1.14) !important;
+  -webkit-backdrop-filter:blur(10px) saturate(1.14) !important;
+}
+body.star-glass-v436 .modern-home-strip-v424 > a:nth-child(2){
+  background:
+    linear-gradient(145deg,rgba(83,38,158,.38),rgba(26,23,75,.30)) !important;
+  border-color:rgba(181,119,255,.42) !important;
+}
+body.star-glass-v436 .modern-home-strip-v424 > a:nth-child(3){
+  background:
+    linear-gradient(145deg,rgba(7,96,134,.36),rgba(5,31,73,.28)) !important;
+  border-color:rgba(71,215,239,.36) !important;
+}
+body.star-glass-v436 .modern-home-strip-v424 > a:nth-child(4){
+  background:
+    linear-gradient(145deg,rgba(112,75,18,.34),rgba(41,31,48,.28)) !important;
+  border-color:rgba(232,188,87,.38) !important;
+}
+
+/* Headers: star field visible THROUGH them instead of looking like solid banners. */
+body.star-glass-v436 .page-heading-v424,
+body.star-glass-v436 .page-heading-v424.frost-header-v431{
+  background:
+    linear-gradient(105deg,rgba(3,16,43,.42),rgba(8,31,76,.28) 58%,rgba(67,32,126,.18)),
+    url("assets/starry-sky-v436.svg") center 18% / cover no-repeat !important;
+  border-color:rgba(105,180,255,.38) !important;
+  box-shadow:0 14px 32px rgba(0,5,24,.18) !important;
+  backdrop-filter:blur(5px) !important;
+}
+
+/* Search / top bars. */
+body.star-glass-v436 .site-search-box-v426,
+body.star-glass-v436 .mobile-topbar{
+  background:rgba(5,25,64,.38) !important;
+  border-color:rgba(99,174,255,.34) !important;
+  box-shadow:0 8px 18px rgba(0,5,23,.15) !important;
+  backdrop-filter:blur(12px) saturate(1.15) !important;
+  -webkit-backdrop-filter:blur(12px) saturate(1.15) !important;
+}
+
+/* Breadcrumbs / table-of-contents. */
+body.star-glass-v436 .breadcrumbs-v409{
+  background:rgba(4,20,50,.30) !important;
+  border-color:rgba(91,165,245,.25) !important;
+}
+body.star-glass-v436 .page-toc-v409{
+  background:
+    linear-gradient(145deg,rgba(38,29,103,.35),rgba(5,27,69,.29)) !important;
+  border-color:rgba(150,116,255,.30) !important;
+  backdrop-filter:blur(9px) !important;
+}
+body.star-glass-v436 .page-toc-v409 > summary{
+  background:
+    linear-gradient(90deg,rgba(66,48,157,.48),rgba(9,70,137,.43)) !important;
+}
+
+/* Guide accordions such as Experts. */
+body.star-glass-v436 .guide-page-v69 > details.guide-fold-v414{
+  background:
+    linear-gradient(145deg,rgba(6,39,91,.34),rgba(4,19,52,.27)) !important;
+}
+body.star-glass-v436 .guide-page-v69 > details.guide-fold-v414 > summary{
+  background:
+    linear-gradient(90deg,rgba(10,61,132,.52),rgba(58,67,166,.45) 62%,rgba(113,62,197,.42)) !important;
+  color:#fff !important;
+}
+body.star-glass-v436 .guide-page-v69 > details.guide-fold-v414[open] > summary{
+  background:
+    linear-gradient(90deg,rgba(12,72,157,.58),rgba(72,76,190,.52) 60%,rgba(135,72,224,.48)) !important;
+}
+body.star-glass-v436 .guide-fold-body-v414,
+body.star-glass-v436 .guide-fold-content-v414{
+  background:rgba(3,18,48,.20) !important;
+}
+
+/* Forms/calculators. */
+body.star-glass-v436 select,
+body.star-glass-v436 input[type="text"],
+body.star-glass-v436 input[type="number"],
+body.star-glass-v436 input[type="search"],
+body.star-glass-v436 textarea{
+  background:rgba(5,28,69,.40) !important;
+  border-color:rgba(87,168,255,.32) !important;
+  color:#f6fbff !important;
+  backdrop-filter:blur(8px) !important;
+}
+
+/* Tables also get glass. */
+body.star-glass-v436 table{
+  background:rgba(4,20,51,.22) !important;
+}
+body.star-glass-v436 table th{
+  background:rgba(11,50,112,.44) !important;
+}
+body.star-glass-v436 table td{
+  background:rgba(4,23,58,.25) !important;
+}
+body.star-glass-v436 table tr:nth-child(even) td{
+  background:rgba(55,32,105,.23) !important;
+}
+
+/* Mobile bottom nav: transparent enough to see stars below it. */
+@media(max-width:980px), (hover:none) and (pointer:coarse){
+  body.star-glass-v436 .mobile-bottom-v424{
+    background:rgba(4,22,57,.44) !important;
+    border-color:rgba(92,170,255,.38) !important;
+    box-shadow:0 12px 30px rgba(0,5,24,.28) !important;
+    backdrop-filter:blur(14px) saturate(1.18) !important;
+    -webkit-backdrop-filter:blur(14px) saturate(1.18) !important;
+  }
+
+  body.star-glass-v436 .modern-panel-v424,
+  body.star-glass-v436 .modern-topic-card-v424,
+  body.star-glass-v436 .modern-list-v424 > a,
+  body.star-glass-v436 .guide-page-v69 > details.guide-fold-v414,
+  body.star-glass-v436 .guide-section,
+  body.star-glass-v436 .guide-callout,
+  body.star-glass-v436 .news-card,
+  body.star-glass-v436 .kb-group-v415,
+  body.star-glass-v436 .kb-tools-v415,
+  body.star-glass-v436 .kb-more-v415,
+  body.star-glass-v436 .kb-card-textonly-v416,
+  body.star-glass-v436 .kb-intro-v415{
+    backdrop-filter:blur(9px) saturate(1.14) !important;
+    -webkit-backdrop-filter:blur(9px) saturate(1.14) !important;
+  }
+}
