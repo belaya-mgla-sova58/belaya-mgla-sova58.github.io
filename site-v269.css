@@ -11611,3 +11611,179 @@ body.is-other-route .guide-hero{
   .kb-card-v417 .kb-card-texts-v415 strong{font-size:10.5px !important;margin-bottom:3px !important;}
   .kb-card-v417 .kb-card-texts-v415 small{font-size:8px !important;line-height:1.2 !important;}
 }
+
+
+/* ===== v418: Furnace calculators mobile repair ===== */
+/* The buildings block had legacy light styles outside the active stylesheet.
+   Give both calculator pages a self-contained dark layout. */
+body.site-hq-v407 .furnace-calc-v379 .calc-buildings-v379{
+  height:auto !important;
+  min-height:0 !important;
+  overflow:visible !important;
+  margin:14px 0 !important;
+  padding:15px !important;
+  border:1px solid rgba(115,190,239,.28) !important;
+  border-radius:16px !important;
+  background:linear-gradient(155deg,rgba(17,61,101,.95),rgba(8,37,70,.97)) !important;
+  color:#dceaf5 !important;
+  box-shadow:none !important;
+}
+body.site-hq-v407 .furnace-calc-v379 .calc-buildings-v379 h2{
+  margin:0 0 7px !important;
+  color:#f2f8fd !important;
+  font-size:18px !important;
+  line-height:1.25 !important;
+}
+body.site-hq-v407 .furnace-calc-v379 .calc-buildings-v379 > p{
+  margin:0 0 12px !important;
+  color:#b9d1e2 !important;
+  font-size:13px !important;
+  line-height:1.45 !important;
+}
+body.site-hq-v407 .furnace-calc-v379 .calc-building-grid-v379{
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:9px !important;
+  width:100% !important;
+}
+body.site-hq-v407 .furnace-calc-v379 .calc-building-grid-v379 label{
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) auto !important;
+  align-items:center !important;
+  gap:9px !important;
+  min-width:0 !important;
+  min-height:48px !important;
+  margin:0 !important;
+  padding:9px 10px !important;
+  border:1px solid rgba(116,190,238,.18) !important;
+  border-radius:11px !important;
+  background:rgba(10,48,84,.76) !important;
+}
+body.site-hq-v407 .furnace-calc-v379 .calc-building-grid-v379 label span{
+  min-width:0 !important;
+  color:#d9e9f5 !important;
+  font-size:12px !important;
+  font-weight:800 !important;
+  line-height:1.25 !important;
+}
+body.site-hq-v407 .furnace-calc-v379 .calc-building-grid-v379 select{
+  width:auto !important;
+  min-width:105px !important;
+  max-width:130px !important;
+  min-height:38px !important;
+  margin:0 !important;
+  padding:0 8px !important;
+  border:1px solid rgba(121,190,236,.38) !important;
+  border-radius:9px !important;
+  background:#0b335b !important;
+  color:#eef7ff !important;
+  font-size:12px !important;
+  font-weight:800 !important;
+}
+body.site-hq-v407 .fire-calc-v380 .calc-buildings-v379 select:disabled{
+  opacity:.72 !important;
+  background:#0a2c4d !important;
+  color:#a9bfd0 !important;
+}
+
+/* Make the top from/to chooser clean and self-sizing too. */
+body.site-hq-v407 .furnace-calc-v379 .calc-select-v378{
+  height:auto !important;
+  min-height:0 !important;
+  overflow:visible !important;
+}
+body.site-hq-v407 .furnace-calc-v379 .calc-select-v378 label{
+  min-width:0 !important;
+}
+body.site-hq-v407 .furnace-calc-v379 .calc-select-v378 select{
+  box-sizing:border-box !important;
+}
+
+@media(max-width:700px){
+  body.site-hq-v407 .furnace-calc-v379{
+    width:100% !important;
+    max-width:100% !important;
+    overflow:visible !important;
+  }
+  body.site-hq-v407 .furnace-calc-v379 .calc-select-v378{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:9px !important;
+    margin:10px 0 !important;
+    padding:11px !important;
+    border-radius:13px !important;
+  }
+  body.site-hq-v407 .furnace-calc-v379 .calc-select-v378 .calc-arrow-v378{
+    display:none !important;
+  }
+  body.site-hq-v407 .furnace-calc-v379 .calc-select-v378 label{
+    display:block !important;
+    width:100% !important;
+  }
+  body.site-hq-v407 .furnace-calc-v379 .calc-select-v378 label span{
+    margin-bottom:5px !important;
+    color:#d9e9f5 !important;
+    font-size:11px !important;
+    line-height:1.25 !important;
+  }
+  body.site-hq-v407 .furnace-calc-v379 .calc-select-v378 select{
+    width:100% !important;
+    min-width:0 !important;
+    max-width:none !important;
+    min-height:42px !important;
+    padding:0 9px !important;
+    font-size:12px !important;
+  }
+
+  body.site-hq-v407 .furnace-calc-v379 .calc-buildings-v379{
+    margin:10px 0 !important;
+    padding:11px !important;
+    border-radius:13px !important;
+  }
+  body.site-hq-v407 .furnace-calc-v379 .calc-buildings-v379 h2{
+    font-size:16px !important;
+    line-height:1.22 !important;
+  }
+  body.site-hq-v407 .furnace-calc-v379 .calc-buildings-v379 > p{
+    margin-bottom:10px !important;
+    font-size:11.5px !important;
+    line-height:1.42 !important;
+  }
+  body.site-hq-v407 .furnace-calc-v379 .calc-building-grid-v379{
+    grid-template-columns:1fr !important;
+    gap:6px !important;
+  }
+  body.site-hq-v407 .furnace-calc-v379 .calc-building-grid-v379 label{
+    grid-template-columns:1fr !important;
+    gap:5px !important;
+    min-height:0 !important;
+    padding:8px 9px !important;
+    border-radius:9px !important;
+  }
+  body.site-hq-v407 .furnace-calc-v379 .calc-building-grid-v379 label span{
+    font-size:11px !important;
+  }
+  body.site-hq-v407 .furnace-calc-v379 .calc-building-grid-v379 select{
+    width:100% !important;
+    min-width:0 !important;
+    max-width:none !important;
+    min-height:38px !important;
+    font-size:11px !important;
+  }
+  body.site-hq-v407 .furnace-calc-v379 .calc-note-v378{
+    margin:8px 0 !important;
+    padding:9px 10px !important;
+    border-radius:10px !important;
+    font-size:10.5px !important;
+    line-height:1.38 !important;
+  }
+  body.site-hq-v407 .furnace-calc-v379 .calc-total-v378{
+    margin:10px 0 !important;
+    padding:11px !important;
+    border-radius:13px !important;
+  }
+  body.site-hq-v407 .furnace-calc-v379 .calc-total-v378 h2,
+  body.site-hq-v407 .furnace-calc-v379 .calc-route-v378 h2{
+    font-size:17px !important;
+  }
+}
