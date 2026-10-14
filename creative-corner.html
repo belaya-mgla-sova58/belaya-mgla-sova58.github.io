@@ -1,184 +1,145 @@
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="robots" content="noindex,nofollow,noarchive">
-  <meta name="theme-color" content="#03112d">
-  <title>Белая Мгла • Глобальное обновление</title>
-  <link rel="icon" href="favicon.ico">
-  <style>
-    :root{
-      color-scheme:dark;
-      --bg:#03112d;
-      --bg2:#061a3d;
-      --panel:rgba(7,29,72,.88);
-      --line:rgba(75,166,255,.35);
-      --text:#f7fbff;
-      --muted:#afc1dc;
-      --blue:#33b8ff;
-      --gold:#f2bf45;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif}
-    body{
-      min-height:100vh;
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 50% -12%,rgba(55,93,190,.34),transparent 38%),
-        radial-gradient(circle at 12% 80%,rgba(20,91,182,.18),transparent 34%),
-        radial-gradient(circle at 88% 72%,rgba(99,65,190,.14),transparent 32%),
-        linear-gradient(180deg,#03112d 0%,#041735 52%,#021027 100%);
-    }
-    body:before,
-    body:after{
-      content:"";
-      position:fixed;
-      inset:-20%;
-      pointer-events:none;
-      opacity:.28;
-      background-image:
-        radial-gradient(circle,rgba(255,255,255,.78) 0 1px,transparent 1.4px),
-        radial-gradient(circle,rgba(131,204,255,.65) 0 1px,transparent 1.5px);
-      background-size:72px 72px,108px 108px;
-      background-position:0 0,28px 34px;
-      animation:snow 22s linear infinite;
-    }
-    body:after{
-      opacity:.13;
-      transform:scale(1.25);
-      animation-duration:34s;
-      animation-direction:reverse;
-    }
-    @keyframes snow{
-      to{background-position:0 720px,28px 1114px}
-    }
-    .wrap{
-      position:relative;
-      z-index:2;
-      width:min(720px,calc(100% - 28px));
-      padding:22px;
-    }
-    .card{
-      position:relative;
-      overflow:hidden;
-      padding:clamp(28px,6vw,54px);
-      border:1px solid var(--line);
-      border-radius:28px;
-      text-align:center;
-      background:
-        radial-gradient(circle at 50% 0%,rgba(47,111,224,.20),transparent 42%),
-        linear-gradient(145deg,rgba(8,34,82,.95),rgba(4,20,51,.97));
-      box-shadow:
-        0 28px 70px rgba(0,6,22,.48),
-        inset 0 1px 0 rgba(255,255,255,.07);
-      backdrop-filter:blur(16px);
-    }
-    .card:before{
-      content:"";
-      position:absolute;
-      left:10%;right:10%;top:0;
-      height:1px;
-      background:linear-gradient(90deg,transparent,#68cfff,transparent);
-      box-shadow:0 0 18px rgba(73,190,255,.55);
-    }
-    .logo{
-      display:block;
-      width:min(270px,72%);
-      max-height:112px;
-      object-fit:contain;
-      margin:0 auto 24px;
-      filter:drop-shadow(0 8px 16px rgba(0,8,28,.28));
-    }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      margin-bottom:16px;
-      padding:8px 13px;
-      border:1px solid rgba(89,179,255,.28);
-      border-radius:999px;
-      background:rgba(12,55,111,.45);
-      color:#bfe7ff;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.04em;
-      text-transform:uppercase;
-    }
-    .badge:before{content:"❄";color:#71d2ff}
-    h1{
-      margin:0;
-      font-size:clamp(34px,7vw,62px);
-      line-height:.98;
-      letter-spacing:-.035em;
-      color:#fff;
-      text-shadow:0 0 26px rgba(72,157,255,.18);
-    }
-    .accent{
-      display:block;
-      margin-top:7px;
-      color:#8edcff;
-    }
-    p{
-      max-width:540px;
-      margin:20px auto 0;
-      color:var(--muted);
-      font-size:clamp(15px,2.4vw,19px);
-      line-height:1.55;
-    }
-    .status{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      margin:28px auto 0;
-      color:#dcecff;
-      font-size:13px;
-      font-weight:800;
-    }
-    .dot{
-      width:9px;height:9px;border-radius:50%;
-      background:#55c9ff;
-      box-shadow:0 0 12px #38baff;
-      animation:pulse 1.7s ease-in-out infinite;
-    }
-    @keyframes pulse{
-      50%{opacity:.35;transform:scale(.72)}
-    }
-    .footer{
-      margin-top:28px;
-      color:#708bad;
-      font-size:11px;
-    }
-    @media(max-width:520px){
-      .wrap{padding:12px}
-      .card{padding:30px 18px;border-radius:22px}
-      .logo{width:min(230px,78%);margin-bottom:20px}
-      .badge{font-size:10px;padding:7px 11px}
-      p{font-size:14px;line-height:1.5}
-      .status{margin-top:23px}
-    }
-    @media(prefers-reduced-motion:reduce){
-      body:before,body:after,.dot{animation:none}
-    }
-  </style>
-</head>
-<body>
-  <main class="wrap">
-    <section class="card" aria-labelledby="maintenance-title">
-      <img class="logo" src="assets/img_6dc1ef08d6ab264b.webp" alt="Белая Мгла Выживание">
-      <div class="badge">Технические работы</div>
-      <h1 id="maintenance-title">Глобальное<span class="accent">обновление сайта</span></h1>
-      <p>
-        «Белая Мгла» временно закрыта. Мы полностью обновляем оформление,
-        навигацию и материалы сайта, чтобы пользоваться им стало удобнее.
-      </p>
-      <div class="status"><span class="dot"></span> Скоро вернёмся</div>
-      <div class="footer">Белая Мгла • Государство 58 • Sova</div>
-    </section>
-  </main>
-</body>
-</html>
+<!DOCTYPE html>
+
+<html lang="ru"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>Белая Мгла • Творческий уголок</title><link href="site-v269.css?v=431" rel="stylesheet"/><link href="favicon.ico" rel="icon" sizes="any"/><link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/><link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="apple-touch-icon.png" rel="apple-touch-icon"/><script defer="" src="site-v269.js?v=431"></script><meta content="#031426" name="theme-color"/>
+<style id="creative-song-v396-style">
+.creative-song-card-v396{
+  margin-bottom:12px;
+  border-color:rgba(102,88,178,.24) !important;
+  background:linear-gradient(135deg,rgba(243,248,255,.98),rgba(244,239,255,.98)) !important;
+  box-shadow:0 8px 22px rgba(69,65,126,.08) !important;
+}
+.creative-song-card-v396::after{
+  content:"♫" !important;
+  color:rgba(89,73,166,.12) !important;
+  transform:none !important;
+  font-size:36px !important;
+}
+.creative-song-card-v396 .creative-v349-kind{color:#6557a6}
+.creative-song-meta-v396{margin-top:6px;color:#7b84a0;font-size:11px;font-weight:700}
+@media(max-width:640px){
+  .creative-song-meta-v396{font-size:10px}
+  .creative-song-card-v396::after{font-size:31px !important}
+}
+
+.creative-song-card-v396 .creative-card-like-v367.news-like-button{
+  min-height:25px;padding:3px 8px;gap:4px;box-shadow:none;
+  border:1px solid rgba(92,119,154,.15);background:rgba(255,255,255,.86);
+  color:#657890;font-size:11px;font-weight:inherit;transform:none;
+}
+.creative-song-card-v396 .creative-card-like-v367.news-like-button:hover{transform:none;box-shadow:none;border-color:rgba(92,119,154,.24)}
+.creative-song-card-v396 .creative-card-like-v367 .news-like-heart{color:#a9b4c5;font-size:15px;line-height:1;filter:none}
+.creative-song-card-v396 .creative-card-like-v367.is-liked .news-like-heart{color:#d65f78 !important}
+.creative-song-card-v396 .creative-card-like-v367 .news-like-count{min-width:auto;color:#657890;font-weight:700}
+@media(max-width:640px){
+  .creative-song-card-v396 .creative-card-like-v367.news-like-button{min-height:23px;padding:2px 6px;font-size:10px}
+}
+</style>
+<style id="creative-hq-v409">
+body.site-hq-v407.news-top-creative .creative-v349-card,
+body.site-hq-v407.news-top-creative .creative-song-card-v396{background:linear-gradient(145deg,rgba(13,57,97,.98),rgba(6,32,62,.98))!important;border-color:rgba(117,193,245,.28)!important;box-shadow:0 12px 28px rgba(0,12,28,.22)!important;color:#dcecf8!important}
+body.site-hq-v407.news-top-creative .creative-v349-card h2,body.site-hq-v407.news-top-creative .creative-v349-author{color:#eef8ff!important}
+body.site-hq-v407.news-top-creative .creative-v349-kind,body.site-hq-v407.news-top-creative .creative-song-meta-v396{color:#91cdf4!important}
+body.site-hq-v407.news-top-creative .creative-submit-v366{background:linear-gradient(145deg,rgba(13,57,97,.96),rgba(7,37,69,.98))!important;border-color:rgba(117,193,245,.28)!important;color:#dcecf8!important}
+body.site-hq-v407.news-top-creative .creative-submit-v366 h2{color:#fff!important}
+body.site-hq-v407.news-top-creative .creative-submit-v366 p{color:#c9ddeb!important}
+body.site-hq-v407.news-top-creative .creative-song-head-v396,body.site-hq-v407.news-top-creative .creative-song-player-v396,body.site-hq-v407.news-top-creative .creative-song-lyrics-v396{background:linear-gradient(145deg,rgba(13,57,97,.98),rgba(6,32,62,.98))!important;border-color:rgba(117,193,245,.28)!important;box-shadow:0 12px 28px rgba(0,12,28,.22)!important}
+body.site-hq-v407.news-top-creative .creative-song-head-v396 h2,body.site-hq-v407.news-top-creative .creative-song-player-title-v396 strong,body.site-hq-v407.news-top-creative .creative-song-lyrics-head-v396 h3{color:#f4faff!important}
+body.site-hq-v407.news-top-creative .creative-song-author-v396,body.site-hq-v407.news-top-creative .creative-song-player-title-v396 small,body.site-hq-v407.news-top-creative .creative-song-lyrics-text-v396 p,body.site-hq-v407.news-top-creative .creative-song-signature-v396{color:#c9dbea!important}
+body.site-hq-v407.news-top-creative .creative-song-kicker-v396,body.site-hq-v407.news-top-creative .creative-song-lyrics-head-v396 span{color:#8dcef7!important}
+body.site-hq-v407.news-top-creative .creative-song-tags-v396 span,body.site-hq-v407.news-top-creative .creative-song-view-v396{background:rgba(16,63,103,.86)!important;border-color:rgba(117,193,245,.25)!important;color:#cfe5f5!important}
+body.site-hq-v407.news-top-creative .creative-song-lyrics-head-v396{background:rgba(15,64,107,.55)!important;border-color:rgba(117,193,245,.18)!important}
+body.site-hq-v407.news-top-creative .creative-song-chorus-v396{background:linear-gradient(90deg,rgba(53,64,137,.42),rgba(11,44,78,.65))!important;border-left-color:#8b7ee8!important;color:#edf4ff!important}
+body.site-hq-v407.news-top-creative .creative-song-finale-v396{color:#c9bfff!important}
+body.site-hq-v407.news-top-creative .creative-song-disc-v396{background:linear-gradient(135deg,#174f7f,#4f4297)!important;color:#fff!important}
+</style><meta content="Творчество игроков государства 58: песни, стихи, рассказы, рисунки и другие работы." name="description"/><meta content="website" property="og:type"/><meta content="Белая Мгла: Выживание" property="og:site_name"/><meta content="Белая Мгла • Творческий уголок" property="og:title"/><meta content="Творчество игроков государства 58: песни, стихи, рассказы, рисунки и другие работы." property="og:description"/><meta content="https://belaya-mgla-sova58.github.io/creative-corner.html" property="og:url"/><meta content="https://belaya-mgla-sova58.github.io/assets/home-hero-official-v406.png" property="og:image"/><meta content="Белая Мгла • Творческий уголок" property="og:image:alt"/><meta content="summary_large_image" name="twitter:card"/><meta content="Белая Мгла • Творческий уголок" name="twitter:title"/><meta content="Творчество игроков государства 58: песни, стихи, рассказы, рисунки и другие работы." name="twitter:description"/><meta content="https://belaya-mgla-sova58.github.io/assets/home-hero-official-v406.png" name="twitter:image"/><link href="https://belaya-mgla-sova58.github.io/creative-corner.html" rel="canonical"/></head><body class="is-news-route news-subpage news-top-creative site-hq-v407 modern-v422 modern-v424" data-static-route="creative-corner"><div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
+<button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
+<div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Творчество</small></div>
+<a aria-label="На главную" href="index.html">⌂</a>
+</div>
+<div aria-hidden="true" class="mobile-nav-overlay" id="mobileNavOverlay"></div><div class="nav-wrap"><img alt="Белая Мгла Выживание" class="sidebar-exact-logo" data-src="assets/img_6dc1ef08d6ab264b.webp" decoding="async" fetchpriority="low" loading="lazy"/><nav><a class="route-link" href="index.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_5aa79ae27faa29b4.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Главная</span></a><a aria-current="page" class="route-link route-link-news active" href="news.html"><img alt="" aria-hidden="true" class="sidebar-color-icon news-menu-icon-img" src="assets/news-owl-icon.png"/><span>Новости</span></a><a class="route-link" href="events.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_6bf97ec0736e4b3f.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>События</span></a><a class="route-link" href="heroes.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_df28a44cd870579e.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Герои</span></a><a class="route-link" href="gear.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_26d001aa476b7102.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Снаряжение</span></a><a class="route-link" href="experts.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_7b29d9b9a7eeb805.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Эксперты</span></a><a class="route-link" href="pets.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_f25119f6b5ca7b00.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Питомцы</span></a><a class="route-link route-link-state-positions" href="state-positions.html"><span aria-hidden="true" class="sidebar-color-icon state-position-menu-icon">👑</span><span>Должности на государстве</span></a><a class="route-link route-link-calculator" href="fire-furnace-calculator.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🧮</span><span>Калькулятор</span></a><a class="route-link route-link-farm" href="farm.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🌾</span><span>Ферма</span></a><a class="route-link route-link-knowledge" href="other.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_83aba0cd17b4f37b.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>База знаний</span></a></nav></div><main id="appMain"><div class="site-search-v426" data-site-search="">
+<div class="site-search-box-v426">
+<span aria-hidden="true" class="site-search-icon-v426">⌕</span>
+<input aria-expanded="false" aria-label="Поиск по сайту" autocomplete="off" class="site-search-input-v426" inputmode="search" placeholder="Поиск по сайту..." spellcheck="false" type="search"/>
+<button aria-label="Очистить поиск" class="site-search-clear-v426" type="button">×</button>
+</div>
+<div aria-label="Результаты поиска" class="site-search-results-v426" role="listbox"></div>
+</div><div class="route-page active news-page" data-route="creative-corner"><nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><a href="news.html">Новости</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><span aria-current="page">Творческий уголок</span></nav><section class="page-heading-v424 frost-header-v431"><h1>Творческий уголок</h1><p>Творчество игроков государства 58: песни, стихи, рассказы, рисунки и другие работы.</p></section>
+<section class="news-shell creative-v349-index">
+<div class="creative-v349-list">
+<section aria-label="Прислать свою работу" class="creative-submit-v366">
+<div class="creative-submit-v366-icon">✍️</div>
+<div class="creative-submit-v366-text">
+<h2>Хотите поделиться своим творчеством?</h2>
+<p>Рисуете, пишете стихи или рассказы, создаёте что-то своими руками? Присылайте свои работы для публикации в Творческом уголке. Не забудьте указать своё игровое имя.</p>
+</div>
+<a class="creative-submit-v366-btn" href="https://t.me/sova_gos58" rel="noopener noreferrer" target="_blank">Написать в Telegram</a>
+</section>
+<a aria-label="Открыть песню Солнечный замок" class="creative-v349-card creative-song-card-v396" href="creative-solnechny-zamok.html">
+<div class="creative-v349-kind">♫ МУЗЫКАЛЬНАЯ ПУБЛИКАЦИЯ</div>
+<h2>Солнечный замок</h2>
+<div class="creative-v349-author">Автор — [VgB]HiTmaN74</div>
+<div class="creative-song-meta-v396">4:54 · Песня государства 58</div>
+<div class="creative-card-stats-v367">
+<span aria-label="Поставить лайк песне Солнечный замок" class="creative-card-like-v367 news-like-button" data-like-key="creative-solnechny-zamok-hitman74-v2" role="button" tabindex="0">
+<span aria-hidden="true" class="news-like-heart">♥</span><span class="news-like-count">0</span>
+</span>
+<span aria-label="Просмотры песни Солнечный замок" class="creative-card-views-v367" data-creative-view="creative-solnechny-zamok-hitman74-v2">
+<span aria-hidden="true">👀</span><b>0</b>
+</span>
+</div>
+<div aria-hidden="true" class="creative-v349-arrow">›</div>
+</a>
+<a class="creative-v349-card" href="creative-roman48.html">
+<div class="creative-v349-kind">✒️ СТИХОТВОРЕНИЕ</div>
+<h2>Роман48</h2>
+<div class="creative-v349-author">Автор — [WeR]MIsh_Gun</div>
+<div class="creative-card-stats-v367">
+<span aria-label="Поставить лайк" class="creative-card-like-v367" data-creative-like="creative-roman48-v2" role="button" tabindex="0">
+<span aria-hidden="true">♥</span><b>0</b>
+</span>
+<span aria-label="Просмотры" class="creative-card-views-v367" data-creative-view="creative-roman48">
+<span aria-hidden="true">👀</span><b>0</b>
+</span>
+</div>
+<div aria-hidden="true" class="creative-v349-arrow">›</div>
+</a>
+<a class="creative-v349-card creative-amoress-card-v365" href="creative-amoress-painting.html">
+<div class="creative-v349-kind">🎨 КАРТИНА ПО НОМЕРАМ</div>
+<h2>Картина по номерам</h2>
+<div class="creative-v349-author">Автор — [VgB]ღAmoressღ</div>
+<div class="creative-card-stats-v367">
+<span aria-label="Поставить лайк" class="creative-card-like-v367" data-creative-like="creative-amoress-v2" role="button" tabindex="0">
+<span aria-hidden="true">♥</span><b>0</b>
+</span>
+<span aria-label="Просмотры" class="creative-card-views-v367" data-creative-view="creative-amoress-painting-v2">
+<span aria-hidden="true">👀</span><b>0</b>
+</span>
+</div>
+<div aria-hidden="true" class="creative-v349-arrow">›</div>
+</a>
+<a class="creative-v349-card creative-boss-v372" href="creative-boss-little-furnace.html">
+<div class="creative-v349-kind">📖 ИГРОВАЯ ИСТОРИЯ</div><h2>Маленькая топка</h2>
+<div class="creative-v349-author">Автор — [KSV]bossmolokosos</div>
+<div class="creative-card-stats-v367">
+<span aria-label="Поставить лайк" class="creative-card-like-v367" data-creative-like="boss-little-furnace-v1" role="button" tabindex="0"><span aria-hidden="true">♥</span><b>0</b></span>
+<span class="creative-card-views-v367" data-creative-view="boss-little-furnace"><span aria-hidden="true">👀</span><b>0</b></span>
+</div><div aria-hidden="true" class="creative-v349-arrow">›</div>
+</a>
+<a class="creative-v349-card creative-boss-v372" href="creative-boss-joe.html">
+<div class="creative-v349-kind">✍️ ИГРОВОЙ РАССКАЗ</div><h2>Джо</h2>
+<div class="creative-v349-author">Автор — [KSV]bossmolokosos</div>
+<div class="creative-card-stats-v367">
+<span aria-label="Поставить лайк" class="creative-card-like-v367" data-creative-like="boss-joe-v1" role="button" tabindex="0"><span aria-hidden="true">♥</span><b>0</b></span>
+<span class="creative-card-views-v367" data-creative-view="boss-joe"><span aria-hidden="true">👀</span><b>0</b></span>
+</div><div aria-hidden="true" class="creative-v349-arrow">›</div>
+</a>
+<div class="creative-v351-signature">Творчество игроков • Гос 58</div>
+</div>
+</section>
+<div class="footer news-footer">Белая Мгла • Автор - Sova</div></div></main><button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button><nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424">
+<a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_5aa79ae27faa29b4.webp"/></span><b>Главная</b></a>
+<a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_6bf97ec0736e4b3f.webp"/></span><b>События</b></a>
+<a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_df28a44cd870579e.webp"/></span><b>Герои</b></a>
+<a data-v424-nav="calc" href="fire-furnace-calculator.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/calculator-nav-v429.svg"/></span><b>Калькулятор</b></a>
+<a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_83aba0cd17b4f37b.webp"/></span><b>База знаний</b></a>
+</nav></body></html>

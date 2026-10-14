@@ -1,184 +1,135 @@
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="robots" content="noindex,nofollow,noarchive">
-  <meta name="theme-color" content="#03112d">
-  <title>Белая Мгла • Глобальное обновление</title>
-  <link rel="icon" href="favicon.ico">
-  <style>
-    :root{
-      color-scheme:dark;
-      --bg:#03112d;
-      --bg2:#061a3d;
-      --panel:rgba(7,29,72,.88);
-      --line:rgba(75,166,255,.35);
-      --text:#f7fbff;
-      --muted:#afc1dc;
-      --blue:#33b8ff;
-      --gold:#f2bf45;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif}
-    body{
-      min-height:100vh;
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 50% -12%,rgba(55,93,190,.34),transparent 38%),
-        radial-gradient(circle at 12% 80%,rgba(20,91,182,.18),transparent 34%),
-        radial-gradient(circle at 88% 72%,rgba(99,65,190,.14),transparent 32%),
-        linear-gradient(180deg,#03112d 0%,#041735 52%,#021027 100%);
-    }
-    body:before,
-    body:after{
-      content:"";
-      position:fixed;
-      inset:-20%;
-      pointer-events:none;
-      opacity:.28;
-      background-image:
-        radial-gradient(circle,rgba(255,255,255,.78) 0 1px,transparent 1.4px),
-        radial-gradient(circle,rgba(131,204,255,.65) 0 1px,transparent 1.5px);
-      background-size:72px 72px,108px 108px;
-      background-position:0 0,28px 34px;
-      animation:snow 22s linear infinite;
-    }
-    body:after{
-      opacity:.13;
-      transform:scale(1.25);
-      animation-duration:34s;
-      animation-direction:reverse;
-    }
-    @keyframes snow{
-      to{background-position:0 720px,28px 1114px}
-    }
-    .wrap{
-      position:relative;
-      z-index:2;
-      width:min(720px,calc(100% - 28px));
-      padding:22px;
-    }
-    .card{
-      position:relative;
-      overflow:hidden;
-      padding:clamp(28px,6vw,54px);
-      border:1px solid var(--line);
-      border-radius:28px;
-      text-align:center;
-      background:
-        radial-gradient(circle at 50% 0%,rgba(47,111,224,.20),transparent 42%),
-        linear-gradient(145deg,rgba(8,34,82,.95),rgba(4,20,51,.97));
-      box-shadow:
-        0 28px 70px rgba(0,6,22,.48),
-        inset 0 1px 0 rgba(255,255,255,.07);
-      backdrop-filter:blur(16px);
-    }
-    .card:before{
-      content:"";
-      position:absolute;
-      left:10%;right:10%;top:0;
-      height:1px;
-      background:linear-gradient(90deg,transparent,#68cfff,transparent);
-      box-shadow:0 0 18px rgba(73,190,255,.55);
-    }
-    .logo{
-      display:block;
-      width:min(270px,72%);
-      max-height:112px;
-      object-fit:contain;
-      margin:0 auto 24px;
-      filter:drop-shadow(0 8px 16px rgba(0,8,28,.28));
-    }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      margin-bottom:16px;
-      padding:8px 13px;
-      border:1px solid rgba(89,179,255,.28);
-      border-radius:999px;
-      background:rgba(12,55,111,.45);
-      color:#bfe7ff;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.04em;
-      text-transform:uppercase;
-    }
-    .badge:before{content:"❄";color:#71d2ff}
-    h1{
-      margin:0;
-      font-size:clamp(34px,7vw,62px);
-      line-height:.98;
-      letter-spacing:-.035em;
-      color:#fff;
-      text-shadow:0 0 26px rgba(72,157,255,.18);
-    }
-    .accent{
-      display:block;
-      margin-top:7px;
-      color:#8edcff;
-    }
-    p{
-      max-width:540px;
-      margin:20px auto 0;
-      color:var(--muted);
-      font-size:clamp(15px,2.4vw,19px);
-      line-height:1.55;
-    }
-    .status{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      margin:28px auto 0;
-      color:#dcecff;
-      font-size:13px;
-      font-weight:800;
-    }
-    .dot{
-      width:9px;height:9px;border-radius:50%;
-      background:#55c9ff;
-      box-shadow:0 0 12px #38baff;
-      animation:pulse 1.7s ease-in-out infinite;
-    }
-    @keyframes pulse{
-      50%{opacity:.35;transform:scale(.72)}
-    }
-    .footer{
-      margin-top:28px;
-      color:#708bad;
-      font-size:11px;
-    }
-    @media(max-width:520px){
-      .wrap{padding:12px}
-      .card{padding:30px 18px;border-radius:22px}
-      .logo{width:min(230px,78%);margin-bottom:20px}
-      .badge{font-size:10px;padding:7px 11px}
-      p{font-size:14px;line-height:1.5}
-      .status{margin-top:23px}
-    }
-    @media(prefers-reduced-motion:reduce){
-      body:before,body:after,.dot{animation:none}
-    }
-  </style>
-</head>
-<body>
-  <main class="wrap">
-    <section class="card" aria-labelledby="maintenance-title">
-      <img class="logo" src="assets/img_6dc1ef08d6ab264b.webp" alt="Белая Мгла Выживание">
-      <div class="badge">Технические работы</div>
-      <h1 id="maintenance-title">Глобальное<span class="accent">обновление сайта</span></h1>
-      <p>
-        «Белая Мгла» временно закрыта. Мы полностью обновляем оформление,
-        навигацию и материалы сайта, чтобы пользоваться им стало удобнее.
-      </p>
-      <div class="status"><span class="dot"></span> Скоро вернёмся</div>
-      <div class="footer">Белая Мгла • Государство 58 • Sova</div>
-    </section>
-  </main>
-</body>
-</html>
+<!DOCTYPE html>
+
+<html lang="ru"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>Белая Мгла • Гонка вооружений</title><link as="image" fetchpriority="high" href="assets/img_50ddce9361de1ed0.webp" rel="preload"/><!-- v112: events overview uses catalog icons only; decorative event-name emoji removed -->
+<!-- v119: merged approved header updates from v102-v104 onto v118 mobile branch -->
+<link href="site-v269.css?v=431" rel="stylesheet"/><link href="favicon.ico" rel="icon" sizes="any"/><link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/><link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="apple-touch-icon.png" rel="apple-touch-icon"/><script defer="" src="site-v269.js?v=431"></script><meta content="Гонка вооружений — личное событие развития, в котором нужно использовать определённые материалы и улучшения, получать очки, закрывать личные награды и подниматься в рейтинге государства." name="description"/><meta content="#031426" name="theme-color"/><meta content="website" property="og:type"/><meta content="Белая Мгла: Выживание" property="og:site_name"/><meta content="Белая Мгла • Гонка вооружений" property="og:title"/><meta content="Гонка вооружений — личное событие развития, в котором нужно использовать определённые материалы и улучшения, получать очки, закрывать личные награды и подниматься в рейтинге государства." property="og:description"/><meta content="https://belaya-mgla-sova58.github.io/armament-competition.html" property="og:url"/><meta content="https://belaya-mgla-sova58.github.io/assets/img_50ddce9361de1ed0.webp" property="og:image"/><meta content="Белая Мгла • Гонка вооружений" property="og:image:alt"/><meta content="summary_large_image" name="twitter:card"/><meta content="Белая Мгла • Гонка вооружений" name="twitter:title"/><meta content="Гонка вооружений — личное событие развития, в котором нужно использовать определённые материалы и улучшения, получать очки, закрывать личные награды и подниматься в рейтинге государства." name="twitter:description"/><meta content="https://belaya-mgla-sova58.github.io/assets/img_50ddce9361de1ed0.webp" name="twitter:image"/><link href="https://belaya-mgla-sova58.github.io/armament-competition.html" rel="canonical"/></head><body class="is-armament-competition-route site-hq-v407 modern-v422 modern-v424" data-static-route="armament-competition">
+<div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
+<button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
+<div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div>
+<a aria-label="На главную" href="index.html">⌂</a>
+</div>
+<div aria-hidden="true" class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<div class="nav-wrap"><img alt="Белая Мгла Выживание" class="sidebar-exact-logo" data-src="assets/img_6dc1ef08d6ab264b.webp" decoding="async" fetchpriority="low" loading="lazy"/><nav><a class="route-link" href="index.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_5aa79ae27faa29b4.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Главная</span></a><a class="route-link route-link-news" href="news.html"><img alt="" aria-hidden="true" class="sidebar-color-icon news-menu-icon-img" src="assets/news-owl-icon.png"/><span>Новости</span></a><a aria-current="page" class="route-link active" href="events.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_6bf97ec0736e4b3f.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>События</span></a><a class="route-link" href="heroes.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_df28a44cd870579e.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Герои</span></a><a class="route-link" href="gear.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_26d001aa476b7102.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Снаряжение</span></a><a class="route-link" href="experts.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_7b29d9b9a7eeb805.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Эксперты</span></a><a class="route-link" href="pets.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_f25119f6b5ca7b00.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Питомцы</span></a><a class="route-link route-link-state-positions" href="state-positions.html"><span aria-hidden="true" class="sidebar-color-icon state-position-menu-icon">👑</span><span>Должности на государстве</span></a><a class="route-link route-link-calculator" href="fire-furnace-calculator.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🧮</span><span>Калькулятор</span></a><a class="route-link route-link-farm" href="farm.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🌾</span><span>Ферма</span></a><a class="route-link route-link-knowledge" href="other.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_83aba0cd17b4f37b.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>База знаний</span></a></nav></div>
+<main id="appMain"><div class="site-search-v426" data-site-search="">
+<div class="site-search-box-v426">
+<span aria-hidden="true" class="site-search-icon-v426">⌕</span>
+<input aria-expanded="false" aria-label="Поиск по сайту" autocomplete="off" class="site-search-input-v426" inputmode="search" placeholder="Поиск по сайту..." spellcheck="false" type="search"/>
+<button aria-label="Очистить поиск" class="site-search-clear-v426" type="button">×</button>
+</div>
+<div aria-label="Результаты поиска" class="site-search-results-v426" role="listbox"></div>
+</div><div class="route-page active" data-route="armament-competition"><nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><a href="events.html">События</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><span aria-current="page">Гонка вооружений</span></nav><section class="page-heading-v424 frost-header-v431"><h1>Гонка вооружений</h1><p>Гонка вооружений — личное событие развития, в котором нужно использовать определённые материалы и улучшения, получать очки, закрывать личные наград…</p></section><section class="intro" id="armament-competition"><span class="eyebrow">Отдельный гайд события</span><div class="owl-page-title"><h2 class="owl-heading"><span class="owl-title-text"> Гонка вооружений</span></h2></div><p><b>Автор - Sova</b></p><p><b>Гонка вооружений</b> — личное событие развития, в котором нужно использовать определённые материалы и улучшения, получать очки, закрывать личные награды и подниматься в рейтинге государства.</p><p><img alt="" aria-hidden="true" class="catalog-inline-item-icon" loading="lazy" src="assets/catalog-fire_crystal.png"/> Событие появляется после открытия в государстве системы <b>Огненных кристаллов</b> и заменяет старое событие развития города.</p><p>Главное правило: <b>не прокачивать всё подряд, а сначала посмотреть, за какие действия именно в текущем запуске дают очки.</b></p></section><section class="section">
+<h3> НЕ ВСЕ ГОНКИ ОДИНАКОВЫЕ</h3>
+<p>У события есть разные варианты.</p>
+<p>Они отличаются:</p>
+<ul class="tip-list"><li>заданиями;</li><li>материалами, за которые начисляются очки;</li><li>финальными наградами;</li><li>выгодностью разных видов прокачки.</li></ul>
+<p>В актуальной ротации встречаются варианты, связанные с:</p>
+<p> <b>Планами дизайна</b></p>
+<p>и</p>
+<p> <b>Огненными кристаллами</b></p>
+<p>Поэтому нельзя один раз запомнить список заданий и пользоваться им постоянно.</p>
+<p>Для <b>58 государства</b> всегда открываем текущую вкладку события и проверяем список действий.</p>
+<h3> КОГДА ПРОХОДИТ</h3>
+<p>«Гонка вооружений» связана с событием <b>«Проект офицера»</b>.</p>
+<p>Они чередуются в общей ротации.</p>
+<p>Типичный цикл выглядит примерно так:</p>
+<div class="savebox"> Гонка вооружений<br/><br/>↓<br/><br/> Проект офицера<br/><br/>↓<br/><br/> другой вариант Гонки вооружений<br/><br/>↓<br/><br/> другой вариант Проекта офицера</div>
+<p>Точные дни могут меняться.</p>
+<p>Поэтому ориентируемся на <b>Календарь событий</b>, а не на старую таблицу из интернета.</p>
+<h3> КАК УСТРОЕНЫ НАГРАДЫ</h3>
+<p>Есть два основных направления.</p>
+<h3> Личные пороги</h3>
+<p>Набираете определённое количество очков и получаете последовательные награды.</p>
+<p>Это самая предсказуемая часть события.</p>
+<p>Сначала желательно оценить:</p>
+<p><b>сколько ресурсов нужно потратить до следующего сундука</b></p>
+<p>и</p>
+<p><b>насколько ценна его награда.</b></p>
+<h3> РЕЙТИНГ</h3>
+<p>Дополнительно игроки соревнуются между собой по количеству набранных очков.</p>
+<p>После окончания события выдаются рейтинговые награды.</p>
+<p>Но для высокого места обычно приходится расходовать значительно больше редких материалов.</p>
+<p>Поэтому не стоит автоматически бороться за рейтинг в каждом запуске.</p>
+<h3> ВАРИАНТ С ПЛАНАМИ ДИЗАЙНА</h3>
+<p>В одном из актуальных вариантов очки могут давать следующие действия.</p>
+<h3> Эксперты</h3>
+<ul class="tip-list"><li> Использование Печатей Экспертов.</li><li> Использование Книг знаний.</li><li> Ускорения изучения навыков Экспертов.</li></ul>
+<h3> ОГНЕННЫЕ КРИСТАЛЛЫ</h3>
+<p>Очки могут начисляться за:</p>
+<ul class="tip-list"><li> использование обычных Огненных кристаллов для зданий;</li><li> использование Очищенных огненных кристаллов;</li><li> использование осколков Огненных кристаллов в исследованиях.</li></ul>
+<p>Некоторые из этих пунктов появляются только после открытия соответствующей системы в государстве.</p>
+<h3> ФРАГМЕНТЫ ГЕРОЕВ</h3>
+<p>В этом варианте могут учитываться фрагменты героев разной редкости:</p>
+<ul class="tip-list"><li> редкие;</li><li> эпические;</li><li> мифические.</li></ul>
+<p>Чем выше редкость фрагмента, тем больше очков он обычно приносит.</p>
+<div class="rule warn"><b> Перед использованием универсальных фрагментов обязательно проверьте текущие задания.</b><p>Не расходуйте редкие мифические фрагменты только ради маленького прироста рейтинга.</p></div>
+<h3> СНАРЯЖЕНИЕ ГУБЕРНАТОРА</h3>
+<p>Очки могут начисляться за повышение максимального показателя <b>снаряжения губернатора</b>.</p>
+<p>Талисманы при этом являются отдельной системой.</p>
+<p>Поэтому внимательно смотрите формулировку задания.</p>
+<p>Если написано именно про снаряжение, улучшение талисмана может не дать нужных очков.</p>
+<h3> УСКОРЕНИЯ</h3>
+<p>Очки могут давать:</p>
+<ul class="tip-list"><li><img alt="" aria-hidden="true" class="catalog-inline-item-icon" loading="lazy" src="assets/catalog-speedup_build.png"/>  ускорения строительства;</li><li><img alt="" aria-hidden="true" class="catalog-inline-item-icon" loading="lazy" src="assets/catalog-speedup_research.png"/>  ускорения исследований;</li><li><img alt="" aria-hidden="true" class="catalog-inline-item-icon" loading="lazy" src="assets/catalog-speedup_training.png"/>  ускорения обучения и повышения войск;</li><li> ускорения изучения навыков Экспертов.</li></ul>
+<div class="rule warn"><b> Ускорения, купленные непосредственно за алмазы, могут не учитываться.</b><p>Для зачёта используйте обычные предметы ускорения и проверяйте изменение очков события.</p></div>
+<h3> ВАРИАНТ С ОГНЕННЫМИ КРИСТАЛЛАМИ</h3>
+<p>Другой вариант делает основной упор на крупное развитие аккаунта.</p>
+<p>Очки могут начисляться за:</p>
+<ul class="tip-list"><li> Огненные кристаллы;</li><li> Очищенные огненные кристаллы;</li><li> осколки Огненных кристаллов;</li><li><img alt="" aria-hidden="true" class="catalog-inline-item-icon" loading="lazy" src="assets/catalog-mythril.png"/>  Мифрил;</li><li> повышение показателя снаряжения губернатора;</li><li><img alt="" aria-hidden="true" class="catalog-inline-item-icon" loading="lazy" src="assets/catalog-essence.png"/>  Камни эссенции экипировки героев;</li><li> Виджеты эксклюзивного снаряжения героев;</li><li> ускорения строительства;</li><li> ускорения исследований;</li><li> ускорения обучения;</li><li> ускорения навыков Экспертов.</li></ul>
+<h3> ОСТОРОЖНО С МИФРИЛОМ</h3>
+<p>Мифрил приносит очень большое количество очков.</p>
+<p>Именно поэтому его легко потратить слишком много ради рейтинга.</p>
+<p>Перед использованием спросите себя:</p>
+<p><b>мне действительно нужен следующий порог или место в рейтинге?</b></p>
+<p>Если нет, Мифрил лучше сохранить на более важное совмещение событий.</p>
+<h3> КАМНИ ЭССЕНЦИИ И ВИДЖЕТЫ</h3>
+<p>Эти материалы ценны сами по себе.</p>
+<p>Их особенно выгодно использовать, когда одновременно совпадают несколько событий.</p>
+<p>Например:</p>
+<div class="savebox"> Гонка вооружений<br/><br/>+<br/><br/> задание Мобилизации альянса<br/><br/>или другое событие развития.</div>
+<p>Так одна и та же прокачка приносит награды сразу в нескольких местах.</p>
+<h3> НЕ ТРАТЬТЕ ОГНЕННЫЕ КРИСТАЛЛЫ СРАЗУ</h3>
+<p>После получения Огненного кристалла нет необходимости немедленно использовать его.</p>
+<p>Лучше хранить запас до события, где его расход принесёт дополнительные награды.</p>
+<p>Особенно это касается:</p>
+<ul class="tip-list"><li> обычных Огненных кристаллов;</li><li> Очищенных огненных кристаллов;</li><li> осколков Огненных кристаллов.</li></ul>
+<h3> ЭКСПЕРТОВ ТОЖЕ КОПИМ</h3>
+<p>После появления Экспертов появилась ещё одна категория материалов, которую выгодно планировать.</p>
+<p>Не расходуйте без необходимости:</p>
+<ul class="tip-list"><li> Печати Экспертов;</li><li> Книги знаний;</li><li> ускорения изучения навыков.</li></ul>
+<p>Если их использование входит в текущую Гонку вооружений, вы получите дополнительную выгоду за ту же прокачку.</p>
+<h3> КАК ИГРАТЬ БЕЗ ЛИШНИХ ТРАТ</h3>
+<p>Перед событием разделите ресурсы на три группы.</p>
+<h3> Можно использовать</h3>
+<p>Материалы, которые всё равно собирались потратить сейчас.</p>
+<h3> Использовать при хорошем совмещении</h3>
+<p>Редкие фрагменты, Огненные кристаллы, Камни эссенции, Виджеты.</p>
+<h3> Только ради серьёзной цели</h3>
+<p>Мифрил и другие особенно редкие материалы.</p>
+<p>Так вы не превратите обычную Гонку вооружений в пылесос для склада. </p>
+<h3> СНАЧАЛА СУНДУКИ, ПОТОМ РЕЙТИНГ</h3>
+<p>Удобная схема:</p>
+<ol class="tip-list"><li>Проверить задания.</li><li>Посмотреть личные пороги.</li><li>Рассчитать стоимость следующей награды.</li><li>Закрыть выгодные сундуки.</li><li>Только после этого решать, нужен ли рейтинг.</li></ol>
+<p>Очень часто следующий высокий порог требует непропорционально больших затрат.</p>
+<p>В таком случае выгоднее остановиться.</p>
+<h3> СОВМЕЩАЙТЕ СОБЫТИЯ</h3>
+<p>Лучший момент для большой прокачки:</p>
+<p><b>когда одно действие даёт очки сразу в нескольких событиях.</b></p>
+<p>Например:</p>
+<ul class="tip-list"><li> Огненные кристаллы могут совпасть с другим событием развития.</li><li> Обучение войск может совпасть с отдельной задачей.</li><li> Прокачка Экспертов может идти одновременно с другим рейтингом.</li><li> Улучшение экипировки героя можно совместить с дополнительным событием.</li></ul>
+<p>Всегда проверяйте активные события перед крупной тратой.</p>
+<h3> ЧТО ПОЛЕЗНО КОПИТЬ</h3>
+<ul class="tip-list"><li> Огненные кристаллы.</li><li> Очищенные огненные кристаллы.</li><li> Осколки Огненных кристаллов.</li><li> Ускорения.</li><li> Фрагменты героев.</li><li> Печати Экспертов.</li><li> Книги знаний.</li><li> Ускорения навыков Экспертов.</li><li> Камни эссенции.</li><li> Виджеты героев.</li><li> Мифрил.</li><li> Материалы снаряжения губернатора.</li></ul>
+<h3> ЧТО ПРОВЕРИТЬ ПЕРЕД ТРАТОЙ</h3>
+<ul class="tip-list"><li> Откройте «Гонку вооружений».</li><li> Перейдите в задания.</li><li> Убедитесь, что нужный материал действительно даёт очки.</li><li> Посмотрите следующий личный порог.</li><li> Проверьте текущий рейтинг.</li><li> Посмотрите другие активные события.</li><li> Только после этого тратьте материал.</li></ul>
+<h3> ЧАСТЫЕ ОШИБКИ</h3>
+<ul class="tip-list"><li> Считать, что каждый запуск имеет одинаковые задания.</li><li> Использовать старую таблицу другого государства.</li><li> Тратить Огненные кристаллы сразу после получения.</li><li> Использовать Мифрил ради нескольких дополнительных очков рейтинга.</li><li> Забывать про Печати и Книги Экспертов.</li><li><img alt="" aria-hidden="true" class="catalog-inline-item-icon" loading="lazy" src="assets/catalog-diamond.png"/>  Покупать ускорение за алмазы и ожидать обычные очки ускорений.</li><li> Использовать мифические фрагменты без проверки задания.</li><li> Гнаться за рейтингом после того, как выгодные личные награды уже закончились.</li><li> Не совмещать Гонку вооружений с другими событиями.</li></ul>
+<div class="savebox"><b> ГЛАВНОЕ</b><br/><br/> Сначала <b>читаем задания текущего запуска</b>.<br/><br/> У Гонки вооружений есть разные варианты.<br/><br/> Огненные кристаллы лучше копить под событие.<br/><br/> Материалы Экспертов тоже могут давать очки.<br/><br/> Камни эссенции и Виджеты расходуем с пользой.<br/><br/> Мифрил не сливаем без серьёзной причины.<br/><br/> Сначала закрываем выгодные личные пороги.<br/><br/> За рейтинг боремся только осознанно.<br/><br/> Стараемся получать награды сразу в нескольких событиях одной прокачкой.<br/><br/><b>Главный принцип:</b><br/>Гонка вооружений награждает не быструю прокачку, а правильный момент для прокачки.</div>
+</section><div class="footer">Белая Мгла • Автор - Sova</div></div></main>
+<button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button>
+<nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424">
+<a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_5aa79ae27faa29b4.webp"/></span><b>Главная</b></a>
+<a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_6bf97ec0736e4b3f.webp"/></span><b>События</b></a>
+<a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_df28a44cd870579e.webp"/></span><b>Герои</b></a>
+<a data-v424-nav="calc" href="fire-furnace-calculator.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/calculator-nav-v429.svg"/></span><b>Калькулятор</b></a>
+<a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_83aba0cd17b4f37b.webp"/></span><b>База знаний</b></a>
+</nav></body></html>

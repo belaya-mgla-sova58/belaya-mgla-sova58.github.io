@@ -1,184 +1,50 @@
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="robots" content="noindex,nofollow,noarchive">
-  <meta name="theme-color" content="#03112d">
-  <title>Белая Мгла • Глобальное обновление</title>
-  <link rel="icon" href="favicon.ico">
-  <style>
-    :root{
-      color-scheme:dark;
-      --bg:#03112d;
-      --bg2:#061a3d;
-      --panel:rgba(7,29,72,.88);
-      --line:rgba(75,166,255,.35);
-      --text:#f7fbff;
-      --muted:#afc1dc;
-      --blue:#33b8ff;
-      --gold:#f2bf45;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif}
-    body{
-      min-height:100vh;
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 50% -12%,rgba(55,93,190,.34),transparent 38%),
-        radial-gradient(circle at 12% 80%,rgba(20,91,182,.18),transparent 34%),
-        radial-gradient(circle at 88% 72%,rgba(99,65,190,.14),transparent 32%),
-        linear-gradient(180deg,#03112d 0%,#041735 52%,#021027 100%);
-    }
-    body:before,
-    body:after{
-      content:"";
-      position:fixed;
-      inset:-20%;
-      pointer-events:none;
-      opacity:.28;
-      background-image:
-        radial-gradient(circle,rgba(255,255,255,.78) 0 1px,transparent 1.4px),
-        radial-gradient(circle,rgba(131,204,255,.65) 0 1px,transparent 1.5px);
-      background-size:72px 72px,108px 108px;
-      background-position:0 0,28px 34px;
-      animation:snow 22s linear infinite;
-    }
-    body:after{
-      opacity:.13;
-      transform:scale(1.25);
-      animation-duration:34s;
-      animation-direction:reverse;
-    }
-    @keyframes snow{
-      to{background-position:0 720px,28px 1114px}
-    }
-    .wrap{
-      position:relative;
-      z-index:2;
-      width:min(720px,calc(100% - 28px));
-      padding:22px;
-    }
-    .card{
-      position:relative;
-      overflow:hidden;
-      padding:clamp(28px,6vw,54px);
-      border:1px solid var(--line);
-      border-radius:28px;
-      text-align:center;
-      background:
-        radial-gradient(circle at 50% 0%,rgba(47,111,224,.20),transparent 42%),
-        linear-gradient(145deg,rgba(8,34,82,.95),rgba(4,20,51,.97));
-      box-shadow:
-        0 28px 70px rgba(0,6,22,.48),
-        inset 0 1px 0 rgba(255,255,255,.07);
-      backdrop-filter:blur(16px);
-    }
-    .card:before{
-      content:"";
-      position:absolute;
-      left:10%;right:10%;top:0;
-      height:1px;
-      background:linear-gradient(90deg,transparent,#68cfff,transparent);
-      box-shadow:0 0 18px rgba(73,190,255,.55);
-    }
-    .logo{
-      display:block;
-      width:min(270px,72%);
-      max-height:112px;
-      object-fit:contain;
-      margin:0 auto 24px;
-      filter:drop-shadow(0 8px 16px rgba(0,8,28,.28));
-    }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      margin-bottom:16px;
-      padding:8px 13px;
-      border:1px solid rgba(89,179,255,.28);
-      border-radius:999px;
-      background:rgba(12,55,111,.45);
-      color:#bfe7ff;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.04em;
-      text-transform:uppercase;
-    }
-    .badge:before{content:"❄";color:#71d2ff}
-    h1{
-      margin:0;
-      font-size:clamp(34px,7vw,62px);
-      line-height:.98;
-      letter-spacing:-.035em;
-      color:#fff;
-      text-shadow:0 0 26px rgba(72,157,255,.18);
-    }
-    .accent{
-      display:block;
-      margin-top:7px;
-      color:#8edcff;
-    }
-    p{
-      max-width:540px;
-      margin:20px auto 0;
-      color:var(--muted);
-      font-size:clamp(15px,2.4vw,19px);
-      line-height:1.55;
-    }
-    .status{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      margin:28px auto 0;
-      color:#dcecff;
-      font-size:13px;
-      font-weight:800;
-    }
-    .dot{
-      width:9px;height:9px;border-radius:50%;
-      background:#55c9ff;
-      box-shadow:0 0 12px #38baff;
-      animation:pulse 1.7s ease-in-out infinite;
-    }
-    @keyframes pulse{
-      50%{opacity:.35;transform:scale(.72)}
-    }
-    .footer{
-      margin-top:28px;
-      color:#708bad;
-      font-size:11px;
-    }
-    @media(max-width:520px){
-      .wrap{padding:12px}
-      .card{padding:30px 18px;border-radius:22px}
-      .logo{width:min(230px,78%);margin-bottom:20px}
-      .badge{font-size:10px;padding:7px 11px}
-      p{font-size:14px;line-height:1.5}
-      .status{margin-top:23px}
-    }
-    @media(prefers-reduced-motion:reduce){
-      body:before,body:after,.dot{animation:none}
-    }
-  </style>
-</head>
-<body>
-  <main class="wrap">
-    <section class="card" aria-labelledby="maintenance-title">
-      <img class="logo" src="assets/img_6dc1ef08d6ab264b.webp" alt="Белая Мгла Выживание">
-      <div class="badge">Технические работы</div>
-      <h1 id="maintenance-title">Глобальное<span class="accent">обновление сайта</span></h1>
-      <p>
-        «Белая Мгла» временно закрыта. Мы полностью обновляем оформление,
-        навигацию и материалы сайта, чтобы пользоваться им стало удобнее.
-      </p>
-      <div class="status"><span class="dot"></span> Скоро вернёмся</div>
-      <div class="footer">Белая Мгла • Государство 58 • Sova</div>
-    </section>
-  </main>
-</body>
-</html>
+<!DOCTYPE html>
+
+<html lang="ru"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>Белая Мгла • 👑 Приказы губернатора</title><!-- v112: events overview uses catalog icons only; decorative event-name emoji removed -->
+<!-- v119: merged approved header updates from v102-v104 onto v118 mobile branch -->
+<link href="site-v269.css?v=431" rel="stylesheet"/><link href="favicon.ico" rel="icon" sizes="any"/><link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/><link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="apple-touch-icon.png" rel="apple-touch-icon"/><link as="image" fetchpriority="high" href="assets/img_a3f1d69dfd04dd22.webp" rel="preload"/><script defer="" src="site-v269.js?v=431"></script><meta content="Полезные временные бонусы для ресурсов, строительства, выживших и развития города." name="description"/><meta content="#031426" name="theme-color"/><meta content="website" property="og:type"/><meta content="Белая Мгла: Выживание" property="og:site_name"/><meta content="Белая Мгла • 👑 Приказы губернатора" property="og:title"/><meta content="Полезные временные бонусы для ресурсов, строительства, выживших и развития города." property="og:description"/><meta content="https://belaya-mgla-sova58.github.io/governor-orders.html" property="og:url"/><meta content="https://belaya-mgla-sova58.github.io/assets/img_a3f1d69dfd04dd22.webp" property="og:image"/><meta content="Белая Мгла • 👑 Приказы губернатора" property="og:image:alt"/><meta content="summary_large_image" name="twitter:card"/><meta content="Белая Мгла • 👑 Приказы губернатора" name="twitter:title"/><meta content="Полезные временные бонусы для ресурсов, строительства, выживших и развития города." name="twitter:description"/><meta content="https://belaya-mgla-sova58.github.io/assets/img_a3f1d69dfd04dd22.webp" name="twitter:image"/><link href="https://belaya-mgla-sova58.github.io/governor-orders.html" rel="canonical"/></head><body class="is-governor-route site-hq-v407 modern-v422 modern-v424" data-static-route="governor-orders">
+<div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
+<button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
+<div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div>
+<a aria-label="На главную" href="index.html">⌂</a>
+</div>
+<div aria-hidden="true" class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<div class="nav-wrap"><img alt="Белая Мгла Выживание" class="sidebar-exact-logo" data-src="assets/img_6dc1ef08d6ab264b.webp" decoding="async" fetchpriority="low" loading="lazy"/><nav><a class="route-link" href="index.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_5aa79ae27faa29b4.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Главная</span></a><a class="route-link route-link-news" href="news.html"><img alt="" aria-hidden="true" class="sidebar-color-icon news-menu-icon-img" src="assets/news-owl-icon.png"/><span>Новости</span></a><a class="route-link" href="events.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_6bf97ec0736e4b3f.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>События</span></a><a class="route-link" href="heroes.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_df28a44cd870579e.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Герои</span></a><a class="route-link" href="gear.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_26d001aa476b7102.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Снаряжение</span></a><a class="route-link" href="experts.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_7b29d9b9a7eeb805.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Эксперты</span></a><a class="route-link" href="pets.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_f25119f6b5ca7b00.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Питомцы</span></a><a aria-current="page" class="route-link route-link-state-positions active" href="state-positions.html"><span aria-hidden="true" class="sidebar-color-icon state-position-menu-icon">👑</span><span>Должности на государстве</span></a><a class="route-link route-link-calculator" href="fire-furnace-calculator.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🧮</span><span>Калькулятор</span></a><a class="route-link route-link-farm" href="farm.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🌾</span><span>Ферма</span></a><a class="route-link route-link-knowledge" href="other.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_83aba0cd17b4f37b.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>База знаний</span></a></nav></div>
+<main id="appMain"><div class="site-search-v426" data-site-search="">
+<div class="site-search-box-v426">
+<span aria-hidden="true" class="site-search-icon-v426">⌕</span>
+<input aria-expanded="false" aria-label="Поиск по сайту" autocomplete="off" class="site-search-input-v426" inputmode="search" placeholder="Поиск по сайту..." spellcheck="false" type="search"/>
+<button aria-label="Очистить поиск" class="site-search-clear-v426" type="button">×</button>
+</div>
+<div aria-label="Результаты поиска" class="site-search-results-v426" role="listbox"></div>
+</div><div class="route-page active" data-route="governor-orders"><nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><a href="other.html">Другие гайды</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><span aria-current="page">👑 Приказы губернатора</span></nav><section class="page-heading-v424 frost-header-v431"><h1>👑 Приказы губернатора</h1><p>Полезные временные бонусы для ресурсов, строительства, выживших и развития города.</p></section><div class="guide-page-v69 governor-orders-v374">
+<div class="guide-topics"><span class="topic-pill">❄️ Обычные приказы</span><span class="topic-pill">🔥 Эпоха кристалла огня</span><span class="topic-pill">🏗️ Комбо на стройку</span></div><details class="page-toc-v409"><summary>Содержание</summary><div class="page-toc-links-v409"><a href="#section-1">До Эпохи кристалла огня</a><a href="#section-2">Эпоха кристалла огня</a><a href="#section-3">Забастовки выживших</a><a href="#section-4">Супер-комбо: 4 баффа на стройку</a></div></details><div class="guide-fold-toolbar-v414"><span>Короткий режим: открывай только нужные разделы.</span><button class="guide-fold-all-v414" type="button">Раскрыть все</button></div>
+<details class="guide-section guide-fold-v414" data-guide-fold="1" open=""><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-1">❄️ До Эпохи кристалла огня</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414"><div class="mini-grid orders-grid-v374">
+<div class="mini-card"><b>⚒️ Срочная мобилизация</b><br/>Все выжившие на рабочих местах работают <b>48 часов</b>. Настроение всех выживших −10.<br/><span>⏱ 8 ч. · 💠 50 000</span></div>
+<div class="mini-card"><b>📦 Поспешная работа</b><br/>Мгновенно выдаёт ресурсы, соответствующие <b>5 дням работы</b> всех производственных рабочих мест.<br/><span>⏱ 1 д. · 💠 150 000</span></div>
+<div class="mini-card"><b>❤️ Комплексный уход</b><br/>Мгновенно лечит всех заболевших выживших в городе.<br/><span>⏱ 4 ч. · 💠 150 000</span></div>
+<div class="mini-card"><b>🏗️ Двойное время</b><br/>Ускоряет на <b>20%</b> строительство новых и улучшение существующих зданий, начатых в следующие <b>5 минут</b>.<br/><span>⏱ 23 ч. · 💠 800 000</span></div>
+<div class="mini-card"><b>📈 Продуктивный день</b><br/><b>+100%</b> к продукции на всех рабочих местах на <b>24 часа</b>. Настроение выживших −10.<br/><span>⏱ 12 ч. · 💠 50 000</span></div>
+<div class="mini-card"><b>🎉 Праздники</b><br/><b>+50 к настроению</b> и <b>+30 к комфорту</b> в день праздника для всех выживших.<br/><span>⏱ 1 д. · 💠 50 000</span></div>
+</div><div class="guide-callout warn"><button aria-label="Скопировать текст блока" class="copy-block-v409" type="button">Скопировать</button><b>Важно:</b> «Двойное время» включайте <b>до запуска стройки</b>. После активации есть только 5 минут, чтобы начать строительство или улучшение.</div></div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="2"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-2">🔥 Эпоха кристалла огня</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414"><p>После перехода в новую эпоху три приказа остаются, а три старых заменяются новыми. Одновременно по-прежнему используется <b>6 приказов</b>.</p>
+<div class="guide-callout"><button aria-label="Скопировать текст блока" class="copy-block-v409" type="button">Скопировать</button><b>Остаются:</b> 📦 Поспешная работа · ❤️ Комплексный уход · 🏗️ Двойное время</div>
+<div class="orders-swap-v374"><div>⚒️ Срочная мобилизация <b>→</b> ⚙️ Решающий момент</div><div>📈 Продуктивный день <b>→</b> 🪖 Продвинутые тренировки</div><div>🎉 Праздники <b>→</b> 🌅 Благодарность Рассветного Альянса</div></div>
+<div class="mini-grid orders-grid-v374">
+<div class="mini-card"><b>⚙️ Решающий момент</b><br/>Запускает максимальную нагрузку автоматизации и даёт <b>+100% к продукции на 24 часа</b> по времени выживших.<br/><span>⏱ 12 ч. · 💠 100 000</span></div>
+<div class="mini-card"><b>🪖 Продвинутые тренировки</b><br/>Повышает <b>скорость тренировки войск на 20% на 2 часа</b>.<br/><span>⏱ Перезарядка: 2 д.</span></div>
+<div class="mini-card"><b>🌅 Благодарность Рассветного Альянса</b><br/>Даёт <b>случайную награду из хранилища Рассветного Альянса</b>.<br/><span>⏱ Перезарядка: 2 д.</span></div>
+</div></div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="3"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-3">⚠️ Забастовки выживших</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414"><p>Забастовки происходят, когда условия жизни в городе ухудшаются и у выживших падает настроение. Особенно внимательно следите за городом после приказов, которые заставляют жителей работать интенсивнее.</p><div class="strike-grid-v382"><div class="strike-card-v382 strike-why-v382"><h3>😠 Почему бастуют?</h3><ul><li>🥶 В городе слишком холодно.</li><li>🍲 Не хватает еды или качество питания слишком низкое.</li><li>🏠 Низкий комфорт жилья и мебели.</li><li>🤒 Выжившие болеют.</li><li>⚒️ Слишком большая рабочая нагрузка.</li><li>📉 Низкое настроение после тяжёлых приказов.</li></ul></div><div class="strike-card-v382 strike-fix-v382"><h3>🛠️ Что делать?</h3><ul><li>🔥 Поднять температуру Топки.</li><li>🍲 Улучшить питание в Столовой.</li><li>🛏️ Улучшать жильё и мебель.</li><li>❤️ Лечить заболевших выживших.</li><li>📮 Проверять жалобы жителей.</li><li>🎉 Использовать «Праздники» для восстановления настроения и комфорта.</li></ul></div></div><div class="strike-warning-v382"><b>⚠️ Осторожно с двумя приказами подряд</b><span>«Срочная мобилизация» даёт −10 настроения, а «Продуктивный день» ещё −10. Вместе это <b>−20 настроения</b>. Если настроение уже низкое, риск забастовки становится выше.</span></div><div class="strike-tip-v382"><b>💡 Удобная схема:</b> перед тяжёлыми рабочими приказами проверьте настроение жителей. После них при необходимости используйте <b>«Праздники»</b>: +50 к настроению и +30 к комфорту.</div></div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="4"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-4">🔥 Супер-комбо: 4 баффа на стройку</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414"><p>Перед долгой и дорогой стройкой соберите все четыре усиления, а затем запускайте здание.</p>
+<div class="combo-chain-v374"><div><b>🐺 Пещерная гиена</b></div><div><b>🏛️ Вице-президент</b><span>+10% к скорости строительства</span></div><div><b>🎖️ Меркантильность</b><span>+10% к скорости строительства на 24 часа</span></div><div><b>👑 Двойное время</b><span>+20% к скорости строительства</span></div><div class="combo-go-v374">🏗️ <b>ЗАПУСК СТРОЙКИ</b></div></div>
+<div class="guide-callout warn"><button aria-label="Скопировать текст блока" class="copy-block-v409" type="button">Скопировать</button><b>Порядок:</b> сначала соберите и активируйте все четыре бонуса, затем запускайте строительство. «Двойное время» действует только на стройки, начатые в течение следующих 5 минут.</div></div></details>
+<div class="v69-footer">Белая Мгла • Автор - Sova</div></div></div></main>
+<button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button>
+<nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424">
+<a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_5aa79ae27faa29b4.webp"/></span><b>Главная</b></a>
+<a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_6bf97ec0736e4b3f.webp"/></span><b>События</b></a>
+<a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_df28a44cd870579e.webp"/></span><b>Герои</b></a>
+<a data-v424-nav="calc" href="fire-furnace-calculator.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/calculator-nav-v429.svg"/></span><b>Калькулятор</b></a>
+<a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_83aba0cd17b4f37b.webp"/></span><b>База знаний</b></a>
+</nav></body></html>

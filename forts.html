@@ -1,184 +1,49 @@
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="robots" content="noindex,nofollow,noarchive">
-  <meta name="theme-color" content="#03112d">
-  <title>Белая Мгла • Глобальное обновление</title>
-  <link rel="icon" href="favicon.ico">
-  <style>
-    :root{
-      color-scheme:dark;
-      --bg:#03112d;
-      --bg2:#061a3d;
-      --panel:rgba(7,29,72,.88);
-      --line:rgba(75,166,255,.35);
-      --text:#f7fbff;
-      --muted:#afc1dc;
-      --blue:#33b8ff;
-      --gold:#f2bf45;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif}
-    body{
-      min-height:100vh;
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 50% -12%,rgba(55,93,190,.34),transparent 38%),
-        radial-gradient(circle at 12% 80%,rgba(20,91,182,.18),transparent 34%),
-        radial-gradient(circle at 88% 72%,rgba(99,65,190,.14),transparent 32%),
-        linear-gradient(180deg,#03112d 0%,#041735 52%,#021027 100%);
-    }
-    body:before,
-    body:after{
-      content:"";
-      position:fixed;
-      inset:-20%;
-      pointer-events:none;
-      opacity:.28;
-      background-image:
-        radial-gradient(circle,rgba(255,255,255,.78) 0 1px,transparent 1.4px),
-        radial-gradient(circle,rgba(131,204,255,.65) 0 1px,transparent 1.5px);
-      background-size:72px 72px,108px 108px;
-      background-position:0 0,28px 34px;
-      animation:snow 22s linear infinite;
-    }
-    body:after{
-      opacity:.13;
-      transform:scale(1.25);
-      animation-duration:34s;
-      animation-direction:reverse;
-    }
-    @keyframes snow{
-      to{background-position:0 720px,28px 1114px}
-    }
-    .wrap{
-      position:relative;
-      z-index:2;
-      width:min(720px,calc(100% - 28px));
-      padding:22px;
-    }
-    .card{
-      position:relative;
-      overflow:hidden;
-      padding:clamp(28px,6vw,54px);
-      border:1px solid var(--line);
-      border-radius:28px;
-      text-align:center;
-      background:
-        radial-gradient(circle at 50% 0%,rgba(47,111,224,.20),transparent 42%),
-        linear-gradient(145deg,rgba(8,34,82,.95),rgba(4,20,51,.97));
-      box-shadow:
-        0 28px 70px rgba(0,6,22,.48),
-        inset 0 1px 0 rgba(255,255,255,.07);
-      backdrop-filter:blur(16px);
-    }
-    .card:before{
-      content:"";
-      position:absolute;
-      left:10%;right:10%;top:0;
-      height:1px;
-      background:linear-gradient(90deg,transparent,#68cfff,transparent);
-      box-shadow:0 0 18px rgba(73,190,255,.55);
-    }
-    .logo{
-      display:block;
-      width:min(270px,72%);
-      max-height:112px;
-      object-fit:contain;
-      margin:0 auto 24px;
-      filter:drop-shadow(0 8px 16px rgba(0,8,28,.28));
-    }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      margin-bottom:16px;
-      padding:8px 13px;
-      border:1px solid rgba(89,179,255,.28);
-      border-radius:999px;
-      background:rgba(12,55,111,.45);
-      color:#bfe7ff;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.04em;
-      text-transform:uppercase;
-    }
-    .badge:before{content:"❄";color:#71d2ff}
-    h1{
-      margin:0;
-      font-size:clamp(34px,7vw,62px);
-      line-height:.98;
-      letter-spacing:-.035em;
-      color:#fff;
-      text-shadow:0 0 26px rgba(72,157,255,.18);
-    }
-    .accent{
-      display:block;
-      margin-top:7px;
-      color:#8edcff;
-    }
-    p{
-      max-width:540px;
-      margin:20px auto 0;
-      color:var(--muted);
-      font-size:clamp(15px,2.4vw,19px);
-      line-height:1.55;
-    }
-    .status{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      margin:28px auto 0;
-      color:#dcecff;
-      font-size:13px;
-      font-weight:800;
-    }
-    .dot{
-      width:9px;height:9px;border-radius:50%;
-      background:#55c9ff;
-      box-shadow:0 0 12px #38baff;
-      animation:pulse 1.7s ease-in-out infinite;
-    }
-    @keyframes pulse{
-      50%{opacity:.35;transform:scale(.72)}
-    }
-    .footer{
-      margin-top:28px;
-      color:#708bad;
-      font-size:11px;
-    }
-    @media(max-width:520px){
-      .wrap{padding:12px}
-      .card{padding:30px 18px;border-radius:22px}
-      .logo{width:min(230px,78%);margin-bottom:20px}
-      .badge{font-size:10px;padding:7px 11px}
-      p{font-size:14px;line-height:1.5}
-      .status{margin-top:23px}
-    }
-    @media(prefers-reduced-motion:reduce){
-      body:before,body:after,.dot{animation:none}
-    }
-  </style>
-</head>
-<body>
-  <main class="wrap">
-    <section class="card" aria-labelledby="maintenance-title">
-      <img class="logo" src="assets/img_6dc1ef08d6ab264b.webp" alt="Белая Мгла Выживание">
-      <div class="badge">Технические работы</div>
-      <h1 id="maintenance-title">Глобальное<span class="accent">обновление сайта</span></h1>
-      <p>
-        «Белая Мгла» временно закрыта. Мы полностью обновляем оформление,
-        навигацию и материалы сайта, чтобы пользоваться им стало удобнее.
-      </p>
-      <div class="status"><span class="dot"></span> Скоро вернёмся</div>
-      <div class="footer">Белая Мгла • Государство 58 • Sova</div>
-    </section>
-  </main>
-</body>
-</html>
+<!DOCTYPE html>
+
+<html lang="ru"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>Белая Мгла • Форты</title><!-- v112: events overview uses catalog icons only; decorative event-name emoji removed -->
+<!-- v119: merged approved header updates from v102-v104 onto v118 mobile branch -->
+<link href="site-v269.css?v=431" rel="stylesheet"/><link href="favicon.ico" rel="icon" sizes="any"/><link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/><link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="apple-touch-icon.png" rel="apple-touch-icon"/><script defer="" src="site-v269.js?v=431"></script><meta content="Битвы за форт — альянсовое событие, в котором несколько альянсов могут бороться за контроль над фортом." name="description"/><meta content="#031426" name="theme-color"/><meta content="website" property="og:type"/><meta content="Белая Мгла: Выживание" property="og:site_name"/><meta content="Белая Мгла • Форты" property="og:title"/><meta content="Битвы за форт — альянсовое событие, в котором несколько альянсов могут бороться за контроль над фортом." property="og:description"/><meta content="https://belaya-mgla-sova58.github.io/forts.html" property="og:url"/><meta content="https://belaya-mgla-sova58.github.io/assets/img_55f2688a367250fb.webp" property="og:image"/><meta content="Белая Мгла • Форты" property="og:image:alt"/><meta content="summary_large_image" name="twitter:card"/><meta content="Белая Мгла • Форты" name="twitter:title"/><meta content="Битвы за форт — альянсовое событие, в котором несколько альянсов могут бороться за контроль над фортом." name="twitter:description"/><meta content="https://belaya-mgla-sova58.github.io/assets/img_55f2688a367250fb.webp" name="twitter:image"/><link href="https://belaya-mgla-sova58.github.io/forts.html" rel="canonical"/></head><body class="is-forts-route site-hq-v407 modern-v422 modern-v424" data-static-route="forts">
+<div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
+<button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
+<div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div>
+<a aria-label="На главную" href="index.html">⌂</a>
+</div>
+<div aria-hidden="true" class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<div class="nav-wrap"><img alt="Белая Мгла Выживание" class="sidebar-exact-logo" data-src="assets/img_6dc1ef08d6ab264b.webp" decoding="async" fetchpriority="low" loading="lazy"/><nav><a class="route-link" href="index.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_5aa79ae27faa29b4.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Главная</span></a><a class="route-link route-link-news" href="news.html"><img alt="" aria-hidden="true" class="sidebar-color-icon news-menu-icon-img" src="assets/news-owl-icon.png"/><span>Новости</span></a><a aria-current="page" class="route-link active" href="events.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_6bf97ec0736e4b3f.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>События</span></a><a class="route-link" href="heroes.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_df28a44cd870579e.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Герои</span></a><a class="route-link" href="gear.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_26d001aa476b7102.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Снаряжение</span></a><a class="route-link" href="experts.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_7b29d9b9a7eeb805.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Эксперты</span></a><a class="route-link" href="pets.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_f25119f6b5ca7b00.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Питомцы</span></a><a class="route-link route-link-state-positions" href="state-positions.html"><span aria-hidden="true" class="sidebar-color-icon state-position-menu-icon">👑</span><span>Должности на государстве</span></a><a class="route-link route-link-calculator" href="fire-furnace-calculator.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🧮</span><span>Калькулятор</span></a><a class="route-link route-link-farm" href="farm.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🌾</span><span>Ферма</span></a><a class="route-link route-link-knowledge" href="other.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_83aba0cd17b4f37b.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>База знаний</span></a></nav></div>
+<main id="appMain"><div class="site-search-v426" data-site-search="">
+<div class="site-search-box-v426">
+<span aria-hidden="true" class="site-search-icon-v426">⌕</span>
+<input aria-expanded="false" aria-label="Поиск по сайту" autocomplete="off" class="site-search-input-v426" inputmode="search" placeholder="Поиск по сайту..." spellcheck="false" type="search"/>
+<button aria-label="Очистить поиск" class="site-search-clear-v426" type="button">×</button>
+</div>
+<div aria-label="Результаты поиска" class="site-search-results-v426" role="listbox"></div>
+</div><div class="route-page active" data-route="forts"><nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><a href="events.html">События</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><span aria-current="page">Форты</span></nav><section class="page-heading-v424 frost-header-v431"><h1>Форты</h1><p>Битвы за форт — альянсовое событие, в котором несколько альянсов могут бороться за контроль над фортом.</p></section><section class="intro" id="forts"><span class="eyebrow">События альянса</span><div class="owl-page-title"><h2 class="owl-heading"><span class="owl-title-text"> Форты</span></h2></div><p><b>Битвы за форт</b> — альянсовое событие, в котором несколько альянсов могут бороться за контроль над фортом.</p><p>Главная задача здесь не просто один раз победить защитников. Нужно: <b>выбрать правильную цель → собрать сильный рейд → захватить форт → удержать его.</b></p><p>Главный ресурс события — не отдельный сильный игрок, а <b>координация всего альянса</b>.</p></section><section class="section"><div class="fort-info-photo"><div class="thumb-grid" style="grid-template-columns:180px;justify-content:flex-start"><div class="thumb-card fort-shot"><div class="cap">Скрин из видео. Фото уменьшено, аккуратно обрезано, данные игрока скрыты.</div></div></div></div>
+<h3> Регистрация</h3><p>Регистрацией на Битву за форт занимается руководство альянса: <b>R4 / R5</b>.</p><p>Во время регистрации руководство выбирает форт, за который альянс хочет сражаться. Также выбираются <b>3 предпочтительных варианта времени</b>.</p><div class="rule warn"><b> Важно</b><p>Это ещё не означает, что бой обязательно начнётся в одном из выбранных вами часов. Окончательное время определяется системой с учётом выбора других альянсов, зарегистрированных на тот же объект.</p><p>После окончания регистрации обязательно ещё раз проверьте <b>реальное время боя</b>.</p></div>
+<h3> Какой форт выбирать</h3><p>Награды у фортов могут различаться. Перед регистрацией R4/R5 лучше открыть нужный форт и посмотреть:</p><ul class="tip-list"><li>какие награды доступны сейчас;</li><li>нужен ли этот форт альянсу;</li><li>сколько соперников на него зарегистрировано;</li><li>в какое время альянс сможет собрать больше активных игроков.</li></ul><p>Для <b>58 государства</b> ориентируемся именно на награды, показанные сейчас в вашем игровом интерфейсе. Не используем старые таблицы наград из других государств.</p>
+<h3> Почему может быть несколько целей</h3><p>Если альянс уже захватил форт на предыдущей стадии, этот форт может <b>автоматически перейти в регистрацию на следующую стадию</b>.</p><p>При этом руководство может получить возможность зарегистрироваться ещё на новую цель.</p><p>Поэтому иногда альянс одновременно видит несколько боёв. В такой ситуации R4/R5 заранее определяют приоритет:</p><p><b>какой форт обязателен → какой второстепенный → какой можно отдать.</b></p><p>Не распыляйте основные силы без необходимости.</p>
+<h3> Перед началом боя</h3><p>Участнику желательно заранее:</p><ul class="tip-list"><li> быть онлайн;</li><li> освободить очереди походов;</li><li> вернуть ненужные походы со сбора;</li><li> проверить войска;</li><li> проверить героев;</li><li> подготовить боевой отряд;</li><li> посмотреть сообщения, метки и команды R4/R5;</li><li> точно знать, в какой рейд нужно вступать.</li></ul><p>Не начинайте собственный рейд без команды, если руководство уже назначило капитанов.</p>
+<h3> Что происходит в начале</h3><p>В начале боя внутри форта находится гарнизон <b>наёмников «Фаэтона»</b>.</p><p>Сначала необходимо победить NPC и занять здание.</p><p>После этого, если на тот же форт зарегистрированы другие альянсы, начинается настоящая борьба за удержание.</p>
+<h3> Рейд или одиночная атака</h3><p>Игра позволяет атаковать форт как <b>рейдом</b> или <b>одиночной атакой</b>.</p><p>Но для альянсовой игры обычно лучше использовать <b>организованный рейд</b>.</p><p>Почему:</p><ul class="tip-list"><li>в рейде участвует больше войск;</li><li>проще собрать сильных игроков;</li><li>руководство контролирует состав;</li><li>меньше риск, что несколько игроков одновременно откроют слабые рейды;</li><li>проще сразу перейти к удержанию объекта.</li></ul><div class="rule warn"><b> Одиночную атаку используйте только если это разрешено руководством.</b><p>Особенно не нужно самостоятельно пытаться забрать самый первый захват NPC, если альянс готовит общий рейд.</p></div>
+<h3> Кто должен открывать рейд</h3><p>Руководству лучше заранее назначить капитанов.</p><p>Обычно рейд открывают игроки с:</p><ul class="tip-list"><li>сильными боевыми героями;</li><li>хорошими боевыми характеристиками;</li><li>высокой вместимостью рейда;</li><li>подходящим составом войск.</li></ul><p>Конкретных героев для <b>58 государства</b> здесь не фиксируем. Используем тех, кто реально доступен вам сейчас, и сравниваем боевые отчёты.</p>
+<h3> Сколько войск отправлять</h3><p>Правило <b>«всегда отправлять полный отряд»</b> не универсально.</p><p>Если идёт серьёзный бой с другим альянсом, руководство может попросить отправлять максимально сильные полные отряды.</p><p>Но при первом рейде или при большом количестве желающих R4/R5 могут установить лимит войск на человека, чтобы в рейд смогло войти больше участников.</p><div class="savebox"><b>Главный принцип:</b><br/><br/><b>Отправляем столько войск, сколько указало руководство.</b></div>
+<h3> Главное правило — 30 минут</h3><p>Просто войти в форт недостаточно.</p><p>Чтобы окончательно получить контроль во время настоящей борьбы, альянс должен удерживать форт:</p><div class="savebox"><b>30 МИНУТ ПОДРЯД</b></div><p>Если противник выбивает ваш гарнизон до окончания этих 30 минут, непрерывное удержание заканчивается.</p><p>После нового захвата отсчёт начинается заново.</p><p>Поэтому после первого успешного рейда начинается самая важная часть: <b>оборона</b>.</p>
+<h3> Если никто не удержал 30 минут</h3><p>Бой за форт может продолжаться до <b>2 часов</b>.</p><p>Если за это время ни один альянс не смог удерживать объект непрерывно 30 минут, победит альянс, который <b>контролирует форт в момент окончания битвы</b>.</p><p>Поэтому последние минуты могут решить весь результат. Если идёт тяжёлый спорный бой, не считайте событие законченным раньше таймера.</p>
+<h3> После захвата</h3><p>После успешного входа сразу смотрите команду R4/R5.</p><p>Если форт нужно удерживать:</p><ul class="tip-list"><li> отправляйте подкрепления;</li><li> заменяйте ослабленные отряды;</li><li> следите за вместимостью гарнизона;</li><li> не забивайте гарнизон случайными слабыми отрядами;</li><li> будьте готовы к новому рейду противника.</li></ul><p>Захват без подкреплений часто заканчивается быстрым выбиванием гарнизона.</p>
+<h3> Если противник выбил форт</h3><p>Не атакуйте хаотично каждый сам за себя.</p><p>Сначала руководство назначает:</p><p><b>капитана рейда → время → состав → участников.</b></p><p>Затем собирается один сильный удар.</p><p>Несколько слабых несогласованных атак обычно только дают противнику время укрепить гарнизон.</p>
+<h3> Нужны ли стяги рядом с фортом</h3><p>Для Битвы за форт не нужно специально тянуть территорию альянса стягами прямо к объекту.</p><p>Это отличается от механики некоторых комплексов.</p><p>Главное здесь — <b>регистрация на сам форт</b>.</p>
+<h3> Награды</h3><p>В событии существует несколько типов наград. Они могут быть связаны с:</p><ul class="tip-list"><li>первым захватом;</li><li>участием в бою;</li><li>итоговым контролем над фортом;</li><li>результатами сезона.</li></ul><p>Точный состав наград проверяем непосредственно на выбранном форте в <b>58 государстве</b>.</p><div class="rule warn"><b> Важно</b><p>Не обещаем каждому игроку одинаковую награду только за вход в рейд. Механика наград и очков зависит от конкретного действия во время боя.</p></div>
+<h3> Очки</h3><p>Сам факт нахождения в рейде ещё не гарантирует очки за бой.</p><p>Если противников уничтожили другие участники и ваши войска фактически не участвовали в уничтожении врагов, индивидуальные очки могут не начислиться.</p><p>Поэтому не ориентируйтесь только на число отправленных походов. Главный результат для альянса — <b>захват и удержание форта</b>.</p>
+<h3> После победы</h3><p>После успешного захвата наступает защищённый период, когда форт нельзя атаковать.</p><p>При следующей соответствующей битве в нём снова появляется NPC-гарнизон.</p><p>То есть старые войска не остаются внутри навсегда. Перед следующим боем всё начинается заново с новой подготовки.</p>
+<h3> Что делать участнику</h3><ul class="tip-list"><li> Проверить точное время события.</li><li> Быть онлайн заранее.</li><li> Освободить походы.</li><li> Следить за командами R4/R5.</li><li> Вступать только в назначенный рейд.</li><li> Использовать подходящих боевых героев и сильные войска.</li><li> Соблюдать лимит войск, если его установило руководство.</li><li> После захвата сразу быть готовым отправить подкрепление.</li><li> Не уходить после первого захвата, если продолжается борьба.</li><li> Следить за таймером 30 минут.</li></ul>
+<h3> Что делать R4/R5</h3><ul class="tip-list"><li> Выбрать форт по актуальным наградам.</li><li> Выбрать три удобных временных интервала.</li><li> После регистрации проверить окончательное время.</li><li> Назначить капитанов рейдов.</li><li> Заранее сообщить лимит войск участникам.</li><li> Не создавать лишние конкурирующие рейды.</li><li> После захвата быстро организовать гарнизон.</li><li> Следить за непрерывным таймером удержания.</li><li> Если целей несколько, заранее определить приоритет.</li></ul>
+<h3> Частые ошибки</h3><ul class="tip-list"><li> Атаковать форт в одиночку без команды.</li><li> Открывать несколько случайных рейдов.</li><li> Считать выбранное при регистрации время окончательным.</li><li> Опоздать к старту.</li><li> Всем отправлять полный отряд, когда руководство установило лимит.</li><li> После первого захвата решить, что победа уже получена.</li><li> Не подкреплять гарнизон.</li><li> Забыть про правило 30 минут непрерывного удержания.</li><li> Выйти из игры, пока идёт двухчасовое окно боя.</li><li> Использовать старые списки героев и наград из других государств.</li></ul>
+<div class="savebox"><b> Главное</b><br/><br/> <b>R4/R5 регистрируют цель.</b><br/><br/> Выбираются <b>3 варианта времени</b>, окончательное назначает система.<br/><br/> Основную атаку проводим <b>организованным рейдом</b>.<br/><br/> После захвата сразу готовим подкрепления.<br/><br/> Для полной победы нужно <b>30 минут непрерывного удержания</b>.<br/><br/> Если никто не удержал 30 минут, через <b>2 часа</b> победит тот, кто контролирует форт в самом конце.<br/><br/> Не открываем лишние рейды без команды.<br/><br/><b>Главный принцип:</b><br/>Форт выигрывается не первым ударом, а тем альянсом, который лучше организует захват и удержание.</div>
+</section><div class="footer">Белая Мгла • Автор - Sova</div></div></main>
+<button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button>
+<nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424">
+<a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_5aa79ae27faa29b4.webp"/></span><b>Главная</b></a>
+<a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_6bf97ec0736e4b3f.webp"/></span><b>События</b></a>
+<a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_df28a44cd870579e.webp"/></span><b>Герои</b></a>
+<a data-v424-nav="calc" href="fire-furnace-calculator.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/calculator-nav-v429.svg"/></span><b>Калькулятор</b></a>
+<a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_83aba0cd17b4f37b.webp"/></span><b>База знаний</b></a>
+</nav></body></html>

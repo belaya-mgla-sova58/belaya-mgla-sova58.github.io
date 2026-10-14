@@ -1,184 +1,101 @@
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="robots" content="noindex,nofollow,noarchive">
-  <meta name="theme-color" content="#03112d">
-  <title>Белая Мгла • Глобальное обновление</title>
-  <link rel="icon" href="favicon.ico">
-  <style>
-    :root{
-      color-scheme:dark;
-      --bg:#03112d;
-      --bg2:#061a3d;
-      --panel:rgba(7,29,72,.88);
-      --line:rgba(75,166,255,.35);
-      --text:#f7fbff;
-      --muted:#afc1dc;
-      --blue:#33b8ff;
-      --gold:#f2bf45;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif}
-    body{
-      min-height:100vh;
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 50% -12%,rgba(55,93,190,.34),transparent 38%),
-        radial-gradient(circle at 12% 80%,rgba(20,91,182,.18),transparent 34%),
-        radial-gradient(circle at 88% 72%,rgba(99,65,190,.14),transparent 32%),
-        linear-gradient(180deg,#03112d 0%,#041735 52%,#021027 100%);
-    }
-    body:before,
-    body:after{
-      content:"";
-      position:fixed;
-      inset:-20%;
-      pointer-events:none;
-      opacity:.28;
-      background-image:
-        radial-gradient(circle,rgba(255,255,255,.78) 0 1px,transparent 1.4px),
-        radial-gradient(circle,rgba(131,204,255,.65) 0 1px,transparent 1.5px);
-      background-size:72px 72px,108px 108px;
-      background-position:0 0,28px 34px;
-      animation:snow 22s linear infinite;
-    }
-    body:after{
-      opacity:.13;
-      transform:scale(1.25);
-      animation-duration:34s;
-      animation-direction:reverse;
-    }
-    @keyframes snow{
-      to{background-position:0 720px,28px 1114px}
-    }
-    .wrap{
-      position:relative;
-      z-index:2;
-      width:min(720px,calc(100% - 28px));
-      padding:22px;
-    }
-    .card{
-      position:relative;
-      overflow:hidden;
-      padding:clamp(28px,6vw,54px);
-      border:1px solid var(--line);
-      border-radius:28px;
-      text-align:center;
-      background:
-        radial-gradient(circle at 50% 0%,rgba(47,111,224,.20),transparent 42%),
-        linear-gradient(145deg,rgba(8,34,82,.95),rgba(4,20,51,.97));
-      box-shadow:
-        0 28px 70px rgba(0,6,22,.48),
-        inset 0 1px 0 rgba(255,255,255,.07);
-      backdrop-filter:blur(16px);
-    }
-    .card:before{
-      content:"";
-      position:absolute;
-      left:10%;right:10%;top:0;
-      height:1px;
-      background:linear-gradient(90deg,transparent,#68cfff,transparent);
-      box-shadow:0 0 18px rgba(73,190,255,.55);
-    }
-    .logo{
-      display:block;
-      width:min(270px,72%);
-      max-height:112px;
-      object-fit:contain;
-      margin:0 auto 24px;
-      filter:drop-shadow(0 8px 16px rgba(0,8,28,.28));
-    }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      margin-bottom:16px;
-      padding:8px 13px;
-      border:1px solid rgba(89,179,255,.28);
-      border-radius:999px;
-      background:rgba(12,55,111,.45);
-      color:#bfe7ff;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.04em;
-      text-transform:uppercase;
-    }
-    .badge:before{content:"❄";color:#71d2ff}
-    h1{
-      margin:0;
-      font-size:clamp(34px,7vw,62px);
-      line-height:.98;
-      letter-spacing:-.035em;
-      color:#fff;
-      text-shadow:0 0 26px rgba(72,157,255,.18);
-    }
-    .accent{
-      display:block;
-      margin-top:7px;
-      color:#8edcff;
-    }
-    p{
-      max-width:540px;
-      margin:20px auto 0;
-      color:var(--muted);
-      font-size:clamp(15px,2.4vw,19px);
-      line-height:1.55;
-    }
-    .status{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      margin:28px auto 0;
-      color:#dcecff;
-      font-size:13px;
-      font-weight:800;
-    }
-    .dot{
-      width:9px;height:9px;border-radius:50%;
-      background:#55c9ff;
-      box-shadow:0 0 12px #38baff;
-      animation:pulse 1.7s ease-in-out infinite;
-    }
-    @keyframes pulse{
-      50%{opacity:.35;transform:scale(.72)}
-    }
-    .footer{
-      margin-top:28px;
-      color:#708bad;
-      font-size:11px;
-    }
-    @media(max-width:520px){
-      .wrap{padding:12px}
-      .card{padding:30px 18px;border-radius:22px}
-      .logo{width:min(230px,78%);margin-bottom:20px}
-      .badge{font-size:10px;padding:7px 11px}
-      p{font-size:14px;line-height:1.5}
-      .status{margin-top:23px}
-    }
-    @media(prefers-reduced-motion:reduce){
-      body:before,body:after,.dot{animation:none}
-    }
-  </style>
-</head>
-<body>
-  <main class="wrap">
-    <section class="card" aria-labelledby="maintenance-title">
-      <img class="logo" src="assets/img_6dc1ef08d6ab264b.webp" alt="Белая Мгла Выживание">
-      <div class="badge">Технические работы</div>
-      <h1 id="maintenance-title">Глобальное<span class="accent">обновление сайта</span></h1>
-      <p>
-        «Белая Мгла» временно закрыта. Мы полностью обновляем оформление,
-        навигацию и материалы сайта, чтобы пользоваться им стало удобнее.
-      </p>
-      <div class="status"><span class="dot"></span> Скоро вернёмся</div>
-      <div class="footer">Белая Мгла • Государство 58 • Sova</div>
-    </section>
-  </main>
-</body>
-</html>
+<!DOCTYPE html>
+
+<html lang="ru"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>Белая Мгла • База знаний</title><!-- v112: events overview uses catalog icons only; decorative event-name emoji removed -->
+<!-- v119: merged approved header updates from v102-v104 onto v118 mobile branch -->
+<link href="site-v269.css?v=431" rel="stylesheet"/><link href="favicon.ico" rel="icon" sizes="any"/><link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/><link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="apple-touch-icon.png" rel="apple-touch-icon"/><script defer="" src="site-v269.js?v=431"></script><meta content="Справочные механики, ранняя игра и полезные разделы Белой Мглы." name="description"/><meta content="#031426" name="theme-color"/><meta content="website" property="og:type"/><meta content="Белая Мгла: Выживание" property="og:site_name"/><meta content="Белая Мгла • База знаний" property="og:title"/><meta content="Справочные механики, ранняя игра и полезные разделы Белой Мглы." property="og:description"/><meta content="https://belaya-mgla-sova58.github.io/other.html" property="og:url"/><meta content="https://belaya-mgla-sova58.github.io/assets/img_55f2688a367250fb.webp" property="og:image"/><meta content="Белая Мгла • Другие гайды" property="og:image:alt"/><meta content="summary_large_image" name="twitter:card"/><meta content="Белая Мгла • База знаний" name="twitter:title"/><meta content="Справочные механики, ранняя игра и полезные разделы Белой Мглы." name="twitter:description"/><meta content="https://belaya-mgla-sova58.github.io/assets/img_55f2688a367250fb.webp" name="twitter:image"/><link href="https://belaya-mgla-sova58.github.io/other.html" rel="canonical"/><style id="other-guide-icons-v376">
+.other-guide-icon-card{display:flex!important;align-items:center!important;gap:10px!important;}
+.other-guide-mini-icon{width:25px!important;height:25px!important;flex:0 0 25px!important;object-fit:contain!important;}
+@media(max-width:700px){.other-guide-mini-icon{width:23px!important;height:23px!important;flex-basis:23px!important}.other-guide-icon-card{gap:9px!important}}
+</style><style id="kb-type-hotfix-v420">
+/* v420 hard mobile typography override for Knowledge Base.
+   Kept inside other.html so it works even if an old stylesheet is cached. */
+body.is-other-route .kb-grid-v415 .kb-card-v415 .kb-card-texts-v415 strong{
+  display:block !important;
+  color:#fff !important;
+  font-size:17px !important;
+  font-weight:900 !important;
+  line-height:1.15 !important;
+  letter-spacing:.01em !important;
+  margin:0 0 7px !important;
+  opacity:1 !important;
+  text-shadow:0 1px 1px rgba(0,0,0,.22) !important;
+}
+body.is-other-route .kb-grid-v415 .kb-card-v415 .kb-card-texts-v415 small{
+  display:block !important;
+  color:#e8f5ff !important;
+  font-size:13px !important;
+  font-weight:700 !important;
+  line-height:1.35 !important;
+  opacity:1 !important;
+}
+body.is-other-route .kb-grid-v415 .kb-card-v415{
+  opacity:1 !important;
+}
+@media(max-width:760px){
+  body.is-other-route .kb-grid-v415 .kb-card-v415{
+    min-height:108px !important;
+    padding:11px 10px !important;
+  }
+  body.is-other-route .kb-grid-v415 .kb-card-v415 .kb-card-texts-v415 strong{
+    color:#fff !important;
+    font-size:14px !important;
+    line-height:1.16 !important;
+    margin-bottom:6px !important;
+  }
+  body.is-other-route .kb-grid-v415 .kb-card-v415 .kb-card-texts-v415 small{
+    color:#eaf6ff !important;
+    font-size:11.5px !important;
+    font-weight:700 !important;
+    line-height:1.30 !important;
+  }
+  body.is-other-route .kb-grid-v415 .kb-card-v415 .kb-card-arrow-v415{
+    background:#e6f5ff !important;
+    color:#145f94 !important;
+    border-color:#fff !important;
+    opacity:1 !important;
+  }
+}
+</style></head><body class="is-other-route site-hq-v407 modern-v422 modern-v424" data-static-route="other">
+<div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
+<button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
+<div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div>
+<a aria-label="На главную" href="index.html">⌂</a>
+</div>
+<div aria-hidden="true" class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<div class="nav-wrap"><img alt="Белая Мгла Выживание" class="sidebar-exact-logo" data-src="assets/img_6dc1ef08d6ab264b.webp" decoding="async" fetchpriority="low" loading="lazy"/><nav><a class="route-link" href="index.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_5aa79ae27faa29b4.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Главная</span></a><a class="route-link route-link-news" href="news.html"><img alt="" aria-hidden="true" class="sidebar-color-icon news-menu-icon-img" src="assets/news-owl-icon.png"/><span>Новости</span></a><a class="route-link" href="events.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_6bf97ec0736e4b3f.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>События</span></a><a class="route-link" href="heroes.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_df28a44cd870579e.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Герои</span></a><a class="route-link" href="gear.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_26d001aa476b7102.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Снаряжение</span></a><a class="route-link" href="experts.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_7b29d9b9a7eeb805.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Эксперты</span></a><a class="route-link" href="pets.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_f25119f6b5ca7b00.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Питомцы</span></a><a class="route-link route-link-state-positions" href="state-positions.html"><span aria-hidden="true" class="sidebar-color-icon state-position-menu-icon">👑</span><span>Должности на государстве</span></a><a class="route-link route-link-calculator" href="fire-furnace-calculator.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🧮</span><span>Калькулятор</span></a><a class="route-link route-link-farm" href="farm.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🌾</span><span>Ферма</span></a><a aria-current="page" class="route-link route-link-knowledge active" href="other.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_83aba0cd17b4f37b.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>База знаний</span></a></nav></div>
+<main id="appMain"><div class="site-search-v426" data-site-search="">
+<div class="site-search-box-v426">
+<span aria-hidden="true" class="site-search-icon-v426">⌕</span>
+<input aria-expanded="false" aria-label="Поиск по сайту" autocomplete="off" class="site-search-input-v426" inputmode="search" placeholder="Поиск по сайту..." spellcheck="false" type="search"/>
+<button aria-label="Очистить поиск" class="site-search-clear-v426" type="button">×</button>
+</div>
+<div aria-label="Результаты поиска" class="site-search-results-v426" role="listbox"></div>
+</div><div class="route-page active" data-route="other"><nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><span aria-current="page">База знаний</span></nav><section class="page-heading-v424 frost-header-v431"><h1>База знаний</h1><p>Справочные механики, ранняя игра и полезные разделы Белой Мглы.</p></section>
+<div class="guide-page-v69"><div class="kb-page-v415"><section class="kb-intro-v415">
+<div aria-hidden="true" class="kb-intro-icon-v415">📖</div>
+<div>
+<h1>База знаний</h1>
+<p>Короткие справочные разделы, которые не нужны в основном меню.</p>
+</div>
+</section><section class="kb-group-v415"><div class="kb-group-head-v415"><h2>Чаще нужно</h2><span>То, к чему чаще возвращаются.</span></div><div class="kb-grid-v415"><a class="kb-card-v415 kb-card-textonly-v416 kb-card-v417" href="resources.html"><span class="kb-card-caption-v415"><span class="kb-card-texts-v415"><strong>Ресурсы</strong><small>Редкие материалы и приоритеты.</small></span><span aria-hidden="true" class="kb-card-arrow-v415">›</span></span></a><a class="kb-card-v415 kb-card-textonly-v416 kb-card-v417" href="alliance.html"><span class="kb-card-caption-v415"><span class="kb-card-texts-v415"><strong>Альянс</strong><small>Помощь, технологии и активность.</small></span><span aria-hidden="true" class="kb-card-arrow-v415">›</span></span></a><a class="kb-card-v415 kb-card-textonly-v416 kb-card-v417" href="#kb-calculators"><span class="kb-card-caption-v415"><span class="kb-card-texts-v415"><strong>Калькуляторы</strong><small>Топка и Огненная Топка.</small></span><span aria-hidden="true" class="kb-card-arrow-v415">›</span></span></a></div></section><section class="kb-group-v415"><div class="kb-group-head-v415"><h2>Развитие</h2><span>Прокачка аккаунта.</span></div><div class="kb-grid-v415"><a class="kb-card-v415 kb-card-textonly-v416 kb-card-v417" href="research.html"><span class="kb-card-caption-v415"><span class="kb-card-texts-v415"><strong>Исследования</strong><small>Ветки и приоритеты.</small></span><span aria-hidden="true" class="kb-card-arrow-v415">›</span></span></a><a class="kb-card-v415 kb-card-textonly-v416 kb-card-v417" href="island.html"><span class="kb-card-caption-v415"><span class="kb-card-texts-v415"><strong>Остров</strong><small>Развитие и бонусы.</small></span><span aria-hidden="true" class="kb-card-arrow-v415">›</span></span></a><a class="kb-card-v415 kb-card-textonly-v416 kb-card-v417" href="troops.html"><span class="kb-card-caption-v415"><span class="kb-card-texts-v415"><strong>Войска</strong><small>Классы и усиление.</small></span><span aria-hidden="true" class="kb-card-arrow-v415">›</span></span></a></div></section><section class="kb-group-v415"><div class="kb-group-head-v415"><h2>База</h2><span>Справочная информация.</span></div><div class="kb-grid-v415"><a class="kb-card-v415 kb-card-textonly-v416 kb-card-v417" href="buildings.html"><span class="kb-card-caption-v415"><span class="kb-card-texts-v415"><strong>Здания</strong><small>Что улучшать.</small></span><span aria-hidden="true" class="kb-card-arrow-v415">›</span></span></a><a class="kb-card-v415 kb-card-textonly-v416 kb-card-v417" href="beacon.html"><span class="kb-card-caption-v415"><span class="kb-card-texts-v415"><strong>Маяк</strong><small>Задания и награды.</small></span><span aria-hidden="true" class="kb-card-arrow-v415">›</span></span></a><a class="kb-card-v415 kb-card-textonly-v416 kb-card-v417" href="newbie.html"><span class="kb-card-caption-v415"><span class="kb-card-texts-v415"><strong>Новичкам</strong><small>Для новых и вернувшихся.</small></span><span aria-hidden="true" class="kb-card-arrow-v415">›</span></span></a></div></section><section class="kb-tools-v415" id="kb-calculators">
+<div class="kb-tools-title-v415">
+<h2>Калькуляторы</h2>
+<p>Быстрый расчёт без поиска по сайту.</p>
+</div>
+<div class="kb-tools-grid-v415">
+<a href="furnace-calculator.html"><strong>Топка 20–30</strong><span>Расчёт требований обычной Топки</span></a>
+<a href="fire-furnace-calculator.html"><strong>Огненная Топка</strong><span>Этапы 1–5 и необходимые ресурсы</span></a>
+</div>
+</section><section class="kb-more-v415">
+<h2>Ещё в базе знаний</h2>
+<div class="kb-more-links-v415"><a href="governor.html">Губернатор</a><a href="arena.html">Арена</a><a href="labyrinth.html">Лабиринт</a><a href="exploration.html">Освоение</a><a href="mails.html">Боевые письма</a></div>
+</section><div class="v69-footer">Белая Мгла • Автор - Sova</div></div></div>
+</div></main>
+<button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button>
+<nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424">
+<a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_5aa79ae27faa29b4.webp"/></span><b>Главная</b></a>
+<a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_6bf97ec0736e4b3f.webp"/></span><b>События</b></a>
+<a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_df28a44cd870579e.webp"/></span><b>Герои</b></a>
+<a data-v424-nav="calc" href="fire-furnace-calculator.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/calculator-nav-v429.svg"/></span><b>Калькулятор</b></a>
+<a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_83aba0cd17b4f37b.webp"/></span><b>База знаний</b></a>
+</nav></body></html>

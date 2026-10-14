@@ -1,184 +1,123 @@
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="robots" content="noindex,nofollow,noarchive">
-  <meta name="theme-color" content="#03112d">
-  <title>Белая Мгла • Глобальное обновление</title>
-  <link rel="icon" href="favicon.ico">
-  <style>
-    :root{
-      color-scheme:dark;
-      --bg:#03112d;
-      --bg2:#061a3d;
-      --panel:rgba(7,29,72,.88);
-      --line:rgba(75,166,255,.35);
-      --text:#f7fbff;
-      --muted:#afc1dc;
-      --blue:#33b8ff;
-      --gold:#f2bf45;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif}
-    body{
-      min-height:100vh;
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 50% -12%,rgba(55,93,190,.34),transparent 38%),
-        radial-gradient(circle at 12% 80%,rgba(20,91,182,.18),transparent 34%),
-        radial-gradient(circle at 88% 72%,rgba(99,65,190,.14),transparent 32%),
-        linear-gradient(180deg,#03112d 0%,#041735 52%,#021027 100%);
-    }
-    body:before,
-    body:after{
-      content:"";
-      position:fixed;
-      inset:-20%;
-      pointer-events:none;
-      opacity:.28;
-      background-image:
-        radial-gradient(circle,rgba(255,255,255,.78) 0 1px,transparent 1.4px),
-        radial-gradient(circle,rgba(131,204,255,.65) 0 1px,transparent 1.5px);
-      background-size:72px 72px,108px 108px;
-      background-position:0 0,28px 34px;
-      animation:snow 22s linear infinite;
-    }
-    body:after{
-      opacity:.13;
-      transform:scale(1.25);
-      animation-duration:34s;
-      animation-direction:reverse;
-    }
-    @keyframes snow{
-      to{background-position:0 720px,28px 1114px}
-    }
-    .wrap{
-      position:relative;
-      z-index:2;
-      width:min(720px,calc(100% - 28px));
-      padding:22px;
-    }
-    .card{
-      position:relative;
-      overflow:hidden;
-      padding:clamp(28px,6vw,54px);
-      border:1px solid var(--line);
-      border-radius:28px;
-      text-align:center;
-      background:
-        radial-gradient(circle at 50% 0%,rgba(47,111,224,.20),transparent 42%),
-        linear-gradient(145deg,rgba(8,34,82,.95),rgba(4,20,51,.97));
-      box-shadow:
-        0 28px 70px rgba(0,6,22,.48),
-        inset 0 1px 0 rgba(255,255,255,.07);
-      backdrop-filter:blur(16px);
-    }
-    .card:before{
-      content:"";
-      position:absolute;
-      left:10%;right:10%;top:0;
-      height:1px;
-      background:linear-gradient(90deg,transparent,#68cfff,transparent);
-      box-shadow:0 0 18px rgba(73,190,255,.55);
-    }
-    .logo{
-      display:block;
-      width:min(270px,72%);
-      max-height:112px;
-      object-fit:contain;
-      margin:0 auto 24px;
-      filter:drop-shadow(0 8px 16px rgba(0,8,28,.28));
-    }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      margin-bottom:16px;
-      padding:8px 13px;
-      border:1px solid rgba(89,179,255,.28);
-      border-radius:999px;
-      background:rgba(12,55,111,.45);
-      color:#bfe7ff;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.04em;
-      text-transform:uppercase;
-    }
-    .badge:before{content:"❄";color:#71d2ff}
-    h1{
-      margin:0;
-      font-size:clamp(34px,7vw,62px);
-      line-height:.98;
-      letter-spacing:-.035em;
-      color:#fff;
-      text-shadow:0 0 26px rgba(72,157,255,.18);
-    }
-    .accent{
-      display:block;
-      margin-top:7px;
-      color:#8edcff;
-    }
-    p{
-      max-width:540px;
-      margin:20px auto 0;
-      color:var(--muted);
-      font-size:clamp(15px,2.4vw,19px);
-      line-height:1.55;
-    }
-    .status{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      margin:28px auto 0;
-      color:#dcecff;
-      font-size:13px;
-      font-weight:800;
-    }
-    .dot{
-      width:9px;height:9px;border-radius:50%;
-      background:#55c9ff;
-      box-shadow:0 0 12px #38baff;
-      animation:pulse 1.7s ease-in-out infinite;
-    }
-    @keyframes pulse{
-      50%{opacity:.35;transform:scale(.72)}
-    }
-    .footer{
-      margin-top:28px;
-      color:#708bad;
-      font-size:11px;
-    }
-    @media(max-width:520px){
-      .wrap{padding:12px}
-      .card{padding:30px 18px;border-radius:22px}
-      .logo{width:min(230px,78%);margin-bottom:20px}
-      .badge{font-size:10px;padding:7px 11px}
-      p{font-size:14px;line-height:1.5}
-      .status{margin-top:23px}
-    }
-    @media(prefers-reduced-motion:reduce){
-      body:before,body:after,.dot{animation:none}
-    }
-  </style>
-</head>
-<body>
-  <main class="wrap">
-    <section class="card" aria-labelledby="maintenance-title">
-      <img class="logo" src="assets/img_6dc1ef08d6ab264b.webp" alt="Белая Мгла Выживание">
-      <div class="badge">Технические работы</div>
-      <h1 id="maintenance-title">Глобальное<span class="accent">обновление сайта</span></h1>
-      <p>
-        «Белая Мгла» временно закрыта. Мы полностью обновляем оформление,
-        навигацию и материалы сайта, чтобы пользоваться им стало удобнее.
-      </p>
-      <div class="status"><span class="dot"></span> Скоро вернёмся</div>
-      <div class="footer">Белая Мгла • Государство 58 • Sova</div>
-    </section>
-  </main>
-</body>
-</html>
+<!DOCTYPE html>
+
+<html lang="ru"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>Белая Мгла • Братья по оружию</title><!-- v112: events overview uses catalog icons only; decorative event-name emoji removed -->
+<!-- v119: merged approved header updates from v102-v104 onto v118 mobile branch -->
+<link href="site-v269.css?v=431" rel="stylesheet"/><link href="favicon.ico" rel="icon" sizes="any"/><link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/><link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="apple-touch-icon.png" rel="apple-touch-icon"/><script defer="" src="site-v269.js?v=431"></script><meta content="«Братья по оружию» - боевое событие, где очки дают за сражения с войсками других губернаторов. Во время события очки начисляются за уничтожение и тяжёлое ранение войск других губернаторов. Чем выше уровень войск противника, тем больш" name="description"/><meta content="#031426" name="theme-color"/><meta content="website" property="og:type"/><meta content="Белая Мгла: Выживание" property="og:site_name"/><meta content="Белая Мгла • Братья по оружию" property="og:title"/><meta content="«Братья по оружию» - боевое событие, где очки дают за сражения с войсками других губернаторов. Во время события очки начисляются за уничтожение и тяжёлое ранение войск других губернаторов. Чем выше уровень войск противника, тем больш" property="og:description"/><meta content="https://belaya-mgla-sova58.github.io/brothers-in-arms.html" property="og:url"/><meta content="https://belaya-mgla-sova58.github.io/assets/img_55f2688a367250fb.webp" property="og:image"/><meta content="Белая Мгла • Братья по оружию" property="og:image:alt"/><meta content="summary_large_image" name="twitter:card"/><meta content="Белая Мгла • Братья по оружию" name="twitter:title"/><meta content="«Братья по оружию» - боевое событие, где очки дают за сражения с войсками других губернаторов. Во время события очки начисляются за уничтожение и тяжёлое ранение войск других губернаторов. Чем выше уровень войск противника, тем больш" name="twitter:description"/><meta content="https://belaya-mgla-sova58.github.io/assets/img_55f2688a367250fb.webp" name="twitter:image"/><link href="https://belaya-mgla-sova58.github.io/brothers-in-arms.html" rel="canonical"/></head><body class="is-brothers-in-arms-route site-hq-v407 modern-v422 modern-v424" data-static-route="brothers-in-arms">
+<div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
+<button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
+<div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div>
+<a aria-label="На главную" href="index.html">⌂</a>
+</div>
+<div aria-hidden="true" class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<div class="nav-wrap"><img alt="Белая Мгла Выживание" class="sidebar-exact-logo" data-src="assets/img_6dc1ef08d6ab264b.webp" decoding="async" fetchpriority="low" loading="lazy"/><nav><a class="route-link" href="index.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_5aa79ae27faa29b4.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Главная</span></a><a class="route-link route-link-news" href="news.html"><img alt="" aria-hidden="true" class="sidebar-color-icon news-menu-icon-img" src="assets/news-owl-icon.png"/><span>Новости</span></a><a aria-current="page" class="route-link active" href="events.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_6bf97ec0736e4b3f.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>События</span></a><a class="route-link" href="heroes.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_df28a44cd870579e.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Герои</span></a><a class="route-link" href="gear.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_26d001aa476b7102.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Снаряжение</span></a><a class="route-link" href="experts.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_7b29d9b9a7eeb805.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Эксперты</span></a><a class="route-link" href="pets.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_f25119f6b5ca7b00.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Питомцы</span></a><a class="route-link route-link-state-positions" href="state-positions.html"><span aria-hidden="true" class="sidebar-color-icon state-position-menu-icon">👑</span><span>Должности на государстве</span></a><a class="route-link route-link-calculator" href="fire-furnace-calculator.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🧮</span><span>Калькулятор</span></a><a class="route-link route-link-farm" href="farm.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🌾</span><span>Ферма</span></a><a class="route-link route-link-knowledge" href="other.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_83aba0cd17b4f37b.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>База знаний</span></a></nav></div>
+<main id="appMain"><div class="site-search-v426" data-site-search="">
+<div class="site-search-box-v426">
+<span aria-hidden="true" class="site-search-icon-v426">⌕</span>
+<input aria-expanded="false" aria-label="Поиск по сайту" autocomplete="off" class="site-search-input-v426" inputmode="search" placeholder="Поиск по сайту..." spellcheck="false" type="search"/>
+<button aria-label="Очистить поиск" class="site-search-clear-v426" type="button">×</button>
+</div>
+<div aria-label="Результаты поиска" class="site-search-results-v426" role="listbox"></div>
+</div><div class="route-page active" data-route="brothers-in-arms"><nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><a href="events.html">События</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><span aria-current="page">Братья по оружию</span></nav><section class="page-heading-v424 frost-header-v431"><h1>Братья по оружию</h1><p>«Братья по оружию» - боевое событие, где очки дают за сражения с войсками других губернаторов. Во время события очки начисляются за уничтожение и т…</p></section>
+<section class="intro" id="brothers-in-arms"><span class="eyebrow">Отдельный гайд события</span><div class="owl-page-title"><h2 class="owl-heading"><span class="owl-title-text"> Братья по оружию</span></h2></div><p><b>Автор - Sova</b></p><p><b>«Братья по оружию»</b> - боевое событие, где очки дают за сражения с войсками других губернаторов. Во время события очки начисляются за уничтожение и тяжёлое ранение войск других губернаторов. Чем выше уровень войск противника, тем больше очков можно получить.</p><div class="rule"><b>Главное правило:</b><p>Не все бои одинаково безопасны. Битва на ресурсной плитке и неудачная атака города могут дать очки, но последствия для ваших войск совершенно разные.</p></div></section>
+<section class="section">
+<div class="mercenary-fact-grid">
+<div class="mercenary-fact-card"><div class="mercenary-fact-num">48 ч.</div><b>обычная длительность</b><span>Точное время всегда смотрим в календаре 58 государства.</span></div>
+<div class="mercenary-fact-card"><div class="mercenary-fact-num">Очки</div><b>Бои с игроками</b><span>Очки начисляются за уничтоженные и тяжело раненые войска противника.</span></div>
+<div class="mercenary-fact-card"><div class="mercenary-fact-num">1–11</div><b>ступени войск</b><span>Для 12-й, 13-й ступени и специальных войск смотрим текущее окно события.</span></div>
+<div class="mercenary-fact-card"><div class="mercenary-fact-num">Правила</div><b>договорённости государства</b><span>То, что игра позволяет атаковать, ещё не значит, что это разрешено в 58 государстве.</span></div>
+</div>
+<h3> Сколько длится</h3>
+<p>Обычная продолжительность события - <b>48 часов</b>. Чаще всего оно проходит в неделю обычной Битвы за замок. Типичный период - с пятницы 00:00 UTC до воскресенья 00:00 UTC, но точное время всегда смотрим в текущем календаре <b>58 государства</b>.</p>
+<h3> За что дают очки</h3>
+<p>Основной источник очков:</p>
+<ul class="tip-list"><li> уничтоженные войска противника;</li><li> тяжело раненые войска противника.</li></ul>
+<p>Чем выше их уровень, тем больше очков.</p>
+<h3> Опубликованная шкала очков</h3>
+<div class="table-wrap"><table><thead><tr><th>Уровень войск</th><th>Очков за бойца</th></tr></thead><tbody>
+<tr><td>1-я ступень</td><td>1</td></tr><tr><td>2-я ступень</td><td>1</td></tr><tr><td>3-я ступень</td><td>2</td></tr><tr><td>4-я ступень</td><td>3</td></tr><tr><td>5-я ступень</td><td>4</td></tr><tr><td>6-я ступень</td><td>5</td></tr><tr><td>7-я ступень</td><td>7</td></tr><tr><td>8-я ступень</td><td>9</td></tr><tr><td>9-я ступень</td><td>11</td></tr><tr><td>10-я ступень</td><td>13</td></tr><tr><td>11-я ступень</td><td>15</td></tr>
+</tbody></table></div>
+<div class="rule warn"><b>12-я, 13-я ступени и специальные типы войск</b><p>Не переносим чужие старые таблицы автоматически. Проверяем количество очков непосредственно в текущем окне события 58 государства.</p></div>
+<h3> Высокий T не всегда лучшая цель</h3>
+<p>11-я ступень даёт больше очков, чем 8-я. Но если ради этих очков вы потеряете огромный марш, такая цель может оказаться намного хуже. Всегда сравнивайте получаемые очки, количество раненых, возможную постоянную гибель, стоимость лечения и риск ответной атаки.</p>
+<h3> Где можно набирать очки</h3>
+<ul class="tip-list"><li> ресурсные плитки;</li><li> города других губернаторов;</li><li> Битва за замок и башни;</li><li> Форты и Крепости;</li><li> договорные бои, если они разрешены правилами государства.</li></ul>
+<div class="rule"><b>Сначала читаем правила 58 государства.</b><p>У самой игры нет одних универсальных договорённостей для всех государств.</p></div>
+<h3> Договорённости государства важнее желания набить очки</h3>
+<p>В государстве могут действовать правила:</p>
+<ul class="tip-list"><li> не атаковать определённые альянсы;</li><li> не атаковать города;</li><li> разрешать только плитки;</li><li> ограничивать число атак на один город;</li><li> разрешать договорные бои;</li><li> вводить отдельные правила на часть события.</li></ul>
+<div class="rule warn"><b>То, что игра позволяет нажать «Атаковать», ещё не означает, что это разрешено государством.</b></div>
+<h3> Ресурсные плитки</h3>
+<p>Если правила государства разрешают атаки на сборщиков, это один из наиболее контролируемых способов получения очков.</p>
+<ul class="tip-list"><li> нет стены города;</li><li> плитку нельзя усилить подкреплением;</li><li> вы заранее видите находящийся там марш;</li><li> поражение не приводит к тем же постоянным потерям, что неудачная атака города.</li></ul>
+<p>Но заранее освободите Медпункт и обязательно убедитесь, что удары по плиткам разрешены.</p>
+<h3> Кого искать на плитке</h3>
+<p>Если выбор есть, чем выше уровень войск, тем быстрее набираются очки. Войска 10-й и 11-й ступени дают больше очков, чем большое количество слабых войск 1–5-й ступени. Но атаковать заведомо более сильный марш только ради высокой ступени не нужно.</p>
+<h3> Договорные бои</h3>
+<p>Если правила 58 государства позволяют, игроки могут договориться о контролируемом обмене очками. Например, один игрок выставляет марш на разрешённую плитку, второй атакует, затем роли меняются.</p>
+<ul class="tip-list"><li> оба заранее понимают, что происходит;</li><li> нет неожиданной войны между альянсами;</li><li> можно заранее подобрать количество и уровень войск;</li><li> проще контролировать Медпункт.</li></ul>
+<p>Используем такой способ только если он разрешён правилами государства.</p>
+<h3> Атака города</h3>
+<p>Перед атакой обязательно:</p>
+<ul class="tip-list"><li> провести разведку;</li><li> проверить героев;</li><li> посмотреть войска;</li><li> оценить возможные подкрепления;</li><li> посмотреть расположение союзников цели;</li><li> убедиться, что город разрешено атаковать.</li></ul>
+<h3> Главная опасность города</h3>
+<p>Если вы <b>атакуете город и проигрываете</b>, часть вашего марша может погибнуть навсегда.</p>
+<div class="savebox"><b>Ориентир текущей механики:</b><br/><br/><b>35% марша - постоянная гибель.</b><br/>Около 10% получают тяжёлые ранения.<br/>Около 55% получают лёгкие ранения и возвращаются.</div>
+<div class="rule warn"><b>Не атакуйте город, если не уверены в победе.</b></div>
+<h3> Город могут усилить</h3>
+<p>Плитку нельзя внезапно наполнить подкреплениями. Город можно. Пока ваш марш идёт, союзники противника могут отправить подкрепления, резко увеличить защиту и превратить лёгкую цель в тяжёлое поражение. Поэтому длинный марш до города особенно опасен.</p>
+<h3> Битва за замок</h3>
+<p>Обычная Битва за замок часто совпадает с «Братьями по оружию». Для активных альянсов это один из лучших моментов для набора очков:</p>
+<ul class="tip-list"><li> много боёв с игроками;</li><li> много высокоуровневых войск;</li><li> очки набираются значительно быстрее;</li><li> потери в боях за Замок и башни в основном проходят через систему ранений, а не как проигранная атака обычного города.</li></ul>
+<div class="rule"><b>Медпункт должен быть свободен.</b></div>
+<h3> Следим за Медпунктом</h3>
+<p>Перед событием:</p>
+<ul class="tip-list"><li> вылечите старых раненых;</li><li> освободите максимум мест;</li><li> подготовьте ресурсы;</li><li> подготовьте ускорения лечения.</li></ul>
+<p>Во время крупных боёв проверяйте Медпункт после каждого серьёзного столкновения. Переполненный Медпункт превращает безопасный бой в гораздо более дорогой.</p>
+<h3> Лечим небольшими партиями</h3>
+<p>Если альянс активно помогает лечению, можно лечить войска небольшими партиями и получать помощь союзников. Так лечение идёт быстрее, постоянно освобождается место, а войска быстрее возвращаются в строй.</p>
+<h3> Форты и Крепости</h3>
+<p>Если «Братья по оружию» совпадают с подходящими боями за Форты или Крепости, бои там также могут приносить очки. Перед этим проверяем текущую строку задания события, расписание и план R4/R5. Не начинаем отдельную войну только ради ещё одного места для очков.</p>
+<h3> Если не хотите участвовать</h3>
+<p>Самый простой вариант - <b>поставить щит</b>. Особенно перед сном, работой или долгим офлайном, если государство разрешает свободные атаки по городам.</p>
+<h3> Не ломайте щит случайно</h3>
+<p>Если решили переждать событие под щитом, не начинайте атаку другого игрока, не отправляйте разведку на противника и проверяйте предупреждение игры перед любым действием, которое может снять защиту.</p>
+<h3> Щит города не делает обычную плитку безопасной</h3>
+<p>Если ваши войска находятся на обычной ресурсной точке, они находятся вне города. Если атаки на сборщиков разрешены, их могут атаковать отдельно. Поэтому не оставляйте обычные сборочные марши без присмотра и отзывайте их перед долгим офлайном.</p>
+<h3> Защищённые точки сбора альянса</h3>
+<p>Если у альянса доступны специальные защищённые точки сбора, они особенно полезны во время «Братьев по оружию». На таких точках можно продолжать сбор без обычного риска нападения на ресурсную плитку.</p>
+<h3> Если союзника атакуют</h3>
+<p>Можно использовать подкрепления, если это соответствует плану альянса. Но не отправляйте армию вслепую.</p>
+<ul class="tip-list"><li> кто атакует;</li><li> насколько он сильнее;</li><li> сколько места в вашем Медпункте;</li><li> разрешена ли ответная атака;</li><li> что сказал R4/R5.</li></ul>
+<p>Иногда лучший способ помочь союзнику - не кормить противника дополнительными очками, а попросить союзника поставить щит или телепортироваться.</p>
+<h3> Ловушка с подкреплением</h3>
+<p>Если договорённости государства разрешают активные бои между игроками, сильный игрок может выглядеть лёгкой целью, но получить подкрепления перед ударом. Не судите только по мощности города: делайте разведку, смотрите альянс, учитывайте время марша и следите за линиями подкрепления.</p>
+<h3> Очки за защиту</h3>
+<p>Исторически защитник также мог получать очки за уничтоженные и тяжело раненые войска атакующего. Но в разных версиях события эта механика описывается неодинаково.</p>
+<div class="rule"><b>Для 58 государства смотрим текущую строку задания в игре.</b><p>Не строим весь план набора очков только на пассивной защите города.</p></div>
+<h3> Личные награды</h3>
+<p>У события есть личные пороги. Требуемое количество очков может меняться с развитием государства, поэтому на сайте не фиксируем одну старую таблицу порогов навечно. Главная цель для большинства игроков - взять нужные гарантированные личные награды с минимальными потерями.</p>
+<h3> Рейтинг</h3>
+<p>После личных наград можно продолжать бороться за рейтинг. Но сначала посчитайте стоимость. Если ради следующего места вы теряете десятки тысяч войск, большое количество ускорений, огромный объём лечения и ресурсов, награда рейтинга может оказаться намного дешевле ваших потерь.</p>
+<h3> Лучшая стратегия для большинства</h3>
+<ol class="tip-list"><li>Прочитать правила 58 государства.</li><li>Освободить Медпункт.</li><li>Взять безопасные очки: Замок, башни, разрешённые плитки, договорные бои.</li><li>Закрыть нужные личные пороги.</li><li>Оценить рейтинг.</li><li>Если продолжать невыгодно - поставить щит.</li></ol>
+<h3> Для сильных игроков</h3>
+<p>Даже большой перевес в силе не означает, что нужно атаковать всё подряд. Лучше выбирать разрешённые цели, высокоуровневые войска, цели без опасного подкрепления, короткие маршруты и бои с хорошим соотношением очков к потерям. Одно нарушение правил государства может создать проблемы всему альянсу.</p>
+<h3> Для F2P и небольшого доната</h3>
+<p>Не нужно соревноваться с китами по количеству уничтоженных войск. Оптимальный вариант:</p>
+<ul class="tip-list"><li> личные пороги;</li><li> Битва за замок;</li><li> разрешённые плитки;</li><li> договорные обмены, если государство позволяет;</li><li> свободный Медпункт;</li><li> щит после завершения своей цели.</li></ul>
+<p>Сохранённая армия обычно ценнее лишнего места в рейтинге.</p>
+<h3> Перед началом</h3>
+<ul class="tip-list"><li> Прочитать правила государства.</li><li> Прочитать сообщение R4/R5.</li><li> Вылечить Медпункт.</li><li> Подготовить лечение.</li><li> Проверить щиты.</li><li> Вернуть уязвимые сборочные марши.</li><li> Узнать, разрешены ли плитки.</li><li> Узнать, разрешены ли города.</li><li> Проверить расписание Битвы за замок.</li></ul>
+<h3> Частые ошибки</h3>
+<ul class="tip-list"><li> Не читать правила 58 государства.</li><li> Считать договорённости одинаковыми во всех государствах.</li><li> Атаковать город без разведки.</li><li> Идти на равного противника только ради очков за войска 11-й ступени.</li><li> Забывать, что проигранная атака города может уничтожить 35% марша.</li><li> Начинать крупные бои с заполненным Медпунктом.</li><li> Оставлять войска на плитках, когда атаки на сборщиков разрешены.</li><li> Случайно снять щит атакой или разведкой.</li><li> Продолжать сражаться после получения нужных наград без оценки стоимости.</li><li> Гнаться за рейтингом ценой огромной постоянной гибели войск.</li></ul>
+<div class="savebox"><b> Главное</b><br/><br/> «Братья по оружию» — событие с очками за бои с войсками других губернаторов.<br/> Обычно событие длится <b>48 часов</b>.<br/> Очки дают уничтоженные и тяжело раненые войска противника.<br/> Чем выше ступень войск противника, тем больше очков.<br/> Разрешённые плитки намного безопаснее неудачной атаки города.<br/> При проигранной атаке обычного города примерно <b>35% марша может погибнуть навсегда</b>.<br/> Битва за замок - один из лучших способов набирать очки без риска обычной проигранной атаки города.<br/> Медпункт должен оставаться свободным.<br/> Перед любой атакой читаем правила <b>58 государства</b>.<br/> Не участвуете - ставьте щит.<br/> Сначала закрываем нужные личные награды.<br/> За рейтингом идём только если цена потерь оправдана.<br/><br/><b>Главный принцип: «Братья по оружию» - это не «бей всё, что видишь». Лучший результат дают разрешённые бои с максимумом очков и минимумом потерь.</b></div>
+</section><div class="footer">Белая Мгла • Автор - Sova</div></div>
+</main>
+<button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button>
+<nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424">
+<a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_5aa79ae27faa29b4.webp"/></span><b>Главная</b></a>
+<a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_6bf97ec0736e4b3f.webp"/></span><b>События</b></a>
+<a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_df28a44cd870579e.webp"/></span><b>Герои</b></a>
+<a data-v424-nav="calc" href="fire-furnace-calculator.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/calculator-nav-v429.svg"/></span><b>Калькулятор</b></a>
+<a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_83aba0cd17b4f37b.webp"/></span><b>База знаний</b></a>
+</nav></body></html>

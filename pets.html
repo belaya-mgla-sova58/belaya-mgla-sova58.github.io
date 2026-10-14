@@ -1,184 +1,269 @@
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="robots" content="noindex,nofollow,noarchive">
-  <meta name="theme-color" content="#03112d">
-  <title>Белая Мгла • Глобальное обновление</title>
-  <link rel="icon" href="favicon.ico">
-  <style>
-    :root{
-      color-scheme:dark;
-      --bg:#03112d;
-      --bg2:#061a3d;
-      --panel:rgba(7,29,72,.88);
-      --line:rgba(75,166,255,.35);
-      --text:#f7fbff;
-      --muted:#afc1dc;
-      --blue:#33b8ff;
-      --gold:#f2bf45;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif}
-    body{
-      min-height:100vh;
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 50% -12%,rgba(55,93,190,.34),transparent 38%),
-        radial-gradient(circle at 12% 80%,rgba(20,91,182,.18),transparent 34%),
-        radial-gradient(circle at 88% 72%,rgba(99,65,190,.14),transparent 32%),
-        linear-gradient(180deg,#03112d 0%,#041735 52%,#021027 100%);
-    }
-    body:before,
-    body:after{
-      content:"";
-      position:fixed;
-      inset:-20%;
-      pointer-events:none;
-      opacity:.28;
-      background-image:
-        radial-gradient(circle,rgba(255,255,255,.78) 0 1px,transparent 1.4px),
-        radial-gradient(circle,rgba(131,204,255,.65) 0 1px,transparent 1.5px);
-      background-size:72px 72px,108px 108px;
-      background-position:0 0,28px 34px;
-      animation:snow 22s linear infinite;
-    }
-    body:after{
-      opacity:.13;
-      transform:scale(1.25);
-      animation-duration:34s;
-      animation-direction:reverse;
-    }
-    @keyframes snow{
-      to{background-position:0 720px,28px 1114px}
-    }
-    .wrap{
-      position:relative;
-      z-index:2;
-      width:min(720px,calc(100% - 28px));
-      padding:22px;
-    }
-    .card{
-      position:relative;
-      overflow:hidden;
-      padding:clamp(28px,6vw,54px);
-      border:1px solid var(--line);
-      border-radius:28px;
-      text-align:center;
-      background:
-        radial-gradient(circle at 50% 0%,rgba(47,111,224,.20),transparent 42%),
-        linear-gradient(145deg,rgba(8,34,82,.95),rgba(4,20,51,.97));
-      box-shadow:
-        0 28px 70px rgba(0,6,22,.48),
-        inset 0 1px 0 rgba(255,255,255,.07);
-      backdrop-filter:blur(16px);
-    }
-    .card:before{
-      content:"";
-      position:absolute;
-      left:10%;right:10%;top:0;
-      height:1px;
-      background:linear-gradient(90deg,transparent,#68cfff,transparent);
-      box-shadow:0 0 18px rgba(73,190,255,.55);
-    }
-    .logo{
-      display:block;
-      width:min(270px,72%);
-      max-height:112px;
-      object-fit:contain;
-      margin:0 auto 24px;
-      filter:drop-shadow(0 8px 16px rgba(0,8,28,.28));
-    }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      margin-bottom:16px;
-      padding:8px 13px;
-      border:1px solid rgba(89,179,255,.28);
-      border-radius:999px;
-      background:rgba(12,55,111,.45);
-      color:#bfe7ff;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.04em;
-      text-transform:uppercase;
-    }
-    .badge:before{content:"❄";color:#71d2ff}
-    h1{
-      margin:0;
-      font-size:clamp(34px,7vw,62px);
-      line-height:.98;
-      letter-spacing:-.035em;
-      color:#fff;
-      text-shadow:0 0 26px rgba(72,157,255,.18);
-    }
-    .accent{
-      display:block;
-      margin-top:7px;
-      color:#8edcff;
-    }
-    p{
-      max-width:540px;
-      margin:20px auto 0;
-      color:var(--muted);
-      font-size:clamp(15px,2.4vw,19px);
-      line-height:1.55;
-    }
-    .status{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      margin:28px auto 0;
-      color:#dcecff;
-      font-size:13px;
-      font-weight:800;
-    }
-    .dot{
-      width:9px;height:9px;border-radius:50%;
-      background:#55c9ff;
-      box-shadow:0 0 12px #38baff;
-      animation:pulse 1.7s ease-in-out infinite;
-    }
-    @keyframes pulse{
-      50%{opacity:.35;transform:scale(.72)}
-    }
-    .footer{
-      margin-top:28px;
-      color:#708bad;
-      font-size:11px;
-    }
-    @media(max-width:520px){
-      .wrap{padding:12px}
-      .card{padding:30px 18px;border-radius:22px}
-      .logo{width:min(230px,78%);margin-bottom:20px}
-      .badge{font-size:10px;padding:7px 11px}
-      p{font-size:14px;line-height:1.5}
-      .status{margin-top:23px}
-    }
-    @media(prefers-reduced-motion:reduce){
-      body:before,body:after,.dot{animation:none}
-    }
-  </style>
-</head>
-<body>
-  <main class="wrap">
-    <section class="card" aria-labelledby="maintenance-title">
-      <img class="logo" src="assets/img_6dc1ef08d6ab264b.webp" alt="Белая Мгла Выживание">
-      <div class="badge">Технические работы</div>
-      <h1 id="maintenance-title">Глобальное<span class="accent">обновление сайта</span></h1>
-      <p>
-        «Белая Мгла» временно закрыта. Мы полностью обновляем оформление,
-        навигацию и материалы сайта, чтобы пользоваться им стало удобнее.
-      </p>
-      <div class="status"><span class="dot"></span> Скоро вернёмся</div>
-      <div class="footer">Белая Мгла • Государство 58 • Sova</div>
-    </section>
-  </main>
-</body>
-</html>
+<!DOCTYPE html>
+
+<html lang="ru"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>Белая Мгла • Питомцы: кто они, для чего нужны и какие доступны сейчас</title><!-- v112: events overview uses catalog icons only; decorative event-name emoji removed -->
+<!-- v119: merged approved header updates from v102-v104 onto v118 mobile branch -->
+<link href="site-v269.css?v=431" rel="stylesheet"/><link href="favicon.ico" rel="icon" sizes="any"/><link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/><link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="apple-touch-icon.png" rel="apple-touch-icon"/><link as="image" fetchpriority="high" href="assets/img_e3dc0571d069e24d.webp" rel="preload"/><script defer="" src="site-v269.js?v=431"></script><meta content="Питомцы — отдельная система развития губернатора. Они не занимают место героя в походе. После приручения питомец развивается отдельно, повышает характеристики аккаунта и получает собственную полезную способность." name="description"/><meta content="#031426" name="theme-color"/><meta content="website" property="og:type"/><meta content="Белая Мгла: Выживание" property="og:site_name"/><meta content="Белая Мгла • Питомцы: кто они, для чего нужны и какие доступны сейчас" property="og:title"/><meta content="Питомцы — отдельная система развития губернатора. Они не занимают место героя в походе. После приручения питомец развивается отдельно, повышает характеристики аккаунта и получает собственную полезную способность." property="og:description"/><meta content="https://belaya-mgla-sova58.github.io/pets.html" property="og:url"/><meta content="https://belaya-mgla-sova58.github.io/assets/img_e3dc0571d069e24d.webp" property="og:image"/><meta content="Белая Мгла • Питомцы: кто они, для чего нужны и какие доступны сейчас" property="og:image:alt"/><meta content="summary_large_image" name="twitter:card"/><meta content="Белая Мгла • Питомцы: кто они, для чего нужны и какие доступны сейчас" name="twitter:title"/><meta content="Питомцы — отдельная система развития губернатора. Они не занимают место героя в походе. После приручения питомец развивается отдельно, повышает характеристики аккаунта и получает собственную полезную способность." name="twitter:description"/><meta content="https://belaya-mgla-sova58.github.io/assets/img_e3dc0571d069e24d.webp" name="twitter:image"/><link href="https://belaya-mgla-sova58.github.io/pets.html" rel="canonical"/></head><body class="is-pets-route site-hq-v407 modern-v422 modern-v424" data-static-route="pets">
+<div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
+<button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
+<div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div>
+<a aria-label="На главную" href="index.html">⌂</a>
+</div>
+<div aria-hidden="true" class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<div class="nav-wrap"><img alt="Белая Мгла Выживание" class="sidebar-exact-logo" data-src="assets/img_6dc1ef08d6ab264b.webp" decoding="async" fetchpriority="low" loading="lazy"/><nav><a class="route-link" href="index.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_5aa79ae27faa29b4.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Главная</span></a><a class="route-link route-link-news" href="news.html"><img alt="" aria-hidden="true" class="sidebar-color-icon news-menu-icon-img" src="assets/news-owl-icon.png"/><span>Новости</span></a><a class="route-link" href="events.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_6bf97ec0736e4b3f.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>События</span></a><a class="route-link" href="heroes.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_df28a44cd870579e.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Герои</span></a><a class="route-link" href="gear.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_26d001aa476b7102.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Снаряжение</span></a><a class="route-link" href="experts.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_7b29d9b9a7eeb805.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Эксперты</span></a><a aria-current="page" class="route-link active" href="pets.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_f25119f6b5ca7b00.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Питомцы</span></a><a class="route-link route-link-state-positions" href="state-positions.html"><span aria-hidden="true" class="sidebar-color-icon state-position-menu-icon">👑</span><span>Должности на государстве</span></a><a class="route-link route-link-calculator" href="fire-furnace-calculator.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🧮</span><span>Калькулятор</span></a><a class="route-link route-link-farm" href="farm.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🌾</span><span>Ферма</span></a><a class="route-link route-link-knowledge" href="other.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_83aba0cd17b4f37b.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>База знаний</span></a></nav></div>
+<main id="appMain"><div class="site-search-v426" data-site-search="">
+<div class="site-search-box-v426">
+<span aria-hidden="true" class="site-search-icon-v426">⌕</span>
+<input aria-expanded="false" aria-label="Поиск по сайту" autocomplete="off" class="site-search-input-v426" inputmode="search" placeholder="Поиск по сайту..." spellcheck="false" type="search"/>
+<button aria-label="Очистить поиск" class="site-search-clear-v426" type="button">×</button>
+</div>
+<div aria-label="Результаты поиска" class="site-search-results-v426" role="listbox"></div>
+</div><div class="route-page active" data-route="pets"><nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><span aria-current="page">Питомцы: кто они, для чего нужны и какие доступны сейчас</span></nav><section class="page-heading-v424 frost-header-v431"><h1>Питомцы: кто они, для чего нужны и какие доступны сейчас</h1><p>Питомцы — отдельная система развития губернатора. Они не занимают место героя в походе. После приручения питомец развивается отдельно, повышает хар…</p></section><div class="guide-page-v69 pets-encyclopedia-v77"><details class="page-toc-v409"><summary>Содержание</summary><div class="page-toc-links-v409"><a href="#section-1">Питомцы: кто они, для чего нужны и какие доступны сейчас</a><a href="#section-2">Доступны сейчас в 58 государстве</a><a href="#section-3">Когда открываются питомцы</a><a href="#section-4">Как открываются новые питомцы</a><a href="#section-5">Пещерная гиена</a><a href="#section-6">Арктический волк</a><a href="#section-7">Овцебык</a><a href="#section-8">Огромный тапир</a><a href="#section-9">Рух-титан</a><a href="#section-10">Огромный олень</a><a href="#section-11">Снежный леопард</a><a href="#section-12">Пещерный лев</a><a href="#section-13">Снежный примат</a><a href="#section-14">Будущие питомцы для 58 государства</a><a href="#section-15">Как прокачиваются питомцы</a><a href="#section-16">Материалы питомцев</a><a href="#section-17">Кормление и приручение</a><a href="#section-18">Совершенствование характеристик</a><a href="#section-19">Можно ли использовать несколько питомцев сразу?</a><a href="#section-20">Как распределять материалы</a><a href="#section-21">Быстрая шпаргалка 58 государства</a></div></details><div class="guide-fold-toolbar-v414"><span>Короткий режим: открывай только нужные разделы.</span><button class="guide-fold-all-v414" type="button">Раскрыть все</button></div>
+<details class="guide-section guide-fold-v414" data-guide-fold="1" open=""><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-1">Питомцы: кто они, для чего нужны и какие доступны сейчас</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414">
+<div class="pets-kicker-v77"> ПИТОМЦЫ • 58 ГОСУДАРСТВО</div>
+<p><b>Питомцы</b> — отдельная система развития губернатора. Они не занимают место героя в походе. После приручения питомец развивается отдельно, повышает характеристики аккаунта и получает собственную полезную способность.</p>
+<p>Одни питомцы помогают развитию города и сбору ресурсов, другие усиливают армию.</p>
+<div class="pets-summary-grid-v77">
+<div class="pets-summary-card-v77"><span>9</span><b>доступны сейчас</b><small>от Пещерной гиены до Снежного примата</small></div>
+<div class="pets-summary-card-v77"><span>5</span><b>будущих</b><small>ещё не открыты в 58 государстве</small></div>
+<div class="pets-summary-card-v77"><span>18 ур.</span><b>Топка</b><small>минимальное условие для открытия системы питомцев</small></div>
+</div>
+<div class="guide-callout tip"><button aria-label="Скопировать текст блока" class="copy-block-v409" type="button">Скопировать</button><b> Важно для нашего сайта:</b> эта страница ориентирована именно на российское государство 58. То, что питомец уже существует в более старых государствах, не означает, что он доступен у нас.</div>
+</div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="2"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-2"> Доступны сейчас в 58 государстве</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414">
+<div class="mini-grid">
+<div class="mini-card"><b> Пещерная гиена</b></div>
+<div class="mini-card"><b> Арктический волк</b></div>
+<div class="mini-card"><b> Овцебык</b></div>
+<div class="mini-card"><b> Огромный тапир</b></div>
+<div class="mini-card"><b> Рух-титан</b></div>
+<div class="mini-card"><b> Огромный олень</b></div>
+<div class="mini-card"><b> Снежный леопард</b></div>
+<div class="mini-card"><b> Пещерный лев</b></div>
+<div class="mini-card"><b> Снежный примат</b></div>
+</div>
+</div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="3"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-3"> Когда открываются питомцы</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414">
+<p>Для открытия системы питомцев нужны два условия:</p>
+<div class="mini-grid">
+<div class="mini-card"><b> Топка 18 или выше</b></div>
+<div class="mini-card"><b> Необходимый этап развития государства</b></div>
+</div>
+<p>Одной только Топки 18 недостаточно. Государство также должно дойти до этапа, на котором система питомцев становится доступной.</p>
+<p>Новые питомцы затем появляются постепенно.</p>
+</div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="4"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-4"> Как открываются новые питомцы</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414">
+<p>Питомцы идут по цепочке. Для открытия следующего зверя необходимо сначала развить предыдущего до нужного уровня.</p>
+<div class="pet-chain-v77">
+<span> Гиена</span><b>15</b>
+<span> Волк</span><b>15</b>
+<span> Овцебык</span><b>15</b>
+<span> Тапир</span><b>15</b>
+<span> Рух-титан</span><b>15</b>
+<span> Олень</span><b>15</b>
+<span> Леопард</span><b>15</b>
+<span> Лев</span><b>30</b>
+<span> Примат</span>
+</div>
+<p class="pet-chain-note-v77">Число между питомцами — уровень предыдущего питомца, необходимый для открытия следующего.</p>
+<div class="guide-callout tip"><button aria-label="Скопировать текст блока" class="copy-block-v409" type="button">Скопировать</button><b> Совет:</b> на ранних этапах важно не остановить цепочку открытия, вложив все материалы только в одного любимого питомца.</div>
+</div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="5"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-5"> Пещерная гиена</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414">
+<div class="pet-info-card-v77 utility">
+<div class="pet-icon-v77"></div>
+<div>
+<div class="pet-tags-v77"><span>Строительство</span></div>
+<p>Способность даёт до <strong>+15% скорости строительства на 5 минут</strong>.</p>
+<p class="pet-use-v77"><b>Как использовать:</b> активируй способность перед запуском долгого строительства. Особенно полезно перед улучшением Топки, Научного центра, Посольства и других зданий с большим временем строительства.</p>
+<small>После запуска строительства бонус уже будет учтён.</small>
+</div>
+</div>
+</div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="6"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-6"> Арктический волк</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414">
+<div class="pet-info-card-v77 utility">
+<div class="pet-icon-v77"></div>
+<div>
+<div class="pet-tags-v77"><span>Энергия губернатора</span></div>
+<p>Мгновенно восстанавливает до <strong>60 энергии губернатора</strong>.</p>
+<p class="pet-use-v77"><b>Как использовать:</b> полезен для охоты на зверей, Полярных ужасов и событий, где быстро расходуется энергия.</p>
+</div>
+</div>
+</div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="7"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-7"> Овцебык</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414">
+<div class="pet-info-card-v77 utility">
+<div class="pet-icon-v77"></div>
+<div>
+<div class="pet-tags-v77"><span>Мгновенный сбор</span></div>
+<p>Позволяет <strong>мгновенно завершить сбор следующей обычной ресурсной плитки после прибытия отряда</strong>.</p>
+<p>При максимальном развитии навыка время восстановления сокращается до <strong>15 часов</strong>.</p>
+<p class="pet-use-v77"><b>Как использовать:</b> выбирай самую богатую обычную ресурсную плитку, которую отряд способен полностью унести. Обычно выгоднее использовать способность на плитке 8 уровня.</p>
+<small>На защищённые ресурсные точки альянса способность не распространяется.</small>
+</div>
+</div>
+</div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="8"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-8"> Огромный тапир</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414">
+<div class="pet-info-card-v77 utility">
+<div class="pet-icon-v77"></div>
+<div>
+<div class="pet-tags-v77"><span>Корм для животных</span></div>
+<p>Даёт до <strong>500 единиц корма для животных</strong>.</p>
+<p class="pet-use-v77"><b>Как использовать:</b> используй способность регулярно. Корм нужен для повышения уровней питомцев, поэтому Тапир помогает ускорять развитие всей системы.</p>
+</div>
+</div>
+</div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="9"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-9"> Рух-титан</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414">
+<div class="pet-info-card-v77 combat">
+<div class="pet-icon-v77"></div>
+<div>
+<div class="pet-tags-v77"><span>Ослабление противника</span></div>
+<p>Снижает <strong>ОЗ войск противника до −5%</strong>.</p>
+<p class="pet-use-v77"><b>Как использовать:</b> активируй перед важными боями, Битвой за замок, SvS, сборными атаками и атаками сильных целей.</p>
+</div>
+</div>
+</div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="10"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-10"> Огромный олень</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414">
+<div class="pet-info-card-v77 utility">
+<div class="pet-icon-v77"></div>
+<div>
+<div class="pet-tags-v77"><span>Дополнительные награды</span></div>
+<p>Периодически приносит <strong>случайный полезный предмет</strong>.</p>
+<p>По мере развития уменьшается время восстановления способности.</p>
+<p class="pet-use-v77"><b>Как использовать:</b> не забывай использовать навык после восстановления. Это бесплатный дополнительный источник предметов, который не требует энергии или походов.</p>
+</div>
+</div>
+</div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="11"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-11"> Снежный леопард</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414">
+<div class="pet-info-card-v77 combat">
+<div class="pet-icon-v77"></div>
+<div>
+<div class="pet-tags-v77"><span>Скорость и ослабление</span></div>
+<p>Даёт до <strong>+30% скорости похода</strong> и до <strong>−5% смертоносности войск противника</strong>.</p>
+<p class="pet-use-v77"><b>Как использовать:</b> особенно полезен для быстрых атак, занятия объектов, подкреплений и SvS.</p>
+<small>Дополнительное снижение смертоносности противника делает его полезным не только для перемещения, но и непосредственно в бою.</small>
+</div>
+</div>
+</div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="12"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-12"> Пещерный лев</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414">
+<div class="pet-info-card-v77 combat featured">
+<div class="pet-icon-v77"></div>
+<div>
+<div class="pet-tags-v77"><span>Атака войск</span></div>
+<p>Повышает <strong>атаку всех войск до +10%</strong>.</p>
+<p class="pet-use-v77"><b>Как использовать:</b> универсальное усиление перед крупными сборными атаками, Битвой за замок, SvS и другими серьёзными боями.</p>
+<small>В отличие от более узких питомцев, Лев усиливает сразу всю армию.</small>
+</div>
+</div>
+</div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="13"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-13"> Снежный примат</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414">
+<div class="pet-info-card-v77 combat featured">
+<div class="pet-icon-v77"></div>
+<div>
+<div class="pet-tags-v77"><span>Вместимость отряда</span></div>
+<p>Увеличивает вместимость <strong>собственного отряда до +15 000 бойцов</strong>.</p>
+<p class="pet-use-v77"><b>Как использовать:</b> активируй перед походом, когда нужно отправить больше собственных войск одним отрядом. Полезен для сильного личного марша, участия в сборных атаках, атак и удержания объектов.</p>
+<small><b>Не путать:</b> Снежный примат увеличивает твой собственный отряд. Будущий Железный носорог увеличивает общую вместимость всей сборной атаки.</small>
+</div>
+</div>
+</div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="14"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-14"> Будущие питомцы для 58 государства</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414">
+<p>Следующие питомцы уже существуют в более старых государствах, но <b>в 58 государстве пока не открыты</b>.</p>
+<div class="mini-grid">
+<div class="mini-card"><b> Железный носорог</b><br/>Увеличивает вместимость сборной атаки до +150 000 бойцов.</div>
+<div class="mini-card"><b> Саблезубый тигр</b><br/>Повышает смертоносность войск до +10%.</div>
+<div class="mini-card"><b> Мамонт</b><br/>Повышает защиту всех войск до +10%.</div>
+<div class="mini-card"><b> Морозная горилла</b><br/>Повышает ОЗ всех войск до +10%.</div>
+<div class="mini-card"><b> Морозный хамелеон</b><br/>Снижает защиту войск противника до −10%.</div>
+</div>
+<div class="guide-callout warn"><button aria-label="Скопировать текст блока" class="copy-block-v409" type="button">Скопировать</button><b> Важно:</b> на сайте они остаются в разделе «Будущие», пока фактически не появятся в 58 государстве. После открытия каждого питомца проверяем его непосредственно в русской версии игры и только тогда переносим в основной список.</div>
+</div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="15"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-15"> Как прокачиваются питомцы</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414">
+<div class="pets-steps-v77">
+<div><span>1</span><h3>Приручение</h3><p>Нового питомца сначала нужно приручить. После этого он становится постоянной частью системы питомцев.</p></div>
+<div><span>2</span><h3>Уровень</h3><p><b>Корм для животных</b> используется для повышения обычного уровня питомца. С ростом уровня увеличиваются его характеристики.</p></div>
+<div><span>3</span><h3>Развитие</h3><p>На определённых этапах для дальнейшего развития требуются специальные материалы.</p></div>
+<div><span>4</span><h3>Совершенствование</h3><p>Отдельная система изменения дополнительных характеристик питомца. Для неё используются дикие метки.</p></div>
+</div>
+</div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="16"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-16"> Материалы питомцев</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414">
+<div class="mini-grid">
+<div class="mini-card"><b> Корм для животных</b><br/>Основной материал повышения уровня.</div>
+<div class="mini-card"><b> Руководство по приручению</b><br/>Используется при развитии питомца.</div>
+<div class="mini-card"><b> Энергетическое зелье</b><br/>Нужно на более высоких этапах развития.</div>
+<div class="mini-card"><b> Усиливающая сыворотка</b><br/>Редкий материал позднего развития.</div>
+<div class="mini-card"><b> Обычная дикая метка</b><br/>Используется для совершенствования дополнительных характеристик.</div>
+<div class="mini-card"><b> Продвинутая дикая метка</b><br/>Более ценный материал для продвинутого совершенствования.</div>
+</div>
+</div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="17"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-17"> Кормление и приручение</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414">
+<p>У каждого питомца количество ежедневных попыток ограничено.</p>
+<div class="guide-callout tip"><button aria-label="Скопировать текст блока" class="copy-block-v409" type="button">Скопировать</button><b>Питомца можно кормить и приручать до 2 раз в день.</b></div>
+<p>После этого попытки восстанавливаются со временем. Поэтому ежедневные попытки лучше не пропускать без причины.</p>
+</div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="18"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-18"> Совершенствование характеристик</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414">
+<p>Совершенствование не является обычным повышением уровня.</p>
+<p>С помощью диких меток питомец получает новые значения дополнительных характеристик.</p>
+<p>После попытки можно сравнить текущие характеристики и новый результат, а затем решить, принимать изменение или оставить старый вариант.</p>
+<div class="guide-callout warn"><button aria-label="Скопировать текст блока" class="copy-block-v409" type="button">Скопировать</button><b> Продвинутые дикие метки</b> — редкий ресурс. Их лучше сохранять для питомцев, которыми действительно планируешь пользоваться в серьёзных боях.</div>
+</div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="19"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-19"> Можно ли использовать несколько питомцев сразу?</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414">
+<p><b>Да.</b> Активные способности разных питомцев могут работать одновременно.</p>
+<p>Например, перед серьёзным боем в 58 государстве уже можно совместить:</p>
+<div class="rule-grid">
+<div class="rule good"><b> Рух-титан</b><p>Ослабление ОЗ противника.</p></div>
+<div class="rule good"><b> Снежный леопард</b><p>Скорость похода и снижение смертоносности противника.</p></div>
+<div class="rule good"><b> Пещерный лев</b><p>Повышение атаки.</p></div>
+<div class="rule good"><b> Снежный примат</b><p>Увеличение размера собственного отряда.</p></div>
+</div>
+<div class="guide-callout tip"><button aria-label="Скопировать текст блока" class="copy-block-v409" type="button">Скопировать</button><b>Питомцы работают не как выбор одного зверя, а как набор разных инструментов.</b></div>
+</div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="20"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-20"> Как распределять материалы</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414">
+<p>Не нужно прокачивать всех питомцев одинаково.</p>
+<h3> Сначала цепочка открытия</h3>
+<p>Если следующий питомец ещё не открыт, сначала доводи предыдущего до уровня, необходимого для продолжения цепочки.</p>
+<h3> После открытия нужной цепочки</h3>
+<p>Редкие материалы можно сильнее концентрировать на питомцах, способности которых используются чаще.</p>
+<div class="mini-grid">
+<div class="mini-card"><b> Развитие города</b><br/>Пещерная гиена</div>
+<div class="mini-card"><b> Энергия</b><br/>Арктический волк</div>
+<div class="mini-card"><b> Ресурсы</b><br/>Овцебык</div>
+<div class="mini-card"><b> Корм</b><br/>Огромный тапир</div>
+<div class="mini-card"><b> Ослабление</b><br/>Рух-титан</div>
+<div class="mini-card"><b> Дополнительные награды</b><br/>Огромный олень</div>
+<div class="mini-card"><b> Скорость и бой</b><br/>Снежный леопард</div>
+<div class="mini-card"><b> Атака</b><br/>Пещерный лев</div>
+<div class="mini-card"><b> Размер отряда</b><br/>Снежный примат</div>
+</div>
+<p>Нет необходимости делать всех одинакового уровня только ради красивых цифр мощности.</p>
+</div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="21"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-21"> Быстрая шпаргалка 58 государства</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414">
+<div class="mini-grid">
+<div class="mini-card"><b> Гиена</b><br/>строительство</div>
+<div class="mini-card"><b> Волк</b><br/>энергия</div>
+<div class="mini-card"><b> Овцебык</b><br/>мгновенный сбор</div>
+<div class="mini-card"><b> Тапир</b><br/>корм</div>
+<div class="mini-card"><b> Рух-титан</b><br/>− ОЗ врага</div>
+<div class="mini-card"><b> Олень</b><br/>дополнительные предметы</div>
+<div class="mini-card"><b> Леопард</b><br/>скорость + ослабление</div>
+<div class="mini-card"><b> Лев</b><br/>+ атака</div>
+<div class="mini-card"><b> Примат</b><br/>+ размер своего отряда</div>
+</div>
+<h3> Ещё не открыты</h3>
+<div class="mini-grid">
+<div class="mini-card"><b> Носорог</b><br/>размер сборной атаки</div>
+<div class="mini-card"><b> Тигр</b><br/>смертоносность</div>
+<div class="mini-card"><b> Мамонт</b><br/>защита</div>
+<div class="mini-card"><b> Морозная горилла</b><br/>ОЗ</div>
+<div class="mini-card"><b> Морозный хамелеон</b><br/>снижение защиты противника</div>
+</div>
+<div class="savebox"><b> Главное</b><br/><br/>В <b>58 государстве сейчас доступны 9 питомцев</b>, от Пещерной гиены до Снежного примата.<br/><br/><b>Открываем цепочку → не пропускаем ежедневное кормление → используем полезные способности → редкие материалы вкладываем осознанно.</b><br/><br/>Будущих питомцев переносим в основной список только после их фактического появления в российском 58 государстве.</div>
+</div></details>
+<div class="footer">Белая Мгла • Автор - Sova</div>
+</div></div>
+</main>
+<button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button>
+<nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424">
+<a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_5aa79ae27faa29b4.webp"/></span><b>Главная</b></a>
+<a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_6bf97ec0736e4b3f.webp"/></span><b>События</b></a>
+<a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_df28a44cd870579e.webp"/></span><b>Герои</b></a>
+<a data-v424-nav="calc" href="fire-furnace-calculator.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/calculator-nav-v429.svg"/></span><b>Калькулятор</b></a>
+<a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_83aba0cd17b4f37b.webp"/></span><b>База знаний</b></a>
+</nav></body></html>

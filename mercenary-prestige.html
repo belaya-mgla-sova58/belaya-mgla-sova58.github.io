@@ -1,184 +1,65 @@
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="robots" content="noindex,nofollow,noarchive">
-  <meta name="theme-color" content="#03112d">
-  <title>Белая Мгла • Глобальное обновление</title>
-  <link rel="icon" href="favicon.ico">
-  <style>
-    :root{
-      color-scheme:dark;
-      --bg:#03112d;
-      --bg2:#061a3d;
-      --panel:rgba(7,29,72,.88);
-      --line:rgba(75,166,255,.35);
-      --text:#f7fbff;
-      --muted:#afc1dc;
-      --blue:#33b8ff;
-      --gold:#f2bf45;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif}
-    body{
-      min-height:100vh;
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 50% -12%,rgba(55,93,190,.34),transparent 38%),
-        radial-gradient(circle at 12% 80%,rgba(20,91,182,.18),transparent 34%),
-        radial-gradient(circle at 88% 72%,rgba(99,65,190,.14),transparent 32%),
-        linear-gradient(180deg,#03112d 0%,#041735 52%,#021027 100%);
-    }
-    body:before,
-    body:after{
-      content:"";
-      position:fixed;
-      inset:-20%;
-      pointer-events:none;
-      opacity:.28;
-      background-image:
-        radial-gradient(circle,rgba(255,255,255,.78) 0 1px,transparent 1.4px),
-        radial-gradient(circle,rgba(131,204,255,.65) 0 1px,transparent 1.5px);
-      background-size:72px 72px,108px 108px;
-      background-position:0 0,28px 34px;
-      animation:snow 22s linear infinite;
-    }
-    body:after{
-      opacity:.13;
-      transform:scale(1.25);
-      animation-duration:34s;
-      animation-direction:reverse;
-    }
-    @keyframes snow{
-      to{background-position:0 720px,28px 1114px}
-    }
-    .wrap{
-      position:relative;
-      z-index:2;
-      width:min(720px,calc(100% - 28px));
-      padding:22px;
-    }
-    .card{
-      position:relative;
-      overflow:hidden;
-      padding:clamp(28px,6vw,54px);
-      border:1px solid var(--line);
-      border-radius:28px;
-      text-align:center;
-      background:
-        radial-gradient(circle at 50% 0%,rgba(47,111,224,.20),transparent 42%),
-        linear-gradient(145deg,rgba(8,34,82,.95),rgba(4,20,51,.97));
-      box-shadow:
-        0 28px 70px rgba(0,6,22,.48),
-        inset 0 1px 0 rgba(255,255,255,.07);
-      backdrop-filter:blur(16px);
-    }
-    .card:before{
-      content:"";
-      position:absolute;
-      left:10%;right:10%;top:0;
-      height:1px;
-      background:linear-gradient(90deg,transparent,#68cfff,transparent);
-      box-shadow:0 0 18px rgba(73,190,255,.55);
-    }
-    .logo{
-      display:block;
-      width:min(270px,72%);
-      max-height:112px;
-      object-fit:contain;
-      margin:0 auto 24px;
-      filter:drop-shadow(0 8px 16px rgba(0,8,28,.28));
-    }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      margin-bottom:16px;
-      padding:8px 13px;
-      border:1px solid rgba(89,179,255,.28);
-      border-radius:999px;
-      background:rgba(12,55,111,.45);
-      color:#bfe7ff;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.04em;
-      text-transform:uppercase;
-    }
-    .badge:before{content:"❄";color:#71d2ff}
-    h1{
-      margin:0;
-      font-size:clamp(34px,7vw,62px);
-      line-height:.98;
-      letter-spacing:-.035em;
-      color:#fff;
-      text-shadow:0 0 26px rgba(72,157,255,.18);
-    }
-    .accent{
-      display:block;
-      margin-top:7px;
-      color:#8edcff;
-    }
-    p{
-      max-width:540px;
-      margin:20px auto 0;
-      color:var(--muted);
-      font-size:clamp(15px,2.4vw,19px);
-      line-height:1.55;
-    }
-    .status{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      margin:28px auto 0;
-      color:#dcecff;
-      font-size:13px;
-      font-weight:800;
-    }
-    .dot{
-      width:9px;height:9px;border-radius:50%;
-      background:#55c9ff;
-      box-shadow:0 0 12px #38baff;
-      animation:pulse 1.7s ease-in-out infinite;
-    }
-    @keyframes pulse{
-      50%{opacity:.35;transform:scale(.72)}
-    }
-    .footer{
-      margin-top:28px;
-      color:#708bad;
-      font-size:11px;
-    }
-    @media(max-width:520px){
-      .wrap{padding:12px}
-      .card{padding:30px 18px;border-radius:22px}
-      .logo{width:min(230px,78%);margin-bottom:20px}
-      .badge{font-size:10px;padding:7px 11px}
-      p{font-size:14px;line-height:1.5}
-      .status{margin-top:23px}
-    }
-    @media(prefers-reduced-motion:reduce){
-      body:before,body:after,.dot{animation:none}
-    }
-  </style>
-</head>
-<body>
-  <main class="wrap">
-    <section class="card" aria-labelledby="maintenance-title">
-      <img class="logo" src="assets/img_6dc1ef08d6ab264b.webp" alt="Белая Мгла Выживание">
-      <div class="badge">Технические работы</div>
-      <h1 id="maintenance-title">Глобальное<span class="accent">обновление сайта</span></h1>
-      <p>
-        «Белая Мгла» временно закрыта. Мы полностью обновляем оформление,
-        навигацию и материалы сайта, чтобы пользоваться им стало удобнее.
-      </p>
-      <div class="status"><span class="dot"></span> Скоро вернёмся</div>
-      <div class="footer">Белая Мгла • Государство 58 • Sova</div>
-    </section>
-  </main>
-</body>
-</html>
+<!DOCTYPE html>
+
+<html lang="ru"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>Белая Мгла • Престиж наёмника</title><!-- v112: events overview uses catalog icons only; decorative event-name emoji removed -->
+<!-- v119: merged approved header updates from v102-v104 onto v118 mobile branch -->
+<link href="site-v269.css?v=431" rel="stylesheet"/><link href="favicon.ico" rel="icon" sizes="any"/><link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/><link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="apple-touch-icon.png" rel="apple-touch-icon"/><link as="image" fetchpriority="high" href="assets/img_494e5af9ee1a6e7e.webp" rel="preload"/><script defer="" src="site-v269.js?v=431"></script><meta content="«Престиж наёмника» - PvE-событие из двух частей: личной цепочки наёмников Фаэтона и совместных испытаний альянса против капитанов Фаэтона." name="description"/><meta content="#031426" name="theme-color"/><meta content="website" property="og:type"/><meta content="Белая Мгла: Выживание" property="og:site_name"/><meta content="Белая Мгла • Престиж наёмника" property="og:title"/><meta content="«Престиж наёмника» - PvE-событие из двух частей: личной цепочки наёмников Фаэтона и совместных испытаний альянса против капитанов Фаэтона." property="og:description"/><meta content="https://belaya-mgla-sova58.github.io/mercenary-prestige.html" property="og:url"/><meta content="https://belaya-mgla-sova58.github.io/assets/img_494e5af9ee1a6e7e.webp" property="og:image"/><meta content="Белая Мгла • Престиж наёмника" property="og:image:alt"/><meta content="summary_large_image" name="twitter:card"/><meta content="Белая Мгла • Престиж наёмника" name="twitter:title"/><meta content="«Престиж наёмника» - PvE-событие из двух частей: личной цепочки наёмников Фаэтона и совместных испытаний альянса против капитанов Фаэтона." name="twitter:description"/><meta content="https://belaya-mgla-sova58.github.io/assets/img_494e5af9ee1a6e7e.webp" name="twitter:image"/><link href="https://belaya-mgla-sova58.github.io/mercenary-prestige.html" rel="canonical"/></head><body class="is-mercenary-prestige-route site-hq-v407 modern-v422 modern-v424" data-static-route="mercenary-prestige">
+<div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
+<button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
+<div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div>
+<a aria-label="На главную" href="index.html">⌂</a>
+</div>
+<div aria-hidden="true" class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<div class="nav-wrap"><img alt="Белая Мгла Выживание" class="sidebar-exact-logo" data-src="assets/img_6dc1ef08d6ab264b.webp" decoding="async" fetchpriority="low" loading="lazy"/><nav><a class="route-link" href="index.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_5aa79ae27faa29b4.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Главная</span></a><a class="route-link route-link-news" href="news.html"><img alt="" aria-hidden="true" class="sidebar-color-icon news-menu-icon-img" src="assets/news-owl-icon.png"/><span>Новости</span></a><a aria-current="page" class="route-link active" href="events.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_6bf97ec0736e4b3f.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>События</span></a><a class="route-link" href="heroes.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_df28a44cd870579e.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Герои</span></a><a class="route-link" href="gear.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_26d001aa476b7102.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Снаряжение</span></a><a class="route-link" href="experts.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_7b29d9b9a7eeb805.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Эксперты</span></a><a class="route-link" href="pets.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_f25119f6b5ca7b00.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Питомцы</span></a><a class="route-link route-link-state-positions" href="state-positions.html"><span aria-hidden="true" class="sidebar-color-icon state-position-menu-icon">👑</span><span>Должности на государстве</span></a><a class="route-link route-link-calculator" href="fire-furnace-calculator.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🧮</span><span>Калькулятор</span></a><a class="route-link route-link-farm" href="farm.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🌾</span><span>Ферма</span></a><a class="route-link route-link-knowledge" href="other.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_83aba0cd17b4f37b.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>База знаний</span></a></nav></div>
+<main id="appMain"><div class="site-search-v426" data-site-search="">
+<div class="site-search-box-v426">
+<span aria-hidden="true" class="site-search-icon-v426">⌕</span>
+<input aria-expanded="false" aria-label="Поиск по сайту" autocomplete="off" class="site-search-input-v426" inputmode="search" placeholder="Поиск по сайту..." spellcheck="false" type="search"/>
+<button aria-label="Очистить поиск" class="site-search-clear-v426" type="button">×</button>
+</div>
+<div aria-label="Результаты поиска" class="site-search-results-v426" role="listbox"></div>
+</div><div class="route-page active" data-route="mercenary-prestige"><nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><a href="events.html">События</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><span aria-current="page">Престиж наёмника</span></nav><section class="page-heading-v424 frost-header-v431"><h1>Престиж наёмника</h1><p>«Престиж наёмника» - PvE-событие из двух частей: личной цепочки наёмников Фаэтона и совместных испытаний альянса против капитанов Фаэтона.</p></section>
+<section class="intro" id="mercenary-prestige"><span class="eyebrow">Отдельный гайд события</span><div class="owl-page-title"><h2 class="owl-heading"><span class="owl-title-text"> Престиж наёмника</span></h2></div><p><b>Автор - Sova</b></p><p><b>«Престиж наёмника»</b> - PvE-событие из двух частей: личной цепочки наёмников Фаэтона и совместных испытаний альянса против капитанов Фаэтона.</p><p>Главный ограниченный ресурс события - <b> энергия губернатора</b>. Поэтому задача не просто пройти все этапы, а сделать это с минимальным расходом энергии.</p></section>
+<section class="section mercenary-guide">
+<div class="mercenary-fact-grid"><div class="mercenary-fact-card"><div class="mercenary-fact-num">25</div><b>личных этапов</b><span>Нужно пройти всю цепочку наёмников Фаэтона.</span></div><div class="mercenary-fact-card"><div class="mercenary-fact-num">15</div><b>энергии</b><span>Стоит разведка каждого наёмника.</span></div><div class="mercenary-fact-card"><div class="mercenary-fact-num">5</div><b>контрактов</b><span>Столько запросов помощи даётся в начале события.</span></div><div class="mercenary-fact-card"><div class="mercenary-fact-num">1 ч.</div><b>на найденную цель</b><span>После этого разведку придётся оплачивать снова.</span></div></div>
+<h3> Как устроено событие</h3><p>В личной части нужно последовательно победить <b>25 наёмников</b>. Они становятся сильнее по мере прохождения.</p><p>Особенно заметный скачок сложности обычно приходится на этапы:</p><div class="rule"><b>5 → 10 → 15 → 20 → 25</b></div><p>После личных испытаний участники помогают альянсу открывать совместных капитанов Фаэтона.</p>
+<h3> Выбор сложности</h3><p>В начале события выбирается доступная сложность.</p><div class="rule warn"><b>После подтверждения изменить сложность в этом запуске нельзя.</b><p>Если полностью пройти все 25 этапов, следующая сложность станет доступна при одном из следующих запусков события.</p></div><p>Не выбирайте максимальную сложность только из-за красивых наград. Главное - суметь закончить всю цепочку.</p>
+<h3> Как найти наёмника</h3><p>Каждый этап начинается с разведки.</p><div class="rule"><b>Разведка: 15 энергии.</b><p>После неё наёмник появляется на карте на <b>1 час</b>.</p></div><p>Если время закончится, найденная цель исчезнет и придётся снова потратить 15 энергии. Поэтому не запускайте разведку, если сейчас не готовы заниматься этапом.</p>
+<h3> Три способа победить</h3><div class="rule-grid"><div class="rule good"><b> Одиночная атака</b><p>Дополнительно стоит <b>10 энергии</b>. Самый дешёвый обычный вариант.</p></div><div class="rule"><b> Собственный рейд</b><p>Дополнительно стоит <b>25 энергии</b>. Используйте только когда одиночного марша действительно недостаточно.</p></div><div class="rule good"><b> Запрос помощи альянса</b><p>Использует <b>Контракт наёмника</b>. Дополнительная энергия владельца за сам бой не требуется, но 15 энергии за разведку уже были потрачены.</p></div></div>
+<h3> Сколько энергии нужно</h3><p>Если проходить все 25 этапов только одиночными атаками:</p><div class="rule"><b>25 × 15 разведка + 25 × 10 атака = 625 энергии.</b></div><p>Если использовать 5 бесплатных запросов помощи:</p><div class="rule good"><b>25 разведок + 20 одиночных атак = 575 энергии.</b></div><p>Это намного выгоднее постоянных собственных рейдов.</p>
+<h3> Не открывайте рейд на каждый этап</h3><p>Если пройти все 25 целей собственными рейдами:</p><div class="rule warn"><b>25 × 15 разведка + 25 × 25 рейд = 1000 энергии.</b></div><p>Правильная последовательность:</p><div class="rule good"><b>Сначала соло → потом помощь → собственный рейд только если нужен.</b></div>
+<h3> Джина экономит энергию</h3><p>Для обычных атак очень полезна <b>Джина</b>. Её навык снижает расход энергии на подходящие действия в тундре.</p><ul class="tip-list"><li>Одиночная атака: <b>10 → 8 энергии</b> при достаточной прокачке.</li><li>Рейд: <b>25 → 20 энергии</b> при достаточной прокачке.</li></ul><p>Если использовать 5 запросов помощи и 20 одиночных атак с хорошо прокачанной Джиной, полное прохождение может обойтись примерно в <b>535 энергии</b>.</p>
+<h3> Проиграли соло? Энергия вернётся</h3><div class="rule good"><b>Если одиночная атака проиграна, энергия атаки возвращается после возвращения марша в город.</b></div><p>Поэтому сложного наёмника можно использовать как бесплатный тест состава, пока действует часовой таймер разведки.</p>
+<h3> Используйте поражение как тест</h3><p>Если этап выглядит слишком сильным:</p><ol class="tip-list"><li>Попробуйте лучшую тройку героев.</li><li>Посмотрите результат.</li><li>Замените одного героя.</li><li>Переставьте снаряжение.</li><li>Измените состав войск.</li><li>Попробуйте снова.</li></ol><div class="rule warn"><b>Не забывайте про часовой таймер.</b><p>Если он закончится, разведку придётся оплачивать повторно.</p></div>
+<h3> Когда перестать тестировать</h3><p>Если после нескольких вариантов очевидно, что вы сильно слабее цели, не тратьте время. Используйте Контракт или открывайте рейд с союзниками.</p><p>Поражения могут не расходовать энергию атаки, но таймер найденного наёмника продолжает идти.</p>
+<h3> Контракты наёмника</h3><p>В начале события игрок получает <b>5 Контрактов</b>. Они позволяют использовать функцию <b>«Запросить помощь»</b>.</p><p>После запроса информация о цели появляется для вашего альянса, и союзник может помочь закрыть этап.</p>
+<h3> Куда лучше тратить Контракты</h3><p>Необязательно использовать их строго на этапах 5 / 10 / 15 / 20 / 25.</p><div class="rule good"><b>Лучше сохранить Контракт на момент, когда соло уже не проходит или иначе пришлось бы открывать дорогой собственный рейд.</b></div><p>То есть Контракт особенно ценен там, где он экономит больше всего энергии.</p>
+<h3> Помогайте союзникам</h3><p>Помощь другим участникам выгодна. За участие можно получать дополнительные предметы поддержки, Контракты и награды за помощь.</p><p>Событие становится намного выгоднее, когда участники активно помогают друг другу.</p>
+<h3> Не копите Контракты без цели</h3><p>Контракты относятся к текущему событию. Если до окончания осталось мало времени, используйте их на оставшиеся сложные этапы. Нет смысла закончить событие с неиспользованными бесплатными запросами помощи.</p>
+<h3> Ускоренные марши события</h3><p>В актуальной версии события марши к наёмникам получают дополнительное ускорение движения. Но всё равно учитывайте время пути, особенно если до окончания часового таймера осталось мало времени.</p>
+<h3> Альянсовая часть</h3><p>Личное прохождение участников одновременно двигает прогресс всего альянса.</p><div class="rule good"><b>Когда достаточное количество игроков проходит необходимые личные испытания, R4/R5 могут вызвать капитана Фаэтона.</b></div>
+<h3> Сколько капитанов</h3><p>В текущей цепочке:</p><div class="rule"><b>5 капитанов Фаэтона.</b><p>Каждый следующий сильнее предыдущего. Альянс открывает их постепенно по мере общего прогресса участников.</p></div>
+<h3> На капитана даётся 30 минут</h3><p>После вызова участники получают уведомление и начинается таймер.</p><div class="rule warn"><b>30 минут на уничтожение капитана.</b></div><p>Поэтому R4/R5 не должны запускать босса случайно.</p>
+<h3> Когда вызывать капитана</h3><p>Лучшее время - когда в сети много участников.</p><ul class="tip-list"><li>Предупредить альянс заранее.</li><li>Указать время вызова.</li><li>Дать игрокам вернуть марши.</li><li>Убедиться, что большинство готово.</li></ul>
+<h3> Капитана не бьют обычным рейдом</h3><p>Механика отличается от Медведя или Полярного террора. Участники отправляют <b>отдельные марши</b> и постепенно уменьшают здоровье капитана.</p><p>Чем больше участников успеет ударить, тем больше игроков смогут получить награду за участие.</p>
+<h3> Сначала дайте всем отметиться</h3><div class="rule good"><b>Сначала каждый желающий отправляет небольшой марш и наносит удар. После этого сильные участники начинают добивать капитана.</b></div><p>Так один сильный игрок не уничтожит босса раньше, чем остальные успеют принять участие.</p>
+<h3> Награда за участие</h3><p>Главное - успеть принять участие. Размер вашего урона не является причиной специально пытаться перебить всех остальных.</p><p>Выгоднее дать возможность ударить как можно большему количеству участников.</p>
+<h3> Что если капитана не убили</h3><p>Если 30 минут закончились, а капитан остался жив, его можно <b>вызвать повторно</b> и попытаться снова.</p>
+<h3> Побеждённого капитана повторно не фармим</h3><p>Если конкретный капитан уже уничтожен, повторную полноценную награду за него получить нельзя.</p><div class="rule"><b>Каждый капитан - одна общая альянсовая награда за запуск события.</b></div>
+<h3> Как приходят награды</h3><p>После победы над капитаном награды приходят <b>по почте</b> сразу после боя. Также приходит письмо со статистикой нанесённого урона. Награды капитанов могут содержать случайные предметы.</p>
+<h3> Удобный маршрут 25 этапов</h3><div class="rule-grid"><div class="rule good"><b>Этап проходит уверенно</b><p> Джина + одиночная атака.</p></div><div class="rule"><b>Сложный этап</b><p>Сначала тестируем соло и меняем состав.</p></div><div class="rule good"><b>Не получается</b><p> Используем Контракт.</p></div><div class="rule warn"><b>Контрактов нет</b><p> Только тогда открываем собственный рейд.</p></div></div>
+<h3> Как подготовиться</h3><ul class="tip-list"><li>Не тратить всю энергию губернатора перед событием.</li><li>Сохранить банки энергии.</li><li>Проверить Джину.</li><li>Освободить хотя бы один марш.</li><li>Предупредить альянс о взаимной помощи.</li><li>Не запускать разведку перед долгим офлайном.</li></ul>
+<h3> Для F2P</h3><p>Оптимальная логика:</p><ul class="tip-list"><li> Джина.</li><li> Максимум доступных соло-побед.</li><li> Контракты на сложные этапы.</li><li> Активная помощь союзникам.</li><li> Собственный рейд только в крайнем случае.</li></ul><p>Так можно получить хорошие награды без лишних покупок энергии.</p>
+<h3> Что делать участнику</h3><ul class="tip-list"><li>Выбрать сложность, которую реально закончить.</li><li>Пройти все 25 этапов.</li><li>Использовать Джину, пока она справляется.</li><li>Сложные цели сначала тестировать соло.</li><li>Помнить, что энергия проигранной одиночной атаки возвращается.</li><li>Контракты сохранять для дорогих целей.</li><li>Помогать союзникам.</li><li>Следить за объявлениями R4/R5.</li><li>Успевать нанести удар капитану.</li></ul>
+<h3> Что делать R4/R5</h3><ul class="tip-list"><li>Следить за прогрессом открытия капитанов.</li><li>Не призывать босса без предупреждения.</li><li>Выбирать время высокого онлайна.</li><li>Напомнить участникам сначала отметиться атакой.</li><li>После этого дать сильным игрокам добить капитана.</li><li>Следить за 30-минутным таймером.</li><li>Если попытка не удалась, организовать повторный вызов.</li></ul>
+<h3> Частые ошибки</h3><ul class="tip-list"><li>Выбрать слишком высокую сложность.</li><li>Забыть, что сложность фиксируется до конца события.</li><li>Разведать цель и уйти из игры на час.</li><li>Открывать собственный рейд на каждый этап.</li><li>Бояться тестировать сложного наёмника одиночными атаками.</li><li>Не использовать Джину.</li><li>Потратить все Контракты на простейшие цели.</li><li>Не помогать союзникам.</li><li>Вызвать капитана при низком онлайне.</li><li>Уничтожить капитана раньше, чем участники успели ударить.</li><li>Пытаться собирать на капитана обычные рейды вместо отдельных маршей.</li></ul>
+<h3> Главное</h3><ul class="tip-list"><li> Нужно пройти <b>25 личных этапов</b>.</li><li> Каждая разведка стоит <b>15 энергии</b>.</li><li> Найденная цель существует <b>1 час</b>.</li><li> Одиночная атака стоит ещё <b>10 энергии</b>.</li><li> Собственный рейд стоит ещё <b>25 энергии</b>.</li><li> В начале есть <b>5 Контрактов наёмника</b>.</li><li> Джина помогает снизить расход энергии.</li><li> При поражении в одиночной атаке энергия атаки возвращается после возвращения марша.</li><li> Экономный вариант: <b>5 запросов помощи + 20 соло</b>.</li><li> У альянса есть <b>5 капитанов Фаэтона</b>.</li><li> На каждого после вызова даётся <b>30 минут</b>.</li><li> Вызывают капитанов R4/R5.</li><li> Капитанов атакуем отдельными маршами.</li><li> Сначала даём участникам отметиться, затем добиваем.</li></ul>
+<div class="rule good"><b>Главный принцип: соло, пока можем → Контракт, когда стало тяжело → собственный рейд только когда другого варианта нет.</b></div>
+</section><div class="footer">Белая Мгла • Автор - Sova</div></div></main>
+<button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button>
+<nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424">
+<a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_5aa79ae27faa29b4.webp"/></span><b>Главная</b></a>
+<a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_6bf97ec0736e4b3f.webp"/></span><b>События</b></a>
+<a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_df28a44cd870579e.webp"/></span><b>Герои</b></a>
+<a data-v424-nav="calc" href="fire-furnace-calculator.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/calculator-nav-v429.svg"/></span><b>Калькулятор</b></a>
+<a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_83aba0cd17b4f37b.webp"/></span><b>База знаний</b></a>
+</nav></body></html>

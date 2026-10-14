@@ -1,2 +1,4 @@
 User-agent: *
-Disallow: /
+Allow: /
+
+Sitemap: https://belaya-mgla-sova58.github.io/sitemap.xml

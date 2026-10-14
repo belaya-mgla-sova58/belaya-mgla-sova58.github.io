@@ -1,184 +1,139 @@
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="robots" content="noindex,nofollow,noarchive">
-  <meta name="theme-color" content="#03112d">
-  <title>Белая Мгла • Глобальное обновление</title>
-  <link rel="icon" href="favicon.ico">
-  <style>
-    :root{
-      color-scheme:dark;
-      --bg:#03112d;
-      --bg2:#061a3d;
-      --panel:rgba(7,29,72,.88);
-      --line:rgba(75,166,255,.35);
-      --text:#f7fbff;
-      --muted:#afc1dc;
-      --blue:#33b8ff;
-      --gold:#f2bf45;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif}
-    body{
-      min-height:100vh;
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 50% -12%,rgba(55,93,190,.34),transparent 38%),
-        radial-gradient(circle at 12% 80%,rgba(20,91,182,.18),transparent 34%),
-        radial-gradient(circle at 88% 72%,rgba(99,65,190,.14),transparent 32%),
-        linear-gradient(180deg,#03112d 0%,#041735 52%,#021027 100%);
-    }
-    body:before,
-    body:after{
-      content:"";
-      position:fixed;
-      inset:-20%;
-      pointer-events:none;
-      opacity:.28;
-      background-image:
-        radial-gradient(circle,rgba(255,255,255,.78) 0 1px,transparent 1.4px),
-        radial-gradient(circle,rgba(131,204,255,.65) 0 1px,transparent 1.5px);
-      background-size:72px 72px,108px 108px;
-      background-position:0 0,28px 34px;
-      animation:snow 22s linear infinite;
-    }
-    body:after{
-      opacity:.13;
-      transform:scale(1.25);
-      animation-duration:34s;
-      animation-direction:reverse;
-    }
-    @keyframes snow{
-      to{background-position:0 720px,28px 1114px}
-    }
-    .wrap{
-      position:relative;
-      z-index:2;
-      width:min(720px,calc(100% - 28px));
-      padding:22px;
-    }
-    .card{
-      position:relative;
-      overflow:hidden;
-      padding:clamp(28px,6vw,54px);
-      border:1px solid var(--line);
-      border-radius:28px;
-      text-align:center;
-      background:
-        radial-gradient(circle at 50% 0%,rgba(47,111,224,.20),transparent 42%),
-        linear-gradient(145deg,rgba(8,34,82,.95),rgba(4,20,51,.97));
-      box-shadow:
-        0 28px 70px rgba(0,6,22,.48),
-        inset 0 1px 0 rgba(255,255,255,.07);
-      backdrop-filter:blur(16px);
-    }
-    .card:before{
-      content:"";
-      position:absolute;
-      left:10%;right:10%;top:0;
-      height:1px;
-      background:linear-gradient(90deg,transparent,#68cfff,transparent);
-      box-shadow:0 0 18px rgba(73,190,255,.55);
-    }
-    .logo{
-      display:block;
-      width:min(270px,72%);
-      max-height:112px;
-      object-fit:contain;
-      margin:0 auto 24px;
-      filter:drop-shadow(0 8px 16px rgba(0,8,28,.28));
-    }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      margin-bottom:16px;
-      padding:8px 13px;
-      border:1px solid rgba(89,179,255,.28);
-      border-radius:999px;
-      background:rgba(12,55,111,.45);
-      color:#bfe7ff;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.04em;
-      text-transform:uppercase;
-    }
-    .badge:before{content:"❄";color:#71d2ff}
-    h1{
-      margin:0;
-      font-size:clamp(34px,7vw,62px);
-      line-height:.98;
-      letter-spacing:-.035em;
-      color:#fff;
-      text-shadow:0 0 26px rgba(72,157,255,.18);
-    }
-    .accent{
-      display:block;
-      margin-top:7px;
-      color:#8edcff;
-    }
-    p{
-      max-width:540px;
-      margin:20px auto 0;
-      color:var(--muted);
-      font-size:clamp(15px,2.4vw,19px);
-      line-height:1.55;
-    }
-    .status{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      margin:28px auto 0;
-      color:#dcecff;
-      font-size:13px;
-      font-weight:800;
-    }
-    .dot{
-      width:9px;height:9px;border-radius:50%;
-      background:#55c9ff;
-      box-shadow:0 0 12px #38baff;
-      animation:pulse 1.7s ease-in-out infinite;
-    }
-    @keyframes pulse{
-      50%{opacity:.35;transform:scale(.72)}
-    }
-    .footer{
-      margin-top:28px;
-      color:#708bad;
-      font-size:11px;
-    }
-    @media(max-width:520px){
-      .wrap{padding:12px}
-      .card{padding:30px 18px;border-radius:22px}
-      .logo{width:min(230px,78%);margin-bottom:20px}
-      .badge{font-size:10px;padding:7px 11px}
-      p{font-size:14px;line-height:1.5}
-      .status{margin-top:23px}
-    }
-    @media(prefers-reduced-motion:reduce){
-      body:before,body:after,.dot{animation:none}
-    }
-  </style>
-</head>
-<body>
-  <main class="wrap">
-    <section class="card" aria-labelledby="maintenance-title">
-      <img class="logo" src="assets/img_6dc1ef08d6ab264b.webp" alt="Белая Мгла Выживание">
-      <div class="badge">Технические работы</div>
-      <h1 id="maintenance-title">Глобальное<span class="accent">обновление сайта</span></h1>
-      <p>
-        «Белая Мгла» временно закрыта. Мы полностью обновляем оформление,
-        навигацию и материалы сайта, чтобы пользоваться им стало удобнее.
-      </p>
-      <div class="status"><span class="dot"></span> Скоро вернёмся</div>
-      <div class="footer">Белая Мгла • Государство 58 • Sova</div>
-    </section>
-  </main>
-</body>
-</html>
+<!DOCTYPE html>
+
+<html lang="ru"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>Белая Мгла • Рыбалка</title><!-- v112: events overview uses catalog icons only; decorative event-name emoji removed -->
+<!-- v119: merged approved header updates from v102-v104 onto v118 mobile branch -->
+<link href="site-v269.css?v=431" rel="stylesheet"/><link href="favicon.ico" rel="icon" sizes="any"/><link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/><link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="apple-touch-icon.png" rel="apple-touch-icon"/><link as="image" fetchpriority="high" href="assets/img_663eac42a1984120.webp" rel="preload"/><script defer="" src="site-v269.js?v=431"></script><meta content="Рыболовный турнир — одиночное событие, в котором нужно опускать крючок как можно глубже, обходить препятствия, а на обратном пути ловить рыбу и другую добычу." name="description"/><meta content="#031426" name="theme-color"/><meta content="website" property="og:type"/><meta content="Белая Мгла: Выживание" property="og:site_name"/><meta content="Белая Мгла • Рыбалка" property="og:title"/><meta content="Рыболовный турнир — одиночное событие, в котором нужно опускать крючок как можно глубже, обходить препятствия, а на обратном пути ловить рыбу и другую добычу." property="og:description"/><meta content="https://belaya-mgla-sova58.github.io/fishing.html" property="og:url"/><meta content="https://belaya-mgla-sova58.github.io/assets/img_663eac42a1984120.webp" property="og:image"/><meta content="Белая Мгла • Рыбалка" property="og:image:alt"/><meta content="summary_large_image" name="twitter:card"/><meta content="Белая Мгла • Рыбалка" name="twitter:title"/><meta content="Рыболовный турнир — одиночное событие, в котором нужно опускать крючок как можно глубже, обходить препятствия, а на обратном пути ловить рыбу и другую добычу." name="twitter:description"/><meta content="https://belaya-mgla-sova58.github.io/assets/img_663eac42a1984120.webp" name="twitter:image"/><link href="https://belaya-mgla-sova58.github.io/fishing.html" rel="canonical"/></head><body class="is-fishing-route site-hq-v407 modern-v422 modern-v424" data-static-route="fishing">
+<div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
+<button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
+<div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div>
+<a aria-label="На главную" href="index.html">⌂</a>
+</div>
+<div aria-hidden="true" class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<div class="nav-wrap"><img alt="Белая Мгла Выживание" class="sidebar-exact-logo" data-src="assets/img_6dc1ef08d6ab264b.webp" decoding="async" fetchpriority="low" loading="lazy"/><nav><a class="route-link" href="index.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_5aa79ae27faa29b4.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Главная</span></a><a class="route-link route-link-news" href="news.html"><img alt="" aria-hidden="true" class="sidebar-color-icon news-menu-icon-img" src="assets/news-owl-icon.png"/><span>Новости</span></a><a aria-current="page" class="route-link active" href="events.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_6bf97ec0736e4b3f.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>События</span></a><a class="route-link" href="heroes.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_df28a44cd870579e.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Герои</span></a><a class="route-link" href="gear.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_26d001aa476b7102.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Снаряжение</span></a><a class="route-link" href="experts.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_7b29d9b9a7eeb805.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Эксперты</span></a><a class="route-link" href="pets.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_f25119f6b5ca7b00.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Питомцы</span></a><a class="route-link route-link-state-positions" href="state-positions.html"><span aria-hidden="true" class="sidebar-color-icon state-position-menu-icon">👑</span><span>Должности на государстве</span></a><a class="route-link route-link-calculator" href="fire-furnace-calculator.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🧮</span><span>Калькулятор</span></a><a class="route-link route-link-farm" href="farm.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🌾</span><span>Ферма</span></a><a class="route-link route-link-knowledge" href="other.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_83aba0cd17b4f37b.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>База знаний</span></a></nav></div>
+<main id="appMain"><div class="site-search-v426" data-site-search="">
+<div class="site-search-box-v426">
+<span aria-hidden="true" class="site-search-icon-v426">⌕</span>
+<input aria-expanded="false" aria-label="Поиск по сайту" autocomplete="off" class="site-search-input-v426" inputmode="search" placeholder="Поиск по сайту..." spellcheck="false" type="search"/>
+<button aria-label="Очистить поиск" class="site-search-clear-v426" type="button">×</button>
+</div>
+<div aria-label="Результаты поиска" class="site-search-results-v426" role="listbox"></div>
+</div><div class="route-page active" data-route="fishing"><nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><a href="events.html">События</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><span aria-current="page">Рыбалка</span></nav><section class="page-heading-v424 frost-header-v431"><h1>Рыбалка</h1><p>Рыболовный турнир — одиночное событие, в котором нужно опускать крючок как можно глубже, обходить препятствия, а на обратном пути ловить рыбу и дру…</p></section><section class="intro" id="fishing"><span class="eyebrow">Отдельный гайд события</span><div class="owl-page-title"><h2 class="owl-heading"><span class="owl-title-text"> Рыбалка</span></h2></div><p><b>Рыболовный турнир</b> — одиночное событие, в котором нужно опускать крючок как можно глубже, обходить препятствия, а на обратном пути ловить рыбу и другую добычу.</p><p>Событие проходит примерно <b>раз в 4 недели</b>. Главная цель может быть разной:  <b>рейтинг</b> — набрать как можно больше очков;  <b>коллекция</b> — поймать недостающую рыбу и другие экземпляры справочника. Перед началом лучше сразу решить, что для вас сейчас важнее.</p></section><section class="section"><div class="fishing-layout"><div>
+<h3> Как работает рыбалка</h3><figure class="site-photo-card fishing-guide-photo"><img alt="Рыбалка: игровой процесс с леской и рыбами" decoding="async" loading="lazy" src="assets/fishing-gameplay.jpg"/><figcaption>Во время ловли ведём леску по полю, избегаем препятствий и собираем нужную добычу.</figcaption></figure>
+<p>Каждая попытка состоит из двух частей.</p>
+<h3> Спуск</h3>
+<p>Во время спуска ваша задача — пройти <b>как можно глубже</b>.</p>
+<p>Старайтесь не задевать рыбу и другие препятствия головой крючка.</p>
+<p>После определённого количества столкновений крючок перестаёт опускаться и начинает автоматически возвращаться наверх.</p>
+<p>Чем глубже вы смогли пройти, тем больше возможностей встретить ценную и редкую добычу.</p>
+<div class="rule"><b> Совет</b><p>Один из самых удобных способов — держаться ближе к <b>левому или правому краю экрана</b> и отходить от края только для обхода препятствий.</p></div>
+<h3> Подъём</h3>
+<p>Когда крючок начинает подниматься, начинается сама ловля.</p>
+<p>Чтобы поймать рыбу: <b>заденьте крючком её голову.</b></p>
+<p>Попадание в хвост рыбу не ловит.</p>
+<p>Поэтому на спуске иногда можно безопасно пройти рядом с телом или хвостом большой рыбы, а на подъёме уже целиться именно в голову.</p>
+<h3> Вместимость крючка</h3>
+<p>За одну попытку нельзя забрать бесконечное количество добычи. У крючка есть ограничение.</p>
+<p>Поэтому не всегда выгодно хватать первую попавшуюся рыбу.</p>
+<p>Если играете на высокий результат или ищете конкретный экземпляр, оставляйте свободное место для более ценной добычи.</p>
+<h3> Если играете на рейтинг</h3>
+<p>Для рейтинга главная задача: <b>глубина + ценная добыча + хороший подъём.</b></p>
+<ul class="tip-list">
+<li> пройти как можно глубже;</li>
+<li> избегать лишних столкновений;</li>
+<li> не забивать крючок дешёвой добычей слишком рано;</li>
+<li> выбирать более редкую и ценную рыбу;</li>
+<li> использовать сильные специальные предметы на хорошие попытки.</li>
+</ul>
+<p>Если начало получилось очень плохим, не обязательно заканчивать заход. Можно использовать <b>«Отступить»</b> и попробовать снова.</p>
+<h3> Если собираете коллекцию</h3>
+<p>Перед рыбалкой сначала откройте справочник и посмотрите, <b>каких экземпляров вам не хватает</b>.</p>
+<p>Не нужно пытаться ловить всё подряд.</p>
+<p>Учитывайте сезон события. Сезоны меняются по порядку:</p>
+<ul class="tip-list">
+<li> <b>Зима</b></li>
+<li> <b>Весна</b></li>
+<li> <b>Лето</b></li>
+<li> <b>Осень</b></li>
+</ul>
+<p>Часть рыбы связана с определённым сезоном. Если нужной рыбы в текущем сезоне нет, бессмысленно тратить на неё специальные предметы.</p>
+<h3> Рог Посейдона</h3>
+<p><b>Рог Посейдона</b> — один из самых ценных предметов Рыболовного турнира.</p>
+<p>Он позволяет выбрать нужную рыбу и вызвать её во время следующей попытки.</p>
+<p>Вызванная рыба подсвечивается, а найти её помогает Океанический сканер.</p>
+<div class="rule warn"><b> Важно</b><p>Рог <b>не ловит рыбу автоматически</b>. Вам всё равно нужно добраться до неё и поймать её крючком на обратном пути.</p></div>
+<p>Поэтому не тратьте Рога Посейдона на обычную рыбу, которую ещё можно легко получить естественным путём. Лучше сохранять их для действительно недостающих редких экземпляров.</p>
+<h3> Если промахнулись с Рогом</h3>
+<p>Если использовали Рог Посейдона, но плохо прошли спуск, пропустили нужную рыбу, рано начали подъём или не смогли её поймать, не спешите заканчивать попытку.</p>
+<p>Нажмите: <b>Пауза → Отступить</b> и попробуйте заход снова.</p>
+<p>При повторе ценная рыба обычно остаётся примерно в том же месте, поэтому можно заранее запомнить её глубину и маршрут.</p>
+<h3> Катушечный стабилизатор</h3>
+<p>При обычной попытке количество ошибок на спуске ограничено.</p>
+<p><b>Катушечный стабилизатор</b> позволяет пережить ещё несколько столкновений и пройти глубже.</p>
+<p>Особенно полезно использовать его при охоте за редкой рыбой, вместе с Рогом Посейдона, при попытке установить хороший результат или когда собираетесь уходить на большую глубину.</p>
+<h3> Фонарь</h3>
+<p>На большой глубине становится темно.</p>
+<p><b>Фонарь</b> улучшает видимость и облегчает прохождение глубоких участков.</p>
+<p>Его особенно полезно сочетать с попытками, где вы хотите пройти максимально глубоко или ищете конкретную редкую добычу.</p>
+<h3> Океанический сканер</h3>
+<p><b>Океанический сканер</b> помогает обнаруживать редкую рыбу поблизости.</p>
+<p>Он показывает направление и расстояние до цели.</p>
+<p>При использовании Рога Посейдона сканер также помогает найти вызванную рыбу.</p>
+<h3> Приманка</h3>
+<p>В начале события даётся: <b>5 приманок.</b></p>
+<p>Затем восстанавливается: <b>1 приманка каждые 3 часа.</b></p>
+<p>Максимально можно хранить: <b>10 приманок.</b></p>
+<div class="rule warn"><b> Не держите запас постоянно на максимуме</b><p>Если у вас уже 10/10, новая приманка не сможет нормально накапливаться, поэтому часть бесплатных попыток теряется.</p></div>
+<figure class="site-photo-card fishing-guide-photo"><img alt="Рыболовный турнир: леска, крючок, грузило и особые предметы" decoding="async" loading="lazy" src="assets/fishing-tournament-screen.jpg"/><figcaption>Экран Рыболовного турнира: здесь видны уровень лески, крючка и грузила, а также особые предметы.</figcaption></figure><h3> Улучшайте рыболовные наборы</h3>
+<p>Во время события постепенно улучшайте рыболовное снаряжение.</p>
+<p>Прокачка помогает проходить глубже, собирать больше добычи, делать попытки стабильнее и получать больше очков.</p>
+<p>Не откладывайте все улучшения на конец события. Чем раньше усилено снаряжение, тем больше последующих попыток вы проведёте уже с хорошими характеристиками.</p>
+<h3> Охота за затонувшим сокровищем</h3>
+<p>Отдельная страница <b>«Охота за затонувшим сокровищем»</b> открывается, когда ваши рыболовные наборы достигают <b>9 уровня</b>.</p>
+<p>Но одного открытия страницы недостаточно.</p>
+<p>Чтобы полноценно участвовать, необходимо улучшить <b>все рыболовные наборы до максимального уровня</b>.</p>
+<p>Поэтому сначала прокачиваем снаряжение, а уже потом используем дополнительный режим.</p>
+<h3> Когда использовать «Отступить»</h3>
+<p>Не бойтесь перезапускать плохую попытку.</p>
+<ul class="tip-list">
+<li> слишком рано получили столкновения;</li>
+<li> не смогли пройти на нужную глубину;</li>
+<li> пропустили редкую рыбу;</li>
+<li> неправильно рассчитали маршрут к вызванной Рогом рыбе;</li>
+<li> поняли, что хороший результат уже невозможен.</li>
+</ul>
+<p>Так можно изучить расположение рыбы и построить более удобный маршрут.</p>
+<h3> Полезные приёмы</h3>
+<ul class="tip-list">
+<li> На спуске держитесь ближе к краю.</li>
+<li> Не пытайтесь ловить рыбу на пути вниз.</li>
+<li> На подъёме целитесь именно в голову.</li>
+<li> Не заполняйте крючок дешёвой добычей слишком рано.</li>
+<li> Перед охотой за коллекцией проверьте недостающие экземпляры.</li>
+<li> Учитывайте текущий сезон.</li>
+<li> Рог Посейдона берегите для редкой недостающей рыбы.</li>
+<li> Сильные специальные предметы лучше использовать вместе, когда попытка действительно важна.</li>
+<li> Не допускайте постоянного запаса 10/10 приманок.</li>
+<li> Плохой заход можно перезапустить через «Отступить».</li>
+</ul>
+<h3> Частые ошибки</h3>
+<ul class="tip-list">
+<li> Ловить первую попавшуюся рыбу.</li>
+<li> Пытаться цеплять рыбу за хвост.</li>
+<li> Идти по центру экрана без необходимости и постоянно сталкиваться.</li>
+<li> Забивать крючок дешёвой добычей до появления редкой.</li>
+<li> Использовать Рог Посейдона на обычную рыбу.</li>
+<li> После промаха с редкой рыбой сразу заканчивать попытку.</li>
+<li> Игнорировать сезон коллекции.</li>
+<li> Держать приманку на максимуме и терять бесплатное восстановление.</li>
+<li> Копить все улучшения до самого конца события.</li>
+</ul>
+<div class="savebox"><b> Главное</b><br/><br/> На спуске: <b>избегаем столкновений и идём глубже.</b><br/><br/> На подъёме: <b>ловим рыбу за голову.</b><br/><br/> Для рейтинга: <b>глубина и ценная добыча.</b><br/><br/> Для коллекции: <b>ловим только то, чего не хватает.</b><br/><br/> Рог Посейдона: <b>сохраняем для редкой нужной рыбы.</b><br/><br/> Плохая попытка: <b>Пауза → Отступить → пробуем снова.</b><br/><br/> Приманка: <b>не держим 10/10 слишком долго.</b><br/><br/><b>Главный принцип:</b><br/><br/>не хватать всё подряд, а заранее знать, зачем вы идёте в конкретную попытку.</div>
+</div></div></section><div class="footer">Белая Мгла • Автор - Sova</div></div></main>
+<button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button>
+<nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424">
+<a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_5aa79ae27faa29b4.webp"/></span><b>Главная</b></a>
+<a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_6bf97ec0736e4b3f.webp"/></span><b>События</b></a>
+<a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_df28a44cd870579e.webp"/></span><b>Герои</b></a>
+<a data-v424-nav="calc" href="fire-furnace-calculator.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/calculator-nav-v429.svg"/></span><b>Калькулятор</b></a>
+<a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_83aba0cd17b4f37b.webp"/></span><b>База знаний</b></a>
+</nav></body></html>

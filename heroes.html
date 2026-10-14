@@ -1,184 +1,77 @@
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="robots" content="noindex,nofollow,noarchive">
-  <meta name="theme-color" content="#03112d">
-  <title>Белая Мгла • Глобальное обновление</title>
-  <link rel="icon" href="favicon.ico">
-  <style>
-    :root{
-      color-scheme:dark;
-      --bg:#03112d;
-      --bg2:#061a3d;
-      --panel:rgba(7,29,72,.88);
-      --line:rgba(75,166,255,.35);
-      --text:#f7fbff;
-      --muted:#afc1dc;
-      --blue:#33b8ff;
-      --gold:#f2bf45;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif}
-    body{
-      min-height:100vh;
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 50% -12%,rgba(55,93,190,.34),transparent 38%),
-        radial-gradient(circle at 12% 80%,rgba(20,91,182,.18),transparent 34%),
-        radial-gradient(circle at 88% 72%,rgba(99,65,190,.14),transparent 32%),
-        linear-gradient(180deg,#03112d 0%,#041735 52%,#021027 100%);
-    }
-    body:before,
-    body:after{
-      content:"";
-      position:fixed;
-      inset:-20%;
-      pointer-events:none;
-      opacity:.28;
-      background-image:
-        radial-gradient(circle,rgba(255,255,255,.78) 0 1px,transparent 1.4px),
-        radial-gradient(circle,rgba(131,204,255,.65) 0 1px,transparent 1.5px);
-      background-size:72px 72px,108px 108px;
-      background-position:0 0,28px 34px;
-      animation:snow 22s linear infinite;
-    }
-    body:after{
-      opacity:.13;
-      transform:scale(1.25);
-      animation-duration:34s;
-      animation-direction:reverse;
-    }
-    @keyframes snow{
-      to{background-position:0 720px,28px 1114px}
-    }
-    .wrap{
-      position:relative;
-      z-index:2;
-      width:min(720px,calc(100% - 28px));
-      padding:22px;
-    }
-    .card{
-      position:relative;
-      overflow:hidden;
-      padding:clamp(28px,6vw,54px);
-      border:1px solid var(--line);
-      border-radius:28px;
-      text-align:center;
-      background:
-        radial-gradient(circle at 50% 0%,rgba(47,111,224,.20),transparent 42%),
-        linear-gradient(145deg,rgba(8,34,82,.95),rgba(4,20,51,.97));
-      box-shadow:
-        0 28px 70px rgba(0,6,22,.48),
-        inset 0 1px 0 rgba(255,255,255,.07);
-      backdrop-filter:blur(16px);
-    }
-    .card:before{
-      content:"";
-      position:absolute;
-      left:10%;right:10%;top:0;
-      height:1px;
-      background:linear-gradient(90deg,transparent,#68cfff,transparent);
-      box-shadow:0 0 18px rgba(73,190,255,.55);
-    }
-    .logo{
-      display:block;
-      width:min(270px,72%);
-      max-height:112px;
-      object-fit:contain;
-      margin:0 auto 24px;
-      filter:drop-shadow(0 8px 16px rgba(0,8,28,.28));
-    }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      margin-bottom:16px;
-      padding:8px 13px;
-      border:1px solid rgba(89,179,255,.28);
-      border-radius:999px;
-      background:rgba(12,55,111,.45);
-      color:#bfe7ff;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.04em;
-      text-transform:uppercase;
-    }
-    .badge:before{content:"❄";color:#71d2ff}
-    h1{
-      margin:0;
-      font-size:clamp(34px,7vw,62px);
-      line-height:.98;
-      letter-spacing:-.035em;
-      color:#fff;
-      text-shadow:0 0 26px rgba(72,157,255,.18);
-    }
-    .accent{
-      display:block;
-      margin-top:7px;
-      color:#8edcff;
-    }
-    p{
-      max-width:540px;
-      margin:20px auto 0;
-      color:var(--muted);
-      font-size:clamp(15px,2.4vw,19px);
-      line-height:1.55;
-    }
-    .status{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      margin:28px auto 0;
-      color:#dcecff;
-      font-size:13px;
-      font-weight:800;
-    }
-    .dot{
-      width:9px;height:9px;border-radius:50%;
-      background:#55c9ff;
-      box-shadow:0 0 12px #38baff;
-      animation:pulse 1.7s ease-in-out infinite;
-    }
-    @keyframes pulse{
-      50%{opacity:.35;transform:scale(.72)}
-    }
-    .footer{
-      margin-top:28px;
-      color:#708bad;
-      font-size:11px;
-    }
-    @media(max-width:520px){
-      .wrap{padding:12px}
-      .card{padding:30px 18px;border-radius:22px}
-      .logo{width:min(230px,78%);margin-bottom:20px}
-      .badge{font-size:10px;padding:7px 11px}
-      p{font-size:14px;line-height:1.5}
-      .status{margin-top:23px}
-    }
-    @media(prefers-reduced-motion:reduce){
-      body:before,body:after,.dot{animation:none}
-    }
-  </style>
-</head>
-<body>
-  <main class="wrap">
-    <section class="card" aria-labelledby="maintenance-title">
-      <img class="logo" src="assets/img_6dc1ef08d6ab264b.webp" alt="Белая Мгла Выживание">
-      <div class="badge">Технические работы</div>
-      <h1 id="maintenance-title">Глобальное<span class="accent">обновление сайта</span></h1>
-      <p>
-        «Белая Мгла» временно закрыта. Мы полностью обновляем оформление,
-        навигацию и материалы сайта, чтобы пользоваться им стало удобнее.
-      </p>
-      <div class="status"><span class="dot"></span> Скоро вернёмся</div>
-      <div class="footer">Белая Мгла • Государство 58 • Sova</div>
-    </section>
-  </main>
-</body>
-</html>
+<!DOCTYPE html>
+
+<html lang="ru"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>Белая Мгла • Герои</title><!-- v112: events overview uses catalog icons only; decorative event-name emoji removed -->
+<!-- v119: merged approved header updates from v102-v104 onto v118 mobile branch -->
+<link href="site-v269.css?v=431" rel="stylesheet"/><link href="favicon.ico" rel="icon" sizes="any"/><link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/><link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="apple-touch-icon.png" rel="apple-touch-icon"/><link as="image" fetchpriority="high" href="assets/img_e430aab46e8893e4.webp" rel="preload"/><script defer="" src="site-v269.js?v=431"></script><meta content="Кого использовать, как читать роли и куда вкладывать ресурсы." name="description"/><meta content="#031426" name="theme-color"/><meta content="website" property="og:type"/><meta content="Белая Мгла: Выживание" property="og:site_name"/><meta content="Белая Мгла • Герои" property="og:title"/><meta content="Кого использовать, как читать роли и куда вкладывать ресурсы." property="og:description"/><meta content="https://belaya-mgla-sova58.github.io/heroes.html" property="og:url"/><meta content="https://belaya-mgla-sova58.github.io/assets/img_e430aab46e8893e4.webp" property="og:image"/><meta content="Белая Мгла • Герои" property="og:image:alt"/><meta content="summary_large_image" name="twitter:card"/><meta content="Белая Мгла • Герои" name="twitter:title"/><meta content="Кого использовать, как читать роли и куда вкладывать ресурсы." name="twitter:description"/><meta content="https://belaya-mgla-sova58.github.io/assets/img_e430aab46e8893e4.webp" name="twitter:image"/><link href="https://belaya-mgla-sova58.github.io/heroes.html" rel="canonical"/></head><body class="is-heroes-route site-hq-v407 modern-v422 modern-v424" data-static-route="heroes">
+<div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
+<button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
+<div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div>
+<a aria-label="На главную" href="index.html">⌂</a>
+</div>
+<div aria-hidden="true" class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<div class="nav-wrap"><img alt="Белая Мгла Выживание" class="sidebar-exact-logo" data-src="assets/img_6dc1ef08d6ab264b.webp" decoding="async" fetchpriority="low" loading="lazy"/><nav><a class="route-link" href="index.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_5aa79ae27faa29b4.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Главная</span></a><a class="route-link route-link-news" href="news.html"><img alt="" aria-hidden="true" class="sidebar-color-icon news-menu-icon-img" src="assets/news-owl-icon.png"/><span>Новости</span></a><a class="route-link" href="events.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_6bf97ec0736e4b3f.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>События</span></a><a aria-current="page" class="route-link active" href="heroes.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_df28a44cd870579e.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Герои</span></a><a class="route-link" href="gear.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_26d001aa476b7102.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Снаряжение</span></a><a class="route-link" href="experts.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_7b29d9b9a7eeb805.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Эксперты</span></a><a class="route-link" href="pets.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_f25119f6b5ca7b00.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>Питомцы</span></a><a class="route-link route-link-state-positions" href="state-positions.html"><span aria-hidden="true" class="sidebar-color-icon state-position-menu-icon">👑</span><span>Должности на государстве</span></a><a class="route-link route-link-calculator" href="fire-furnace-calculator.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🧮</span><span>Калькулятор</span></a><a class="route-link route-link-farm" href="farm.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🌾</span><span>Ферма</span></a><a class="route-link route-link-knowledge" href="other.html"><img alt="" aria-hidden="true" class="sidebar-color-icon" data-src="assets/img_83aba0cd17b4f37b.webp" decoding="async" fetchpriority="low" loading="lazy"/><span>База знаний</span></a></nav></div>
+<main id="appMain"><div class="site-search-v426" data-site-search="">
+<div class="site-search-box-v426">
+<span aria-hidden="true" class="site-search-icon-v426">⌕</span>
+<input aria-expanded="false" aria-label="Поиск по сайту" autocomplete="off" class="site-search-input-v426" inputmode="search" placeholder="Поиск по сайту..." spellcheck="false" type="search"/>
+<button aria-label="Очистить поиск" class="site-search-clear-v426" type="button">×</button>
+</div>
+<div aria-label="Результаты поиска" class="site-search-results-v426" role="listbox"></div>
+</div><div class="route-page active" data-route="heroes"><nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><span aria-current="page">Герои</span></nav><section class="page-heading-v424 frost-header-v431"><h1>Герои</h1><p>Кого использовать, как читать роли и куда вкладывать ресурсы.</p></section><div class="guide-page-v69">
+<div class="guide-topics"><span class="topic-pill"> Навыки</span><span class="topic-pill"> Типы войск</span><span class="topic-pill"> Медведь</span><span class="topic-pill"> Арена</span></div><details class="page-toc-v409"><summary>Содержание</summary><div class="page-toc-links-v409"><a href="#section-1">Герои: кого и для чего использовать</a><a href="#section-2">Два типа навыков</a><a href="#section-3">Тип героя</a><a href="#section-4">Не прокачивай всех подряд</a><a href="#section-5">Учебный лагерь</a><a href="#section-6">Поколения героев</a><a href="#section-7">Герои в начале игры</a><a href="#section-8">Медведь и присоединение к рейду</a><a href="#section-9">Арена</a><a href="#section-10">Как правильно сравнивать героев</a></div></details><div class="guide-fold-toolbar-v414"><span>Короткий режим: открывай только нужные разделы.</span><button class="guide-fold-all-v414" type="button">Раскрыть все</button></div>
+<details class="guide-section guide-fold-v414" data-guide-fold="1" open=""><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-1"> Герои: кого и для чего использовать</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414"><p>В «Белой Мгле: Выживание» нельзя оценивать героя только по редкости или общей мощности. Один герой может быть отличным на Арене, но слабее в рейдах, другой может оставаться полезным много поколений благодаря одному конкретному навыку.</p></div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="2"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-2"> Два типа навыков</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414"><p>У героев есть две разные группы навыков:</p><p><b>Исследование</b> используется там, где герои сражаются сами: в Исследовании и на Арене.</p><p><b>Экспедиция</b> используется, когда герои ведут войска: в обычных походах, PvP, рейдах, гарнизоне, охоте на зверей и других боях войск.</p><div class="guide-callout tip"><button aria-label="Скопировать текст блока" class="copy-block-v409" type="button">Скопировать</button><b> Поэтому перед прокачкой всегда смотри, для какого режима нужен герой.</b></div></div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="3"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-3"> Тип героя</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414"><p>Каждый боевой герой относится к одному из трёх типов:</p><div class="guide-callout tip"><button aria-label="Скопировать текст блока" class="copy-block-v409" type="button">Скопировать</button><b>Пехота → Копейщики → Стрелки.</b></div><p>Пехота сильнее против копейщиков, копейщики против стрелков, стрелки против пехоты.</p><p>Но один только тип войск не определяет ценность героя. Навыки, звёзды, поколение и конкретный режим боя могут быть важнее.</p></div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="4"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-4"> Не прокачивай всех подряд</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414"><p>Лучше полностью развивать нескольких нужных героев, чем распределять фрагменты и материалы между всем списком.</p><p>Особенно осторожно расходуй <b>универсальные мифические фрагменты</b>. Новые поколения героев появляются по мере развития государства, поэтому заранее оставлять запас часто полезнее, чем вкладывать всё в первого доступного легендарного героя.</p></div></details><details class="guide-section guide-fold-v414" data-guide-fold="5"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-5">🎓 Учебный лагерь</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414">
+<p><b>Учебный лагерь</b> позволяет использовать героев высокого уровня без необходимости вручную прокачивать каждого из них опытом.</p>
+<p>В системе есть <b>пять героев-инструкторов</b>. Герои, размещённые на местах учёбы, автоматически подстраиваются под <b>минимальный уровень этих пяти инструкторов</b>.</p>
+<figure class="site-photo-card training-camp-photo">
+<img alt="Учебный лагерь героев: пять инструкторов и герои на местах учёбы" decoding="async" loading="lazy" src="assets/hero-training-camp-levels.webp"/>
+<figcaption>Уровень героев на местах учёбы определяется минимальным уровнем пяти инструкторов.</figcaption>
+</figure>
+<h3>Как определяется уровень лагеря</h3>
+<p>Система смотрит на уровни пяти инструкторов и берёт <b>самый низкий из них</b>.</p>
+<div class="guide-callout tip"><button aria-label="Скопировать текст блока" class="copy-block-v409" type="button">Скопировать</button><b>Пример:</b><br/>74 / 74 / 74 / 73 / 73 → уровень Учебного лагеря будет <b>73</b>.</div>
+<p>Если одного из самых слабых инструкторов поднять выше, уровень лагеря изменится только тогда, когда поднимется минимальный уровень среди всей пятёрки.</p>
+<h3>Что происходит с героем на месте учёбы</h3>
+<p>Если собственный уровень героя ниже уровня лагеря, он временно получает уровень Учебного лагеря.</p>
+<div class="guide-callout tip"><button aria-label="Скопировать текст блока" class="copy-block-v409" type="button">Скопировать</button><b>Например:</b><br/>реальный уровень героя 35 → уровень лагеря 73 → на месте учёбы герой используется как <b>73 уровня</b>.</div>
+<p>При этом лагерь повышает именно <b>уровень героя</b>. Он не добавляет звёзды, не прокачивает навыки и не улучшает снаряжение.</p>
+<p>Если собственный уровень героя уже выше уровня лагеря, герой не понижается и сохраняет свой уровень.</p>
+<h3>Если убрать героя из лагеря</h3>
+<p>Герой возвращается к своему настоящему уровню, который был прокачан вручную.</p>
+<div class="guide-callout tip"><button aria-label="Скопировать текст блока" class="copy-block-v409" type="button">Скопировать</button><b>Пример:</b><br/>35 → в лагере 73 → убрали из лагеря → снова <b>35</b>.</div>
+<h3>Сброс уровня</h3>
+<figure class="site-photo-card training-camp-photo">
+<img alt="Учебный лагерь героев: вкладка Сброс уровня" decoding="async" loading="lazy" src="assets/hero-training-camp-reset.webp"/>
+<figcaption>Сброс уровня отправляет героя на 1 уровень и возвращает весь потраченный на его уровень опыт героя.</figcaption>
+</figure>
+<p>Во вкладке <b>«Сброс уровня»</b> можно вернуть героя на <b>1 уровень</b>. Потраченный на его уровень опыт героя возвращается, поэтому его можно перераспределить на других героев.</p>
+<h3>Как выгоднее расходовать опыт героя</h3>
+<p>Не стоит прокачивать опытом всех героев подряд. Выгоднее концентрировать опыт на героях, которые формируют пятёрку инструкторов, а остальных размещать на местах учёбы.</p>
+<div class="guide-callout tip"><button aria-label="Скопировать текст блока" class="copy-block-v409" type="button">Скопировать</button><b>Схема:</b><br/>прокачиваем основных героев → растёт минимальный уровень пяти инструкторов → растёт уровень лагеря → остальные герои автоматически подтягиваются.</div>
+<h3>Главное</h3>
+<ul class="tip-list">
+<li>уровень лагеря задаёт <b>самый низкий уровень среди пяти инструкторов</b>;</li>
+<li>герои на местах учёбы получают этот уровень временно;</li>
+<li>звёзды, навыки и снаряжение лагерь не повышает;</li>
+<li>после удаления из лагеря герой возвращается к своему реальному уровню;</li>
+<li>сброс уровня возвращает героя на 1 уровень и возвращает потраченный опыт героя.</li>
+</ul>
+</div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="6"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-6"> Поколения героев</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414"><p>Набор доступных героев зависит от возраста государства. Новые поколения постепенно добавляют новых легендарных героев Пехоты, Копейщиков и Стрелков.</p><p>Более новое поколение обычно имеет более высокие характеристики, однако это не означает, что каждый старый герой сразу становится бесполезным.</p><p>Некоторые эпические герои сохраняют ценность очень долго благодаря специальным навыкам Экспедиции.</p></div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="7"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-7"> Герои в начале игры</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414"><p>Для обычных боёв с войсками хорошей ранней основой являются <b>Сергей, Молли и Бахити</b>.</p><p><b>Джесси</b> особенно полезна в рейдах благодаря навыку, увеличивающему наносимый войсками урон.</p><p><b>Джассер</b> также остаётся полезным участником рейдов.</p><p><b>Джина</b> ценна прежде всего для охоты на зверей и полярных ужасов: её навыки уменьшают расход энергии губернатора и ускоряют походы на зверей.</p></div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="8"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-8"> Медведь и присоединение к рейду</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414"><p>Когда ты создаёшь рейд, учитываются навыки всех трёх твоих героев.</p><p>Когда ты <b>присоединяешься к чужому рейду</b>, особенно важен первый герой слева: в общий набор попадает его первый навык Экспедиции.</p><p>Из навыков участников система выбирает только несколько лучших, обычно четыре, причём уровень навыка имеет значение.</p><p>Для ранних поколений хорошими примерами являются <b>Джесси, Джассер и Джеронимо</b>. По мере появления новых поколений список подходящих героев расширяется.</p></div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="9"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-9"> Арена</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414"><p>На Арене используются <b>навыки Освоения</b>, а не Экспедиции.</p><p>Здесь важны состав из пяти героев, их расположение, классы, контроль, урон и выживаемость. Поэтому герой, великолепный для рейда или Медведя, не обязательно будет таким же сильным на Арене.</p></div></details>
+<details class="guide-section guide-fold-v414" data-guide-fold="10"><summary class="guide-fold-summary-v414"><h2 class="guide-fold-title-v414" id="section-10"> Как правильно сравнивать героев</h2><span aria-hidden="true" class="guide-fold-action-v414">Подробнее</span></summary><div class="guide-fold-body-v414"><p>Сравнивай героев при похожем уровне развития: звёздах, уровне навыков, снаряжении и эксклюзивном снаряжении.</p><p>Новая легендарка с одной звездой не обязательно будет полезнее полностью развитого старого героя.</p></div></details>
+<div class="guide-callout tip"><button aria-label="Скопировать текст блока" class="copy-block-v409" type="button">Скопировать</button><b> Главное правило:</b> Сначала реши, <b>где ты хочешь использовать героя</b>, потом изучи именно соответствующие навыки и только после этого вкладывай фрагменты, опыт и снаряжение.</div>
+<div class="v69-footer">Белая Мгла • Автор - Sova</div>
+</div></div></main>
+<button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button>
+<nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424">
+<a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_5aa79ae27faa29b4.webp"/></span><b>Главная</b></a>
+<a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_6bf97ec0736e4b3f.webp"/></span><b>События</b></a>
+<a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_df28a44cd870579e.webp"/></span><b>Герои</b></a>
+<a data-v424-nav="calc" href="fire-furnace-calculator.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/calculator-nav-v429.svg"/></span><b>Калькулятор</b></a>
+<a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429" src="assets/img_83aba0cd17b4f37b.webp"/></span><b>База знаний</b></a>
+</nav></body></html>
