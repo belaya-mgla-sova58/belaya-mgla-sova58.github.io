@@ -1558,3 +1558,25 @@ document.addEventListener("DOMContentLoaded", () => {
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initV414,{once:true});
   else initV414();
 })();
+
+
+/* v424 mobile bottom navigation active state */
+(() => {
+  const file=(location.pathname.split('/').pop()||'index.html').toLowerCase();
+  const map={
+    'index.html':'home',
+    'events.html':'events',
+    'heroes.html':'heroes',
+    'fire-furnace-calculator.html':'calc',
+    'furnace-calculator.html':'calc',
+    'other.html':'knowledge'
+  };
+  const active=map[file];
+  if(active){
+    document.querySelectorAll('.mobile-bottom-v424 a').forEach(a=>{
+      const on=a.dataset.v424Nav===active;
+      a.classList.toggle('active',on);
+      if(on) a.setAttribute('aria-current','page');
+    });
+  }
+})();
