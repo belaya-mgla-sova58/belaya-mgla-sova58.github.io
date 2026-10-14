@@ -12578,3 +12578,38 @@ body.modern-v422 .back-to-top{
     pointer-events:auto !important;
   }
 }
+
+
+/* ===== v423: no large page headers =====
+   All decorative route mastheads are removed to keep pages compact and stable on phones. */
+header.hero,
+.ui-route-hero,
+.home-hq-hero-v405,
+.home-hq-hero-v406{
+  display:none !important;
+  height:0 !important;
+  min-height:0 !important;
+  margin:0 !important;
+  padding:0 !important;
+  overflow:hidden !important;
+}
+
+body.modern-v422 #appMain{
+  padding-top:10px !important;
+}
+body.modern-v422 .route-page{
+  padding-top:0 !important;
+}
+body.modern-v422 .breadcrumbs-v409{
+  margin-top:0 !important;
+}
+
+@media(max-width:760px){
+  body.modern-v422 #appMain{
+    padding-top:6px !important;
+  }
+  body.modern-v422 .breadcrumbs-v409{
+    margin-top:0 !important;
+    margin-bottom:8px !important;
+  }
+}
