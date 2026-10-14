@@ -10910,3 +10910,119 @@ body.is-alliance-route .alliance-daily-list-v412{
     height:32px !important;
   }
 }
+
+
+/* ===== v413: long-guide contents panel repair =====
+   Fixes the washed-out mobile TOC, removes the inherited circular +/- badge,
+   and keeps Contents compact until the reader opens it. */
+body.site-hq-v407 .page-toc-v409{
+  display:block !important;
+  width:100% !important;
+  max-width:100% !important;
+  margin:10px 0 15px !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  border:1px solid rgba(117,193,245,.24) !important;
+  border-radius:15px !important;
+  background:linear-gradient(145deg,rgba(12,53,91,.98),rgba(6,31,60,.99)) !important;
+  box-shadow:none !important;
+  color:#dcecf8 !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+body.site-hq-v407 .page-toc-v409 > summary{
+  display:flex !important;
+  align-items:center !important;
+  gap:8px !important;
+  width:100% !important;
+  min-height:0 !important;
+  margin:0 !important;
+  padding:12px 14px !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background:linear-gradient(90deg,rgba(23,77,120,.72),rgba(11,48,86,.68)) !important;
+  color:#f4faff !important;
+  font-size:13px !important;
+  font-weight:900 !important;
+  line-height:1.25 !important;
+  box-shadow:none !important;
+  text-shadow:none !important;
+}
+body.site-hq-v407 .page-toc-v409 > summary::before{
+  content:"▸" !important;
+  display:inline-block !important;
+  width:auto !important;
+  height:auto !important;
+  min-width:0 !important;
+  flex:0 0 auto !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background:none !important;
+  box-shadow:none !important;
+  color:#80cdf8 !important;
+  font-size:15px !important;
+  line-height:1 !important;
+  place-items:initial !important;
+  transform:none !important;
+}
+body.site-hq-v407 .page-toc-v409[open] > summary::before{
+  content:"▾" !important;
+  transform:none !important;
+}
+body.site-hq-v407 .page-toc-v409[open] > summary{
+  border-bottom:1px solid rgba(117,193,245,.16) !important;
+}
+body.site-hq-v407 .page-toc-v409 .page-toc-links-v409{
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:7px !important;
+  margin:0 !important;
+  padding:10px 11px 12px !important;
+  border:0 !important;
+  background:transparent !important;
+}
+body.site-hq-v407 .page-toc-v409 .page-toc-links-v409 a{
+  display:block !important;
+  min-width:0 !important;
+  padding:9px 10px !important;
+  border:1px solid rgba(117,193,245,.14) !important;
+  border-radius:10px !important;
+  background:rgba(18,67,108,.64) !important;
+  color:#dcecf8 !important;
+  font-size:11.5px !important;
+  font-weight:800 !important;
+  line-height:1.3 !important;
+  text-decoration:none !important;
+  box-shadow:none !important;
+  text-shadow:none !important;
+  overflow-wrap:anywhere !important;
+}
+body.site-hq-v407 .page-toc-v409 .page-toc-links-v409 a:hover,
+body.site-hq-v407 .page-toc-v409 .page-toc-links-v409 a:focus-visible{
+  background:rgba(31,96,146,.82) !important;
+  border-color:rgba(126,198,243,.34) !important;
+  color:#fff !important;
+}
+
+@media(max-width:760px){
+  body.site-hq-v407 .page-toc-v409{
+    margin:8px 0 11px !important;
+    border-radius:12px !important;
+  }
+  body.site-hq-v407 .page-toc-v409 > summary{
+    padding:10px 11px !important;
+    font-size:12px !important;
+  }
+  body.site-hq-v407 .page-toc-v409 .page-toc-links-v409{
+    grid-template-columns:1fr !important;
+    gap:5px !important;
+    padding:8px 8px 9px !important;
+  }
+  body.site-hq-v407 .page-toc-v409 .page-toc-links-v409 a{
+    padding:8px 9px !important;
+    font-size:11px !important;
+    border-radius:9px !important;
+  }
+}
