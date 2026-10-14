@@ -10875,3 +10875,38 @@ body.site-hq-v407 .copy-block-v409{
   body.is-home-route.home-hq-v405 .home-hq-welcome-v405 h1{font-size:22px !important;}
   body.site-hq-v407 .guide-page-v69 > .guide-section{padding:15px 12px !important;}
 }
+
+
+/* v412: Alliance daily icons — one clean strip, no duplicate inline icons */
+body.is-alliance-route #section-2 + .catalog-icon-strip{
+  display:grid !important;
+  grid-template-columns:repeat(4,34px) !important;
+  gap:8px !important;
+  align-items:center !important;
+  justify-content:start !important;
+  width:max-content !important;
+  max-width:100% !important;
+  margin:8px 0 12px !important;
+  flex-wrap:nowrap !important;
+}
+body.is-alliance-route #section-2 + .catalog-icon-strip .catalog-game-icon{
+  width:34px !important;
+  height:34px !important;
+  margin:0 !important;
+  vertical-align:middle !important;
+}
+body.is-alliance-route .alliance-daily-list-v412{
+  clear:both !important;
+  margin-top:0 !important;
+}
+@media(max-width:430px){
+  body.is-alliance-route #section-2 + .catalog-icon-strip{
+    grid-template-columns:repeat(4,32px) !important;
+    gap:7px !important;
+    margin:7px 0 11px !important;
+  }
+  body.is-alliance-route #section-2 + .catalog-icon-strip .catalog-game-icon{
+    width:32px !important;
+    height:32px !important;
+  }
+}

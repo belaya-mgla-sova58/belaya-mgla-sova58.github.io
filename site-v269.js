@@ -589,7 +589,7 @@
     const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){
       if(left<=0 || !n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
       const p=n.parentElement; if(!p) return NodeFilter.FILTER_REJECT;
-      if(p.closest('script,style,.catalog-term,.catalog-icon-strip')) return NodeFilter.FILTER_REJECT;
+      if(p.closest('script,style,.catalog-term,.catalog-icon-strip,.alliance-daily-list-v412')) return NodeFilter.FILTER_REJECT;
       if(hasSameIcon(p)) return NodeFilter.FILTER_REJECT;
       return NodeFilter.FILTER_ACCEPT;
     }});
