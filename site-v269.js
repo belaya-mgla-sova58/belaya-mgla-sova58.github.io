@@ -1497,3 +1497,64 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initV409,{once:true}); else initV409();
 })();
+
+
+/* v414 — compact long-guide cards */
+(() => {
+  function initV414(){
+    const isMobile=()=>window.matchMedia('(max-width:760px)').matches;
+
+    function foldsIn(page){
+      return Array.from(page.querySelectorAll(':scope > details.guide-fold-v414'));
+    }
+
+    function openForHash(){
+      if(!location.hash || location.hash.length<2) return false;
+      const target=document.getElementById(location.hash.slice(1));
+      const fold=target?.closest?.('details.guide-fold-v414');
+      if(fold){ fold.open=true; return true; }
+      return false;
+    }
+
+    document.querySelectorAll('.guide-page-v69').forEach(page=>{
+      const folds=foldsIn(page);
+      if(!folds.length) return;
+
+      // Calm default state: one open on phone, two on desktop.
+      const initialOpen=isMobile()?1:2;
+      folds.forEach((fold,i)=>{ fold.open=i<initialOpen; });
+      openForHash();
+
+      const allBtn=page.querySelector('.guide-fold-all-v414');
+      if(allBtn){
+        const sync=()=>{
+          const allOpen=folds.every(f=>f.open);
+          allBtn.textContent=allOpen?'Свернуть все':'Раскрыть все';
+          allBtn.setAttribute('aria-pressed',allOpen?'true':'false');
+        };
+        allBtn.addEventListener('click',()=>{
+          const shouldOpen=!folds.every(f=>f.open);
+          folds.forEach(f=>{f.open=shouldOpen;});
+          sync();
+        });
+        folds.forEach(f=>f.addEventListener('toggle',sync));
+        sync();
+      }
+    });
+
+    // Open a collapsed card before the existing smooth-scroll TOC handler runs.
+    document.addEventListener('click',e=>{
+      const a=e.target.closest?.('.page-toc-v409 a[href^="#"]');
+      if(!a) return;
+      const id=a.getAttribute('href')?.slice(1);
+      const target=id&&document.getElementById(id);
+      const fold=target?.closest?.('details.guide-fold-v414');
+      if(fold) fold.open=true;
+    },true);
+
+    window.addEventListener('hashchange',openForHash);
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initV414,{once:true});
+  else initV414();
+})();
