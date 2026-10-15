@@ -19002,3 +19002,24 @@ body.is-events-route .guide-nav-card.crazy-joe-card-v462 .guide-nav-card-label-v
     padding:12px 14px !important;
   }
 }
+
+
+/* =========================================================
+   v463 — events list: crazy joe card without overlay text
+   ========================================================= */
+body.is-events-route .guide-nav-card.crazy-joe-card-v462{
+  padding: 0 !important;
+  min-height: 92px !important;
+  background-position: center center !important;
+  background-size: cover !important;
+}
+
+body.is-events-route .guide-nav-card.crazy-joe-card-v462 .guide-nav-card-label-v462{
+  display:none !important;
+}
+
+@media (max-width: 820px){
+  body.is-events-route .guide-nav-card.crazy-joe-card-v462{
+    min-height: 88px !important;
+  }
+}
