@@ -16824,3 +16824,86 @@ body.cosmic-visible-v444.is-home-route .v424-head-icon{
   width:100% !important;
   height:auto !important;
 }
+
+
+/* =========================================================
+   v447 — restore Creative Corner + WhiteFox News headers
+   Only these two pages. Other page headers unchanged.
+   ========================================================= */
+
+body.news-top-creative .page-heading-v424.creative-corner-header-v447,
+body.news-top-whitefox .page-heading-v424.whitefox-news-header-v447{
+  position:relative !important;
+  overflow:hidden !important;
+  min-height:190px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:flex-end !important;
+  padding:18px 20px !important;
+  border:1px solid rgba(144,205,255,.34) !important;
+  border-radius:18px !important;
+  box-shadow:0 14px 30px rgba(0,5,24,.22) !important;
+  background-color:#07162f !important;
+  background-size:cover !important;
+  background-position:center !important;
+  background-repeat:no-repeat !important;
+}
+
+body.news-top-creative .page-heading-v424.creative-corner-header-v447{
+  background-image:
+    linear-gradient(180deg,rgba(3,9,26,.05) 18%,rgba(3,9,26,.22) 54%,rgba(3,9,26,.78) 100%),
+    url("assets/creative-corner-header-v447.webp") !important;
+}
+
+body.news-top-whitefox .page-heading-v424.whitefox-news-header-v447{
+  background-image:
+    linear-gradient(180deg,rgba(30,4,10,.03) 15%,rgba(27,4,10,.20) 52%,rgba(20,4,10,.76) 100%),
+    url("assets/whitefox-news-header-v447.webp") !important;
+}
+
+body.news-top-creative .page-heading-v424.creative-corner-header-v447 h1,
+body.news-top-whitefox .page-heading-v424.whitefox-news-header-v447 h1{
+  position:relative !important;
+  z-index:2 !important;
+  margin:0 0 4px !important;
+  color:#fff !important;
+  font-family:Georgia,"Times New Roman",serif !important;
+  font-size:clamp(28px,5vw,44px) !important;
+  line-height:1.02 !important;
+  text-shadow:0 3px 12px rgba(0,0,0,.62) !important;
+}
+
+body.news-top-creative .page-heading-v424.creative-corner-header-v447 p,
+body.news-top-whitefox .page-heading-v424.whitefox-news-header-v447 p{
+  position:relative !important;
+  z-index:2 !important;
+  max-width:720px !important;
+  margin:0 !important;
+  color:rgba(245,249,255,.92) !important;
+  font-size:13px !important;
+  line-height:1.38 !important;
+  text-shadow:0 2px 8px rgba(0,0,0,.62) !important;
+}
+
+/* Mobile: compact but still visually a real header. */
+@media(max-width:700px){
+  body.news-top-creative .page-heading-v424.creative-corner-header-v447,
+  body.news-top-whitefox .page-heading-v424.whitefox-news-header-v447{
+    min-height:132px !important;
+    padding:12px 13px !important;
+    border-radius:14px !important;
+    background-position:center center !important;
+  }
+
+  body.news-top-creative .page-heading-v424.creative-corner-header-v447 h1,
+  body.news-top-whitefox .page-heading-v424.whitefox-news-header-v447 h1{
+    font-size:26px !important;
+  }
+
+  body.news-top-creative .page-heading-v424.creative-corner-header-v447 p,
+  body.news-top-whitefox .page-heading-v424.whitefox-news-header-v447 p{
+    max-width:92% !important;
+    font-size:10px !important;
+    line-height:1.28 !important;
+  }
+}
