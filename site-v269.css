@@ -17345,3 +17345,32 @@ body.is-home-route.cosmic-visible-v444 .modern-topic-card-v424::after{
     min-height:116px !important;
   }
 }
+
+
+/* =========================================================
+   v450 — events page cleanup and 2-column guide cards on mobile
+   ========================================================= */
+@media (max-width: 820px){
+  body.is-events-route .guide-nav-grid{
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:10px !important;
+  }
+
+  body.is-events-route .guide-nav-card{
+    min-height:76px !important;
+    padding:12px 10px !important;
+    align-items:flex-start !important;
+    justify-content:flex-start !important;
+    font-size:13px !important;
+    line-height:1.14 !important;
+    white-space:normal !important;
+    text-wrap:balance !important;
+  }
+}
+
+@media (max-width: 360px){
+  body.is-events-route .guide-nav-grid{
+    grid-template-columns:1fr !important;
+  }
+}
