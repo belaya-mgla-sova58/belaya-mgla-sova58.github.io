@@ -18538,3 +18538,119 @@ body.is-home-route .home-news-banner-copy-v449{
 .filter-hidden-v452{
   display:revert !important;
 }
+
+
+/* =========================================================
+   v458 — home "Часто открывают" cards:
+   icon left, larger text on the right, same layout for all cards
+   ========================================================= */
+
+body.is-home-route .modern-card-grid-v424 .modern-topic-card-v424{
+  position:relative !important;
+  display:grid !important;
+  grid-template-columns:54px minmax(0,1fr) 16px !important;
+  grid-template-rows:auto auto !important;
+  align-items:center !important;
+  column-gap:10px !important;
+  row-gap:3px !important;
+  min-height:88px !important;
+  padding:10px 9px 10px 10px !important;
+  overflow:hidden !important;
+}
+
+body.is-home-route .modern-card-grid-v424 .modern-topic-card-v424 > .v445-topic-icon{
+  grid-column:1 !important;
+  grid-row:1 / span 2 !important;
+  align-self:center !important;
+  justify-self:start !important;
+  width:52px !important;
+  height:52px !important;
+  min-width:52px !important;
+  min-height:52px !important;
+  margin:0 !important;
+  padding:0 !important;
+}
+
+body.is-home-route .modern-card-grid-v424 .modern-topic-card-v424 .v445-topic-icon-img{
+  display:block !important;
+  width:52px !important;
+  height:52px !important;
+  max-width:52px !important;
+  max-height:52px !important;
+  object-fit:contain !important;
+}
+
+body.is-home-route .modern-card-grid-v424 .modern-topic-card-v424 > b{
+  grid-column:2 !important;
+  grid-row:1 !important;
+  align-self:end !important;
+  width:100% !important;
+  margin:0 !important;
+  font-size:16px !important;
+  line-height:1.08 !important;
+  text-align:left !important;
+  white-space:normal !important;
+  overflow-wrap:anywhere !important;
+}
+
+body.is-home-route .modern-card-grid-v424 .modern-topic-card-v424 > small{
+  grid-column:2 !important;
+  grid-row:2 !important;
+  align-self:start !important;
+  width:100% !important;
+  margin:0 !important;
+  font-size:9px !important;
+  line-height:1.22 !important;
+  text-align:left !important;
+  white-space:normal !important;
+  overflow-wrap:anywhere !important;
+}
+
+body.is-home-route .modern-card-grid-v424 .modern-topic-card-v424::after{
+  content:"›" !important;
+  position:static !important;
+  grid-column:3 !important;
+  grid-row:1 / span 2 !important;
+  align-self:center !important;
+  justify-self:end !important;
+  transform:none !important;
+  color:#bdeaff !important;
+  font-size:22px !important;
+  line-height:1 !important;
+  text-shadow:0 0 10px rgba(91,191,255,.36) !important;
+}
+
+/* Mobile: keep two columns of cards, but the inside of every card is horizontal. */
+@media(max-width:520px){
+  body.is-home-route .modern-card-grid-v424 .modern-topic-card-v424{
+    grid-template-columns:44px minmax(0,1fr) 12px !important;
+    column-gap:7px !important;
+    row-gap:2px !important;
+    min-height:82px !important;
+    padding:8px 7px 8px 8px !important;
+  }
+
+  body.is-home-route .modern-card-grid-v424 .modern-topic-card-v424 > .v445-topic-icon,
+  body.is-home-route .modern-card-grid-v424 .modern-topic-card-v424 .v445-topic-icon-img{
+    width:42px !important;
+    height:42px !important;
+    min-width:42px !important;
+    min-height:42px !important;
+    max-width:42px !important;
+    max-height:42px !important;
+  }
+
+  body.is-home-route .modern-card-grid-v424 .modern-topic-card-v424 > b{
+    font-size:13px !important;
+    line-height:1.06 !important;
+  }
+
+  body.is-home-route .modern-card-grid-v424 .modern-topic-card-v424 > small{
+    font-size:7.6px !important;
+    line-height:1.18 !important;
+  }
+
+  body.is-home-route .modern-card-grid-v424 .modern-topic-card-v424::after{
+    font-size:19px !important;
+  }
+}
