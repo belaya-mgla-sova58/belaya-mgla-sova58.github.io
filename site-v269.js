@@ -1408,3 +1408,190 @@ document.addEventListener("DOMContentLoaded", () => {
     start();
   }
 })();
+
+
+/* =========================================================
+   v451 — reading/navigation helper
+   ========================================================= */
+(() => {
+  function initReaderV451(){
+    const body = document.body;
+    const route = document.querySelector('.route-page.active') || document.querySelector('.route-page');
+    if(!route) return;
+
+    // Thin reading progress line.
+    if(!document.querySelector('.reader-progress-v451')){
+      const progress = document.createElement('div');
+      progress.className = 'reader-progress-v451';
+      progress.setAttribute('aria-hidden','true');
+      progress.innerHTML = '<span></span>';
+      document.body.appendChild(progress);
+      const bar = progress.firstElementChild;
+      let ticking = false;
+      const update = () => {
+        ticking = false;
+        const doc = document.documentElement;
+        const max = Math.max(1, doc.scrollHeight - window.innerHeight);
+        const value = Math.max(0, Math.min(1, window.scrollY / max));
+        bar.style.transform = `scaleX(${value})`;
+      };
+      window.addEventListener('scroll', () => {
+        if(!ticking){
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      }, {passive:true});
+      update();
+    }
+
+    // Home remains clean.
+    if(body.classList.contains('is-home-route')) return;
+
+    const heading = route.querySelector('.page-heading-v424');
+    if(!heading || route.querySelector('.reader-tools-v451')) return;
+
+    const folds = Array.from(route.querySelectorAll('details.guide-fold-v414'));
+
+    const tools = document.createElement('div');
+    tools.className = 'reader-tools-v451';
+    tools.setAttribute('aria-label','Быстрый просмотр страницы');
+
+    const sectionsBtn = document.createElement('button');
+    sectionsBtn.type = 'button';
+    sectionsBtn.className = 'reader-sections-v451';
+    sectionsBtn.textContent = '☰ Разделы';
+
+    const foldsBtn = document.createElement('button');
+    foldsBtn.type = 'button';
+    foldsBtn.className = 'reader-folds-v451';
+    foldsBtn.textContent = 'Свернуть всё';
+    if(!folds.length) foldsBtn.hidden = true;
+
+    const textBtn = document.createElement('button');
+    textBtn.type = 'button';
+    textBtn.className = 'reader-text-v451';
+
+    tools.append(sectionsBtn, foldsBtn, textBtn);
+    heading.insertAdjacentElement('afterend', tools);
+
+    // Text size persisted between pages.
+    let textSize = 0;
+    try { textSize = Number(localStorage.getItem('bmReaderTextSize') || 0); } catch(e){}
+    const applyTextSize = () => {
+      body.classList.toggle('reader-large-v451', textSize === 1);
+      body.classList.toggle('reader-xlarge-v451', textSize === 2);
+      textBtn.textContent = textSize === 0 ? 'Aa Текст' : textSize === 1 ? 'Aa 110%' : 'Aa 120%';
+    };
+    applyTextSize();
+    textBtn.addEventListener('click', () => {
+      textSize = (textSize + 1) % 3;
+      try { localStorage.setItem('bmReaderTextSize', String(textSize)); } catch(e){}
+      applyTextSize();
+    });
+
+    // Collapse/expand all guide folds from one place.
+    const syncFolds = () => {
+      if(!folds.length) return;
+      const allOpen = folds.every(f => f.open);
+      foldsBtn.textContent = allOpen ? 'Свернуть всё' : 'Раскрыть всё';
+    };
+    folds.forEach(f => f.addEventListener('toggle', syncFolds));
+    foldsBtn.addEventListener('click', () => {
+      const shouldOpen = !folds.every(f => f.open);
+      folds.forEach(f => { f.open = shouldOpen; });
+      syncFolds();
+    });
+    syncFolds();
+
+    // Universal section sheet, also for pages that never had a TOC.
+    const overlay = document.createElement('div');
+    overlay.className = 'reader-sections-overlay-v451';
+    overlay.setAttribute('aria-hidden','true');
+
+    const sheet = document.createElement('div');
+    sheet.className = 'reader-sections-sheet-v451';
+
+    const head = document.createElement('div');
+    head.className = 'reader-sections-head-v451';
+    head.innerHTML = '<strong>Разделы страницы</strong>';
+
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.className = 'reader-sections-close-v451';
+    close.setAttribute('aria-label','Закрыть');
+    close.textContent = '×';
+    head.appendChild(close);
+
+    const links = document.createElement('div');
+    links.className = 'reader-sections-links-v451';
+
+    const candidates = Array.from(route.querySelectorAll(
+      '.guide-fold-title-v414, .section > h2, .section > h3, .intro h2, .news-title-row h2, .creative-v349-head h2'
+    ));
+
+    const seen = new Set();
+    candidates.forEach((h, index) => {
+      const label = (h.textContent || '').replace(/\s+/g,' ').trim();
+      if(!label || seen.has(label) || label.length > 90) return;
+      seen.add(label);
+      if(!h.id) h.id = `reader-section-v451-${index}`;
+
+      const a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = label;
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.getElementById(h.id);
+        const fold = target && target.closest('details.guide-fold-v414');
+        if(fold) fold.open = true;
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden','true');
+        setTimeout(() => target && target.scrollIntoView({behavior:'smooth', block:'start'}), 30);
+      });
+      links.appendChild(a);
+    });
+
+    // Fallback if the page uses only fold summaries.
+    if(!links.children.length){
+      Array.from(route.querySelectorAll('h2,h3')).slice(0,14).forEach((h,index) => {
+        const label = (h.textContent || '').replace(/\s+/g,' ').trim();
+        if(!label || seen.has(label)) return;
+        seen.add(label);
+        if(!h.id) h.id = `reader-fallback-v451-${index}`;
+        const a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = label;
+        a.addEventListener('click', e => {
+          e.preventDefault();
+          overlay.classList.remove('open');
+          h.scrollIntoView({behavior:'smooth', block:'start'});
+        });
+        links.appendChild(a);
+      });
+    }
+
+    sheet.append(head, links);
+    overlay.appendChild(sheet);
+    document.body.appendChild(overlay);
+
+    const openSheet = () => {
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden','false');
+    };
+    const closeSheet = () => {
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden','true');
+    };
+
+    sectionsBtn.addEventListener('click', openSheet);
+    close.addEventListener('click', closeSheet);
+    overlay.addEventListener('click', e => { if(e.target === overlay) closeSheet(); });
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeSheet(); });
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', initReaderV451, {once:true});
+  } else {
+    initReaderV451();
+  }
+})();
