@@ -2175,3 +2175,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   window.addEventListener('pageshow', removeQuickSummaryV454);
 })();
+
+
+/* v457 — remove the old filter interface completely. */
+(() => {
+  const removeFiltersV457 = () => {
+    document.querySelectorAll('.smart-filters-v452, .kb-filters-host-v452').forEach(el => el.remove());
+    document.querySelectorAll('.filter-hidden-v452').forEach(el => el.classList.remove('filter-hidden-v452'));
+  };
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', removeFiltersV457, {once:true});
+  } else {
+    removeFiltersV457();
+  }
+  window.addEventListener('pageshow', removeFiltersV457);
+})();

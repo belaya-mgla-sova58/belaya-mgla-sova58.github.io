@@ -18521,3 +18521,20 @@ body.is-home-route .home-news-banner-copy-v449{
   position:relative;
   z-index:1;
 }
+
+
+/* =========================================================
+   v457 — remove filter chip rows
+   Removes: Все / Альянс / PvP / PvE / SvS / Развитие
+   and the same filter UI in other sections.
+   ========================================================= */
+.smart-filters-v452,
+.smart-filter-btn-v452,
+.kb-filters-host-v452{
+  display:none !important;
+}
+
+/* Safety: no content should remain hidden by a previously used filter. */
+.filter-hidden-v452{
+  display:revert !important;
+}
