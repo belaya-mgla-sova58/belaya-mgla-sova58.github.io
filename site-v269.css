@@ -18231,3 +18231,11 @@ body.is-other-route .kb-card-v415.smart-important-v452{
 .site-updated-v452{
   display:none !important;
 }
+
+
+/* =========================================================
+   v454 — remove automatic "Коротко" summary block
+   ========================================================= */
+.quick-summary-v452{
+  display:none !important;
+}

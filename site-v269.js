@@ -2171,3 +2171,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   window.addEventListener('pageshow', removeReaderStripV453);
 })();
+
+
+/* v454 — retire the automatic "Коротко" summary block. */
+(() => {
+  const removeQuickSummaryV454 = () => {
+    document.querySelectorAll('.quick-summary-v452').forEach(el => el.remove());
+  };
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', removeQuickSummaryV454, {once:true});
+  } else {
+    removeQuickSummaryV454();
+  }
+  window.addEventListener('pageshow', removeQuickSummaryV454);
+})();
