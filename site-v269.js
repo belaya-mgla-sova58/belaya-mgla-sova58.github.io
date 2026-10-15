@@ -2157,3 +2157,17 @@ document.addEventListener("DOMContentLoaded", () => {
     init();
   }
 })();
+
+
+/* v453 — retire the reader toolbar shown under page headers. */
+(() => {
+  const removeReaderStripV453 = () => {
+    document.querySelectorAll('.reader-tools-v451').forEach(el => el.remove());
+  };
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', removeReaderStripV453, {once:true});
+  } else {
+    removeReaderStripV453();
+  }
+  window.addEventListener('pageshow', removeReaderStripV453);
+})();

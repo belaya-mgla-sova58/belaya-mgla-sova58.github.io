@@ -18222,3 +18222,12 @@ body.is-other-route .kb-card-v415.smart-important-v452{
     grid-template-columns:1fr;
   }
 }
+
+
+/* =========================================================
+   v453 — remove reader control strip completely
+   ========================================================= */
+.reader-tools-v451,
+.site-updated-v452{
+  display:none !important;
+}
