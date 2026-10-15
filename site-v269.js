@@ -1595,3 +1595,565 @@ document.addEventListener("DOMContentLoaded", () => {
     initReaderV451();
   }
 })();
+
+
+/* =========================================================
+   v452 — usability upgrade pack
+   ========================================================= */
+(() => {
+  const UPDATED_TEXT = 'Обновлено на сайте · 15.10.2026';
+
+  const storageGet = (key, fallback) => {
+    try {
+      const value = localStorage.getItem(key);
+      return value ? JSON.parse(value) : fallback;
+    } catch(e) {
+      return fallback;
+    }
+  };
+  const storageSet = (key, value) => {
+    try { localStorage.setItem(key, JSON.stringify(value)); } catch(e) {}
+  };
+
+  const pageKey = () => {
+    const raw = location.pathname.split('/').pop() || 'index.html';
+    return raw || 'index.html';
+  };
+
+  const pageTitle = () => {
+    const h1 = document.querySelector('.route-page.active h1, .route-page h1');
+    if (h1 && h1.textContent.trim()) return h1.textContent.trim();
+    return (document.title || 'Белая Мгла').replace(/^Белая Мгла\s*[•|-]\s*/,'').trim();
+  };
+
+  const pageDescription = () => {
+    const p = document.querySelector('.page-heading-v424 p, .route-page.active .intro p, .route-page .intro p');
+    if (!p) return '';
+    return p.textContent.replace(/\s+/g,' ').trim().slice(0,110);
+  };
+
+  /* ---------- recent pages ---------- */
+  function trackRecent(){
+    const key = pageKey();
+    if (key === 'index.html' || key === '404.html') return;
+    const recent = storageGet('bmRecentV452', []);
+    const item = {
+      url:key,
+      title:pageTitle(),
+      description:pageDescription(),
+      time:Date.now()
+    };
+    const next = [item, ...recent.filter(x => x && x.url !== key)].slice(0,8);
+    storageSet('bmRecentV452', next);
+  }
+
+  /* ---------- favorites ---------- */
+  const favoriteGet = () => storageGet('bmFavoritesV452', []);
+  const favoriteHas = url => favoriteGet().some(x => x && x.url === url);
+
+  function favoriteToggleCurrent(){
+    const key = pageKey();
+    if (key === 'index.html' || key === '404.html') return false;
+    let fav = favoriteGet();
+    const exists = fav.some(x => x.url === key);
+    if (exists) {
+      fav = fav.filter(x => x.url !== key);
+    } else {
+      fav.unshift({
+        url:key,
+        title:pageTitle(),
+        description:pageDescription(),
+        time:Date.now()
+      });
+      fav = fav.slice(0,16);
+    }
+    storageSet('bmFavoritesV452', fav);
+    return !exists;
+  }
+
+  /* ---------- enhance v451 reader toolbar ---------- */
+  function enhanceReader(){
+    if (document.body.classList.contains('is-home-route')) return;
+    const tools = document.querySelector('.reader-tools-v451');
+    if (!tools || tools.dataset.v452 === '1') return;
+    tools.dataset.v452 = '1';
+
+    const bookmark = document.createElement('button');
+    bookmark.type = 'button';
+    bookmark.className = 'reader-bookmark-v452';
+
+    const essential = document.createElement('button');
+    essential.type = 'button';
+    essential.className = 'reader-essential-v452';
+
+    const updated = document.createElement('span');
+    updated.className = 'site-updated-v452';
+    updated.textContent = UPDATED_TEXT;
+
+    const refreshBookmark = () => {
+      const saved = favoriteHas(pageKey());
+      bookmark.classList.toggle('is-saved', saved);
+      bookmark.textContent = saved ? '★ В избранном' : '☆ В избранное';
+    };
+
+    let essentialOn = false;
+    try { essentialOn = localStorage.getItem('bmEssentialV452') === '1'; } catch(e){}
+    const applyEssential = () => {
+      document.body.classList.toggle('reader-essential-mode-v452', essentialOn);
+      essential.classList.toggle('is-on', essentialOn);
+      essential.textContent = essentialOn ? '✓ Только главное' : 'Только главное';
+    };
+
+    bookmark.addEventListener('click', () => {
+      favoriteToggleCurrent();
+      refreshBookmark();
+    });
+
+    essential.addEventListener('click', () => {
+      essentialOn = !essentialOn;
+      try { localStorage.setItem('bmEssentialV452', essentialOn ? '1' : '0'); } catch(e){}
+      applyEssential();
+    });
+
+    tools.insertBefore(bookmark, tools.querySelector('.reader-text-v451') || null);
+    tools.insertBefore(essential, tools.querySelector('.reader-text-v451') || null);
+    tools.appendChild(updated);
+
+    refreshBookmark();
+    applyEssential();
+  }
+
+  /* ---------- quick summary ---------- */
+  function cleanPoint(text){
+    return String(text || '')
+      .replace(/\s+/g,' ')
+      .replace(/^[•·✦✓✅📌🔥⭐\-\s]+/,'')
+      .trim()
+      .slice(0,145);
+  }
+
+  function addQuickSummary(){
+    if (document.body.classList.contains('is-home-route')) return;
+    const route = document.querySelector('.route-page.active, .route-page');
+    if (!route || route.querySelector('.quick-summary-v452')) return;
+
+    const textLen = (route.textContent || '').replace(/\s+/g,' ').trim().length;
+    if (textLen < 1000) return;
+
+    const points = [];
+    const add = text => {
+      const t = cleanPoint(text);
+      if (t.length < 18) return;
+      if (points.some(x => x.toLowerCase() === t.toLowerCase())) return;
+      points.push(t);
+    };
+
+    // Prefer existing concise material.
+    route.querySelectorAll('.savebox li, .guide-fold-body-v414 li, .mini-card, .quick, .rule, .check')
+      .forEach(el => {
+        if (points.length < 4) add(el.textContent);
+      });
+
+    if (points.length < 3) {
+      route.querySelectorAll('.guide-fold-body-v414 p, .section p, .intro p')
+        .forEach(el => {
+          if (points.length < 4) add(el.textContent);
+        });
+    }
+
+    if (points.length < 2) return;
+
+    const box = document.createElement('section');
+    box.className = 'quick-summary-v452';
+    box.innerHTML = `
+      <div class="quick-summary-head-v452">
+        <strong>Коротко</strong>
+        <span>главное без длинного чтения</span>
+      </div>
+      <ul class="quick-summary-list-v452">
+        ${points.slice(0,4).map(x => `<li>${x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</li>`).join('')}
+      </ul>
+    `;
+
+    const tools = route.querySelector('.reader-tools-v451');
+    if (tools) tools.insertAdjacentElement('afterend', box);
+    else {
+      const heading = route.querySelector('.page-heading-v424');
+      if (heading) heading.insertAdjacentElement('afterend', box);
+    }
+  }
+
+  /* ---------- home badges ---------- */
+  const BADGES = {
+    'events.html':['Обновлено','badge-cyan-v452'],
+    'heroes.html':['Популярно','badge-purple-v452'],
+    'fire-furnace-calculator.html':['Инструмент','badge-gold-v452'],
+    'other.html':['Справочник','badge-purple-v452'],
+    'news-elena.html':['58','badge-gold-v452'],
+    'creative-corner.html':['Творчество','badge-purple-v452'],
+    'gear.html':['Полезно','badge-cyan-v452'],
+    'experts.html':['Приоритет','badge-purple-v452'],
+    'farm.html':['Расчёт','badge-gold-v452']
+  };
+
+  function addSmartBadges(){
+    if (!document.body.classList.contains('is-home-route')) return;
+    const cards = document.querySelectorAll(
+      '.modern-home-strip-v424 > a, .modern-topic-card-v424, .home-news-card-v442'
+    );
+    cards.forEach(card => {
+      const href = (card.getAttribute('href') || '').split('#')[0];
+      const spec = BADGES[href];
+      if (!spec || card.querySelector('.smart-badge-v452')) return;
+      card.style.position = 'relative';
+      const badge = document.createElement('span');
+      badge.className = `smart-badge-v452 ${spec[1]}`;
+      badge.textContent = spec[0];
+      card.appendChild(badge);
+    });
+  }
+
+  /* ---------- home recent/favorites ---------- */
+  const homeIconFor = url => {
+    if (/events|bear|joe|castle|svs|foundry|fort|winter|alliance/.test(url)) return '✦';
+    if (/hero|gear|expert|pet/.test(url)) return '◆';
+    if (/calculator|furnace/.test(url)) return '▦';
+    if (/news|whitefox|creative/.test(url)) return '✎';
+    return '▤';
+  };
+
+  function buildHomeSmartSection(title, icon, items, emptyText){
+    const section = document.createElement('section');
+    section.className = 'modern-panel-v424 home-smart-section-v452';
+
+    const head = document.createElement('div');
+    head.className = 'modern-panel-head-v424';
+    head.innerHTML = `<div><span class="v424-head-icon">${icon}</span><h2>${title}</h2></div>`;
+    section.appendChild(head);
+
+    const grid = document.createElement('div');
+    grid.className = 'home-smart-grid-v452';
+
+    if (!items.length) {
+      const empty = document.createElement('div');
+      empty.className = 'home-smart-empty-v452';
+      empty.textContent = emptyText;
+      grid.appendChild(empty);
+    } else {
+      items.slice(0,4).forEach(item => {
+        const a = document.createElement('a');
+        a.className = 'home-smart-card-v452';
+        a.href = item.url;
+        a.innerHTML = `
+          <span class="home-smart-card-icon-v452">${homeIconFor(item.url)}</span>
+          <span class="home-smart-card-copy-v452">
+            <b>${String(item.title || 'Страница').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</b>
+            <small>${String(item.description || 'Быстрый возврат к материалу').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</small>
+          </span>
+          <i class="home-smart-card-arrow-v452">›</i>
+        `;
+        grid.appendChild(a);
+      });
+    }
+    section.appendChild(grid);
+    return section;
+  }
+
+  function renderHomeSmartSections(){
+    if (!document.body.classList.contains('is-home-route')) return;
+    const home = document.querySelector('.modern-home-v424');
+    if (!home || home.querySelector('.home-smart-section-v452')) return;
+
+    const recent = storageGet('bmRecentV452', []);
+    const favorites = favoriteGet();
+
+    const news = home.querySelector('.home-news-v442');
+    const anchor = news || home.querySelector('.modern-home-columns-bottom-v424');
+
+    const favSection = buildHomeSmartSection(
+      'Избранное',
+      '★',
+      favorites,
+      'Открой нужный гайд и нажми «☆ В избранное». Он появится здесь.'
+    );
+
+    const recentSection = buildHomeSmartSection(
+      'Недавно открывали',
+      '◷',
+      recent,
+      'Здесь появятся последние открытые гайды.'
+    );
+
+    if (anchor) {
+      anchor.insertAdjacentElement('afterend', favSection);
+      favSection.insertAdjacentElement('afterend', recentSection);
+    } else {
+      home.append(favSection, recentSection);
+    }
+  }
+
+  /* ---------- filters: events ---------- */
+  const EVENT_TAGS = {
+    'bear.html':['pve','alliance'],
+    'crazy-joe.html':['pve','alliance'],
+    'mercenary-prestige.html':['pve'],
+    'frostfire-mine.html':['pve'],
+    'endless-trial.html':['pve'],
+    'tundra-trade-route.html':['alliance'],
+    'alliance-showdown.html':['alliance','development'],
+    'fishing.html':['pve'],
+    'snowplow.html':['pve'],
+    'dreams.html':['pve'],
+    'alliance-championship.html':['alliance','pvp'],
+    'foundry.html':['alliance','pvp'],
+    'forts.html':['alliance','pvp'],
+    'castle.html':['pvp'],
+    'svs-prep.html':['svs','development'],
+    'svs.html':['svs','pvp'],
+    'armament-competition.html':['development'],
+    'state-power.html':['development'],
+    'alliance-mobilization.html':['alliance','development'],
+    'brothers-in-arms.html':['pvp'],
+    'winter-siege.html':['alliance','pvp']
+  };
+
+  function addFilterBar(container, defs, apply){
+    if (!container || container.querySelector('.smart-filters-v452')) return;
+    const bar = document.createElement('div');
+    bar.className = 'smart-filters-v452';
+
+    defs.forEach((def, index) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'smart-filter-btn-v452' + (index === 0 ? ' active' : '');
+      btn.dataset.filter = def[0];
+      btn.textContent = def[1];
+      btn.addEventListener('click', () => {
+        bar.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
+        apply(def[0]);
+      });
+      bar.appendChild(btn);
+    });
+    container.prepend(bar);
+  }
+
+  function initEventsFilters(){
+    if (!document.body.classList.contains('is-events-route')) return;
+    const grid = document.querySelector('.guide-nav-grid');
+    if (!grid) return;
+    const body = grid.parentElement;
+
+    grid.querySelectorAll('.guide-nav-card').forEach(card => {
+      const href = (card.getAttribute('href') || '').split('#')[0];
+      const tags = EVENT_TAGS[href] || [];
+      card.dataset.filterTags = tags.join(' ');
+      if (['castle.html','svs.html','bear.html','alliance-championship.html'].includes(href)) {
+        card.classList.add('smart-important-v452');
+      }
+    });
+
+    addFilterBar(body, [
+      ['all','Все'],
+      ['alliance','Альянс'],
+      ['pvp','PvP'],
+      ['pve','PvE'],
+      ['svs','SvS'],
+      ['development','Развитие']
+    ], filter => {
+      grid.querySelectorAll('.guide-nav-card').forEach(card => {
+        const on = filter === 'all' || (card.dataset.filterTags || '').split(' ').includes(filter);
+        card.classList.toggle('filter-hidden-v452', !on);
+      });
+    });
+  }
+
+  /* ---------- filters: knowledge base ---------- */
+  const KB_TAGS = {
+    'resources.html':['resources'],
+    'alliance.html':['reference'],
+    '#kb-calculators':['calculations'],
+    'research.html':['development'],
+    'island.html':['development'],
+    'troops.html':['development'],
+    'buildings.html':['reference'],
+    'beacon.html':['reference'],
+    'newbie.html':['reference'],
+    'furnace-calculator.html':['calculations'],
+    'fire-furnace-calculator.html':['calculations'],
+    'governor.html':['reference'],
+    'arena.html':['reference'],
+    'labyrinth.html':['reference'],
+    'exploration.html':['reference'],
+    'mails.html':['reference']
+  };
+
+  function initKnowledgeFilters(){
+    if (!document.body.classList.contains('is-other-route')) return;
+    const route = document.querySelector('.route-page.active, .route-page');
+    if (!route || route.querySelector('.kb-filters-host-v452')) return;
+
+    const host = document.createElement('div');
+    host.className = 'kb-filters-host-v452';
+    const intro = route.querySelector('.kb-intro-v415, .page-heading-v424');
+    if (intro) intro.insertAdjacentElement('afterend', host);
+    else route.prepend(host);
+
+    const cards = Array.from(route.querySelectorAll(
+      '.kb-card-v415, .kb-tools-grid-v415 a, .kb-more-links-v415 a'
+    ));
+
+    cards.forEach(card => {
+      const href = card.getAttribute('href') || '';
+      card.dataset.filterTags = (KB_TAGS[href] || ['reference']).join(' ');
+      if (['resources.html','fire-furnace-calculator.html','research.html'].includes(href)) {
+        card.classList.add('smart-important-v452');
+      }
+    });
+
+    addFilterBar(host, [
+      ['all','Все'],
+      ['development','Развитие'],
+      ['resources','Ресурсы'],
+      ['calculations','Расчёты'],
+      ['reference','Справочник']
+    ], filter => {
+      cards.forEach(card => {
+        const on = filter === 'all' || (card.dataset.filterTags || '').split(' ').includes(filter);
+        card.classList.toggle('filter-hidden-v452', !on);
+      });
+
+      route.querySelectorAll('.kb-group-v415, .kb-tools-v415, .kb-more-v415').forEach(group => {
+        const groupCards = Array.from(group.querySelectorAll(
+          '.kb-card-v415, .kb-tools-grid-v415 a, .kb-more-links-v415 a'
+        ));
+        if (!groupCards.length) return;
+        const anyVisible = groupCards.some(c => !c.classList.contains('filter-hidden-v452'));
+        group.classList.toggle('filter-hidden-v452', !anyVisible);
+      });
+    });
+  }
+
+  /* ---------- next useful guide ---------- */
+  const NEXT_GUIDE = {
+    'events.html':['bear.html','Охота на медведя','Один из самых часто используемых гайдов событий'],
+    'bear.html':['heroes.html','Герои','Подобрать героев и понять их роли'],
+    'crazy-joe.html':['alliance.html','Альянс','Подготовка и координация альянса'],
+    'mercenary-prestige.html':['resources.html','Ресурсы','Что копить и куда тратить редкие материалы'],
+    'frostfire-mine.html':['fire-furnace-calculator.html','Калькулятор Огненной Топки','Быстрый расчёт этапов и ресурсов'],
+    'alliance-championship.html':['alliance-showdown.html','Сражение альянсов','Следующий командный формат'],
+    'foundry.html':['forts.html','Битвы за форт','Ещё один гайд по координации атак'],
+    'forts.html':['castle.html','Битва за замок','Переход к центральной битве государства'],
+    'svs-prep.html':['svs.html','SvS: боевая фаза','Что делать после подготовки'],
+    'svs.html':['castle.html','Битва за замок','Тактика по центральной точке'],
+    'heroes.html':['gear.html','Снаряжение','Что усиливать после выбора героев'],
+    'gear.html':['experts.html','Эксперты','Следующий приоритет развития'],
+    'experts.html':['pets.html','Питомцы','Бонусы и развитие питомцев'],
+    'pets.html':['heroes.html','Герои','Вернуться к связкам и ролям'],
+    'research.html':['island.html','Остров','Следующий раздел развития'],
+    'island.html':['troops.html','Войска','Классы и усиление армии'],
+    'troops.html':['buildings.html','Здания','Что улучшать на базе'],
+    'buildings.html':['beacon.html','Маяк','Задания и награды'],
+    'beacon.html':['newbie.html','Новичкам','Короткий справочник для возвращения в игру'],
+    'resources.html':['fire-furnace-calculator.html','Калькулятор Огненной Топки','Проверить, сколько ресурсов понадобится'],
+    'news-elena.html':['creative-corner.html','Творческий уголок','Истории, песни и материалы игроков'],
+    'creative-corner.html':['news-elena.html','WhiteFox News','Новости государства 58']
+  };
+
+  function addNextGuide(){
+    const key = pageKey();
+    const spec = NEXT_GUIDE[key];
+    if (!spec || document.body.classList.contains('is-home-route')) return;
+    const route = document.querySelector('.route-page.active, .route-page');
+    if (!route || route.querySelector('.next-guide-v452')) return;
+
+    const box = document.createElement('section');
+    box.className = 'next-guide-v452';
+    box.innerHTML = `
+      <div class="next-guide-label-v452">Что открыть дальше</div>
+      <a class="next-guide-link-v452" href="${spec[0]}">
+        <span>
+          <b>${spec[1]}</b>
+          <small>${spec[2]}</small>
+        </span>
+        <i>›</i>
+      </a>
+    `;
+
+    const footer = route.querySelector('.v69-footer');
+    if (footer) footer.insertAdjacentElement('beforebegin', box);
+    else route.appendChild(box);
+  }
+
+  /* ---------- empty-search suggestions ---------- */
+  const POPULAR_SEARCH = [
+    ['events.html','События','Гайды, правила и награды','Обновлено'],
+    ['heroes.html','Герои','Связки, роли и прокачка','Популярно'],
+    ['fire-furnace-calculator.html','Калькулятор Огненной Топки','Этапы и ресурсы','Инструмент'],
+    ['bear.html','Охота на медведя','Рейды и составы','Гайд'],
+    ['other.html','База знаний','Справочные разделы','Справочник']
+  ];
+
+  function initSearchSuggestions(){
+    document.querySelectorAll('[data-site-search]').forEach(root => {
+      const input = root.querySelector('.site-search-input-v426');
+      const results = root.querySelector('.site-search-results-v426');
+      if (!input || !results || input.dataset.v452 === '1') return;
+      input.dataset.v452 = '1';
+
+      const showSuggestions = () => {
+        if (input.value.trim()) return;
+
+        const recent = storageGet('bmRecentV452', []).slice(0,4);
+        let list = recent.length
+          ? recent.map(x => [x.url,x.title,x.description || 'Недавно открывали','Недавно'])
+          : POPULAR_SEARCH;
+
+        const title = recent.length ? 'Недавно открывали' : 'Популярное';
+        results.innerHTML = `
+          <div class="site-search-suggest-head-v452">${title}</div>
+          ${list.map(item => `
+            <a class="site-search-result-v426" href="${item[0]}" role="option">
+              <span class="site-search-result-title-v426">${item[1]}</span>
+              <span class="site-search-result-desc-v426">${item[2] || ''}</span>
+              <span class="site-search-result-v452-badge">${item[3]}</span>
+              <span class="site-search-result-arrow-v426" aria-hidden="true">›</span>
+            </a>
+          `).join('')}
+        `;
+        results.classList.add('open');
+        input.setAttribute('aria-expanded','true');
+      };
+
+      input.addEventListener('focus', () => setTimeout(showSuggestions, 0));
+      input.addEventListener('click', () => setTimeout(showSuggestions, 0));
+    });
+  }
+
+  /* ---------- floating top button ---------- */
+  function initBackToTop(){
+    const btn = document.getElementById('backToTop');
+    if (!btn) return;
+    const update = () => btn.classList.toggle('v452-visible', window.scrollY > 420);
+    window.addEventListener('scroll', update, {passive:true});
+    update();
+  }
+
+  function init(){
+    trackRecent();
+    enhanceReader();
+    addQuickSummary();
+    addSmartBadges();
+    renderHomeSmartSections();
+    initEventsFilters();
+    initKnowledgeFilters();
+    addNextGuide();
+    initSearchSuggestions();
+    initBackToTop();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, {once:true});
+  } else {
+    init();
+  }
+})();
