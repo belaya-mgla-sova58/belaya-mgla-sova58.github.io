@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - '.bear478/part4.txt'
+      - '.github/workflows/v478-bear-webp.yml'
 permissions:
   contents: write
 jobs:
