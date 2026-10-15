@@ -18239,3 +18239,259 @@ body.is-other-route .kb-card-v415.smart-important-v452{
 .quick-summary-v452{
   display:none !important;
 }
+
+
+/* =========================================================
+   v455 — FINAL TEXT CONTRAST / READABILITY LOCK
+   Prevent legacy white cards from mixing with light site text.
+   ========================================================= */
+
+/* ----- Main legacy article sections ----- */
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page > section.section,
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page section.section,
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page > .section{
+  background:
+    radial-gradient(circle at 92% 2%,rgba(105,71,220,.10),transparent 32%),
+    linear-gradient(145deg,rgba(7,31,75,.90),rgba(4,20,52,.88)) !important;
+  border:1px solid rgba(104,178,255,.28) !important;
+  color:#d9e8f5 !important;
+  box-shadow:
+    0 10px 26px rgba(0,5,22,.15),
+    inset 0 1px 0 rgba(255,255,255,.045) !important;
+}
+
+/* Normal article copy always stays readable. */
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page :is(
+  section.section,
+  .guide-section,
+  .guide-fold-body-v414,
+  .intro,
+  .content-card,
+  .panel
+) :is(p,li,dd,dt,td,th){
+  color:#d8e7f4 !important;
+  text-shadow:none !important;
+}
+
+/* Strong/bold text must never disappear into a pale/bright surface. */
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page :is(
+  section.section,
+  .guide-section,
+  .guide-fold-body-v414,
+  .intro,
+  .content-card,
+  .panel,
+  .rule,
+  .savebox,
+  .good,
+  .warnbox,
+  .guide-callout
+) :is(b,strong){
+  color:#ffffff !important;
+  text-shadow:none !important;
+}
+
+/* Article headings. */
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page section.section :is(h2,h3,h4),
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page .guide-section :is(h2,h3,h4){
+  color:#f7fbff !important;
+  text-shadow:0 2px 8px rgba(0,0,0,.20) !important;
+}
+
+/* Remove the old circular pseudo-icon from legacy section H3s.
+   It was left from the light design and can distort long headings. */
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page section.section > h3::before{
+  display:none !important;
+  content:none !important;
+}
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page section.section > h3{
+  display:block !important;
+  padding-left:0 !important;
+  line-height:1.18 !important;
+}
+
+/* ----- Lists ----- */
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page :is(
+  .tip-list,
+  .guide-list,
+  .checks,
+  .rule-list
+){
+  color:#d8e7f4 !important;
+}
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page :is(
+  .tip-list,
+  .guide-list,
+  .checks,
+  .rule-list
+) li{
+  color:#d8e7f4 !important;
+}
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page :is(
+  .tip-list,
+  .guide-list,
+  .checks,
+  .rule-list
+) li::marker{
+  color:#72d7ff !important;
+}
+
+/* ----- Meaningful callouts ----- */
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page .rule{
+  background:linear-gradient(145deg,rgba(10,55,97,.86),rgba(5,34,67,.88)) !important;
+  border:1px solid rgba(92,186,242,.30) !important;
+  color:#e0edf7 !important;
+}
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page .rule :is(p,li,span){
+  color:#e0edf7 !important;
+}
+
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page :is(
+  .rule.warn,
+  .warn,
+  .warnbox,
+  .guide-callout.warn,
+  .guide-callout.warning
+){
+  background:linear-gradient(145deg,rgba(104,70,29,.80),rgba(66,43,24,.82)) !important;
+  border-color:rgba(244,184,83,.44) !important;
+  color:#fff0ce !important;
+}
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page :is(
+  .rule.warn,
+  .warn,
+  .warnbox,
+  .guide-callout.warn,
+  .guide-callout.warning
+) :is(p,li,span){
+  color:#fff0ce !important;
+}
+
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page :is(
+  .savebox,
+  .good
+){
+  background:linear-gradient(145deg,rgba(19,79,79,.82),rgba(9,53,66,.84)) !important;
+  border-color:rgba(91,211,190,.36) !important;
+  color:#e1fff7 !important;
+}
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page :is(
+  .savebox,
+  .good
+) :is(p,li,span){
+  color:#e1fff7 !important;
+}
+
+/* ----- Mini cards and generic old cards ----- */
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page :is(
+  .mini-card,
+  .quick,
+  .check,
+  .info-card,
+  .content-card,
+  .panel,
+  .card
+){
+  background:linear-gradient(145deg,rgba(12,52,94,.78),rgba(6,31,66,.82)) !important;
+  border-color:rgba(104,179,248,.24) !important;
+  color:#dceaf5 !important;
+}
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page :is(
+  .mini-card,
+  .quick,
+  .check,
+  .info-card,
+  .content-card,
+  .panel,
+  .card
+) :is(p,li,span,small){
+  color:#dceaf5 !important;
+}
+
+/* ----- Tables ----- */
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page table{
+  color:#dceaf5 !important;
+  background:rgba(5,26,59,.54) !important;
+  border-color:rgba(105,176,239,.20) !important;
+}
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page table :is(th,td){
+  color:#dceaf5 !important;
+  border-color:rgba(105,176,239,.17) !important;
+}
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page table th{
+  background:rgba(24,68,112,.70) !important;
+  color:#fff !important;
+}
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page table tr:nth-child(even) td{
+  background:rgba(10,43,82,.22) !important;
+}
+
+/* ----- Figure captions ----- */
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page figcaption{
+  color:#c9dbea !important;
+  background:rgba(5,25,57,.78) !important;
+  border-color:rgba(105,178,242,.18) !important;
+}
+
+/* ----- Links inside articles ----- */
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page section.section a:not(.guide-nav-card),
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page .guide-section a{
+  color:#8edcff !important;
+  text-decoration-color:rgba(142,220,255,.45) !important;
+}
+
+/* ----- Special protection for bold-only list items like seasons ----- */
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page li > b:only-child,
+body.site-hq-v407.modern-v424:not(.is-home-route) .route-page li > strong:only-child{
+  color:#f8fcff !important;
+}
+
+/* ----- Text wrapping / geometry safety ----- */
+body.site-hq-v407.modern-v424 .route-page :is(
+  p,li,td,th,h1,h2,h3,h4,b,strong,span,small,a
+){
+  max-width:100%;
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+body.site-hq-v407.modern-v424 .route-page :is(p,li){
+  line-height:1.55 !important;
+}
+
+/* Keep captions/callouts from being hidden behind the fixed bottom bar. */
+@media(max-width:820px){
+  body.site-hq-v407.modern-v424:not(.is-home-route) .route-page{
+    padding-bottom:82px !important;
+  }
+
+  body.site-hq-v407.modern-v424:not(.is-home-route) .route-page > section.section,
+  body.site-hq-v407.modern-v424:not(.is-home-route) .route-page section.section{
+    padding:14px 12px !important;
+    border-radius:15px !important;
+  }
+
+  body.site-hq-v407.modern-v424:not(.is-home-route) .route-page section.section :is(p,li),
+  body.site-hq-v407.modern-v424:not(.is-home-route) .route-page .guide-section :is(p,li){
+    font-size:14.5px !important;
+    line-height:1.56 !important;
+  }
+
+  body.site-hq-v407.modern-v424:not(.is-home-route) .route-page section.section :is(h2,h3){
+    line-height:1.16 !important;
+  }
+}
+
+/* =========================================================
+   v455 — explicit fishing-page fix from reported screenshot
+   ========================================================= */
+body.is-fishing-route.site-hq-v407.modern-v424 .route-page section.section{
+  background:
+    radial-gradient(circle at 88% 4%,rgba(77,111,235,.12),transparent 30%),
+    linear-gradient(145deg,rgba(7,31,75,.94),rgba(4,20,52,.92)) !important;
+}
+body.is-fishing-route.site-hq-v407.modern-v424 .route-page section.section :is(p,li){
+  color:#dceaf6 !important;
+}
+body.is-fishing-route.site-hq-v407.modern-v424 .route-page section.section :is(h3,b,strong){
+  color:#ffffff !important;
+}
