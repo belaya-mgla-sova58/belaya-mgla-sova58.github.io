@@ -2191,3 +2191,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   window.addEventListener('pageshow', removeFiltersV457);
 })();
+
+
+/* v459 — retire home Recent/Favorites sections to keep the mobile home shorter. */
+(() => {
+  const removeLongHomeExtrasV459 = () => {
+    document.querySelectorAll('.home-smart-section-v452').forEach(el => el.remove());
+  };
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', removeLongHomeExtrasV459, {once:true});
+  } else {
+    removeLongHomeExtrasV459();
+  }
+  window.addEventListener('pageshow', removeLongHomeExtrasV459);
+})();
