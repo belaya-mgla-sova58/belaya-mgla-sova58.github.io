@@ -1797,20 +1797,10 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   function addSmartBadges(){
-    if (!document.body.classList.contains('is-home-route')) return;
-    const cards = document.querySelectorAll(
-      '.modern-home-strip-v424 > a, .modern-topic-card-v424, .home-news-card-v442'
-    );
-    cards.forEach(card => {
-      const href = (card.getAttribute('href') || '').split('#')[0];
-      const spec = BADGES[href];
-      if (!spec || card.querySelector('.smart-badge-v452')) return;
-      card.style.position = 'relative';
-      const badge = document.createElement('span');
-      badge.className = `smart-badge-v452 ${spec[1]}`;
-      badge.textContent = spec[0];
-      card.appendChild(badge);
-    });
+    /* v456: disabled.
+       These helper labels ("Обновлено", "Популярно", etc.) were clipping
+       and visually breaking the home cards on narrow mobile layouts. */
+    return;
   }
 
   /* ---------- home recent/favorites ---------- */

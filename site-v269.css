@@ -18495,3 +18495,29 @@ body.is-fishing-route.site-hq-v407.modern-v424 .route-page section.section :is(p
 body.is-fishing-route.site-hq-v407.modern-v424 .route-page section.section :is(h3,b,strong){
   color:#ffffff !important;
 }
+
+
+/* =========================================================
+   v456 — remove clipped home helper badges
+   The pills like "Обновлено", "Популярно", "Полезно", "Инструмент"
+   were overlapping cards on the home page in mobile view.
+   ========================================================= */
+body.is-home-route .modern-home-strip-v424 .smart-badge-v452,
+body.is-home-route .modern-topic-card-v424 .smart-badge-v452,
+body.is-home-route .home-news-card-v442 .smart-badge-v452{
+  display:none !important;
+}
+
+/* Make sure the card content has full clean space after badge removal */
+body.is-home-route .modern-home-strip-v424 > a,
+body.is-home-route .modern-topic-card-v424,
+body.is-home-route .home-news-card-v442{
+  overflow:hidden;
+}
+
+body.is-home-route .modern-home-strip-v424 > a > div,
+body.is-home-route .modern-topic-card-v424,
+body.is-home-route .home-news-banner-copy-v449{
+  position:relative;
+  z-index:1;
+}
