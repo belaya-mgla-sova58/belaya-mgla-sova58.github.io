@@ -32,3 +32,35 @@ body.is-bear-route .event-bear-header-v478>h1,body.is-bear-route .event-bear-hea
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',applyBearArt,{once:true});
   else applyBearArt();
 })();
+
+(function(){
+  var style=document.createElement('style');
+  style.id='event-single-frame-v488';
+  style.textContent='\
+body.is-events-route .guide-nav-card.event-bear-v478{border:0!important;outline:0!important;box-shadow:none!important;}\
+body.is-events-route .guide-nav-card.event-bear-v478::after{display:none!important;content:none!important;}\
+body.is-bear-route .event-bear-header-v478::after{display:none!important;content:none!important;}\
+body.is-events-route .guide-nav-card.crazy-joe-card-v462{border:0!important;outline:0!important;box-shadow:none!important;}\
+body.is-events-route .guide-nav-card.crazy-joe-card-v462::after{display:none!important;content:none!important;}\
+body.is-events-route .guide-nav-card.event-single-frame-v488{border:0!important;outline:0!important;box-shadow:none!important;background-color:transparent!important;}\
+body.is-events-route .guide-nav-card.event-single-frame-v488>span[aria-hidden="true"]{display:none!important;}\
+.page-heading-v424.frost-header-v431.event-single-frame-v488{border:0!important;outline:0!important;box-shadow:none!important;background-color:transparent!important;}\
+.page-heading-v424.frost-header-v431.event-single-frame-v488::after{display:none!important;content:none!important;}\
+.page-heading-v424.frost-header-v431.event-single-frame-v488>span[aria-hidden="true"]{display:none!important;}';
+  document.head.appendChild(style);
+
+  function applySingleFrame(){
+    document.querySelectorAll('body.is-events-route .guide-nav-card').forEach(function(card){
+      if(card.querySelector('img') || card.classList.contains('crazy-joe-card-v462') || card.classList.contains('event-bear-v478')){
+        card.classList.add('event-single-frame-v488');
+      }
+    });
+    document.querySelectorAll('.page-heading-v424.frost-header-v431').forEach(function(header){
+      if(header.querySelector('img') || header.classList.contains('event-bear-header-v478')){
+        header.classList.add('event-single-frame-v488');
+      }
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',applySingleFrame,{once:true});
+  else applySingleFrame();
+})();
