@@ -1,0 +1,40 @@
+name: v483 prestige cropped images
+on:
+  push:
+    paths:
+      - '.github/workflows/v483-prestige-crops.yml'
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install cropped Prestige images
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64,re
+          card='''"+card_b64+"'''
+          head='''"+head_b64+"'''
+          Path('assets/prestige-card-v483.jpg').write_bytes(base64.b64decode(card))
+          Path('assets/prestige-header-v483.jpg').write_bytes(base64.b64decode(head))
+          p=Path('events.html')
+          s=p.read_text(encoding='utf-8')
+          new='<a aria-label="Престиж наёмника" class="guide-nav-card" href="mercenary-prestige.html" title="Престиж наёмника" style="position:relative;min-height:0;aspect-ratio:2/1;padding:0;overflow:hidden;border-radius:14px;font-size:0;color:transparent"><img alt="Престиж наёмника" src="assets/prestige-card-v483.jpg?v=483" style="display:block;width:100%;height:100%;object-fit:cover"/></a>'
+          s=re.sub(r'<a[^>]*href="mercenary-prestige\.html"[^>]*>.*?</a>',new,s,count=1)
+          s=re.sub(r'site-v269\.js\?v=\d+','site-v269.js?v=483',s)
+          p.write_text(s,encoding='utf-8')
+          p=Path('mercenary-prestige.html')
+          s=p.read_text(encoding='utf-8')
+          section='<section class="page-heading-v424 frost-header-v431" style="position:relative;padding:0;overflow:hidden;aspect-ratio:3/1;min-height:0;border-radius:14px"><img alt="Престиж наёмника" src="assets/prestige-header-v483.jpg?v=483" style="display:block;width:100%;height:100%;object-fit:cover"/></section>'
+          s=re.sub(r'<section class="page-heading-v424 frost-header-v431(?: [^"]*)?"[^>]*>.*?</section>',section,s,count=1,flags=re.S)
+          s=re.sub(r'site-v269\.js\?v=\d+','site-v269.js?v=483',s)
+          p.write_text(s,encoding='utf-8')
+          PY
+          rm -f .github/workflows/v483-prestige-crops.yml
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git commit -m 'v483: use cropped Prestige images'
+          git push
