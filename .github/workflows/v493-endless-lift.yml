@@ -1,0 +1,33 @@
+name: Lift Endless Trial header v493
+
+on:
+  push:
+    paths:
+      - '.github/workflows/v493-endless-lift.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  lift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Force Endless Trial header higher
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('endless-trial.html')
+          s = p.read_text(encoding='utf-8')
+          s = s.replace('margin-top:-6px', 'margin-top:-14px!important', 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit change
+        shell: bash
+        run: |
+          git config user.name "belaya-mgla-sova58"
+          git config user.email "actions@users.noreply.github.com"
+          git add endless-trial.html
+          git diff --cached --quiet || git commit -m "v493: force Endless Trial header higher"
+          git push
