@@ -19058,3 +19058,53 @@ body.is-events-route .guide-nav-card.crazy-joe-card-v462::before{
     linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0) 45%),
     radial-gradient(circle at 76% 42%, rgba(255,145,226,.16), transparent 42%) !important;
 }
+
+
+/* v498: unified event banners, frame exists only inside the image */
+.event-art-v498{
+  position:relative!important;
+  padding:0!important;
+  overflow:hidden!important;
+  aspect-ratio:2048/682!important;
+  min-height:0!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+  border-radius:14px!important;
+  margin-top:0!important;
+}
+.event-art-v498::before,
+.event-art-v498::after,
+.event-art-card-v498::before,
+.event-art-card-v498::after{
+  content:none!important;
+  display:none!important;
+}
+.event-art-v498>img,
+.event-art-card-v498>img{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  display:block!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+}
+.event-art-card-v498{
+  position:relative!important;
+  min-height:0!important;
+  aspect-ratio:2048/682!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border-radius:14px!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+  font-size:0!important;
+  color:transparent!important;
+}
