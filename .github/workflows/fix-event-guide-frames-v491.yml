@@ -1,0 +1,68 @@
+name: Fix event guide frames v491
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-event-guide-frames-v491.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove duplicate guide frames
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          span = '<span aria-hidden="true" style="position:absolute;inset:14px;border:1px solid rgba(220,245,255,.55);border-radius:14px;pointer-events:none"></span>'
+
+          for name in ['mercenary-prestige.html', 'frostfire-mine.html']:
+              p = Path(name)
+              s = p.read_text(encoding='utf-8')
+              s = s.replace(span, '')
+              s = s.replace('site-v269.js?v=485', 'site-v269.js?v=491')
+              p.write_text(s, encoding='utf-8')
+
+          p = Path('bear.html')
+          s = p.read_text(encoding='utf-8').replace('site-v269.js?v=465', 'site-v269.js?v=491')
+          p.write_text(s, encoding='utf-8')
+
+          p = Path('site-v269.js')
+          s = p.read_text(encoding='utf-8')
+          s = s.replace('border:1px solid rgba(108,205,255,.35)!important;', 'border:0!important;')
+          s = s.replace('box-shadow:0 10px 24px rgba(0,8,24,.22)!important;', 'box-shadow:none!important;')
+          s = re.sub(r'body\.is-events-route \.guide-nav-card\.event-bear-v478::after\{[^}]*\}', 'body.is-events-route .guide-nav-card.event-bear-v478::after{content:none!important;display:none!important;}', s)
+          s = re.sub(r'body\.is-bear-route \.event-bear-header-v478::after\{[^}]*\}', 'body.is-bear-route .event-bear-header-v478::after{content:none!important;display:none!important;}', s)
+
+          marker = "\n(function(){\n  var style=document.createElement('style');\n  style.id='event-single-frame-v488';"
+          pos = s.find(marker)
+          if pos != -1:
+              s = s[:pos]
+
+          cleanup = r'''
+
+(function(){
+  var style=document.createElement('style');
+  style.id='event-single-frame-v491';
+  style.textContent='\\
+body.is-bear-route .page-heading-v424.frost-header-v431.event-bear-header-v478{border:0!important;outline:0!important;box-shadow:none!important;}\\
+body.is-bear-route .page-heading-v424.frost-header-v431.event-bear-header-v478::before,body.is-bear-route .page-heading-v424.frost-header-v431.event-bear-header-v478::after{content:none!important;display:none!important;border:0!important;box-shadow:none!important;}\\
+body.is-mercenary-prestige-route .page-heading-v424.frost-header-v431,body.is-frostfire-mine-route .page-heading-v424.frost-header-v431,body.is-endless-trial-route .page-heading-v424.frost-header-v431,body.is-crazy-joe-route .page-heading-v424.frost-header-v431{border:0!important;outline:0!important;box-shadow:none!important;}\\
+body.is-mercenary-prestige-route .page-heading-v424.frost-header-v431::before,body.is-mercenary-prestige-route .page-heading-v424.frost-header-v431::after,body.is-frostfire-mine-route .page-heading-v424.frost-header-v431::before,body.is-frostfire-mine-route .page-heading-v424.frost-header-v431::after,body.is-endless-trial-route .page-heading-v424.frost-header-v431::before,body.is-endless-trial-route .page-heading-v424.frost-header-v431::after,body.is-crazy-joe-route .page-heading-v424.frost-header-v431::before,body.is-crazy-joe-route .page-heading-v424.frost-header-v431::after{content:none!important;display:none!important;border:0!important;box-shadow:none!important;}';
+  document.head.appendChild(style);
+})();
+'''
+          p.write_text(s.rstrip() + cleanup, encoding='utf-8')
+          PY
+      - name: Commit fixes
+        run: |
+          git config user.name "belaya-mgla-sova58"
+          git config user.email "actions@users.noreply.github.com"
+          git add mercenary-prestige.html frostfire-mine.html bear.html site-v269.js
+          git diff --cached --quiet || git commit -m "v491: remove duplicate frames from event guides"
+          git push
