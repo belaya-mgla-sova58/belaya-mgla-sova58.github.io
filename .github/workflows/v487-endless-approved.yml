@@ -1,0 +1,60 @@
+name: v487 endless trial approved art
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/v487-endless-approved.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install approved Endless Trial art and patch pages
+        shell: python
+        run: |
+          import base64, re
+          from pathlib import Path
+
+          assets = Path("assets")
+          assets.mkdir(exist_ok=True)
+
+          header_b64 = "..."
+          card_b64 = "..."
+
+          (assets / "endless-trial-header-v487.jpg").write_bytes(base64.b64decode(header_b64))
+          (assets / "endless-trial-card-v487.jpg").write_bytes(base64.b64decode(card_b64))
+
+          # events.html: only replace the Endless Trial card
+          p = Path("events.html")
+          s = p.read_text(encoding="utf-8")
+          replacement = '''<a aria-label="Бесконечное испытание" class="guide-nav-card" href="endless-trial.html" title="Бесконечное испытание" style="position:relative;min-height:0;aspect-ratio:2/1;padding:0;overflow:hidden;border-radius:14px;font-size:0;color:transparent;border:0;box-shadow:0 10px 24px rgba(0,8,24,.22)"><img alt="Бесконечное испытание" src="assets/endless-trial-card-v487.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"/></a>'''
+          s, n = re.subn(r'<a[^>]*href="endless-trial\.html"[^>]*>.*?</a>', replacement, s, count=1, flags=re.S)
+          if n != 1:
+              raise SystemExit("Endless Trial card was not found in events.html")
+          p.write_text(s, encoding="utf-8")
+
+          # endless-trial.html: replace only the page heading with the approved image
+          p = Path("endless-trial.html")
+          s = p.read_text(encoding="utf-8")
+          header = '''<section class="page-heading-v424 frost-header-v431" style="position:relative;padding:0;overflow:hidden;aspect-ratio:3/1;min-height:0;border-radius:14px;border:0;box-shadow:none"><img alt="Бесконечное испытание" src="assets/endless-trial-header-v487.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"/><h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Бесконечное испытание</h1></section>'''
+          s, n = re.subn(r'<section class="page-heading-v424 frost-header-v431"[^>]*>.*?</section>', header, s, count=1, flags=re.S)
+          if n != 1:
+              raise SystemExit("Endless Trial page heading was not found")
+          p.write_text(s, encoding="utf-8")
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add events.html endless-trial.html assets/endless-trial-card-v487.jpg assets/endless-trial-header-v487.jpg
+          git commit -m "v487: add approved Endless Trial art" || exit 0
+          git push
