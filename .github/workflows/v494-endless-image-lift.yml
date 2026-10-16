@@ -1,0 +1,38 @@
+name: Lift Endless Trial image v494
+
+on:
+  push:
+    paths:
+      - '.github/workflows/v494-endless-image-lift.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lift image inside Endless Trial header
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('endless-trial.html')
+          s = p.read_text(encoding='utf-8')
+          s = s.replace('box-shadow:none;margin-top:-14px!important', 'box-shadow:none')
+          old = 'style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"'
+          new = 'style="position:absolute;left:0;right:0;top:-8px;width:100%;height:calc(100% + 8px);object-fit:cover;display:block"'
+          if old not in s:
+              raise SystemExit('Endless Trial image style not found')
+          s = s.replace(old, new, 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit change
+        shell: bash
+        run: |
+          git config user.name "belaya-mgla-sova58"
+          git config user.email "actions@users.noreply.github.com"
+          git add endless-trial.html
+          git diff --cached --quiet || git commit -m "v494: lift Endless Trial image inside header"
+          git push
