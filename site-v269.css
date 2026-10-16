@@ -19058,3 +19058,56 @@ body.is-events-route .guide-nav-card.crazy-joe-card-v462::before{
     linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0) 45%),
     radial-gradient(circle at 76% 42%, rgba(255,145,226,.16), transparent 42%) !important;
 }
+
+/* =========================================================
+   v520 — darken bright title/image backgrounds
+   Fixes overly bright title areas on Creative Corner / WhiteFox
+   and matching home news banners.
+   ========================================================= */
+
+/* Darker title overlays on the two custom news headers */
+body.news-top-creative .page-heading-v424.creative-corner-header-v447{
+  background-image:
+    linear-gradient(180deg,
+      rgba(2,8,24,.18) 8%,
+      rgba(3,10,28,.52) 42%,
+      rgba(3,10,28,.88) 100%),
+    url("assets/creative-corner-header-v447.webp") !important;
+}
+
+body.news-top-whitefox .page-heading-v424.whitefox-news-header-v447{
+  background-image:
+    linear-gradient(180deg,
+      rgba(18,4,10,.16) 10%,
+      rgba(16,4,10,.48) 44%,
+      rgba(14,4,10,.86) 100%),
+    url("assets/whitefox-news-header-v447.webp") !important;
+}
+
+/* A little stronger readable text for those title blocks */
+body.news-top-creative .page-heading-v424.creative-corner-header-v447 h1,
+body.news-top-whitefox .page-heading-v424.whitefox-news-header-v447 h1{
+  text-shadow:0 4px 14px rgba(0,0,0,.78) !important;
+}
+
+body.news-top-creative .page-heading-v424.creative-corner-header-v447 p,
+body.news-top-whitefox .page-heading-v424.whitefox-news-header-v447 p{
+  color:rgba(246,250,255,.96) !important;
+  text-shadow:0 3px 10px rgba(0,0,0,.74) !important;
+}
+
+/* Same issue on the homepage cards with those names */
+body.is-home-route .home-news-v442 .home-news-card-v442.home-news-creative-v449 .home-news-banner-overlay-v449,
+body.is-home-route .home-news-v442 .home-news-card-v442.home-news-whitefox-v449 .home-news-banner-overlay-v449{
+  background:linear-gradient(180deg,
+    rgba(2,8,22,.16) 10%,
+    rgba(3,10,28,.42) 46%,
+    rgba(3,10,28,.92) 100%) !important;
+}
+
+body.is-home-route .home-news-v442 .home-news-card-v442.home-news-creative-v449 .home-news-banner-copy-v449 b,
+body.is-home-route .home-news-v442 .home-news-card-v442.home-news-whitefox-v449 .home-news-banner-copy-v449 b,
+body.is-home-route .home-news-v442 .home-news-card-v442.home-news-creative-v449 .home-news-banner-copy-v449 small,
+body.is-home-route .home-news-v442 .home-news-card-v442.home-news-whitefox-v449 .home-news-banner-copy-v449 small{
+  text-shadow:0 3px 10px rgba(0,0,0,.84) !important;
+}
