@@ -19398,3 +19398,31 @@ body.modern-v424 .mobile-bottom-v424 a b{
     min-height:32px !important;
   }
 }
+
+/* =========================================================
+   v528 — exact icons cropped from the user-approved reference image.
+   Keep the source artwork intact; no SVG substitutions or recoloring.
+   ========================================================= */
+body.is-home-route img[src*="-v528.webp"],
+body.modern-v424 .mobile-bottom-v424 img[src*="-v528.webp"]{
+  filter:none !important;
+  mix-blend-mode:normal !important;
+  object-fit:contain !important;
+  object-position:center !important;
+}
+
+/* Let the exact artwork breathe inside existing wells. */
+body.is-home-route .v424-icon:has(img[src*="-v528.webp"]),
+body.is-home-route .v445-topic-icon:has(img[src*="-v528.webp"]),
+body.is-home-route .v424-list-icon:has(img[src*="-v528.webp"]),
+body.modern-v424 .mobile-bottom-v424 .mobile-nav-icon-v429:has(img[src*="-v528.webp"]){
+  padding:0 !important;
+  overflow:hidden !important;
+}
+
+body.modern-v424 .mobile-bottom-v424 img[src*="-v528.webp"]{
+  width:32px !important;
+  height:32px !important;
+  max-width:32px !important;
+  max-height:32px !important;
+}
