@@ -19149,3 +19149,56 @@ body.modern-v424 .mobile-bottom-v424 a > .mobile-nav-icon-v429{
     text-align:center !important;
   }
 }
+
+/* =========================================================
+   v526 — simple unified icons on home + matching bottom nav
+   ========================================================= */
+body.is-home-route .modern-home-strip-v424 .v424-icon,
+body.is-home-route .modern-topic-card-v424 > .v445-topic-icon,
+body.is-home-route .modern-list-v424 .v424-list-icon{
+  display:grid !important;
+  place-items:center !important;
+}
+body.is-home-route .modern-home-strip-v424 .v424-icon{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+body.modern-v424 .mobile-bottom-v424 a > .mobile-nav-icon-v429{
+  display:grid !important;
+  place-items:center !important;
+}
+body.modern-v424 .mobile-bottom-v424{
+  min-height:68px !important;
+  padding:5px 5px 4px !important;
+  gap:2px !important;
+}
+body.modern-v424 .mobile-bottom-v424 a{
+  min-height:56px !important;
+  padding:3px 1px 2px !important;
+  gap:2px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+body.modern-v424 .mobile-bottom-v424 a > .mobile-nav-icon-v429{
+  width:34px !important;
+  height:34px !important;
+  min-width:34px !important;
+  min-height:34px !important;
+  margin:0 auto 1px !important;
+}
+body.modern-v424 .mobile-bottom-v424 a b{
+  margin:0 !important;
+  font-size:8px !important;
+  line-height:1.1 !important;
+  text-align:center !important;
+}
+body.is-home-route .v445-tile-icon-img,
+body.is-home-route .v445-topic-icon-img,
+body.is-home-route .v445-list-icon-img,
+body.modern-v424 .mobile-nav-img-v429{
+  object-fit:contain !important;
+  object-position:center !important;
+}
