@@ -1,8 +1,8 @@
-const CACHE_NAME = 'belaya-mgla-v548';
+const CACHE_NAME = 'belaya-mgla-v549';
 const CORE = [
   './',
   './index.html',
-  './site-v269.css?v=548',
+  './site-v269.css?v=549',
   './site-v269.js?v=535',
   './manifest-v541.webmanifest',
   './app-icon-192-v541.png',
