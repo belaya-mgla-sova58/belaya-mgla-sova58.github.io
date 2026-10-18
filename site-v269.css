@@ -19609,3 +19609,106 @@ body.star-glass-v436 .breadcrumbs-v409 [aria-current="page"]{
   .pwa-install-copy-v540 small{font-size:9px;}
   .pwa-install-v540 button{padding:8px 11px;font-size:10px;}
 }
+
+/* =========================================================
+   v542 — mobile scroll performance
+   Keep the same visual design, but remove expensive repaint effects
+   on phones / Android WebView / emulators.
+   ========================================================= */
+@media (max-width: 980px), (pointer: coarse) {
+  html,
+  body,
+  #appMain,
+  main,
+  .route-page,
+  .modern-home-v424 {
+    scroll-behavior: auto !important;
+    background-attachment: scroll !important;
+  }
+
+  /* Blur on many translucent panels is the biggest scroll cost on mobile. */
+  .nav-wrap,
+  .mobile-topbar,
+  .mobile-bottom-v424,
+  .breadcrumbs-v409,
+  .modern-panel-v424,
+  .modern-topic-card-v424,
+  .modern-list-v424 > a,
+  .modern-home-strip-v424 > a,
+  .home-news-card-v442,
+  .guide-fold-summary-v414,
+  .guide-section,
+  .guide-callout,
+  .news-shell,
+  .news-card,
+  .news-category-description,
+  .news-category-description-overlay,
+  .kb-group-v415,
+  .kb-tools-v415,
+  .kb-more-v415,
+  details,
+  article {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Prevent GPU layers from being kept alive while scrolling. */
+  .site-cosmic-background-v442,
+  .modern-panel-v424,
+  .modern-topic-card-v424,
+  .modern-list-v424 > a,
+  .home-news-card-v442,
+  article,
+  details {
+    will-change: auto !important;
+  }
+
+  /* Long guides/news pages only paint sections near the viewport. */
+  .guide-page-v69 > section,
+  .guide-page-v69 > details,
+  .news-shell > article,
+  .whitefox-story > section,
+  .route-page > .section,
+  .route-page > section:not(.page-heading-v424),
+  .kb-group-v415,
+  .kb-tools-v415,
+  .kb-more-v415 {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 360px;
+  }
+
+  /* Touch devices do not need hover-lift animations; avoiding them cuts repaints. */
+  .event-card,
+  .thumb-card,
+  .rule,
+  .guide-card,
+  .expert-card,
+  .mini-card,
+  .pet-card,
+  .icon-card,
+  .resource-card,
+  .card,
+  .news-category-card,
+  .guide-nav-card,
+  .modern-topic-card-v424,
+  .modern-list-v424 > a {
+    transition: none !important;
+  }
+
+  .event-card:hover,
+  .thumb-card:hover,
+  .rule:hover,
+  .guide-card:hover,
+  .expert-card:hover,
+  .mini-card:hover,
+  .pet-card:hover,
+  .icon-card:hover,
+  .resource-card:hover,
+  .card:hover,
+  .news-category-card:hover,
+  .guide-nav-card:hover,
+  .modern-topic-card-v424:hover,
+  .modern-list-v424 > a:hover {
+    transform: none !important;
+  }
+}

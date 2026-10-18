@@ -6,7 +6,7 @@
   const isiOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
 
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js?v=541').catch(()=>{}));
+    window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js?v=542').catch(()=>{}));
   }
 
   if (!btn) return;
