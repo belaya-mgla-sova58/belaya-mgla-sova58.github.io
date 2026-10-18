@@ -19781,3 +19781,67 @@ body.star-glass-v436 .breadcrumbs-v409 [aria-current="page"]{
     color: #d9ecfb !important;
   }
 }
+
+/* v544: Other/Knowledge page mobile readability final fix
+   At ~400px width, 3 columns make the text too tiny.
+   Use 2 columns on small phones and 1 column on very narrow screens. */
+@media (max-width: 520px){
+  body.is-other-route .kb-grid-v415{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+
+  body.is-other-route .kb-group-v415{
+    padding: 10px !important;
+  }
+
+  body.is-other-route .kb-card-v415.kb-card-textonly-v416,
+  body.is-other-route .kb-card-v415.kb-card-v417{
+    min-height: 94px !important;
+    padding: 10px 10px 11px !important;
+    border-radius: 12px !important;
+  }
+
+  body.is-other-route .kb-card-textonly-v416 .kb-card-caption-v415,
+  body.is-other-route .kb-card-v415 .kb-card-caption-v415{
+    gap: 6px !important;
+  }
+
+  body.is-other-route .kb-card-v415 .kb-card-texts-v415 strong,
+  body.is-other-route .kb-card-textonly-v416 .kb-card-texts-v415 strong,
+  body.is-other-route .kb-card-v417 .kb-card-texts-v415 strong{
+    font-size: 12.6px !important;
+    line-height: 1.18 !important;
+    letter-spacing: 0 !important;
+    margin-bottom: 4px !important;
+    color: #ffffff !important;
+  }
+
+  body.is-other-route .kb-card-v415 .kb-card-texts-v415 small,
+  body.is-other-route .kb-card-textonly-v416 .kb-card-texts-v415 small,
+  body.is-other-route .kb-card-v417 .kb-card-texts-v415 small{
+    display: block !important;
+    font-size: 10.2px !important;
+    line-height: 1.3 !important;
+    color: #dfefff !important;
+  }
+
+  body.is-other-route .kb-card-v415 .kb-card-arrow-v415,
+  body.is-other-route .kb-card-textonly-v416 .kb-card-arrow-v415{
+    width: 20px !important;
+    height: 20px !important;
+    flex: 0 0 20px !important;
+    font-size: 15px !important;
+  }
+}
+
+@media (max-width: 360px){
+  body.is-other-route .kb-grid-v415{
+    grid-template-columns: 1fr !important;
+  }
+
+  body.is-other-route .kb-card-v415.kb-card-textonly-v416,
+  body.is-other-route .kb-card-v415.kb-card-v417{
+    min-height: 88px !important;
+  }
+}
