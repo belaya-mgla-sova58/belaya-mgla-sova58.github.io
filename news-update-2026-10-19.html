@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Белая Мгла • Большое обновление 19 октября 2026</title>
-<link href="site-v269.css?v=552" rel="stylesheet"/>
+<link href="site-v269.css?v=553" rel="stylesheet"/>
 
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
@@ -222,6 +222,62 @@ body.is-news-route.news-subpage .update-news-20261019 .overview-card .overview-c
     font-size:27px!important;
     line-height:1.1!important;
   }
+}
+</style>
+
+<style id="v553-final-contrast">
+/* v553: final overrides placed last so global theme rules cannot wash out text */
+body.is-news-route .update-news-20261019 .update-overview,
+body.is-news-route .update-news-20261019 .update-article-card{
+  background:linear-gradient(180deg,#f8fbff 0%,#e9f2ff 100%) !important;
+  color:#172d49 !important;
+}
+body.is-news-route .update-news-20261019 .overview-head h2,
+body.is-news-route .update-news-20261019 .update-section-heading h2,
+body.is-news-route .update-news-20261019 .update-subheading{
+  color:#16385f !important;
+  -webkit-text-fill-color:#16385f !important;
+  text-shadow:none !important;
+  opacity:1 !important;
+  filter:none !important;
+  mix-blend-mode:normal !important;
+}
+body.is-news-route .update-news-20261019 .overview-head p,
+body.is-news-route .update-news-20261019 .overview-kicker,
+body.is-news-route .update-news-20261019 .overview-trust,
+body.is-news-route .update-news-20261019 .update-section-heading p,
+body.is-news-route .update-news-20261019 .section-quick,
+body.is-news-route .update-news-20261019 .section-quick p,
+body.is-news-route .update-news-20261019 .update-copy,
+body.is-news-route .update-news-20261019 .update-copy p{
+  color:#314b69 !important;
+  -webkit-text-fill-color:currentColor !important;
+  text-shadow:none !important;
+  opacity:1 !important;
+}
+body.is-news-route .update-news-20261019 .overview-trust strong,
+body.is-news-route .update-news-20261019 .update-copy strong{color:#173b64 !important;-webkit-text-fill-color:#173b64 !important;}
+body.is-news-route .update-news-20261019 .section-quick{background:#eef5ff !important;border-color:#cddff2 !important;}
+body.is-news-route .update-news-20261019 .section-quick-label{background:#174a7a !important;color:#fff !important;-webkit-text-fill-color:#fff !important;}
+body.is-news-route .update-news-20261019 .overview-action,
+body.is-news-route .update-news-20261019 .section-toggle{color:#173b64 !important;-webkit-text-fill-color:#173b64 !important;background:linear-gradient(135deg,#e7f4ff,#eee8ff) !important;}
+body.is-news-route .update-news-20261019 .overview-card{background:linear-gradient(180deg,#28577f,#173b61) !important;color:#fff !important;-webkit-text-fill-color:#fff !important;}
+body.is-news-route .update-news-20261019 .overview-card *{color:#fff !important;-webkit-text-fill-color:#fff !important;text-shadow:none !important;}
+body.is-news-route .update-news-20261019 .update-skill,
+body.is-news-route .update-news-20261019 .update-date-card,
+body.is-news-route .update-news-20261019 .update-expert-top{background:#fff !important;}
+body.is-news-route .update-news-20261019 .update-skill h3,
+body.is-news-route .update-news-20261019 .update-date-card strong{color:#173b64 !important;-webkit-text-fill-color:#173b64 !important;}
+body.is-news-route .update-news-20261019 .update-skill p,
+body.is-news-route .update-news-20261019 .update-date-card span{color:#516a84 !important;-webkit-text-fill-color:#516a84 !important;}
+/* independent back-to-top control */
+#backTopV553{position:fixed;right:14px;bottom:82px;z-index:9999;width:46px;height:46px;border:1px solid rgba(174,231,255,.55);border-radius:50%;background:linear-gradient(145deg,#1767a2,#493a97);color:#fff;font-size:22px;font-weight:900;display:grid;place-items:center;box-shadow:0 10px 26px rgba(0,0,0,.34);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .18s ease,transform .18s ease,visibility .18s;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#backTopV553.show{opacity:1;visibility:visible;transform:none}
+#backToTop{display:none !important}
+@media(max-width:640px){
+ body.is-news-route .update-news-20261019 .overview-head h2{font-size:22px !important;line-height:1.15 !important;}
+ body.is-news-route .update-news-20261019 .update-section-heading h2{font-size:27px !important;line-height:1.08 !important;}
+ #backTopV553{right:12px;bottom:78px;width:44px;height:44px;font-size:21px}
 }
 </style>
 </head>
@@ -655,4 +711,15 @@ body.is-news-route.news-subpage .update-news-20261019 .overview-card .overview-c
   b.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
   sync();
 })();
-</script><script defer="" src="pwa-install.js?v=549"></script></body></html>
+</script><script defer="" src="pwa-install.js?v=553"></script>
+<button aria-label="Наверх" id="backTopV553" type="button">↑</button>
+<script id="back-top-v553">
+(function(){
+ const b=document.getElementById('backTopV553'); if(!b)return;
+ const sync=()=>b.classList.toggle('show',(window.scrollY||document.documentElement.scrollTop)>420);
+ window.addEventListener('scroll',sync,{passive:true});
+ b.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+ sync();
+})();
+</script>
+</body></html>
