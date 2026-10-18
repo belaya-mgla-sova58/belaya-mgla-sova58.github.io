@@ -19862,3 +19862,41 @@ body.news-top-ru .ru-updates-grid-v545 .news-category-link{
   body.news-top-ru .ru-updates-grid-v545 .news-category-card.ru{min-height:128px;}
   body.news-top-ru .ru-updates-grid-v545 .news-category-link{font-size:20px;}
 }
+
+/* v546: restore News category banner artwork after Modern/Star Glass overrides */
+body.is-news-route.modern-v422 .news-category-card.ru,
+body.is-news-route.star-glass-v436 .news-category-card.ru{
+  background:
+    linear-gradient(180deg,rgba(2,12,32,.04) 0%,rgba(2,12,32,.12) 45%,rgba(2,12,32,.64) 100%),
+    url("assets/news-ru-final-fullbleed.jpg") center center / cover no-repeat !important;
+  border-color:rgba(102,198,255,.34) !important;
+}
+body.is-news-route.modern-v422 .news-category-card.elena,
+body.is-news-route.star-glass-v436 .news-category-card.elena{
+  background:
+    linear-gradient(180deg,rgba(50,0,8,.02) 0%,rgba(50,0,8,.10) 44%,rgba(65,0,10,.62) 100%),
+    url("assets/elena-autumn-maple-banner.png") center center / cover no-repeat !important;
+  border-color:rgba(255,137,159,.30) !important;
+}
+body.is-news-route.modern-v422 .news-category-card.creative,
+body.is-news-route.star-glass-v436 .news-category-card.creative{
+  background:
+    linear-gradient(180deg,rgba(4,10,35,.02) 0%,rgba(4,10,35,.10) 44%,rgba(4,10,35,.64) 100%),
+    url("assets/creative-corner-art-v330.jpg") center center / cover no-repeat !important;
+  border-color:rgba(155,154,255,.32) !important;
+}
+body.is-news-route .news-category-card .news-category-link{
+  min-height:150px !important;
+  align-items:flex-end !important;
+}
+body.is-news-route .news-category-card .news-category-link span{
+  position:relative;
+  z-index:3;
+  color:#fff !important;
+  text-shadow:0 2px 10px rgba(0,0,0,.85),0 1px 2px rgba(0,0,0,.95) !important;
+}
+@media(max-width:700px){
+  body.is-news-route .news-category-card .news-category-link{
+    min-height:112px !important;
+  }
+}
