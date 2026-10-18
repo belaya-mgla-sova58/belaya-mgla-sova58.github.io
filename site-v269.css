@@ -19712,3 +19712,72 @@ body.star-glass-v436 .breadcrumbs-v409 [aria-current="page"]{
     transform: none !important;
   }
 }
+
+/* v543: Other/Knowledge page mobile readability fix — move text away from the side menu and brighten small copy */
+@media (max-width: 760px){
+  body.is-other-route .page-heading-v424,
+  body.is-other-route .page-heading-v424.frost-header-v431{
+    padding-left: 52px !important;
+    padding-right: 16px !important;
+  }
+
+  body.is-other-route .page-heading-v424 h1,
+  body.is-other-route .page-heading-v424.frost-header-v431 h1{
+    font-size: clamp(30px, 8.8vw, 42px) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.3px !important;
+    text-wrap: balance;
+  }
+
+  body.is-other-route .page-heading-v424 p,
+  body.is-other-route .page-heading-v424.frost-header-v431 p{
+    color: #e5f4ff !important;
+    font-size: 13px !important;
+    line-height: 1.45 !important;
+    max-width: none !important;
+    text-shadow: 0 1px 8px rgba(3, 16, 44, 0.35);
+  }
+
+  body.is-other-route .guide-page-v69,
+  body.is-other-route .kb-page-v415{
+    overflow: visible !important;
+  }
+
+  body.is-other-route .kb-intro-v415{
+    padding-left: 54px !important;
+    padding-right: 12px !important;
+    gap: 10px !important;
+  }
+
+  body.is-other-route .kb-intro-v415 h1{
+    color: #ffffff !important;
+    font-size: 18px !important;
+    line-height: 1.14 !important;
+  }
+
+  body.is-other-route .kb-intro-v415 p{
+    color: #d7ebfb !important;
+    font-size: 11.5px !important;
+    line-height: 1.4 !important;
+  }
+
+  body.is-other-route .kb-group-head-v415 h2{
+    color: #ffffff !important;
+  }
+
+  body.is-other-route .kb-group-head-v415 span{
+    color: #cfe6f8 !important;
+  }
+
+  body.is-other-route .kb-card-v415 .kb-card-texts-v415 strong{
+    font-size: 10.6px !important;
+    line-height: 1.18 !important;
+    color: #ffffff !important;
+  }
+
+  body.is-other-route .kb-card-v415 .kb-card-texts-v415 small{
+    font-size: 9.5px !important;
+    line-height: 1.3 !important;
+    color: #d9ecfb !important;
+  }
+}
