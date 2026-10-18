@@ -19493,3 +19493,23 @@ body.cosmic-visible-v444 .v424-list-icon img,
 body.cosmic-visible-v444 .mobile-bottom-v424 .mobile-nav-img-v429{
   object-fit: contain;
 }
+
+/* v537 — WhiteFox News: brighter text only. Typography and backgrounds unchanged. */
+body.news-top-whitefox .whitefox-index-title h2{
+  color:#f5f8ff !important;
+}
+body.news-top-whitefox .whitefox-index-title p{
+  color:#c8d9f2 !important;
+}
+body.news-top-whitefox .whitefox-elena-card-title{
+  color:#ff665c !important;
+}
+body.news-top-whitefox .whitefox-elena-card-week{
+  color:#ffae55 !important;
+}
+body.news-top-whitefox .whitefox-elena-card-hint{
+  color:#d7e6f7 !important;
+}
+body.news-top-whitefox .whitefox-elena-card-hint span{
+  color:#f4f8ff !important;
+}
