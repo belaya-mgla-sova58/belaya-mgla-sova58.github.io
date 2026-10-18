@@ -1,12 +1,12 @@
-const CACHE_NAME = 'belaya-mgla-v540';
+const CACHE_NAME = 'belaya-mgla-v541';
 const CORE = [
   './',
   './index.html',
-  './site-v269.css?v=540',
+  './site-v269.css?v=541',
   './site-v269.js?v=535',
-  './manifest.webmanifest',
-  './app-icon-192.png',
-  './app-icon-512.png',
+  './manifest-v541.webmanifest',
+  './app-icon-192-v541.png',
+  './app-icon-512-v541.png',
   './assets/home-hero-polish-v446.webp',
   './assets/ui-home-v534.webp'
 ];
