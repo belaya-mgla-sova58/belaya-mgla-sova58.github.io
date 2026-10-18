@@ -3,7 +3,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Белая Мгла • Большое обновление 19 октября 2026</title>
-<link href="site-v269.css?v=546" rel="stylesheet"/>
+<link href="site-v269.css?v=548" rel="stylesheet"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
@@ -54,6 +54,145 @@ a{color:#aeeaff;text-decoration:none}a:hover{color:white}
 .update-warning{margin:18px 0;padding:16px 17px;border-radius:18px;border:1px solid #f0d5a8;background:linear-gradient(135deg,#fffaf0,#fff5e7);color:#6b4f2c;line-height:1.6}.update-warning strong{color:#8b5b12}
 .update-video{margin-top:18px;overflow:hidden;border-radius:20px;border:1px solid #d5e3ef;background:#07182c;box-shadow:0 14px 34px rgba(15,33,58,.18)}.update-video iframe,.update-video video{display:block;width:100%;aspect-ratio:16/9;border:0;background:#000;object-fit:contain}.update-video-info{padding:12px 14px;background:#f8fbff;color:#5a6d83;font-size:13px;line-height:1.5}.update-source-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.update-source-links a{display:inline-flex;align-items:center;gap:6px;padding:8px 11px;border-radius:999px;border:1px solid #cfe4f5;background:#eef8ff;color:#25567b;font-size:12px;font-weight:900}.update-source-links a:hover{background:#e1f3ff;color:#173f5f}
 @media(max-width:700px){.update-expert-top{grid-template-columns:1fr}.update-expert-portrait{max-width:240px;margin:auto}.update-skill-grid{grid-template-columns:1fr}.update-skill.wide{grid-column:auto}}
+/* v547 readability fix for RU update article */
+.update-article-card{background:linear-gradient(180deg,#ffffff 0%,#f4f9ff 100%)!important;color:#152b45!important}
+.update-article-card *{text-shadow:none!important}
+.update-section-heading h2,.update-subheading,.update-media h3{color:#123255!important}
+.update-section-heading p,.update-copy,.update-copy p,.update-copy li{color:#2c4564!important}
+.update-copy strong,.update-note strong,.update-warning strong,.update-tip strong{color:#17375e!important}
+.update-expert-top{background:linear-gradient(135deg,#ffffff,#f2f7ff)!important;border-color:#d2e3f2!important}
+.update-skill,.update-date-card{background:#ffffff!important;border-color:#d7e5f3!important}
+.update-date-card strong,.update-skill h3{color:#17375e!important}
+.update-date-card span,.update-skill p,.update-source-row,.update-media figcaption{color:#586d84!important}
+.update-note{background:linear-gradient(135deg,#eef8ff,#f2ecff)!important;color:#29425f!important}
+.update-warning{background:linear-gradient(135deg,#fff8ed,#fff2df)!important;color:#674b29!important}
+.update-tip{background:linear-gradient(135deg,#f2fff8,#ebfaf3)!important;color:#285544!important}
+.update-article-card .update-section-number{box-shadow:0 10px 24px rgba(33,67,124,.22)!important}
+
+
+
+/* v548: compact card layout for RU update article */
+.update-article-card{
+  margin-top:14px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:#17324f!important;
+}
+.update-section-heading{
+  margin:0 0 10px!important;
+  padding:14px 15px!important;
+  border:1px solid rgba(132,196,255,.30)!important;
+  border-radius:18px!important;
+  background:linear-gradient(135deg,#0b3159,#272b68)!important;
+  box-shadow:0 10px 24px rgba(0,12,38,.22)!important;
+  align-items:center!important;
+}
+.update-section-heading h2{
+  margin:0 0 3px!important;
+  color:#ffffff!important;
+  font-size:clamp(22px,4.8vw,30px)!important;
+  line-height:1.08!important;
+}
+.update-section-heading p{
+  color:#cfe7fb!important;
+  font-size:12.5px!important;
+  line-height:1.35!important;
+}
+.update-section-number{
+  width:42px!important;height:42px!important;border-radius:13px!important;
+  font-size:18px!important;
+  background:linear-gradient(145deg,#1687c9,#6c45bf)!important;
+}
+.update-article-card > .update-copy{
+  margin:0 0 10px!important;
+  padding:15px 16px!important;
+  border:1px solid #d7e5f2!important;
+  border-radius:17px!important;
+  background:#ffffff!important;
+  color:#29445f!important;
+  box-shadow:0 8px 20px rgba(17,48,79,.08)!important;
+}
+.update-article-card > .update-copy p{margin:7px 0!important;color:#29445f!important}
+.update-date-grid{margin:10px 0!important;gap:9px!important}
+.update-date-card{
+  padding:13px 13px 14px!important;
+  border-radius:16px!important;
+  background:linear-gradient(180deg,#ffffff,#f4f9ff)!important;
+  box-shadow:0 7px 18px rgba(19,57,92,.08)!important;
+}
+.update-date-card strong{font-size:16px!important;color:#17375e!important}
+.update-date-card b{font-size:11px!important;color:#5d46a8!important}
+.update-date-card span{font-size:12px!important;color:#526b84!important}
+.update-note,.update-warning,.update-tip{
+  margin:10px 0!important;
+  padding:13px 14px!important;
+  border-radius:16px!important;
+  line-height:1.5!important;
+  box-shadow:0 7px 18px rgba(20,51,82,.06)!important;
+}
+.update-source-row{
+  margin:9px 0 0!important;
+  padding:10px 12px!important;
+  border:1px solid rgba(126,180,224,.25)!important;
+  border-radius:14px!important;
+  background:rgba(239,248,255,.92)!important;
+}
+.update-expert-top{
+  margin:0 0 10px!important;
+  padding:14px!important;
+  border-radius:18px!important;
+  background:#ffffff!important;
+  box-shadow:0 8px 20px rgba(17,48,79,.08)!important;
+}
+.update-expert-top .update-copy{font-size:14.5px!important;line-height:1.55!important;color:#29445f!important}
+.update-expert-top .update-copy p{color:#29445f!important}
+.update-subheading{
+  margin:10px 0 8px!important;
+  padding:10px 13px!important;
+  border-radius:14px!important;
+  background:linear-gradient(135deg,rgba(18,70,116,.96),rgba(44,45,112,.96))!important;
+  color:#ffffff!important;
+  font-size:17px!important;
+  box-shadow:0 7px 16px rgba(0,18,49,.16)!important;
+}
+.update-skill-grid{margin:0 0 10px!important;gap:9px!important}
+.update-skill{
+  padding:13px!important;
+  border-radius:15px!important;
+  background:#ffffff!important;
+  box-shadow:0 7px 17px rgba(17,48,79,.07)!important;
+}
+.update-skill h3{font-size:15px!important;color:#17375e!important}
+.update-skill p{font-size:12.5px!important;line-height:1.45!important;color:#4e667f!important}
+.update-video{margin-top:0!important;border-radius:16px!important}
+.update-video-info{font-size:12px!important;line-height:1.42!important}
+.update-source-links{margin-top:9px!important;gap:6px!important}
+.update-source-links a{padding:7px 9px!important;font-size:11px!important}
+.update-coming{margin-top:12px!important;padding:13px 14px!important;border-radius:16px!important}
+@media(max-width:700px){
+  .update-news-20261019{width:calc(100% - 12px)!important}
+  .update-hero{padding:24px 17px 20px!important;border-radius:20px!important}
+  .update-hero h1{font-size:34px!important}
+  .update-lead{font-size:14px!important;line-height:1.5!important}
+  .update-meta span{padding:7px 9px!important;font-size:11px!important}
+  .update-section-heading{padding:11px 12px!important;gap:10px!important;border-radius:15px!important}
+  .update-section-number{width:36px!important;height:36px!important;flex-basis:36px!important;font-size:16px!important}
+  .update-section-heading h2{font-size:20px!important}
+  .update-section-heading p{font-size:11px!important}
+  .update-article-card > .update-copy{padding:12px 13px!important;font-size:13.5px!important;line-height:1.5!important}
+  .update-date-grid{grid-template-columns:1fr!important;gap:7px!important}
+  .update-date-card{padding:11px 12px!important}
+  .update-expert-top{padding:12px!important;gap:12px!important}
+  .update-expert-portrait{max-width:180px!important}
+  .update-subheading{font-size:15px!important;padding:9px 11px!important}
+  .update-skill{padding:11px!important}
+  .update-skill h3{font-size:14px!important}
+  .update-skill p{font-size:12px!important}
+  .update-note,.update-warning,.update-tip{font-size:12.5px!important;padding:11px 12px!important}
+}
 
 </style>
 <link href="manifest-v541.webmanifest" rel="manifest"/><meta content="yes" name="mobile-web-app-capable"/><meta content="yes" name="apple-mobile-web-app-capable"/><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/><meta content="Белая Мгла" name="apple-mobile-web-app-title"/></head>
@@ -167,4 +306,4 @@ a{color:#aeeaff;text-decoration:none}a:hover{color:white}
 </div></main>
 <button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button>
 <nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424"><a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-home-v534.webp"/></span><b>Главная</b></a><a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-events-v534.webp"/></span><b>События</b></a><a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-heroes-v534.webp"/></span><b>Герои</b></a><a data-v424-nav="calc" href="fire-furnace-calculator.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-calculator-v534.webp"/></span><b>Калькулятор</b></a><a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-knowledge-v534.webp"/></span><b>База знаний</b></a></nav>
-<script>document.querySelectorAll("img").forEach(function(i){i.addEventListener("error",function(){if(!this.src.startsWith("data:"))this.style.display="none"})});</script><script defer="" src="pwa-install.js?v=540"></script></body></html>
+<script>document.querySelectorAll("img").forEach(function(i){i.addEventListener("error",function(){if(!this.src.startsWith("data:"))this.style.display="none"})});</script><script defer="" src="pwa-install.js?v=548"></script></body></html>
