@@ -1,8 +1,8 @@
-const CACHE_NAME = 'belaya-mgla-v550';
+const CACHE_NAME = 'belaya-mgla-v552';
 const CORE = [
   './',
   './index.html',
-  './site-v269.css?v=550',
+  './site-v269.css?v=552',
   './site-v269.js?v=535',
   './manifest-v541.webmanifest',
   './app-icon-192-v541.png',
@@ -28,21 +28,17 @@ self.addEventListener('fetch', event => {
   const req = event.request;
   if (req.method !== 'GET') return;
 
-  /* Pages: show cached copy immediately, refresh it quietly in background. */
+  /* Pages: network first so edited text/design is never hidden by an old cached HTML page. */
   if (req.mode === 'navigate') {
     event.respondWith((async () => {
       const cache = await caches.open(CACHE_NAME);
-      const cached = await cache.match(req);
-      const networkPromise = fetch(req).then(resp => {
+      try {
+        const resp = await fetch(req);
         if (resp && resp.ok) cache.put(req, resp.clone());
         return resp;
-      }).catch(() => null);
-
-      if (cached) {
-        event.waitUntil(networkPromise);
-        return cached;
+      } catch (e) {
+        return (await cache.match(req, {ignoreSearch:true})) || (await cache.match('./index.html'));
       }
-      return (await networkPromise) || (await cache.match('./index.html'));
     })());
     return;
   }
