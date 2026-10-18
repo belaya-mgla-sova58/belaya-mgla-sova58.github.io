@@ -19845,3 +19845,20 @@ body.star-glass-v436 .breadcrumbs-v409 [aria-current="page"]{
     min-height: 88px !important;
   }
 }
+
+/* v545: restored RU updates category */
+body.news-top-ru .ru-updates-grid-v545{
+  grid-template-columns:minmax(0,1fr) !important;
+}
+body.news-top-ru .ru-updates-grid-v545 .news-category-card.ru{
+  min-height:180px;
+}
+body.news-top-ru .ru-updates-grid-v545 .news-category-link{
+  font-size:clamp(20px,3vw,30px);
+  line-height:1.08;
+  text-shadow:0 2px 10px rgba(0,18,48,.75);
+}
+@media(max-width:700px){
+  body.news-top-ru .ru-updates-grid-v545 .news-category-card.ru{min-height:128px;}
+  body.news-top-ru .ru-updates-grid-v545 .news-category-link{font-size:20px;}
+}
