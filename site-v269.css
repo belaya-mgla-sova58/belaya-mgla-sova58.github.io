@@ -19549,3 +19549,39 @@ body.modern-v424 .breadcrumbs-v409 [aria-current="page"],
 body.star-glass-v436 .breadcrumbs-v409 [aria-current="page"]{
   font-weight:800 !important;
 }
+
+/* v539: Knowledge Base mobile card text — keep whole words, no ugly mid-word wraps */
+@media(max-width:760px){
+  body.is-other-route .kb-card-v415.kb-card-textonly-v416{
+    padding:9px 7px 9px !important;
+  }
+  body.is-other-route .kb-card-textonly-v416 .kb-card-caption-v415{
+    gap:3px !important;
+  }
+  body.is-other-route .kb-card-v415 .kb-card-texts-v415{
+    min-width:0 !important;
+  }
+  body.is-other-route .kb-card-v415 .kb-card-texts-v415 strong{
+    font-size:10px !important;
+    line-height:1.16 !important;
+    letter-spacing:-.08px !important;
+    word-break:normal !important;
+    overflow-wrap:normal !important;
+    hyphens:none !important;
+    -webkit-hyphens:none !important;
+  }
+  body.is-other-route .kb-card-v415 .kb-card-texts-v415 small{
+    font-size:9.2px !important;
+    line-height:1.28 !important;
+    word-break:normal !important;
+    overflow-wrap:normal !important;
+    hyphens:none !important;
+    -webkit-hyphens:none !important;
+  }
+  body.is-other-route .kb-card-v415 .kb-card-arrow-v415{
+    width:17px !important;
+    height:17px !important;
+    flex:0 0 17px !important;
+    font-size:13px !important;
+  }
+}
