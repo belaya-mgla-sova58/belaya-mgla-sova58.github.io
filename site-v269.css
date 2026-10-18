@@ -19513,3 +19513,39 @@ body.news-top-whitefox .whitefox-elena-card-hint{
 body.news-top-whitefox .whitefox-elena-card-hint span{
   color:#f4f8ff !important;
 }
+
+/* v538: breadcrumbs should be plain text without white pill backgrounds */
+.breadcrumbs-v409 a,
+.breadcrumbs-v409 [aria-current="page"],
+body.modern-v422 .breadcrumbs-v409 a,
+body.modern-v422 .breadcrumbs-v409 [aria-current="page"],
+body.modern-v424 .breadcrumbs-v409 a,
+body.modern-v424 .breadcrumbs-v409 [aria-current="page"],
+body.star-glass-v436 .breadcrumbs-v409 a,
+body.star-glass-v436 .breadcrumbs-v409 [aria-current="page"]{
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  outline:0 !important;
+  border-radius:0 !important;
+  padding:0 !important;
+  margin:0 !important;
+  text-decoration:none !important;
+  color:#eef6ff !important;
+}
+
+.breadcrumbs-v409 a:hover,
+body.modern-v422 .breadcrumbs-v409 a:hover,
+body.modern-v424 .breadcrumbs-v409 a:hover,
+body.star-glass-v436 .breadcrumbs-v409 a:hover{
+  background:transparent !important;
+  color:#ffffff !important;
+  text-decoration:none !important;
+}
+
+.breadcrumbs-v409 [aria-current="page"],
+body.modern-v422 .breadcrumbs-v409 [aria-current="page"],
+body.modern-v424 .breadcrumbs-v409 [aria-current="page"],
+body.star-glass-v436 .breadcrumbs-v409 [aria-current="page"]{
+  font-weight:800 !important;
+}
