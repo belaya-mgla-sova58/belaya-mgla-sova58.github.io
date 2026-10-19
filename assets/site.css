@@ -6849,7 +6849,7 @@ body.is-svs-route .hero .ui-route-copy {
   overflow:hidden;
   background:
     linear-gradient(rgba(185,12,28,.10),rgba(185,12,28,.10)),
-    url("assets/elena-autumn-maple-banner.png") center center / cover no-repeat !important;
+    url("elena-autumn-maple-banner.png") center center / cover no-repeat !important;
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.22),
     0 14px 30px rgba(139,12,34,.22);
@@ -6876,17 +6876,17 @@ body.is-svs-route .hero .ui-route-copy {
 .news-category-card.eu{
   background:
     linear-gradient(90deg,rgba(34,29,112,.18),rgba(25,47,125,.03)),
-    url("assets/news-eu-nozoom.jpg") center center / 100% 100% no-repeat !important;
+    url("news-eu-nozoom.jpg") center center / 100% 100% no-repeat !important;
 }
 .news-category-card.ru{
   background:
     linear-gradient(90deg,rgba(13,86,146,.18),rgba(18,111,173,.03)),
-    url("assets/news-ru-nozoom.jpg") center center / 100% 100% no-repeat !important;
+    url("news-ru-nozoom.jpg") center center / 100% 100% no-repeat !important;
 }
 .news-category-card.creative{
   background:
     linear-gradient(90deg,rgba(55,48,145,.20),rgba(81,57,147,.03)),
-    url("assets/news-creative-nozoom.jpg") center center / 100% 100% no-repeat !important;
+    url("news-creative-nozoom.jpg") center center / 100% 100% no-repeat !important;
 }
 .news-category-card.eu .news-category-link,
 .news-category-card.ru .news-category-link,
@@ -6908,7 +6908,7 @@ body.is-svs-route .hero .ui-route-copy {
 .news-category-card.eu{
   background:
     linear-gradient(90deg,rgba(30,27,108,.12),rgba(24,49,132,.02)),
-    url("assets/news-eu-final-fullbleed.jpg") center center / cover no-repeat !important;
+    url("news-eu-final-fullbleed.jpg") center center / cover no-repeat !important;
 }
 
 
@@ -6916,7 +6916,7 @@ body.is-svs-route .hero .ui-route-copy {
 .news-category-card.ru{
   background:
     linear-gradient(90deg,rgba(13,82,142,.12),rgba(19,108,171,.02)),
-    url("assets/news-ru-final-fullbleed.jpg") center center / cover no-repeat !important;
+    url("news-ru-final-fullbleed.jpg") center center / cover no-repeat !important;
 }
 
 /* v379 — exact current building levels for Furnace calculator */

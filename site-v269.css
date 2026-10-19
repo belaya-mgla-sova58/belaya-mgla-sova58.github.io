@@ -2071,7 +2071,7 @@ figure{
   border:2px solid rgba(255,255,255,.58);
   padding:3px;
 }
-.bear-intro-text h3{
+.bear-intro-text h1{
   margin:0 0 6px !important;
   font-size:23px;
   color:#fff;
@@ -2128,7 +2128,7 @@ figure{
     width:82px !important;
     height:82px !important;
   }
-  .bear-intro-text h3{
+  .bear-intro-text h1{
     font-size:20px;
   }
   .bear-leader-compare{
@@ -11266,7 +11266,7 @@ body.is-other-route .guide-hero{
   background:rgba(48,119,170,.30);
   font-size:29px;
 }
-.kb-intro-v415 h1{
+.kb-intro-v415 h2{
   margin:0 0 4px !important;
   color:#f5fbff !important;
   font-size:27px !important;
@@ -11465,7 +11465,7 @@ body.is-other-route .guide-hero{
   .kb-intro-icon-v415{
     width:42px;height:42px;flex-basis:42px;border-radius:11px;font-size:22px;
   }
-  .kb-intro-v415 h1{font-size:20px !important;}
+  .kb-intro-v415 h2{font-size:20px !important;}
   .kb-intro-v415 p{font-size:11px !important;}
   .kb-group-v415{
     padding:9px !important;
@@ -12398,7 +12398,7 @@ body.modern-v422 .kb-more-v415{
   background:linear-gradient(145deg,rgba(8,39,69,.97),rgba(5,28,52,.99)) !important;
   box-shadow:none !important;
 }
-body.modern-v422 .kb-intro-v415 h1,
+body.modern-v422 .kb-intro-v415 h2,
 body.modern-v422 .kb-group-head-v415 h2,
 body.modern-v422 .kb-tools-title-v415 h2,
 body.modern-v422 .kb-more-v415 h2{color:#fff !important;}
@@ -14779,7 +14779,7 @@ body.is-other-route.modern-v424 .kb-intro-icon-v415{
   box-shadow:0 0 14px rgba(143,83,246,.20) !important;
 }
 
-body.is-other-route.modern-v424 .kb-intro-v415 h1{
+body.is-other-route.modern-v424 .kb-intro-v415 h2{
   color:#fbfdff !important;
 }
 body.is-other-route.modern-v424 .kb-intro-v415 p{
@@ -19749,7 +19749,7 @@ body.star-glass-v436 .breadcrumbs-v409 [aria-current="page"]{
     gap: 10px !important;
   }
 
-  body.is-other-route .kb-intro-v415 h1{
+  body.is-other-route .kb-intro-v415 h2{
     color: #ffffff !important;
     font-size: 18px !important;
     line-height: 1.14 !important;
@@ -20243,3 +20243,7 @@ body[data-static-route="news-elena"] .whitefox-index-card-badges-v557 span{
     font-size:11px;
   }
 }
+
+
+/* v571: accessible page title for the image-led home hero */
+.home-main-title-v571{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;}

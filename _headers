@@ -1,11 +1,20 @@
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
-/site-v255.css
+/site-v269.css
   Cache-Control: public, max-age=604800
+
+/site-v269.js
+  Cache-Control: public, max-age=604800
+
+/site-v269-core-v465.js
+  Cache-Control: public, max-age=604800
+
+/service-worker.js
+  Cache-Control: no-cache
+
+/manifest-v541.webmanifest
+  Cache-Control: public, max-age=3600
 
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
-
-/site-v255.js
-  Cache-Control: public, max-age=604800
