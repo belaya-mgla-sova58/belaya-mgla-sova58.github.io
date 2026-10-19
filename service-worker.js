@@ -1,4 +1,4 @@
-const CACHE_NAME = 'belaya-mgla-v567';
+const CACHE_NAME = 'belaya-mgla-v568';
 const CORE = [
   './',
   './index.html',

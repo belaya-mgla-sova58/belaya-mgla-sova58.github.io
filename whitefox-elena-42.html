@@ -276,7 +276,7 @@
 </article>
 </section>
 <div class="footer news-footer">Белая Мгла • Автор - Sova</div></div></main><button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button><nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424"><a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-home-v534.webp"/></span><b>Главная</b></a><a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-events-v534.webp"/></span><b>События</b></a><a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-heroes-v534.webp"/></span><b>Герои</b></a><a data-v424-nav="calc" href="fire-furnace-calculator.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-calculator-v534.webp"/></span><b>Калькулятор</b></a><a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-knowledge-v534.webp"/></span><b>База знаний</b></a></nav><script defer="" src="pwa-install.js?v=567"></script>
-<script id="whitefox-week42-js-v567">
+<script id="whitefox-week42-js-v568">
 (function(){
   'use strict';
   const BASE='https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/';
@@ -354,8 +354,8 @@
 
     function parseFlat(root){
       const chunks={}; const markers={}; const likes={};
-      const chunkRe=new RegExp('^__c2__'+scope+'__([a-z0-9-]+)__(\d+)__(\d+)__(.+)$','i');
-      const markerRe=new RegExp('^__c2m__'+scope+'__([a-z0-9-]+)__(\d+)$','i');
+      const chunkRe=new RegExp('^__c2__'+scope+'__([a-z0-9-]+)__([0-9]+)__([0-9]+)__(.+)$','i');
+      const markerRe=new RegExp('^__c2m__'+scope+'__([a-z0-9-]+)__([0-9]+)$','i');
       const likeRe=new RegExp('^__cl2__'+scope+'__([a-z0-9-]+)$','i');
       Object.entries(root||{}).forEach(([k,v])=>{
         let m=k.match(chunkRe); if(m){const id=m[1],idx=Number(m[2]),total=Number(m[3]);if(!chunks[id])chunks[id]={total,parts:{}};chunks[id].parts[idx]=b64uDecode(m[4]);return;}
