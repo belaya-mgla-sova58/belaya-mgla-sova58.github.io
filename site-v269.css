@@ -20082,3 +20082,164 @@ body.is-news-route .news-category-card .news-category-link span{
     left:172px !important;
   }
 }
+
+
+/* v558: WhiteFox readability improvements on mobile and touch devices */
+body[data-static-route="news-elena"] .whitefox-story,
+body[data-static-route="news-elena"] .whitefox-story *{
+  text-shadow:none !important;
+  filter:none !important;
+}
+body[data-static-route="news-elena"] .whitefox-story-head{
+  background:radial-gradient(circle at 92% 12%,rgba(255,193,90,.22),transparent 28%),linear-gradient(145deg,#fff8ee 0%,#fff 56%,#fff3ea 100%) !important;
+}
+body[data-static-route="news-elena"] .whitefox-story-head h2{
+  color:#4e2b43 !important;
+  -webkit-text-fill-color:#4e2b43 !important;
+}
+body[data-static-route="news-elena"] .whitefox-week{
+  color:#a24a36 !important;
+  -webkit-text-fill-color:#a24a36 !important;
+}
+body[data-static-route="news-elena"] .whitefox-author,
+body[data-static-route="news-elena"] .whitefox-story-signature small{
+  color:#5e6778 !important;
+  -webkit-text-fill-color:#5e6778 !important;
+}
+body[data-static-route="news-elena"] .whitefox-story-signature strong{
+  color:#263c5b !important;
+  -webkit-text-fill-color:#263c5b !important;
+}
+body[data-static-route="news-elena"] .whitefox-story-block,
+body[data-static-route="news-elena"] .whitefox-castle,
+body[data-static-route="news-elena"] .whitefox-questions-v557,
+body[data-static-route="news-elena"] .whitefox-romance-v557{
+  background:rgba(255,255,255,.98) !important;
+  box-shadow:0 9px 28px rgba(45,66,101,.08) !important;
+}
+body[data-static-route="news-elena"] .whitefox-story-block p,
+body[data-static-route="news-elena"] .whitefox-story-block li,
+body[data-static-route="news-elena"] .whitefox-story-block div:not(.whitefox-section-title):not(.anon-comments-v557):not(.anon-comments-head-v557):not(.anon-comments-actions-v557):not(.anon-comments-list-v557):not(.anon-comment-v557):not(.anon-comment-meta-v557):not(.whitefox-head-stats-v557):not(.whitefox-week42-jump-v558):not(.whitefox-card-stats-v557):not(.whitefox-index-card-badges-v557){
+  color:#29415f !important;
+  -webkit-text-fill-color:#29415f !important;
+  opacity:1 !important;
+}
+body[data-static-route="news-elena"] .whitefox-story-block strong,
+body[data-static-route="news-elena"] .whitefox-story-block b,
+body[data-static-route="news-elena"] .whitefox-story-block .whitefox-romance-final-v557,
+body[data-static-route="news-elena"] .whitefox-story-block .whitefox-romance-item-v557 strong{
+  color:#1f3655 !important;
+  -webkit-text-fill-color:#1f3655 !important;
+}
+body[data-static-route="news-elena"] .whitefox-story-block .whitefox-section-title h3{
+  color:#213a5a !important;
+  -webkit-text-fill-color:#213a5a !important;
+  opacity:1 !important;
+}
+body[data-static-route="news-elena"] .whitefox-story-block .whitefox-section-title span{
+  box-shadow:inset 0 0 0 1px rgba(68,99,145,.10);
+}
+body[data-static-route="news-elena"] .whitefox-story-block .whitefox-section-title + p{
+  margin-top:8px !important;
+}
+body[data-static-route="news-elena"] .whitefox-week42-intro-v557{
+  background:linear-gradient(145deg,#ffffff,#f3f7ff) !important;
+}
+body[data-static-route="news-elena"] .whitefox-editor-note-v557,
+body[data-static-route="news-elena"] .anon-comments-hint-v557,
+body[data-static-route="news-elena"] .anon-comments-empty-v557,
+body[data-static-route="news-elena"] .anon-comments-status-v557,
+body[data-static-route="news-elena"] .anon-comment-meta-v557{
+  color:#61758d !important;
+  -webkit-text-fill-color:#61758d !important;
+}
+body[data-static-route="news-elena"] .anon-comment-text-v557{
+  color:#314963 !important;
+  -webkit-text-fill-color:#314963 !important;
+}
+body[data-static-route="news-elena"] .whitefox-week42-jump-v558{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:14px;
+  position:relative;
+  z-index:3;
+}
+body[data-static-route="news-elena"] .whitefox-week42-jump-v558 a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  min-height:36px;
+  padding:8px 13px;
+  border-radius:999px;
+  border:1px solid rgba(89,120,173,.20);
+  background:rgba(255,255,255,.95);
+  color:#28507e !important;
+  -webkit-text-fill-color:#28507e !important;
+  text-decoration:none;
+  font-size:12px;
+  font-weight:900;
+  box-shadow:0 6px 16px rgba(53,77,111,.08);
+}
+body[data-static-route="news-elena"] .whitefox-week42-jump-v558 a.romance{
+  border-color:rgba(220,118,163,.26);
+  color:#a43868 !important;
+  -webkit-text-fill-color:#a43868 !important;
+  background:linear-gradient(145deg,#fff6fb,#fff);
+}
+body[data-static-route="news-elena"] #whitefox42Questions,
+body[data-static-route="news-elena"] #whitefox42Romance{
+  scroll-margin-top:88px;
+}
+body[data-static-route="news-elena"] .news-like-wrap > span,
+body[data-static-route="news-elena"] .whitefox-head-stat-v557,
+body[data-static-route="news-elena"] .whitefox-head-like-v557,
+body[data-static-route="news-elena"] .whitefox-card-stat-v557{
+  background:rgba(255,255,255,.95) !important;
+  color:#4d3d53 !important;
+  -webkit-text-fill-color:#4d3d53 !important;
+  border-color:rgba(121,91,111,.18) !important;
+  box-shadow:0 5px 14px rgba(53,75,109,.07) !important;
+}
+body[data-static-route="news-elena"] .whitefox-head-like-v557 span,
+body[data-static-route="news-elena"] .whitefox-head-stat-v557 b,
+body[data-static-route="news-elena"] .news-like-wrap b,
+body[data-static-route="news-elena"] .news-like-count,
+body[data-static-route="news-elena"] .whitefox-card-stat-v557 b{
+  color:#7d3158 !important;
+  -webkit-text-fill-color:#7d3158 !important;
+}
+body[data-static-route="news-elena"] .whitefox-index-card-badges-v557 span{
+  box-shadow:0 5px 14px rgba(53,75,109,.06);
+}
+@media (max-width: 640px){
+  body[data-static-route="news-elena"] .whitefox-story-head{
+    padding:18px 16px 16px !important;
+  }
+  body[data-static-route="news-elena"] .whitefox-story-head h2{
+    font-size:25px !important;
+    line-height:1.08 !important;
+  }
+  body[data-static-route="news-elena"] .whitefox-story-block{
+    padding:15px 14px !important;
+  }
+  body[data-static-route="news-elena"] .whitefox-story-block p,
+  body[data-static-route="news-elena"] .whitefox-question-v557,
+  body[data-static-route="news-elena"] .whitefox-romance-item-v557{
+    font-size:14px !important;
+    line-height:1.56 !important;
+  }
+  body[data-static-route="news-elena"] .whitefox-story-block .whitefox-section-title h3{
+    font-size:18px !important;
+    line-height:1.18 !important;
+  }
+  body[data-static-route="news-elena"] .whitefox-week42-jump-v558{
+    gap:7px;
+  }
+  body[data-static-route="news-elena"] .whitefox-week42-jump-v558 a{
+    min-height:35px;
+    padding:8px 11px;
+    font-size:11px;
+  }
+}
