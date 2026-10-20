@@ -1,0 +1,83 @@
+name: Install regenerated owl stickers 05-10
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.tmp/owl_05_10_new.zip'
+      - '.github/workflows/install-new-owl-05-10.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Install regenerated owl PNGs
+        shell: python
+        run: |
+          from pathlib import Path
+          from zipfile import ZipFile
+          import shutil
+
+          archive = Path('.tmp/owl_05_10_new.zip')
+          out_dir = Path('assets/chat-stickers/owls')
+          out_dir.mkdir(parents=True, exist_ok=True)
+
+          with ZipFile(archive) as z:
+              names = z.namelist()
+              for idx in range(5, 11):
+                  prefix = f'{idx:02d}_'
+                  matches = [n for n in names if Path(n).name.startswith(prefix) and n.lower().endswith('.png')]
+                  if len(matches) != 1:
+                      raise SystemExit(f'Expected one PNG with prefix {prefix}, found {matches}')
+                  target = out_dir / f'owl-{idx:02d}.png'
+                  with z.open(matches[0]) as src, target.open('wb') as dst:
+                      shutil.copyfileobj(src, dst)
+
+          print('Installed owl-05 through owl-10')
+
+      - name: Refresh PWA cache
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          p = Path('service-worker.js')
+          s = p.read_text(encoding='utf-8')
+          s, count = re.subn(r"belaya-mgla-v\d+", "belaya-mgla-v578", s, count=1)
+          if count != 1:
+              raise SystemExit('CACHE_NAME not found')
+          p.write_text(s, encoding='utf-8')
+
+      - name: Verify installed PNGs
+        shell: python
+        run: |
+          from pathlib import Path
+          from PIL import Image
+          for idx in range(5, 11):
+              p = Path(f'assets/chat-stickers/owls/owl-{idx:02d}.png')
+              if not p.exists():
+                  raise SystemExit(f'Missing {p}')
+              with Image.open(p) as im:
+                  if im.format != 'PNG':
+                      raise SystemExit(f'Not PNG: {p}')
+                  if im.size != (384, 384):
+                      raise SystemExit(f'Unexpected size for {p}: {im.size}')
+          print('Verified 6 regenerated owl PNGs')
+
+      - name: Commit installed stickers and clean temporary files
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .tmp/owl_05_10_new.zip
+          rm -f .github/workflows/install-new-owl-05-10.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/chat-stickers/owls/owl-05.png assets/chat-stickers/owls/owl-06.png assets/chat-stickers/owls/owl-07.png assets/chat-stickers/owls/owl-08.png assets/chat-stickers/owls/owl-09.png assets/chat-stickers/owls/owl-10.png service-worker.js .tmp/owl_05_10_new.zip .github/workflows/install-new-owl-05-10.yml
+          git commit -m 'Install regenerated owl stickers 05-10'
+          git push origin main
