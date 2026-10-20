@@ -36,10 +36,11 @@ jobs:
         shell: python
         run: |
           from pathlib import Path
+          import re
+
           p = Path('chat.html')
           text = p.read_text(encoding='utf-8')
-          lines = [line for line in text.splitlines() if 'chat-sticker-data/' not in line]
-          text = '\n'.join(lines) + '\n'
+          text = re.sub(r'<script[^>]+src="chat-sticker-data/[^\"]+"[^>]*></script>', '', text)
           text = text.replace('chat-stickers-v1.css?v=2', 'chat-stickers-v1.css?v=3')
           text = text.replace('chat-stickers-v1.js?v=2', 'chat-stickers-v1.js?v=3')
           p.write_text(text, encoding='utf-8')
