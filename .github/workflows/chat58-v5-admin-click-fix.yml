@@ -1,0 +1,62 @@
+name: Chat58 v5 admin click fix
+on:
+  push:
+    paths:
+      - '.github/workflows/chat58-v5-admin-click-fix.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch Chat58 admin access
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          targets=[Path('chat-v4.js'),Path('.tmp/chat-v4-part3.txt')]
+          for p in targets:
+              s=p.read_text(encoding='utf-8')
+              anchor="function createAdminUi(){"
+              helper="""function adminJwkFromCode(code){const raw=String(code||'').trim();if(!raw.toUpperCase().startsWith('SOVA58-'))throw new Error('bad code');const text=b64uDecode(raw.slice(7));const data=JSON.parse(text);return data.privateJwk||data}\nasync function activateAdminJwk(jwk,state){adminPrivateKey=await importAdminPrivate(jwk);adminUnlocked=true;safeStorageSet(ADMIN_KEY,JSON.stringify(jwk));if(state)state.textContent='Доступ SOVA активирован ✅';updateAdminUi();render(lastItems,true)}\n\n"""
+              if 'function adminJwkFromCode' not in s:
+                  if anchor not in s: raise SystemExit(f'admin anchor missing in {p}')
+                  s=s.replace(anchor,helper+anchor,1)
+
+              old=""" const modal=document.createElement('div');modal.id='chat58AdminModal';modal.className='chat58-admin-modal';modal.hidden=true;modal.innerHTML='<div class=\"chat58-admin-card\"><button class=\"chat58-admin-close\" type=\"button\" aria-label=\"Закрыть\">×</button><div class=\"chat58-admin-crown\">👑</div><h2>Панель SOVA</h2><p>Для доступа импортируй личный ключ администратора. Он хранится только на этом устройстве.</p><label class=\"chat58-admin-import\">Выбрать ключ<input id=\"chat58AdminFile\" type=\"file\" accept=\"application/json,.json\"></label><div id=\"chat58AdminState\" class=\"chat58-admin-state\"></div><button id=\"chat58AdminLogout\" class=\"chat58-admin-logout\" type=\"button\" hidden>Удалить ключ с устройства</button></div>';"""
+              new=""" const modal=document.createElement('div');modal.id='chat58AdminModal';modal.className='chat58-admin-modal';modal.hidden=true;modal.innerHTML='<div class=\"chat58-admin-card\"><button class=\"chat58-admin-close\" type=\"button\" aria-label=\"Закрыть\">×</button><div class=\"chat58-admin-crown\">👑</div><h2>Панель SOVA</h2><p>Доступ хранится только на этом устройстве. В браузере можно выбрать файл, а в приложении удобнее вставить код SOVA.</p><label class=\"chat58-admin-import\">📁 Выбрать ключ<input id=\"chat58AdminFile\" type=\"file\" accept=\"application/json,.json\"></label><div class=\"chat58-admin-or\">или</div><input id=\"chat58AdminCode\" class=\"chat58-admin-code\" type=\"password\" autocomplete=\"off\" autocapitalize=\"off\" spellcheck=\"false\" placeholder=\"Вставить код SOVA\"><button id=\"chat58AdminCodeBtn\" class=\"chat58-admin-code-btn\" type=\"button\">🔑 Активировать</button><div id=\"chat58AdminState\" class=\"chat58-admin-state\"></div><button id=\"chat58AdminLogout\" class=\"chat58-admin-logout\" type=\"button\" hidden>Удалить ключ с устройства</button></div>';"""
+              if old in s: s=s.replace(old,new,1)
+              elif 'chat58AdminCodeBtn' not in s: raise SystemExit(f'modal anchor missing in {p}')
+
+              oldclick=""" btn.addEventListener('click',()=>{modal.hidden=false;updateAdminUi()});modal.querySelector('.chat58-admin-close').addEventListener('click',()=>{modal.hidden=true});modal.addEventListener('click',e=>{if(e.target===modal)modal.hidden=true});"""
+              newclick=""" const openAdmin=()=>{modal.hidden=false;updateAdminUi()};btn.style.pointerEvents='auto';btn.style.position='relative';btn.style.zIndex='3';btn.addEventListener('click',openAdmin);btn.addEventListener('touchend',e=>{e.preventDefault();openAdmin()},{passive:false});modal.querySelector('.chat58-admin-close').addEventListener('click',()=>{modal.hidden=true});modal.addEventListener('click',e=>{if(e.target===modal)modal.hidden=true});"""
+              if oldclick in s: s=s.replace(oldclick,newclick,1)
+
+              oldfile=""" modal.querySelector('#chat58AdminFile').addEventListener('change',async e=>{const file=e.target.files&&e.target.files[0];if(!file)return;const state=modal.querySelector('#chat58AdminState');state.textContent='Проверяю ключ…';try{const data=JSON.parse(await file.text());const jwk=data.privateJwk||data;adminPrivateKey=await importAdminPrivate(jwk);adminUnlocked=true;safeStorageSet(ADMIN_KEY,JSON.stringify(jwk));state.textContent='Доступ SOVA активирован ✅';updateAdminUi();render(lastItems,true)}catch(err){state.textContent='Этот файл не является ключом SOVA.'}});"""
+              newfile=""" modal.querySelector('#chat58AdminFile').addEventListener('change',async e=>{const file=e.target.files&&e.target.files[0];if(!file)return;const state=modal.querySelector('#chat58AdminState');state.textContent='Проверяю ключ…';try{const data=JSON.parse(await file.text());await activateAdminJwk(data.privateJwk||data,state)}catch(err){state.textContent='Этот файл не является ключом SOVA.'}});\n modal.querySelector('#chat58AdminCodeBtn').addEventListener('click',async()=>{const state=modal.querySelector('#chat58AdminState'),field=modal.querySelector('#chat58AdminCode');const code=field.value.trim();if(!code){state.textContent='Вставь код SOVA.';return}state.textContent='Проверяю код…';try{await activateAdminJwk(adminJwkFromCode(code),state);field.value=''}catch(err){state.textContent='Неверный код SOVA.'}});"""
+              if oldfile in s: s=s.replace(oldfile,newfile,1)
+              elif 'chat58AdminCodeBtn' in s and "addEventListener('click',async()=>" not in s: raise SystemExit(f'file listener anchor missing in {p}')
+
+              s=s.replace("if(state)state.textContent=adminUnlocked?'Доступ SOVA активирован ✅':'Импортируй файл ключа SOVA.'","if(state)state.textContent=adminUnlocked?'Доступ SOVA активирован ✅':'Выбери файл или вставь код SOVA.'")
+              p.write_text(s,encoding='utf-8')
+
+          css=Path('chat-v4.css')
+          s=css.read_text(encoding='utf-8')
+          add="""\n.chat58-admin-or{margin:8px 0;color:rgba(226,239,249,.44);font-size:9px}.chat58-admin-code{box-sizing:border-box;width:100%;padding:10px 11px;border:1px solid rgba(255,220,124,.24);border-radius:11px;background:rgba(255,255,255,.07);color:#fff;font:inherit;font-size:11px;outline:none}.chat58-admin-code:focus{border-color:rgba(255,222,132,.62);box-shadow:0 0 0 3px rgba(255,207,91,.08)}.chat58-admin-code-btn{width:100%;margin-top:7px;padding:10px 12px;border:1px solid rgba(255,220,124,.30);border-radius:11px;background:linear-gradient(180deg,rgba(181,134,41,.34),rgba(121,87,25,.28));color:#ffe9a9;font:inherit;font-size:11px;font-weight:900;cursor:pointer}.chat58-admin-btn{pointer-events:auto!important;position:relative;z-index:3}\n"""
+          if '.chat58-admin-code-btn' not in s: s+=add
+          css.write_text(s,encoding='utf-8')
+
+          html=Path('chat.html')
+          s=html.read_text(encoding='utf-8').replace('chat-v4.css?v=4','chat-v4.css?v=5').replace('chat-v4.js?v=4','chat-v4.js?v=5')
+          html.write_text(s,encoding='utf-8')
+          PY
+          node --check chat-v4.js
+      - name: Commit fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add chat.html chat-v4.js chat-v4.css .tmp/chat-v4-part3.txt
+          git diff --cached --quiet || git commit -m "Fix Chat 58 admin button and add code login"
+          git push
