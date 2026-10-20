@@ -1,0 +1,74 @@
+name: Install chat stickers
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'belaya-mgla-chat-stickers-ready.zip'
+      - '.github/workflows/install-chat-stickers.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Unpack approved sticker assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/chat-stickers-pack
+          mkdir -p /tmp/chat-stickers-pack
+          unzip -q belaya-mgla-chat-stickers-ready.zip -d /tmp/chat-stickers-pack
+          rm -rf assets/chat-stickers
+          mkdir -p assets
+          cp -R /tmp/chat-stickers-pack/assets/chat-stickers assets/chat-stickers
+          cp /tmp/chat-stickers-pack/chat-stickers-v1.js chat-stickers-v1.js
+          cp /tmp/chat-stickers-pack/chat-stickers-v1.css chat-stickers-v1.css
+          cp /tmp/chat-stickers-pack/sticker-assets-manifest.json sticker-assets-manifest.json
+
+      - name: Remove old embedded sticker chunks and refresh cache versions
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path('chat.html')
+          text = p.read_text(encoding='utf-8')
+          lines = [line for line in text.splitlines() if 'chat-sticker-data/' not in line]
+          text = '\n'.join(lines) + '\n'
+          text = text.replace('chat-stickers-v1.css?v=2', 'chat-stickers-v1.css?v=3')
+          text = text.replace('chat-stickers-v1.js?v=2', 'chat-stickers-v1.js?v=3')
+          p.write_text(text, encoding='utf-8')
+
+          sw = Path('service-worker.js')
+          s = sw.read_text(encoding='utf-8')
+          s = s.replace("belaya-mgla-v572", "belaya-mgla-v573")
+          sw.write_text(s, encoding='utf-8')
+
+      - name: Verify sticker counts
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(find assets/chat-stickers/owls -maxdepth 1 -type f -name '*.png' | wc -l)" -eq 30
+          test "$(find assets/chat-stickers/heroes -maxdepth 1 -type f -name '*.png' | wc -l)" -eq 6
+          grep -q 'chat-stickers-v1.css?v=3' chat.html
+          grep -q 'chat-stickers-v1.js?v=3' chat.html
+          ! grep -q 'chat-sticker-data/' chat.html
+
+      - name: Commit installed stickers
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f belaya-mgla-chat-stickers-ready.zip
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/chat-stickers chat-stickers-v1.js chat-stickers-v1.css sticker-assets-manifest.json chat.html service-worker.js belaya-mgla-chat-stickers-ready.zip
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m 'Install chat sticker assets'
+          git push origin main
