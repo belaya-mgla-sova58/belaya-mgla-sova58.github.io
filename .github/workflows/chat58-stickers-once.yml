@@ -1,0 +1,48 @@
+name: Chat58 stickers once
+on:
+  push:
+    paths:
+      - '.github/workflows/chat58-stickers-once.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Connect sticker packs
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('chat.html')
+          s=p.read_text(encoding='utf-8')
+          css='<link href="chat-stickers-v1.css?v=2" rel="stylesheet"/>'
+          if css not in s:
+              marker='<link href="favicon.ico" rel="icon" sizes="any"/>'
+              if marker in s:
+                  s=s.replace(marker,css+marker,1)
+              else:
+                  s=s.replace('</head>',css+'</head>',1)
+          scripts=''.join([
+            '<script defer src="chat-sticker-data/owl_%02d.js?v=1"></script>'%i for i in range(10)
+          ]+[
+            '<script defer src="chat-sticker-data/hero_%02d.js?v=1"></script>'%i for i in range(3)
+          ])+'<script defer src="chat-stickers-v1.js?v=2"></script>'
+          if 'chat-stickers-v1.js?v=2' not in s:
+              s=s.replace('</body>',scripts+'</body>',1)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Verify sticker hooks
+        run: |
+          grep -q 'chat-stickers-v1.css?v=2' chat.html
+          grep -q 'chat-sticker-data/owl_09.js?v=1' chat.html
+          grep -q 'chat-sticker-data/hero_02.js?v=1' chat.html
+          grep -q 'chat-stickers-v1.js?v=2' chat.html
+      - name: Commit and clean installer
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/chat58-stickers-once.yml
+          git add chat.html
+          git commit -m "Enable owl and hero stickers in Chat 58"
+          git push
