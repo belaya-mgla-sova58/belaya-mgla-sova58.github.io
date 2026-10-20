@@ -1,0 +1,39 @@
+(function(){
+'use strict';
+
+const BASE='https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/';
+const ROOT=BASE.slice(0,-1)+'.json';
+const CHAT_QUERY=ROOT+'?orderBy='+encodeURIComponent('"$key"')+'&startAt='+encodeURIComponent('"__chat58"')+'&endAt='+encodeURIComponent('"__chat58\uf8ff"');
+const PREFIX='__chat58__', MARK='__chat58m__', DEL='__chat58d__', REPLY='__chat58r__', REACT='__chat58x__', NICK='__chat58n__', MOD='__chat58mod__', ADMINMSG='__chat58a__';
+const NICK_KEY='belaya-mgla-chat58-nick-v1', UID_KEY='belaya-mgla-chat58-uid-v1', LAST_KEY='belaya-mgla-chat58-last-v1', ADMIN_KEY='belaya-mgla-chat58-admin-jwk-v1';
+const PUBLIC_ADMIN_JWK={"kty":"EC","crv":"P-256","x":"k39zWtQ5CgsmVc-sqsjCm-kExVGPIGYME_BEPlma_D0","y":"AqP1MJqV3iVSnTArgiowCXCctMXYe6DiAl5erWMb5q8","key_ops":["verify"],"ext":true};
+const REACTIONS=[['up','👍'],['laugh','😂'],['heart','❤️']];
+
+const gate=document.getElementById('chat58Gate'),nickForm=document.getElementById('chat58NickForm'),nickInput=document.getElementById('chat58NickInput'),nickNote=document.getElementById('chat58NickNote');
+const myNick=document.getElementById('chat58MyNick'),messagesEl=document.getElementById('chat58Messages'),form=document.getElementById('chat58Form'),input=document.getElementById('chat58Input'),send=document.getElementById('chat58Send'),status=document.getElementById('chat58Status'),count=document.getElementById('chat58Count'),refresh=document.getElementById('chat58Refresh'),conn=document.getElementById('chat58Conn'),connText=document.getElementById('chat58ConnText'),newBtn=document.getElementById('chat58New'),replyBar=document.getElementById('chat58ReplyBar'),replyNick=document.getElementById('chat58ReplyNick'),replyText=document.getElementById('chat58ReplyText'),replyCancel=document.getElementById('chat58ReplyCancel');
+
+let timer=0,firstLoad=true,lastSignature='',loading=false,replyTarget=null,unreadCount=0,knownIds=new Set(),lastItems=[],lastRoot={},adminPrivateKey=null,adminPublicKey=null,adminUnlocked=false,mutedUntil=0;
+let moderationState={hidden:new Set(),pinnedId:'',mutes:new Map()};
+const verifyCache=new Map();
+
+function safeStorageGet(k){try{return localStorage.getItem(k)||''}catch(e){return ''}}
+function safeStorageSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function safeStorageRemove(k){try{localStorage.removeItem(k)}catch(e){}}
+function getUid(){let v=safeStorageGet(UID_KEY);if(v)return v;try{v=crypto.randomUUID()}catch(e){v='u-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,12)}safeStorageSet(UID_KEY,v);return v}
+const uid=getUid();
+
+function b64uEncode(text){const bytes=new TextEncoder().encode(text);return bytesToB64u(bytes)}
+function bytesToB64u(bytes){let bin='';for(let i=0;i<bytes.length;i++)bin+=String.fromCharCode(bytes[i]);return btoa(bin).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+function b64uToBytes(text){let s=String(text).replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';const bin=atob(s);return Uint8Array.from(bin,c=>c.charCodeAt(0))}
+function b64uDecode(text){try{return new TextDecoder().decode(b64uToBytes(text))}catch(e){return ''}}
+function splitText(text,size){const a=Array.from(text),out=[];for(let i=0;i<a.length;i+=size)out.push(a.slice(i,i+size).join(''));return out}
+function keyUrl(key){return BASE+encodeURIComponent(key)+'.json'}
+async function incrementStrict(key){const r=await fetch(keyUrl(key),{method:'PUT',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify({'.sv':{increment:1}})});if(!r.ok)throw new Error('write '+r.status);return r.json().catch(()=>1)}
+async function readRoot(){const r=await fetch(CHAT_QUERY,{cache:'no-store'});if(!r.ok)throw new Error('read '+r.status);const v=await r.json();return v&&typeof v==='object'?v:{}}
+function setConnection(ok){conn.classList.toggle('online',ok);conn.classList.toggle('offline',!ok);connText.textContent=ok?'Онлайн':'Нет связи'}
+function setStatus(text,isError){status.textContent=text||'';status.classList.toggle('error',!!isError)}
+function idTs(id){const p=String(id).split('-')[0];const n=parseInt(p,36);return Number.isFinite(n)?n:0}
+function formatTime(ts){const d=new Date(ts);const now=new Date();const same=d.getFullYear()===now.getFullYear()&&d.getMonth()===now.getMonth()&&d.getDate()===now.getDate();return same?d.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}):d.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit'})+' '+d.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'})}
+function nearBottom(){return messagesEl.scrollHeight-messagesEl.scrollTop-messagesEl.clientHeight<90}
+function normalizeNick(n){return String(n||'').normalize('NFKC').trim().replace(/\s+/g,' ').toLocaleLowerCase('ru-RU')}
+async function sha256Hex(text){const hash=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text));return Array.from(new Uint8Array(hash),b=>b.toString(16).padStart(2,'0')).join('')}
