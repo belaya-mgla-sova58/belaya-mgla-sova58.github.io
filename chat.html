@@ -5,6 +5,12 @@
 <meta name="theme-color" content="#031426"/>
 <link rel="canonical" href="https://belaya-mgla-sova58.github.io/chat.html"/>
 <link href="site-v269.css?v=571" rel="stylesheet"/><link href="favicon.ico" rel="icon" sizes="any"/><script defer src="site-v269.js?v=571"></script>
+<style id="chat58-perf-v2">
+body[data-static-route="chat"] .site-cosmic-background-v442{display:none!important}
+body[data-static-route="chat"] *{animation:none!important}
+.chat58-row{content-visibility:auto;contain-intrinsic-size:58px}
+@media(max-width:720px){.chat58-head,.chat58-shell{box-shadow:none!important}}
+</style>
 <style id="chat58-style-v1">
 .chat58-wrap{max-width:960px;margin:0 auto;padding:0 16px 110px}.chat58-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:10px 0 12px;padding:14px 16px;border:1px solid rgba(145,211,255,.24);border-radius:18px;background:linear-gradient(145deg,rgba(9,35,62,.90),rgba(8,25,48,.86));box-shadow:0 12px 30px rgba(0,0,0,.16)}.chat58-title{min-width:0}.chat58-title h1{margin:0 0 4px;font-size:22px}.chat58-title p{margin:0;opacity:.75;font-size:12px}.chat58-conn{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.06);font-size:11px;font-weight:800}.chat58-dot{width:8px;height:8px;border-radius:50%;background:#f3b14a;box-shadow:0 0 10px rgba(243,177,74,.45)}.chat58-conn.online .chat58-dot{background:#6de79b;box-shadow:0 0 12px rgba(109,231,155,.55)}.chat58-conn.offline .chat58-dot{background:#ff7070;box-shadow:0 0 12px rgba(255,112,112,.45)}
 .chat58-shell{overflow:hidden;border:1px solid rgba(151,207,255,.24);border-radius:22px;background:linear-gradient(180deg,rgba(4,24,45,.90),rgba(3,18,36,.94));box-shadow:0 18px 44px rgba(0,0,0,.24),inset 0 0 32px rgba(81,166,227,.05)}.chat58-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 13px;border-bottom:1px solid rgba(151,207,255,.13);background:rgba(12,43,72,.72)}.chat58-me{min-width:0;font-size:11px;opacity:.82}.chat58-me b{display:block;max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;color:#eef9ff}.chat58-refresh{border:1px solid rgba(160,220,255,.24);border-radius:999px;background:rgba(74,151,207,.12);color:#eaf8ff;padding:7px 10px;font:inherit;font-size:11px;font-weight:800;cursor:pointer}.chat58-refresh:disabled{opacity:.5;cursor:wait}
@@ -31,6 +37,7 @@
 'use strict';
 const BASE='https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/';
 const ROOT=BASE.slice(0,-1)+'.json';
+const CHAT_QUERY=ROOT+'?orderBy='+encodeURIComponent('\"$key\"')+'&startAt='+encodeURIComponent('\"__chat58\"')+'&endAt='+encodeURIComponent('\"__chat58\uf8ff\"');
 const PREFIX='__chat58__', MARK='__chat58m__', DEL='__chat58d__';
 const NICK_KEY='belaya-mgla-chat58-nick-v1', UID_KEY='belaya-mgla-chat58-uid-v1', LAST_KEY='belaya-mgla-chat58-last-v1';
 const gate=document.getElementById('chat58Gate'),nickForm=document.getElementById('chat58NickForm'),nickInput=document.getElementById('chat58NickInput'),nickNote=document.getElementById('chat58NickNote');
@@ -45,7 +52,7 @@ function b64uDecode(text){try{let s=text.replace(/-/g,'+').replace(/_/g,'/');whi
 function splitText(text,size){const a=Array.from(text),out=[];for(let i=0;i<a.length;i+=size)out.push(a.slice(i,i+size).join(''));return out}
 function keyUrl(key){return BASE+encodeURIComponent(key)+'.json'}
 async function incrementStrict(key){const r=await fetch(keyUrl(key),{method:'PUT',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify({'.sv':{increment:1}})});if(!r.ok)throw new Error('write '+r.status);return r.json().catch(()=>1)}
-async function readRoot(){const r=await fetch(ROOT,{cache:'no-store'});if(!r.ok)throw new Error('read '+r.status);const v=await r.json();return v&&typeof v==='object'?v:{}}
+async function readRoot(){const r=await fetch(CHAT_QUERY,{cache:'no-store'});if(!r.ok)throw new Error('read '+r.status);const v=await r.json();return v&&typeof v==='object'?v:{}}
 function setConnection(ok){conn.classList.toggle('online',ok);conn.classList.toggle('offline',!ok);connText.textContent=ok?'Онлайн':'Нет связи'}
 function setStatus(text,isError){status.textContent=text||'';status.classList.toggle('error',!!isError)}
 function idTs(id){const p=String(id).split('-')[0];const n=parseInt(p,36);return Number.isFinite(n)?n:0}
