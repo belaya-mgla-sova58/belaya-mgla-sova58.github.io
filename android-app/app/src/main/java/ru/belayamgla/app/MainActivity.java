@@ -10,6 +10,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.view.WindowInsets;
+import android.view.ViewGroup;
 import android.webkit.CookieManager;
 import android.webkit.DownloadListener;
 import android.webkit.ServiceWorkerController;
@@ -57,11 +59,16 @@ public class MainActivity extends Activity {
             "u=u.slice(0,8);var i=0;function n(){if(i>=u.length)return;fetch(u[i++],{credentials:'same-origin',cache:'force-cache'}).catch(function(){}).finally(function(){setTimeout(n,250);});}setTimeout(n,1000);})();";
 
     private static final String FIND_ACTIVE_NAV_JS =
-            "(function(){var n=document.querySelector('.mobile-bottom-v424 a.active');if(!n){var a=document.querySelectorAll('.mobile-bottom-v424 a');for(var i=0;i<a.length;i++){try{if(new URL(a[i].href,location.href).pathname===location.pathname){n=a[i];break;}}catch(e){}}}return n&&n.dataset?n.dataset.v424Nav||'':'';})();";
+            "(function(){" +
+            "var n=document.querySelector('.mobile-bottom-v424 a.active');" +
+            "if(!n){var a=document.querySelectorAll('.mobile-bottom-v424 a');for(var i=0;i<a.length;i++){try{if(new URL(a[i].href,location.href).pathname===location.pathname){n=a[i];break;}}catch(e){}}}" +
+            "return n&&n.dataset?n.dataset.v424Nav||'':'';" +
+            "})();";
 
     private WebView webView;
     private ProgressBar progressBar;
     private LinearLayout bottomBar;
+    private int bottomInsetPx = 0;
     private final Map<String, LinearLayout> navItems = new HashMap<>();
     private String activeNav = "home";
     private boolean offlineShown = false;
@@ -90,14 +97,20 @@ public class MainActivity extends Activity {
             webView.setRendererPriorityPolicy(WebView.RENDERER_PRIORITY_BOUND, true);
         }
 
-        webFrame.addView(webView, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
-        FrameLayout.LayoutParams progressParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, dp(2));
+        webFrame.addView(webView, new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT
+        ));
+        FrameLayout.LayoutParams progressParams = new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT, dp(2));
         webFrame.addView(progressBar, progressParams);
 
-        root.addView(webFrame, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f));
+        root.addView(webFrame, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f));
         bottomBar = createBottomBar();
-        root.addView(bottomBar, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(70)));
+        root.addView(bottomBar, createBottomBarLayoutParams());
         setContentView(root);
+        applyWindowInsets(root);
 
         configureWebView();
         setActiveNav("home");
@@ -106,8 +119,43 @@ public class MainActivity extends Activity {
             webView.restoreState(savedInstanceState);
         } else {
             Uri deepLink = getIntent() != null ? getIntent().getData() : null;
-            webView.loadUrl(deepLink != null && SITE_HOST.equalsIgnoreCase(deepLink.getHost()) ? deepLink.toString() : HOME_URL);
+            webView.loadUrl(deepLink != null && SITE_HOST.equalsIgnoreCase(deepLink.getHost())
+                    ? deepLink.toString() : HOME_URL);
         }
+    }
+
+    private LinearLayout.LayoutParams createBottomBarLayoutParams() {
+        return new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, dp(70) + bottomInsetPx);
+    }
+
+    private void applyWindowInsets(View root) {
+        root.setOnApplyWindowInsetsListener((v, insets) -> {
+            int bottom = 0;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                bottom = insets.getInsets(WindowInsets.Type.navigationBars()).bottom;
+            } else {
+                bottom = insets.getSystemWindowInsetBottom();
+            }
+            updateBottomBarInset(bottom);
+            return insets;
+        });
+        root.requestApplyInsets();
+    }
+
+    private void updateBottomBarInset(int bottom) {
+        if (bottom < 0) bottom = 0;
+        if (bottomInsetPx == bottom && bottomBar.getLayoutParams() != null) return;
+        bottomInsetPx = bottom;
+        bottomBar.setPadding(dp(4), dp(5), dp(4), dp(5) + bottomInsetPx);
+        ViewGroup.LayoutParams lp = bottomBar.getLayoutParams();
+        if (lp == null) {
+            lp = createBottomBarLayoutParams();
+        } else {
+            lp.height = dp(70) + bottomInsetPx;
+        }
+        bottomBar.setLayoutParams(lp);
+        bottomBar.setClipToPadding(false);
     }
 
     private LinearLayout createBottomBar() {
@@ -146,7 +194,8 @@ public class MainActivity extends Activity {
         text.setGravity(Gravity.CENTER);
         text.setSingleLine(true);
         text.setTag("text");
-        LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         textParams.topMargin = dp(2);
         item.addView(text, textParams);
 
@@ -159,7 +208,8 @@ public class MainActivity extends Activity {
         });
 
         navItems.put(key, item);
-        bar.addView(item, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1f));
+        bar.addView(item, new LinearLayout.LayoutParams(0,
+                LinearLayout.LayoutParams.MATCH_PARENT, 1f));
     }
 
     private void setActiveNav(String key) {
@@ -208,7 +258,7 @@ public class MainActivity extends Activity {
         settings.setDisplayZoomControls(false);
         settings.setSupportZoom(false);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
-        settings.setUserAgentString(settings.getUserAgentString() + " BelayaMglaAndroid/3.0");
+        settings.setUserAgentString(settings.getUserAgentString() + " BelayaMglaAndroid/4.0");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             try {
@@ -229,8 +279,12 @@ public class MainActivity extends Activity {
         });
 
         webView.setWebViewClient(new WebViewClient() {
-            @Override public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) { return handleUri(request.getUrl()); }
-            @Override @SuppressWarnings("deprecation") public boolean shouldOverrideUrlLoading(WebView view, String url) { return handleUri(Uri.parse(url)); }
+            @Override public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return handleUri(request.getUrl());
+            }
+            @Override @SuppressWarnings("deprecation") public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return handleUri(Uri.parse(url));
+            }
             @Override public void onPageCommitVisible(WebView view, String url) {
                 super.onPageCommitVisible(view, url);
                 if (isSiteUrl(url)) view.evaluateJavascript(PERFORMANCE_JS, null);
@@ -254,7 +308,8 @@ public class MainActivity extends Activity {
         });
 
         webView.setDownloadListener(new DownloadListener() {
-            @Override public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
+            @Override public void onDownloadStart(String url, String userAgent, String contentDisposition,
+                                                  String mimetype, long contentLength) {
                 openExternal(Uri.parse(url));
             }
         });
@@ -286,10 +341,14 @@ public class MainActivity extends Activity {
 
     private void openExternal(Uri uri) {
         try { startActivity(new Intent(Intent.ACTION_VIEW, uri)); }
-        catch (ActivityNotFoundException e) { Toast.makeText(this, "Не удалось открыть ссылку", Toast.LENGTH_SHORT).show(); }
+        catch (ActivityNotFoundException e) {
+            Toast.makeText(this, "Не удалось открыть ссылку", Toast.LENGTH_SHORT).show();
+        }
     }
 
-    private int dp(int value) { return Math.round(value * getResources().getDisplayMetrics().density); }
+    private int dp(int value) {
+        return Math.round(value * getResources().getDisplayMetrics().density);
+    }
 
     @Override protected void onSaveInstanceState(Bundle outState) {
         webView.saveState(outState);
