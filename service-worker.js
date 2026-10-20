@@ -1,4 +1,4 @@
-const CACHE_NAME = 'belaya-mgla-v571';
+const CACHE_NAME = 'belaya-mgla-v572';
 const CORE = [
   './',
   './index.html',
@@ -33,7 +33,7 @@ self.addEventListener('fetch', event => {
     event.respondWith((async () => {
       const cache = await caches.open(CACHE_NAME);
       try {
-        const resp = await fetch(req);
+        const resp = await fetch(req, {cache: 'no-store'});
         if (resp && resp.ok) cache.put(req, resp.clone());
         return resp;
       } catch (e) {
