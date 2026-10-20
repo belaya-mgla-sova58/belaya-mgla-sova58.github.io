@@ -5,13 +5,20 @@
     owls: [{"id":"owl-01","label":"Ура","src":"assets/chat-stickers/owls/owl-01.png"},{"id":"owl-02","label":"Ору","src":"assets/chat-stickers/owls/owl-02.png"},{"id":"owl-03","label":"Отлично","src":"assets/chat-stickers/owls/owl-03.png"},{"id":"owl-04","label":"Спасибо","src":"assets/chat-stickers/owls/owl-04.png"},{"id":"owl-05","label":"Вместе Мы Сильнее","src":"assets/chat-stickers/owls/owl-05.png"},{"id":"owl-06","label":"Ну Вы Даете","src":"assets/chat-stickers/owls/owl-06.png"},{"id":"owl-07","label":"Серьезно","src":"assets/chat-stickers/owls/owl-07.png"},{"id":"owl-08","label":"Доброе Утро","src":"assets/chat-stickers/owls/owl-08.png"},{"id":"owl-09","label":"Спокойной Ночи","src":"assets/chat-stickers/owls/owl-09.png"},{"id":"owl-10","label":"Надо Разобраться","src":"assets/chat-stickers/owls/owl-10.png"},{"id":"owl-11","label":"Думаю","src":"assets/chat-stickers/owls/owl-11.png"},{"id":"owl-12","label":"Слежу","src":"assets/chat-stickers/owls/owl-12.png"},{"id":"owl-13","label":"Принято","src":"assets/chat-stickers/owls/owl-13.png"},{"id":"owl-14","label":"Красава","src":"assets/chat-stickers/owls/owl-14.png"},{"id":"owl-15","label":"Грустно","src":"assets/chat-stickers/owls/owl-15.png"},{"id":"owl-16","label":"В Бой","src":"assets/chat-stickers/owls/owl-16.png"},{"id":"owl-17","label":"Куда Идем","src":"assets/chat-stickers/owls/owl-17.png"},{"id":"owl-18","label":"Алмазы","src":"assets/chat-stickers/owls/owl-18.png"},{"id":"owl-19","label":"Победа","src":"assets/chat-stickers/owls/owl-19.png"},{"id":"owl-20","label":"Ой","src":"assets/chat-stickers/owls/owl-20.png"},{"id":"owl-21","label":"Сбор","src":"assets/chat-stickers/owls/owl-21.png"},{"id":"owl-22","label":"На Медведя","src":"assets/chat-stickers/owls/owl-22.png"},{"id":"owl-23","label":"В Форты","src":"assets/chat-stickers/owls/owl-23.png"},{"id":"owl-24","label":"Готов","src":"assets/chat-stickers/owls/owl-24.png"},{"id":"owl-25","label":"В Атаку","src":"assets/chat-stickers/owls/owl-25.png"},{"id":"owl-26","label":"Замок Наш","src":"assets/chat-stickers/owls/owl-26.png"},{"id":"owl-27","label":"Копим","src":"assets/chat-stickers/owls/owl-27.png"},{"id":"owl-28","label":"Щит","src":"assets/chat-stickers/owls/owl-28.png"},{"id":"owl-29","label":"Победа 58","src":"assets/chat-stickers/owls/owl-29.png"},{"id":"owl-30","label":"В Игру","src":"assets/chat-stickers/owls/owl-30.png"}],
     heroes: [{"id":"hero-mom-beer","label":"МОМ любит пиво","src":"assets/chat-stickers/heroes/mom-beer.png"},{"id":"hero-greg-respect","label":"Грег: «С уважением»","src":"assets/chat-stickers/heroes/greg-respect.png"},{"id":"hero-greg-no-respect","label":"Грег: «Без уважения»","src":"assets/chat-stickers/heroes/greg-no-respect.png"},{"id":"hero-molly-report-all","label":"Молли: «Всем отчёт»","src":"assets/chat-stickers/heroes/molly-report-all.png"},{"id":"hero-molly-where-report","label":"Молли: «Где отчёт?»","src":"assets/chat-stickers/heroes/molly-where-report.png"},{"id":"hero-geronimo-who-guilty","label":"Джеронимо: «Кто виноват?»","src":"assets/chat-stickers/heroes/geronimo-who-guilty.png"}]
   };
-  const PACK_LABELS = { owls: '🦉 Совы', heroes: '🎮 Герои' };
+
+  const EMOJIS = [
+    '😀','😃','😄','😁','😆','😅','😂','🤣','😊','😇','🙂','🙃','😉','😍','🥰','😘','😋','😜','🤪','🤨','🧐','🤓','😎','🥳','😏','😒','🙄','😬','🤥','😌','😔','😪','🤤','😴','😷','🤒','🤕','🤢','🤮','🥵','🥶','🥴','😵','🤯','🤠','😈','👿','👻','💀','☠️','👽','🤖','💩','😺','😸','😹','😻','😼','🙀','😿','😾',
+    '👍','👎','👌','✌️','🤞','🤟','🤘','🤙','👈','👉','👆','👇','☝️','✋','🤚','🖐️','🖖','👋','👏','🙌','👐','🤲','🙏','✍️','💪','👀','👁️','🫶','❤️','🧡','💛','💚','💙','💜','🖤','🤍','🤎','💔','❣️','💕','💞','💓','💗','💖','💘','💝','💟',
+    '🔥','⭐','🌟','✨','⚡','💥','💫','💦','💨','🎉','🎊','🏆','🥇','🎯','🚀','🛡️','⚔️','🏰','💎','💰','💣','🔔','✅','❌','❗','❓','💯','📢','📌','🦉','🦊','🐻','🐝','🍺','🍻','☕','🍕','🍰','🎁','🎮','🏪','📉','🚷','🔹','👨','🙎','🍠'
+  ];
+
+  const TAB_ORDER = ['owls', 'heroes', 'emoji'];
+  const PACK_LABELS = { owls: '🦉 Совы', heroes: '🎮 Герои', emoji: '😊 Смайлы' };
   const TOKEN_RE = /^#sticker\|(owls|heroes)\|([a-z0-9-]+)$/i;
   const LEGACY_RE = /^#sticker\|(owls|heroes)\|(\d+)$/i;
   const form = document.getElementById('chat58Form');
   const input = document.getElementById('chat58Input');
   const send = document.getElementById('chat58Send');
-  const status = document.getElementById('chat58Status');
   const composer = document.querySelector('.chat58-composer');
   if (!form || !input || !composer) return;
 
@@ -19,7 +26,7 @@
   Object.entries(PACKS).forEach(([pack, items]) => {
     items.forEach((item, index) => {
       byId.set(`${pack}:${item.id}`, item);
-      byId.set(`${pack}:${index}`, item); // старые токены остаются читаемыми
+      byId.set(`${pack}:${index}`, item);
     });
   });
 
@@ -27,7 +34,7 @@
   button.type = 'button';
   button.id = 'chat58StickerBtn';
   button.className = 'chat58-sticker-btn';
-  button.setAttribute('aria-label', 'Открыть стикеры');
+  button.setAttribute('aria-label', 'Открыть стикеры и смайлы');
   button.setAttribute('aria-expanded', 'false');
   button.textContent = '☺';
 
@@ -35,7 +42,7 @@
   panel.id = 'chat58StickerPanel';
   panel.className = 'chat58-sticker-panel';
   panel.hidden = true;
-  panel.setAttribute('aria-label', 'Стикеры');
+  panel.setAttribute('aria-label', 'Стикеры и смайлы');
 
   const tabs = document.createElement('div');
   tabs.className = 'chat58-sticker-tabs';
@@ -68,9 +75,20 @@
     return null;
   }
 
+  function insertEmoji(emoji) {
+    if (input.disabled) return;
+    const start = Number.isInteger(input.selectionStart) ? input.selectionStart : input.value.length;
+    const end = Number.isInteger(input.selectionEnd) ? input.selectionEnd : start;
+    input.value = input.value.slice(0, start) + emoji + input.value.slice(end);
+    const caret = start + emoji.length;
+    input.focus();
+    if (typeof input.setSelectionRange === 'function') input.setSelectionRange(caret, caret);
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+
   function renderTabs() {
     tabs.replaceChildren();
-    Object.keys(PACKS).forEach(pack => {
+    TAB_ORDER.forEach(pack => {
       const tab = document.createElement('button');
       tab.type = 'button';
       tab.className = 'chat58-sticker-tab' + (pack === activePack ? ' is-active' : '');
@@ -88,6 +106,22 @@
 
   function renderGrid() {
     grid.replaceChildren();
+    grid.classList.toggle('is-emoji', activePack === 'emoji');
+
+    if (activePack === 'emoji') {
+      EMOJIS.forEach(emoji => {
+        const cell = document.createElement('button');
+        cell.type = 'button';
+        cell.className = 'chat58-sticker-cell chat58-emoji-cell';
+        cell.textContent = emoji;
+        cell.title = emoji;
+        cell.setAttribute('aria-label', `Вставить ${emoji}`);
+        cell.addEventListener('click', () => insertEmoji(emoji));
+        grid.appendChild(cell);
+      });
+      return;
+    }
+
     PACKS[activePack].forEach(item => {
       const cell = document.createElement('button');
       cell.type = 'button';
@@ -179,6 +213,6 @@
   }
 
   window.CHAT58_STICKERS = Object.freeze({
-    packs: Object.freeze({ owls: PACKS.owls.length, heroes: PACKS.heroes.length })
+    packs: Object.freeze({ owls: PACKS.owls.length, heroes: PACKS.heroes.length, emoji: EMOJIS.length })
   });
 })();
