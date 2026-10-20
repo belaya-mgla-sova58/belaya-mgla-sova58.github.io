@@ -8,6 +8,7 @@ const PREFIX='__chat58__', MARK='__chat58m__', DEL='__chat58d__', REPLY='__chat5
 const NICK_KEY='belaya-mgla-chat58-nick-v1', UID_KEY='belaya-mgla-chat58-uid-v1', LAST_KEY='belaya-mgla-chat58-last-v1', ADMIN_KEY='belaya-mgla-chat58-admin-jwk-v1';
 const PUBLIC_ADMIN_JWK={"kty":"EC","crv":"P-256","x":"k39zWtQ5CgsmVc-sqsjCm-kExVGPIGYME_BEPlma_D0","y":"AqP1MJqV3iVSnTArgiowCXCctMXYe6DiAl5erWMb5q8","key_ops":["verify"],"ext":true};
 const REACTIONS=[['up','👍'],['laugh','😂'],['heart','❤️']];
+const SOVA_NICK='SOVA';
 
 const gate=document.getElementById('chat58Gate'),nickForm=document.getElementById('chat58NickForm'),nickInput=document.getElementById('chat58NickInput'),nickNote=document.getElementById('chat58NickNote');
 const myNick=document.getElementById('chat58MyNick'),messagesEl=document.getElementById('chat58Messages'),form=document.getElementById('chat58Form'),input=document.getElementById('chat58Input'),send=document.getElementById('chat58Send'),status=document.getElementById('chat58Status'),count=document.getElementById('chat58Count'),refresh=document.getElementById('chat58Refresh'),conn=document.getElementById('chat58Conn'),connText=document.getElementById('chat58ConnText'),newBtn=document.getElementById('chat58New'),replyBar=document.getElementById('chat58ReplyBar'),replyNick=document.getElementById('chat58ReplyNick'),replyText=document.getElementById('chat58ReplyText'),replyCancel=document.getElementById('chat58ReplyCancel');
@@ -36,6 +37,7 @@ function idTs(id){const p=String(id).split('-')[0];const n=parseInt(p,36);return
 function formatTime(ts){const d=new Date(ts);const now=new Date();const same=d.getFullYear()===now.getFullYear()&&d.getMonth()===now.getMonth()&&d.getDate()===now.getDate();return same?d.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}):d.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit'})+' '+d.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'})}
 function nearBottom(){return messagesEl.scrollHeight-messagesEl.scrollTop-messagesEl.clientHeight<90}
 function normalizeNick(n){return String(n||'').normalize('NFKC').trim().replace(/\s+/g,' ').toLocaleLowerCase('ru-RU')}
+function isSovaNick(n){return normalizeNick(n)==='sova'}
 async function sha256Hex(text){const hash=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text));return Array.from(new Uint8Array(hash),b=>b.toString(16).padStart(2,'0')).join('')}
 function parseNickClaims(root){
  const claims=[]; const re=/^__chat58n__([a-f0-9]{64})__([a-z0-9]+)__([a-z0-9-]+)__(.+)$/i;
@@ -44,7 +46,12 @@ function parseNickClaims(root){
 }
 function claimWinner(claims,hash){return claims.filter(c=>c.hash===hash).sort((a,b)=>(a.ts-b.ts)||a.uid.localeCompare(b.uid))[0]||null}
 async function claimNickname(nick){
- const norm=normalizeNick(nick),hash=await sha256Hex(norm);let root=await readRoot();let claims=parseNickClaims(root),winner=claimWinner(claims,hash);
+ const norm=normalizeNick(nick);
+ if(isSovaNick(nick)){
+   if(!adminUnlocked)return {ok:false,reason:'reserved'};
+   safeStorageSet(NICK_KEY,SOVA_NICK);return {ok:true,admin:true};
+ }
+ const hash=await sha256Hex(norm);let root=await readRoot();let claims=parseNickClaims(root),winner=claimWinner(claims,hash);
  if(winner&&winner.uid!==uid)return {ok:false,reason:'taken'};
  if(!winner){const ts36=Date.now().toString(36);await incrementStrict(NICK+hash+'__'+ts36+'__'+uid+'__'+b64uEncode(nick));root=await readRoot();claims=parseNickClaims(root);winner=claimWinner(claims,hash)}
  if(!winner||winner.uid!==uid)return {ok:false,reason:'taken'};
@@ -52,6 +59,10 @@ async function claimNickname(nick){
 }
 async function ensureSavedNickname(){
  const nick=safeStorageGet(NICK_KEY);if(!nick)return false;
+ if(isSovaNick(nick)){
+   if(adminUnlocked){safeStorageSet(NICK_KEY,SOVA_NICK);return true}
+   safeStorageRemove(NICK_KEY);nickNote.textContent='Ник SOVA защищён. Нажми «Войти как SOVA» и введи личный код.';return false;
+ }
  try{const result=await claimNickname(nick);if(result.ok)return true;safeStorageRemove(NICK_KEY);nickNote.textContent='Этот ник уже занят. Выбери другой.';return false}catch(e){return true}
 }
 
@@ -93,7 +104,21 @@ async function verifyAdminMessages(items){for(const x of items){if(!x.adminSig)c
 async function writeMod(type,target,value){const ts36=Date.now().toString(36),canonical='chat58|mod|'+type+'|'+target+'|'+String(value)+'|'+ts36,sig=await signAdmin(canonical);await incrementStrict(MOD+type+'__'+target+'__'+String(value)+'__'+ts36+'__'+sig);lastSignature='';await loadMessages(true)}
 
 function adminJwkFromCode(code){const raw=String(code||'').trim();if(!raw.toUpperCase().startsWith('SOVA58-'))throw new Error('bad code');const text=b64uDecode(raw.slice(7));const data=JSON.parse(text);return data.privateJwk||data}
-async function activateAdminJwk(jwk,state){adminPrivateKey=await importAdminPrivate(jwk);adminUnlocked=true;safeStorageSet(ADMIN_KEY,JSON.stringify(jwk));if(state)state.textContent='Доступ SOVA активирован ✅';updateAdminUi();render(lastItems,true)}
+async function activateAdminJwk(jwk,state){adminPrivateKey=await importAdminPrivate(jwk);adminUnlocked=true;safeStorageSet(ADMIN_KEY,JSON.stringify(jwk));safeStorageSet(NICK_KEY,SOVA_NICK);if(nickNote)nickNote.textContent='';applyNick();if(state)state.textContent='Доступ SOVA активирован ✅';updateAdminUi();render(lastItems,true)}
+
+function createSovaRecoveryUi(){
+ const card=gate&&gate.querySelector('.chat58-gate-card');if(!card||document.getElementById('chat58SovaRecover'))return;
+ const wrap=document.createElement('div');wrap.className='chat58-sova-recover';
+ const btn=document.createElement('button');btn.id='chat58SovaRecover';btn.type='button';btn.className='chat58-sova-recover-btn';btn.textContent='👑 Войти как SOVA';
+ const panel=document.createElement('div');panel.className='chat58-sova-recover-panel';panel.hidden=true;
+ const inp=document.createElement('input');inp.type='password';inp.className='chat58-sova-recover-code';inp.placeholder='Вставить код SOVA';inp.autocomplete='off';inp.autocapitalize='off';inp.spellcheck=false;
+ const go=document.createElement('button');go.type='button';go.className='chat58-sova-recover-go';go.textContent='🔑 Восстановить SOVA';
+ const note=document.createElement('div');note.className='chat58-sova-recover-note';
+ panel.append(inp,go,note);wrap.append(btn,panel);card.appendChild(wrap);
+ btn.addEventListener('click',()=>{panel.hidden=!panel.hidden;if(!panel.hidden)setTimeout(()=>inp.focus(),30)});
+ btn.addEventListener('touchend',e=>{e.preventDefault();panel.hidden=!panel.hidden;if(!panel.hidden)setTimeout(()=>inp.focus(),30)},{passive:false});
+ go.addEventListener('click',async()=>{const code=inp.value.trim();if(!code){note.textContent='Вставь личный код SOVA.';return}go.disabled=true;note.textContent='Проверяю…';try{await activateAdminJwk(adminJwkFromCode(code),note);inp.value='';note.textContent='SOVA восстановлена на этом устройстве ✅';lastSignature='';await loadMessages(true)}catch(e){note.textContent='Неверный код SOVA.'}finally{go.disabled=false}});
+}
 
 function createAdminUi(){
  const toolbar=document.querySelector('.chat58-toolbar');if(!toolbar||document.getElementById('chat58AdminBtn'))return;
@@ -130,15 +155,15 @@ function render(items,stickToBottom){
 
 async function loadMessages(force){if(loading)return;loading=true;if(force)refresh.disabled=true;const wasNear=nearBottom();try{const root=await readRoot();lastRoot=root;let items=parseRoot(root);moderationState=await parseModeration(root);await verifyAdminMessages(items);mutedUntil=moderationState.mutes.get(uid)||0;items=items.filter(x=>!moderationState.hidden.has(x.id));lastItems=items;const incoming=knownIds.size?items.filter(x=>!knownIds.has(x.id)&&x.owner!==uid).length:0;knownIds=new Set(items.map(x=>x.id));if(incoming&&!wasNear){unreadCount+=incoming;updateUnread()}const sig=items.map(x=>x.id+':'+(x.reply?x.reply.id:'')+':'+Number(x.reactions.up||0)+':'+Number(x.reactions.laugh||0)+':'+Number(x.reactions.heart||0)+':'+(x.admin?'a':'')).join('|')+'|p:'+moderationState.pinnedId+'|h:'+Array.from(moderationState.hidden).join(',')+'|m:'+mutedUntil+'|adm:'+adminUnlocked;if(sig!==lastSignature||force){lastSignature=sig;render(items,wasNear)}if(wasNear)clearUnread();setConnection(true);if(status.textContent==='Не удалось обновить чат.')setStatus('',false);if(mutedUntil>Date.now())setStatus('Ты временно не можешь писать в чат.',true)}catch(e){console.warn('chat load',e);setConnection(false);if(force)setStatus('Не удалось обновить чат.',true)}finally{loading=false;refresh.disabled=false}}
 
-async function sendMessage(text){const nick=safeStorageGet(NICK_KEY);if(!nick)throw new Error('nick');if(mutedUntil>Date.now())throw new Error('muted');const id=Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8);const chunks=splitText(text,70),total=chunks.length,nickEnc=b64uEncode(nick),rt=replyTarget?{id:replyTarget.id,nick:replyTarget.nick,text:replyTarget.text}:null;for(let i=0;i<chunks.length;i++){const k=PREFIX+id+'__'+i+'__'+total+'__'+nickEnc+'__'+uid+'__'+b64uEncode(chunks[i]);await incrementStrict(k)}if(rt)await incrementStrict(REPLY+id+'__'+b64uEncode(JSON.stringify(rt)));if(adminUnlocked){try{const sig=await signAdmin('chat58|adminmsg|'+id+'|'+uid+'|'+nick+'|'+text.trim());await incrementStrict(ADMINMSG+id+'__'+sig)}catch(e){console.warn('admin badge sign failed',e)}}await incrementStrict(MARK+id+'__'+total);return id}
+async function sendMessage(text){const nick=safeStorageGet(NICK_KEY);if(!nick)throw new Error('nick');if(isSovaNick(nick)&&!adminUnlocked)throw new Error('reserved');if(mutedUntil>Date.now())throw new Error('muted');const id=Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8);const chunks=splitText(text,70),total=chunks.length,nickEnc=b64uEncode(nick),rt=replyTarget?{id:replyTarget.id,nick:replyTarget.nick,text:replyTarget.text}:null;for(let i=0;i<chunks.length;i++){const k=PREFIX+id+'__'+i+'__'+total+'__'+nickEnc+'__'+uid+'__'+b64uEncode(chunks[i]);await incrementStrict(k)}if(rt)await incrementStrict(REPLY+id+'__'+b64uEncode(JSON.stringify(rt)));if(adminUnlocked){try{const sig=await signAdmin('chat58|adminmsg|'+id+'|'+uid+'|'+nick+'|'+text.trim());await incrementStrict(ADMINMSG+id+'__'+sig)}catch(e){console.warn('admin badge sign failed',e)}}await incrementStrict(MARK+id+'__'+total);return id}
 async function deleteMessage(id,btn){if(!confirm('Удалить своё сообщение?'))return;btn.disabled=true;try{await incrementStrict(DEL+id);setStatus('Сообщение удалено.',false);lastSignature='';await loadMessages(true)}catch(e){btn.disabled=false;setStatus('Не удалось удалить сообщение.',true)}}
 function autosize(){input.style.height='auto';input.style.height=Math.min(input.scrollHeight,120)+'px';count.textContent=Array.from(input.value).length+' / 350'}
 function startPolling(){clearInterval(timer);timer=setInterval(()=>{if(!document.hidden)loadMessages(false)},5000)}
 function applyNick(){const nick=safeStorageGet(NICK_KEY);if(nick){gate.hidden=true;myNick.textContent=nick;input.disabled=false;send.disabled=false}else{gate.hidden=false;input.disabled=true;send.disabled=true;setTimeout(()=>nickInput.focus(),50)}}
 
-nickForm.addEventListener('submit',async e=>{e.preventDefault();let nick=nickInput.value.trim().replace(/\s+/g,' ');const len=Array.from(nick).length;if(len<2){nickNote.textContent='Ник должен быть не короче 2 символов.';return}if(len>24){nickNote.textContent='Ник слишком длинный. Максимум 24 символа.';return}if(/[\u0000-\u001f\u007f]/.test(nick)){nickNote.textContent='В нике есть неподдерживаемые символы.';return}nickNote.textContent='Проверяю ник…';try{const r=await claimNickname(nick);if(!r.ok){nickNote.textContent='Этот ник уже занят. Выбери другой.';return}nickNote.textContent='';applyNick();loadMessages(true)}catch(err){nickNote.textContent='Не удалось проверить ник. Попробуй ещё раз.'}});
+nickForm.addEventListener('submit',async e=>{e.preventDefault();let nick=nickInput.value.trim().replace(/\s+/g,' ');const len=Array.from(nick).length;if(len<2){nickNote.textContent='Ник должен быть не короче 2 символов.';return}if(len>24){nickNote.textContent='Ник слишком длинный. Максимум 24 символа.';return}if(/[\u0000-\u001f\u007f]/.test(nick)){nickNote.textContent='В нике есть неподдерживаемые символы.';return}if(isSovaNick(nick)&&!adminUnlocked){nickNote.textContent='Ник SOVA защищён. Используй кнопку «Войти как SOVA».';return}nickNote.textContent='Проверяю ник…';try{const r=await claimNickname(nick);if(!r.ok){nickNote.textContent='Этот ник уже занят. Выбери другой.';return}nickNote.textContent='';applyNick();loadMessages(true)}catch(err){nickNote.textContent='Не удалось проверить ник. Попробуй ещё раз.'}});
 form.addEventListener('submit',async e=>{e.preventDefault();const text=input.value.trim();if(!text)return;const n=Array.from(text).length;if(n>350){setStatus('Сообщение слишком длинное.',true);return}if(mutedUntil>Date.now()){setStatus('Ты временно не можешь писать в чат.',true);return}const last=Number(safeStorageGet(LAST_KEY)||0);if(Date.now()-last<5000){setStatus('Подожди несколько секунд перед следующим сообщением.',true);return}send.disabled=true;setStatus('Отправляем…',false);try{await sendMessage(text);clearReply();safeStorageSet(LAST_KEY,String(Date.now()));input.value='';autosize();setStatus('',false);lastSignature='';await loadMessages(true)}catch(err){if(err&&err.message==='muted')setStatus('Ты временно не можешь писать в чат.',true);else{setConnection(false);setStatus('Не удалось отправить. Проверь интернет и попробуй ещё раз.',true)}}finally{send.disabled=false}});
 input.addEventListener('input',autosize);input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();form.requestSubmit()}});replyCancel&&replyCancel.addEventListener('click',clearReply);newBtn&&newBtn.addEventListener('click',()=>{messagesEl.scrollTop=messagesEl.scrollHeight;clearUnread()});messagesEl.addEventListener('scroll',()=>{if(nearBottom())clearUnread()},{passive:true});refresh.addEventListener('click',()=>loadMessages(true));window.addEventListener('online',()=>{setConnection(true);loadMessages(true)});window.addEventListener('offline',()=>setConnection(false));document.addEventListener('visibilitychange',()=>{if(!document.hidden)loadMessages(false)});
 
-(async function init(){createAdminUi();await loadAdminFromStorage();updateAdminUi();const ok=await ensureSavedNickname();applyNick();autosize();setConnection(navigator.onLine);if(ok||!safeStorageGet(NICK_KEY))await loadMessages(true);startPolling()})();
+(async function init(){createAdminUi();createSovaRecoveryUi();await loadAdminFromStorage();updateAdminUi();const ok=await ensureSavedNickname();applyNick();autosize();setConnection(navigator.onLine);if(ok||!safeStorageGet(NICK_KEY))await loadMessages(true);startPolling()})();
 })();

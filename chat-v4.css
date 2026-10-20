@@ -8,3 +8,12 @@
 @media(max-width:720px){.chat58-toolbar{gap:6px}.chat58-admin-btn{padding:6px 8px;font-size:8.5px}.chat58-refresh{padding:6px 8px}.chat58-admin-card{padding:20px 16px}.chat58-pinned{padding:7px 9px}}
 
 .chat58-admin-or{margin:8px 0;color:rgba(226,239,249,.44);font-size:9px}.chat58-admin-code{box-sizing:border-box;width:100%;padding:10px 11px;border:1px solid rgba(255,220,124,.24);border-radius:11px;background:rgba(255,255,255,.07);color:#fff;font:inherit;font-size:11px;outline:none}.chat58-admin-code:focus{border-color:rgba(255,222,132,.62);box-shadow:0 0 0 3px rgba(255,207,91,.08)}.chat58-admin-code-btn{width:100%;margin-top:7px;padding:10px 12px;border:1px solid rgba(255,220,124,.30);border-radius:11px;background:linear-gradient(180deg,rgba(181,134,41,.34),rgba(121,87,25,.28));color:#ffe9a9;font:inherit;font-size:11px;font-weight:900;cursor:pointer}.chat58-admin-btn{pointer-events:auto!important;position:relative;z-index:3}
+
+/* Chat58 v6: SOVA multi-device recovery */
+.chat58-sova-recover{margin-top:13px;padding-top:12px;border-top:1px solid rgba(255,224,132,.16)}
+.chat58-sova-recover-btn,.chat58-sova-recover-go{width:100%;box-sizing:border-box;border:1px solid rgba(255,219,118,.34);border-radius:13px;background:linear-gradient(180deg,rgba(183,135,34,.24),rgba(119,83,19,.20));color:#ffe7a0;padding:10px 12px;font:inherit;font-size:11px;font-weight:900;cursor:pointer;position:relative;z-index:2;touch-action:manipulation}
+.chat58-sova-recover-panel[hidden]{display:none}.chat58-sova-recover-panel{margin-top:8px}
+.chat58-sova-recover-code{box-sizing:border-box;width:100%;padding:10px 11px;border:1px solid rgba(255,219,118,.24);border-radius:12px;background:rgba(255,255,255,.07);color:#fff;font:inherit;font-size:11px;outline:none;text-align:center}
+.chat58-sova-recover-code:focus{border-color:rgba(255,225,143,.62);box-shadow:0 0 0 3px rgba(219,173,60,.10)}
+.chat58-sova-recover-go{margin-top:7px}.chat58-sova-recover-go:disabled{opacity:.55}
+.chat58-sova-recover-note{min-height:15px;margin-top:7px;color:#bfe9ff;font-size:9.5px;line-height:1.35}
