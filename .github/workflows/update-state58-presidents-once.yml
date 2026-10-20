@@ -22,16 +22,19 @@ jobs:
           p = Path('state-58.html')
           s = p.read_text(encoding='utf-8')
           s = s.replace('Кто возглавлял государство, когда и чем запомнился период.', 'Кто возглавлял государство и когда вступил в должность.')
-          block = '''<section class="guide-section" id="presidents"><h2>👑 История президентства</h2><p>Хронология президентов государства 58. Только ник и дата вступления в должность.</p><div class="president-timeline">
-<article class="president-entry"><h3>❄SOVA❄</h3><p>2026.10.11</p></article>
-<article class="president-entry"><h3>Роман 48</h3><p>2026.09.27</p></article>
-<article class="president-entry"><h3>AmoonRa</h3><p>2026.09.13</p></article>
-<article class="president-entry"><h3>Безразличие</h3><p>2026.08.30</p></article>
-<article class="president-entry"><h3>《DK》</h3><p>2026.08.16</p></article>
-<article class="president-entry"><h3>ツ Бⓞлⓞлⓞ</h3><p>2026.08.02</p></article>
-<article class="president-entry"><h3>Адмирал Ушаков</h3><p>2026.07.20</p></article>
-</div></section>
-'''
+          lines = [
+              '<section class="guide-section" id="presidents"><h2>👑 История президентства</h2><p>Хронология президентов государства 58. Только ник и дата вступления в должность.</p><div class="president-timeline">',
+              '<article class="president-entry"><h3>❄SOVA❄</h3><p>2026.10.11</p></article>',
+              '<article class="president-entry"><h3>Роман 48</h3><p>2026.09.27</p></article>',
+              '<article class="president-entry"><h3>AmoonRa</h3><p>2026.09.13</p></article>',
+              '<article class="president-entry"><h3>Безразличие</h3><p>2026.08.30</p></article>',
+              '<article class="president-entry"><h3>《DK》</h3><p>2026.08.16</p></article>',
+              '<article class="president-entry"><h3>ツ Бⓞлⓞлⓞ</h3><p>2026.08.02</p></article>',
+              '<article class="president-entry"><h3>Адмирал Ушаков</h3><p>2026.07.20</p></article>',
+              '</div></section>',
+              ''
+          ]
+          block = '\n'.join(lines)
           pattern = r'<section class="guide-section" id="presidents">.*?(?=<section class="guide-section" id="victories">)'
           new_s, n = re.subn(pattern, block, s, flags=re.S)
           if n != 1:
