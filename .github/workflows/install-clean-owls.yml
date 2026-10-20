@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - '.tmp/clean-owls/READY'
+      - 'clean-owls-v2-small.zip'
 
 permissions:
   contents: write
@@ -17,15 +17,13 @@ jobs:
         with:
           ref: main
 
-      - name: Rebuild clean owl pack
+      - name: Install clean owl pack
         shell: bash
         run: |
           set -euo pipefail
-          cat .tmp/clean-owls/chunk-* > /tmp/clean-owls.b64
-          base64 -d /tmp/clean-owls.b64 > /tmp/clean-owls.zip
           rm -rf /tmp/clean-owls-unpacked
           mkdir -p /tmp/clean-owls-unpacked
-          unzip -q /tmp/clean-owls.zip -d /tmp/clean-owls-unpacked
+          unzip -q clean-owls-v2-small.zip -d /tmp/clean-owls-unpacked
           test "$(find /tmp/clean-owls-unpacked/assets/chat-stickers/owls -maxdepth 1 -type f -name 'owl-*.png' | wc -l)" -eq 30
           rm -rf assets/chat-stickers/owls
           cp -R /tmp/clean-owls-unpacked/assets/chat-stickers/owls assets/chat-stickers/owls
@@ -35,9 +33,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf .tmp/clean-owls
+          rm -f clean-owls-v2-small.zip
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/chat-stickers/owls .tmp/clean-owls
+          git add assets/chat-stickers/owls clean-owls-v2-small.zip
           git commit -m 'Replace owl stickers with clean source crops'
           git push origin main
