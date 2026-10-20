@@ -1,0 +1,40 @@
+function parseNickClaims(root){
+ const claims=[]; const re=/^__chat58n__([a-f0-9]{64})__([a-z0-9]+)__([a-z0-9-]+)__(.+)$/i;
+ Object.keys(root||{}).forEach(k=>{const m=k.match(re);if(!m)return;claims.push({hash:m[1].toLowerCase(),ts:parseInt(m[2],36)||0,ts36:m[2],uid:m[3],nick:b64uDecode(m[4]),key:k})});
+ return claims;
+}
+function claimWinner(claims,hash){return claims.filter(c=>c.hash===hash).sort((a,b)=>(a.ts-b.ts)||a.uid.localeCompare(b.uid))[0]||null}
+async function claimNickname(nick){
+ const norm=normalizeNick(nick),hash=await sha256Hex(norm);let root=await readRoot();let claims=parseNickClaims(root),winner=claimWinner(claims,hash);
+ if(winner&&winner.uid!==uid)return {ok:false,reason:'taken'};
+ if(!winner){const ts36=Date.now().toString(36);await incrementStrict(NICK+hash+'__'+ts36+'__'+uid+'__'+b64uEncode(nick));root=await readRoot();claims=parseNickClaims(root);winner=claimWinner(claims,hash)}
+ if(!winner||winner.uid!==uid)return {ok:false,reason:'taken'};
+ safeStorageSet(NICK_KEY,nick);return {ok:true};
+}
+async function ensureSavedNickname(){
+ const nick=safeStorageGet(NICK_KEY);if(!nick)return false;
+ try{const result=await claimNickname(nick);if(result.ok)return true;safeStorageRemove(NICK_KEY);nickNote.textContent='Этот ник уже занят. Выбери другой.';return false}catch(e){return true}
+}
+
+function parseRoot(root){
+ const chunks={},markers={},deleted={},replies={},reactions={},adminSigs={};
+ const chunkRe=/^__chat58__([a-z0-9-]+)__([0-9]+)__([0-9]+)__(.+)__([a-z0-9-]+)__(.+)$/i;
+ const markRe=/^__chat58m__([a-z0-9-]+)__([0-9]+)$/i;
+ const delRe=/^__chat58d__([a-z0-9-]+)$/i;
+ const replyRe=/^__chat58r__([a-z0-9-]+)__(.+)$/i;
+ const reactRe=/^__chat58x__([a-z0-9-]+)__(up|laugh|heart)$/i;
+ const adminRe=/^__chat58a__([a-z0-9-]+)__(.+)$/i;
+ Object.entries(root||{}).forEach(([k,v])=>{let m=k.match(chunkRe);if(m){const id=m[1],idx=Number(m[2]),total=Number(m[3]);if(!chunks[id])chunks[id]={total,parts:{},nick:b64uDecode(m[4]),owner:m[5]};chunks[id].parts[idx]=b64uDecode(m[6]);return}m=k.match(markRe);if(m){markers[m[1]]=Number(m[2]);return}m=k.match(delRe);if(m&&Number(v)>0){deleted[m[1]]=true;return}m=k.match(replyRe);if(m){try{const r=JSON.parse(b64uDecode(m[2]));if(r&&r.id)replies[m[1]]={id:String(r.id),nick:String(r.nick||''),text:String(r.text||'')}}catch(e){}return}m=k.match(reactRe);if(m){if(!reactions[m[1]])reactions[m[1]]={up:0,laugh:0,heart:0};reactions[m[1]][m[2]]=Math.max(0,Number(v)||0);return}m=k.match(adminRe);if(m){adminSigs[m[1]]=m[2]}});
+ const out=[];Object.entries(markers).forEach(([id,total])=>{const c=chunks[id];if(!c||deleted[id]||c.total!==total)return;let text='';for(let i=0;i<total;i++){if(typeof c.parts[i]!=='string')return;text+=c.parts[i]}if(!text.trim()||!c.nick)return;out.push({id,ts:idTs(id),nick:c.nick,owner:c.owner,text:text.trim(),reply:replies[id]||null,reactions:reactions[id]||{up:0,laugh:0,heart:0},adminSig:adminSigs[id]||'',admin:false})});
+ return out.sort((a,b)=>a.ts-b.ts).slice(-80)
+}
+
+async function getPublicAdminKey(){if(adminPublicKey)return adminPublicKey;adminPublicKey=await crypto.subtle.importKey('jwk',PUBLIC_ADMIN_JWK,{name:'ECDSA',namedCurve:'P-256'},false,['verify']);return adminPublicKey}
+async function verifySig(canonical,sig){
+ const cacheKey=canonical+'|'+sig;if(verifyCache.has(cacheKey))return verifyCache.get(cacheKey);
+ let ok=false;try{ok=await crypto.subtle.verify({name:'ECDSA',hash:'SHA-256'},await getPublicAdminKey(),b64uToBytes(sig),new TextEncoder().encode(canonical))}catch(e){}
+ verifyCache.set(cacheKey,ok);return ok;
+}
+async function signAdmin(canonical){if(!adminPrivateKey)throw new Error('admin locked');const sig=await crypto.subtle.sign({name:'ECDSA',hash:'SHA-256'},adminPrivateKey,new TextEncoder().encode(canonical));return bytesToB64u(new Uint8Array(sig))}
+async function importAdminPrivate(jwk){
+ const key=await crypto.subtle.importKey('jwk',jwk,{name:'ECDSA',namedCurve:'P-256'},false,['sign']);
