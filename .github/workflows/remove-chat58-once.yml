@@ -1,0 +1,117 @@
+name: Remove Chat 58 once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/remove-chat58-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  remove-chat:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Remove Chat 58 and navigation links
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          # Remove every visible link to chat.html from all static pages.
+          anchor = re.compile(
+              r'<a\b(?=[^>]*\bhref\s*=\s*["\'][^"\']*chat\.html(?:\?[^"\']*)?["\'])[^>]*>.*?</a>\s*',
+              re.I | re.S,
+          )
+
+          changed = []
+          for p in Path('.').glob('*.html'):
+              text = p.read_text(encoding='utf-8')
+              new = anchor.sub('', text)
+              if new != text:
+                  p.write_text(new, encoding='utf-8')
+                  changed.append(str(p))
+
+          # Remove chat page from sitemap if present.
+          sitemap = Path('sitemap.xml')
+          if sitemap.exists():
+              text = sitemap.read_text(encoding='utf-8')
+              new = re.sub(
+                  r'<url>\s*<loc>[^<]*chat\.html</loc>.*?</url>\s*',
+                  '', text, flags=re.I | re.S
+              )
+              if new != text:
+                  sitemap.write_text(new, encoding='utf-8')
+                  changed.append(str(sitemap))
+
+          # Force old PWA caches, which may contain chat.html, to be discarded.
+          sw = Path('service-worker.js')
+          if sw.exists():
+              text = sw.read_text(encoding='utf-8')
+              def bump(m):
+                  return f"const CACHE_NAME = 'belaya-mgla-v{int(m.group(1)) + 1}';"
+              new, n = re.subn(
+                  r"const CACHE_NAME = 'belaya-mgla-v(\d+)';",
+                  bump, text, count=1
+              )
+              if n and new != text:
+                  sw.write_text(new, encoding='utf-8')
+                  changed.append(str(sw))
+
+          print('Updated navigation/cache files:')
+          for x in changed:
+              print(' -', x)
+          PY
+
+          # Remove the page, all chat code and all sticker payloads/assets.
+          rm -f \
+            chat.html \
+            chat-v4.js \
+            chat-v4.css \
+            chat-admin-inline-fix.js \
+            chat-stickers-v1.js \
+            chat-stickers-v1.css \
+            sticker-assets-manifest.json \
+            belaya-mgla-stickers-display-fix.zip
+
+          rm -rf chat-sticker-data assets/chat-stickers
+
+          # Remove old workflows that could reinstall or modify Chat 58 later.
+          rm -f \
+            .github/workflows/chat58-perf-once.yml \
+            .github/workflows/chat58-v4-once.yml \
+            .github/workflows/chat58-v5-admin-click-fix.yml \
+            .github/workflows/install-chat-stickers.yml \
+            .github/workflows/install-clean-owls.yml
+
+          # Self-delete this one-time workflow.
+          rm -f .github/workflows/remove-chat58-once.yml
+
+          echo 'Remaining site references to chat.html:'
+          grep -RIn --exclude-dir=.git --exclude='README.md' --exclude='*.zip' 'chat\.html' . || true
+
+          echo 'Remaining Chat 58 implementation files:'
+          find . -maxdepth 3 \( -iname 'chat*' -o -path './assets/chat-stickers*' \) -print || true
+
+      - name: Commit removal
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'Nothing to commit.'
+            exit 0
+          fi
+          git commit -m 'Remove Chat 58 from site'
+          git push origin HEAD:main
