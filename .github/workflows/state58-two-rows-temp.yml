@@ -1,0 +1,39 @@
+name: State58 president cards two rows
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/state58-two-rows-temp.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Make president cards 4+3 in two rows
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('state-58.html')
+          s = p.read_text(encoding='utf-8')
+          override = '''\n/* state58 presidents v575: 4 + 3 compact tiles in two rows */\n.president-timeline{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:8px!important;max-width:620px!important;margin:14px auto 6px!important;padding:12px!important}\n.president-entry{box-sizing:border-box!important;flex:0 0 calc(25% - 6px)!important;min-width:0!important;min-height:58px!important;padding:8px 5px!important;margin:0!important}\n.president-entry:last-child:nth-child(3n+1){grid-column:auto!important}\n@media(max-width:720px){.president-timeline{gap:5px!important;padding:7px!important}.president-entry{flex-basis:calc(25% - 4px)!important;min-height:50px!important;padding:6px 2px!important}.president-entry h3{font-size:9px!important;line-height:1.1!important}.president-entry p{font-size:8px!important}}\n'''
+          marker = '/* state58 presidents v575:'
+          if marker in s:
+              print('Already patched')
+          else:
+              s = s.replace('</style>', override + '</style>', 1)
+              p.write_text(s, encoding='utf-8')
+              print('Patched state-58.html')
+          PY
+      - name: Remove temporary workflow and commit
+        run: |
+          rm -f .github/workflows/state58-two-rows-temp.yml
+          git config user.name "belaya-mgla-sova58"
+          git config user.email "actions@users.noreply.github.com"
+          git add state-58.html .github/workflows/state58-two-rows-temp.yml
+          git commit -m "Make State 58 president cards two rows" || exit 0
+          git push
