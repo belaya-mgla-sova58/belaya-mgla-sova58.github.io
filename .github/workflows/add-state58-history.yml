@@ -1,0 +1,105 @@
+name: Add State 58 history
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/add-state58-history.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Add State 58 page and links
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def patch_once(path, needle, addition):
+              p = Path(path)
+              s = p.read_text(encoding='utf-8')
+              if addition.strip() in s:
+                  return
+              if needle not in s:
+                  raise SystemExit(f'Needle not found in {path}: {needle[:80]}')
+              s = s.replace(needle, addition + needle, 1)
+              p.write_text(s, encoding='utf-8')
+
+          state_link = '<a class="route-link route-link-state58" href="state-58.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🏰</span><span>Государство 58</span></a>'
+          patch_once(
+              'index.html',
+              '<a class="route-link route-link-state-positions" href="state-positions.html">',
+              state_link
+          )
+          patch_once(
+              'index.html',
+              '<a class="modern-topic-card-v424" href="state-positions.html">',
+              '<a class="modern-topic-card-v424" href="state-58.html"><span class="v445-topic-icon" aria-hidden="true" style="font-size:28px;line-height:1;">🏰</span><b>Государство 58</b><small>Президенты, победы и история</small></a>'
+          )
+          patch_once(
+              'state-positions.html',
+              '<a aria-current="page" class="route-link route-link-state-positions active" href="state-positions.html">',
+              state_link
+          )
+          history_card = '''<section class="guide-section president-guide-entry-v385">
+          <a class="guide-nav-card" href="state-58.html#presidents" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+          <span aria-hidden="true" style="font-size:28px;line-height:1;">🏰</span>
+          <span><b>История президентства 58-го</b><br/><small>Президенты, периоды правления и важные события государства.</small></span>
+          <span aria-hidden="true" style="margin-left:auto;font-size:22px;">›</span>
+          </a>
+          </section>
+          '''
+          patch_once(
+              'state-positions.html',
+              '<section class="guide-section president-guide-entry-v385">\n<a class="guide-nav-card" href="president-guide.html"',
+              history_card
+          )
+
+          page = '''<!DOCTYPE html>
+          <html lang="ru"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+          <title>Белая Мгла • Государство 58</title>
+          <meta name="description" content="Летопись государства 58: история президентства, важные победы, альянсы и памятные события."/>
+          <meta name="theme-color" content="#031426"/>
+          <link rel="canonical" href="https://belaya-mgla-sova58.github.io/state-58.html"/>
+          <link href="site-v269.css?v=571" rel="stylesheet"/><link href="favicon.ico" rel="icon" sizes="any"/><script defer src="site-v269.js?v=571"></script>
+          <style>
+          .state58-wrap{max-width:1040px;margin:0 auto;padding:0 16px 42px}.state58-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:18px 0 26px}.state58-card{display:flex;flex-direction:column;gap:7px;padding:18px;border:1px solid rgba(151,207,255,.22);border-radius:18px;background:rgba(7,31,54,.72);text-decoration:none;color:inherit}.state58-card>span{font-size:31px}.state58-card b{font-size:17px}.state58-card small{opacity:.78;line-height:1.45}.president-timeline{position:relative;margin:18px 0 6px;padding-left:24px}.president-timeline:before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:2px;background:linear-gradient(#9bd8ff,#456f93)}.president-entry{position:relative;padding:18px 18px 18px 20px;margin:0 0 16px;border-radius:18px;background:rgba(7,31,54,.76);border:1px solid rgba(151,207,255,.22)}.president-entry:before{content:"";position:absolute;left:-23px;top:24px;width:12px;height:12px;border-radius:50%;background:#bfe8ff;box-shadow:0 0 0 5px rgba(70,137,188,.24)}.president-badge{display:inline-block;margin-bottom:8px;padding:5px 10px;border-radius:999px;background:rgba(62,141,197,.22);font-size:11px;font-weight:800;letter-spacing:.05em}.state58-note{padding:15px 17px;border-radius:16px;background:rgba(62,141,197,.1);border:1px dashed rgba(151,207,255,.28);line-height:1.55}.state58-links{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.state58-links a{padding:14px 16px;border-radius:15px;background:rgba(7,31,54,.7);border:1px solid rgba(151,207,255,.2);text-decoration:none;color:inherit}.state58-links small{display:block;opacity:.74;margin-top:4px}@media(max-width:720px){.state58-grid{grid-template-columns:1fr}.state58-links{grid-template-columns:1fr}}
+          </style></head>
+          <body class="modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="state58"><div aria-hidden="true" class="site-cosmic-background-v442"></div>
+          <div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar"><button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button><div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Государство 58</small></div><a aria-label="На главную" href="index.html">⌂</a></div>
+          <div aria-hidden="true" class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+          <div class="nav-wrap"><img alt="Белая Мгла Выживание" class="sidebar-exact-logo" data-src="assets/img_6dc1ef08d6ab264b.webp" decoding="async" loading="lazy"/><nav>
+          <a class="route-link" href="index.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">⌂</span><span>Главная</span></a><a class="route-link route-link-news" href="news.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">✦</span><span>Новости</span></a><a class="route-link" href="events.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">📅</span><span>События</span></a><a class="route-link" href="heroes.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">♟</span><span>Герои</span></a><a class="route-link" href="gear.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">⚙</span><span>Снаряжение</span></a><a class="route-link" href="experts.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">★</span><span>Эксперты</span></a><a class="route-link" href="pets.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🐾</span><span>Питомцы</span></a><a aria-current="page" class="route-link route-link-state58 active" href="state-58.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🏰</span><span>Государство 58</span></a><a class="route-link route-link-state-positions" href="state-positions.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">👑</span><span>Должности на государстве</span></a><a class="route-link route-link-calculator" href="fire-furnace-calculator.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🧮</span><span>Калькулятор</span></a><a class="route-link route-link-farm" href="farm.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">🌾</span><span>Ферма</span></a><a class="route-link route-link-knowledge" href="other.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">📚</span><span>База знаний</span></a>
+          </nav></div>
+          <main id="appMain"><div class="state58-wrap"><nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><span aria-current="page">Государство 58</span></nav>
+          <section class="page-heading-v424 frost-header-v431"><h1>Государство 58</h1><p>Летопись 58-го: президенты, важные победы, альянсы и события, которые становятся частью нашей общей истории.</p></section>
+          <div class="guide-topics"><span class="topic-pill">👑 Президенты</span><span class="topic-pill">🏆 Победы</span><span class="topic-pill">🛡️ Альянсы</span></div>
+          <section class="state58-grid" aria-label="Разделы государства 58"><a class="state58-card" href="#presidents"><span>👑</span><b>История президентства</b><small>Кто возглавлял государство, когда и чем запомнился период.</small></a><a class="state58-card" href="#victories"><span>🏆</span><b>История побед</b><small>Солнечный замок, SvS и другие важные сражения 58-го.</small></a><a class="state58-card" href="#alliances"><span>🛡️</span><b>Альянсы государства</b><small>Будущий каталог альянсов с отдельными карточками и анкетами.</small></a></section>
+          <section class="guide-section" id="presidents"><h2>👑 История президентства</h2><p>Здесь будет храниться хронология президентов государства 58. Для каждого периода можно указать ник, альянс, даты президентства и события, которыми этот период запомнился.</p><div class="president-timeline"><article class="president-entry current"><span class="president-badge">ДЕЙСТВУЮЩИЙ ПРЕЗИДЕНТ</span><h3>Текущий период</h3><p><b>Президент:</b> будет добавлен после подтверждения ника.</p><p><b>Начало президентства:</b> дата будет добавлена.</p><p><b>Главные события:</b> сюда войдут победы, важные решения и памятные моменты этого президентства.</p></article></div><div class="state58-note">📜 Предыдущие президенты будут добавляться по мере подтверждения ников, альянсов и дат. Так летопись останется точной, без догадок.</div></section>
+          <section class="guide-section" id="victories"><h2>🏆 История побед и важных событий</h2><p>Здесь соберём крупные победы государства, битвы за Солнечный замок, результаты SvS и другие события, которые стоит сохранить в истории 58-го.</p><div class="state58-note">Первую хронологию событий добавим вместе с точными датами и названиями соперников.</div></section>
+          <section class="guide-section" id="alliances"><h2>🛡️ Альянсы государства 58</h2><p>Этот блок подготовлен под карточки всех альянсов государства. У каждого альянса будет короткая карточка, а по нажатию откроется полная анкета.</p><div class="state58-links"><a href="state-positions.html"><strong>👑 Должности на государстве</strong><small>Министры, бонусы и назначения</small></a><a href="president-guide.html"><strong>📘 Руководство президента</strong><small>Памятки по управлению государством</small></a></div></section>
+          <div class="v69-footer">Белая Мгла • Автор - Sova</div></div></main>
+          <button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button>
+          <nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424"><a data-v424-nav="home" href="index.html"><b>Главная</b></a><a data-v424-nav="events" href="events.html"><b>События</b></a><a data-v424-nav="heroes" href="heroes.html"><b>Герои</b></a><a data-v424-nav="calc" href="fire-furnace-calculator.html"><b>Калькулятор</b></a><a data-v424-nav="knowledge" href="other.html"><b>База знаний</b></a></nav>
+          </body></html>'''
+          Path('state-58.html').write_text(page, encoding='utf-8')
+          PY
+      - name: Commit changes
+        shell: bash
+        run: |
+          if git diff --quiet -- index.html state-positions.html state-58.html && git ls-files --error-unmatch state-58.html >/dev/null 2>&1; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "belaya-mgla-sova58"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html state-positions.html state-58.html
+          git commit -m "Add State 58 presidency history"
+          git push origin main
