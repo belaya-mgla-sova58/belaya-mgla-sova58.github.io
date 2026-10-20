@@ -1,0 +1,127 @@
+name: Chat58 v6 once
+on:
+  push:
+    paths:
+      - '.github/workflows/chat58-v6-once.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add SOVA multi-device recovery
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          p=Path('chat-v4.js')
+          s=p.read_text(encoding='utf-8')
+
+          if "const SOVA_NICK='SOVA';" not in s:
+              s=s.replace("const REACTIONS=[['up','👍'],['laugh','😂'],['heart','❤️']];", "const REACTIONS=[['up','👍'],['laugh','😂'],['heart','❤️']];\nconst SOVA_NICK='SOVA';", 1)
+
+          if "function isSovaNick" not in s:
+              s=s.replace("function normalizeNick(n){return String(n||'').normalize('NFKC').trim().replace(/\\s+/g,' ').toLocaleLowerCase('ru-RU')}", "function normalizeNick(n){return String(n||'').normalize('NFKC').trim().replace(/\\s+/g,' ').toLocaleLowerCase('ru-RU')}\nfunction isSovaNick(n){return normalizeNick(n)==='sova'}", 1)
+
+          claim_block = r"async function claimNickname\(nick\)\{.*?\n\}\nasync function ensureSavedNickname\(\)\{.*?\n\}"
+          replacement = r"""async function claimNickname(nick){
+ const norm=normalizeNick(nick);
+ if(isSovaNick(nick)){
+   if(!adminUnlocked)return {ok:false,reason:'reserved'};
+   safeStorageSet(NICK_KEY,SOVA_NICK);return {ok:true,admin:true};
+ }
+ const hash=await sha256Hex(norm);let root=await readRoot();let claims=parseNickClaims(root),winner=claimWinner(claims,hash);
+ if(winner&&winner.uid!==uid)return {ok:false,reason:'taken'};
+ if(!winner){const ts36=Date.now().toString(36);await incrementStrict(NICK+hash+'__'+ts36+'__'+uid+'__'+b64uEncode(nick));root=await readRoot();claims=parseNickClaims(root);winner=claimWinner(claims,hash)}
+ if(!winner||winner.uid!==uid)return {ok:false,reason:'taken'};
+ safeStorageSet(NICK_KEY,nick);return {ok:true};
+}
+async function ensureSavedNickname(){
+ const nick=safeStorageGet(NICK_KEY);if(!nick)return false;
+ if(isSovaNick(nick)){
+   if(adminUnlocked){safeStorageSet(NICK_KEY,SOVA_NICK);return true}
+   safeStorageRemove(NICK_KEY);nickNote.textContent='Ник SOVA защищён. Нажми «Войти как SOVA» и введи личный код.';return false;
+ }
+ try{const result=await claimNickname(nick);if(result.ok)return true;safeStorageRemove(NICK_KEY);nickNote.textContent='Этот ник уже занят. Выбери другой.';return false}catch(e){return true}
+}"""
+          s,n=re.subn(claim_block,replacement,s,count=1,flags=re.S)
+          if n!=1:
+              raise SystemExit('claim block not found')
+
+          s,n=re.subn(
+              r"async function activateAdminJwk\(jwk,state\)\{.*?\}",
+              "async function activateAdminJwk(jwk,state){adminPrivateKey=await importAdminPrivate(jwk);adminUnlocked=true;safeStorageSet(ADMIN_KEY,JSON.stringify(jwk));safeStorageSet(NICK_KEY,SOVA_NICK);if(nickNote)nickNote.textContent='';applyNick();if(state)state.textContent='Доступ SOVA активирован ✅';updateAdminUi();render(lastItems,true)}",
+              s,count=1,flags=re.S)
+          if n!=1:
+              raise SystemExit('activateAdminJwk not found')
+
+          if 'function createSovaRecoveryUi()' not in s:
+              recovery = r"""
+function createSovaRecoveryUi(){
+ const card=gate&&gate.querySelector('.chat58-gate-card');if(!card||document.getElementById('chat58SovaRecover'))return;
+ const wrap=document.createElement('div');wrap.className='chat58-sova-recover';
+ const btn=document.createElement('button');btn.id='chat58SovaRecover';btn.type='button';btn.className='chat58-sova-recover-btn';btn.textContent='👑 Войти как SOVA';
+ const panel=document.createElement('div');panel.className='chat58-sova-recover-panel';panel.hidden=true;
+ const inp=document.createElement('input');inp.type='password';inp.className='chat58-sova-recover-code';inp.placeholder='Вставить код SOVA';inp.autocomplete='off';inp.autocapitalize='off';inp.spellcheck=false;
+ const go=document.createElement('button');go.type='button';go.className='chat58-sova-recover-go';go.textContent='🔑 Восстановить SOVA';
+ const note=document.createElement('div');note.className='chat58-sova-recover-note';
+ panel.append(inp,go,note);wrap.append(btn,panel);card.appendChild(wrap);
+ btn.addEventListener('click',()=>{panel.hidden=!panel.hidden;if(!panel.hidden)setTimeout(()=>inp.focus(),30)});
+ btn.addEventListener('touchend',e=>{e.preventDefault();panel.hidden=!panel.hidden;if(!panel.hidden)setTimeout(()=>inp.focus(),30)},{passive:false});
+ go.addEventListener('click',async()=>{const code=inp.value.trim();if(!code){note.textContent='Вставь личный код SOVA.';return}go.disabled=true;note.textContent='Проверяю…';try{await activateAdminJwk(adminJwkFromCode(code),note);inp.value='';note.textContent='SOVA восстановлена на этом устройстве ✅';lastSignature='';await loadMessages(true)}catch(e){note.textContent='Неверный код SOVA.'}finally{go.disabled=false}});
+}
+"""
+              s=s.replace('\nfunction createAdminUi(){', recovery+'\nfunction createAdminUi(){',1)
+
+          # Protect SOVA at send time even if an old browser still has the nickname saved.
+          needle="async function sendMessage(text){const nick=safeStorageGet(NICK_KEY);if(!nick)throw new Error('nick');"
+          repl="async function sendMessage(text){const nick=safeStorageGet(NICK_KEY);if(!nick)throw new Error('nick');if(isSovaNick(nick)&&!adminUnlocked)throw new Error('reserved');"
+          if needle in s:
+              s=s.replace(needle,repl,1)
+          elif "throw new Error('reserved')" not in s:
+              raise SystemExit('sendMessage anchor not found')
+
+          # Give a clear reserved-nickname message in the nickname form.
+          needle="if(/[\\u0000-\\u001f\\u007f]/.test(nick)){nickNote.textContent='В нике есть неподдерживаемые символы.';return}nickNote.textContent='Проверяю ник…';"
+          repl="if(/[\\u0000-\\u001f\\u007f]/.test(nick)){nickNote.textContent='В нике есть неподдерживаемые символы.';return}if(isSovaNick(nick)&&!adminUnlocked){nickNote.textContent='Ник SOVA защищён. Используй кнопку «Войти как SOVA».';return}nickNote.textContent='Проверяю ник…';"
+          if needle in s:
+              s=s.replace(needle,repl,1)
+          elif "Ник SOVA защищён. Используй кнопку" not in s:
+              raise SystemExit('nick form anchor not found')
+
+          s=s.replace("(async function init(){createAdminUi();await loadAdminFromStorage();", "(async function init(){createAdminUi();createSovaRecoveryUi();await loadAdminFromStorage();",1)
+
+          p.write_text(s,encoding='utf-8')
+
+          css=Path('chat-v4.css')
+          c=css.read_text(encoding='utf-8')
+          add="""
+/* Chat58 v6: SOVA multi-device recovery */
+.chat58-sova-recover{margin-top:13px;padding-top:12px;border-top:1px solid rgba(255,224,132,.16)}
+.chat58-sova-recover-btn,.chat58-sova-recover-go{width:100%;box-sizing:border-box;border:1px solid rgba(255,219,118,.34);border-radius:13px;background:linear-gradient(180deg,rgba(183,135,34,.24),rgba(119,83,19,.20));color:#ffe7a0;padding:10px 12px;font:inherit;font-size:11px;font-weight:900;cursor:pointer;position:relative;z-index:2;touch-action:manipulation}
+.chat58-sova-recover-panel[hidden]{display:none}.chat58-sova-recover-panel{margin-top:8px}
+.chat58-sova-recover-code{box-sizing:border-box;width:100%;padding:10px 11px;border:1px solid rgba(255,219,118,.24);border-radius:12px;background:rgba(255,255,255,.07);color:#fff;font:inherit;font-size:11px;outline:none;text-align:center}
+.chat58-sova-recover-code:focus{border-color:rgba(255,225,143,.62);box-shadow:0 0 0 3px rgba(219,173,60,.10)}
+.chat58-sova-recover-go{margin-top:7px}.chat58-sova-recover-go:disabled{opacity:.55}
+.chat58-sova-recover-note{min-height:15px;margin-top:7px;color:#bfe9ff;font-size:9.5px;line-height:1.35}
+"""
+          if 'Chat58 v6: SOVA multi-device recovery' not in c:
+              c += add
+          css.write_text(c,encoding='utf-8')
+
+          h=Path('chat.html')
+          t=h.read_text(encoding='utf-8')
+          t=t.replace('chat-v4.css?v=5','chat-v4.css?v=6').replace('chat-v4.js?v=5','chat-v4.js?v=6')
+          h.write_text(t,encoding='utf-8')
+          PY
+          node --check chat-v4.js
+      - name: Commit and remove installer
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/chat58-v6-once.yml
+          git add chat-v4.js chat-v4.css chat.html
+          git commit -m "Add multi-device SOVA recovery to Chat 58"
+          git push
