@@ -76,13 +76,14 @@
   }
 
   function insertEmoji(emoji) {
-    if (input.disabled) return;
-    const start = Number.isInteger(input.selectionStart) ? input.selectionStart : input.value.length;
-    const end = Number.isInteger(input.selectionEnd) ? input.selectionEnd : start;
-    input.value = input.value.slice(0, start) + emoji + input.value.slice(end);
+    const start = input.selectionStart ?? input.value.length;
+    const end = input.selectionEnd ?? input.value.length;
+    const before = input.value.slice(0, start);
+    const after = input.value.slice(end);
+    input.value = `${before}${emoji}${after}`;
     const caret = start + emoji.length;
     input.focus();
-    if (typeof input.setSelectionRange === 'function') input.setSelectionRange(caret, caret);
+    input.setSelectionRange(caret, caret);
     input.dispatchEvent(new Event('input', { bubbles: true }));
   }
 
@@ -114,8 +115,7 @@
         cell.type = 'button';
         cell.className = 'chat58-sticker-cell chat58-emoji-cell';
         cell.textContent = emoji;
-        cell.title = emoji;
-        cell.setAttribute('aria-label', `Вставить ${emoji}`);
+        cell.setAttribute('aria-label', `Смайл ${emoji}`);
         cell.addEventListener('click', () => insertEmoji(emoji));
         grid.appendChild(cell);
       });
@@ -126,6 +126,7 @@
       const cell = document.createElement('button');
       cell.type = 'button';
       cell.className = 'chat58-sticker-cell';
+      if (activePack === 'owls') cell.classList.add('is-owl');
       cell.title = item.label;
       cell.setAttribute('aria-label', item.label);
 
@@ -135,6 +136,7 @@
       img.loading = 'lazy';
       img.decoding = 'async';
       img.draggable = false;
+      img.className = 'chat58-sticker-thumb' + (activePack === 'owls' ? ' is-owl-pack' : '');
       cell.appendChild(img);
 
       cell.addEventListener('click', () => {
@@ -182,9 +184,9 @@
       if (node.dataset.stickerHydrated === '1') return;
       const match = getSticker(node.textContent);
       if (!match) return;
-      const { item } = match;
+      const { pack, item } = match;
       const img = document.createElement('img');
-      img.className = 'chat58-sticker-message';
+      img.className = 'chat58-sticker-message' + (pack === 'owls' ? ' is-owl-pack' : '');
       img.src = item.src;
       img.alt = item.label;
       img.loading = 'lazy';
@@ -195,7 +197,9 @@
         node.textContent = '[Стикер недоступен]';
       }, { once: true });
       node.replaceChildren(img);
-      node.classList.add('is-sticker');
+      node.classList.add('is-sticker', `is-${pack}`);
+      const msg = node.closest('.chat58-msg');
+      if (msg) msg.classList.add('chat58-msg-sticker', `chat58-msg-${pack}`);
       node.dataset.stickerHydrated = '1';
     });
   }
