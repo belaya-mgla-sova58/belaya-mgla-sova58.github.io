@@ -11,13 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install Chat58 v4
+      - name: Build Chat58 v4 source
+        run: |
+          cat .tmp/chat-v4-part1.txt .tmp/chat-v4-part2.txt .tmp/chat-v4-part3.txt .tmp/chat-v4-part4.txt > chat-v4.js
+          node --check chat-v4.js
+      - name: Switch chat page to v4
         run: |
           python - <<'PY'
           from pathlib import Path
-          import gzip,re
-          Path('chat-v4.js').write_bytes(gzip.decompress(Path('.tmp/chat-v4.js.gz').read_bytes()))
-          Path('chat-v4.css').write_bytes(gzip.decompress(Path('.tmp/chat-v4.css.gz').read_bytes()))
+          import re
           p=Path('chat.html')
           s=p.read_text(encoding='utf-8')
           if 'chat-v4.css?v=4' not in s:
@@ -27,8 +29,6 @@ jobs:
               raise SystemExit('chat script anchor not found')
           p.write_text(s,encoding='utf-8')
           PY
-      - name: Syntax check
-        run: node --check chat-v4.js
       - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
