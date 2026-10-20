@@ -23,26 +23,18 @@
 }
 .chat58-sticker-cell{
   display:grid;place-items:center;min-width:0;aspect-ratio:1;border:1px solid transparent;border-radius:12px;
-  background:rgba(255,255,255,.035);padding:3px;cursor:pointer;touch-action:manipulation;overflow:hidden
+  background:rgba(255,255,255,.035);padding:5px;cursor:pointer;touch-action:manipulation;overflow:hidden
 }
 .chat58-sticker-cell:hover{border-color:rgba(151,207,255,.28);background:rgba(255,255,255,.075)}
-.chat58-sticker-thumb{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
-.chat58-sticker-cell.is-owl .chat58-sticker-thumb,
-.chat58-sticker-message.is-owl-pack{
-  clip-path:inset(0 12px 0 12px);
-}
-.chat58-sticker-cell.is-owl .chat58-sticker-thumb{width:108%;height:108%;transform:scale(.96)}
+.chat58-sticker-thumb,.chat58-sticker-cell img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
 .chat58-sticker-grid.is-emoji{grid-template-columns:repeat(8,minmax(0,1fr));gap:4px}
 .chat58-emoji-cell{font:inherit;font-size:29px;line-height:1;padding:4px;background:rgba(255,255,255,.025)}
 .chat58-text.is-sticker{display:flex;align-items:center;justify-content:center;white-space:normal;overflow:hidden}
-.chat58-msg.chat58-msg-sticker{
-  width:fit-content;max-width:min(210px,68vw);padding:7px 8px 6px;border-radius:18px;
-}
-.chat58-msg.chat58-msg-sticker .chat58-meta{margin-bottom:5px}
+.chat58-msg.chat58-msg-sticker{width:fit-content;max-width:min(200px,66vw);padding:6px 7px 5px;border-radius:17px}
+.chat58-msg.chat58-msg-sticker .chat58-meta{margin-bottom:4px}
 .chat58-msg.chat58-msg-sticker .chat58-actions{justify-content:center;gap:4px;margin-top:4px}
-.chat58-msg.chat58-msg-sticker .chat58-action,
-.chat58-msg.chat58-msg-sticker .chat58-react{padding:2px 6px;font-size:8px}
-.chat58-sticker-message{display:block;width:auto;height:auto;max-width:156px;max-height:156px;object-fit:contain}
+.chat58-msg.chat58-msg-sticker .chat58-action,.chat58-msg.chat58-msg-sticker .chat58-react{padding:2px 6px;font-size:8px}
+.chat58-sticker-message{display:block;width:auto;height:auto;max-width:148px;max-height:148px;object-fit:contain}
 .chat58-row.own .chat58-sticker-message{margin-left:auto}
 @media(max-width:720px){
   .chat58-sticker-btn{width:42px;height:42px;min-width:42px}
@@ -51,13 +43,13 @@
   .chat58-sticker-grid.is-emoji{grid-template-columns:repeat(7,minmax(0,1fr));gap:3px}
   .chat58-emoji-cell{font-size:27px}
   .chat58-sticker-tab{min-height:40px;font-size:11px}
-  .chat58-msg.chat58-msg-sticker{max-width:min(180px,72vw);padding:6px 7px 5px}
-  .chat58-sticker-message{max-width:138px;max-height:138px}
+  .chat58-msg.chat58-msg-sticker{max-width:min(172px,70vw);padding:5px 6px 4px}
+  .chat58-sticker-message{max-width:132px;max-height:132px}
 }
 @media(max-width:380px){
   .chat58-sticker-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
   .chat58-sticker-grid.is-emoji{grid-template-columns:repeat(6,minmax(0,1fr))}
   .chat58-emoji-cell{font-size:25px}
-  .chat58-msg.chat58-msg-sticker{max-width:min(168px,76vw)}
-  .chat58-sticker-message{max-width:128px;max-height:128px}
+  .chat58-msg.chat58-msg-sticker{max-width:min(160px,74vw)}
+  .chat58-sticker-message{max-width:122px;max-height:122px}
 }
