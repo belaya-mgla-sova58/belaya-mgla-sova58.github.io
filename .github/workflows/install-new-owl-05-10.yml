@@ -1,10 +1,9 @@
-name: Install regenerated owl stickers 05-10
+name: Finish direct owl sticker install
 
 on:
   push:
     branches: [ main ]
     paths:
-      - '.tmp/owl_05_10_new.zip'
       - '.github/workflows/install-new-owl-05-10.yml'
 
 permissions:
@@ -18,29 +17,27 @@ jobs:
         with:
           ref: main
 
-      - name: Install regenerated owl PNGs
+      - name: Install uploaded owl blobs
         shell: python
         run: |
           from pathlib import Path
-          from zipfile import ZipFile
-          import shutil
+          import urllib.request, json, base64
 
-          archive = Path('.tmp/owl_05_10_new.zip')
-          out_dir = Path('assets/chat-stickers/owls')
-          out_dir.mkdir(parents=True, exist_ok=True)
-
-          with ZipFile(archive) as z:
-              names = z.namelist()
-              for idx in range(5, 11):
-                  prefix = f'{idx:02d}_'
-                  matches = [n for n in names if Path(n).name.startswith(prefix) and n.lower().endswith('.png')]
-                  if len(matches) != 1:
-                      raise SystemExit(f'Expected one PNG with prefix {prefix}, found {matches}')
-                  target = out_dir / f'owl-{idx:02d}.png'
-                  with z.open(matches[0]) as src, target.open('wb') as dst:
-                      shutil.copyfileobj(src, dst)
-
-          print('Installed owl-05 through owl-10')
+          repo = 'belaya-mgla-sova58/belaya-mgla-sova58.github.io'
+          items = {
+              'owl-05.png': '74f1f78a40a0efdf5a294a1cef4c614730d1fcb8',
+              'owl-06.png': '78c8071d0bf84823acb2f99b278f6c31e85fe68e',
+              'owl-07.png': '1979b742cd42cd2977ad8811eb76edca72295f24',
+          }
+          out = Path('assets/chat-stickers/owls')
+          out.mkdir(parents=True, exist_ok=True)
+          for name, sha in items.items():
+              url = f'https://api.github.com/repos/{repo}/git/blobs/{sha}'
+              with urllib.request.urlopen(url) as r:
+                  data = json.load(r)
+              raw = base64.b64decode(data['content'])
+              (out / name).write_bytes(raw)
+              print(name, len(raw))
 
       - name: Refresh PWA cache
         shell: python
@@ -49,28 +46,10 @@ jobs:
           import re
           p = Path('service-worker.js')
           s = p.read_text(encoding='utf-8')
-          s, count = re.subn(r"belaya-mgla-v\d+", "belaya-mgla-v578", s, count=1)
-          if count != 1:
-              raise SystemExit('CACHE_NAME not found')
+          s = re.sub(r"belaya-mgla-v\d+", "belaya-mgla-v578", s, count=1)
           p.write_text(s, encoding='utf-8')
 
-      - name: Verify installed PNGs
-        shell: python
-        run: |
-          from pathlib import Path
-          from PIL import Image
-          for idx in range(5, 11):
-              p = Path(f'assets/chat-stickers/owls/owl-{idx:02d}.png')
-              if not p.exists():
-                  raise SystemExit(f'Missing {p}')
-              with Image.open(p) as im:
-                  if im.format != 'PNG':
-                      raise SystemExit(f'Not PNG: {p}')
-                  if im.size != (384, 384):
-                      raise SystemExit(f'Unexpected size for {p}: {im.size}')
-          print('Verified 6 regenerated owl PNGs')
-
-      - name: Commit installed stickers and clean temporary files
+      - name: Clean temporary installer and commit
         shell: bash
         run: |
           set -euo pipefail
@@ -78,6 +57,6 @@ jobs:
           rm -f .github/workflows/install-new-owl-05-10.yml
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/chat-stickers/owls/owl-05.png assets/chat-stickers/owls/owl-06.png assets/chat-stickers/owls/owl-07.png assets/chat-stickers/owls/owl-08.png assets/chat-stickers/owls/owl-09.png assets/chat-stickers/owls/owl-10.png service-worker.js .tmp/owl_05_10_new.zip .github/workflows/install-new-owl-05-10.yml
-          git commit -m 'Install regenerated owl stickers 05-10'
+          git add assets/chat-stickers/owls/owl-05.png assets/chat-stickers/owls/owl-06.png assets/chat-stickers/owls/owl-07.png service-worker.js .tmp/owl_05_10_new.zip .github/workflows/install-new-owl-05-10.yml
+          git commit -m 'Install regenerated owl stickers 05-07 and clean installer'
           git push origin main
