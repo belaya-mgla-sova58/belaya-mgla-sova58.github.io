@@ -1,0 +1,58 @@
+name: Replace Heroes with Cheats in Android nav once
+
+on:
+  push:
+    branches: [android-app-v1]
+    paths:
+      - '.github/workflows/android-cheats-bottom-nav-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: android-app-v1
+          fetch-depth: 0
+
+      - name: Replace Heroes bottom button with Cheats
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          main = Path('android-app/app/src/main/java/ru/belayamgla/app/MainActivity.java')
+          s = main.read_text(encoding='utf-8')
+          old = 'addNavItem(bar, "heroes", "Герои", R.drawable.ic_heroes, "heroes.html");'
+          new = 'addNavItem(bar, "cheats", "Шпоры", R.drawable.ic_cheats, "cheats.html");'
+          if old not in s and new not in s:
+              raise SystemExit('Heroes nav item not found')
+          s = s.replace(old, new, 1)
+          s = s.replace('BelayaMglaAndroid/4.0', 'BelayaMglaAndroid/4.1')
+          main.write_text(s, encoding='utf-8')
+
+          gradle = Path('android-app/app/build.gradle.kts')
+          g = gradle.read_text(encoding='utf-8')
+          g = g.replace('versionCode = 4', 'versionCode = 5', 1)
+          g = g.replace('versionName = "4.0.0"', 'versionName = "4.1.0"', 1)
+          gradle.write_text(g, encoding='utf-8')
+
+          icon = Path('android-app/app/src/main/res/drawable/ic_cheats.xml')
+          icon.write_text('''<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="24dp" android:height="24dp" android:viewportWidth="24" android:viewportHeight="24"><path android:fillColor="#FFFFFFFF" android:pathData="M13,2L4,14h7l-1,8 10,-13h-7z"/></vector>\n''', encoding='utf-8')
+
+          Path('.github/workflows/android-cheats-bottom-nav-once.yml').unlink(missing_ok=True)
+          PY
+
+      - name: Commit Android v4.1 navigation update
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Replace Heroes with Cheats in Android bottom nav'
+          git push origin HEAD:android-app-v1
