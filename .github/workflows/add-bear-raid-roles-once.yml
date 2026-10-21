@@ -1,0 +1,85 @@
+name: Add bear raid roles visual once
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/add-bear-raid-roles-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Add visual to bear guide
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          page = Path('bear.html')
+          s = page.read_text(encoding='utf-8')
+
+          style = '''<style id="bear-raid-roles-v580-style">
+          body.is-bear-route .bear-raid-roles-v580{padding-top:0;padding-bottom:12px}
+          body.is-bear-route .bear-raid-roles-figure-v580{max-width:1160px;margin:0 auto;padding:0;overflow:hidden;border:1px solid rgba(103,205,255,.26);border-radius:24px;background:#06182f;box-shadow:0 18px 46px rgba(0,0,0,.28)}
+          body.is-bear-route .bear-raid-roles-figure-v580 a{display:block;line-height:0}
+          body.is-bear-route .bear-raid-roles-figure-v580 img{display:block;width:100%;height:auto;margin:0;border:0}
+          body.is-bear-route .bear-raid-roles-caption-v580{margin:0;padding:10px 14px;text-align:center;color:#9fc8e8;font-size:13px;line-height:1.35;background:rgba(3,18,33,.94)}
+          @media (max-width:720px){
+            body.is-bear-route .bear-raid-roles-figure-v580{border-radius:15px}
+            body.is-bear-route .bear-raid-roles-caption-v580{font-size:12px;padding:8px 10px}
+          }
+          </style>'''
+          if 'bear-raid-roles-v580-style' not in s:
+              s = s.replace('</head>', style + '</head>', 1)
+
+          block = '''<section class="section bear-raid-roles-v580" aria-label="Создатель рейда и участник рейда">
+          <figure class="bear-raid-roles-figure-v580">
+          <a href="assets/bear-raid-roles-v580.svg" target="_blank" rel="noopener" aria-label="Открыть схему Создатель рейда и участник рейда крупно">
+          <img src="assets/bear-raid-roles-v580.svg" alt="Охота на медведя: создатель рейда и участник рейда используют разные навыки героев" decoding="async" loading="eager"/>
+          </a>
+          <figcaption class="bear-raid-roles-caption-v580">Нажмите на схему, чтобы открыть её крупно.</figcaption>
+          </figure>
+          </section>'''
+          marker = '<section class="section bear-rally-leader-guide">'
+          if 'class="section bear-raid-roles-v580"' not in s:
+              if marker not in s:
+                  raise SystemExit('Bear guide insertion marker not found')
+              s = s.replace(marker, block + marker, 1)
+
+          page.write_text(s, encoding='utf-8')
+
+          sw = Path('service-worker.js')
+          if sw.exists():
+              t = sw.read_text(encoding='utf-8')
+              def bump(m):
+                  return "const CACHE_NAME = 'belaya-mgla-v%d';" % (int(m.group(1)) + 1)
+              t2, n = re.subn(r"const CACHE_NAME = 'belaya-mgla-v(\d+)';", bump, t, count=1)
+              if n:
+                  sw.write_text(t2, encoding='utf-8')
+
+          Path('.github/workflows/add-bear-raid-roles-once.yml').unlink(missing_ok=True)
+          PY
+
+      - name: Commit changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'Nothing to commit.'
+            exit 0
+          fi
+          git commit -m 'Add raid roles visual to bear guide'
+          git push origin HEAD:main
