@@ -1,0 +1,20 @@
+name: Apply reliable Minion cover v599
+on: [push]
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python patch-minion-cover-v599.py
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add creative-bananovyi-mom.html site-v269.js service-worker.js
+          git commit -m "Embed Minion cover directly in song page" || true
+          git push
+      - run: |
+          git rm .github/workflows/apply-minion-cover-v599.yml patch-minion-cover-v599.py
+          git commit -m "Remove Minion cover setup files"
+          git push
