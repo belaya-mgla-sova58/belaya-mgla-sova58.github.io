@@ -1,11 +1,11 @@
-const CACHE_NAME = 'belaya-mgla-v585';
+const CACHE_NAME = 'belaya-mgla-v586';
 const CORE = [
   './',
   './index.html',
   './cheats.html',
-  './site-v269-v585.min.css?v=585',
-  './site-v269.js?v=585',
-  './site-v269-core-v585.min.js?v=585',
+  './site-v269.css?v=586',
+  './site-v269.js?v=586',
+  './mobile-cheats-v583.js?v=583',
   './ui-cheats-v583.svg',
   './manifest-v541.webmanifest',
   './app-icon-192-v541.png',

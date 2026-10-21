@@ -20247,17 +20247,3 @@ body[data-static-route="news-elena"] .whitefox-index-card-badges-v557 span{
 
 /* v571: accessible page title for the image-led home hero */
 .home-main-title-v571{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;}
-
-/* v585 lean mode */
-.reveal{opacity:1!important;transform:none!important;transition:none!important}
-.pwa-install-compact-v585{padding:8px 10px!important;gap:8px!important;min-height:auto!important;border-radius:16px!important}
-.pwa-install-compact-v585 .pwa-install-copy-v540 img{width:34px!important;height:34px!important}
-.pwa-install-compact-v585 .pwa-install-copy-v540 b{font-size:13px!important}
-.pwa-install-compact-v585 .pwa-install-copy-v540 small{font-size:10.5px!important;line-height:1.25!important}
-.pwa-install-compact-v585 #pwaInstallButton{padding:8px 11px!important;min-height:34px!important;font-size:12px!important}
-.site-search-results-v426.is-open-v585{display:grid!important;gap:6px!important;padding:8px!important}
-.site-search-result-v585{display:grid;gap:2px;padding:9px 11px;border-radius:12px;text-decoration:none!important;background:rgba(255,255,255,.045);border:1px solid rgba(120,205,246,.12)}
-.site-search-result-v585 b{color:#eefaff;font-size:13px}
-.site-search-result-v585 small{color:#86abc5;font-size:11px;line-height:1.3}
-.site-search-empty-v585{padding:10px;color:#8fb1c9;font-size:12px;text-align:center}
-@media(max-width:620px){.pwa-install-compact-v585 .pwa-install-copy-v540 small{display:none}.pwa-install-compact-v585{margin:8px 0!important}.home-today-v581{padding:11px!important}}
