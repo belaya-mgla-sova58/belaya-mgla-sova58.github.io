@@ -1,0 +1,121 @@
+name: Replace Heroes with Cheats in site bottom nav once
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/site-cheats-bottom-nav-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Patch mobile bottom navigation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          changed = []
+          anchor_re = re.compile(r'<a\b(?=[^>]*\bdata-v424-nav=["\']heroes["\'])[^>]*>.*?</a>', re.I | re.S)
+
+          def patch_anchor(m):
+              a = m.group(0)
+              a = re.sub(r'href=["\']heroes\.html["\']', 'href="cheats.html"', a, flags=re.I)
+              a = re.sub(r'data-v424-nav=["\']heroes["\']', 'data-v424-nav="cheats"', a, flags=re.I)
+              a = re.sub(r'aria-label=["\'][^"\']*Герои[^"\']*["\']', 'aria-label="Шпоры"', a, flags=re.I)
+              a = a.replace('>Герои<', '>Шпоры<')
+              a = a.replace('ui-heroes-v534.webp', 'ui-cheats-v583.svg')
+              return a
+
+          # Patch static bottom-nav anchors if they are present in HTML.
+          for p in Path('.').glob('*.html'):
+              s = p.read_text(encoding='utf-8')
+              ns = anchor_re.sub(patch_anchor, s)
+              if ns != s:
+                  p.write_text(ns, encoding='utf-8')
+                  changed.append(str(p))
+
+          # Add a tiny site-wide safety patch for dynamically injected bottom navs.
+          core = Path('site-v269-core-v465.js')
+          s = core.read_text(encoding='utf-8')
+          marker = '/* v583: mobile bottom nav uses Cheats instead of Heroes */'
+          if marker not in s:
+              addon = r'''
+
+/* v583: mobile bottom nav uses Cheats instead of Heroes */
+(function(){
+  function patchBottomNav(){
+    document.querySelectorAll('.mobile-bottom-v424 a').forEach(function(a){
+      var key=(a.dataset&&a.dataset.v424Nav)||'';
+      var href=a.getAttribute('href')||'';
+      if(key!=='heroes' && !/(^|\/)heroes\.html(?:[?#]|$)/i.test(href)) return;
+      a.setAttribute('href','cheats.html');
+      if(a.dataset) a.dataset.v424Nav='cheats';
+      a.setAttribute('aria-label','Шпоры');
+      Array.from(a.querySelectorAll('*')).forEach(function(el){
+        if((el.textContent||'').trim()==='Герои') el.textContent='Шпоры';
+      });
+      Array.from(a.childNodes).forEach(function(n){
+        if(n.nodeType===3 && (n.nodeValue||'').trim()==='Герои') n.nodeValue=(n.nodeValue||'').replace('Герои','Шпоры');
+      });
+      var img=a.querySelector('img');
+      if(img){
+        img.setAttribute('src','ui-cheats-v583.svg');
+        img.removeAttribute('data-src');
+        img.setAttribute('alt','');
+      }else{
+        var icon=a.querySelector('[aria-hidden="true"]');
+        if(icon && !(icon.textContent||'').trim()) icon.textContent='⚡';
+      }
+    });
+  }
+  document.addEventListener('DOMContentLoaded',patchBottomNav);
+  patchBottomNav();
+  setTimeout(patchBottomNav,150);
+})();
+'''
+              core.write_text(s + addon, encoding='utf-8')
+              changed.append(str(core))
+
+          # Simple lightning icon that inherits the site's image sizing.
+          icon = Path('ui-cheats-v583.svg')
+          if not icon.exists():
+              icon.write_text('''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path fill="#dff6ff" d="M36.5 3 13 36h16l-2 25 24-35H35.5z"/><path fill="none" stroke="#67cfff" stroke-width="4" stroke-linejoin="round" d="M36.5 3 13 36h16l-2 25 24-35H35.5z"/></svg>\n''', encoding='utf-8')
+              changed.append(str(icon))
+
+          # Bump cache so the changed JS appears immediately on installed/PWA site.
+          sw = Path('service-worker.js')
+          if sw.exists():
+              t = sw.read_text(encoding='utf-8')
+              nt = re.sub(r"const CACHE_NAME = 'belaya-mgla-v\d+';", "const CACHE_NAME = 'belaya-mgla-v583';", t, count=1)
+              if nt != t:
+                  sw.write_text(nt, encoding='utf-8')
+                  changed.append(str(sw))
+
+          Path('.github/workflows/site-cheats-bottom-nav-once.yml').unlink(missing_ok=True)
+          print('Changed:', ', '.join(changed) if changed else 'none')
+          PY
+
+      - name: Commit changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'Nothing to commit.'
+            exit 0
+          fi
+          git commit -m 'Use Cheats in mobile bottom navigation'
+          git push origin HEAD:main
