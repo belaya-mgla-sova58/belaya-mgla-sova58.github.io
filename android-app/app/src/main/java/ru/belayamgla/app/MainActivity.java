@@ -168,7 +168,7 @@ public class MainActivity extends Activity {
 
         addNavItem(bar, "home", "Главная", R.drawable.ic_home, "index.html");
         addNavItem(bar, "events", "События", R.drawable.ic_events, "events.html");
-        addNavItem(bar, "cheats", "Шпоры", R.drawable.ic_cheats, "cheats.html");
+        addNavItem(bar, "heroes", "Герои", R.drawable.ic_heroes, "heroes.html");
         addNavItem(bar, "calc", "Калькулятор", R.drawable.ic_calculator, "fire-furnace-calculator.html");
         addNavItem(bar, "knowledge", "База знаний", R.drawable.ic_knowledge, "other.html");
         return bar;
