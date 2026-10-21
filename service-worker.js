@@ -1,17 +1,20 @@
-const CACHE_NAME = 'belaya-mgla-v586';
+const CACHE_NAME = 'belaya-mgla-v589';
 const CORE = [
   './',
   './index.html',
   './cheats.html',
   './site-v269.css?v=586',
   './site-v269.js?v=586',
-  './mobile-cheats-v583.js?v=583',
+  './mobile-bottom-icons-v589.css?v=589',
   './ui-cheats-v583.svg',
   './manifest-v541.webmanifest',
   './app-icon-192-v541.png',
   './app-icon-512-v541.png',
   './assets/home-hero-polish-v446.webp',
-  './assets/ui-home-v534.webp'
+  './assets/ui-home-v534.webp',
+  './assets/ui-events-v534.webp',
+  './assets/ui-calculator-v534.webp',
+  './assets/ui-knowledge-v534.webp'
 ];
 
 self.addEventListener('install', event => {
