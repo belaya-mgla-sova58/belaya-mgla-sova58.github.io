@@ -76,6 +76,7 @@
     document.body.classList.toggle('is-pets-route',route==='pets');
     document.body.classList.toggle('is-events-route',route==='events');
     document.body.classList.toggle('is-bear-route',route==='bear');
+    document.body.classList.toggle('is-ginas-revenge-route',route==='ginas-revenge');
     document.body.classList.toggle('is-crazy-joe-route',route==='crazy-joe');
     document.body.classList.toggle('is-mercenary-prestige-route',route==='mercenary-prestige');
     document.body.classList.toggle('is-frostfire-mine-route',route==='frostfire-mine');
@@ -173,7 +174,7 @@
 })();
 
 (function(){
-  const routeNames={home:'Главная',newbie:'Новичкам',heroes:'Герои',gear:'Снаряжение',buildings:'Здания','buildings-before-fire':'Здания до Топки 30','buildings-after-fire':'Эпоха кристалла огня',research:'Исследования',troops:'Войска',alliance:'Альянс','state-positions':'Должности на государстве',resources:'Ресурсы',governor:'Губернатор',farm:'Ферма',experts:'Эксперты',pets:'Питомцы',events:'События',other:'Другие гайды',arena:'Арена',beacon:'Маяк',mails:'Письма','alliance-showdown':'Сражение альянсов','tundra-trade-route':'Торговый путь в тундре','endless-trial':'Бесконечное испытание','mercenary-prestige':'Престиж наёмника','frostfire-mine':'Рудник ледяного огня','crazy-joe':'Безумная Джо','alliance-championship':'Чемпионат альянса',fishing:'Рыбалка',forts:'Крепости',castle:'Битва за замок',foundry:'Литейная','svs-prep':'Подготовка к SvS',svs:'SvS',dreams:'Сны',snowplow:'Снегоуборщики',bear:'Охота на медведя'};
+  const routeNames={home:'Главная',newbie:'Новичкам',heroes:'Герои',gear:'Снаряжение',buildings:'Здания','buildings-before-fire':'Здания до Топки 30','buildings-after-fire':'Эпоха кристалла огня',research:'Исследования',troops:'Войска',alliance:'Альянс','state-positions':'Должности на государстве',resources:'Ресурсы',governor:'Губернатор',farm:'Ферма',experts:'Эксперты',pets:'Питомцы',events:'События',other:'Другие гайды',arena:'Арена',beacon:'Маяк',mails:'Письма','alliance-showdown':'Сражение альянсов','tundra-trade-route':'Торговый путь в тундре','endless-trial':'Бесконечное испытание','mercenary-prestige':'Престиж наёмника','frostfire-mine':'Рудник ледяного огня','crazy-joe':'Безумная Джо','alliance-championship':'Чемпионат альянса',fishing:'Рыбалка',forts:'Крепости',castle:'Битва за замок',foundry:'Литейная','svs-prep':'Подготовка к SvS',svs:'SvS',dreams:'Сны',snowplow:'Снегоуборщики',bear:'Охота на медведя','ginas-revenge':'Месть Джины'};
   const freshness={experts:'Обновлено',beacon:'Новое',mails:'Новое',arena:'Обновлено',home:'Обновлено'};
   const verified='20.09.2026';
 
