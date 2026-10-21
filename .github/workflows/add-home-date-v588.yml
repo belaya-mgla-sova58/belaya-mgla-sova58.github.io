@@ -1,0 +1,40 @@
+name: Add automatic home date v588
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/add-home-date-v588.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch-home:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Add automatic Today date to homepage
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          tag = '<script defer src="home-date-v588.js?v=588"></script>'
+          if 'home-date-v588.js' not in s:
+              if '</body>' not in s:
+                  raise SystemExit('index.html has no </body> tag')
+              s = s.replace('</body>', tag + '</body>', 1)
+              p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit homepage date patch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/add-home-date-v588.yml
+          git add index.html
+          git commit -m "Show automatic Today date on homepage"
+          git push origin main
