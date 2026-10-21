@@ -1,0 +1,155 @@
+name: Add Gina's Revenge guide v587
+
+on:
+  push:
+    paths:
+      - '.github/workflows/add-ginas-revenge-v587.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  add-guide:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create Gina guide and add event card
+        shell: bash
+        run: |
+          cp crazy-joe.html ginas-revenge.html
+          python3 <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path('ginas-revenge.html')
+          s = path.read_text(encoding='utf-8')
+
+          # Basic metadata and route identity.
+          s = s.replace('Белая Мгла • Безумная Джо', 'Белая Мгла • Месть Джины')
+          s = s.replace('https://belaya-mgla-sova58.github.io/crazy-joe.html', 'https://belaya-mgla-sova58.github.io/ginas-revenge.html')
+          s = s.replace('data-static-route="crazy-joe"', 'data-static-route="ginas-revenge"')
+          s = s.replace('class="is-crazy-joe-route ', 'class="is-ginas-revenge-route ')
+          s = s.replace('data-route="crazy-joe"', 'data-route="ginas-revenge"')
+
+          # Replace description and social image with safe site artwork.
+          old_desc = 'Безумная Джо — альянсовое PvE-событие, в котором бандиты волнами атакуют города участников и Штаб альянса.'
+          new_desc = 'Месть Джины — событие Whiteout Survival: Рога Криптида, рейды на Криптидов, осколки Джины и выгодный расход энергии губернатора.'
+          s = s.replace(old_desc, new_desc)
+          s = re.sub(r'https://belaya-mgla-sova58\.github\.io/assets/crazy-joe-header-v500\.webp',
+                     'https://belaya-mgla-sova58.github.io/assets/img_6dc1ef08d6ab264b.webp', s)
+          s = s.replace('Безумная Джо" property="og:image:alt', 'Месть Джины" property="og:image:alt')
+
+          # Remove the Joe-specific image header CSS. Gina uses a native glass header instead of a wrong image.
+          s = re.sub(r'<style id="crazy-joe-image-header-v500-style">.*?</style>', '', s, flags=re.S)
+
+          gina_css = '''<style id="gina-revenge-v587-style">
+          body.is-ginas-revenge-route .gina-hero-v587{position:relative;overflow:hidden;margin:6px 0 14px;padding:24px 22px;border:1px solid rgba(126,207,249,.22);border-radius:26px;background:radial-gradient(circle at 88% 10%,rgba(245,170,65,.18),transparent 34%),linear-gradient(145deg,rgba(8,34,62,.96),rgba(4,19,38,.98));box-shadow:0 18px 48px rgba(0,0,0,.24)}
+          body.is-ginas-revenge-route .gina-hero-v587:after{content:"🏹";position:absolute;right:20px;top:12px;font-size:66px;opacity:.16;transform:rotate(-8deg);pointer-events:none}
+          body.is-ginas-revenge-route .gina-kicker-v587{display:inline-flex;align-items:center;gap:7px;margin-bottom:8px;padding:5px 9px;border:1px solid rgba(126,207,249,.18);border-radius:999px;background:rgba(93,196,245,.08);color:#87dfff;font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+          body.is-ginas-revenge-route .gina-hero-v587 h1{margin:0 0 8px;color:#f5fbff;font-size:clamp(28px,5vw,44px);line-height:1.02}
+          body.is-ginas-revenge-route .gina-hero-v587 p{max-width:760px;margin:7px 0 0;color:#cfe2ef;line-height:1.55}
+          body.is-ginas-revenge-route .gina-author-v587{color:#8fdcff!important;font-weight:800}
+          body.is-ginas-revenge-route .gina-stat-grid-v587{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0 20px}
+          body.is-ginas-revenge-route .gina-stat-v587{padding:14px;border:1px solid rgba(121,202,246,.16);border-radius:18px;background:rgba(7,29,52,.78)}
+          body.is-ginas-revenge-route .gina-stat-v587 b{display:block;color:#fff;font-size:20px;line-height:1.05}
+          body.is-ginas-revenge-route .gina-stat-v587 span{display:block;margin-top:5px;color:#9dbbd0;font-size:12px;line-height:1.3}
+          body.is-ginas-revenge-route .gina-quick-v587{margin:18px 0;padding:16px 17px;border:1px solid rgba(250,185,85,.30);border-left:5px solid #f3b64b;border-radius:18px;background:linear-gradient(145deg,rgba(81,52,16,.30),rgba(7,26,47,.82))}
+          body.is-ginas-revenge-route .gina-quick-v587 h2{margin:0 0 10px;color:#ffd889;font-size:19px}
+          body.is-ginas-revenge-route .gina-steps-v587{display:grid;gap:8px;counter-reset:gstep;margin:12px 0 18px}
+          body.is-ginas-revenge-route .gina-step-v587{counter-increment:gstep;display:grid;grid-template-columns:36px 1fr;gap:11px;align-items:start;padding:12px 13px;border:1px solid rgba(123,201,243,.14);border-radius:16px;background:rgba(255,255,255,.035)}
+          body.is-ginas-revenge-route .gina-step-v587:before{content:counter(gstep);display:grid;place-items:center;width:32px;height:32px;border-radius:11px;background:linear-gradient(145deg,#42c3ff,#287ed3);color:white;font-weight:900}
+          body.is-ginas-revenge-route .gina-step-v587 b{color:#ecf8ff}
+          body.is-ginas-revenge-route .gina-step-v587 p{margin:3px 0 0;color:#b8d0e0;line-height:1.45}
+          body.is-ginas-revenge-route .gina-note-v587{margin:12px 0;padding:13px 15px;border-radius:16px;border:1px solid rgba(116,207,255,.18);background:rgba(51,151,208,.09);color:#d7edf8;line-height:1.5}
+          body.is-ginas-revenge-route .gina-note-v587.warn{border-color:rgba(247,181,74,.28);background:rgba(126,80,18,.16)}
+          body.is-ginas-revenge-route .gina-source-v587{font-size:12px;color:#86a4b9}
+          body.is-ginas-revenge-route .gina-source-v587 a{color:#76d6ff}
+          @media(max-width:760px){body.is-ginas-revenge-route .gina-stat-grid-v587{grid-template-columns:repeat(2,minmax(0,1fr))}body.is-ginas-revenge-route .gina-hero-v587{padding:20px 17px}body.is-ginas-revenge-route .gina-hero-v587:after{font-size:52px;right:8px}}
+          </style>'''
+          s = s.replace('</head>', gina_css + '\n</head>', 1)
+
+          route = '''<div class="route-page active" data-route="ginas-revenge"><nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><a href="events.html">События</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><span aria-current="page">Месть Джины</span></nav>
+          <section class="gina-hero-v587"><span class="gina-kicker-v587">🏹 Отдельный гайд события</span><h1>Месть Джины</h1><p class="gina-author-v587">Автор - Sova</p><p><b>Месть Джины</b> — событие, где мы охотимся на обычных зверей, собираем <b>Рога Криптида</b>, призываем Криптидов-берсерков и получаем осколки Джины.</p><p>Главная идея: сначала закрыть обязательные рейды, а затем использовать оставшуюся энергию на зверей, чтобы накопить как можно больше Рогов.</p></section>
+          <section class="section gina-guide-v587">
+            <div class="gina-stat-grid-v587"><div class="gina-stat-v587"><b>3 дня</b><span>обычная длительность события</span></div><div class="gina-stat-v587"><b>10 рейдов</b><span>цель для дополнительной награды</span></div><div class="gina-stat-v587"><b>10 осколков</b><span>награда за цель события</span></div><div class="gina-stat-v587"><b>до 50</b><span>наград за помощь в рейдах в день</span></div></div>
+
+            <div class="gina-quick-v587"><h2>⚡ Если читать некогда</h2><p><b>Бей зверей → собирай Рога → сделай 10 своих рейдов → забери 10 осколков Джины → включи Автовступление → снова фарми зверей и копи Рога.</b></p><p>Рога после окончания события <b>не пропадают</b>, поэтому не обязательно тратить их все сразу.</p></div>
+
+            <h3>Как проходит событие</h3><p>Во время «Мести Джины» за победу над обычными зверями на карте есть шанс получить <b>Рог Криптида</b>. Рог используется для призыва Криптида-берсерка, которого атакуют совместным рейдом альянса.</p><div class="gina-note-v587">💡 Если в Маяке есть задания на убийство зверей, удобно совмещать их с фармом Рогов: одна трата энергии работает сразу на несколько задач.</div>
+
+            <h3>Пошагово</h3><div class="gina-steps-v587"><div class="gina-step-v587"><div><b>Охотимся на обычных зверей</b><p>Во время активного события собираем Рога Криптида.</p></div></div><div class="gina-step-v587"><div><b>Призываем Криптида</b><p>Открываем событие, используем Рог и находим Криптида-берсерка на карте.</p></div></div><div class="gina-step-v587"><div><b>Запускаем собственный рейд</b><p>Обычная стоимость запуска — 25 энергии губернатора. С максимально прокачанным навыком Джины стоимость снижается до 20.</p></div></div><div class="gina-step-v587"><div><b>Закрываем 10 рейдов</b><p>Выполняем цель события и забираем дополнительную награду в 10 осколков Джины.</p></div></div><div class="gina-step-v587"><div><b>После цели снова бьём зверей</b><p>Оставшуюся энергию выгоднее направлять на получение новых Рогов, потому что сами Рога можно использовать и после события.</p></div></div></div>
+
+            <h3>Осколки Джины</h3><p>За собственный успешный рейд на Криптида создатель получает <b>2–4 осколка Джины</b>. Отдельная цель события за 10 рейдов даёт ещё <b>10 осколков</b>.</p><div class="gina-note-v587 warn">🔥 Приоритет: сначала закрываем цель на 10 рейдов. После этого не сжигаем всю энергию на новых Криптидах, а возвращаемся к обычным зверям и запасаем Рога.</div>
+
+            <h3>Рейды альянса и Автовступление</h3><p>Присоединяйтесь к рейдам союзников. За участие можно получать дополнительные награды, а лимит наград за помощь составляет <b>до 50 в день</b>.</p><p><b>Альянс → Война → Автовступление</b>. Включённое Автовступление помогает чаще попадать в рейды и не следить за каждым призывом вручную.</p>
+
+            <h3>Почему Джина важна</h3><p>Джина особенно полезна для PvE и охоты. Её экспедиционные навыки снижают расход энергии губернатора вплоть до <b>20%</b> и увеличивают скорость марша по дикой местности вплоть до <b>100%</b>.</p><p>Поэтому даже после появления более сильных боевых героев Джина остаётся удобным героем для зверей и Полярных ужасов.</p>
+
+            <h3>Рога не пропадают</h3><p>Неиспользованные Рога Криптида остаются в рюкзаке после завершения события. Криптидов можно продолжать призывать позже, поэтому большой запас Рогов полезнее, чем попытка потратить всё во время трёх дней события.</p>
+
+            <h3>Что будет после 4-го поколения</h3><p>Начиная с 4-го поколения героев «Месть Джины» заменяется событием <b>«Миссия героя»</b>. Если Джина ещё не прокачана полностью, оставшиеся Рога и связанные предметы получают дальнейшее применение для получения её осколков.</p>
+
+            <h3>Частые ошибки</h3><ul class="tip-list"><li>Тратить все Рога сразу.</li><li>Продолжать массово призывать Криптидов после закрытия 10 рейдов.</li><li>Не включать Автовступление в рейды альянса.</li><li>Игнорировать Джину при охоте, если её навык экономии энергии уже прокачан.</li><li>Забывать, что новые Рога выгоднее всего добывать именно во время активной «Мести Джины».</li></ul>
+
+            <div class="gina-quick-v587"><h2>🦉 Шпора от Белой Мглы</h2><p>🦌 Бей зверей → собирай Рога<br>🦏 Сделай 10 своих рейдов<br>🧩 Забери 10 осколков Джины<br>🤝 Включи Автовступление<br>🏹 Ставь Джину для экономии энергии<br>📦 После 10 рейдов снова фарми зверей<br>❄️ Рога не пропадают после события</p><p><b>Главное правило: сначала 10 рейдов, потом копим Рога.</b></p></div>
+
+            <h3>Источники</h3><p class="gina-source-v587">Механика и числа перепроверены по Whiteout Survival Wiki: <a href="https://www.whiteoutsurvival.wiki/events/ginas-revenge/" rel="noopener noreferrer" target="_blank">Gina's Revenge</a> и <a href="https://www.whiteoutsurvival.wiki/events/heros-mission/" rel="noopener noreferrer" target="_blank">Hero's Mission</a>.</p>
+          </section></div>'''
+
+          pattern = r'<div class="route-page active" data-route="ginas-revenge">.*?</div></main>'
+          if not re.search(pattern, s, flags=re.S):
+              # At this point copied file still carries the old route only if an earlier replacement did not catch it.
+              pattern = r'<div class="route-page active" data-route="crazy-joe">.*?</div></main>'
+          s, n = re.subn(pattern, route + '</main>', s, count=1, flags=re.S)
+          if n != 1:
+              raise SystemExit('Could not replace Crazy Joe route body safely')
+
+          path.write_text(s, encoding='utf-8')
+
+          # Add a native card to the Events page before the Bear card/link.
+          ep = Path('events.html')
+          e = ep.read_text(encoding='utf-8')
+          if 'ginas-revenge.html' not in e:
+              style = '''<style id="gina-event-card-v587-style">
+              body.is-events-route .guide-nav-card.gina-event-card-v587{display:flex!important;align-items:center!important;gap:14px!important;min-height:118px!important;padding:16px!important;border:1px solid rgba(245,184,73,.28)!important;border-radius:22px!important;background:radial-gradient(circle at 88% 12%,rgba(245,184,73,.16),transparent 38%),linear-gradient(145deg,rgba(8,34,62,.94),rgba(4,19,38,.96))!important;box-shadow:0 14px 34px rgba(0,0,0,.18)!important;text-decoration:none!important;overflow:hidden!important}
+              body.is-events-route .gina-event-icon-v587{display:grid;place-items:center;flex:0 0 58px;width:58px;height:58px;border-radius:18px;background:rgba(245,184,73,.12);border:1px solid rgba(245,184,73,.24);font-size:32px}
+              body.is-events-route .gina-event-copy-v587{display:grid;gap:4px;min-width:0}
+              body.is-events-route .gina-event-copy-v587 strong{color:#fff;font-size:20px;line-height:1.1}
+              body.is-events-route .gina-event-copy-v587 small{color:#a9c8da;font-size:12px;line-height:1.35}
+              body.is-events-route .gina-event-badge-v587{display:inline-flex;width:max-content;padding:3px 7px;border-radius:999px;background:rgba(66,195,255,.10);border:1px solid rgba(99,205,255,.18);color:#7bd8ff;font-size:10px;font-weight:900;letter-spacing:.06em}
+              </style>'''
+              e = e.replace('</head>', style + '\n</head>', 1)
+              card = '<a class="guide-nav-card gina-event-card-v587" href="ginas-revenge.html"><span class="gina-event-icon-v587">🏹</span><span class="gina-event-copy-v587"><span class="gina-event-badge-v587">НОВЫЙ ГАЙД</span><strong>Месть Джины</strong><small>Рога Криптида • рейды • осколки Джины • экономия энергии</small></span></a>'
+              m = re.search(r'<a\b[^>]*href="bear\.html"[^>]*>', e)
+              if not m:
+                  raise SystemExit('Could not find Bear card anchor in events.html')
+              e = e[:m.start()] + card + e[m.start():]
+              ep.write_text(e, encoding='utf-8')
+
+          # Teach the shared JS the route name without otherwise touching frontend behavior.
+          cp = Path('site-v269-core-v465.js')
+          if cp.exists():
+              c = cp.read_text(encoding='utf-8')
+              if "route==='ginas-revenge'" not in c:
+                  anchor = "document.body.classList.toggle('is-bear-route',route==='bear');"
+                  if anchor in c:
+                      c = c.replace(anchor, anchor + "\n    document.body.classList.toggle('is-ginas-revenge-route',route==='ginas-revenge');", 1)
+              if "'ginas-revenge':'Месть Джины'" not in c:
+                  c = c.replace("bear:'Охота на медведя'", "bear:'Охота на медведя','ginas-revenge':'Месть Джины'", 1)
+              cp.write_text(c, encoding='utf-8')
+
+          # Remove this one-time workflow from the final tree.
+          Path('.github/workflows/add-ginas-revenge-v587.yml').unlink(missing_ok=True)
+          PY
+
+      - name: Commit guide
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Add Gina's Revenge guide" || exit 0
+          git push
