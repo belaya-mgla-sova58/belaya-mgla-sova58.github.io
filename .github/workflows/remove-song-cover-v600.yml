@@ -1,0 +1,44 @@
+name: Remove song cover v600
+on: [push]
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove cover
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('creative-bananovyi-mom.html')
+          s=p.read_text(encoding='utf-8')
+          start='<div aria-hidden="true" class="banana-cover-v592 banana-cover-v599">'
+          end='<div class="creative-song-kicker-v396">'
+          if start in s and end in s:
+              a=s.index(start)
+              b=s.index(end,a)
+              s=s[:a]+s[b:]
+          st='<style id="banana-cover-v599-style">'
+          if st in s:
+              a=s.index(st)
+              b=s.index('</style>',a)+len('</style>')
+              s=s[:a]+s[b:]
+          p.write_text(s,encoding='utf-8')
+          sw=Path('service-worker.js')
+          w=sw.read_text(encoding='utf-8').replace("belaya-mgla-v599","belaya-mgla-v600")
+          sw.write_text(w,encoding='utf-8')
+          PY
+          rm -f banana-song-cover-v596.css
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Remove Bananovyi MOM cover" || true
+          git push
+      - name: Cleanup
+        run: |
+          git rm .github/workflows/remove-song-cover-v600.yml
+          git commit -m "Remove one-time song cover workflow" || true
+          git push
