@@ -1,0 +1,84 @@
+name: Add Cheats navigation once
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/add-cheats-nav-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Connect Cheats across site
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          cheats_link = '<a class="route-link route-link-cheats" href="cheats.html"><span aria-hidden="true" class="sidebar-color-icon sidebar-emoji-icon-v421">⚡</span><span>Шпоры</span></a>'
+          knowledge_marker = '<a class="route-link route-link-knowledge" href="other.html">'
+
+          changed = 0
+          for p in Path('.').glob('*.html'):
+              if p.name == 'cheats.html':
+                  continue
+              s = p.read_text(encoding='utf-8')
+              if 'route-link-cheats' in s or knowledge_marker not in s:
+                  continue
+              s = s.replace(knowledge_marker, cheats_link + knowledge_marker, 1)
+              p.write_text(s, encoding='utf-8')
+              changed += 1
+
+          # Add quick access to Cheats in the homepage Today block.
+          home = Path('index.html')
+          s = home.read_text(encoding='utf-8')
+          if 'home-today-link-cheats-v582' not in s:
+              marker = '<a class="home-today-link-v581" href="other.html">'
+              card = '<a class="home-today-link-v581 home-today-link-cheats-v582" href="cheats.html"><span class="home-today-link-icon-v581" aria-hidden="true">⚡</span><span><strong>Шпоры</strong><small>Короткие памятки по событиям</small></span></a>'
+              if marker in s:
+                  s = s.replace(marker, card + marker, 1)
+                  home.write_text(s, encoding='utf-8')
+
+          # Add the page to sitemap.
+          site = Path('sitemap.xml')
+          x = site.read_text(encoding='utf-8')
+          url = '  <url><loc>https://belaya-mgla-sova58.github.io/cheats.html</loc></url>\n'
+          if '/cheats.html' not in x:
+              x = x.replace('</urlset>', url + '</urlset>')
+              site.write_text(x, encoding='utf-8')
+
+          # Bump PWA cache and keep Cheats available offline after first install/update.
+          sw = Path('service-worker.js')
+          t = sw.read_text(encoding='utf-8')
+          t = re.sub(r"const CACHE_NAME = 'belaya-mgla-v\d+';", "const CACHE_NAME = 'belaya-mgla-v582';", t, count=1)
+          if "'./cheats.html'" not in t:
+              t = t.replace("  './index.html',", "  './index.html',\n  './cheats.html',", 1)
+          sw.write_text(t, encoding='utf-8')
+
+          Path('.github/workflows/add-cheats-nav-once.yml').unlink(missing_ok=True)
+          print(f'Navigation updated in {changed} HTML files')
+          PY
+
+      - name: Commit changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'Nothing to commit.'
+            exit 0
+          fi
+          git commit -m 'Connect quick guides across site'
+          git push origin HEAD:main
