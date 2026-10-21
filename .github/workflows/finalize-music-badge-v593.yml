@@ -1,0 +1,29 @@
+name: Finalize Music 58 premiere badge
+on: [push]
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('creative-corner.html')
+          s=p.read_text(encoding='utf-8')
+          old='<span class="creative-music-badge-v590">НОВАЯ ПЕСНЯ ГОТОВИТСЯ</span>'
+          new='<span class="creative-music-badge-v590">НОВАЯ ПРЕМЬЕРА</span>'
+          if old not in s:
+              raise SystemExit('badge marker not found')
+          p.write_text(s.replace(old,new,1),encoding='utf-8')
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add creative-corner.html
+          git commit -m "Finalize Банановый МОМ premiere badge"
+          git push
+      - run: |
+          git rm .github/workflows/finalize-music-badge-v593.yml
+          git commit -m "Remove premiere badge setup workflow"
+          git push
