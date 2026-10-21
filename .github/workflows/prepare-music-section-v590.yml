@@ -59,3 +59,4 @@ jobs:
           git rm .github/workflows/prepare-music-section-v590.yml
           git commit -m "Remove Music 58 setup workflow"
           git push
+# trigger v590
