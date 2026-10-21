@@ -1262,6 +1262,7 @@ document.addEventListener("DOMContentLoaded", () => {
     'index.html':'home',
     'events.html':'events',
     'heroes.html':'heroes',
+    'cheats.html':'cheats',
     'fire-furnace-calculator.html':'calc',
     'furnace-calculator.html':'calc',
     'other.html':'knowledge'
