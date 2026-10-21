@@ -1,0 +1,52 @@
+name: Apply Gina Revenge banner v601
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-gina-banner-v601.yml'
+permissions:
+  contents: write
+jobs:
+  apply-banner:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update Gina card and guide header
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          events = Path('events.html')
+          s = events.read_text(encoding='utf-8')
+          old = '<a class="guide-nav-card gina-event-card-v587" href="ginas-revenge.html"><span class="gina-event-icon-v587">🏹</span><span class="gina-event-copy-v587"><span class="gina-event-badge-v587">НОВЫЙ ГАЙД</span><strong>Месть Джины</strong><small>Рога Криптида • рейды • осколки Джины • экономия энергии</small></span></a>'
+          new = '<a aria-label="Месть Джины" class="guide-nav-card gina-event-card-v601" href="ginas-revenge.html"><img alt="Месть Джины" decoding="async" fetchpriority="high" src="assets/gina-revenge-card-v601.png"/></a>'
+          if old not in s:
+              raise SystemExit('Gina card markup not found in events.html')
+          s = s.replace(old, new, 1)
+          events.write_text(s, encoding='utf-8')
+
+          gina = Path('ginas-revenge.html')
+          s = gina.read_text(encoding='utf-8')
+          marker = '<section class="gina-hero-v587">'
+          insert = '<section class="gina-hero-v587 gina-hero-with-cover-v601"><img class="gina-cover-v601" src="assets/gina-revenge-card-v601.png" alt="Месть Джины" decoding="async" fetchpriority="high"/>'
+          if marker not in s:
+              raise SystemExit('Gina hero section not found')
+          s = s.replace(marker, insert, 1)
+          style = '''\n<style id="gina-banner-v601-style">\nbody.is-events-route .guide-nav-card.gina-event-card-v601{display:block!important;width:100%!important;min-width:0!important;min-height:0!important;height:auto!important;padding:0!important;border:1px solid rgba(190,97,255,.42)!important;border-radius:10px!important;background:rgba(4,15,36,.56)!important;box-shadow:0 5px 13px rgba(0,5,22,.25),0 0 9px rgba(190,97,255,.075)!important;overflow:hidden!important;transform:none!important}\nbody.is-events-route .guide-nav-card.gina-event-card-v601:hover{transform:translateY(-1px)!important;border-color:rgba(190,97,255,.68)!important;box-shadow:0 8px 18px rgba(0,5,22,.30),0 0 13px rgba(190,97,255,.13)!important}\nbody.is-events-route .guide-nav-card.gina-event-card-v601 img{display:block!important;width:100%!important;height:auto!important;aspect-ratio:1024/341!important;object-fit:cover!important;object-position:center!important;margin:0!important;padding:0!important;border:0!important;border-radius:9px!important;box-shadow:none!important}\nbody.is-ginas-revenge-route .gina-hero-with-cover-v601{padding:0 0 20px!important;overflow:hidden!important}\nbody.is-ginas-revenge-route .gina-hero-with-cover-v601:after{display:none!important}\nbody.is-ginas-revenge-route .gina-cover-v601{display:block;width:100%;height:auto;aspect-ratio:1024/341;object-fit:cover;object-position:center;margin:0 0 18px;border:0;border-radius:25px 25px 14px 14px}\nbody.is-ginas-revenge-route .gina-hero-with-cover-v601>span,body.is-ginas-revenge-route .gina-hero-with-cover-v601>h1,body.is-ginas-revenge-route .gina-hero-with-cover-v601>p{margin-left:22px;margin-right:22px}\n@media(max-width:760px){body.is-ginas-revenge-route .gina-hero-with-cover-v601{padding:0 0 17px!important}body.is-ginas-revenge-route .gina-cover-v601{margin-bottom:14px;border-radius:20px 20px 12px 12px}body.is-ginas-revenge-route .gina-hero-with-cover-v601>span,body.is-ginas-revenge-route .gina-hero-with-cover-v601>h1,body.is-ginas-revenge-route .gina-hero-with-cover-v601>p{margin-left:17px;margin-right:17px}}\n</style>\n'''
+          s = s.replace('</head>', style + '</head>', 1)
+          gina.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit site changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add events.html ginas-revenge.html
+          git commit -m "Show Gina Revenge banner on card and guide" || true
+          git push
+      - name: Remove one-time workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git pull --rebase
+          git rm .github/workflows/apply-gina-banner-v601.yml
+          git commit -m "Remove one-time Gina banner workflow"
+          git push
