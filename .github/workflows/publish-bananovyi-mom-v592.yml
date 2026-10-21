@@ -1,0 +1,28 @@
+name: Publish Bananovyi MOM v592
+on: [push]
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download original MP3
+        run: |
+          curl -L --fail --retry 3 --retry-delay 2 -o assets/bananovyi-mom.mp3 'https://cdn.creativeclaw.co/u/9f9da7ef/audio/faa911b2-4378-4bc3-8d26-6fdf5edb35d0.mp3'
+          test "$(stat -c%s assets/bananovyi-mom.mp3)" = "2610582"
+          echo 'ee447966159710862cf443b9352844d5c210994258cdee9e5fafc14cb31ca4a8  assets/bananovyi-mom.mp3' | sha256sum -c -
+      - name: Build song publication
+        run: python patch-bananovyi-mom-v592.py
+      - name: Commit publication
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/bananovyi-mom.mp3 creative-bananovyi-mom.html creative-corner.html sitemap.xml service-worker.js
+          git commit -m "Publish Банановый МОМ" || true
+          git push
+      - name: Remove one-time setup files
+        run: |
+          git rm .github/workflows/publish-bananovyi-mom-v592.yml patch-bananovyi-mom-v592.py
+          git commit -m "Remove Банановый МОМ setup files"
+          git push
