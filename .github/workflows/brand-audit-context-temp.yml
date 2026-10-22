@@ -1,0 +1,29 @@
+name: Brand audit context temp
+
+on:
+  push:
+    paths:
+      - '.github/workflows/brand-audit-context-temp.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Print remaining old branding contexts
+        shell: python
+        run: |
+          import pathlib,re
+          rx=re.compile(r'Белая\s+Мгла\s*:\s*Выживание',re.I)
+          total=0
+          for p in sorted(pathlib.Path('.').glob('*.html')):
+            s=p.read_text(encoding='utf-8',errors='ignore')
+            for m in rx.finditer(s):
+              total+=1
+              a=max(0,m.start()-140); b=min(len(s),m.end()+180)
+              ctx=s[a:b].replace('\n',' ')
+              print(f'{p.name}: {ctx}')
+          print('TOTAL',total)
