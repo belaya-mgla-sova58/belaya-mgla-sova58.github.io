@@ -45,6 +45,7 @@ jobs:
             s=s.replace('Whiteout Survival','Белая мгла')
             s=s.replace('Белая Мгла Выживание','Белая мгла')
             s=s.replace('content="Белая Мгла: Выживание" property="og:site_name"','content="Белая мгла · SOVA58" property="og:site_name"')
+            s=re.sub(r'Белая\s+Мгла\s*:\s*Выживание','Белая мгла',s,flags=re.I)
             s=s.replace('Белая Мгла — официальный сайт государства 58',phrase)
 
             # Static author metadata and legacy bylines only on actual guide pages.
@@ -103,6 +104,6 @@ jobs:
           if git diff --cached --quiet; then
             echo 'No changes'
           else
-            git commit -m 'Unify independent SOVA58 branding and SEO'
+            git commit -m 'Finish independent SOVA58 branding cleanup'
             git push
           fi
