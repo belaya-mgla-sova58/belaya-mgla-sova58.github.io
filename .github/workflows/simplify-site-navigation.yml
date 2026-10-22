@@ -1,4 +1,4 @@
-name: Simplify site navigation
+name: Finalize simplified navigation
 on:
   push:
     branches: [main]
@@ -7,94 +7,26 @@ on:
 permissions:
   contents: write
 jobs:
-  simplify:
+  finalize:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Simplify menus and reorganize knowledge base
+      - name: Fix knowledge base active menu state
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
-          import re
-
-          def sidebar(current):
-              items = [
-                  ('index.html','Главная','assets/ui-home-v534.webp','home'),
-                  ('events.html','События','assets/ui-events-v534.webp','events'),
-                  ('heroes.html','Герои','assets/ui-heroes-v534.webp','heroes'),
-                  ('gear.html','Снаряжение','assets/ui-gear-v534.webp','gear'),
-                  ('experts.html','Эксперты','assets/ui-experts-v534.webp','experts'),
-                  ('pets.html','Питомцы','assets/ui-pets-v534.webp','pets'),
-                  ('other.html#kb-calculators','Калькуляторы','assets/ui-calculator-v534.webp','calc'),
-                  ('other.html','База знаний','assets/ui-knowledge-v534.webp','knowledge'),
-              ]
-              out = ['<div class="nav-wrap"><img alt="Белая Мгла Выживание" class="sidebar-exact-logo" data-src="assets/img_6dc1ef08d6ab264b.webp" decoding="async" fetchpriority="low" loading="lazy"/><nav>']
-              for href,label,icon,key in items:
-                  target = href.split('#')[0]
-                  active = current == target or (key=='calc' and current in {'furnace-calculator.html','fire-furnace-calculator.html'})
-                  attrs = ' aria-current="page"' if active else ''
-                  cls = 'route-link active' if active else 'route-link'
-                  if key=='calc': cls += ' route-link-calculator'
-                  if key=='knowledge': cls += ' route-link-knowledge'
-                  out.append(f'<a{attrs} class="{cls}" href="{href}"><img alt="" aria-hidden="true" class="sidebar-color-icon home-v531-icon" decoding="async" loading="lazy" src="{icon}"/><span>{label}</span></a>')
-              out.append('</nav></div>')
-              return ''.join(out)
-
-          def bottom(current):
-              items = [
-                  ('index.html','home','Главная','assets/ui-home-v534.webp'),
-                  ('events.html','events','События','assets/ui-events-v534.webp'),
-                  ('heroes.html','heroes','Герои','assets/ui-heroes-v534.webp'),
-                  ('fire-furnace-calculator.html','calc','Калькулятор','assets/ui-calculator-v534.webp'),
-                  ('other.html','knowledge','База знаний','assets/ui-knowledge-v534.webp'),
-              ]
-              parts=['<nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424">']
-              for href,key,label,icon in items:
-                  parts.append(f'<a data-v424-nav="{key}" href="{href}"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="{icon}"/></span><b>{label}</b></a>')
-              parts.append('</nav>')
-              return ''.join(parts)
-
-          nav_rx = re.compile(r'<div class="nav-wrap">.*?</nav></div>', re.S)
-          bottom_rx = re.compile(r'<nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424">.*?</nav>', re.S)
-          changed=[]
-          for p in Path('.').glob('*.html'):
-              s=p.read_text(encoding='utf-8',errors='ignore')
-              old=s
-              if nav_rx.search(s):
-                  s=nav_rx.sub(sidebar(p.name),s,count=1)
-              if bottom_rx.search(s):
-                  s=bottom_rx.sub(bottom(p.name),s,count=1)
-              if s!=old:
-                  p.write_text(s,encoding='utf-8')
-                  changed.append(p.name)
-
           p=Path('other.html')
           s=p.read_text(encoding='utf-8')
-          s=s.replace('Короткие справочные разделы, которые не нужны в основном меню.','Полезные справочные разделы и быстрые переходы к нужным материалам.')
-          marker='<section class="kb-tools-v415" id="kb-calculators">'
-          if 'id="kb-useful-moved"' not in s and marker in s:
-              block='''<section class="kb-group-v415" id="kb-useful-moved"><div class="kb-group-head-v415"><h2>Полезное</h2><span>Разделы, к которым удобно возвращаться по необходимости.</span></div><div class="kb-grid-v415"><a class="kb-card-v415 kb-card-textonly-v416 kb-card-v417" href="state-58.html"><span class="kb-card-caption-v415"><span class="kb-card-texts-v415"><strong>Государство 58</strong><small>Материалы и информация нашего государства.</small></span><span aria-hidden="true" class="kb-card-arrow-v415">›</span></span></a><a class="kb-card-v415 kb-card-textonly-v416 kb-card-v417" href="state-positions.html"><span class="kb-card-caption-v415"><span class="kb-card-texts-v415"><strong>Должности</strong><small>Должности государства и их возможности.</small></span><span aria-hidden="true" class="kb-card-arrow-v415">›</span></span></a><a class="kb-card-v415 kb-card-textonly-v416 kb-card-v417" href="farm.html"><span class="kb-card-caption-v415"><span class="kb-card-texts-v415"><strong>Ферма</strong><small>Развитие и использование фермерского аккаунта.</small></span><span aria-hidden="true" class="kb-card-arrow-v415">›</span></span></a><a class="kb-card-v415 kb-card-textonly-v416 kb-card-v417" href="cheats.html"><span class="kb-card-caption-v415"><span class="kb-card-texts-v415"><strong>Шпоры</strong><small>Короткие памятки по событиям и механикам.</small></span><span aria-hidden="true" class="kb-card-arrow-v415">›</span></span></a></div></section>'''
-              s=s.replace(marker,block+marker,1)
+          s=s.replace('<a aria-current="page" class="route-link active route-link-calculator" href="other.html#kb-calculators">','<a class="route-link route-link-calculator" href="other.html#kb-calculators">',1)
           p.write_text(s,encoding='utf-8')
           PY
-
-          # Remove obsolete one-time workflows and temporary Gina reconstruction chunks.
-          rm -f .github/workflows/add-event-schedule-v608.yml
-          rm -f .github/workflows/event-schedule-colors-v613.yml
-          rm -f .github/workflows/fix-event-schedule-v609.yml
-          rm -f .github/workflows/fix-event-schedule-v610.yml
-          rm -f .github/workflows/fix-event-schedule-v611.yml
-          rm -f .github/workflows/fix-event-schedule-v612.yml
-          rm -f .github/workflows/patch-gina-v604.yml
-          rm -f .github/workflows/patch-gina-v605.yml
-          rm -f .github/workflows/patch-gina-v606.yml
-          rm -rf _gina606
-      - name: Commit cleanup
+          rm -f .github/workflows/simplify-site-navigation.yml
+      - name: Commit final cleanup
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A
-          git diff --cached --quiet || git commit -m 'Simplify navigation and remove obsolete technical files'
+          git diff --cached --quiet || git commit -m 'Finalize simplified navigation'
           git push
