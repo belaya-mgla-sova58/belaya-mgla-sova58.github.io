@@ -1,0 +1,50 @@
+name: Fix event schedule v610
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/fix-event-schedule-v610.yml
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Insert schedule
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('events.html')
+          s = p.read_text(encoding='utf-8')
+          marker = '<section class="event-schedule-v608"'
+          if marker not in s:
+              target = '<div class="route-page active" data-route="events">'
+              if target not in s:
+                  raise SystemExit('route marker not found')
+              html = '''<section class="event-schedule-v608" aria-label="График событий 20–26 октября 2026">
+<div class="event-schedule-head-v608"><div><h2>📅 График событий</h2><p>20–26 октября 2026 · подтверждено по игровому календарю</p></div><span class="event-schedule-msk-v608">Время МСК</span></div>
+<div class="event-active-v608"><div class="event-active-card-v608"><b>Сегодня активны</b><span>Колесо фортуны · Безумная Джо · Битвы за форт · Воспоминания о грезах</span></div><div class="event-active-card-v608"><b>Долгие события</b><span>Награды пути · Ковка эксклюзивного снаряжения</span></div><div class="event-active-card-v608"><b>22 октября</b><span>Последний день: Колесо фортуны и Безумная Джо</span></div></div>
+<div class="event-week-wrap-v608"><div class="event-week-v608">
+<div class="corner">Событие</div><div class="event-day-v608">Вт<br>20</div><div class="event-day-v608">Ср<br>21</div><div class="event-day-v608 today">Чт<br>22</div><div class="event-day-v608">Пт<br>23</div><div class="event-day-v608">Сб<br>24</div><div class="event-day-v608">Вс<br>25</div><div class="event-day-v608">Пн<br>26</div>
+<div class="event-row-name-v608">Колесо фортуны</div><div class="event-cell-v608 on offer"></div><div class="event-cell-v608 on offer"></div><div class="event-cell-v608 on offer"></div><div class="event-cell-v608"></div><div class="event-cell-v608"></div><div class="event-cell-v608"></div><div class="event-cell-v608"></div>
+<div class="event-row-name-v608">Безумная Джо</div><div class="event-cell-v608 on alliance"></div><div class="event-cell-v608 on alliance"></div><div class="event-cell-v608 on alliance"></div><div class="event-cell-v608"></div><div class="event-cell-v608"></div><div class="event-cell-v608"></div><div class="event-cell-v608"></div>
+<div class="event-row-name-v608">Битвы за форт</div><div class="event-cell-v608 on pvp"></div><div class="event-cell-v608 on pvp"></div><div class="event-cell-v608 on pvp"></div><div class="event-cell-v608 on pvp"></div><div class="event-cell-v608"></div><div class="event-cell-v608"></div><div class="event-cell-v608"></div>
+<div class="event-row-name-v608">Воспоминания о грезах</div><div class="event-cell-v608"></div><div class="event-cell-v608 on"></div><div class="event-cell-v608 on"></div><div class="event-cell-v608 on"></div><div class="event-cell-v608"></div><div class="event-cell-v608"></div><div class="event-cell-v608"></div>
+<div class="event-row-name-v608">Награды пути</div><div class="event-cell-v608 on"></div><div class="event-cell-v608 on"></div><div class="event-cell-v608 on"></div><div class="event-cell-v608 on"></div><div class="event-cell-v608 on"></div><div class="event-cell-v608 on"></div><div class="event-cell-v608"></div>
+<div class="event-row-name-v608">Ковка эксклюзивного снаряжения</div><div class="event-cell-v608 on offer"></div><div class="event-cell-v608 on offer"></div><div class="event-cell-v608 on offer"></div><div class="event-cell-v608 on offer"></div><div class="event-cell-v608 on offer"></div><div class="event-cell-v608 on offer"></div><div class="event-cell-v608 on offer"></div>
+</div></div>
+<div class="event-soon-v608"><h3>⏳ Скоро закончится</h3><div class="event-soon-list-v608"><span class="event-soon-chip-v608">22.10 · Колесо фортуны</span><span class="event-soon-chip-v608">22.10 · Безумная Джо</span><span class="event-soon-chip-v608">23.10 · Воспоминания о грезах</span><span class="event-soon-chip-v608">23.10 · Битвы за форт</span><span class="event-soon-chip-v608">25.10 · Награды пути</span></div></div>
+<div class="event-schedule-note-v608">В график внесены только даты, подтверждённые по игровому календарю.</div>
+</section>'''
+              s = s.replace(target, target + html, 1)
+              p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add events.html
+          git diff --cached --quiet || git commit -m "Insert event schedule v610"
+          git push
