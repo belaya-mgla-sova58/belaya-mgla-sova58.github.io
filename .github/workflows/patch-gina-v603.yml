@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - 'assets/gina-revenge-card-v603.webp'
+      - '.github/workflows/patch-gina-v603.yml'
 permissions:
   contents: write
 jobs:
