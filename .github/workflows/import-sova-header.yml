@@ -1,0 +1,36 @@
+name: Import SOVA58 header
+
+on:
+  push:
+    paths:
+      - '.github/workflows/import-sova-header.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import-header:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download header into site assets
+        run: |
+          set -euo pipefail
+          mkdir -p assets
+          curl --fail --location --retry 3 \
+            'https://cdn.creativeclaw.co/u/9f9da7ef/images/277c9dfc-4b55-459f-b4bd-4fb108956b85.png' \
+            --output assets/sova58-header-v619.png
+          test -s assets/sova58-header-v619.png
+          file assets/sova58-header-v619.png | grep -qi 'PNG image data'
+      - name: Commit local header
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/sova58-header-v619.png
+          if git diff --cached --quiet; then
+            echo 'Header already present'
+          else
+            git commit -m 'Add local SOVA58 winter owl header'
+            git push
+          fi
