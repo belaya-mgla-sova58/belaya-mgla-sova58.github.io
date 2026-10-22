@@ -20354,3 +20354,69 @@ body[data-static-route="news-elena"] .whitefox-index-card-badges-v557 span{
   body .home-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
   body .pet-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;}
 }
+
+/* ===== v621: desktop left alignment repair =====
+   Removes the double-centering gap between the fixed sidebar and page content. */
+@media (min-width:1201px) and (hover:hover) and (pointer:fine){
+  body.site-hq-v407 main,
+  body.site-hq-v407 main#appMain,
+  body.site-hq-v407 #appMain{
+    margin-left:var(--desktop-sidebar)!important;
+    width:calc(100% - var(--desktop-sidebar))!important;
+    max-width:none!important;
+    padding-left:16px!important;
+    padding-right:20px!important;
+    box-sizing:border-box!important;
+  }
+
+  body.site-hq-v407 main#appMain>.route-page.active,
+  body.site-hq-v407 #appMain>.route-page.active{
+    width:100%!important;
+    max-width:none!important;
+    margin-left:0!important;
+    margin-right:0!important;
+    padding-left:0!important;
+    padding-right:0!important;
+  }
+
+  body.site-hq-v407 main#appMain .site-search-v426,
+  body.site-hq-v407 main#appMain .breadcrumbs-v409,
+  body.site-hq-v407 main#appMain .page-heading-v424,
+  body.site-hq-v407 main#appMain .guide-page-v69,
+  body.site-hq-v407 main#appMain .page-shell,
+  body.site-hq-v407 main#appMain .content-wrap,
+  body.site-hq-v407 #appMain .site-search-v426,
+  body.site-hq-v407 #appMain .breadcrumbs-v409,
+  body.site-hq-v407 #appMain .page-heading-v424,
+  body.site-hq-v407 #appMain .guide-page-v69,
+  body.site-hq-v407 #appMain .page-shell,
+  body.site-hq-v407 #appMain .content-wrap{
+    width:100%!important;
+    max-width:none!important;
+    margin-left:0!important;
+    margin-right:0!important;
+    box-sizing:border-box!important;
+  }
+
+  body.site-hq-v407 .breadcrumbs-v409{
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+
+  /* Keep readable article width only inside text-heavy specialty pages, without shifting the whole page. */
+  body.site-hq-v407 .whitefox-story,
+  body.site-hq-v407 .whitefox-index,
+  body.site-hq-v407 .author-page-v616{
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+}
+
+@media (min-width:1201px) and (max-width:1399px) and (hover:hover) and (pointer:fine){
+  body.site-hq-v407 main,
+  body.site-hq-v407 main#appMain,
+  body.site-hq-v407 #appMain{
+    padding-left:12px!important;
+    padding-right:14px!important;
+  }
+}
