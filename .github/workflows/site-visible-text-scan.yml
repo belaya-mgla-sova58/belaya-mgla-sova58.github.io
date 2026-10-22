@@ -1,0 +1,74 @@
+name: Site visible text scan
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/site-visible-text-scan.yml'
+permissions:
+  contents: write
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Scan visible HTML text for technical leftovers
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from html.parser import HTMLParser
+          import re
+
+          class VisibleText(HTMLParser):
+              def __init__(self):
+                  super().__init__(convert_charrefs=True)
+                  self.skip=0
+                  self.parts=[]
+              def handle_starttag(self, tag, attrs):
+                  if tag in {'script','style','noscript','template'}:
+                      self.skip += 1
+              def handle_endtag(self, tag):
+                  if tag in {'script','style','noscript','template'} and self.skip:
+                      self.skip -= 1
+              def handle_data(self, data):
+                  if not self.skip:
+                      t=' '.join(data.split())
+                      if t:
+                          self.parts.append(t)
+
+          terms = [
+              r'\bTODO\b', r'\bDEBUG\b', r'\bdebug\b', r'\bdraft\b', r'\bbeta\b',
+              r'\bplaceholder\b', r'\broute\b', r'\bsection\b', r'\bbuild\b', r'\bdeploy\b',
+              r'\btechnical\b', r'\bversion\b', r'\bv\d{2,4}\b', r'Whiteout\s+Survival',
+              r'техничес\w*', r'служеб\w*', r'заглуш\w*', r'чернов\w*', r'времен\w*',
+              r'верси\w*', r'отлад\w*', r'тестов\w*', r'GitHub', r'github\.io'
+          ]
+          rx = re.compile('|'.join(f'(?:{x})' for x in terms), re.I)
+          report=[]
+          for p in sorted(Path('.').glob('*.html')):
+              s=p.read_text(encoding='utf-8',errors='ignore')
+              parser=VisibleText()
+              try: parser.feed(s)
+              except Exception: pass
+              hits=[]
+              for text in parser.parts:
+                  if rx.search(text):
+                      hits.append(text)
+              if hits:
+                  report.append(f'## {p.name}')
+                  seen=set()
+                  for h in hits:
+                      if h not in seen:
+                          report.append(h)
+                          seen.add(h)
+                  report.append('')
+          Path('_site_visible_text_scan.txt').write_text('\n'.join(report) if report else 'NO_MATCHES\n', encoding='utf-8')
+          PY
+      - name: Commit scan report
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add _site_visible_text_scan.txt
+          git diff --cached --quiet || git commit -m 'Add temporary visible text scan report'
+          git push
