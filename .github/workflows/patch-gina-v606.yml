@@ -1,1 +1,35 @@
-test
+name: Patch Gina cover v606
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/gina-revenge-final-v606.jpg'
+      - '.github/workflows/patch-gina-v606.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Switch Gina references to final JPG
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          for name in ['events.html','ginas-revenge.html']:
+              p = Path(name)
+              s = p.read_text(encoding='utf-8')
+              s = s.replace('assets/gina-revenge-final-v605.webp?v=605','assets/gina-revenge-final-v606.jpg?v=606')
+              s = s.replace('assets/gina-revenge-final-v605.webp','assets/gina-revenge-final-v606.jpg?v=606')
+              s = s.replace('assets/gina-revenge-card-v604.svg?v=604','assets/gina-revenge-final-v606.jpg?v=606')
+              p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit page updates
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add events.html ginas-revenge.html
+          git diff --cached --quiet || git commit -m 'Use Gina Revenge final JPG v606'
+          git push
