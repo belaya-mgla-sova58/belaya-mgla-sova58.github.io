@@ -1,0 +1,97 @@
+name: Sitemap maintenance
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '*.html'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Update lastmod for meaningful page changes
+        shell: python
+        run: |
+          import datetime, json, pathlib, re, subprocess
+          from xml.sax.saxutils import escape
+
+          message = subprocess.check_output(['git','log','-1','--format=%s'], text=True).strip().lower()
+          technical = (
+            'css','responsive','layout','cache','branding','seo','sitemap','metadata','workflow',
+            'performance','asset','navigation','mobile','desktop','repair','minif','cleanup'
+          )
+          if any(word in message for word in technical):
+              print('Technical-only commit, keeping content lastmod dates unchanged.')
+              pathlib.Path('.sitemap-skip').write_text('1')
+              raise SystemExit(0)
+
+          try:
+              changed = subprocess.check_output(
+                  ['git','diff','--name-only','HEAD^','HEAD','--','*.html'], text=True
+              ).splitlines()
+          except subprocess.CalledProcessError:
+              changed = []
+
+          excluded = {'404.html','maintenance.html','google94584035fdf43cd0.html','yandex_ee69138efc48d1ec.html'}
+          changed = [x for x in changed if x and '/' not in x and x not in excluded and pathlib.Path(x).exists()]
+          if not changed:
+              print('No indexable HTML pages changed.')
+              pathlib.Path('.sitemap-skip').write_text('1')
+              raise SystemExit(0)
+
+          date = subprocess.check_output(['git','log','-1','--format=%cs'], text=True).strip() or datetime.date.today().isoformat()
+          base = 'https://belaya-mgla-sova58.github.io/'
+          sitemap = pathlib.Path('sitemap.xml')
+          text = sitemap.read_text(encoding='utf-8')
+
+          for name in changed:
+              loc = base if name == 'index.html' else base + name
+              pattern = re.compile(r'(<url><loc>'+re.escape(loc)+r'</loc><lastmod>)([^<]+)(</lastmod></url>)')
+              if pattern.search(text):
+                  text = pattern.sub(r'\g<1>'+date+r'\g<3>', text, count=1)
+              else:
+                  text = text.replace('</urlset>', f'  <url><loc>{escape(loc)}</loc><lastmod>{date}</lastmod></url>\n</urlset>')
+
+              # Keep Article dateModified synchronized when this page is a guide.
+              p = pathlib.Path(name)
+              html = p.read_text(encoding='utf-8')
+              m = re.search(r'(<script id="guide-article-schema-v625" type="application/ld\+json">)(.*?)(</script>)', html, re.S)
+              if m:
+                  try:
+                      data = json.loads(m.group(2))
+                      data['dateModified'] = date
+                      block = m.group(1) + json.dumps(data, ensure_ascii=False, separators=(',',':')) + m.group(3)
+                      html = html[:m.start()] + block + html[m.end():]
+                      p.write_text(html, encoding='utf-8')
+                  except Exception as e:
+                      print('Could not update Article dateModified for', name, e)
+
+          sitemap.write_text(text, encoding='utf-8')
+          pathlib.Path('.sitemap-changed').write_text('\n'.join(changed), encoding='utf-8')
+          print('Updated:', ', '.join(changed))
+
+      - name: Commit sitemap dates
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f .sitemap-skip ]; then
+            rm -f .sitemap-skip
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add sitemap.xml '*.html'
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m 'Update sitemap dates for changed pages'
+          git push
+          rm -f .sitemap-changed
