@@ -1,0 +1,108 @@
+name: SEO fix v1
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/seo-fix-v1.yml'
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Improve homepage SEO, clean fragment, rebuild sitemap
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, subprocess, html as htmllib
+          from urllib.parse import urljoin
+
+          base='https://belaya-mgla-sova58.github.io/'
+          home=Path('index.html')
+          s=home.read_text(encoding='utf-8')
+          title='Белая мгла: гайды, события и калькуляторы | SOVA58'
+          desc='Гайды по Белой мгле: события, герои, снаряжение, эксперты, питомцы, калькуляторы и материалы 58 государства.'
+          s=re.sub(r'<title[^>]*>.*?</title>',f'<title>{title}</title>',s,count=1,flags=re.I|re.S)
+          def set_meta_name(text,name,value):
+              pat=rf'<meta\s+[^>]*name=["\']{re.escape(name)}["\'][^>]*>'
+              tag=f'<meta content="{value}" name="{name}"/>'
+              if re.search(pat,text,re.I):
+                  return re.sub(pat,tag,text,count=1,flags=re.I)
+              return text.replace('</head>',tag+'</head>',1)
+          def set_meta_prop(text,prop,value):
+              pat=rf'<meta\s+[^>]*property=["\']{re.escape(prop)}["\'][^>]*>'
+              tag=f'<meta content="{value}" property="{prop}"/>'
+              if re.search(pat,text,re.I):
+                  return re.sub(pat,tag,text,count=1,flags=re.I)
+              return text.replace('</head>',tag+'</head>',1)
+          s=set_meta_name(s,'description',desc)
+          s=set_meta_name(s,'author','SOVA58')
+          s=set_meta_prop(s,'og:site_name','Белая мгла • SOVA58')
+          s=set_meta_prop(s,'og:title',title)
+          s=set_meta_prop(s,'og:description',desc)
+          s=set_meta_prop(s,'og:locale','ru_RU')
+          s=set_meta_prop(s,'og:image:alt','Белая мгла — гайды и материалы SOVA58')
+          s=set_meta_name(s,'twitter:title',title)
+          s=set_meta_name(s,'twitter:description',desc)
+          if '"@type":"WebSite"' not in s and '"@type": "WebSite"' not in s:
+              schema='''<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Белая мгла • SOVA58","url":"https://belaya-mgla-sova58.github.io/","description":"Гайды по Белой мгле: события, герои, снаряжение, эксперты, питомцы, калькуляторы и материалы 58 государства.","inLanguage":"ru"}</script>'''
+              s=s.replace('</head>',schema+'</head>',1)
+          home.write_text(s,encoding='utf-8')
+
+          ev=Path('events.html').read_text(encoding='utf-8')
+          frag=Path('assets/event-schedule-v612.fragment.html')
+          if frag.exists():
+              if 'event-schedule-v608' not in ev:
+                  raise SystemExit('Refusing to delete calendar fragment: schedule missing from events.html')
+              frag.unlink()
+
+          urls=[]
+          for p in sorted(Path('.').glob('*.html')):
+              if p.name in {'404.html','maintenance.html'}:
+                  continue
+              text=p.read_text(encoding='utf-8',errors='ignore')
+              robots=re.search(r'<meta\s+[^>]*name=["\']robots["\'][^>]*>',text,re.I)
+              if robots and re.search(r'noindex',robots.group(0),re.I):
+                  continue
+              can=re.search(r'<link\s+[^>]*rel=["\']canonical["\'][^>]*>',text,re.I)
+              loc=None
+              if can:
+                  href=re.search(r'href=["\'](.*?)["\']',can.group(0),re.I|re.S)
+                  if href: loc=htmllib.unescape(href.group(1).strip())
+              if not loc:
+                  loc=base if p.name=='index.html' else urljoin(base,p.name)
+              try:
+                  lastmod=subprocess.check_output(['git','log','-1','--format=%cs','--',str(p)],text=True).strip()
+              except Exception:
+                  lastmod=''
+              urls.append((loc,lastmod,p.name))
+
+          lines=['<?xml version="1.0" encoding="UTF-8"?>','<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+          for loc,lastmod,name in urls:
+              lines.append('  <url>')
+              lines.append(f'    <loc>{loc}</loc>')
+              if lastmod: lines.append(f'    <lastmod>{lastmod}</lastmod>')
+              lines.append('  </url>')
+          lines.append('</urlset>')
+          Path('sitemap.xml').write_text('\n'.join(lines)+'\n',encoding='utf-8')
+          names={x[2] for x in urls}
+          for must in ['ginas-revenge.html','armament-competition.html','events.html','heroes.html','index.html']:
+              if Path(must).exists() and must not in names:
+                  raise SystemExit(f'Missing expected sitemap page: {must}')
+          if 'maintenance.html' in names or '404.html' in names:
+              raise SystemExit('Non-index pages leaked into sitemap')
+          print(f'SEOFIX sitemap_urls={len(urls)} fragment_removed={not frag.exists()}')
+          print('SEOFIX homepage_title=',title)
+          PY
+      - name: Commit SEO improvements
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html sitemap.xml assets/event-schedule-v612.fragment.html || true
+          git diff --cached --quiet || git commit -m 'Improve SEO metadata and refresh sitemap'
+          git push
