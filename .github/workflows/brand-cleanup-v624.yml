@@ -1,0 +1,108 @@
+name: Brand cleanup v624
+
+on:
+  push:
+    paths:
+      - '.github/workflows/brand-cleanup-v624.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Clean branding and author metadata
+        shell: python
+        run: |
+          import pathlib,re
+
+          guides=set([
+            'alliance-championship.html','alliance-mobilization.html','alliance-showdown.html',
+            'arena.html','armament-competition.html','beacon.html','bear.html','brothers-in-arms.html',
+            'buildings-after-fire.html','buildings-before-fire.html','buildings.html','castle.html','cheats.html',
+            'crazy-joe.html','dreams.html','endless-trial.html','experts.html','exploration.html','farm.html',
+            'fishing.html','forts.html','foundry.html','frostfire-mine.html','gear.html','ginas-revenge.html',
+            'governor-orders.html','governor.html','heroes.html','island.html','labyrinth.html','mails.html',
+            'mercenary-prestige.html','newbie.html','pets.html','president-guide.html','research.html','resources.html',
+            'snowplow.html','state-positions.html','svs-prep.html','svs.html','troops.html','tundra-trade-route.html',
+            'winter-siege.html'
+          ])
+          phrase='Независимый сайт с гайдами по Белой мгле от SOVA58'
+          old_home_desc='Гайды по Белой мгле: события, герои, снаряжение, эксперты, питомцы, калькуляторы и материалы 58 государства.'
+          new_home_desc=phrase+': события, герои, снаряжение, эксперты, питомцы, калькуляторы и материалы 58 государства.'
+
+          changed=[]
+          for p in sorted(pathlib.Path('.').glob('*.html')):
+            s=p.read_text(encoding='utf-8')
+            old=s
+
+            # Canonical site/game naming.
+            s=s.replace('Whiteout Survival','Белая мгла')
+            s=s.replace('Белая Мгла Выживание','Белая мгла')
+            s=s.replace('content="Белая Мгла: Выживание" property="og:site_name"','content="Белая мгла · SOVA58" property="og:site_name"')
+            s=s.replace('Белая Мгла — официальный сайт государства 58',phrase)
+
+            # Static author metadata and legacy bylines only on actual guide pages.
+            if p.name in guides:
+              s=re.sub(r'Автор\s*[-—:]\s*Sova\b','Автор: SOVA58',s,flags=re.I)
+              if not re.search(r'<meta\s+[^>]*name=["\']author["\']',s,re.I):
+                s=s.replace('</head>','<meta name="author" content="SOVA58"/></head>',1)
+
+            # Main page: selected independent-site wording in SEO and visible copy.
+            if p.name=='index.html':
+              s=s.replace(old_home_desc,new_home_desc)
+              if 'class="independent-brand-v624"' not in s:
+                s=s.replace('<h1 class="home-main-title-v571">Белая Мгла</h1>',
+                  '<h1 class="home-main-title-v571">Белая Мгла</h1>\n<p class="independent-brand-v624">'+phrase+'</p>',1)
+
+            # Author page: make independence explicit to users and search engines.
+            if p.name=='sova58.html':
+              s=s.replace('SOVA58 — автор и редактор гайдов, событий и игровых материалов по Белой мгле для сообщества и 58 государства.',
+                          phrase+'. Автор и редактор игровых материалов для сообщества и 58 государства.')
+              s=s.replace('Авторская страница SOVA58: гайды, события и материалы по Белой мгле для сообщества и 58 государства.',
+                          phrase+'. Авторская страница SOVA58, события и материалы для сообщества и 58 государства.')
+              if 'class="independent-brand-v624"' not in s:
+                s=s.replace('<section class="author-intro-v616"><span class="author-kicker-v616">Авторская страница</span>',
+                  '<section class="author-intro-v616"><span class="author-kicker-v616">Авторская страница</span><p class="independent-brand-v624">'+phrase+'</p>',1)
+
+            # Bust CSS cache everywhere.
+            s=re.sub(r'site-v269\.css\?v=\d+','site-v269.css?v=624',s)
+
+            if s!=old:
+              p.write_text(s,encoding='utf-8')
+              changed.append(p.name)
+
+          css=pathlib.Path('site-v269.css')
+          cs=css.read_text(encoding='utf-8')
+          marker='v624: independent SOVA58 branding'
+          if marker not in cs:
+            cs += '''\n/* ===== v624: independent SOVA58 branding ===== */\n.independent-brand-v624{margin:8px 0 16px;color:#9fc9df;font-size:14px;font-weight:800;line-height:1.45;letter-spacing:.01em}\nbody.is-home-route .independent-brand-v624{text-align:center;margin:4px auto 14px;max-width:760px;color:#b8d9ec}\n.author-intro-v616 .independent-brand-v624{margin:10px 0 6px;color:#8fe4ff;font-size:13px}\n@media(max-width:760px){.independent-brand-v624{font-size:13px;margin-bottom:12px}}\n'''
+            css.write_text(cs,encoding='utf-8')
+
+          print('CHANGED_HTML',len(changed))
+          for x in changed: print(' -',x)
+          alltext='\n'.join(p.read_text(encoding='utf-8',errors='ignore') for p in pathlib.Path('.').glob('*.html'))
+          print('REMAIN_WHITEOUT',len(re.findall(r'Whiteout\s+Survival',alltext,re.I)))
+          print('REMAIN_OLD_SITE_NAME',len(re.findall(r'Белая\s+Мгла\s*:\s*Выживание',alltext,re.I)))
+          print('REMAIN_OLD_LOGO_ALT',len(re.findall(r'Белая\s+Мгла\s+Выживание',alltext,re.I)))
+          print('BAD_OFFICIAL_ALT',alltext.count('Белая Мгла — официальный сайт государства 58'))
+          print('INDEPENDENT_PHRASE_OCCURRENCES',alltext.count(phrase))
+
+      - name: Commit cleanup
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add '*.html' site-v269.css
+          if git diff --cached --quiet; then
+            echo 'No changes'
+          else
+            git commit -m 'Unify independent SOVA58 branding and SEO'
+            git push
+          fi
