@@ -1,9 +1,9 @@
-name: Patch Gina cover v606
+name: Patch Gina cover v607
 on:
   push:
     branches: [main]
     paths:
-      - 'assets/gina-revenge-final-v606.jpg'
+      - '_gina606/**'
       - '.github/workflows/patch-gina-v606.yml'
 permissions:
   contents: write
@@ -12,7 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Switch Gina references to final JPG
+      - name: Rebuild exact Gina JPG
+        shell: bash
+        run: |
+          cat _gina606/chunk1.txt _gina606/chunk2.txt _gina606/chunk3.txt _gina606/chunk4.txt _gina606/chunk5.txt | base64 -d > assets/gina-revenge-final-v607.jpg
+          echo 'b30cfdd5fb2683e862c2664ed508846bced9bec99393e46719f88018d002c883  assets/gina-revenge-final-v607.jpg' | sha256sum -c -
+      - name: Switch Gina references to v607
         shell: bash
         run: |
           python - <<'PY'
@@ -20,16 +25,21 @@ jobs:
           for name in ['events.html','ginas-revenge.html']:
               p = Path(name)
               s = p.read_text(encoding='utf-8')
-              s = s.replace('assets/gina-revenge-final-v605.webp?v=605','assets/gina-revenge-final-v606.jpg?v=606')
-              s = s.replace('assets/gina-revenge-final-v605.webp','assets/gina-revenge-final-v606.jpg?v=606')
-              s = s.replace('assets/gina-revenge-card-v604.svg?v=604','assets/gina-revenge-final-v606.jpg?v=606')
+              for old in [
+                  'assets/gina-revenge-final-v606.jpg?v=606',
+                  'assets/gina-revenge-final-v606.jpg',
+                  'assets/gina-revenge-final-v605.webp?v=605',
+                  'assets/gina-revenge-final-v605.webp',
+                  'assets/gina-revenge-card-v604.svg?v=604'
+              ]:
+                  s = s.replace(old, 'assets/gina-revenge-final-v607.jpg?v=607')
               p.write_text(s, encoding='utf-8')
           PY
-      - name: Commit page updates
+      - name: Commit exact image and page updates
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add events.html ginas-revenge.html
-          git diff --cached --quiet || git commit -m 'Use Gina Revenge final JPG v606'
+          git add assets/gina-revenge-final-v607.jpg events.html ginas-revenge.html
+          git diff --cached --quiet || git commit -m 'Use verified Gina Revenge JPG v607'
           git push
