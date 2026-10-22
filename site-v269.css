@@ -20686,3 +20686,9 @@ html.force-desktop-root body .nav-wrap>nav>a.route-link{
   margin-right:0!important;
   box-sizing:border-box!important;
 }
+
+/* ===== v624: independent SOVA58 branding ===== */
+.independent-brand-v624{margin:8px 0 16px;color:#9fc9df;font-size:14px;font-weight:800;line-height:1.45;letter-spacing:.01em}
+body.is-home-route .independent-brand-v624{text-align:center;margin:4px auto 14px;max-width:760px;color:#b8d9ec}
+.author-intro-v616 .independent-brand-v624{margin:10px 0 6px;color:#8fe4ff;font-size:13px}
+@media(max-width:760px){.independent-brand-v624{font-size:13px;margin-bottom:12px}}
