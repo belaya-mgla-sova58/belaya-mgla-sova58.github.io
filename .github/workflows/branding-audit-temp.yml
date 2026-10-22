@@ -1,0 +1,46 @@
+name: Temporary branding audit
+
+on:
+  push:
+    paths:
+      - '.github/workflows/branding-audit-temp.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Audit HTML branding
+        shell: python
+        run: |
+          import pathlib,re
+          pats={
+            'official':re.compile(r'официал',re.I),
+            'whiteout':re.compile(r'Whiteout\s+Survival',re.I),
+            'survival_brand':re.compile(r'Белая\s+Мгла\s*:\s*Выживание|Белая\s+Мгла\s+Выживание',re.I),
+            'old_author':re.compile(r'Автор\s*[-—:]\s*Sova\b',re.I),
+          }
+          files=sorted(pathlib.Path('.').glob('*.html'))
+          print('HTML_COUNT',len(files))
+          counts={k:0 for k in pats}
+          hitfiles={k:[] for k in pats}
+          for p in files:
+            s=p.read_text(encoding='utf-8',errors='ignore')
+            for k,rx in pats.items():
+              m=list(rx.finditer(s))
+              if m:
+                counts[k]+=len(m); hitfiles[k].append(p.name)
+          for k in pats:
+            print(f'[{k}] OCCURRENCES={counts[k]} FILES={len(hitfiles[k])}')
+            for f in hitfiles[k]: print(' -',f)
+          # metadata checks
+          missing_author=[]; old_site_name=[]
+          guides=set(['alliance-championship.html','alliance-mobilization.html','alliance-showdown.html','arena.html','armament-competition.html','beacon.html','bear.html','brothers-in-arms.html','buildings-after-fire.html','buildings-before-fire.html','buildings.html','castle.html','cheats.html','crazy-joe.html','dreams.html','endless-trial.html','experts.html','exploration.html','farm.html','fishing.html','forts.html','foundry.html','frostfire-mine.html','gear.html','ginas-revenge.html','governor-orders.html','governor.html','heroes.html','island.html','labyrinth.html','mails.html','mercenary-prestige.html','newbie.html','pets.html','president-guide.html','research.html','resources.html','snowplow.html','state-positions.html','svs-prep.html','svs.html','troops.html','tundra-trade-route.html','winter-siege.html'])
+          for p in files:
+            s=p.read_text(encoding='utf-8',errors='ignore')
+            if 'Белая Мгла: Выживание' in s: old_site_name.append(p.name)
+          print('[old_og_site_name_files]',len(old_site_name))
+          for f in old_site_name: print(' -',f)
