@@ -17,6 +17,7 @@ jobs:
         run: |
           set -euo pipefail
           python -m pip install --quiet requests beautifulsoup4 pillow
+          sed -i "s/'Bloodthirsty'/'Battlethirsty'/g" tmp-gen12-build.py
           python tmp-gen12-build.py
           git add hero-hervor.html hero-karol.html hero-ligeia.html sitemap.xml assets/heroes/gen-12
           git config user.name 'github-actions[bot]'
