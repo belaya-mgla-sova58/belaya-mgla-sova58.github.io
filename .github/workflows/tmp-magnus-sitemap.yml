@@ -13,23 +13,24 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Touch Magnus guide meaningfully
+      - name: Add Magnus to sitemap and remove temporary workflow
         shell: bash
         run: |
           set -euo pipefail
           python - <<'PY'
           from pathlib import Path
-          p=Path('hero-magnus.html')
+          p=Path('sitemap.xml')
           s=p.read_text(encoding='utf-8')
-          old='<body class="is-heroes-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="heroes">'
-          new='<body class="is-heroes-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="heroes" data-hero="magnus">'
-          if old not in s:
-              raise SystemExit('body marker not found')
-          p.write_text(s.replace(old,new,1),encoding='utf-8')
+          loc='https://belaya-mgla-sova58.github.io/hero-magnus.html'
+          if loc not in s:
+              row=f'  <url><loc>{loc}</loc><lastmod>2026-10-23</lastmod></url>\n'
+              s=s.replace('</urlset>',row+'</urlset>')
+              p.write_text(s,encoding='utf-8')
           PY
+          git rm .github/workflows/tmp-magnus-sitemap.yml
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add hero-magnus.html
-          git commit -m 'Finalize Magnus hero guide'
+          git add sitemap.xml
+          git commit -m 'Add Magnus to sitemap and clean temporary workflow'
           git pull --rebase origin main
           git push
