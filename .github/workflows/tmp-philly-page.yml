@@ -1,0 +1,85 @@
+name: Temporary Philly page builder
+on:
+  push:
+    paths:
+      - '.github/workflows/tmp-philly-page.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build-philly:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build Philly page
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp hero-flint.html hero-philly.html
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('hero-philly.html')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace('Флинт','Филли').replace('flint','philly').replace('Драконья погибель','Фармакология')
+          main=Path('tmp-philly-main.html').read_text(encoding='utf-8').strip()
+          s=re.sub(r'<main id="appMain">.*?</main>', main, s, count=1, flags=re.S)
+          p.write_text(s,encoding='utf-8')
+          PY
+          mkdir -p assets/heroes/gen-02/philly
+          curl -L --fail --retry 3 -sS 'https://whiteout-survival.com/ru/heroes/philly/' -o /tmp/philly.html
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, html, urllib.request
+          text=html.unescape(Path('/tmp/philly.html').read_text(encoding='utf-8',errors='ignore'))
+          urls=re.findall(r'https?://[^"\'<>\s]+?\.(?:webp|png|jpe?g)',text,re.I)
+          wanted={
+            'portrait.webp':['philly.webp','philly-'],
+            'skill-first-aid.webp':['first-aid.webp'],
+            'skill-healing-hands.webp':['restorative-hands.webp'],
+            'skill-paralytic-lotion.webp':['paralytic-lotion.webp'],
+            'skill-vigor-tactics.webp':['vigor-tactics.webp'],
+            'skill-dosage-boost.webp':['dosage-boost.webp'],
+            'skill-energizing-shot.webp':['energizing-shot.webp','numbing-spores.webp'],
+            'gear-pharmacologica.webp':['pharmacologica.webp'],
+            'gear-extraction.webp':['extraction.webp'],
+            'gear-first-aid-training.webp':['first-aid-training.webp'],
+          }
+          base=Path('assets/heroes/gen-02/philly')
+          for dest, pats in wanted.items():
+            match=None
+            for pat in pats:
+              for u in urls:
+                if pat.lower() in u.lower():
+                  match=u; break
+              if match: break
+            if not match:
+              for pat in pats:
+                candidate='https://whiteout-survival.com/wp-content/uploads/2025/07/'+pat
+                try:
+                  urllib.request.urlretrieve(candidate, base/dest)
+                  match='downloaded'; break
+                except Exception:
+                  pass
+            elif match:
+              urllib.request.urlretrieve(match, base/dest)
+            if not (base/dest).exists():
+              raise SystemExit(f'Missing asset: {dest}; patterns={pats}')
+          PY
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('sitemap.xml')
+          s=p.read_text(encoding='utf-8')
+          url='https://belaya-mgla-sova58.github.io/hero-philly.html'
+          if url not in s:
+            s=s.replace('</urlset>',f'  <url><loc>{url}</loc><lastmod>2026-10-23</lastmod></url>\n</urlset>')
+            p.write_text(s,encoding='utf-8')
+          PY
+          git add hero-philly.html assets/heroes/gen-02/philly sitemap.xml
+          git commit -m "Add detailed Philly hero page" || true
+          git pull --rebase origin main
+          git push origin HEAD:main
