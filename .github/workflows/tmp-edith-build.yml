@@ -19,6 +19,7 @@ jobs:
           curl -fL https://wos.h5joy-games.com/games/icon_hero_skill_steel_sentinel.webp -o assets/heroes/gen-07/edith/skill-steel-sentinel.webp
           sed -i "/pick('skill-strategic-balance.webp'/d; /pick('skill-ironclad.webp'/d; /pick('skill-steel-sentinel.webp'/d" tmp-edith-build.py
           python tmp-edith-build.py
+          git checkout -- tmp-edith-build.py
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add hero-edith.html assets/heroes/gen-07/edith sitemap.xml
