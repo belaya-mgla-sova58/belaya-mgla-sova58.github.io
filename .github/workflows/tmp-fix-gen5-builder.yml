@@ -1,0 +1,30 @@
+name: Temporary fix Gen5 builder
+on:
+  push:
+    paths:
+      - '.github/workflows/tmp-fix-gen5-builder.yml'
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Patch builder
+        run: |
+          python <<'PY'
+          from pathlib import Path
+          p=Path('.github/workflows/tmp-gen5-pages.yml')
+          s=p.read_text(encoding='utf-8')
+          old="git add hero-hector.html hero-norah.html hero-gwen.html assets/heroes/gen-05 sitemap.xml .github/workflows/tmp-gen5-pages.yml"
+          s=s.replace(old,"git add -A")
+          p.write_text(s,encoding='utf-8')
+          PY
+          git rm .github/workflows/tmp-fix-gen5-builder.yml
+          git config user.name 'belaya-mgla-sova58'
+          git config user.email 'monroe6662004@gmail.com'
+          git add -A
+          git commit -m 'Fix Generation 5 builder staging'
+          git push origin main
