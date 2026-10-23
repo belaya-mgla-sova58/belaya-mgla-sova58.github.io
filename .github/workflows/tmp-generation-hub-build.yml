@@ -1,0 +1,26 @@
+name: Temporary generation hub build
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/tmp-generation-hub-build.yml'
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build generation pages
+        run: |
+          set -euo pipefail
+          python -m pip install --quiet beautifulsoup4
+          python tmp-generation-hub-build.py
+          git add hero-generations.html hero-generation-*.html heroes.html sitemap.xml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Create separate hero generation category'
+          git pull --rebase --autostash origin main
+          git push
