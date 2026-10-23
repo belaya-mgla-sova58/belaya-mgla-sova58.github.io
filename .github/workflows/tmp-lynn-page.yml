@@ -1,0 +1,121 @@
+name: Temporary Lynn page builder
+on:
+  push:
+    paths:
+      - '.github/workflows/tmp-lynn-page.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build-lynn:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build Lynn page
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp hero-ahmose.html hero-lynn.html
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, json
+          p=Path('hero-lynn.html')
+          s=p.read_text(encoding='utf-8')
+          main=Path('tmp-lynn-main.html').read_text(encoding='utf-8').strip()
+          s=re.sub(r'<main id="appMain">.*?</main>', main, s, count=1, flags=re.S)
+          s=re.sub(r'<title>.*?</title>', '<title>Линн: навыки, Слеза Эллы, плюсы и минусы | Белая мгла</title>', s, count=1, flags=re.S)
+          s=re.sub(r'<meta name="description" content="[^"]*"/>', '<meta name="description" content="Подробный гайд по Линн: герой 4 поколения, навыки Освоения и Экспедиции, Слеза Эллы, Арена, PvP, Свирепый медведь, прокачка, плюсы и минусы."/>', s, count=1)
+          s=re.sub(r'<link rel="canonical" href="[^"]*"/>', '<link rel="canonical" href="https://belaya-mgla-sova58.github.io/hero-lynn.html"/>', s, count=1)
+          s=re.sub(r'<meta property="og:title" content="[^"]*"/>', '<meta property="og:title" content="Линн: полный гайд"/>', s, count=1)
+          s=re.sub(r'<meta property="og:description" content="[^"]*"/>', '<meta property="og:description" content="Навыки, Слеза Эллы, Арена, PvP, Свирепый медведь, плюсы и минусы Линн."/>', s, count=1)
+          s=re.sub(r'<meta property="og:url" content="[^"]*"/>', '<meta property="og:url" content="https://belaya-mgla-sova58.github.io/hero-lynn.html"/>', s, count=1)
+          s=re.sub(r'<meta property="og:image" content="[^"]*"/>', '<meta property="og:image" content="https://belaya-mgla-sova58.github.io/assets/heroes/gen-04/lynn/portrait.webp"/>', s, count=1)
+          s=re.sub(r'<meta name="twitter:image" content="[^"]*"/>', '<meta name="twitter:image" content="https://belaya-mgla-sova58.github.io/assets/heroes/gen-04/lynn/portrait.webp"/>', s, count=1)
+          article={"@context":"https://schema.org","@type":"Article","headline":"Линн: полный гайд","description":"Подробный гайд по Линн: герой 4 поколения, навыки Освоения и Экспедиции, Слеза Эллы, Арена, PvP, Свирепый медведь, плюсы и минусы.","url":"https://belaya-mgla-sova58.github.io/hero-lynn.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://belaya-mgla-sova58.github.io/hero-lynn.html"},"author":{"@type":"Person","name":"SOVA58","url":"https://belaya-mgla-sova58.github.io/sova58.html","gender":"Female"},"isPartOf":{"@type":"WebSite","name":"Белая мгла · SOVA58","url":"https://belaya-mgla-sova58.github.io/"},"inLanguage":"ru","dateModified":"2026-10-23","image":["https://belaya-mgla-sova58.github.io/assets/heroes/gen-04/lynn/portrait.webp"]}
+          breadcrumb={"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Главная","item":"https://belaya-mgla-sova58.github.io/"},{"@type":"ListItem","position":2,"name":"Герои","item":"https://belaya-mgla-sova58.github.io/heroes.html"},{"@type":"ListItem","position":3,"name":"Линн","item":"https://belaya-mgla-sova58.github.io/hero-lynn.html"}]}
+          blocks=re.findall(r'<script(?: id="guide-article-schema-v625")? type="application/ld\+json">.*?</script>',s,flags=re.S)
+          if len(blocks)>=2:
+            s=s.replace(blocks[0],'<script id="guide-article-schema-v625" type="application/ld+json">'+json.dumps(article,ensure_ascii=False,separators=(',',':'))+'</script>',1)
+            s=s.replace(blocks[1],'<script type="application/ld+json">'+json.dumps(breadcrumb,ensure_ascii=False,separators=(',',':'))+'</script>',1)
+          p.write_text(s,encoding='utf-8')
+          PY
+          mkdir -p assets/heroes/gen-04/lynn
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from urllib.parse import urljoin
+          import urllib.request
+          from pathlib import Path
+          pages=['https://whiteout-survival.com/ru/heroes/lynn/','https://whiteout-survival.com/heroes/lynn/']
+          class P(HTMLParser):
+            def __init__(self,base): super().__init__(); self.base=base; self.items=[]
+            def handle_starttag(self,tag,attrs):
+              if tag.lower()!='img': return
+              d=dict(attrs); alt=(d.get('alt') or '').strip(); urls=[]
+              for k in ('src','data-src','data-lazy-src'):
+                if d.get(k): urls.append(urljoin(self.base,d[k]))
+              for k in ('srcset','data-srcset'):
+                if d.get(k):
+                  for part in d[k].split(','):
+                    u=part.strip().split(' ')[0]
+                    if u: urls.append(urljoin(self.base,u))
+              self.items.append((alt,urls))
+          items=[]
+          for page in pages:
+            req=urllib.request.Request(page,headers={'User-Agent':'Mozilla/5.0'})
+            text=urllib.request.urlopen(req,timeout=30).read().decode('utf-8','ignore')
+            p=P(page); p.feed(text); items+=p.items
+          wanted={
+            'portrait.webp':['lynn'],
+            'skill-hymn-of-sidrak.webp':['гимн сидрака','hymn of sidrak'],
+            'skill-lethal-finale.webp':['смертельный финал','lethal finale'],
+            'skill-discordant-tune.webp':['нестройная мелодия','discordant tune'],
+            'skill-song-of-lion.webp':['песнь льва','song of lion'],
+            'skill-melancholic-ballad.webp':['меланхолическая баллада','melancholic ballad'],
+            'skill-oonai-cadenza.webp':['oonai cadenza'],
+            'gear-ellas-tear.webp':['слеза эллы','ella’s tear','ellas tear'],
+            'gear-airas-elegy.webp':['элегия айры','aira’s elegy','airas elegy'],
+            'gear-iranons-determination.webp':['решимость иранона','iranon’s determination','iranons determination'],
+          }
+          base=Path('assets/heroes/gen-04/lynn')
+          def norm(x): return x.lower().replace('’','').replace("'",'')
+          def score(alt,url,keys):
+            t=norm(alt+' '+url)
+            return max([len(k) for k in keys if norm(k) in t] or [0])
+          used=set()
+          for dest,keys in wanted.items():
+            cand=[]
+            for alt,urls in items:
+              for u in urls:
+                sc=score(alt,u,keys)
+                if sc: cand.append((sc,alt,u))
+            cand.sort(reverse=True)
+            picked=None
+            for _,alt,u in cand:
+              if u not in used:
+                try:
+                  req=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0'})
+                  data=urllib.request.urlopen(req,timeout=30).read()
+                  if len(data)>1000:
+                    (base/dest).write_bytes(data); used.add(u); picked=(alt,u,len(data)); break
+                except Exception:
+                  pass
+            if not picked:
+              raise SystemExit(f'Missing {dest}; keys={keys}; candidates={cand[:12]}; all_alts={[a for a,_ in items]}')
+            print(dest,picked)
+          PY
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('sitemap.xml'); s=p.read_text(encoding='utf-8')
+          url='https://belaya-mgla-sova58.github.io/hero-lynn.html'
+          if url not in s:
+            s=s.replace('</urlset>',f'  <url><loc>{url}</loc><lastmod>2026-10-23</lastmod></url>\n</urlset>')
+            p.write_text(s,encoding='utf-8')
+          PY
+          git add hero-lynn.html assets/heroes/gen-04/lynn sitemap.xml
+          git commit -m "Add detailed Lynn hero page" || true
+          git pull --rebase origin main
+          git push origin HEAD:main
