@@ -1,0 +1,73 @@
+name: Temporary Zinman page builder
+
+on:
+  push:
+    paths:
+      - '.github/workflows/tmp-zinman-page.yml'
+      - 'tmp-zinman-main.html'
+
+permissions:
+  contents: write
+
+jobs:
+  build-zinman:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build Zinman page
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/heroes/gen-01/zinman
+          base='https://whiteout-survival.com/wp-content/uploads/2025/07'
+          getimg(){
+            out="$1"; shift
+            for src in "$@"; do
+              if curl -fL --retry 2 "$base/$src" -o "assets/heroes/gen-01/zinman/$out"; then return 0; fi
+            done
+            echo "Could not download $out" >&2
+            exit 1
+          }
+          getimg portrait.webp Zinman.webp zinman.webp
+          getimg skill-nail-scatter.webp Nail-Scatter.webp nail-scatter.webp
+          getimg skill-quick-defense.webp Quick-Defense.webp quick-defense.webp
+          getimg skill-robust.webp Robust.webp robust.webp
+          getimg skill-implacable.webp Implacable.webp implacable.webp
+          getimg skill-bastionist.webp Bastionist.webp bastionist.webp
+          getimg skill-positional-battler.webp Positional-Battler.webp positional-battler.webp
+          getimg gear-woodpecker.webp Woodpecker.webp woodpecker.webp
+          getimg gear-overclocked-nail-gun.webp Overclocked-Nail-Gun.webp overclocked-nail-gun.webp
+          getimg gear-defend-to-attack.webp Defend-to-Attack.webp defend-to-attack.webp
+          cp hero-natalia.html hero-zinman.html
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('hero-zinman.html')
+          s=p.read_text(encoding='utf-8')
+          repl={
+          'Наталья: навыки, Ураганная сила, плюсы и минусы | Белая мгла':'Зинман: навыки, Дятел, строительство, плюсы и минусы | Белая мгла',
+          'Подробный гайд по Наталье: навыки Освоения и Экспедиции, талант, Ураганная сила, получение, приоритет прокачки, плюсы, минусы и применение.':'Подробный гайд по Зинману: навыки Освоения и Экспедиции, строительство, Дятел, получение, приоритет прокачки, плюсы, минусы и применение.',
+          'hero-natalia.html':'hero-zinman.html',
+          'Наталья: полный гайд':'Зинман: полный гайд',
+          'Навыки, талант, Ураганная сила, плюсы и минусы Натальи.':'Навыки, строительство, Дятел, плюсы и минусы Зинмана.',
+          'assets/heroes/gen-01/natalia/portrait.webp':'assets/heroes/gen-01/zinman/portrait.webp',
+          '"name":"Наталья"':'"name":"Зинман"',
+          'Подробный гайд по Наталье: навыки Освоения и Экспедиции, талант, Ураганная сила, получение, плюсы и минусы.':'Подробный гайд по Зинману: навыки Освоения и Экспедиции, строительство, Дятел, получение, плюсы и минусы.'
+          }
+          for a,b in repl.items(): s=s.replace(a,b)
+          a=s.index('<main id="appMain">'); b=s.index('</main>',a)+7
+          s=s[:a]+Path('tmp-zinman-main.html').read_text(encoding='utf-8').strip()+s[b:]
+          p.write_text(s,encoding='utf-8')
+          sm=Path('sitemap.xml'); x=sm.read_text(encoding='utf-8')
+          loc='https://belaya-mgla-sova58.github.io/hero-zinman.html'
+          if loc not in x:
+            x=x.replace('</urlset>',f'  <url><loc>{loc}</loc><lastmod>2026-10-23</lastmod></url>\n</urlset>')
+          sm.write_text(x,encoding='utf-8')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add hero-zinman.html sitemap.xml assets/heroes/gen-01/zinman
+          git commit -m 'Add detailed Zinman hero page'
+          git pull --rebase origin main
+          git push
