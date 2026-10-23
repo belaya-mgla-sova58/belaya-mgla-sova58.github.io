@@ -8,6 +8,18 @@
     el.textContent='Сегодня: '+day+' '+month;
   }
 
+  function ensureHomeHero(){
+    var hero=document.querySelector('.home-stamped-hero-v441');
+    if(!hero) return;
+    var img=hero.querySelector('.home-stamped-img-v441');
+    if(!img){
+      hero.innerHTML='<img alt="Независимый сайт с гайдами по Белой мгле от SOVA58" class="home-stamped-img-v441" decoding="async" fetchpriority="high" src="assets/home-hero-polish-v446.webp">';
+    }
+    hero.style.display='';
+    hero.style.visibility='visible';
+    hero.style.opacity='1';
+  }
+
   function addPresidentVote(){
     if(document.getElementById('presidentVote58')) return true;
     var home=document.querySelector('.modern-home-v424');
@@ -23,13 +35,13 @@
     var sec=document.createElement('section');
     sec.id='presidentVote58';
     sec.setAttribute('aria-labelledby','presidentVote58Title');
-    sec.innerHTML='<h2 id="presidentVote58Title">🧪 Тестовое голосование</h2><p class="pv-sub">За кого голосуете?</p><p class="pv-deadline">⏰ Тестовое голосование до 21:05 сегодня</p><div class="pv-warning"><b>Важно:</b> ник игрока нужно <b>скопировать прямо из игры «Белая мгла»</b> и вставить в поле ниже. <b>Не вводите ник вручную.</b> Даже одна лишняя буква, пробел или символ может записать голос отдельно.</div><form id="presidentVote58Form" name="president-vote-58" method="POST" action="https://belaya-mgla-58.netlify.app/__forms.html" target="presidentVote58Frame"><input type="hidden" name="form-name" value="president-vote-58"><label for="presidentVoteNick58">За кого голосуете?</label><input id="presidentVoteNick58" name="player_nick" type="text" autocomplete="off" spellcheck="false" placeholder="Вставьте скопированный ник игрока" required><button type="submit">ОТДАТЬ ГОЛОС</button><p class="pv-status" id="presidentVote58Status"></p></form><iframe name="presidentVote58Frame" title="Отправка голоса" hidden></iframe>';
+    sec.innerHTML='<h2 id="presidentVote58Title">🗳️ Тестовое голосование</h2><p class="pv-sub">За кого голосуете?</p><p class="pv-deadline">⏰ Тест до 21:05 сегодня</p><div class="pv-warning"><b>Важно:</b> ник игрока нужно <b>скопировать прямо из игры «Белая мгла»</b> и вставить в поле ниже. <b>Не вводите ник вручную.</b> Даже одна лишняя буква, пробел или символ может записать голос отдельно.</div><form id="presidentVote58Form" name="president-vote-58" method="POST" action="https://belaya-mgla-58.netlify.app/__forms.html" target="presidentVote58Frame"><input type="hidden" name="form-name" value="president-vote-58"><label for="presidentVoteNick58">За кого голосуете?</label><input id="presidentVoteNick58" name="player_nick" type="text" autocomplete="off" spellcheck="false" placeholder="Вставьте скопированный ник игрока" required><button type="submit">ОТДАТЬ ГОЛОС</button><p class="pv-status" id="presidentVote58Status"></p></form><iframe name="presidentVote58Frame" title="Отправка голоса" hidden></iframe>';
     if(news&&news.parentNode) news.parentNode.insertBefore(sec,news); else home.insertBefore(sec,home.firstChild);
     var form=document.getElementById('presidentVote58Form');
     var status=document.getElementById('presidentVote58Status');
     var frame=sec.querySelector('iframe');
     var submitted=false;
-    var votedKey='belaya-mgla-president-vote-58-test-20261023';
+    var votedKey='belaya-mgla-president-vote-58-test-2105-v1';
     var deadline=new Date('2026-10-23T21:05:00+03:00');
     function closeIfNeeded(){
       if(Date.now()>=deadline.getTime()){
@@ -41,7 +53,7 @@
       return false;
     }
     if(closeIfNeeded()) return true;
-    try{if(localStorage.getItem(votedKey)){form.querySelector('input[type=text]').disabled=true;form.querySelector('button').disabled=true;status.textContent='✅ Вы уже проголосовали в тесте с этого устройства.';}}catch(e){}
+    try{if(localStorage.getItem(votedKey)){form.querySelector('input[type=text]').disabled=true;form.querySelector('button').disabled=true;status.textContent='✅ Вы уже голосовали в тесте с этого устройства.';}}catch(e){}
     form.addEventListener('submit',function(e){
       if(closeIfNeeded()){e.preventDefault();return;}
       var nick=form.player_nick.value.trim();
@@ -57,7 +69,7 @@
       try{localStorage.setItem(votedKey,'1');}catch(e){}
       form.querySelector('input[type=text]').disabled=true;
       form.querySelector('button').disabled=true;
-      status.textContent='✅ Тестовый голос принят. Спасибо!';
+      status.textContent='✅ Ваш тестовый голос принят.';
     });
     setInterval(closeIfNeeded,10000);
     return true;
@@ -75,6 +87,7 @@
 
   function init(){
     try{updateHomeDate();}catch(e){}
+    try{ensureHomeHero();}catch(e){}
     try{ensurePresidentVote();}catch(e){}
   }
   if(document.readyState==='loading'){
