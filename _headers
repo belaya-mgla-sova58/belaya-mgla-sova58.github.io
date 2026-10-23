@@ -10,6 +10,9 @@
 /site-v269-core-v465.js
   Cache-Control: public, max-age=604800
 
+/home-date-v588.js
+  Cache-Control: no-cache, no-store, must-revalidate
+
 /service-worker.js
   Cache-Control: no-cache
 
