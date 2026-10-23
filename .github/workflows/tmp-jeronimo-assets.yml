@@ -1,4 +1,4 @@
-name: Temporary Jeronimo page patch
+name: Temporary Jeronimo final patch
 
 on:
   push:
@@ -16,36 +16,32 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Apply Jeronimo corrections
+      - name: Add explicit skill levels and player source
         shell: bash
         run: |
           set -euo pipefail
           python - <<'PY'
           from pathlib import Path
-          p = Path('hero-jeronimo.html')
-          s = p.read_text(encoding='utf-8')
-          replacements = {
-              'Щит мечей': 'Щит из мечей',
-              'Прозорливость': 'Чутьё',
-              '🐻 Свирепый медведь': '🐻 Свирепый медведь',
-              '⚔️ Атакующий рейд': '⚔️ PvP и атакующие рейды',
-              'Белая мгла · гайды SOVA58 · независимый игровой сайт': 'Белая мгла · гайды SOVA58 · независимый неофициальный игровой сайт',
+          p=Path('hero-jeronimo.html')
+          s=p.read_text(encoding='utf-8')
+          reps={
+            '<p class="jero-values">160% / 176% / 192% / 208% / 224% от атаки за каждый удар.</p>':'<p class="jero-values">Уровни 1–5: 160% / 176% / 192% / 208% / 224% от атаки за каждый удар.</p>',
+            '<p class="jero-values">15% / 17% / 19% / 21% / 23% от атаки.</p>':'<p class="jero-values">Уровни 1–5: 15% / 17% / 19% / 21% / 23% от атаки.</p>',
+            '<p class="jero-values">+16% / +24% / +32% / +40% / +48% к атаке.</p>':'<p class="jero-values">Уровни 1–5: +16% / +24% / +32% / +40% / +48% к атаке.</p>',
+            '<p class="jero-values">+5% / +10% / +15% / +20% / +25%.</p>':'<p class="jero-values">Уровни 1–5: +5% / +10% / +15% / +20% / +25%.</p>',
+            '<p class="jero-values">+6% / +12% / +18% / +24% / +30%.</p>':'<p class="jero-values">Уровни 1–5: +6% / +12% / +18% / +24% / +30%.</p>',
+            '<b>Щит из мечей</b><span>При атаке энергия меча формирует щит. На максимальном уровне снижает получаемый Джеронимо урон на 30%.</span>':'<b>Щит из мечей</b><span>При атаке энергия меча формирует щит и снижает получаемый Джеронимо урон. Уровни 1–5: 10% / 15% / 20% / 25% / 30%.</span>',
+            '<b>Чутьё</b><span>На максимальном уровне повышает атаку войск рейда на 15%. Особенно важный бонус для лидера рейда.</span>':'<b>Чутьё</b><span>Повышает атаку войск рейда. Уровни 1–5: +5% / +7,5% / +10% / +12,5% / +15%. Особенно важный бонус для лидера рейда.</span>',
+            '<a href="https://theriagames.com/ru/guide/whiteout-survival-jeronimo-guide/" target="_blank" rel="noopener">Дополнительная сверка истории, получения и характеристик</a>':'<a href="https://theriagames.com/ru/guide/whiteout-survival-jeronimo-guide/" target="_blank" rel="noopener">Дополнительная сверка истории, получения и характеристик</a><a href="https://www.reddit.com/r/whiteoutsurvival/comments/1uij6a9/jeronimo/" target="_blank" rel="noopener">Обсуждение игроков 2026: Джеронимо в поздних поколениях и на Свирепом медведе</a>'
           }
-          for old, new in replacements.items():
-              s = s.replace(old, new)
-          p.write_text(s, encoding='utf-8')
+          for old,new in reps.items(): s=s.replace(old,new)
+          p.write_text(s,encoding='utf-8')
           PY
-          rm -rf assets/heroes/jeronimo
-      - name: Commit corrections
+      - name: Commit final details
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A hero-jeronimo.html assets/heroes/jeronimo
-          if git diff --cached --quiet; then
-            echo 'No changes.'
-          else
-            git commit -m 'Refine Jeronimo guide labels and cleanup assets'
-            git push
-          fi
+          git add hero-jeronimo.html
+          if git diff --cached --quiet; then echo 'No changes.'; else git commit -m 'Complete Jeronimo skill level details'; git push; fi
