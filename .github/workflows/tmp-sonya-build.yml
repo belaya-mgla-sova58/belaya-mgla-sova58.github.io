@@ -10,20 +10,23 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - name: Inspect Sonya source image assets
+      - name: Build Sonya hero page
         run: |
-          python -m pip install requests beautifulsoup4
-          python - <<'PY'
-          import requests
-          from bs4 import BeautifulSoup
-          from urllib.parse import urljoin
-          u='https://whiteout-survival.com/ru/heroes/sonya/'
-          t=requests.get(u,headers={'User-Agent':'Mozilla/5.0'},timeout=30).text
-          s=BeautifulSoup(t,'html.parser')
-          for im in s.find_all('img'):
-              src=im.get('src') or im.get('data-src') or im.get('data-lazy-src') or ''
-              alt=(im.get('alt') or '').strip()
-              if src and (alt or 'sonya' in src.lower()):
-                  print(alt,'|',urljoin(u,src))
-          PY
-          exit 1
+          mkdir -p assets/heroes/gen-08/sonya
+          curl -fL https://whiteout-survival.com/wp-content/uploads/2025/07/Sonya.webp -o assets/heroes/gen-08/sonya/portrait.webp
+          curl -fL https://whiteout-survival.com/wp-content/uploads/2025/07/Extreme-Cold.webp -o assets/heroes/gen-08/sonya/skill-extreme-cold.webp
+          curl -fL https://whiteout-survival.com/wp-content/uploads/2025/07/Frozen-Bomb.webp -o assets/heroes/gen-08/sonya/skill-frozen-bomb.webp
+          curl -fL https://whiteout-survival.com/wp-content/uploads/2025/07/Money-Hungry.webp -o assets/heroes/gen-08/sonya/skill-money-hungry.webp
+          curl -fL https://whiteout-survival.com/wp-content/uploads/2025/07/Treasure-Hunter.webp -o assets/heroes/gen-08/sonya/skill-treasure-hunter.webp
+          curl -fL https://whiteout-survival.com/wp-content/uploads/2025/07/Bounty-Temptation.webp -o assets/heroes/gen-08/sonya/skill-bounty-temptation.webp
+          curl -fL https://whiteout-survival.com/wp-content/uploads/2025/07/Torrential-Impact.webp -o assets/heroes/gen-08/sonya/skill-torrential-impact.webp
+          curl -fL https://whiteout-survival.com/wp-content/uploads/2025/07/Mangrove-Frog.webp -o assets/heroes/gen-08/sonya/gear-mangrove-frog.webp
+          curl -fL https://whiteout-survival.com/wp-content/uploads/2025/07/Chilled-to-the-Bone.webp -o assets/heroes/gen-08/sonya/gear-chilled-to-bone.webp
+          curl -fL https://whiteout-survival.com/wp-content/uploads/2025/07/Vortex-Turret.webp -o assets/heroes/gen-08/sonya/gear-vortex-turret.webp
+          python tmp-sonya-build.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add hero-sonya.html assets/heroes/gen-08/sonya sitemap.xml
+          git commit -m "Add Sonya hero guide"
+          git pull --rebase origin main
+          git push origin main
