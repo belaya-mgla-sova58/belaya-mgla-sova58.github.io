@@ -1,0 +1,26 @@
+name: Temporary Hendrik build
+on:
+  push:
+    paths:
+      - '.github/workflows/tmp-hendrik-build.yml'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Hendrik hero page
+        run: |
+          python -m pip install requests beautifulsoup4
+          mkdir -p assets/heroes/gen-08/hendrik
+          curl -fL https://wos.h5joy-games.com/games/icon_hero_skill_shipworm_devastation.webp -o assets/heroes/gen-08/hendrik/skill-shipworm-devastation.webp
+          curl -fL https://wos.h5joy-games.com/games/icon_hero_skill_barnacle_armor.webp -o assets/heroes/gen-08/hendrik/skill-barnacle-armor.webp
+          curl -fL https://wos.h5joy-games.com/games/icon_hero_skill_dragon_heir.webp -o assets/heroes/gen-08/hendrik/skill-dragon-heir.webp
+          python tmp-hendrik-build.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add hero-hendrik.html assets/heroes/gen-08/hendrik sitemap.xml
+          git commit -m "Add Hendrik hero guide"
+          git pull --rebase origin main
+          git push origin main
