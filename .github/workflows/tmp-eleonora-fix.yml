@@ -1,0 +1,34 @@
+name: Temporary Eleonora asset fix
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/tmp-eleonora-fix.yml'
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Fix lazy images and build
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('tmp-eleonora-build.py')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace("u=im.get('data-src') or im.get('src') or ''\n    if not u: continue", "u=im.get('data-lazy-src') or im.get('data-src') or im.get('src') or ''\n    if not u or u.startswith('data:'): continue")
+          p.write_text(s,encoding='utf-8')
+          PY
+          python -m pip install --quiet requests beautifulsoup4 pillow
+          python tmp-eleonora-build.py
+          git add hero-eleonora.html sitemap.xml assets/heroes/gen-11/eleonora
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Add Eleonora generation 11 hero guide'
+          git pull --rebase origin main
+          git push
