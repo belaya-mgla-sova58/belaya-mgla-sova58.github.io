@@ -1,0 +1,49 @@
+name: Temporary Jeronimo asset importer
+
+on:
+  push:
+    paths:
+      - '.github/workflows/tmp-jeronimo-assets.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import-assets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Download original game assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/heroes/jeronimo
+          base='https://whiteout-survival.com/wp-content/uploads/2025/07'
+          curl -fL --retry 3 "$base/Jeronimo.webp" -o assets/heroes/jeronimo/jeronimo.webp
+          curl -fL --retry 3 "$base/Combo-Slash.webp" -o assets/heroes/jeronimo/combo-slash.webp
+          curl -fL --retry 3 "$base/Sword-Art.webp" -o assets/heroes/jeronimo/sword-art.webp
+          curl -fL --retry 3 "$base/Lone-Wolf.webp" -o assets/heroes/jeronimo/lone-wolf.webp
+          curl -fL --retry 3 "$base/Battle-Manifesto.webp" -o assets/heroes/jeronimo/battle-manifesto.webp
+          curl -fL --retry 3 "$base/Swordmentor.webp" -o assets/heroes/jeronimo/swordmentor.webp
+          curl -fL --retry 3 "$base/Expert-Swordsmanship.webp" -o assets/heroes/jeronimo/expert-swordsmanship.webp
+          curl -fL --retry 3 "$base/Natural-Leader.webp" -o assets/heroes/jeronimo/natural-leader.webp
+          curl -fL --retry 3 "$base/Dawnbreak.webp" -o assets/heroes/jeronimo/dawnbreak.webp
+          curl -fL --retry 3 "$base/Shield-of-Swords.webp" -o assets/heroes/jeronimo/shield-of-swords.webp
+          curl -fL --retry 3 "$base/Discernment.webp" -o assets/heroes/jeronimo/discernment.webp
+          file assets/heroes/jeronimo/*.webp
+      - name: Commit assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/heroes/jeronimo
+          if git diff --cached --quiet; then
+            echo 'No asset changes.'
+          else
+            git commit -m 'Add original Jeronimo game assets'
+            git push
+          fi
