@@ -1,0 +1,32 @@
+name: Temporary Fred build
+on:
+  push:
+    paths:
+      - '.github/workflows/tmp-fred-build.yml'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Fred hero page
+        run: |
+          mkdir -p assets/heroes/gen-09/fred
+          curl -fL https://whiteout-survival.com/wp-content/uploads/2025/07/Fred.webp -o assets/heroes/gen-09/fred/portrait.webp
+          curl -fL https://whiteout-survival.com/wp-content/uploads/2025/07/Acid-Rain.webp -o assets/heroes/gen-09/fred/skill-acid-rain.webp
+          curl -fL https://whiteout-survival.com/wp-content/uploads/2025/07/Water-Cannon.webp -o assets/heroes/gen-09/fred/skill-water-cannon.webp
+          curl -fL https://whiteout-survival.com/wp-content/uploads/2025/07/Perfect-Responder.webp -o assets/heroes/gen-09/fred/skill-perfect-responder.webp
+          curl -fL https://whiteout-survival.com/wp-content/uploads/2025/07/Hydraulic-Suppression.webp -o assets/heroes/gen-09/fred/skill-hydraulic-suppression.webp
+          curl -fL https://whiteout-survival.com/wp-content/uploads/2025/07/Acidification.webp -o assets/heroes/gen-09/fred/skill-acidification.webp
+          curl -fL https://whiteout-survival.com/wp-content/uploads/2025/07/Floodbringer.webp -o assets/heroes/gen-09/fred/skill-floodbringer.webp
+          curl -fL https://whiteout-survival.com/wp-content/uploads/2025/07/Blazebearer.webp -o assets/heroes/gen-09/fred/gear-blazebearer.webp
+          curl -fL https://whiteout-survival.com/wp-content/uploads/2025/07/Idealism.webp -o assets/heroes/gen-09/fred/gear-idealism.webp
+          curl -fL https://whiteout-survival.com/wp-content/uploads/2025/07/Call-of-the-Firefighter.webp -o assets/heroes/gen-09/fred/gear-call-of-firefighter.webp
+          python tmp-fred-build.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add hero-fred.html assets/heroes/gen-09/fred sitemap.xml
+          git commit -m "Add Fred hero guide"
+          git pull --rebase origin main
+          git push origin main
