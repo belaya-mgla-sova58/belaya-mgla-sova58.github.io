@@ -19,19 +19,19 @@
     var sec=document.createElement('section');
     sec.id='presidentVote58';
     sec.setAttribute('aria-labelledby','presidentVote58Title');
-    sec.innerHTML='<h2 id="presidentVote58Title">🗳️ Выбор президента 58-го</h2><p class="pv-sub">За кого голосуете?</p><p class="pv-deadline">⏰ Голосование до 17:00 24 октября</p><div class="pv-warning"><b>Важно:</b> ник игрока нужно <b>скопировать прямо из игры «Белая мгла»</b> и вставить в поле ниже. <b>Не вводите ник вручную.</b> Даже одна лишняя буква, пробел или символ может записать голос отдельно.</div><form id="presidentVote58Form" name="president-vote-58" method="POST" action="https://belaya-mgla-58.netlify.app/__forms.html" target="presidentVote58Frame"><input type="hidden" name="form-name" value="president-vote-58"><label for="presidentVoteNick58">За кого голосуете?</label><input id="presidentVoteNick58" name="player_nick" type="text" autocomplete="off" spellcheck="false" placeholder="Вставьте скопированный ник игрока" required><button type="submit">ОТДАТЬ ГОЛОС</button><p class="pv-status" id="presidentVote58Status"></p></form><iframe name="presidentVote58Frame" title="Отправка голоса" hidden></iframe>';
+    sec.innerHTML='<h2 id="presidentVote58Title">🗳️ Выбор президента 58-го</h2><p class="pv-sub">За кого голосуете?</p><p class="pv-deadline">⏰ Голосование до 21:00 24 октября</p><div class="pv-warning"><b>Важно:</b> ник игрока нужно <b>скопировать прямо из игры «Белая мгла»</b> и вставить в поле ниже. <b>Не вводите ник вручную.</b> Даже одна лишняя буква, пробел или символ может записать голос отдельно.</div><form id="presidentVote58Form" name="president-vote-58" method="POST" action="https://belaya-mgla-58.netlify.app/__forms.html" target="presidentVote58Frame"><input type="hidden" name="form-name" value="president-vote-58"><label for="presidentVoteNick58">За кого голосуете?</label><input id="presidentVoteNick58" name="player_nick" type="text" autocomplete="off" spellcheck="false" placeholder="Вставьте скопированный ник игрока" required><button type="submit">ОТДАТЬ ГОЛОС</button><p class="pv-status" id="presidentVote58Status"></p></form><iframe name="presidentVote58Frame" title="Отправка голоса" hidden></iframe>';
     if(news&&news.parentNode) news.parentNode.insertBefore(sec,news); else home.insertBefore(sec,home.firstChild);
     var form=document.getElementById('presidentVote58Form');
     var status=document.getElementById('presidentVote58Status');
     var frame=sec.querySelector('iframe');
     var submitted=false;
     var votedKey='belaya-mgla-president-vote-58-v1';
-    var deadline=new Date('2026-10-24T17:00:00+03:00');
+    var deadline=new Date('2026-10-24T21:00:00+03:00');
     function closeIfNeeded(){
       if(Date.now()>=deadline.getTime()){
         form.querySelector('input[type=text]').disabled=true;
         form.querySelector('button').disabled=true;
-        status.textContent='🔒 Голосование завершено 24 октября в 17:00.';
+        status.textContent='🔒 Голосование завершено 24 октября в 21:00.';
         return true;
       }
       return false;
