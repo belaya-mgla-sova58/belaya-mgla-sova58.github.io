@@ -1,4 +1,4 @@
-const CACHE_NAME = 'belaya-mgla-v628';
+const CACHE_NAME = 'belaya-mgla-v630';
 const CORE = [
   './',
   './index.html',
@@ -10,7 +10,7 @@ const CORE = [
   './manifest-v541.webmanifest',
   './app-icon-192-v541.png',
   './app-icon-512-v541.png',
-  './assets/home-hero-polish-v446.webp',
+  './assets/home-hero-polish-v446.webp?v=630',
   './assets/ui-home-v534.webp',
   './assets/ui-events-v534.webp',
   './assets/ui-calculator-v534.webp',
@@ -52,7 +52,7 @@ self.addEventListener('fetch', event => {
     const cache = await caches.open(CACHE_NAME);
     const cached = await cache.match(req);
     if (cached) {
-      event.waitUntil(fetch(req).then(resp => {
+      event.waitUntil(fetch(req, {cache:'no-store'}).then(resp => {
         if (resp && resp.ok && (resp.type === 'basic' || resp.type === 'cors')) {
           return cache.put(req, resp.clone());
         }
@@ -60,7 +60,7 @@ self.addEventListener('fetch', event => {
       return cached;
     }
     try {
-      const resp = await fetch(req);
+      const resp = await fetch(req, {cache:'no-store'});
       if (resp && resp.ok && (resp.type === 'basic' || resp.type === 'cors')) {
         cache.put(req, resp.clone());
       }
