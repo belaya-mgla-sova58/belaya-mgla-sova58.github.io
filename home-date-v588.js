@@ -23,25 +23,25 @@
     var sec=document.createElement('section');
     sec.id='presidentVote58';
     sec.setAttribute('aria-labelledby','presidentVote58Title');
-    sec.innerHTML='<h2 id="presidentVote58Title">🗳️ Выбор президента 58-го</h2><p class="pv-sub">За кого голосуете?</p><p class="pv-deadline">⏰ Голосование до 21:00 24 октября</p><div class="pv-warning"><b>Важно:</b> ник игрока нужно <b>скопировать прямо из игры «Белая мгла»</b> и вставить в поле ниже. <b>Не вводите ник вручную.</b> Даже одна лишняя буква, пробел или символ может записать голос отдельно.</div><form id="presidentVote58Form" name="president-vote-58" method="POST" action="https://belaya-mgla-58.netlify.app/__forms.html" target="presidentVote58Frame"><input type="hidden" name="form-name" value="president-vote-58"><label for="presidentVoteNick58">За кого голосуете?</label><input id="presidentVoteNick58" name="player_nick" type="text" autocomplete="off" spellcheck="false" placeholder="Вставьте скопированный ник игрока" required><button type="submit">ОТДАТЬ ГОЛОС</button><p class="pv-status" id="presidentVote58Status"></p></form><iframe name="presidentVote58Frame" title="Отправка голоса" hidden></iframe>';
+    sec.innerHTML='<h2 id="presidentVote58Title">🧪 Тестовое голосование</h2><p class="pv-sub">За кого голосуете?</p><p class="pv-deadline">⏰ Тестовое голосование до 21:05 сегодня</p><div class="pv-warning"><b>Важно:</b> ник игрока нужно <b>скопировать прямо из игры «Белая мгла»</b> и вставить в поле ниже. <b>Не вводите ник вручную.</b> Даже одна лишняя буква, пробел или символ может записать голос отдельно.</div><form id="presidentVote58Form" name="president-vote-58" method="POST" action="https://belaya-mgla-58.netlify.app/__forms.html" target="presidentVote58Frame"><input type="hidden" name="form-name" value="president-vote-58"><label for="presidentVoteNick58">За кого голосуете?</label><input id="presidentVoteNick58" name="player_nick" type="text" autocomplete="off" spellcheck="false" placeholder="Вставьте скопированный ник игрока" required><button type="submit">ОТДАТЬ ГОЛОС</button><p class="pv-status" id="presidentVote58Status"></p></form><iframe name="presidentVote58Frame" title="Отправка голоса" hidden></iframe>';
     if(news&&news.parentNode) news.parentNode.insertBefore(sec,news); else home.insertBefore(sec,home.firstChild);
     var form=document.getElementById('presidentVote58Form');
     var status=document.getElementById('presidentVote58Status');
     var frame=sec.querySelector('iframe');
     var submitted=false;
-    var votedKey='belaya-mgla-president-vote-58-v1';
-    var deadline=new Date('2026-10-24T21:00:00+03:00');
+    var votedKey='belaya-mgla-president-vote-58-test-20261023';
+    var deadline=new Date('2026-10-23T21:05:00+03:00');
     function closeIfNeeded(){
       if(Date.now()>=deadline.getTime()){
         form.querySelector('input[type=text]').disabled=true;
         form.querySelector('button').disabled=true;
-        status.textContent='🔒 Голосование завершено 24 октября в 21:00.';
+        status.textContent='🔒 Тестовое голосование завершено в 21:05.';
         return true;
       }
       return false;
     }
     if(closeIfNeeded()) return true;
-    try{if(localStorage.getItem(votedKey)){form.querySelector('input[type=text]').disabled=true;form.querySelector('button').disabled=true;status.textContent='✅ Вы уже голосовали с этого устройства.';}}catch(e){}
+    try{if(localStorage.getItem(votedKey)){form.querySelector('input[type=text]').disabled=true;form.querySelector('button').disabled=true;status.textContent='✅ Вы уже проголосовали в тесте с этого устройства.';}}catch(e){}
     form.addEventListener('submit',function(e){
       if(closeIfNeeded()){e.preventDefault();return;}
       var nick=form.player_nick.value.trim();
@@ -57,9 +57,9 @@
       try{localStorage.setItem(votedKey,'1');}catch(e){}
       form.querySelector('input[type=text]').disabled=true;
       form.querySelector('button').disabled=true;
-      status.textContent='✅ Ваш голос принят. Спасибо за участие!';
+      status.textContent='✅ Тестовый голос принят. Спасибо!';
     });
-    setInterval(closeIfNeeded,30000);
+    setInterval(closeIfNeeded,10000);
     return true;
   }
 
