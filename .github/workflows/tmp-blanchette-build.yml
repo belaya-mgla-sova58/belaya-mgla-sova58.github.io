@@ -1,4 +1,4 @@
-name: Temporary Blanchette build
+name: Temporary Blanchette cleanup
 on:
   push:
     branches: [main]
@@ -7,68 +7,29 @@ on:
 permissions:
   contents: write
 jobs:
-  build:
+  cleanup:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Build Blanchette hero guide
+      - name: Clean Blanchette temporary files
         shell: bash
         run: |
           set -euo pipefail
           python - <<'PY'
           from pathlib import Path
-          import re, urllib.request
-          src=Path('hero-magnus.html').read_text(encoding='utf-8')
-          asset_dir=Path('assets/heroes/gen-10/blanchette')
-          asset_dir.mkdir(parents=True,exist_ok=True)
-          urls={
-            'portrait.webp':'https://whiteout-survival.com/wp-content/uploads/2025/07/Blanchette.webp',
-            'skill-triple-blunderbuss.webp':'https://whiteout-survival.com/wp-content/uploads/2025/07/Triple-Blunderbuss.webp',
-            'skill-scattershot.webp':'https://whiteout-survival.com/wp-content/uploads/2025/07/Scattershot.webp',
-            'skill-red-pursuit.webp':'https://whiteout-survival.com/wp-content/uploads/2025/07/Red-Pursuit.webp',
-            'skill-armed-to-the-teeth.webp':'https://whiteout-survival.com/wp-content/uploads/2025/07/Armed-to-the-Teeth.webp',
-            'skill-blood-hunter.webp':'https://whiteout-survival.com/wp-content/uploads/2025/07/Blood-Hunter.webp',
-            'skill-crimson-sniper.webp':'https://whiteout-survival.com/wp-content/uploads/2025/07/Crimson-Sniper.webp',
-            'gear-wolf-hunter.webp':'https://whiteout-survival.com/wp-content/uploads/2025/07/Wolf-Hunter.webp',
-            'gear-hunters-rage.webp':'https://whiteout-survival.com/wp-content/uploads/2025/07/Hunters-Rage.webp',
-            'gear-lightning-strike.webp':'https://whiteout-survival.com/wp-content/uploads/2025/07/Lightning-Strike.webp'
-          }
-          for name,url in urls.items():
-              req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'})
-              with urllib.request.urlopen(req,timeout=40) as r: data=r.read()
-              if len(data)<1000: raise SystemExit(f'asset too small: {name} {len(data)}')
-              (asset_dir/name).write_bytes(data)
-          replacements={
-            '<title>Магнус: навыки, Топор бури, плюсы и минусы | Белая мгла</title>':'<title>Бланшетт: навыки, Охотник на волков, плюсы и минусы | Белая мгла</title>',
-            'Подробный гайд по Магнусу: герой 9 поколения, навыки Освоения и Экспедиции, Топор бури, PvP, гарнизон, Арена, Свирепый медведь, прокачка, плюсы и минусы.':'Подробный гайд по Бланшетт: герой 10 поколения, навыки Освоения и Экспедиции, Охотник на волков, PvP, Арена, Свирепый медведь, прокачка, плюсы и минусы.',
-            'https://belaya-mgla-sova58.github.io/hero-magnus.html':'https://belaya-mgla-sova58.github.io/hero-blanchette.html',
-            'Магнус: полный гайд':'Бланшетт: полный гайд',
-            'Навыки, Топор бури, PvP, гарнизон, Арена, Свирепый медведь, плюсы и минусы Магнуса.':'Навыки, Охотник на волков, PvP, Арена, Свирепый медведь, плюсы и минусы Бланшетт.',
-            'assets/heroes/gen-09/magnus/portrait.webp':'assets/heroes/gen-10/blanchette/portrait.webp',
-            'Подробный гайд по Магнусу: герой 9 поколения, навыки, Топор бури, PvP, гарнизон, Арена и прокачка.':'Подробный гайд по Бланшетт: герой 10 поколения, навыки, Охотник на волков, PvP, Арена и прокачка.',
-            '"name":"Магнус"':'"name":"Бланшетт"'
-          }
-          for old,new in replacements.items(): src=src.replace(old,new)
-          src=src.replace('data-hero="magnus"','data-hero="blanchette"')
-          main=Path('tmp-blanchette-main.html').read_text(encoding='utf-8')
-          new,n=re.subn(r'<main\b.*?</main>',main,src,count=1,flags=re.S|re.I)
-          if n!=1: raise SystemExit(f'main replacement count={n}')
-          Path('hero-blanchette.html').write_text(new,encoding='utf-8')
-          sm=Path('sitemap.xml')
-          text=sm.read_text(encoding='utf-8')
-          loc='https://belaya-mgla-sova58.github.io/hero-blanchette.html'
-          if loc not in text:
-              text=text.replace('</urlset>',f'  <url><loc>{loc}</loc><lastmod>2026-10-23</lastmod></url>\n</urlset>')
-              sm.write_text(text,encoding='utf-8')
+          p=Path('sitemap.xml')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace('  <url><loc>https://belaya-mgla-sova58.github.io/tmp-blanchette-main.html</loc><lastmod>2026-10-23</lastmod></url>\n','')
+          p.write_text(s,encoding='utf-8')
           PY
-          rm -f tmp-blanchette-images.txt tmp-blanchette-main.html
-          git rm -f .github/workflows/tmp-blanchette-inspect.yml 2>/dev/null || true
+          git rm .github/workflows/tmp-blanchette-build.yml
+          rm -f tmp-blanchette-main.html tmp-blanchette-images.txt
+          git add sitemap.xml
+          git add -u
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add hero-blanchette.html assets/heroes/gen-10/blanchette sitemap.xml
-          git add -u
-          git commit -m 'Add Blanchette generation 10 hero guide'
+          git commit -m 'Finalize Blanchette hero guide'
           git pull --rebase origin main
           git push
