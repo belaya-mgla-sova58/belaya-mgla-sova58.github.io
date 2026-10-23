@@ -1,4 +1,4 @@
-name: Temporary Molly page builder
+name: Temporary Molly final patch
 
 on:
   push:
@@ -9,51 +9,30 @@ permissions:
   contents: write
 
 jobs:
-  build-molly:
+  patch-molly:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Download Molly game assets
+      - name: Fix Molly metadata
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p assets/heroes/gen-01/molly
-          base='https://whiteout-survival.com/wp-content/uploads/2025/07'
-          curl -fL --retry 3 "$base/Molly.webp" -o assets/heroes/gen-01/molly/portrait.webp
-          curl -fL --retry 3 "$base/Super-Snowball.webp" -o assets/heroes/gen-01/molly/skill-super-snowball.webp
-          curl -fL --retry 3 "$base/Frost-Ambush.webp" -o assets/heroes/gen-01/molly/skill-frost-ambush.webp
-          curl -fL --retry 3 "$base/Youthful-Persistence.webp" -o assets/heroes/gen-01/molly/skill-youthful-persistence.webp
-          curl -fL --retry 3 "$base/Calling-of-the-Snow.webp" -o assets/heroes/gen-01/molly/skill-snows-grace.webp
-          curl -fL --retry 3 "$base/Ice-Dominion.webp" -o assets/heroes/gen-01/molly/skill-ice-dominion.webp
-          curl -fL --retry 3 "$base/Youthful-Rage.webp" -o assets/heroes/gen-01/molly/skill-youthful-rage.webp
-          curl -fL --retry 3 "$base/Yeti-Spirit.webp" -o assets/heroes/gen-01/molly/gear-yeti-spirit.webp
-          curl -fL --retry 3 "$base/Modified-Launcher.webp" -o assets/heroes/gen-01/molly/gear-modified-launcher.webp
-          curl -fL --retry 3 "$base/Snowy-Blessing.webp" -o assets/heroes/gen-01/molly/gear-snowy-blessing.webp
-      - name: Create Molly page
-        shell: bash
-        run: |
-          set -euo pipefail
-          cp hero-jeronimo.html hero-molly.html
           python - <<'PY'
           from pathlib import Path
-          import re,base64,gzip
           p=Path('hero-molly.html')
           s=p.read_text(encoding='utf-8')
-          s=s.replace('Джеронимо: навыки, Рассвет, плюсы и минусы | Белая мгла','Молли: навыки, Дух Йети, плюсы и минусы | Белая мгла')
-          s=s.replace('Подробный гайд по Джеронимо: навыки Освоения и Экспедиции, талант, Рассвет, получение, приоритет прокачки, плюсы, минусы и применение.','Подробный гайд по Молли: навыки Освоения и Экспедиции, Дух Йети, получение, приоритет прокачки, плюсы, минусы и применение.')
-          s=s.replace('hero-jeronimo.html','hero-molly.html').replace('Джеронимо: полный гайд','Молли: полный гайд').replace('Навыки, талант, Рассвет, плюсы и минусы Джеронимо.','Навыки, Дух Йети, плюсы и минусы Молли.').replace('assets/heroes/gen-01/jeronimo/portrait.webp','assets/heroes/gen-01/molly/portrait.webp').replace('<small>Джеронимо</small>','<small>Молли</small>')
-          main=gzip.decompress(base64.b64decode('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')).decode('utf-8')
-          s=re.sub(r'<main id="appMain">.*?</main>',main,s,flags=re.S)
+          s=s.replace('Подробный гайд по Джеронимо: навыки, талант, Рассвет, получение, плюсы и минусы.','Подробный гайд по Молли: навыки Освоения и Экспедиции, Дух Йети, получение, плюсы и минусы.')
+          s=s.replace('"name":"Джеронимо","item":"https://belaya-mgla-sova58.github.io/hero-molly.html"','"name":"Молли","item":"https://belaya-mgla-sova58.github.io/hero-molly.html"')
           p.write_text(s,encoding='utf-8')
           PY
-      - name: Commit
+      - name: Commit patch
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add hero-molly.html assets/heroes/gen-01/molly
-          git diff --cached --quiet || (git commit -m 'Add detailed Molly hero page' && git push)
+          git add hero-molly.html
+          git diff --cached --quiet || (git commit -m 'Fix Molly page metadata' && git push)
