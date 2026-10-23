@@ -1,0 +1,26 @@
+name: Temporary Lloyd inspect
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/tmp-lloyd-inspect.yml'
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Inspect source
+        run: |
+          set -euo pipefail
+          python -m pip install --quiet requests beautifulsoup4
+          python tmp-lloyd-inspect.py
+          git add tmp-lloyd-source.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Inspect Lloyd source'
+          git pull --rebase origin main
+          git push
