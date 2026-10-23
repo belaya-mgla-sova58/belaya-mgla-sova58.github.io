@@ -1,63 +1,34 @@
-name: Temporary Natalia page builder
+name: Temporary Natalia metadata fix
 
 on:
   push:
     paths:
       - '.github/workflows/tmp-natalia-page.yml'
-      - 'tmp-natalia-main.html'
 
 permissions:
   contents: write
 
 jobs:
-  build-natalia:
+  fix-natalia:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Build Natalia page
+      - name: Fix Natalia metadata
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p assets/heroes/gen-01/natalia
-          base='https://whiteout-survival.com/wp-content/uploads/2025/07'
-          while IFS='|' read -r out src; do
-            curl -fL --retry 3 "$base/$src" -o "assets/heroes/gen-01/natalia/$out"
-          done <<'EOF'
-          portrait.webp|Natalia.webp
-          skill-beast-charge.webp|Beast-Charge.webp
-          skill-whip.webp|Whip.webp
-          skill-rage-response.webp|Rage-Response.webp
-          skill-feral-protection.webp|Wildling-Roar.webp
-          skill-queen-of-the-wild.webp|Queen-of-the-Wild.webp
-          skill-call-of-the-wild.webp|Call-of-the-Wild.webp
-          talent-ursus-strength.webp|Ursus-Strength.webp
-          gear-gale-force.webp|Gale-Force.webp
-          gear-unity.webp|Unity.webp
-          gear-invincibles.webp|Invincibles.webp
-          EOF
-          cp hero-molly.html hero-natalia.html
           python - <<'PY'
           from pathlib import Path
           p=Path('hero-natalia.html')
           s=p.read_text(encoding='utf-8')
-          for a,b in {
-          'Молли: навыки, Дух Йети, плюсы и минусы | Белая мгла':'Наталья: навыки, Ураганная сила, плюсы и минусы | Белая мгла',
-          'Подробный гайд по Молли: навыки Освоения и Экспедиции, Дух Йети, получение, приоритет прокачки, плюсы, минусы и применение.':'Подробный гайд по Наталье: навыки Освоения и Экспедиции, талант, Ураганная сила, получение, приоритет прокачки, плюсы, минусы и применение.',
-          'hero-molly.html':'hero-natalia.html','Молли: полный гайд':'Наталья: полный гайд','Навыки, Дух Йети, плюсы и минусы Молли.':'Навыки, талант, Ураганная сила, плюсы и минусы Натальи.','assets/heroes/gen-01/molly/portrait.webp':'assets/heroes/gen-01/natalia/portrait.webp','"name":"Молли"':'"name":"Наталья"'}.items(): s=s.replace(a,b)
-          a=s.index('<main id="appMain">'); b=s.index('</main>',a)+7
-          s=s[:a]+Path('tmp-natalia-main.html').read_text(encoding='utf-8').strip()+s[b:]
+          s=s.replace('Подробный гайд по Молли: навыки Освоения и Экспедиции, Дух Йети, получение, плюсы и минусы.','Подробный гайд по Наталье: навыки Освоения и Экспедиции, талант, Ураганная сила, получение, плюсы и минусы.')
           p.write_text(s,encoding='utf-8')
-          sm=Path('sitemap.xml'); x=sm.read_text(encoding='utf-8')
-          for page in ('hero-molly.html','hero-natalia.html'):
-            loc='https://belaya-mgla-sova58.github.io/'+page
-            if loc not in x: x=x.replace('</urlset>',f'  <url><loc>{loc}</loc><lastmod>2026-10-23</lastmod></url>\n</urlset>')
-          sm.write_text(x,encoding='utf-8')
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add hero-natalia.html sitemap.xml assets/heroes/gen-01/natalia
-          git commit -m 'Add detailed Natalia hero page'
+          git add hero-natalia.html
+          git commit -m 'Fix Natalia page metadata'
           git pull --rebase origin main
           git push
