@@ -1,0 +1,25 @@
+name: Temporary hero generations separation
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/tmp-hero-generations-separate.yml'
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Separate generations category
+        run: |
+          set -euo pipefail
+          python tmp-hero-generations-separate.py
+          git add heroes.html sitemap.xml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Separate hero generations into category'
+          git pull --rebase --autostash origin main
+          git push
