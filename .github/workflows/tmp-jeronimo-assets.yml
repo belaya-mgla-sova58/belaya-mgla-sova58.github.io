@@ -1,4 +1,4 @@
-name: Temporary Jeronimo asset importer
+name: Temporary Jeronimo page patch
 
 on:
   push:
@@ -9,41 +9,43 @@ permissions:
   contents: write
 
 jobs:
-  import-assets:
+  patch-page:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Download original game assets
+      - name: Apply Jeronimo corrections
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p assets/heroes/jeronimo
-          base='https://whiteout-survival.com/wp-content/uploads/2025/07'
-          curl -fL --retry 3 "$base/Jeronimo.webp" -o assets/heroes/jeronimo/jeronimo.webp
-          curl -fL --retry 3 "$base/Combo-Slash.webp" -o assets/heroes/jeronimo/combo-slash.webp
-          curl -fL --retry 3 "$base/Sword-Art.webp" -o assets/heroes/jeronimo/sword-art.webp
-          curl -fL --retry 3 "$base/Lone-Wolf.webp" -o assets/heroes/jeronimo/lone-wolf.webp
-          curl -fL --retry 3 "$base/Battle-Manifesto.webp" -o assets/heroes/jeronimo/battle-manifesto.webp
-          curl -fL --retry 3 "$base/Swordmentor.webp" -o assets/heroes/jeronimo/swordmentor.webp
-          curl -fL --retry 3 "$base/Expert-Swordsmanship.webp" -o assets/heroes/jeronimo/expert-swordsmanship.webp
-          curl -fL --retry 3 "$base/Natural-Leader.webp" -o assets/heroes/jeronimo/natural-leader.webp
-          curl -fL --retry 3 "$base/Dawnbreak.webp" -o assets/heroes/jeronimo/dawnbreak.webp
-          curl -fL --retry 3 "$base/Shield-of-Swords.webp" -o assets/heroes/jeronimo/shield-of-swords.webp
-          curl -fL --retry 3 "$base/Discernment.webp" -o assets/heroes/jeronimo/discernment.webp
-          file assets/heroes/jeronimo/*.webp
-      - name: Commit assets
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('hero-jeronimo.html')
+          s = p.read_text(encoding='utf-8')
+          replacements = {
+              'Щит мечей': 'Щит из мечей',
+              'Прозорливость': 'Чутьё',
+              '🐻 Свирепый медведь': '🐻 Свирепый медведь',
+              '⚔️ Атакующий рейд': '⚔️ PvP и атакующие рейды',
+              'Белая мгла · гайды SOVA58 · независимый игровой сайт': 'Белая мгла · гайды SOVA58 · независимый неофициальный игровой сайт',
+          }
+          for old, new in replacements.items():
+              s = s.replace(old, new)
+          p.write_text(s, encoding='utf-8')
+          PY
+          rm -rf assets/heroes/jeronimo
+      - name: Commit corrections
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/heroes/jeronimo
+          git add -A hero-jeronimo.html assets/heroes/jeronimo
           if git diff --cached --quiet; then
-            echo 'No asset changes.'
+            echo 'No changes.'
           else
-            git commit -m 'Add original Jeronimo game assets'
+            git commit -m 'Refine Jeronimo guide labels and cleanup assets'
             git push
           fi
