@@ -10,19 +10,43 @@
 
   function ensureHomeHero(){
     var hero=document.querySelector('.home-stamped-hero-v441');
-    if(!hero) return;
+    if(!hero) return false;
     var img=hero.querySelector('.home-stamped-img-v441');
     if(!img){
-      hero.innerHTML='<img alt="Независимый сайт с гайдами по Белой мгле от SOVA58" class="home-stamped-img-v441" decoding="async" fetchpriority="high" src="assets/home-hero-polish-v446.webp">';
+      img=document.createElement('img');
+      img.alt='Независимый сайт с гайдами по Белой мгле от SOVA58';
+      img.className='home-stamped-img-v441';
+      img.decoding='async';
+      img.fetchPriority='high';
+      hero.innerHTML='';
+      hero.appendChild(img);
     }
-    hero.style.display='';
-    hero.style.visibility='visible';
-    hero.style.opacity='1';
+    img.src='assets/home-hero-polish-v446.webp?v=630';
+    hero.hidden=false;
+    hero.removeAttribute('aria-hidden');
+    hero.style.setProperty('display','block','important');
+    hero.style.setProperty('visibility','visible','important');
+    hero.style.setProperty('opacity','1','important');
+    hero.style.setProperty('min-height','1px','important');
+    img.hidden=false;
+    img.style.setProperty('display','block','important');
+    img.style.setProperty('visibility','visible','important');
+    img.style.setProperty('opacity','1','important');
+    img.style.setProperty('width','100%','important');
+    img.style.setProperty('height','auto','important');
+    img.style.setProperty('max-width','100%','important');
+    return true;
   }
 
   function init(){
     try{updateHomeDate();}catch(e){}
-    try{ensureHomeHero();}catch(e){}
+    var attempts=0;
+    function restore(){
+      attempts++;
+      try{ensureHomeHero();}catch(e){}
+      if(attempts<12) setTimeout(restore,250);
+    }
+    restore();
   }
 
   if(document.readyState==='loading'){
