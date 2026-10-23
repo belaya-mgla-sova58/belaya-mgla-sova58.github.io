@@ -19,13 +19,17 @@
   }
 
   function addPresidentVote(){
-    if(document.getElementById('presidentVote58')) return;
+    if(document.getElementById('presidentVote58')) return true;
     var home=document.querySelector('.modern-home-v424');
-    if(!home) return;
+    if(!home) return false;
     var news=document.querySelector('.home-news-v442');
-    var style=document.createElement('style');
-    style.textContent='#presidentVote58{margin:16px 0 20px;padding:20px;border:1px solid rgba(118,211,255,.28);border-radius:24px;background:linear-gradient(145deg,rgba(7,30,56,.95),rgba(4,19,38,.96));box-shadow:0 18px 46px rgba(0,0,0,.22)}#presidentVote58 h2{margin:0 0 8px;color:#f5fbff;font-size:24px}#presidentVote58 .pv-sub{margin:0 0 8px;color:#b9d3e7;line-height:1.45}#presidentVote58 .pv-deadline{margin:0 0 15px;color:#76d6ff;font-weight:900;font-size:14px}#presidentVote58 .pv-warning{margin:0 0 16px;padding:13px 14px;border-radius:16px;background:rgba(255,196,74,.08);border:1px solid rgba(255,208,99,.22);color:#ffe6ae;font-size:13px;line-height:1.45}#presidentVote58 label{display:block;margin:0 0 7px;color:#eaf7ff;font-weight:800}#presidentVote58 input[type=text]{box-sizing:border-box;width:100%;padding:13px 14px;border-radius:14px;border:1px solid rgba(135,220,255,.30);background:rgba(2,14,28,.82);color:#fff;font-size:16px;outline:none}#presidentVote58 input[type=text]:focus{border-color:#68d4ff;box-shadow:0 0 0 3px rgba(75,196,255,.10)}#presidentVote58 button{margin-top:12px;width:100%;padding:13px 16px;border:0;border-radius:14px;background:linear-gradient(145deg,#47c9ff,#278ce8);color:#fff;font-weight:900;font-size:15px;cursor:pointer}#presidentVote58 button:disabled{opacity:.55;cursor:not-allowed}#presidentVote58 .pv-status{margin:11px 0 0;color:#9fd9f5;font-size:13px;text-align:center;min-height:18px}@media(max-width:620px){#presidentVote58{padding:15px;border-radius:18px}#presidentVote58 h2{font-size:21px}}';
-    document.head.appendChild(style);
+    var style=document.getElementById('presidentVote58Style');
+    if(!style){
+      style=document.createElement('style');
+      style.id='presidentVote58Style';
+      style.textContent='#presidentVote58{margin:16px 0 20px;padding:20px;border:1px solid rgba(118,211,255,.28);border-radius:24px;background:linear-gradient(145deg,rgba(7,30,56,.95),rgba(4,19,38,.96));box-shadow:0 18px 46px rgba(0,0,0,.22)}#presidentVote58 h2{margin:0 0 8px;color:#f5fbff;font-size:24px}#presidentVote58 .pv-sub{margin:0 0 8px;color:#b9d3e7;line-height:1.45}#presidentVote58 .pv-deadline{margin:0 0 15px;color:#76d6ff;font-weight:900;font-size:14px}#presidentVote58 .pv-warning{margin:0 0 16px;padding:13px 14px;border-radius:16px;background:rgba(255,196,74,.08);border:1px solid rgba(255,208,99,.22);color:#ffe6ae;font-size:13px;line-height:1.45}#presidentVote58 label{display:block;margin:0 0 7px;color:#eaf7ff;font-weight:800}#presidentVote58 input[type=text]{box-sizing:border-box;width:100%;padding:13px 14px;border-radius:14px;border:1px solid rgba(135,220,255,.30);background:rgba(2,14,28,.82);color:#fff;font-size:16px;outline:none}#presidentVote58 input[type=text]:focus{border-color:#68d4ff;box-shadow:0 0 0 3px rgba(75,196,255,.10)}#presidentVote58 button{margin-top:12px;width:100%;padding:13px 16px;border:0;border-radius:14px;background:linear-gradient(145deg,#47c9ff,#278ce8);color:#fff;font-weight:900;font-size:15px;cursor:pointer}#presidentVote58 button:disabled{opacity:.55;cursor:not-allowed}#presidentVote58 .pv-status{margin:11px 0 0;color:#9fd9f5;font-size:13px;text-align:center;min-height:18px}@media(max-width:620px){#presidentVote58{padding:15px;border-radius:18px}#presidentVote58 h2{font-size:21px}}';
+      document.head.appendChild(style);
+    }
     var sec=document.createElement('section');
     sec.id='presidentVote58';
     sec.setAttribute('aria-labelledby','presidentVote58Title');
@@ -46,7 +50,7 @@
       }
       return false;
     }
-    if(closeIfNeeded()) return;
+    if(closeIfNeeded()) return true;
     try{if(localStorage.getItem(votedKey)){form.querySelector('input[type=text]').disabled=true;form.querySelector('button').disabled=true;status.textContent='✅ Вы уже голосовали с этого устройства.';}}catch(e){}
     form.addEventListener('submit',function(e){
       if(closeIfNeeded()){e.preventDefault();return;}
@@ -66,9 +70,24 @@
       status.textContent='✅ Ваш голос принят. Спасибо за участие!';
     });
     setInterval(closeIfNeeded,30000);
+    return true;
   }
 
-  function init(){updateHomeDate();cleanHomeHero();addPresidentVote();}
+  function ensurePresidentVote(){
+    var tries=0;
+    function tryAdd(){
+      if(addPresidentVote()) return;
+      tries++;
+      if(tries<20) setTimeout(tryAdd,250);
+    }
+    tryAdd();
+  }
+
+  function init(){
+    try{updateHomeDate();}catch(e){}
+    try{cleanHomeHero();}catch(e){}
+    try{ensurePresidentVote();}catch(e){}
+  }
   if(document.readyState==='loading'){
     document.addEventListener('DOMContentLoaded',init,{once:true});
   }else{
