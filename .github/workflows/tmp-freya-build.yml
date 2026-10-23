@@ -1,0 +1,136 @@
+name: Temporary Freya build
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/tmp-freya-build.yml'
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build Freya hero guide
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import re, urllib.request
+          from pathlib import Path
+          from html import unescape
+
+          src = urllib.request.urlopen('https://whiteout-survival.com/ru/heroes/freya/', timeout=30).read().decode('utf-8','ignore')
+          imgs = re.findall(r'<img[^>]+(?:src|data-src)=["\']([^"\']+)["\']', src, re.I)
+          imgs = [unescape(x) for x in imgs]
+          # prefer site media URLs and keep likely Freya assets
+          cand=[]
+          for u in imgs:
+              if u.startswith('//'): u='https:'+u
+              elif u.startswith('/'): u='https://whiteout-survival.com'+u
+              if 'freya' in u.lower() or '/heroes/' in u.lower() or '/uploads/' in u.lower() or '/wp-content/' in u.lower():
+                  if u not in cand: cand.append(u)
+          Path('tmp-freya-images.txt').write_text('\n'.join(cand), encoding='utf-8')
+
+          p=Path('hero-blanchette.html')
+          s=p.read_text(encoding='utf-8')
+          body_start=s.index('<main')
+          body_end=s.index('</main>')+7
+          head=s[:body_start]
+          tail=s[body_end:]
+
+          # Reuse shell/styles but replace metadata and whole main content.
+          head=re.sub(r'<title>.*?</title>', '<title>Фрея: навыки, Коса Кровавой Луны, плюсы и минусы | Белая мгла</title>', head, flags=re.S)
+          head=re.sub(r'<meta name="description" content="[^"]*"/>', '<meta name="description" content="Подробный гайд по Фрее: герой 10 поколения, навыки Освоения и Экспедиции, Коса Кровавой Луны, PvP, Арена, Свирепый медведь, прокачка, плюсы и минусы."/>', head, count=1)
+          head=head.replace('hero-blanchette.html','hero-freya.html').replace('/gen-10/blanchette/','/gen-10/freya/')
+          head=head.replace('Бланшетт: полный гайд','Фрея: полный гайд').replace('Бланшетт.','Фреи.').replace('Бланшетт','Фрея')
+          head=re.sub(r'"headline":"[^"]*"', '"headline":"Фрея: полный гайд"', head)
+          head=re.sub(r'"description":"[^"]*"', '"description":"Подробный гайд по Фрее: герой 10 поколения, навыки, Коса Кровавой Луны, PvP, Арена и прокачка."', head, count=1)
+
+          main='''<main><div class="jero-page">
+          <div class="jero-crumbs"><a href="index.html">Главная</a> · <a href="heroes.html">Герои</a> · Фрея</div>
+          <section class="jero-hero">
+            <div class="jero-portrait-wrap"><img class="jero-portrait" src="assets/heroes/gen-10/freya/portrait.webp" alt="Фрея"></div>
+            <div>
+              <div class="jero-kicker"><span class="jero-chip gold">10 поколение</span><span class="jero-chip">Копейщики</span><span class="jero-chip">Мифический</span><span class="jero-chip">Бой</span></div>
+              <h1>Фрея</h1>
+              <p class="jero-subtitle">Контроль · массовый урон · ослабление атаки врага</p>
+              <p class="jero-lead">Фрея — копейщик 10 поколения для PvP, Арены и атакующих маршей. Она сочетает массовый урон и обездвиживание в Освоении с сильным набором Экспедиции: снижает атаку противника, получает шанс на дополнительный удар и усиливает пехоту со стрелками.</p>
+              <div class="jero-quick"><div><b>Получение</b><span>Зал героев, универсальные мифические осколки и последующие источники поколения</span></div><div><b>Главная роль</b><span>PvP, Арена, атакующие марши</span></div><div><b>Для F2P</b><span>Сильная, но заметно дороже героя Колеса удачи Бланшетт</span></div><div><b>Проверено</b><span>23 октября 2026</span></div></div>
+            </div>
+          </section>
+          <nav class="jero-nav"><a href="#stats">Характеристики</a><a href="#explore">Освоение</a><a href="#expedition">Экспедиция</a><a href="#gear">Снаряжение</a><a href="#use">Применение</a><a href="#verdict">Итог</a></nav>
+
+          <section class="jero-section" id="stats"><h2>Характеристики</h2><p class="jero-section-lead">Максимальные значения героя по актуальной карточке источника.</p><div class="jero-stats"><div class="jero-stat"><strong>12 364</strong><span>Атака героя</span></div><div class="jero-stat"><strong>12 364</strong><span>Защита героя</span></div><div class="jero-stat"><strong>123 654</strong><span>Здоровье героя</span></div><div class="jero-stat"><strong>1 110,88%</strong><span>Атака копейщиков</span></div><div class="jero-stat"><strong>1 110,85%</strong><span>Защита копейщиков</span></div></div></section>
+
+          <section class="jero-section" id="explore"><h2>Навыки Освоения</h2><p class="jero-section-lead">Фрея давит массовым уроном, контролем и серией критических атак.</p><div class="jero-skill-grid">
+            <article class="jero-skill"><div class="jero-skill-head"><img src="assets/heroes/gen-10/freya/skill-chain-sunder.webp" alt="Цепь Разлома"><div><h3>Цепь Разлома</h3><small>Основной массовый урон</small></div></div><p>Атакует цель цепями и наносит урон цели и окружающим врагам. Оставляет метку: при атаках по отмеченной цели часть урона передаётся соседним врагам.</p><p class="jero-values">200 / 220 / 240 / 260 / 280% · перенос урона 40 / 50 / 60 / 70 / 80%</p></article>
+            <article class="jero-skill"><div class="jero-skill-head"><img src="assets/heroes/gen-10/freya/skill-prickled-bind.webp" alt="Колючий переплет"><div><h3>Колючий переплет</h3><small>Контроль</small></div></div><p>Наносит удар цепью и обездвиживает цель на 1,5 секунды.</p><p class="jero-values">100 / 110 / 120 / 130 / 140%</p></article>
+            <article class="jero-skill"><div class="jero-skill-head"><img src="assets/heroes/gen-10/freya/skill-crystal-fury.webp" alt="Кристаллическая ярость"><div><h3>Кристаллическая ярость</h3><small>Критический урон</small></div></div><p>Через определённое число обычных атак резко повышает шанс критического удара.</p><p class="jero-values">+60 / 70 / 80 / 90 / 100% крита · каждые 8 / 7 / 6 / 5 / 4 атак</p></article>
+          </div></section>
+
+          <section class="jero-section" id="expedition"><h2>Навыки Экспедиции</h2><p class="jero-section-lead">Набор для PvP: ослабление всей армии врага, дополнительный урон и усиление двух типов войск.</p><div class="jero-skill-grid">
+            <article class="jero-skill"><div class="jero-skill-head"><img src="assets/heroes/gen-10/freya/skill-fog-of-war.webp" alt="Туман войны"><div><h3>Туман войны</h3><small>Ослабление противника</small></div></div><p>Снижает атаку всех вражеских войск.</p><p class="jero-values">−4 / −8 / −12 / −16 / −20%</p></article>
+            <article class="jero-skill"><div class="jero-skill-head"><img src="assets/heroes/gen-10/freya/skill-blood-moon-scythe.webp" alt="Коса Кровавой Луны"><div><h3>Коса Кровавой Луны</h3><small>Дополнительная атака</small></div></div><p>После обычной атаки с вероятностью 50% активирует «Жатву» и наносит дополнительный урон.</p><p class="jero-values">+20 / 40 / 60 / 80 / 100% урона</p></article>
+            <article class="jero-skill"><div class="jero-skill-head"><img src="assets/heroes/gen-10/freya/skill-night-raid.webp" alt="Ночной рейд"><div><h3>Ночной рейд</h3><small>Пехота + стрелки</small></div></div><p>Пехота и стрелки Фреи получают меньше урона и одновременно наносят больше.</p><p class="jero-values">−3 / 6 / 9 / 12 / 15% получаемого · +3 / 6 / 9 / 12 / 15% наносимого</p></article>
+          </div><div class="jero-note"><strong>Важно:</strong> «Ночной рейд» усиливает именно пехоту и стрелков. Для смешанного марша это очень полезно, но сам класс Фреи — копейщики.</div></section>
+
+          <section class="jero-section" id="gear"><h2>Эксклюзивное снаряжение</h2><div class="jero-gear-layout"><img class="jero-gear-img" src="assets/heroes/gen-10/freya/gear-blood-moon-scythe.webp" alt="Коса Кровавой Луны"><div><h3 class="jero-gear-title">Коса Кровавой Луны</h3><p class="jero-section-lead">Максимальные бонусы: +2 506 атаки, +2 506 защиты, +25 065 здоровья героя, +277,5% смертоносности и +277,5% здоровья войск.</p><div class="jero-gear-skills"><div class="jero-gear-skill"><img src="assets/heroes/gen-10/freya/gear-night-raid.webp" alt="Ночной рейд"><div><b>Ночной рейд</b><span>На максимуме повышает урон Фреи на 30% и мгновенно наносит призванным противникам урон в размере 300% атаки.</span></div></div><div class="jero-gear-skill"><img src="assets/heroes/gen-10/freya/gear-watch-defender.webp" alt="Защитник Дозора"><div><b>Защитник Дозора</b><span>На максимуме повышает защиту войск защитников на 15%.</span></div></div></div></div></div></section>
+
+          <section class="jero-section" id="use"><h2>Где использовать Фрею</h2><div class="jero-mode-grid"><div class="jero-mode"><b>Арена</b><p>Очень сильна за счёт массового урона, обездвиживания и резкого роста шанса крита.</p></div><div class="jero-mode"><b>PvP</b><p>Снижает атаку всей армии врага и одновременно усиливает пехоту со стрелками.</p></div><div class="jero-mode"><b>Сборы</b><p>Полезна как лидер сильного атакующего марша, особенно при хорошем эксклюзивном снаряжении.</p></div><div class="jero-mode"><b>Свирепый медведь</b><p>Рабочий герой за счёт дополнительного урона, но её первый навык Экспедиции является дебаффом, а не прямым бонусом урона сбору.</p></div></div></section>
+
+          <section class="jero-section"><h2>Приоритет прокачки</h2><div class="jero-priority"><div><b><span class="jero-rank">1</span>Туман войны</b><span>Главный универсальный PvP-дебафф.</span></div><div><b><span class="jero-rank">2</span>Коса Кровавой Луны</b><span>Стабильно добавляет урон через 50% шанс «Жатвы».</span></div><div><b><span class="jero-rank">3</span>Ночной рейд</b><span>Силен в маршах, где много пехоты и стрелков.</span></div></div></section>
+
+          <section class="jero-section"><h2>Плюсы и минусы</h2><div class="jero-two"><div class="jero-box good"><h3>Плюсы</h3><ul><li>До −20% атаки всех вражеских войск.</li><li>50% шанс дополнительной атаки после обычного удара.</li><li>Одновременно усиливает пехоту и стрелков.</li><li>Сильный контроль и массовый урон в Арене.</li><li>Очень высокие характеристики 10 поколения.</li></ul></div><div class="jero-box bad"><h3>Минусы</h3><ul><li>Не герой Колеса удачи, поэтому для F2P значительно дороже Бланшетт.</li><li>Часть силы зависит от вероятности срабатывания «Жатвы».</li><li>«Ночной рейд» не усиливает собственный тип войск Фреи, копейщиков.</li><li>Эксклюзивное снаряжение частично ориентировано на защиту.</li></ul></div></div></section>
+
+          <section class="jero-section" id="verdict"><div class="jero-verdict"><h3>Итог</h3><p><strong>Фрея — сильный копейщик 10 поколения для PvP и Арены.</strong> Её главные козыри — массовый контроль, до −20% атаки противника и хорошая синергия с пехотой и стрелками. Для F2P первым приоритетом поколения обычно остаётся Бланшетт из Колеса удачи, а Фрея становится дорогим, но очень мощным следующим усилением.</p></div><div class="jero-sources"><a href="https://whiteout-survival.com/ru/heroes/freya/" target="_blank" rel="noopener">Источник: карточка Фреи</a><a href="https://github.com/xiaoxin0103/whiteout-survival-guide/blob/main/guides/heroes/index.md" target="_blank" rel="noopener">Дополнительная проверка поколения и роли героя</a></div><a class="jero-back" href="heroes.html">← Вернуться к героям</a></section>
+          <div class="jero-foot">Белая мгла · SOVA58 · актуализировано 23.10.2026</div>
+          </div></main>'''
+
+          out=head+main+tail
+          Path('hero-freya.html').write_text(out,encoding='utf-8')
+
+          # Download all images from source in DOM order, then map likely first 10 hero-specific images.
+          from urllib.parse import urljoin
+          allimgs=[]
+          for u in imgs:
+              u=urljoin('https://whiteout-survival.com/ru/heroes/freya/', u)
+              if u not in allimgs: allimgs.append(u)
+          # Filter tiny/common assets by filename and choose files whose URL contains freya when possible.
+          specific=[u for u in allimgs if 'freya' in u.lower()]
+          pool=specific if len(specific)>=10 else allimgs
+          names=['portrait.webp','skill-chain-sunder.webp','skill-prickled-bind.webp','skill-crystal-fury.webp','skill-fog-of-war.webp','skill-blood-moon-scythe.webp','skill-night-raid.webp','gear-blood-moon-scythe.webp','gear-night-raid.webp','gear-watch-defender.webp']
+          dest=Path('assets/heroes/gen-10/freya'); dest.mkdir(parents=True,exist_ok=True)
+          downloaded=[]
+          for u in pool:
+              try:
+                  data=urllib.request.urlopen(u,timeout=20).read()
+                  if len(data)<1500: continue
+                  # Require a plausible raster magic signature
+                  if not (data.startswith(b'RIFF') or data.startswith(b'\x89PNG') or data.startswith(b'\xff\xd8')): continue
+                  downloaded.append((u,data))
+              except Exception:
+                  pass
+          # Prefer last 10 specific if page has logos before hero assets.
+          if len(downloaded) < 10:
+              raise SystemExit(f'Not enough Freya images: {len(downloaded)}; urls saved to tmp-freya-images.txt')
+          chosen=downloaded[-10:]
+          for name,(u,data) in zip(names,chosen):
+              (dest/name).write_bytes(data)
+          Path('tmp-freya-image-map.txt').write_text('\n'.join(f'{n} <- {u}' for n,(u,d) in zip(names,chosen)),encoding='utf-8')
+
+          sm=Path('sitemap.xml')
+          x=sm.read_text(encoding='utf-8')
+          entry='  <url><loc>https://belaya-mgla-sova58.github.io/hero-freya.html</loc><lastmod>2026-10-23</lastmod></url>\n'
+          if 'hero-freya.html' not in x:
+              x=x.replace('</urlset>',entry+'</urlset>')
+              sm.write_text(x,encoding='utf-8')
+          PY
+          git add hero-freya.html assets/heroes/gen-10/freya sitemap.xml tmp-freya-images.txt tmp-freya-image-map.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Add Freya generation 10 hero guide'
+          git pull --rebase origin main
+          git push
