@@ -1,0 +1,101 @@
+name: Temporary Mia page builder
+on:
+  push:
+    paths:
+      - '.github/workflows/tmp-mia-page.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build-mia:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build Mia page
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp hero-logan.html hero-mia.html
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, json
+          p=Path('hero-mia.html')
+          s=p.read_text(encoding='utf-8')
+          main=Path('tmp-mia-main.html').read_text(encoding='utf-8').strip()
+          s=re.sub(r'<main id="appMain">.*?</main>', main, s, count=1, flags=re.S)
+          s=re.sub(r'<title>.*?</title>', '<title>Миа: навыки, Кристалл судьбы, плюсы и минусы | Белая мгла</title>', s, count=1, flags=re.S)
+          s=re.sub(r'<meta name="description" content="[^"]*"/>', '<meta name="description" content="Подробный гайд по Мии: герой 3 поколения, навыки Освоения и Экспедиции, Кристалл судьбы, Свирепый медведь, прокачка, плюсы и минусы."/>', s, count=1)
+          s=re.sub(r'<link rel="canonical" href="[^"]*"/>', '<link rel="canonical" href="https://belaya-mgla-sova58.github.io/hero-mia.html"/>', s, count=1)
+          s=re.sub(r'<meta property="og:title" content="[^"]*"/>', '<meta property="og:title" content="Миа: полный гайд"/>', s, count=1)
+          s=re.sub(r'<meta property="og:description" content="[^"]*"/>', '<meta property="og:description" content="Навыки, Кристалл судьбы, Свирепый медведь, PvP, плюсы и минусы Мии."/>', s, count=1)
+          s=re.sub(r'<meta property="og:url" content="[^"]*"/>', '<meta property="og:url" content="https://belaya-mgla-sova58.github.io/hero-mia.html"/>', s, count=1)
+          s=re.sub(r'<meta property="og:image" content="[^"]*"/>', '<meta property="og:image" content="https://belaya-mgla-sova58.github.io/assets/heroes/gen-03/mia/portrait.webp"/>', s, count=1)
+          s=re.sub(r'<meta name="twitter:image" content="[^"]*"/>', '<meta name="twitter:image" content="https://belaya-mgla-sova58.github.io/assets/heroes/gen-03/mia/portrait.webp"/>', s, count=1)
+          article={"@context":"https://schema.org","@type":"Article","headline":"Миа: полный гайд","description":"Подробный гайд по Мии: герой 3 поколения, навыки Освоения и Экспедиции, Кристалл судьбы, Свирепый медведь, плюсы и минусы.","url":"https://belaya-mgla-sova58.github.io/hero-mia.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://belaya-mgla-sova58.github.io/hero-mia.html"},"author":{"@type":"Person","name":"SOVA58","url":"https://belaya-mgla-sova58.github.io/sova58.html","gender":"Female"},"isPartOf":{"@type":"WebSite","name":"Белая мгла · SOVA58","url":"https://belaya-mgla-sova58.github.io/"},"inLanguage":"ru","dateModified":"2026-10-23","image":["https://belaya-mgla-sova58.github.io/assets/heroes/gen-03/mia/portrait.webp"]}
+          breadcrumb={"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Главная","item":"https://belaya-mgla-sova58.github.io/"},{"@type":"ListItem","position":2,"name":"Герои","item":"https://belaya-mgla-sova58.github.io/heroes.html"},{"@type":"ListItem","position":3,"name":"Миа","item":"https://belaya-mgla-sova58.github.io/hero-mia.html"}]}
+          blocks=re.findall(r'<script(?: id="guide-article-schema-v625")? type="application/ld\+json">.*?</script>',s,flags=re.S)
+          if len(blocks)>=2:
+            s=s.replace(blocks[0],'<script id="guide-article-schema-v625" type="application/ld+json">'+json.dumps(article,ensure_ascii=False,separators=(',',':'))+'</script>',1)
+            s=s.replace(blocks[1],'<script type="application/ld+json">'+json.dumps(breadcrumb,ensure_ascii=False,separators=(',',':'))+'</script>',1)
+          p.write_text(s,encoding='utf-8')
+          PY
+          mkdir -p assets/heroes/gen-03/mia
+          curl -L --fail --retry 3 -sS 'https://whiteout-survival.com/heroes/mia/' -o /tmp/mia.html
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, html, urllib.request
+          text=html.unescape(Path('/tmp/mia.html').read_text(encoding='utf-8',errors='ignore'))
+          urls=re.findall(r'https?://[^"\'<>\s]+?\.(?:webp|png|jpe?g)',text,re.I)
+          wanted={
+            'portrait.webp':['Mia.webp','mia.webp'],
+            'skill-fates-finale.webp':['Fates-Finale.webp','Fate-s-Finale.webp','Fate%E2%80%99s-Finale.webp'],
+            'skill-bad-omen.webp':['Bad-Omen.webp','bad-omen.webp'],
+            'skill-guardian-of-destiny.webp':['Guardian-of-Destiny.webp','guardian-of-destiny.webp'],
+            'skill-bad-luck-streak.webp':['Bad-Luck-Streak.webp','bad-luck-streak.webp'],
+            'skill-lucky-charm.webp':['Lucky-Charm.webp','lucky-charm.webp'],
+            'skill-ritual-deciphering.webp':['Ritual-Deciphering.webp','ritual-deciphering.webp'],
+            'gear-fate-crystal.webp':['Fate-Crystal.webp','fate-crystal.webp'],
+            'gear-vision-of-truth.webp':['Vision-of-Truth.webp','vision-of-truth.webp'],
+            'gear-rally-of-fate.webp':['Rally-of-Fate.webp','rally-of-fate.webp'],
+          }
+          base=Path('assets/heroes/gen-03/mia')
+          for dest,pats in wanted.items():
+            match=None
+            for pat in pats:
+              for u in urls:
+                if pat.lower() in u.lower():
+                  match=u; break
+              if match: break
+            if match:
+              urllib.request.urlretrieve(match,base/dest)
+            else:
+              ok=False
+              for month in ['07','06','08','05']:
+                for pat in pats:
+                  candidate=f'https://whiteout-survival.com/wp-content/uploads/2025/{month}/'+pat
+                  try:
+                    urllib.request.urlretrieve(candidate,base/dest)
+                    ok=True; break
+                  except Exception:
+                    pass
+                if ok: break
+            if not (base/dest).exists():
+              raise SystemExit(f'Missing asset: {dest}; patterns={pats}; sample={urls[:40]}')
+          PY
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('sitemap.xml')
+          s=p.read_text(encoding='utf-8')
+          url='https://belaya-mgla-sova58.github.io/hero-mia.html'
+          if url not in s:
+            s=s.replace('</urlset>',f'  <url><loc>{url}</loc><lastmod>2026-10-23</lastmod></url>\n</urlset>')
+            p.write_text(s,encoding='utf-8')
+          PY
+          git add hero-mia.html assets/heroes/gen-03/mia sitemap.xml
+          git commit -m "Add detailed Mia hero page" || true
+          git pull --rebase origin main
+          git push origin HEAD:main
