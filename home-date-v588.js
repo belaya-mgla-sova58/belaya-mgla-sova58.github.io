@@ -8,6 +8,16 @@
     el.textContent='Сегодня: '+day+' '+month;
   }
 
+  function cleanHomeHero(){
+    var hero=document.querySelector('.home-stamped-hero-v441');
+    if(!hero || hero.dataset.cleanHero==='1') return;
+    hero.dataset.cleanHero='1';
+    hero.innerHTML='<div class="home-clean-hero-v627"><div class="home-clean-hero-mark-v627">❄</div><div><b>Белая Мгла</b><span>Гайды и материалы SOVA58</span></div></div>';
+    var style=document.createElement('style');
+    style.textContent='.home-stamped-hero-v441{min-height:0!important}.home-clean-hero-v627{box-sizing:border-box;min-height:150px;width:100%;display:flex;align-items:center;justify-content:center;gap:16px;padding:24px;border-radius:24px;border:1px solid rgba(108,205,255,.22);background:radial-gradient(circle at 50% 0,rgba(90,200,255,.18),transparent 48%),linear-gradient(145deg,rgba(7,30,56,.96),rgba(3,16,32,.98));box-shadow:0 18px 46px rgba(0,0,0,.22);text-align:left}.home-clean-hero-mark-v627{display:grid;place-items:center;width:58px;height:58px;flex:0 0 58px;border-radius:18px;background:rgba(99,202,255,.11);border:1px solid rgba(135,220,255,.20);font-size:30px;color:#dff6ff}.home-clean-hero-v627 b{display:block;color:#f5fbff;font-size:28px;line-height:1.05}.home-clean-hero-v627 span{display:block;margin-top:6px;color:#9fc6df;font-size:14px}@media(max-width:620px){.home-clean-hero-v627{min-height:116px;padding:18px;border-radius:18px}.home-clean-hero-mark-v627{width:48px;height:48px;flex-basis:48px;font-size:25px}.home-clean-hero-v627 b{font-size:23px}}';
+    document.head.appendChild(style);
+  }
+
   function addPresidentVote(){
     if(document.getElementById('presidentVote58')) return;
     var home=document.querySelector('.modern-home-v424');
@@ -58,7 +68,7 @@
     setInterval(closeIfNeeded,30000);
   }
 
-  function init(){updateHomeDate();addPresidentVote();}
+  function init(){updateHomeDate();cleanHomeHero();addPresidentVote();}
   if(document.readyState==='loading'){
     document.addEventListener('DOMContentLoaded',init,{once:true});
   }else{
