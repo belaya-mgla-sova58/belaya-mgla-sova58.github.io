@@ -10,15 +10,21 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - name: Build Hendrik hero page
+      - name: Inspect Hendrik source image assets
         run: |
           python -m pip install requests beautifulsoup4
           python - <<'PY'
-          import re, requests
-          t=requests.get('https://wos.h5joy-games.com/heroes/s8/hendrik/',headers={'User-Agent':'Mozilla/5.0'}).text
-          vals=sorted(set(re.findall(r'https?://[^\"\'<> ]+\.webp|/games/[^\"\'<> ]+\.webp',t)))
-          for x in vals:
-              if 'hero_skill' in x or 'hendrik' in x or 'special' in x:
-                  print(x)
+          import requests
+          from bs4 import BeautifulSoup
+          from urllib.parse import urljoin
+          u='https://whiteout-survival.com/ru/heroes/hendrik/'
+          t=requests.get(u,headers={'User-Agent':'Mozilla/5.0'},timeout=30).text
+          print('html',len(t))
+          s=BeautifulSoup(t,'html.parser')
+          for im in s.find_all('img'):
+              src=im.get('src') or im.get('data-src') or im.get('data-lazy-src') or ''
+              alt=(im.get('alt') or '').strip()
+              if src:
+                  print(alt,'|',urljoin(u,src))
           PY
           exit 1
