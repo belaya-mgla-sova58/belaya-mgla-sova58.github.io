@@ -1,0 +1,89 @@
+name: Temporary Molly page builder
+
+on:
+  push:
+    paths:
+      - '.github/workflows/tmp-molly-page.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build-molly:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Download Molly game assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/heroes/gen-01/molly
+          base='https://whiteout-survival.com/wp-content/uploads/2025/07'
+          declare -A files=(
+            [portrait.webp]='Molly.webp'
+            [skill-super-snowball.webp]='Super-Snowball.webp'
+            [skill-frost-ambush.webp]='Frost-Ambush.webp'
+            [skill-youthful-persistence.webp]='Youthful-Persistence.webp'
+            [skill-snows-grace.webp]='Calling-of-the-Snow.webp'
+            [skill-ice-dominion.webp]='Ice-Dominion.webp'
+            [skill-youthful-rage.webp]='Youthful-Rage.webp'
+            [gear-yeti-spirit.webp]='Yeti-Spirit.webp'
+            [gear-modified-launcher.webp]='Modified-Launcher.webp'
+            [gear-snowy-blessing.webp]='Snowy-Blessing.webp'
+          )
+          for out in "${!files[@]}"; do
+            curl -fL --retry 3 "$base/${files[$out]}" -o "assets/heroes/gen-01/molly/$out"
+          done
+          file assets/heroes/gen-01/molly/*.webp
+      - name: Create Molly page from hero template
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp hero-jeronimo.html hero-molly.html
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('hero-molly.html')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace('Джеронимо: навыки, Рассвет, плюсы и минусы | Белая мгла','Молли: навыки, Дух Йети, плюсы и минусы | Белая мгла')
+          s=s.replace('Подробный гайд по Джеронимо: навыки Освоения и Экспедиции, талант, Рассвет, получение, приоритет прокачки, плюсы, минусы и применение.','Подробный гайд по Молли: навыки Освоения и Экспедиции, Дух Йети, получение, приоритет прокачки, плюсы, минусы и применение.')
+          s=s.replace('hero-jeronimo.html','hero-molly.html')
+          s=s.replace('Джеронимо: полный гайд','Молли: полный гайд')
+          s=s.replace('Навыки, талант, Рассвет, плюсы и минусы Джеронимо.','Навыки, Дух Йети, плюсы и минусы Молли.')
+          s=s.replace('assets/heroes/gen-01/jeronimo/portrait.webp','assets/heroes/gen-01/molly/portrait.webp')
+          s=s.replace('Джеронимо</span>','Молли</span>')
+          s=s.replace('<small>Джеронимо</small>','<small>Молли</small>')
+          s=s.replace('Джеронимо: навыки, талант, Рассвет, получение, плюсы и минусы.','Молли: навыки, Дух Йети, получение, плюсы и минусы.')
+          main='''<main id="appMain"><div class="site-search-v426" data-site-search=""><div class="site-search-box-v426"><span aria-hidden="true" class="site-search-icon-v426">⌕</span><input aria-expanded="false" aria-label="Поиск по сайту" autocomplete="off" class="site-search-input-v426" inputmode="search" placeholder="Поиск по сайту..." spellcheck="false" type="search"/><button aria-label="Очистить поиск" class="site-search-clear-v426" type="button">×</button></div><div aria-label="Результаты поиска" class="site-search-results-v426" role="listbox"></div></div><div class="route-page active" data-route="heroes"><div class="jero-page">
+<nav aria-label="Хлебные крошки" class="jero-crumbs"><a href="index.html">Главная</a> › <a href="heroes.html">Герои</a> › <span>Молли</span></nav>
+<section class="jero-hero" id="top"><div class="jero-portrait-wrap"><img class="jero-portrait" src="assets/heroes/gen-01/molly/portrait.webp" alt="Молли" fetchpriority="high"/></div><div><div class="jero-kicker"><span class="jero-chip">1 поколение</span><span class="jero-chip">Копейщики</span><span class="jero-chip gold">Мифический</span><span class="jero-chip">Бой</span></div><h1>Молли</h1><div class="jero-subtitle">Урон по площади · контроль · бесплатный герой первого поколения</div><p class="jero-lead">Молли — один из самых доступных мифических героев первого поколения. Она особенно сильна в Арене и Освоении благодаря урону по площади и заморозке, а в Экспедиции усиливает урон всего отряда и может снижать входящий урон.</p><div class="jero-quick"><div><b>Основное получение</b><span>Награда за 7 дней входа, разведка Маяка, наборы героев, Зал героев и другие ранние источники осколков.</span></div><div><b>Главная специализация</b><span>Арена, Освоение и ранний основной марш копейщиков.</span></div><div><b>Для игроков без доната</b><span>Одна из лучших стартовых инвестиций, потому что её осколки доступны бесплатно.</span></div><div><b>Актуальность</b><span>Очень сильна в начале и сохраняет пользу дольше многих героев первого поколения, но постепенно уступает новым копейщикам.</span></div></div></div></section>
+<nav class="jero-nav" aria-label="Содержание"><a href="#stats">Характеристики</a><a href="#exploration">Освоение</a><a href="#expedition">Экспедиция</a><a href="#gear">Дух Йети</a><a href="#priority">Прокачка</a><a href="#modes">Где использовать</a><a href="#pros">Плюсы и минусы</a></nav>
+<section class="jero-section" id="stats"><h2>Характеристики</h2><p class="jero-section-lead">Максимальные базовые показатели Молли.</p><div class="jero-stats"><div class="jero-stat"><strong>2 220</strong><span>Атака героя</span></div><div class="jero-stat"><strong>2 220</strong><span>Защита героя</span></div><div class="jero-stat"><strong>22 200</strong><span>Здоровье героя</span></div><div class="jero-stat"><strong>200,16%</strong><span>Атака копейщиков</span></div><div class="jero-stat"><strong>200,16%</strong><span>Защита копейщиков</span></div></div></section>
+<section class="jero-section" id="exploration"><h2>Навыки Освоения</h2><p class="jero-section-lead">Работают в Освоении и на Арене.</p><div class="jero-skill-grid"><article class="jero-skill"><div class="jero-skill-head"><img src="assets/heroes/gen-01/molly/skill-super-snowball.webp" alt="Суперснежок"/><div><h3>Суперснежок</h3><small>Урон по площади + заморозка</small></div></div><p>Молли запускает огромный снежок, который наносит урон по области и замораживает врагов на 1,5 секунды.</p><p class="jero-values">Уровни 1–5: 180% / 198% / 216% / 234% / 252% от атаки.</p></article><article class="jero-skill"><div class="jero-skill-head"><img src="assets/heroes/gen-01/molly/skill-frost-ambush.webp" alt="Морозная засада"/><div><h3>Морозная засада</h3><small>Сильный одиночный удар</small></div></div><p>Молли внезапно атакует противника и наносит высокий разовый урон.</p><p class="jero-values">Уровни 1–5: 150% / 165% / 180% / 195% / 210% от атаки.</p></article><article class="jero-skill"><div class="jero-skill-head"><img src="assets/heroes/gen-01/molly/skill-youthful-persistence.webp" alt="Юношеское упорство"/><div><h3>Юношеское упорство</h3><small>Пассивный навык</small></div></div><p>Когда здоровье Молли опускается ниже 50%, её скорость атаки увеличивается.</p><p class="jero-values">Уровни 1–5: +20% / +30% / +40% / +50% / +60% к скорости атаки.</p></article></div></section>
+<section class="jero-section" id="expedition"><h2>Навыки Экспедиции</h2><p class="jero-section-lead">Работают в PvP, походах, рейдах и боях с войсками.</p><div class="jero-skill-grid"><article class="jero-skill"><div class="jero-skill-head"><img src="assets/heroes/gen-01/molly/skill-snows-grace.webp" alt="Призыв снега"/><div><h3>Призыв снега</h3><small>Актуальная механика 2026</small></div></div><p>Каждая атака даёт 40% шанс снизить получаемый всеми войсками урон.</p><p class="jero-values">Уровни 1–5: −10% / −20% / −30% / −40% / −50% получаемого урона.</p></article><article class="jero-skill"><div class="jero-skill-head"><img src="assets/heroes/gen-01/molly/skill-ice-dominion.webp" alt="Ледяное господство"/><div><h3>Ледяное господство</h3><small>Усиление наносимого урона</small></div></div><p>Атаки войск имеют 50% шанс увеличить наносимый урон.</p><p class="jero-values">Уровни 1–5: +10% / +20% / +30% / +40% / +50%.</p></article><article class="jero-skill"><div class="jero-skill-head"><img src="assets/heroes/gen-01/molly/skill-youthful-rage.webp" alt="Юношеская ярость"/><div><h3>Юношеская ярость</h3><small>Постоянное усиление отряда</small></div></div><p>Повышает наносимый всеми войсками урон без дополнительного условия.</p><p class="jero-values">Уровни 1–5: +5% / +10% / +15% / +20% / +25%.</p></article></div><div class="jero-note"><strong>Важно:</strong> старые гайды описывают «Призыв снега» как шанс оглушить врага на 1 ход. В актуальных источниках 2026 этот навык уже работает как 40% шанс снизить получаемый всеми войсками урон до 50%. Поэтому старую механику с оглушением на странице не используем.</div></section>
+<section class="jero-section" id="gear"><h2>Эксклюзивное снаряжение</h2><div class="jero-gear-layout"><img class="jero-gear-img" src="assets/heroes/gen-01/molly/gear-yeti-spirit.webp" alt="Дух Йети"/><div><h3 class="jero-gear-title">Дух Йети</h3><p class="jero-section-lead">Эксклюзивное снаряжение Молли усиливает её собственный урон и полезность обороняющихся войск.</p><div class="jero-stats"><div class="jero-stat"><strong>+450</strong><span>Атака</span></div><div class="jero-stat"><strong>+450</strong><span>Защита</span></div><div class="jero-stat"><strong>+4 500</strong><span>Здоровье</span></div><div class="jero-stat"><strong>+50%</strong><span>Смертоносность</span></div><div class="jero-stat"><strong>+50%</strong><span>Здоровье войск</span></div></div><div class="jero-gear-skills"><div class="jero-gear-skill"><img src="assets/heroes/gen-01/molly/gear-modified-launcher.webp" alt="Модифицированная пусковая установка"/><div><b>Модифицированная пусковая установка</b><span>Повышает наносимый Молли урон. Уровни 1–5: +10% / +15% / +20% / +25% / +30%.</span></div></div><div class="jero-gear-skill"><img src="assets/heroes/gen-01/molly/gear-snowy-blessing.webp" alt="Снежное благословение"/><div><b>Снежное благословение</b><span>Повышает смертоносность обороняющихся войск. Уровни 1–5: +5% / +7,5% / +10% / +12,5% / +15%.</span></div></div></div></div></div></section>
+<section class="jero-section" id="priority"><h2>Что прокачивать в первую очередь</h2><div class="jero-two"><div class="jero-box"><h3>Для Арены и Освоения</h3><p><span class="jero-rank">1</span><b>Суперснежок</b> — главный урон по площади и контроль.</p><p><span class="jero-rank">2</span><b>Морозная засада</b> — сильный дополнительный урон.</p><p><span class="jero-rank">3</span><b>Юношеское упорство</b> — полезно, но зависит от низкого здоровья.</p></div><div class="jero-box"><h3>Для походов и PvP</h3><p><span class="jero-rank">1</span><b>Юношеская ярость</b> — стабильный бонус урона.</p><p><span class="jero-rank">2</span><b>Ледяное господство</b> — высокий потенциальный прирост урона.</p><p><span class="jero-rank">3</span><b>Призыв снега</b> — защитный навык с шансом срабатывания.</p></div></div></section>
+<section class="jero-section" id="modes"><h2>Где использовать Молли</h2><div class="jero-mode-grid"><div class="jero-mode"><b>🏟 Арена</b><p>Одна из лучших ролей Молли. «Суперснежок» наносит урон сразу нескольким врагам и даёт контроль заморозкой.</p></div><div class="jero-mode"><b>🧭 Освоение</b><p>Сильный герой для прохождения ранних и средних этапов благодаря площади поражения и контролю.</p></div><div class="jero-mode"><b>⚔️ PvP и марш</b><p>Хороша в ранних поколениях как копейщик основного состава. Позже её постепенно вытесняют новые поколения.</p></div><div class="jero-mode"><b>🐻 Свирепый медведь</b><p>Может использоваться в раннем основном марше, но для присоединения к чужому рейду есть герои с более предсказуемыми атакующими усилениями.</p></div></div></section>
+<section class="jero-section" id="pros"><h2>Плюсы и минусы</h2><div class="jero-two"><div class="jero-box good"><h3>✅ Плюсы</h3><ul><li>получается бесплатно в самом начале игры;</li><li>осколки доступны из нескольких регулярных источников;</li><li>сильный урон по площади;</li><li>заморозка делает её особенно полезной на Арене;</li><li>есть постоянный бонус наносимого войсками урона;</li><li>долго остаётся полезным копейщиком у игроков без доната;</li><li>не требует редких универсальных осколков для нормального развития.</li></ul></div><div class="jero-box bad"><h3>❌ Минусы</h3><ul><li>в поздних поколениях характеристики заметно уступают новым копейщикам;</li><li>два навыка Экспедиции зависят от шанса срабатывания;</li><li>для присоединения к атакующим рейдам есть более сильные специализированные герои;</li><li>«Юношеское упорство» включается только при здоровье ниже 50%;</li><li>большие вложения универсальных мифических осколков обычно невыгодны.</li></ul></div></div></section>
+<section class="jero-section"><div class="jero-verdict"><h3>Стоит ли развивать?</h3><p><b>Да, особенно игрокам без доната.</b> Молли легко развивается естественными источниками и даёт отличную отдачу в начале игры. Лучше использовать её собственные осколки и книги навыков, а редкие универсальные мифические осколки сохранять для героев, которых нельзя так же легко получить бесплатно.</p></div></section>
+<section class="jero-section" id="sources"><h2>Источники и проверка</h2><p class="jero-section-lead">Изображения взяты отдельными игровыми файлами. Механика и рекомендации сверены по нескольким актуальным источникам.</p><div class="jero-sources"><a href="https://whiteout-survival.com/ru/heroes/molly/" target="_blank" rel="noopener">Игровые изображения, базовые характеристики и старая версия описаний</a><a href="https://wosguru.com/hero/molly" target="_blank" rel="noopener">Актуальные роли и механика навыков 2026</a><a href="https://www.whiteoutsurvival-community.com/tools/wiki/heroes/molly.html" target="_blank" rel="noopener">Сверка характеристик и актуальной версии Snow’s Grace, обновление 1 октября 2026</a><a href="https://heaven-guardian.com/whiteout-survival-molly-guide/" target="_blank" rel="noopener">Свежая проверка замены старого оглушения на снижение получаемого урона</a><a href="https://whiteoutsurvivalhandbook.com/guides/whiteoutsurvival-molly-guide-2026" target="_blank" rel="noopener">Дополнительная сверка уровней навыков и получения</a></div><div class="jero-note"><strong>Проверено 23 октября 2026.</strong> При расхождении старых гайдов приоритет отдаётся актуальному игровому описанию и свежим базам.</div><a class="jero-back" href="heroes.html">← Вернуться к разделу «Герои»</a></section>
+<div class="jero-foot">Белая мгла · гайды SOVA58 · независимый неофициальный игровой сайт</div></div></div></main>'''
+          s=re.sub(r'<main id="appMain">.*?</main>', main, s, flags=re.S)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit Molly page and assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add hero-molly.html assets/heroes/gen-01/molly
+          if git diff --cached --quiet; then
+            echo 'No changes.'
+          else
+            git commit -m 'Add detailed Molly hero page'
+            git push
+          fi
