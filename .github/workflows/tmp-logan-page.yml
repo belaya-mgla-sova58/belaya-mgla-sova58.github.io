@@ -55,10 +55,10 @@ jobs:
             'skill-fists-of-destruction.webp':['Fists-of-Destruction.webp','fists-of-destruction.webp'],
             'skill-power-suit.webp':['Power-Suit.webp','power-suit.webp'],
             'skill-blustery-strike.webp':['Blustery-Strike.webp','blustery-strike.webp'],
-            'skill-lions-might.webp':['Lions-Might.webp','Lion-s-Might.webp','lions-might.webp'],
+            'skill-lions-might.webp':['Lion-Strike.webp','lion-strike.webp','Lions-Might.webp','Lion-s-Might.webp','lions-might.webp'],
             'skill-lion-intimidation.webp':['Lion-Intimidation.webp','lion-intimidation.webp'],
             'skill-leader-inspiration.webp':['Leader-Inspiration.webp','leader-inspiration.webp'],
-            'gear-fists-of-steel.webp':['Fists-of-Steel.webp','fists-of-steel.webp'],
+            'gear-fists-of-steel.webp':['Fists-of-Steel.webp','First-of-Steel.webp','fists-of-steel.webp','first-of-steel.webp'],
             'gear-enhanced-fists.webp':['Enhanced-Fists-of-Steel.webp','enhanced-fists-of-steel.webp'],
             'gear-strong-protection.webp':['Strong-Protection.webp','strong-protection.webp'],
           }
@@ -84,7 +84,7 @@ jobs:
                     pass
                 if ok: break
             if not (base/dest).exists():
-              raise SystemExit(f'Missing asset: {dest}; patterns={pats}; sample={urls[:30]}')
+              raise SystemExit(f'Missing asset: {dest}; patterns={pats}')
           PY
           python3 - <<'PY'
           from pathlib import Path
