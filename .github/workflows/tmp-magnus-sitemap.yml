@@ -1,0 +1,35 @@
+name: Temporary Magnus sitemap trigger
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/tmp-magnus-sitemap.yml'
+permissions:
+  contents: write
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Touch Magnus guide meaningfully
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('hero-magnus.html')
+          s=p.read_text(encoding='utf-8')
+          old='<body class="is-heroes-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="heroes">'
+          new='<body class="is-heroes-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="heroes" data-hero="magnus">'
+          if old not in s:
+              raise SystemExit('body marker not found')
+          p.write_text(s.replace(old,new,1),encoding='utf-8')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add hero-magnus.html
+          git commit -m 'Finalize Magnus hero guide'
+          git pull --rebase origin main
+          git push
