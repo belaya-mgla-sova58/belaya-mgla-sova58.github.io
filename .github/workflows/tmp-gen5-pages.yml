@@ -1,0 +1,155 @@
+name: Temporary Gen5 hero pages
+on:
+  push:
+    paths:
+      - '.github/workflows/tmp-gen5-pages.yml'
+permissions:
+  contents: write
+jobs:
+  build-gen5:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build Gen5 pages and assets
+        run: |
+          python -m pip install --quiet requests beautifulsoup4
+          python <<'PY'
+          from pathlib import Path
+          import re, requests, html
+          from bs4 import BeautifulSoup
+
+          ROOT='https://belaya-mgla-sova58.github.io/'
+          base=Path('hero-reina.html').read_text(encoding='utf-8')
+
+          heroes={
+            'hector':{
+              'name':'Гектор','class':'Пехота','subtitle':'Танк передней линии · иммунитет к контролю · герой Колеса удачи','source':'https://whiteout-survival.com/heroes/hector/',
+              'stats':['3 780','4 928','73 926','444.35%','444.35%'],
+              'obtain':'Колесо удачи, Зал героев, Ежедневные предложения, универсальные мифические фрагменты',
+              'lead':'Гектор — мифический герой пехоты 5 поколения и один из главных ориентиров для игроков без крупных покупок. В Освоении он резко ускоряет атаки, получает иммунитет к контролю и становится опаснее при низком здоровье. В Экспедиции сочетает выживаемость всей армии с мощным усилением пехоты и стрелков.',
+              'skills_exp':[('Вихрь мечей','skill-sword-whirlwind.webp','Скорость атаки +80%/+90%/+100%/+110%/+120% и иммунитет к заморозке, оглушению и другим эффектам контроля на 4 с.'),('Сорвиголова','skill-desperado.webp','При здоровье ниже 50% получаемый Гектором урон уменьшается на 20%/30%/40%/50%/60%.'),('Прилив адреналина','skill-adrenaline-surge.webp','При здоровье ниже 50% атака Гектора повышается на 16%/24%/32%/40%/48%.')],
+              'skills_exped':[('Инстинкт выживания','skill-survival-instincts.webp','40% шанс уменьшить получаемый всеми войсками урон на 10%/20%/30%/40%/50%.'),('Неудержимость','skill-rampant.webp','Повышает урон пехоты на 100%/125%/150%/175%/200%, а стрелков на 20%/40%/60%/80%/100%. Эффект ослабевает после каждой атаки и действует серией.'),('Блиц','skill-blitz.webp','25% шанс при атаке нанести 120%/140%/160%/180%/200% урона.')],
+              'gear':'Стальные клыки','gear':'gear-steel-fangs.webp','gear1':('Объятия жнеца','gear-reapers-embrace.webp','На 5 уровне продлевает «Вихрь мечей» на 1,5 с и восстанавливает здоровье Гектора на 15% нанесённого урона.'),'gear2':('Голиаф','gear-goliath.webp','На 5 уровне повышает атаку обороняющихся войск на 15%.'),
+              'priority':['Инстинкт выживания','Неудержимость','Блиц'],
+              'modes':[('Арена','Очень сильный фронтовик: иммунитет к контролю, скорость атаки и высокая живучесть.'),('PvP','Сильная пехота 5 поколения для атакующих и оборонительных маршей.'),('Гарнизон','Эксклюзивное снаряжение усиливает атаку обороняющихся войск.'),('Свирепый медведь','Не лучший первый герой присоединения: первый походный навык защитный, но как лидер сильного сбора полезен.')],
+              'pros':['Колесо удачи делает его главным доступным героем поколения','до −50% получаемого урона всей армией по шансу','очень сильный фронтовик Арены','мощно усиливает пехоту и стрелков'],
+              'cons':['первый походный навык защитный и слаб для чужого сбора на Медведя','часть эффектов зависит от шанса или условий по здоровью','позднее уступает новым поколениям'],
+              'verdict':'Да. Для большинства игроков Гектор — главный приоритет 5 поколения и естественная замена старой пехоте, особенно если его можно стабильно крутить на Колесе удачи.',
+              'alts':{'portrait':['Hector'],'skill-sword-whirlwind.webp':['Sword Whirlwind'],'skill-desperado.webp':['Desperado'],'skill-adrenaline-surge.webp':['Adrenaline Surge'],'skill-survival-instincts.webp':['Survival Instincts'],'skill-rampant.webp':['Rampant'],'skill-blitz.webp':['Blitz'],'gear-steel-fangs.webp':['Steel Fangs'],'gear-reapers-embrace.webp':["Reaper's Embrace"],'gear-goliath.webp':['Goliath']}
+            },
+            'norah':{
+              'name':'Нора','class':'Копейщики','subtitle':'Контроль · усиление пехоты и стрелков · универсальный PvP','source':'https://whiteout-survival.com/heroes/norah/',
+              'stats':['4 928','4 928','49 284','444.35%','444.35%'],
+              'obtain':'Король ледяного поля, подготовка к СВС и другие соревновательные источники; позднее Зал героев',
+              'lead':'Нора — мифический герой-копейщик 5 поколения с сильным сочетанием контроля, усиления союзных типов войск и темповых эффектов. Она особенно хорошо раскрывается в PvP и Арене, где её гранаты дают контроль, а походные навыки одновременно повышают урон и снижают входящий урон.',
+              'skills_exp':[('Заградительный огонь','skill-barrage.webp','Каскад из 5 гранат по случайной цели, урон по области 60%/66%/72%/78%/84% атаки.'),('Светошумовая граната','skill-flashbang.webp','Наносит 50%/55%/60%/65%/70% атаки и оглушает цель на 1,5 с.'),('Клич валькирии','skill-valkyrie-cry.webp','Повышает атаку всех войск на 3%/3.5%/4%/4.5%/5%.')],
+              'skills_exped':[('Общевойсковой бой','skill-combined-arms.webp','Для пехоты и стрелков снижает получаемый урон и повышает наносимый урон на 3%/6%/9%/12%/15%.'),('Скрытный удар','skill-sneak-strike.webp','20% шанс при атаке нанести всем врагам 20%/40%/60%/80%/100% дополнительного урона.'),('Напор','skill-momentum.webp','Каждые 5 атак копейщиков на 2 хода: урон всех войск +5%/+10%/+15%/+20%/+25%, получаемый урон −5%/−10%/−15%/−20%/−25%.')],
+              'gear':'Снежный крейсер','gear':'gear-snow-cruiser.webp','gear1':('Дезорганизатор','gear-disruptor.webp','На 5 уровне гранаты «Заградительного огня» получают 35% шанс оглушить цель на 1 с.'),'gear2':('Истинная стойкость','gear-true-grit.webp','На 5 уровне повышает защиту обороняющихся войск на 15%.'),
+              'priority':['Общевойсковой бой','Напор','Скрытный удар'],
+              'modes':[('Арена','Оглушение и массовые гранаты делают Нору сильным контроллером.'),('PvP','Один из самых универсальных героев поколения благодаря атаке и защите одновременно.'),('Гарнизон','Особое снаряжение повышает защиту обороняющихся войск.'),('Свирепый медведь','Полезна при собственной сильной прокачке, но первый походный навык не является чистым универсальным бонусом для всех типов.')],
+              'pros':['контроль в Арене','сразу усиливает пехоту и стрелков','до +25% урона и −25% входящего урона темповым эффектом','хорошо живёт несколько поколений'],
+              'cons':['не герой Колеса удачи','дороже для F2P','часть урона зависит от шанса и числа атак копейщиков'],
+              'verdict':'Сильный второй выбор 5 поколения. Нора особенно хороша для PvP и обороны, но для игрока без покупок обычно идёт после Гектора.',
+              'alts':{'portrait':['Norah'],'skill-barrage.webp':['Barrage'],'skill-flashbang.webp':['Flashbang'],'skill-valkyrie-cry.webp':['Valkyrie Cry'],'skill-combined-arms.webp':['Combined Arms'],'skill-sneak-strike.webp':['Sneak Strike'],'skill-momentum.webp':['Momentum'],'gear-snow-cruiser.webp':['Snow Cruiser'],'gear-disruptor.webp':['Disruptor'],'gear-true-grit.webp':['True Grit']}
+            },
+            'gwen':{
+              'name':'Гвен','class':'Стрелки','subtitle':'Урон по задней линии · ослабление цели · герой атакующих сборов','source':'https://whiteout-survival.com/heroes/gwen/',
+              'stats':['5 987','4 928','36 962','444.35%','444.35%'],
+              'obtain':'Зал героев, Ежедневные предложения, универсальные мифические фрагменты',
+              'lead':'Гвен — мифический стрелок 5 поколения с сильным уроном по задней линии и несколькими источниками усиленного урона. В Освоении она режет скорость атаки, может удваивать точечный удар и поджигает область. В Экспедиции повышает получаемый целью урон и добавляет периодические всплески урона армии.',
+              'skills_exp':[('Залп','skill-salvo.webp','Урон по области 180%/198%/216%/234%/252% атаки по задней линии и −50% скорости атаки цели на 2 с.'),('Небесный снайпер','skill-sky-sniper.webp','100%/110%/120%/130%/140% атаки с 50% шансом нанести двойной урон.'),('Адское пламя','skill-hellfire.webp','Поджигает область на 3 с, нанося 35%/38.5%/42%/45.5%/49% атаки каждую секунду.')],
+              'skills_exped':[('Орлиное зрение','skill-eagle-vision.webp','Повышает получаемый целью урон на 5%/10%/15%/20%/25%.'),('Господство в воздухе','skill-air-dominance.webp','Раз в 5 атак наносит 20%/40%/60%/80%/100% дополнительного урона и усиливает следующую атаку из любого источника на 5%/7.5%/10%/12.5%/15%.'),('Мастер взрывов','skill-blastmaster.webp','Раз в 4 атаки наносит всем врагам 10%/20%/30%/40%/50% дополнительного урона.')],
+              'gear':'Крылья надежды','gear':'gear-wings-of-hope.webp','gear1':('Огневая поддержка','gear-fire-support-unit.webp','На 5 уровне при применении навыка вторичное оружие атакует случайную цель на 70% атаки.'),'gear2':('Мародёр','gear-marauder.webp','На 5 уровне повышает смертоносность войск в сборе на 15%.'),
+              'priority':['Орлиное зрение','Господство в воздухе','Мастер взрывов'],
+              'modes':[('Арена','Очень сильный стрелок задней линии: AoE, замедление атак и точечный взрыв.'),('PvP','Стабильно усиливает входящий по цели урон и периодические атаки армии.'),('Атакующие сборы','Особое снаряжение даёт до +15% смертоносности войск в сборе.'),('Свирепый медведь','Хороша как лидер сильного сбора; в присоединении ценен первый походный навык, если он учитывается в позиции героя.')],
+              'pros':['до +25% получаемого целью урона','сильный урон по задней линии','эксклюзивное снаряжение усиливает смертоносность сбора','хороша в Арене и PvP'],
+              'cons':['не герой Колеса удачи','дороже для F2P','часть бонусного урона завязана на циклы атак'],
+              'verdict':'Очень сильный стрелок 5 поколения, особенно для Арены и атакующих сборов. Для F2P после обязательного Гектора выбор между Гвен и Норой зависит от роли аккаунта.',
+              'alts':{'portrait':['Gwen'],'skill-salvo.webp':['Salvo'],'skill-sky-sniper.webp':['Sky Sniper'],'skill-hellfire.webp':['Hellfire'],'skill-eagle-vision.webp':['Eagle Vision'],'skill-air-dominance.webp':['Air Dominance'],'skill-blastmaster.webp':['Blastmaster'],'gear-wings-of-hope.webp':['Wings of Hope'],'gear-fire-support-unit.webp':['Fire Support Unit'],'gear-marauder.webp':['Marauder']}
+            }
+          }
+
+          def download_assets(slug,h):
+              r=requests.get(h['source'],timeout=30,headers={'User-Agent':'Mozilla/5.0'}); r.raise_for_status()
+              soup=BeautifulSoup(r.text,'html.parser')
+              imgs=[]
+              for im in soup.find_all('img'):
+                  src=im.get('data-lazy-src') or im.get('data-src') or im.get('src') or ''
+                  alt=(im.get('alt') or '').strip()
+                  if src.startswith('//'): src='https:'+src
+                  if src.startswith('/'): src='https://whiteout-survival.com'+src
+                  if src.startswith('http'): imgs.append((alt,src))
+              out=Path(f'assets/heroes/gen-05/{slug}'); out.mkdir(parents=True,exist_ok=True)
+              for fname,keys in h['alts'].items():
+                  cand=None
+                  for alt,src in imgs:
+                      if any(k.lower() in alt.lower() for k in keys): cand=src; break
+                  if cand is None and fname=='portrait':
+                      m=soup.find('meta',property='og:image'); cand=m.get('content') if m else None
+                  if cand:
+                      rr=requests.get(cand,timeout=30,headers={'User-Agent':'Mozilla/5.0'}); rr.raise_for_status(); (out/fname).write_bytes(rr.content)
+                  else:
+                      print('MISSING',slug,fname,keys)
+
+          def cards(items):
+              return ''.join(f'<article class="jero-skill"><div class="jero-skill-head"><img src="assets/heroes/gen-05/{slug}/{img}" alt="{html.escape(name)}"/><div><h3>{html.escape(name)}</h3></div></div><p>{desc}</p></article>' for name,img,desc in items)
+
+          for slug,h in heroes.items():
+              download_assets(slug,h)
+              name=h['name'];
+              # metadata
+              page=base
+              page=re.sub(r'<title>.*?</title>',f'<title>{name}: навыки, {h["gear"]}, плюсы и минусы | Белая мгла</title>',page,1,flags=re.S)
+              page=re.sub(r'<meta name="description" content="[^"]*"/>',f'<meta name="description" content="Подробный гайд по {name}: герой 5 поколения, навыки Освоения и Экспедиции, {h["gear"]}, PvP, Арена, Свирепый медведь, прокачка, плюсы и минусы."/>',page,1)
+              page=re.sub(r'<link rel="canonical" href="[^"]*"/>',f'<link rel="canonical" href="{ROOT}hero-{slug}.html"/>',page,1)
+              page=re.sub(r'<meta property="og:title" content="[^"]*"/>',f'<meta property="og:title" content="{name}: полный гайд"/>',page,1)
+              page=re.sub(r'<meta property="og:description" content="[^"]*"/>',f'<meta property="og:description" content="Навыки, {h["gear"]}, PvP, Арена, Свирепый медведь, плюсы и минусы {name}."/>',page,1)
+              page=re.sub(r'<meta property="og:url" content="[^"]*"/>',f'<meta property="og:url" content="{ROOT}hero-{slug}.html"/>',page,1)
+              page=re.sub(r'<meta property="og:image" content="[^"]*"/>',f'<meta property="og:image" content="{ROOT}assets/heroes/gen-05/{slug}/portrait.webp"/>',page,1)
+              page=re.sub(r'<meta name="twitter:image" content="[^"]*"/>',f'<meta name="twitter:image" content="{ROOT}assets/heroes/gen-05/{slug}/portrait.webp"/>',page,1)
+              page=re.sub(r'<script id="guide-article-schema-v625" type="application/ld\+json">.*?</script>',f'<script id="guide-article-schema-v625" type="application/ld+json">{{"@context":"https://schema.org","@type":"Article","headline":"{name}: полный гайд","description":"Подробный гайд по {name}, герой 5 поколения.","url":"{ROOT}hero-{slug}.html","mainEntityOfPage":{{"@type":"WebPage","@id":"{ROOT}hero-{slug}.html"}},"author":{{"@type":"Person","name":"SOVA58","url":"{ROOT}sova58.html","gender":"Female"}},"isPartOf":{{"@type":"WebSite","name":"Белая мгла · SOVA58","url":"{ROOT}"}},"inLanguage":"ru","dateModified":"2026-10-23","image":["{ROOT}assets/heroes/gen-05/{slug}/portrait.webp"]}}</script>',page,1,flags=re.S)
+              page=re.sub(r'<script type="application/ld\+json">\{"@context":"https://schema.org","@type":"BreadcrumbList".*?</script>',f'<script type="application/ld+json">{{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{{"@type":"ListItem","position":1,"name":"Главная","item":"{ROOT}"}},{{"@type":"ListItem","position":2,"name":"Герои","item":"{ROOT}heroes.html"}},{{"@type":"ListItem","position":3,"name":"{name}","item":"{ROOT}hero-{slug}.html"}}]}}</script>',page,1,flags=re.S)
+              global_slug=slug
+              globals()['slug']=slug
+              se=cards(h['skills_exp']); sx=cards(h['skills_exped'])
+              g1n,g1i,g1d=h['gear1']; g2n,g2i,g2d=h['gear2']
+              modes=''.join(f'<div class="jero-mode"><b>{a}</b><p>{b}</p></div>' for a,b in h['modes'])
+              pros=''.join(f'<li>{x}</li>' for x in h['pros']); cons=''.join(f'<li>{x}</li>' for x in h['cons'])
+              pri=''.join(f'<div><b><span class="jero-rank">{i}</span>{x}</b><span>{"Первый приоритет" if i==1 else "Следующий приоритет"}</span></div>' for i,x in enumerate(h['priority'],1))
+              main=f'''<main id="appMain"><div class="route-page active" data-route="heroes"><div class="jero-page">
+              <nav class="jero-crumbs"><a href="index.html">Главная</a> › <a href="heroes.html">Герои</a> › <span>{name}</span></nav>
+              <section class="jero-hero"><div class="jero-portrait-wrap"><img class="jero-portrait" src="assets/heroes/gen-05/{slug}/portrait.webp" alt="{name}"/></div><div><div class="jero-kicker"><span class="jero-chip">5 поколение</span><span class="jero-chip">{h['class']}</span><span class="jero-chip gold">Мифический</span><span class="jero-chip">Бой</span></div><h1>{name}</h1><p class="jero-subtitle">{h['subtitle']}</p><p class="jero-lead">{h['lead']}</p><div class="jero-quick"><div><b>Получение</b><span>{h['obtain']}</span></div><div><b>Главная роль</b><span>PvP, Арена и бои своего поколения</span></div><div><b>Поколение</b><span>5 поколение</span></div><div><b>Проверено</b><span>23 октября 2026</span></div></div></div></section>
+              <nav class="jero-nav"><a href="#stats">Характеристики</a><a href="#exploration">Освоение</a><a href="#expedition">Экспедиция</a><a href="#gear">Снаряжение</a><a href="#priority">Прокачка</a><a href="#use">Применение</a><a href="#pros">Плюсы и минусы</a></nav>
+              <section class="jero-section" id="stats"><h2>Характеристики</h2><div class="jero-stats"><div class="jero-stat"><strong>{h['stats'][0]}</strong><span>Атака героя</span></div><div class="jero-stat"><strong>{h['stats'][1]}</strong><span>Защита героя</span></div><div class="jero-stat"><strong>{h['stats'][2]}</strong><span>Здоровье героя</span></div><div class="jero-stat"><strong>{h['stats'][3]}</strong><span>Атака {h['class'].lower()}</span></div><div class="jero-stat"><strong>{h['stats'][4]}</strong><span>Защита {h['class'].lower()}</span></div></div></section>
+              <section class="jero-section" id="exploration"><h2>Навыки Освоения</h2><p class="jero-section-lead">Боевые навыки героя в Арене и Освоении.</p><div class="jero-skill-grid">{se}</div></section>
+              <section class="jero-section" id="expedition"><h2>Навыки Экспедиции</h2><p class="jero-section-lead">Именно эти навыки особенно важны для маршей, сборов и гарнизона.</p><div class="jero-skill-grid">{sx}</div></section>
+              <section class="jero-section" id="gear"><h2>Эксклюзивное снаряжение</h2><div class="jero-gear-layout"><img class="jero-gear-img" src="assets/heroes/gen-05/{slug}/{h['gear']}" alt="{h['gear']}"/><div><h3 class="jero-gear-title">{h['gear']}</h3><p class="jero-section-lead">На максимальной прокачке: +111% смертоносности и +111% здоровья войск, а также индивидуальные характеристики героя.</p><div class="jero-gear-skills"><div class="jero-gear-skill"><img src="assets/heroes/gen-05/{slug}/{g1i}" alt="{g1n}"/><div><b>{g1n}</b><span>{g1d}</span></div></div><div class="jero-gear-skill"><img src="assets/heroes/gen-05/{slug}/{g2i}" alt="{g2n}"/><div><b>{g2n}</b><span>{g2d}</span></div></div></div></div></div></section>
+              <section class="jero-section" id="priority"><h2>Приоритет прокачки</h2><div class="jero-priority">{pri}</div></section>
+              <section class="jero-section" id="use"><h2>Где применять</h2><div class="jero-mode-grid">{modes}</div></section>
+              <section class="jero-section" id="pros"><h2>Плюсы и минусы</h2><div class="jero-two"><div class="jero-box good"><h3>Плюсы</h3><ul>{pros}</ul></div><div class="jero-box bad"><h3>Минусы</h3><ul>{cons}</ul></div></div><div class="jero-verdict"><h3>Итог</h3><p>{h['verdict']}</p></div></section>
+              <section class="jero-section"><h2>Источники</h2><div class="jero-sources"><a href="{h['source']}" target="_blank" rel="noopener">Карточка героя</a><a href="https://whiteoutlab.ru/wiki/heroes/{slug}" target="_blank" rel="noopener">WOS Lab</a></div></section>
+              <a class="jero-back" href="heroes.html">← Все герои</a><div class="jero-foot">Белая мгла · SOVA58 · обновлено 23.10.2026</div></div></div></main>'''
+              page=re.sub(r'<main id="appMain">.*?</main>',main,page,1,flags=re.S)
+              Path(f'hero-{slug}.html').write_text(page,encoding='utf-8')
+
+          # sitemap: remove accidental temp URLs and ensure three pages
+          sp=Path('sitemap.xml'); s=sp.read_text(encoding='utf-8')
+          s=re.sub(r'\s*<url><loc>[^<]*tmp-[^<]*</loc><lastmod>[^<]*</lastmod></url>','',s)
+          for slug in heroes:
+              url=f'{ROOT}hero-{slug}.html'
+              if url not in s:
+                  s=s.replace('</urlset>',f'  <url><loc>{url}</loc><lastmod>2026-10-23</lastmod></url>\n</urlset>')
+          sp.write_text(s,encoding='utf-8')
+          PY
+          git rm .github/workflows/tmp-gen5-pages.yml
+          git config user.name 'belaya-mgla-sova58'
+          git config user.email 'monroe6662004@gmail.com'
+          git add hero-hector.html hero-norah.html hero-gwen.html assets/heroes/gen-05 sitemap.xml .github/workflows/tmp-gen5-pages.yml
+          git stash push -u -m gen5-build
+          git pull --rebase origin main
+          git stash pop
+          git add hero-hector.html hero-norah.html hero-gwen.html assets/heroes/gen-05 sitemap.xml .github/workflows/tmp-gen5-pages.yml
+          git commit -m 'Add Generation 5 hero guides'
+          git push origin main
