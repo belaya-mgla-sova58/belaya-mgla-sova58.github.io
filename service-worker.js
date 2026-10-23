@@ -1,4 +1,4 @@
-const CACHE_NAME = 'belaya-mgla-v626';
+const CACHE_NAME = 'belaya-mgla-v627';
 const CORE = [
   './',
   './index.html',
@@ -34,7 +34,6 @@ self.addEventListener('fetch', event => {
   const req = event.request;
   if (req.method !== 'GET') return;
 
-  /* Pages: network first so edited text/design is never hidden by an old cached HTML page. */
   if (req.mode === 'navigate') {
     event.respondWith((async () => {
       const cache = await caches.open(CACHE_NAME);
@@ -49,7 +48,6 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  /* Static files: cache first, update in background. */
   event.respondWith((async () => {
     const cache = await caches.open(CACHE_NAME);
     const cached = await cache.match(req);
