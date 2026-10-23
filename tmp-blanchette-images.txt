@@ -1,0 +1,208 @@
+0	логотип выживание в условиях белой мглы	data:image/svg+xml,%3Csvg%20xmlns=
+1	логотип выживание в условиях белой мглы	https://whiteout-survival.com/wp-content/uploads/2025/07/logo-whiteout-survival.png
+2	ru_RU	data:image/svg+xml,%3Csvg%20xmlns=
+3	ru_RU	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/ru_RU.png
+4	en_US	data:image/svg+xml,%3Csvg%20xmlns=
+5	en_US	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/en_US.png
+6	es_ES	data:image/svg+xml,%3Csvg%20xmlns=
+7	es_ES	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/es_ES.png
+8	pt_BR	data:image/svg+xml,%3Csvg%20xmlns=
+9	pt_BR	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/pt_BR.png
+10	ar	data:image/svg+xml,%3Csvg%20xmlns=
+11	ar	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/ar.png
+12	zh_CN	data:image/svg+xml,%3Csvg%20xmlns=
+13	zh_CN	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/zh_CN.png
+14	fr_FR	data:image/svg+xml,%3Csvg%20xmlns=
+15	fr_FR	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/fr_FR.png
+16	de_DE	data:image/svg+xml,%3Csvg%20xmlns=
+17	de_DE	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/de_DE.png
+18	id_ID	data:image/svg+xml,%3Csvg%20xmlns=
+19	id_ID	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/id_ID.png
+20	it_IT	data:image/svg+xml,%3Csvg%20xmlns=
+21	it_IT	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/it_IT.png
+22	ja	data:image/svg+xml,%3Csvg%20xmlns=
+23	ja	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/ja.png
+24	ko_KR	data:image/svg+xml,%3Csvg%20xmlns=
+25	ko_KR	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/ko_KR.png
+26	ro_RO	data:image/svg+xml,%3Csvg%20xmlns=
+27	ro_RO	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/ro_RO.png
+28	th	data:image/svg+xml,%3Csvg%20xmlns=
+29	th	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/th.png
+30	tr_TR	data:image/svg+xml,%3Csvg%20xmlns=
+31	tr_TR	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/tr_TR.png
+32	vi	data:image/svg+xml,%3Csvg%20xmlns=
+33	vi	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/vi.png
+34	логотип выживание в условиях белой мглы	data:image/svg+xml,%3Csvg%20xmlns=
+35	логотип выживание в условиях белой мглы	http://whiteout-survival.com/wp-content/uploads/2025/07/logo-whiteout-survival.png
+36	ru_RU	data:image/svg+xml,%3Csvg%20xmlns=
+37	ru_RU	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/ru_RU.png
+38	en_US	data:image/svg+xml,%3Csvg%20xmlns=
+39	en_US	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/en_US.png
+40	es_ES	data:image/svg+xml,%3Csvg%20xmlns=
+41	es_ES	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/es_ES.png
+42	pt_BR	data:image/svg+xml,%3Csvg%20xmlns=
+43	pt_BR	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/pt_BR.png
+44	ar	data:image/svg+xml,%3Csvg%20xmlns=
+45	ar	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/ar.png
+46	zh_CN	data:image/svg+xml,%3Csvg%20xmlns=
+47	zh_CN	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/zh_CN.png
+48	fr_FR	data:image/svg+xml,%3Csvg%20xmlns=
+49	fr_FR	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/fr_FR.png
+50	de_DE	data:image/svg+xml,%3Csvg%20xmlns=
+51	de_DE	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/de_DE.png
+52	id_ID	data:image/svg+xml,%3Csvg%20xmlns=
+53	id_ID	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/id_ID.png
+54	it_IT	data:image/svg+xml,%3Csvg%20xmlns=
+55	it_IT	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/it_IT.png
+56	ja	data:image/svg+xml,%3Csvg%20xmlns=
+57	ja	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/ja.png
+58	ko_KR	data:image/svg+xml,%3Csvg%20xmlns=
+59	ko_KR	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/ko_KR.png
+60	ro_RO	data:image/svg+xml,%3Csvg%20xmlns=
+61	ro_RO	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/ro_RO.png
+62	th	data:image/svg+xml,%3Csvg%20xmlns=
+63	th	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/th.png
+64	tr_TR	data:image/svg+xml,%3Csvg%20xmlns=
+65	tr_TR	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/tr_TR.png
+66	vi	data:image/svg+xml,%3Csvg%20xmlns=
+67	vi	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/vi.png
+68	логотип выживание в условиях белой мглы	data:image/svg+xml,%3Csvg%20xmlns=
+69	логотип выживание в условиях белой мглы	http://whiteout-survival.com/wp-content/uploads/2025/07/logo-whiteout-survival.png
+70	Blanchette	data:image/svg+xml,%3Csvg%20xmlns=
+71	Blanchette	https://whiteout-survival.com/wp-content/uploads/2025/07/Blanchette.webp
+72		data:image/svg+xml,%3Csvg%20xmlns=
+73		http://whiteout-survival.com/wp-content/uploads/2025/07/Legendary.webp
+74		data:image/svg+xml,%3Csvg%20xmlns=
+75		http://whiteout-survival.com/wp-content/uploads/2025/07/marksman.png
+76		data:image/svg+xml,%3Csvg%20xmlns=
+77		http://whiteout-survival.com/wp-content/uploads/2025/07/combat.webp
+78	1 звезда	data:image/svg+xml,%3Csvg%20xmlns=
+79	1 звезда	https://whiteout-survival.com/wp-content/uploads/2025/07/star.png
+80		data:image/svg+xml,%3Csvg%20xmlns=
+81		http://whiteout-survival.com/wp-content/uploads/2025/07/legendary-shards.webp
+82		data:image/svg+xml,%3Csvg%20xmlns=
+83		https://whiteout-survival.com/wp-content/uploads/2025/07/star.png
+84		data:image/svg+xml,%3Csvg%20xmlns=
+85		https://whiteout-survival.com/wp-content/uploads/2025/07/star.png
+86		data:image/svg+xml,%3Csvg%20xmlns=
+87		http://whiteout-survival.com/wp-content/uploads/2025/07/legendary-shards.webp
+88		data:image/svg+xml,%3Csvg%20xmlns=
+89		https://whiteout-survival.com/wp-content/uploads/2025/07/star.png
+90		data:image/svg+xml,%3Csvg%20xmlns=
+91		https://whiteout-survival.com/wp-content/uploads/2025/07/star.png
+92		data:image/svg+xml,%3Csvg%20xmlns=
+93		https://whiteout-survival.com/wp-content/uploads/2025/07/star.png
+94		data:image/svg+xml,%3Csvg%20xmlns=
+95		http://whiteout-survival.com/wp-content/uploads/2025/07/legendary-shards.webp
+96		data:image/svg+xml,%3Csvg%20xmlns=
+97		https://whiteout-survival.com/wp-content/uploads/2025/07/star.png
+98		data:image/svg+xml,%3Csvg%20xmlns=
+99		https://whiteout-survival.com/wp-content/uploads/2025/07/star.png
+100		data:image/svg+xml,%3Csvg%20xmlns=
+101		https://whiteout-survival.com/wp-content/uploads/2025/07/star.png
+102		data:image/svg+xml,%3Csvg%20xmlns=
+103		https://whiteout-survival.com/wp-content/uploads/2025/07/star.png
+104		data:image/svg+xml,%3Csvg%20xmlns=
+105		http://whiteout-survival.com/wp-content/uploads/2025/07/legendary-shards.webp
+106		data:image/svg+xml,%3Csvg%20xmlns=
+107		https://whiteout-survival.com/wp-content/uploads/2025/07/star.png
+108		data:image/svg+xml,%3Csvg%20xmlns=
+109		https://whiteout-survival.com/wp-content/uploads/2025/07/star.png
+110		data:image/svg+xml,%3Csvg%20xmlns=
+111		https://whiteout-survival.com/wp-content/uploads/2025/07/star.png
+112		data:image/svg+xml,%3Csvg%20xmlns=
+113		https://whiteout-survival.com/wp-content/uploads/2025/07/star.png
+114		data:image/svg+xml,%3Csvg%20xmlns=
+115		https://whiteout-survival.com/wp-content/uploads/2025/07/star.png
+116		data:image/svg+xml,%3Csvg%20xmlns=
+117		http://whiteout-survival.com/wp-content/uploads/2025/07/legendary-shards.webp
+118	Тройной мушкетон	data:image/svg+xml,%3Csvg%20xmlns=
+119	Тройной мушкетон	http://whiteout-survival.com/wp-content/uploads/2025/07/Triple-Blunderbuss.webp
+120	Скаттершот	data:image/svg+xml,%3Csvg%20xmlns=
+121	Скаттершот	http://whiteout-survival.com/wp-content/uploads/2025/07/Scattershot.webp
+122	Красная погоня	data:image/svg+xml,%3Csvg%20xmlns=
+123	Красная погоня	http://whiteout-survival.com/wp-content/uploads/2025/07/Red-Pursuit.webp
+124	Вооружены до зубов	data:image/svg+xml,%3Csvg%20xmlns=
+125	Вооружены до зубов	http://whiteout-survival.com/wp-content/uploads/2025/07/Armed-to-the-Teeth.webp
+126	Охотник за кровью	data:image/svg+xml,%3Csvg%20xmlns=
+127	Охотник за кровью	http://whiteout-survival.com/wp-content/uploads/2025/07/Blood-Hunter.webp
+128	Багровый Снайпер	data:image/svg+xml,%3Csvg%20xmlns=
+129	Багровый Снайпер	http://whiteout-survival.com/wp-content/uploads/2025/07/Crimson-Sniper.webp
+130	Охотник на волков	data:image/svg+xml,%3Csvg%20xmlns=
+131	Охотник на волков	http://whiteout-survival.com/wp-content/uploads/2025/07/Wolf-Hunter.webp
+132	Власть	data:image/svg+xml,%3Csvg%20xmlns=
+133	Власть	http://whiteout-survival.com/wp-content/uploads/2025/07/power.webp
+134	Ярость Охотника	data:image/svg+xml,%3Csvg%20xmlns=
+135	Ярость Охотника	http://whiteout-survival.com/wp-content/uploads/2025/07/Hunters-Rage.webp
+136	Удар молнии	data:image/svg+xml,%3Csvg%20xmlns=
+137	Удар молнии	http://whiteout-survival.com/wp-content/uploads/2025/07/Lightning-Strike.webp
+138	логотип выживание в условиях белой мглы	data:image/svg+xml,%3Csvg%20xmlns=
+139	логотип выживание в условиях белой мглы	https://whiteout-survival.com/wp-content/uploads/2025/07/logo-whiteout-survival.png
+140	en_US	data:image/svg+xml,%3Csvg%20xmlns=
+141	en_US	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/en_US.png
+142	en_US	data:image/svg+xml,%3Csvg%20xmlns=
+143	en_US	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/en_US.png
+144	pt_BR	data:image/svg+xml,%3Csvg%20xmlns=
+145	pt_BR	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/pt_BR.png
+146	es_ES	data:image/svg+xml,%3Csvg%20xmlns=
+147	es_ES	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/es_ES.png
+148	ar	data:image/svg+xml,%3Csvg%20xmlns=
+149	ar	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/ar.png
+150	de_DE	data:image/svg+xml,%3Csvg%20xmlns=
+151	de_DE	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/de_DE.png
+152	fr_FR	data:image/svg+xml,%3Csvg%20xmlns=
+153	fr_FR	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/fr_FR.png
+154	id_ID	data:image/svg+xml,%3Csvg%20xmlns=
+155	id_ID	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/id_ID.png
+156	it_IT	data:image/svg+xml,%3Csvg%20xmlns=
+157	it_IT	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/it_IT.png
+158	ja	data:image/svg+xml,%3Csvg%20xmlns=
+159	ja	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/ja.png
+160	ko_KR	data:image/svg+xml,%3Csvg%20xmlns=
+161	ko_KR	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/ko_KR.png
+162	ro_RO	data:image/svg+xml,%3Csvg%20xmlns=
+163	ro_RO	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/ro_RO.png
+164	ru_RU	data:image/svg+xml,%3Csvg%20xmlns=
+165	ru_RU	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/ru_RU.png
+166	th	data:image/svg+xml,%3Csvg%20xmlns=
+167	th	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/th.png
+168	vi	data:image/svg+xml,%3Csvg%20xmlns=
+169	vi	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/vi.png
+170	zh_CN	data:image/svg+xml,%3Csvg%20xmlns=
+171	zh_CN	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/zh_CN.png
+172	tr_TR	data:image/svg+xml,%3Csvg%20xmlns=
+173	tr_TR	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/tr_TR.png
+174	en_US	data:image/svg+xml,%3Csvg%20xmlns=
+175	en_US	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/en_US.png
+176	en_US	data:image/svg+xml,%3Csvg%20xmlns=
+177	en_US	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/en_US.png
+178	pt_BR	data:image/svg+xml,%3Csvg%20xmlns=
+179	pt_BR	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/pt_BR.png
+180	es_ES	data:image/svg+xml,%3Csvg%20xmlns=
+181	es_ES	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/es_ES.png
+182	ar	data:image/svg+xml,%3Csvg%20xmlns=
+183	ar	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/ar.png
+184	de_DE	data:image/svg+xml,%3Csvg%20xmlns=
+185	de_DE	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/de_DE.png
+186	fr_FR	data:image/svg+xml,%3Csvg%20xmlns=
+187	fr_FR	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/fr_FR.png
+188	id_ID	data:image/svg+xml,%3Csvg%20xmlns=
+189	id_ID	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/id_ID.png
+190	it_IT	data:image/svg+xml,%3Csvg%20xmlns=
+191	it_IT	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/it_IT.png
+192	ja	data:image/svg+xml,%3Csvg%20xmlns=
+193	ja	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/ja.png
+194	ko_KR	data:image/svg+xml,%3Csvg%20xmlns=
+195	ko_KR	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/ko_KR.png
+196	ro_RO	data:image/svg+xml,%3Csvg%20xmlns=
+197	ro_RO	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/ro_RO.png
+198	ru_RU	data:image/svg+xml,%3Csvg%20xmlns=
+199	ru_RU	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/ru_RU.png
+200	th	data:image/svg+xml,%3Csvg%20xmlns=
+201	th	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/th.png
+202	vi	data:image/svg+xml,%3Csvg%20xmlns=
+203	vi	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/vi.png
+204	zh_CN	data:image/svg+xml,%3Csvg%20xmlns=
+205	zh_CN	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/zh_CN.png
+206	tr_TR	data:image/svg+xml,%3Csvg%20xmlns=
+207	tr_TR	https://whiteout-survival.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/tr_TR.png
