@@ -79,12 +79,12 @@
 }
 
 /* Epic hero portraits from the supplied reference catalogue. */
-.hero-mini[data-epic="bahiti"]{--portrait:url("https://whiteout-survival.com/wp-content/uploads/2025/07/bahiti.webp")}
-.hero-mini[data-epic="jasser"]{--portrait:url("https://whiteout-survival.com/wp-content/uploads/2025/07/Jasser.webp")}
-.hero-mini[data-epic="jessie"]{--portrait:url("https://whiteout-survival.com/wp-content/uploads/2025/07/Jessie.webp")}
-.hero-mini[data-epic="gina"]{--portrait:url("https://whiteout-survival.com/wp-content/uploads/2025/07/Gina.webp")}
-.hero-mini[data-epic="patrick"]{--portrait:url("https://whiteout-survival.com/wp-content/uploads/2025/07/Patrick.webp")}
-.hero-mini[data-epic="sergey"]{--portrait:url("https://whiteout-survival.com/wp-content/uploads/2025/07/Sergey.webp")}
-.hero-mini[data-epic="seo-yoon"]{--portrait:url("https://whiteout-survival.com/wp-content/uploads/2025/07/Seo-yoon.webp")}
-.hero-mini[data-epic="lumak-bokan"]{--portrait:url("https://whiteout-survival.com/wp-content/uploads/2025/07/Lumak-Bokan.webp")}
-.hero-mini[data-epic="ling-xue"]{--portrait:url("https://whiteout-survival.com/wp-content/uploads/2025/07/Ling-Xue.webp")}
+.hero-mini[data-epic="bahiti"]{--portrait:url("assets/heroes/epic/bahiti/portrait.webp")}
+.hero-mini[data-epic="jasser"]{--portrait:url("assets/heroes/epic/jasser/portrait.webp")}
+.hero-mini[data-epic="jessie"]{--portrait:url("assets/heroes/epic/jessie/portrait.webp")}
+.hero-mini[data-epic="gina"]{--portrait:url("assets/heroes/epic/gina/portrait.webp")}
+.hero-mini[data-epic="patrick"]{--portrait:url("assets/heroes/epic/patrick/portrait.webp")}
+.hero-mini[data-epic="sergey"]{--portrait:url("assets/heroes/epic/sergey/portrait.webp")}
+.hero-mini[data-epic="seo-yoon"]{--portrait:url("assets/heroes/epic/seo-yoon/portrait.webp")}
+.hero-mini[data-epic="lumak-bokan"]{--portrait:url("assets/heroes/epic/lumak-bokan/portrait.webp")}
+.hero-mini[data-epic="ling-xue"]{--portrait:url("assets/heroes/epic/ling-xue/portrait.webp")}
