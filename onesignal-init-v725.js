@@ -6,8 +6,8 @@ window.OneSignalDeferred.push(async function(OneSignal){
   try{
     await OneSignal.init({
       appId:"072b6603-ca67-49f4-8762-773d2b3968e8",
-      serviceWorkerPath:"onesignal/OneSignalSDKWorker.js",
-      serviceWorkerParam:{scope:"/onesignal/"}
+      serviceWorkerPath:"/service-worker.js",
+      serviceWorkerParam:{scope:"/"}
     });
   }catch(e){console.warn("OneSignal init failed",e)}
 });
