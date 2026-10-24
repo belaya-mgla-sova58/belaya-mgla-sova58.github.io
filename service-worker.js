@@ -1,4 +1,4 @@
-const CACHE_NAME = 'belaya-mgla-v633';
+const CACHE_NAME = 'belaya-mgla-v634';
 const CORE = [
   './',
   './index.html',
@@ -7,6 +7,7 @@ const CORE = [
   './site-v626.min.css?v=626',
   './site-v629.min.js?v=629',
   './app-splash-v725.js?v=725',
+  './site-cleanup-v632.js?v=632',
   './ui-cheats-v583.svg',
   './manifest-v541.webmanifest',
   './app-icon-192-v541.png',
@@ -35,6 +36,9 @@ self.addEventListener('fetch', event => {
   const req = event.request;
   if (req.method !== 'GET') return;
 
+  const url = new URL(req.url);
+  if (url.origin !== self.location.origin) return;
+
   if (req.mode === 'navigate') {
     event.respondWith((async () => {
       const cache = await caches.open(CACHE_NAME);
@@ -49,12 +53,14 @@ self.addEventListener('fetch', event => {
     return;
   }
 
+  if (req.destination === 'audio' || req.destination === 'video') return;
+
   event.respondWith((async () => {
     const cache = await caches.open(CACHE_NAME);
     const cached = await cache.match(req);
     if (cached) {
       event.waitUntil(fetch(req, {cache:'no-store'}).then(resp => {
-        if (resp && resp.ok && (resp.type === 'basic' || resp.type === 'cors')) {
+        if (resp && resp.ok && resp.type === 'basic') {
           return cache.put(req, resp.clone());
         }
       }).catch(()=>{}));
@@ -62,7 +68,7 @@ self.addEventListener('fetch', event => {
     }
     try {
       const resp = await fetch(req, {cache:'no-store'});
-      if (resp && resp.ok && (resp.type === 'basic' || resp.type === 'cors')) {
+      if (resp && resp.ok && resp.type === 'basic') {
         cache.put(req, resp.clone());
       }
       return resp;
