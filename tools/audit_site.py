@@ -10,7 +10,7 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "site-audit-report.txt"
-EXCLUDED = {"404.html", "maintenance.html", "__forms.html"}
+EXCLUDED = {"404.html", "maintenance.html", "__forms.html", "google94584035fdf43cd0.html", "yandex_ee69138efc48d1ec.html"}
 SKIP_TEXT_TAGS = {"script", "style", "noscript", "template", "svg"}
 TECH_PATTERNS = [
     re.compile(r"Whiteout Survival", re.I),
