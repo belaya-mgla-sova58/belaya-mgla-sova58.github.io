@@ -1,0 +1,44 @@
+name: Temporary homepage hero v447
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/tmp-home-hero-v447.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install approved homepage banner
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 3 'https://cdn.creativeclaw.co/u/9f9da7ef/images/02b29019-df83-416d-ad3e-5a95541485b3.png' -o /tmp/home-hero-v447.png
+          python -m pip install --quiet pillow
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          src=Image.open('/tmp/home-hero-v447.png').convert('RGB')
+          target_w=1800
+          if src.width>target_w:
+              target_h=round(src.height*target_w/src.width)
+              src=src.resize((target_w,target_h),Image.Resampling.LANCZOS)
+          src.save('assets/home-hero-polish-v447.webp','WEBP',quality=84,method=6)
+
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace('assets/home-hero-polish-v446.webp','assets/home-hero-polish-v447.webp')
+          css='''\n<style id="home-hero-v447-fit">\nbody.is-home-route .modern-home-hero-v424.home-stamped-hero-v441{height:auto!important;min-height:0!important;aspect-ratio:auto!important;padding:0!important;overflow:hidden!important}\nbody.is-home-route .modern-home-hero-v424.home-stamped-hero-v441 .home-stamped-img-v441{display:block!important;width:100%!important;height:auto!important;max-height:none!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important}\n</style>\n'''
+          if 'home-hero-v447-fit' not in s:
+              s=s.replace('</head>',css+'</head>',1)
+          p.write_text(s,encoding='utf-8')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/home-hero-polish-v447.webp index.html
+          git commit -m 'Replace homepage hero with approved winter banner'
+          git pull --rebase --autostash origin main
+          git push
