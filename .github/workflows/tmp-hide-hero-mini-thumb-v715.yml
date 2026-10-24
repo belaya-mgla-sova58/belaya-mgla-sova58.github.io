@@ -1,4 +1,4 @@
-name: Temporary hide duplicate hero thumbnail v715
+name: Hide duplicate hero mini avatars v720
 on:
   push:
     branches: [ main ]
@@ -11,14 +11,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Hide injected thumbnails on generation cards
+      - name: Hide duplicate mini avatars and bust hero CSS cache
         shell: bash
         run: |
           set -euo pipefail
-          printf '\n/* v715: hide extra thumbnails injected inside generation hero cards */\n.hero-mini > img,.hero-mini > picture,.hero-mini .hero-link-thumb,.hero-mini .link-thumb,.hero-mini [class*="thumb"]{display:none!important}\n' >> hero-generations-v714.css
-          sed -i 's/hero-generations-v714.css?v=714/hero-generations-v714.css?v=715/g' hero-generations.html
+          if ! grep -q 'v720: hide duplicate mini avatar on hero pages' hero-epic-v719.css; then
+            printf '\n/* v720: hide duplicate mini avatar on hero pages */\n.epic-hero > .hero-avatar > .hero-portrait > img{display:none!important}\n' >> hero-epic-v719.css
+          fi
+          find . -maxdepth 1 -type f -name 'hero-*.html' -print0 | xargs -0 -r sed -i 's/hero-epic-v719.css?v=719/hero-epic-v719.css?v=720/g'
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add hero-generations-v714.css hero-generations.html
-          git commit -m 'Hide duplicate hero thumbnails in generations'
-          git push
+          git add hero-epic-v719.css hero-*.html
+          if git diff --cached --quiet; then
+            echo 'No changes needed'
+          else
+            git commit -m 'Hide duplicate mini avatars on hero pages'
+            git push
+          fi
