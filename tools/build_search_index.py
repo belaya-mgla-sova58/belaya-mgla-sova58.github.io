@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "search-index.json"
 INDEX_VERSION = 724
+MAX_BODY_CHARS = 6500
 EXCLUDED_NAMES = {
     "404.html",
     "maintenance.html",
@@ -183,7 +184,8 @@ def index_page(path: Path) -> dict | None:
 
     slug_terms = rel.replace("/", " ").replace(".html", "").replace("-", " ").replace("_", " ")
     aliases = squash(" ".join([parser.meta_keywords, *parser.extra_aliases]))
-    searchable = normalize(" ".join([title, html_title, description, headings, aliases, slug_terms, body]))
+    searchable_body = body[:MAX_BODY_CHARS]
+    searchable = normalize(" ".join([title, html_title, description, headings, aliases, slug_terms, searchable_body]))
     if not searchable:
         return None
 
