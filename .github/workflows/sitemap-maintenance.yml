@@ -1,4 +1,4 @@
-name: Sitemap and search maintenance
+name: Sitemap, search and site audit
 
 on:
   push:
@@ -6,7 +6,13 @@ on:
     paths:
       - '*.html'
       - '**/*.html'
+      - '*.js'
+      - '*.css'
+      - '*.webmanifest'
       - 'tools/build_search_index.py'
+      - 'tools/audit_site.py'
+      - '.github/workflows/sitemap-maintenance.yml'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -22,6 +28,9 @@ jobs:
       - name: Build search index
         run: python tools/build_search_index.py
 
+      - name: Audit all HTML pages
+        run: python tools/audit_site.py
+
       - name: Update lastmod for meaningful page changes
         shell: python
         run: |
@@ -31,7 +40,7 @@ jobs:
           message = subprocess.check_output(['git','log','-1','--format=%s'], text=True).strip().lower()
           technical = (
             'css','responsive','layout','cache','branding','seo','sitemap','metadata','workflow',
-            'performance','asset','navigation','mobile','desktop','repair','minif','cleanup'
+            'performance','asset','navigation','mobile','desktop','repair','minif','cleanup','audit'
           )
           if any(word in message for word in technical):
               print('Technical-only commit, keeping content lastmod dates unchanged.')
@@ -65,7 +74,6 @@ jobs:
               else:
                   text = text.replace('</urlset>', f'  <url><loc>{escape(loc)}</loc><lastmod>{date}</lastmod></url>\n</urlset>')
 
-              # Keep Article dateModified synchronized when this page is a guide.
               p = pathlib.Path(name)
               html = p.read_text(encoding='utf-8')
               m = re.search(r'(<script id="guide-article-schema-v625" type="application/ld\+json">)(.*?)(</script>)', html, re.S)
@@ -90,9 +98,9 @@ jobs:
           rm -f .sitemap-skip .sitemap-changed
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add search-index.json sitemap.xml '*.html'
+          git add search-index.json sitemap.xml '*.html' site-audit-report.txt
           if git diff --cached --quiet; then
             exit 0
           fi
-          git commit -m 'Update generated site data'
+          git commit -m 'Update generated site data and audit report'
           git push
