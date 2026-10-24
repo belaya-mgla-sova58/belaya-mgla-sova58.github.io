@@ -11,6 +11,7 @@ on:
       - '*.webmanifest'
       - 'tools/build_search_index.py'
       - 'tools/audit_site.py'
+      - 'tools/source_cleanup.py'
       - '.github/workflows/sitemap-maintenance.yml'
   workflow_dispatch:
 
@@ -24,6 +25,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2
+
+      - name: Clean visible source text
+        run: python tools/source_cleanup.py
 
       - name: Build search index
         run: python tools/build_search_index.py
