@@ -1,0 +1,31 @@
+/* v721 — polished priority rank badges for hero guides */
+.jero-page .jero-priority .jero-rank{
+  display:inline-grid!important;
+  place-items:center!important;
+  width:36px!important;
+  height:36px!important;
+  margin:0 10px 0 0!important;
+  border-radius:50%!important;
+  border:1px solid rgba(220,247,255,.72)!important;
+  background:
+    radial-gradient(circle at 30% 24%,rgba(255,255,255,.9) 0 5%,transparent 6%),
+    radial-gradient(circle at 34% 28%,#9af3ff 0%,#64d5ff 26%,#3b99f3 58%,#2452bd 100%)!important;
+  color:#fff!important;
+  font-size:16px!important;
+  font-weight:950!important;
+  line-height:1!important;
+  vertical-align:middle!important;
+  text-align:center!important;
+  text-shadow:0 1px 2px rgba(0,18,55,.75)!important;
+  box-shadow:
+    0 0 0 3px rgba(91,194,255,.12),
+    0 0 18px rgba(64,169,255,.36),
+    0 8px 18px rgba(0,42,100,.34),
+    inset 0 1px 0 rgba(255,255,255,.55),
+    inset 0 -2px 5px rgba(4,33,95,.28)!important;
+  flex:0 0 36px!important;
+}
+.jero-page .jero-priority b{display:flex!important;align-items:center!important;gap:0!important;min-height:36px!important}
+@media(max-width:620px){
+  .jero-page .jero-priority .jero-rank{width:34px!important;height:34px!important;flex-basis:34px!important;font-size:15px!important}
+}
