@@ -88,3 +88,26 @@
 .hero-mini[data-epic="seo-yoon"]{--portrait:url("assets/heroes/epic/seo-yoon/portrait.webp")}
 .hero-mini[data-epic="lumak-bokan"]{--portrait:url("assets/heroes/epic/lumak-bokan/portrait.webp")}
 .hero-mini[data-epic="ling-xue"]{--portrait:url("assets/heroes/epic/ling-xue/portrait.webp")}
+
+/* v720: Rare Heroes row before Epic Heroes. */
+.gen-acc:nth-of-type(1){--gen-space:url("assets/generation-space-08-v713.webp?v=714")}
+.gen-acc:nth-of-type(2){--gen-space:url("assets/generation-space-07-v713.webp?v=714")}
+.gen-acc:nth-of-type(3){--gen-space:url("assets/generation-space-01-v713.webp?v=714")}
+.gen-acc:nth-of-type(4){--gen-space:url("assets/generation-space-02-v713.webp?v=714")}
+.gen-acc:nth-of-type(5){--gen-space:url("assets/generation-space-03-v713.webp?v=714")}
+.gen-acc:nth-of-type(6){--gen-space:url("assets/generation-space-04-v713.webp?v=714")}
+.gen-acc:nth-of-type(7){--gen-space:url("assets/generation-space-05-v713.webp?v=714")}
+.gen-acc:nth-of-type(8){--gen-space:url("assets/generation-space-06-v713.webp?v=714")}
+.gen-acc:nth-of-type(9){--gen-space:url("assets/generation-space-07-v713.webp?v=714")}
+.gen-acc:nth-of-type(10){--gen-space:url("assets/generation-space-08-v713.webp?v=714")}
+.gen-acc:nth-of-type(11){--gen-space:url("assets/generation-space-09-v713.webp?v=714")}
+.gen-acc:nth-of-type(12){--gen-space:url("assets/generation-space-10-v713.webp?v=714")}
+.gen-acc:nth-of-type(13){--gen-space:url("assets/generation-space-11-v713.webp?v=714")}
+.gen-acc:nth-of-type(14){--gen-space:url("assets/generation-space-12-v713.webp?v=714")}
+.gen-acc.rare-line>summary{border-color:rgba(117,205,255,.70)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 12px 30px rgba(0,0,0,.27),0 0 25px rgba(74,180,255,.14)!important}
+.gen-acc.rare-line[open]>summary{border-color:rgba(168,228,255,.94)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 16px 36px rgba(0,0,0,.32),0 0 34px rgba(67,188,255,.25)!important}
+.gen-acc.rare-line .gen-title span{border-color:rgba(139,219,255,.58)!important;background:linear-gradient(180deg,rgba(31,127,190,.82),rgba(8,61,108,.90))!important;color:#e5f8ff!important;box-shadow:inset 0 0 10px rgba(199,239,255,.11),0 0 14px rgba(75,192,255,.22)!important}
+.hero-mini[data-rare="smith"]{--portrait:url("assets/heroes/rare/smith/portrait.webp")}
+.hero-mini[data-rare="cloris"]{--portrait:url("assets/heroes/rare/cloris/portrait.webp")}
+.hero-mini[data-rare="eugene"]{--portrait:url("assets/heroes/rare/eugene/portrait.webp")}
+.hero-mini[data-rare="charlie"]{--portrait:url("assets/heroes/rare/charlie/portrait.webp")}
