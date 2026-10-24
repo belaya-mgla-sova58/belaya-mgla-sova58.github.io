@@ -13,8 +13,12 @@ function clean(){
   var n;
   while((n=walker.nextNode())){
     if(!n.parentElement||/^(SCRIPT|STYLE|NOSCRIPT|TEXTAREA|CODE|PRE)$/i.test(n.parentElement.tagName))continue;
-    var s=n.nodeValue||'';
-    if(s.indexOf('Whiteout Survival')!==-1)n.nodeValue=s.replace(/Whiteout Survival/g,'Белая мгла');
+    var s=n.nodeValue||'',trim=s.trim();
+    if(s.indexOf('Whiteout Survival')!==-1){s=s.replace(/Whiteout Survival/g,'Белая мгла');n.nodeValue=s;trim=s.trim()}
+    if(/^(DEBUG|TEST|DEMO|PLACEHOLDER|TECHNICAL)$/i.test(trim)||/^v\d{2,}$/i.test(trim)){
+      var p=n.parentElement;
+      if(p&&p.children.length===0)p.style.display='none';
+    }
   }
 }
 function start(){clean();try{new MutationObserver(function(){clean()}).observe(document.documentElement,{subtree:true,childList:true,characterData:true})}catch(e){}}
