@@ -2,8 +2,8 @@ name: Arena Reminder
 
 on:
   schedule:
-    - cron: '50 23 * * *'
-      timezone: 'Europe/Moscow'
+    # 20:50 UTC = 23:50 Moscow time (MSK, UTC+3 year-round)
+    - cron: '50 20 * * *'
   workflow_dispatch:
 
 jobs:
