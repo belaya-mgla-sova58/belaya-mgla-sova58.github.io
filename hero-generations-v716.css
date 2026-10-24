@@ -43,3 +43,48 @@
    The large portrait and sparkle are CSS pseudo-elements, so they stay visible. */
 .hero-mini > :not(.hero-mini-caption){display:none!important}
 .hero-mini .hero-mini-caption > :not(strong):not(span){display:none!important}
+
+/* v718: separate Epic Heroes accordion row before generations. Re-map the
+   existing generation backgrounds because the new row becomes nth-of-type(1). */
+.gen-acc:nth-of-type(1){--gen-space:url("assets/generation-space-07-v713.webp?v=714")}
+.gen-acc:nth-of-type(2){--gen-space:url("assets/generation-space-01-v713.webp?v=714")}
+.gen-acc:nth-of-type(3){--gen-space:url("assets/generation-space-02-v713.webp?v=714")}
+.gen-acc:nth-of-type(4){--gen-space:url("assets/generation-space-03-v713.webp?v=714")}
+.gen-acc:nth-of-type(5){--gen-space:url("assets/generation-space-04-v713.webp?v=714")}
+.gen-acc:nth-of-type(6){--gen-space:url("assets/generation-space-05-v713.webp?v=714")}
+.gen-acc:nth-of-type(7){--gen-space:url("assets/generation-space-06-v713.webp?v=714")}
+.gen-acc:nth-of-type(8){--gen-space:url("assets/generation-space-07-v713.webp?v=714")}
+.gen-acc:nth-of-type(9){--gen-space:url("assets/generation-space-08-v713.webp?v=714")}
+.gen-acc:nth-of-type(10){--gen-space:url("assets/generation-space-09-v713.webp?v=714")}
+.gen-acc:nth-of-type(11){--gen-space:url("assets/generation-space-10-v713.webp?v=714")}
+.gen-acc:nth-of-type(12){--gen-space:url("assets/generation-space-11-v713.webp?v=714")}
+.gen-acc:nth-of-type(13){--gen-space:url("assets/generation-space-12-v713.webp?v=714")}
+
+.gen-acc.epic-line>summary{
+  border-color:rgba(194,161,255,.64)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 12px 30px rgba(0,0,0,.27),0 0 26px rgba(142,100,255,.13)!important;
+}
+.gen-acc.epic-line[open]>summary{
+  border-color:rgba(220,198,255,.92)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 16px 36px rgba(0,0,0,.32),0 0 34px rgba(158,113,255,.25)!important;
+}
+.gen-acc.epic-line .gen-title span{
+  border-color:rgba(211,184,255,.54)!important;
+  background:linear-gradient(180deg,rgba(122,78,190,.78),rgba(55,29,104,.86))!important;
+  color:#f1e8ff!important;
+  box-shadow:inset 0 0 10px rgba(229,211,255,.10),0 0 14px rgba(162,112,255,.22)!important;
+}
+.gen-acc.epic-line .gen-panel{
+  box-shadow:0 14px 32px rgba(0,0,0,.24),0 0 24px rgba(151,106,255,.12)!important;
+}
+
+/* Epic hero portraits from the supplied reference catalogue. */
+.hero-mini[data-epic="bahiti"]{--portrait:url("https://whiteout-survival.com/wp-content/uploads/2025/07/bahiti.webp")}
+.hero-mini[data-epic="jasser"]{--portrait:url("https://whiteout-survival.com/wp-content/uploads/2025/07/Jasser.webp")}
+.hero-mini[data-epic="jessie"]{--portrait:url("https://whiteout-survival.com/wp-content/uploads/2025/07/Jessie.webp")}
+.hero-mini[data-epic="gina"]{--portrait:url("https://whiteout-survival.com/wp-content/uploads/2025/07/Gina.webp")}
+.hero-mini[data-epic="patrick"]{--portrait:url("https://whiteout-survival.com/wp-content/uploads/2025/07/Patrick.webp")}
+.hero-mini[data-epic="sergey"]{--portrait:url("https://whiteout-survival.com/wp-content/uploads/2025/07/Sergey.webp")}
+.hero-mini[data-epic="seo-yoon"]{--portrait:url("https://whiteout-survival.com/wp-content/uploads/2025/07/Seo-yoon.webp")}
+.hero-mini[data-epic="lumak-bokan"]{--portrait:url("https://whiteout-survival.com/wp-content/uploads/2025/07/Lumak-Bokan.webp")}
+.hero-mini[data-epic="ling-xue"]{--portrait:url("https://whiteout-survival.com/wp-content/uploads/2025/07/Ling-Xue.webp")}
