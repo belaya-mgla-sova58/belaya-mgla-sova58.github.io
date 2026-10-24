@@ -38,3 +38,8 @@
   border-color:rgba(150,218,255,.42)!important;
 }
 @media(max-width:430px){.gen-title span{display:none!important}}
+
+/* v717: only the intended caption may exist as a real child of a hero card.
+   The large portrait and sparkle are CSS pseudo-elements, so they stay visible. */
+.hero-mini > :not(.hero-mini-caption){display:none!important}
+.hero-mini .hero-mini-caption > :not(strong):not(span){display:none!important}
