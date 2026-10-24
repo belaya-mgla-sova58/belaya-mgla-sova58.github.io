@@ -2,3 +2,7 @@
 
 /* v720: hide duplicate mini avatar on hero pages */
 .epic-hero > .hero-avatar > .hero-portrait > img{display:none!important}
+
+/* v721: catch legacy/injected duplicate mini avatars beside hero names and crumbs */
+.epic-hero h1 img,.epic-crumbs img,.epic-hero h1 .hero-avatar,.epic-crumbs .hero-avatar,.epic-hero h1 .mini-hero-icon,.epic-crumbs .mini-hero-icon{display:none!important}
+.epic-hero h1::before,.epic-hero h1::after,.epic-crumbs::before,.epic-crumbs::after{content:none!important;background-image:none!important}
