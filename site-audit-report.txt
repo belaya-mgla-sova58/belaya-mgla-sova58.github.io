@@ -1,0 +1,44 @@
+АУДИТ САЙТА «БЕЛАЯ МГЛА»
+====================================
+HTML-страниц проверено: 133
+Битых локальных ссылок/файлов: 1
+Несуществующих якорей: 0
+Повторяющихся id: 0
+Видимых технических фраз: 7
+Замечаний по базовой разметке: 6
+Ошибок разбора HTML: 0
+
+БИТЫЕ ССЫЛКИ / ФАЙЛЫ
+--------------------
+hero-generation-09.html: src="assets/heroes/gen-09/xura/portrait.webp" → отсутствует assets/heroes/gen-09/xura/portrait.webp
+
+ЯКОРЯ
+-----
+Нет.
+
+ДУБЛИ ID
+--------
+Нет.
+
+ТЕХНИЧЕСКИЕ ФРАЗЫ
+-----------------
+creative-bananovyi-mom.html: «МУЗЫКАЛЬНАЯ ПУБЛИКАЦИЯ»
+creative-corner.html: «МУЗЫКАЛЬНАЯ ПУБЛИКАЦИЯ»
+creative-corner.html: «НОВАЯ ПРЕМЬЕРА»
+creative-solnechny-zamok.html: «МУЗЫКАЛЬНАЯ ПУБЛИКАЦИЯ»
+hero-alonso.html: «Whiteout Survival»
+hero-flint.html: «Whiteout Survival»
+hero-zinman.html: «Whiteout Survival»
+
+БАЗОВАЯ РАЗМЕТКА
+----------------
+google94584035fdf43cd0.html: нет <title>
+google94584035fdf43cd0.html: нет meta viewport
+google94584035fdf43cd0.html: нет <h1>
+yandex_ee69138efc48d1ec.html: нет <title>
+yandex_ee69138efc48d1ec.html: нет meta viewport
+yandex_ee69138efc48d1ec.html: нет <h1>
+
+ОШИБКИ РАЗБОРА
+--------------
+Нет.
