@@ -111,3 +111,7 @@
 .hero-mini[data-rare="cloris"]{--portrait:url("assets/heroes/rare/cloris/portrait.webp")}
 .hero-mini[data-rare="eugene"]{--portrait:url("assets/heroes/rare/eugene/portrait.webp")}
 .hero-mini[data-rare="charlie"]{--portrait:url("assets/heroes/rare/charlie/portrait.webp")}
+
+/* v721: remove all small duplicate hero thumbnails from card captions. */
+.hero-mini-caption::before,.hero-mini-caption::after{content:none!important;display:none!important;background:none!important}
+.hero-mini-caption img,.hero-mini-caption picture,.hero-mini-caption svg,.hero-mini-caption [style*="background-image"],.hero-mini-caption [class*="avatar"],.hero-mini-caption [class*="icon"],.hero-mini-caption [class*="thumb"]{display:none!important}
