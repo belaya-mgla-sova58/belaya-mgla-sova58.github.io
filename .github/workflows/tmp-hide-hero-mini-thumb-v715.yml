@@ -1,0 +1,24 @@
+name: Temporary hide duplicate hero thumbnail v715
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/tmp-hide-hero-mini-thumb-v715.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Hide injected thumbnails on generation cards
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '\n/* v715: hide extra thumbnails injected inside generation hero cards */\n.hero-mini > img,.hero-mini > picture,.hero-mini .hero-link-thumb,.hero-mini .link-thumb,.hero-mini [class*="thumb"]{display:none!important}\n' >> hero-generations-v714.css
+          sed -i 's/hero-generations-v714.css?v=714/hero-generations-v714.css?v=715/g' hero-generations.html
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add hero-generations-v714.css hero-generations.html
+          git commit -m 'Hide duplicate hero thumbnails in generations'
+          git push
