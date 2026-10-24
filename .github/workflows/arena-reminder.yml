@@ -1,0 +1,44 @@
+name: Arena Reminder
+
+on:
+  schedule:
+    - cron: '50 23 * * *'
+      timezone: 'Europe/Moscow'
+  workflow_dispatch:
+
+jobs:
+  send-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Arena reminder via OneSignal
+        env:
+          ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
+        run: |
+          if [ -z "$ONESIGNAL_API_KEY" ]; then
+            echo "Missing ONESIGNAL_API_KEY secret" >&2
+            exit 1
+          fi
+
+          response=$(curl --fail-with-body --silent --show-error \
+            -X POST 'https://api.onesignal.com/notifications' \
+            -H 'Content-Type: application/json' \
+            -H "Authorization: Key $ONESIGNAL_API_KEY" \
+            --data-binary @- <<'JSON'
+          {
+            "app_id": "072b6603-ca67-49f4-8762-773d2b3968e8",
+            "target_channel": "push",
+            "included_segments": ["Subscribed Users"],
+            "headings": {"en": "Белая Мгла", "ru": "Белая Мгла"},
+            "contents": {
+              "en": "Совушка зовет вас на арену, не пропустите!",
+              "ru": "Совушка зовет вас на арену, не пропустите!"
+            }
+          }
+          JSON
+          )
+
+          echo "$response"
+          echo "$response" | grep -q '"id"' || {
+            echo "OneSignal did not return a notification id" >&2
+            exit 1
+          }
