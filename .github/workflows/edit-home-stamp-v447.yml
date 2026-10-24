@@ -1,0 +1,96 @@
+name: Update homepage stamp v447
+
+on:
+  push:
+    paths:
+      - '.github/workflows/edit-home-stamp-v447.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  edit-stamp:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install image tools
+        run: python -m pip install --quiet pillow opencv-python-headless numpy
+
+      - name: Replace stamp text
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageDraw, ImageFont
+          import cv2, numpy as np, random
+
+          path = 'assets/home-hero-polish-v446.webp'
+          bgr = cv2.imread(path, cv2.IMREAD_COLOR)
+          if bgr is None:
+              raise SystemExit('Could not read homepage image')
+          h, w = bgr.shape[:2]
+          if (w, h) != (1280, 720):
+              raise SystemExit(f'Unexpected image size: {w}x{h}')
+
+          # Remove only the old rubber stamp area. The surrounding image remains untouched.
+          mask = np.zeros((h, w), dtype=np.uint8)
+          pts = np.array([[92, 449], [432, 417], [468, 614], [122, 655]], dtype=np.int32)
+          cv2.fillConvexPoly(mask, pts, 255)
+          clean = cv2.inpaint(bgr, mask, 7, cv2.INPAINT_TELEA)
+          base = Image.fromarray(cv2.cvtColor(clean, cv2.COLOR_BGR2RGB)).convert('RGBA')
+
+          # Draw a new black distressed stamp directly over the restored snow.
+          sw, sh = 340, 172
+          stamp = Image.new('RGBA', (sw, sh), (0, 0, 0, 0))
+          d = ImageDraw.Draw(stamp)
+          ink = (14, 20, 27, 255)
+          d.rounded_rectangle((7, 7, sw-8, sh-8), radius=2, outline=ink, width=6)
+          d.rectangle((17, 17, sw-18, sh-18), outline=(14,20,27,185), width=2)
+
+          font_path = '/usr/share/fonts/truetype/dejavu/DejaVuSansCondensed-Bold.ttf'
+          font1 = ImageFont.truetype(font_path, 27)
+          font2 = ImageFont.truetype(font_path, 31)
+          snowfont = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 23)
+
+          def centered(text, y, font):
+              box = d.textbbox((0,0), text, font=font, stroke_width=0)
+              tw = box[2]-box[0]
+              d.text(((sw-tw)//2, y), text, font=font, fill=ink)
+
+          centered('НЕЗАВИСИМЫЙ САЙТ', 34, font1)
+          centered('58 ГОСУДАРСТВА', 72, font2)
+          d.line((52, 122, sw-52, 122), fill=ink, width=4)
+          sb = d.textbbox((0,0), '❄', font=snowfont)
+          d.text(((sw-(sb[2]-sb[0]))//2, 128), '❄', font=snowfont, fill=ink)
+
+          # A few tiny worn spots make the new mark match the original rubber-stamp texture.
+          random.seed(58)
+          alpha = stamp.getchannel('A')
+          ap = alpha.load()
+          for _ in range(620):
+              x = random.randrange(5, sw-5)
+              y = random.randrange(5, sh-5)
+              if ap[x,y] > 100:
+                  r = random.choice((1,1,1,2))
+                  ImageDraw.Draw(alpha).ellipse((x-r,y-r,x+r,y+r), fill=random.randrange(40,150))
+          stamp.putalpha(alpha)
+
+          rotated = stamp.rotate(8, resample=Image.Resampling.BICUBIC, expand=True)
+          base.alpha_composite(rotated, (94, 436))
+          base.convert('RGB').save(path, 'WEBP', quality=94, method=6)
+          print('Updated', path)
+          PY
+
+      - name: Commit updated hero image
+        run: |
+          if git diff --quiet -- assets/home-hero-polish-v446.webp; then
+            echo 'No image changes detected'
+            exit 0
+          fi
+          git config user.name 'SOVA58 site bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add assets/home-hero-polish-v446.webp
+          git commit -m 'Rename homepage stamp to independent site'
+          git push
