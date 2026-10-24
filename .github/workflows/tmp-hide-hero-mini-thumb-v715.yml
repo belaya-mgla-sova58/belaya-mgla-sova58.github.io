@@ -1,4 +1,4 @@
-name: Hide duplicate hero mini avatars v720
+name: Apply polished hero priority ranks v721
 on:
   push:
     branches: [ main ]
@@ -11,20 +11,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Hide duplicate mini avatars and bust hero CSS cache
+      - name: Add rank stylesheet to all hero guides using priority ranks
         shell: bash
         run: |
           set -euo pipefail
-          if ! grep -q 'v720: hide duplicate mini avatar on hero pages' hero-epic-v719.css; then
-            printf '\n/* v720: hide duplicate mini avatar on hero pages */\n.epic-hero > .hero-avatar > .hero-portrait > img{display:none!important}\n' >> hero-epic-v719.css
-          fi
-          find . -maxdepth 1 -type f -name 'hero-*.html' -print0 | xargs -0 -r sed -i 's/hero-epic-v719.css?v=719/hero-epic-v719.css?v=720/g'
+          python - <<'PY'
+          from pathlib import Path
+          link = '<link href="hero-rank-v721.css?v=721" rel="stylesheet"/>'
+          changed = []
+          for p in Path('.').glob('hero-*.html'):
+              text = p.read_text(encoding='utf-8')
+              if '.jero-rank' not in text or 'hero-rank-v721.css' in text:
+                  continue
+              if '</head>' not in text:
+                  continue
+              text = text.replace('</head>', link + '\n</head>', 1)
+              p.write_text(text, encoding='utf-8')
+              changed.append(p.name)
+          print('Updated:', ', '.join(changed) if changed else 'none')
+          PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add hero-epic-v719.css hero-*.html
+          git add hero-*.html
           if git diff --cached --quiet; then
             echo 'No changes needed'
           else
-            git commit -m 'Hide duplicate mini avatars on hero pages'
+            git commit -m 'Polish hero priority rank badges'
             git push
           fi
