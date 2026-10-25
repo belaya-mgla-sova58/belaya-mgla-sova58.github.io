@@ -9,10 +9,11 @@
 <style>
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#06172b;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}.welcome{position:fixed;inset:0;background:#06172b;color:#fff;overflow:hidden}.art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;transform:scale(1.012);animation:sceneIn 5.2s ease-out forwards}.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,9,28,.01),rgba(0,9,28,0) 64%,rgba(0,9,28,.10));pointer-events:none}.phrase{position:absolute;left:6.1vw;right:6.1vw;bottom:max(5.7vh,calc(env(safe-area-inset-bottom) + 22px));min-height:13.6vh;padding:18px 28px;border:1.5px solid rgba(155,225,255,.95);border-radius:34px;background:linear-gradient(180deg,#1686d1 0%,#0968b4 44%,#063d81 100%);box-shadow:0 16px 38px rgba(0,15,45,.48),inset 0 1px rgba(255,255,255,.28);display:flex;align-items:center;justify-content:center;text-align:center;font-size:clamp(20px,5.2vw,29px);font-weight:900;line-height:1.25;text-shadow:0 2px 8px rgba(0,20,55,.70);opacity:0;transform:translateY(12px);animation:phraseIn .5s .3s ease forwards}.phrase:before,.phrase:after{content:'❄';position:absolute;bottom:14px;font-size:22px;color:#c8efff;opacity:.92}.phrase:before{left:28px}.phrase:after{right:28px}.welcome.fade{animation:fadeOut .52s ease forwards}@keyframes sceneIn{to{transform:scale(1)}}@keyframes phraseIn{to{opacity:1;transform:translateY(0)}}@keyframes fadeOut{to{opacity:0}}@media(prefers-reduced-motion:reduce){.art,.phrase,.welcome.fade{animation:none!important}.phrase{opacity:1;transform:none}}
 </style>
+<script src="assets/welcome-owl-v753-data.js?v=755"></script>
 </head>
 <body>
 <main class="welcome" id="welcomeScreen" aria-label="Добро пожаловать в Белую Мглу">
-<img id="welcomeArt" class="art" src="assets/owl-welcome-v753.jpg?v=754" alt="Белая Мгла, белая пушистая сова в синем шарфе на фоне зимнего королевства" fetchpriority="high" decoding="sync">
+<img id="welcomeArt" class="art" alt="Белая Мгла, белая пушистая сова в синем шарфе на фоне зимнего королевства" fetchpriority="high" decoding="sync">
 <div class="shade" aria-hidden="true"></div>
 <div class="phrase" id="welcomePhrase"></div>
 </main>
@@ -22,8 +23,9 @@
 var phrases=['Добро пожаловать в Белую мглу.','Сова уже на месте. Можно начинать.','Здесь собраны полезные материалы для игроков 58-го.','Устраивайтесь поудобнее.','Добро пожаловать, путник.','Пора заглянуть в Белую мглу.','Хорошего дня и удачных событий!','Пусть сегодня всё идёт по плану.','Проверим, что нового в 58-м?','Время заглянуть в события и награды.','Не забудьте про ежедневные задания.','Пусть сборы будут быстрыми, а награды щедрыми.','Готовы? Тогда отправляемся в Белую мглу!','Загляните в гайды перед следующим событием.','Пусть сегодня хватит и ресурсов, и ускорений.','Хорошей игры и приятной компании!','Новый день, новые события, новые награды.','Пусть ваши отряды всегда возвращаются с победой.','Проверим календарь и ничего не пропустим.','58-е уже здесь. Присоединяйтесь!'];
 var phrase=document.getElementById('welcomePhrase'),screen=document.getElementById('welcomeScreen'),art=document.getElementById('welcomeArt');
 phrase.textContent=phrases[Math.floor(Math.random()*phrases.length)];
-art.addEventListener('error',function(){location.replace('index.html?from=welcome-v754')},{once:true});
-setTimeout(function(){if(screen)screen.classList.add('fade');setTimeout(function(){location.replace('index.html?from=welcome-v754')},500)},4500);
+if(window.__bmWelcomeOwl753){art.src=window.__bmWelcomeOwl753;}else{location.replace('index.html?from=welcome-v755-noowl');return;}
+art.addEventListener('error',function(){location.replace('index.html?from=welcome-v755-error')},{once:true});
+setTimeout(function(){if(screen)screen.classList.add('fade');setTimeout(function(){location.replace('index.html?from=welcome-v755')},500)},4500);
 })();
 </script>
 </body>
