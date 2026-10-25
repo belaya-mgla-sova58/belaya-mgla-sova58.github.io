@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#06172b">
+<title>Опрос • Белая Мгла</title>
+<style>
+:root{--bg1:#031426;--bg2:#082b4d;--card:rgba(6,28,52,.88);--line:rgba(124,211,255,.24);--text:#f5fbff;--muted:#a9c6da;--yes:#35c985;--no:#ff6b79;--blue:#2da9ff;--blue2:#1475d1}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:radial-gradient(circle at 50% -10%,#124979 0,#08233f 32%,#031426 72%);color:var(--text)}
+body{min-height:100vh;overflow-x:hidden}.snow{position:fixed;inset:0;pointer-events:none;opacity:.25;background-image:radial-gradient(circle,#fff 0 1px,transparent 1.6px),radial-gradient(circle,#bfe8ff 0 1px,transparent 1.6px);background-size:44px 44px,70px 70px;background-position:0 0,20px 26px}
+.wrap{min-height:100vh;display:grid;place-items:center;padding:26px 16px 34px}.card{width:min(680px,100%);padding:28px 22px 24px;border:1px solid var(--line);border-radius:28px;background:linear-gradient(180deg,rgba(8,36,65,.94),rgba(4,22,42,.95));box-shadow:0 24px 70px rgba(0,0,0,.38),inset 0 1px rgba(255,255,255,.05);text-align:center;position:relative;overflow:hidden}.card:before{content:"";position:absolute;width:240px;height:240px;border-radius:50%;top:-130px;left:-70px;background:radial-gradient(circle,rgba(67,187,255,.18),transparent 70%)}
+.brand{font-size:14px;letter-spacing:.17em;text-transform:uppercase;color:#8ed8ff;font-weight:800}.owl{font-size:56px;line-height:1;margin:12px 0 8px;filter:drop-shadow(0 8px 18px rgba(0,0,0,.3))}.state{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:rgba(55,171,255,.1);border:1px solid rgba(116,207,255,.18);font-size:13px;color:#bfe8ff;font-weight:700}.state:before{content:"❄"}
+h1{font-size:clamp(28px,6vw,42px);line-height:1.14;margin:18px auto 10px;max-width:590px}.lead{margin:0 auto;color:var(--muted);font-size:15px;line-height:1.55;max-width:540px}.choices{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px auto 18px;max-width:520px}.choice{border-radius:20px;padding:18px 12px;font-size:27px;font-weight:900;border:1px solid rgba(255,255,255,.10);box-shadow:inset 0 1px rgba(255,255,255,.08)}.yes{background:linear-gradient(180deg,rgba(53,201,133,.22),rgba(21,113,79,.24));color:#9ff0c9;border-color:rgba(84,228,163,.28)}.no{background:linear-gradient(180deg,rgba(255,107,121,.20),rgba(145,43,61,.24));color:#ffb6bd;border-color:rgba(255,130,143,.26)}
+.vote{display:flex;align-items:center;justify-content:center;gap:10px;width:min(520px,100%);margin:0 auto;padding:16px 20px;border:0;border-radius:18px;text-decoration:none;color:white;font-size:18px;font-weight:900;background:linear-gradient(180deg,var(--blue),var(--blue2));box-shadow:0 12px 30px rgba(19,116,207,.35),inset 0 1px rgba(255,255,255,.28);transition:.18s ease}.vote:hover{transform:translateY(-1px);filter:brightness(1.06)}.vote:active{transform:translateY(0)}
+.note{margin:14px auto 0;max-width:520px;color:#86abc5;font-size:13px;line-height:1.45}.results{margin:18px auto 0;padding:14px 16px;max-width:520px;border-radius:16px;border:1px dashed rgba(123,211,255,.22);background:rgba(255,255,255,.025);color:#b8d2e4;font-size:13px;line-height:1.45}.back{display:inline-block;margin-top:18px;color:#91ccea;text-decoration:none;font-size:14px}.back:hover{text-decoration:underline}
+@media(max-width:520px){.card{padding:24px 16px 20px;border-radius:23px}.choices{gap:9px}.choice{font-size:24px;padding:15px 8px}.vote{font-size:17px}.owl{font-size:50px}}
+</style>
+</head>
+<body>
+<div class="snow" aria-hidden="true"></div>
+<main class="wrap">
+<section class="card" aria-labelledby="pollTitle">
+<div class="brand">Белая Мгла</div>
+<div class="owl" aria-hidden="true">🦉</div>
+<div class="state">58-е государство</div>
+<h1 id="pollTitle">Будешь ли ты переходить на другое государство?</h1>
+<p class="lead">Один короткий вопрос. Выбери свой вариант, а после голосования сразу увидишь общий результат.</p>
+<div class="choices" aria-label="Варианты ответа">
+<div class="choice yes">Да</div>
+<div class="choice no">Нет</div>
+</div>
+<a class="vote" href="https://strawpoll.com/3RnYXrv79ye" rel="noopener">Перейти к голосованию →</a>
+<p class="note">Вход в аккаунт не требуется. Голосование проходит анонимно на странице опроса.</p>
+<div class="results">После ответа будут видны количество голосов за «Да» и «Нет», а также их соотношение.</div>
+<a class="back" href="index.html">← Вернуться на сайт</a>
+</section>
+</main>
+</body>
+</html>
