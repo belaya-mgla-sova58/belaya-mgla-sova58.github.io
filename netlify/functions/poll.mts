@@ -1,7 +1,7 @@
 import { getStore } from "@netlify/blobs";
 import type { Config } from "@netlify/functions";
 
-const POLL_KEY = "state-transfer-2026-10";
+const POLL_KEY = "state-transfer-2026-10-reset-1";
 const ALLOWED_ORIGIN = "https://belaya-mgla-sova58.github.io";
 
 function corsHeaders(origin: string | null) {
