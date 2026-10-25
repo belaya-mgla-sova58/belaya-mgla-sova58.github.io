@@ -1,4 +1,4 @@
-const CACHE_NAME = 'belaya-mgla-v637';
+const CACHE_NAME = 'belaya-mgla-v638';
 const CORE = [
   './',
   './index.html',
@@ -7,6 +7,7 @@ const CORE = [
   './site-v626.min.css?v=626',
   './site-v629.min.js?v=629',
   './app-splash-v726.js?v=726',
+  './assets/splash-winter-v729.webp?v=729',
   './site-cleanup-v632.js?v=632',
   './ui-cheats-v583.svg',
   './manifest-v541.webmanifest',
@@ -35,11 +36,10 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const req = event.request;
   if (req.method !== 'GET') return;
-
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
 
-  if (req.mode === 'navigate') {
+  if (req.mode === 'navigate' || req.destination === 'script') {
     event.respondWith((async () => {
       const cache = await caches.open(CACHE_NAME);
       try {
@@ -47,27 +47,13 @@ self.addEventListener('fetch', event => {
         if (resp && resp.ok) cache.put(req, resp.clone());
         return resp;
       } catch (e) {
-        return (await cache.match(req, {ignoreSearch:true})) || (await cache.match('./index.html'));
+        return (await cache.match(req, {ignoreSearch:true})) || (req.mode === 'navigate' ? await cache.match('./index.html') : Response.error());
       }
     })());
     return;
   }
 
   if (req.destination === 'audio' || req.destination === 'video') return;
-
-  if (req.destination === 'script' || req.destination === 'style') {
-    event.respondWith((async () => {
-      const cache = await caches.open(CACHE_NAME);
-      try {
-        const resp = await fetch(req, {cache:'no-store'});
-        if (resp && resp.ok && resp.type === 'basic') cache.put(req, resp.clone());
-        return resp;
-      } catch (e) {
-        return (await cache.match(req)) || Response.error();
-      }
-    })());
-    return;
-  }
 
   event.respondWith((async () => {
     const cache = await caches.open(CACHE_NAME);
