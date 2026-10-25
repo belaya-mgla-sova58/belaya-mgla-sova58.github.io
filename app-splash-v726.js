@@ -8,6 +8,6 @@ function init(){if(!stand())return;var css=document.createElement("style");css.i
 @keyframes bmZoom729{0%{transform:scale(1.045)}100%{transform:scale(1)}}
 @keyframes bmSnow729{to{background-position:22px 110vh,-18px 118vh}}
 @media(prefers-reduced-motion:reduce){#bm-splash-v729 img,#bm-splash-v729:after{animation:none!important}}
-`;document.head.appendChild(css);var s=document.createElement("div");s.id="bm-splash-v729";s.innerHTML='<img src="assets/splash-winter-v729.webp?v=729" alt="Белая Мгла, 58-е государство" decoding="sync" fetchpriority="high">';document.body.appendChild(s);setTimeout(function(){s.classList.add('out');setTimeout(function(){s.remove();css.remove()},620)},4380)}
+`;document.head.appendChild(css);var s=document.createElement("div");s.id="bm-splash-v729";s.innerHTML='<img src="assets/splash-winter-v729.webp?v=730" alt="Белая Мгла, 58-е государство" decoding="sync" fetchpriority="high">';document.body.appendChild(s);setTimeout(function(){s.classList.add('out');setTimeout(function(){s.remove();css.remove()},620)},4380)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:!0});else init()
 }();
