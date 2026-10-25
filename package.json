@@ -1,0 +1,9 @@
+{
+  "name": "belaya-mgla-site",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "@netlify/database": "latest",
+    "@netlify/functions": "latest"
+  }
+}
