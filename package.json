@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "dependencies": {
-    "@netlify/database": "latest",
+    "@netlify/blobs": "latest",
     "@netlify/functions": "latest"
   }
 }
