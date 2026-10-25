@@ -2,43 +2,68 @@ name: Arena Reminder
 
 on:
   schedule:
-    # 20:50 UTC = 23:50 Moscow time (MSK, UTC+3 year-round)
-    - cron: '50 20 * * *'
+    # Запускаем заранее: 20:20 UTC = 23:20 по Москве.
+    # Сам OneSignal держит уведомление до 20:50 UTC = 23:50 МСК.
+    - cron: '20 20 * * *'
   workflow_dispatch:
 
 jobs:
   send-push:
     runs-on: ubuntu-latest
     steps:
-      - name: Send Arena reminder via OneSignal
+      - name: Schedule Arena reminder via OneSignal
         env:
           ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
         run: |
-          if [ -z "$ONESIGNAL_API_KEY" ]; then
+          set -euo pipefail
+
+          if [ -z "${ONESIGNAL_API_KEY:-}" ]; then
             echo "Missing ONESIGNAL_API_KEY secret" >&2
             exit 1
           fi
 
-          response=$(curl --fail-with-body --silent --show-error \
+          send_after=""
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            today="$(date -u +%F)"
+            target_epoch="$(date -u -d "$today 20:50:00" +%s)"
+            now_epoch="$(date -u +%s)"
+
+            if [ "$now_epoch" -lt "$target_epoch" ]; then
+              send_after="$(date -u -d "@$target_epoch" '+%Y-%m-%d %H:%M:%S GMT+0000')"
+              echo "OneSignal will deliver at: $send_after"
+            else
+              echo "Workflow started after 20:50 UTC; sending immediately instead of skipping."
+            fi
+          else
+            echo "Manual run: sending immediately."
+          fi
+
+          payload="$(jq -n \
+            --arg app_id "072b6603-ca67-49f4-8762-773d2b3968e8" \
+            --arg title "Белая Мгла" \
+            --arg body "Совушка зовет вас на арену, не пропустите!" \
+            --arg url "https://belaya-mgla-sova58.github.io/arena.html" \
+            --arg send_after "$send_after" \
+            '{
+              app_id: $app_id,
+              target_channel: "push",
+              included_segments: ["Subscribed Users"],
+              headings: {en: $title, ru: $title},
+              contents: {en: $body, ru: $body},
+              url: $url,
+              ttl: 900,
+              priority: 10,
+              web_push_topic: "arena-reminder"
+            } + (if $send_after != "" then {send_after: $send_after} else {} end)')"
+
+          response="$(curl --fail-with-body --silent --show-error \
             -X POST 'https://api.onesignal.com/notifications' \
             -H 'Content-Type: application/json' \
             -H "Authorization: Key $ONESIGNAL_API_KEY" \
-            --data-binary @- <<'JSON'
-          {
-            "app_id": "072b6603-ca67-49f4-8762-773d2b3968e8",
-            "target_channel": "push",
-            "included_segments": ["Subscribed Users"],
-            "headings": {"en": "Белая Мгла", "ru": "Белая Мгла"},
-            "contents": {
-              "en": "Совушка зовет вас на арену, не пропустите!",
-              "ru": "Совушка зовет вас на арену, не пропустите!"
-            }
-          }
-          JSON
-          )
+            --data-binary "$payload")"
 
           echo "$response"
-          echo "$response" | grep -q '"id"' || {
+          echo "$response" | jq -e '.id and (.id != "")' >/dev/null || {
             echo "OneSignal did not return a notification id" >&2
             exit 1
           }
