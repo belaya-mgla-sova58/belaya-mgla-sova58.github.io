@@ -1,4 +1,4 @@
-import { getDatabase } from "@netlify/database";
+import { getStore } from "@netlify/blobs";
 import type { Config } from "@netlify/functions";
 
 const POLL_KEY = "state-transfer-2026-10";
@@ -15,20 +15,27 @@ function corsHeaders(origin: string | null) {
   };
 }
 
+function getVotesStore() {
+  return getStore({ name: "poll-votes", consistency: "strong" });
+}
+
 async function totals() {
-  const db = getDatabase();
-  const rows = await db.sql<{ choice: string; count: string }>`
-    SELECT choice, COUNT(*)::text AS count
-    FROM poll_votes
-    WHERE poll_key = ${POLL_KEY}
-    GROUP BY choice
-  `;
+  const store = getVotesStore();
+  const { blobs } = await store.list({ prefix: `${POLL_KEY}/` });
   let yes = 0;
   let no = 0;
-  for (const row of rows) {
-    if (row.choice === "yes") yes = Number(row.count) || 0;
-    if (row.choice === "no") no = Number(row.count) || 0;
+
+  const values = await Promise.all(
+    blobs.map(async ({ key }) => {
+      return await store.get(key, { type: "json", consistency: "strong" }) as { choice?: string } | null;
+    })
+  );
+
+  for (const value of values) {
+    if (value?.choice === "yes") yes += 1;
+    if (value?.choice === "no") no += 1;
   }
+
   const total = yes + no;
   return {
     yes,
@@ -48,7 +55,12 @@ export default async (req: Request) => {
   }
 
   if (req.method === "GET") {
-    return Response.json(await totals(), { headers });
+    try {
+      return Response.json(await totals(), { headers });
+    } catch (error) {
+      console.error("poll totals error", error);
+      return Response.json({ error: "storage_unavailable" }, { status: 503, headers });
+    }
   }
 
   if (req.method !== "POST") {
@@ -69,20 +81,25 @@ export default async (req: Request) => {
     return Response.json({ error: "invalid_vote" }, { status: 400, headers });
   }
 
-  const db = getDatabase();
-  const inserted = await db.sql<{ choice: string }>`
-    INSERT INTO poll_votes (poll_key, voter_token, choice)
-    VALUES (${POLL_KEY}, ${voterToken}, ${choice})
-    ON CONFLICT (poll_key, voter_token) DO NOTHING
-    RETURNING choice
-  `;
+  try {
+    const store = getVotesStore();
+    const key = `${POLL_KEY}/${voterToken}`;
+    const { modified } = await store.setJSON(
+      key,
+      { choice, createdAt: new Date().toISOString() },
+      { onlyIfNew: true }
+    );
 
-  const result = await totals();
-  if (!inserted.length) {
-    return Response.json({ ok: false, alreadyVoted: true, ...result }, { status: 409, headers });
+    const result = await totals();
+    if (!modified) {
+      return Response.json({ ok: false, alreadyVoted: true, ...result }, { status: 409, headers });
+    }
+
+    return Response.json({ ok: true, alreadyVoted: false, choice, ...result }, { status: 201, headers });
+  } catch (error) {
+    console.error("poll vote error", error);
+    return Response.json({ error: "storage_unavailable" }, { status: 503, headers });
   }
-
-  return Response.json({ ok: true, alreadyVoted: false, choice, ...result }, { status: 201, headers });
 };
 
 export const config: Config = {
