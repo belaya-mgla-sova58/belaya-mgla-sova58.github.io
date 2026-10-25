@@ -1,0 +1,83 @@
+/* Белая Мгла — системное исправление контраста и мобильной читаемости v633 */
+
+/* v631 случайно стилизовал любой класс с copy- как кнопку. Возвращаем текстовым контейнерам их нормальный фон. */
+[class*="copy-"]:not(button):not(a):not([role="button"]){background:transparent!important;border:0!important;box-shadow:none!important;color:inherit!important}
+
+/* Защита от горизонтального выезда на мобильных и узких окнах */
+html,body{max-width:100%;overflow-x:hidden!important}
+#appMain,.route-page,.guide-page-v69,.page-shell,.content-wrap{min-width:0;max-width:100%;box-sizing:border-box}
+.route-page img,.guide-page-v69 img,.route-page video,.guide-page-v69 video{max-width:100%!important;height:auto}
+
+/* Поиск */
+.site-search-input-v426{color:#eef7ff!important}
+.site-search-input-v426::placeholder{color:#8fb5d3!important;opacity:1!important}
+.site-search-clear-v426{color:#cbe8fb!important}
+
+/* Основные хлебные крошки: тёмная спокойная плашка вместо светлых таблеток */
+.breadcrumbs-v409{background:rgba(5,25,57,.74)!important;border:1px solid rgba(123,195,244,.22)!important;border-radius:13px!important;box-shadow:none!important;color:#c9deef!important}
+.breadcrumbs-v409 a,.breadcrumbs-v409 [aria-current="page"],.breadcrumbs-v409 span{background:transparent!important;border:0!important;box-shadow:none!important;color:#eef6ff!important}
+.breadcrumbs-v409 .breadcrumbs-sep-v409{color:#79bfe9!important}
+
+/* Отдельные страницы героев */
+.jero-crumbs{display:flex!important;align-items:center!important;gap:7px!important;flex-wrap:wrap!important;padding:8px 10px!important;border:1px solid rgba(123,195,244,.18)!important;border-radius:13px!important;background:rgba(5,25,57,.66)!important;color:#b9d1e2!important}
+.jero-crumbs a,.jero-crumbs span{background:transparent!important;border:0!important;box-shadow:none!important;color:#c9edff!important;padding:0!important}
+
+/* Категория «Поколения героев» и похожие copy-контейнеры */
+.hero-category-copy-v708{display:block!important;background:transparent!important;border:0!important;box-shadow:none!important}
+.hero-category-copy-v708 small{color:#72d9ff!important}
+.hero-category-copy-v708 strong{color:#fff!important}
+.hero-category-copy-v708 span{color:#a9cada!important}
+
+/* Уведомления на главной */
+.notify-test-v630{background:linear-gradient(145deg,#0d3568,#182f68)!important;border-color:rgba(120,207,255,.42)!important}
+.notify-copy-v630,.notify-copy-v630>div{background:transparent!important;border:0!important;box-shadow:none!important}
+.notify-copy-v630 b{color:#fff!important;text-shadow:0 1px 2px rgba(0,0,0,.28)!important}
+.notify-copy-v630 small{color:#d6e9fb!important;opacity:1!important}
+.notify-status-v630{color:#d9ecff!important;opacity:1!important;font-weight:600!important}
+.notify-btn-v630,.notify-btn-v630:disabled{color:#fff!important;opacity:1!important}
+
+/* Карточки последних новостей: текст всегда на тёмной читаемой подложке */
+.home-news-banner-copy-v449{background:rgba(3,18,42,.82)!important;border:1px solid rgba(135,201,245,.18)!important;box-shadow:0 4px 14px rgba(0,0,0,.22)!important;border-radius:10px!important;padding:7px 9px!important}
+.home-news-banner-copy-v449 b{color:#fff!important;text-shadow:0 1px 5px rgba(0,0,0,.65)!important;opacity:1!important}
+.home-news-banner-copy-v449 small{color:#d6e8f7!important;text-shadow:0 1px 4px rgba(0,0,0,.55)!important;opacity:1!important}
+.home-news-banner-v449>i,.home-news-card-v442>i{color:#fff!important;opacity:1!important;text-shadow:0 1px 5px rgba(0,0,0,.7)!important}
+
+/* Светлые новостные карточки из общего слоя получают тёмный текст */
+.state58-news-card :is(h1,h2,h3,h4,b,strong){color:#173f6f!important}
+.state58-news-card :is(p,li,span,small){color:#526b84!important}
+.state58-news-card a{color:#246ca8!important}
+
+/* Общие светлые служебные элементы */
+.guide-back-link,.page-tools a,.page-tools .route-link{color:#255e91!important}
+
+/* Инпуты: текст и placeholder не должны исчезать */
+input,select,textarea{max-width:100%;box-sizing:border-box}
+input::placeholder,textarea::placeholder{opacity:1}
+
+/* Fixed bottom bar не перекрывает последний блок */
+@media(max-width:980px),(hover:none) and (pointer:coarse){
+  body.modern-v424 .route-page,body.modern-v424 #appMain{padding-bottom:max(88px,env(safe-area-inset-bottom))!important}
+  body.modern-v424 .mobile-bottom-v424{padding-bottom:max(4px,env(safe-area-inset-bottom))!important}
+  .sova-smart-close,[class*="close"]:is(button,[role="button"]){min-width:40px;min-height:40px}
+}
+
+@media(max-width:900px){
+  .breadcrumbs-v409{max-width:100%;overflow-x:auto;white-space:nowrap;padding:8px 10px!important;margin-bottom:10px!important}
+  .jero-crumbs{font-size:11px!important;margin-bottom:10px!important}
+  .hero-category-link-v708{align-items:center!important}
+  .hero-category-copy-v708{min-width:0!important}
+  .hero-category-copy-v708 strong{font-size:clamp(22px,7vw,31px)!important}
+  .hero-category-copy-v708 span{font-size:12px!important;line-height:1.4!important}
+  .notify-copy-v630 b{font-size:13px!important}
+  .notify-copy-v630 small{font-size:10px!important;line-height:1.35!important}
+  .notify-status-v630{font-size:10.5px!important}
+  .home-news-banner-copy-v449{left:7px!important;right:7px!important;bottom:7px!important}
+  .home-news-banner-copy-v449 b{font-size:12px!important;line-height:1.2!important}
+  .home-news-banner-copy-v449 small{font-size:9.5px!important;line-height:1.25!important}
+}
+
+@media(max-width:520px){
+  .route-page,.guide-page-v69,.page-shell{min-width:0!important}
+  .guide-fold-summary-v414,.guide-fold-body-v414,.guide-nav-card,.hero-category-link-v708{max-width:100%!important;box-sizing:border-box!important}
+  .guide-fold-title-v414{min-width:0!important;overflow-wrap:anywhere!important}
+}
