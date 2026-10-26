@@ -21,7 +21,7 @@
     }
     var canyonShop=document.querySelector('img[alt="Магазин Битвы в каньоне"]');
     if(canyonShop){
-      canyonShop.src='assets/canyon-shop-user-v777.webp?v=777';
+      canyonShop.src='assets/canyon-shop-user-v777.webp?v=778';
       canyonShop.removeAttribute('srcset');
       canyonShop.style.opacity='1';
       canyonShop.setAttribute('data-canyon-shop-user-v777','1');
