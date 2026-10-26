@@ -1,4 +1,4 @@
-name: Separate WhiteFox week 43 comments
+name: Add WhiteFox week 43 romance badge
 on:
   push:
     paths:
@@ -13,17 +13,22 @@ jobs:
       - run: |
           python - <<'PY'
           from pathlib import Path
-          p=Path('whitefox-elena-43.html')
+          p=Path('news-elena.html')
           s=p.read_text(encoding='utf-8')
-          old="function scopeFor(key){return key.indexOf('romance')!==-1?'r':'q'}"
-          new="function scopeFor(key){return key.indexOf('romance')!==-1?'r43':'q43'}"
-          if old not in s:
-              raise SystemExit('scopeFor not found')
-          s=s.replace(old,new,1)
-          p.write_text(s,encoding='utf-8')
+          start=s.index('href="whitefox-elena-43.html?v=571"')
+          end=s.index('<div class="whitefox-card-stats-v557"', start)
+          block=s[start:end]
+          badge='<span class="whitefox-index-badge-r-v557" style="display:inline-flex!important;align-items:center!important;padding:6px 10px!important;border-radius:999px!important;background:#ffe1ee!important;border:1px solid #f0a8c7!important;color:#8d2458!important;-webkit-text-fill-color:#8d2458!important;text-shadow:none!important;opacity:1!important;font-size:11px!important;font-weight:900!important;line-height:1!important">💕 Романтика</span>'
+          if '💕 Романтика' not in block:
+              marker='</span>\n\n</div>'
+              if marker not in block:
+                  raise SystemExit('week 43 badge block marker not found')
+              block=block.replace(marker,'</span>\n'+badge+'\n</div>',1)
+              s=s[:start]+block+s[end:]
+              p.write_text(s,encoding='utf-8')
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add whitefox-elena-43.html
-          git diff --cached --quiet || git commit -m 'Separate WhiteFox week 43 comments from old news'
+          git add news-elena.html
+          git diff --cached --quiet || git commit -m 'Add romance badge to WhiteFox week 43 card'
           git push
