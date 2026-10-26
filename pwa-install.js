@@ -21,10 +21,10 @@
     }
     var canyonShop=document.querySelector('img[alt="Магазин Битвы в каньоне"]');
     if(canyonShop){
-      canyonShop.src='assets/canyon-shop-user-v777.webp?v=778';
+      canyonShop.src='assets/canyon-shop-user-v779.jpg?v=779';
       canyonShop.removeAttribute('srcset');
       canyonShop.style.opacity='1';
-      canyonShop.setAttribute('data-canyon-shop-user-v777','1');
+      canyonShop.setAttribute('data-canyon-shop-user-v779','1');
     }
   }
   if(!document.querySelector('link[data-news-update-reactions-v761]')){var css=document.createElement('link');css.rel='stylesheet';css.href='news-update-reactions-v761.css?v=769';css.setAttribute('data-news-update-reactions-v761','');document.head.appendChild(css);}
