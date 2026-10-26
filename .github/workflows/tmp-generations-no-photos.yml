@@ -1,4 +1,4 @@
-name: Update WhiteFox romance block 43
+name: Separate WhiteFox week 43 comments
 on:
   push:
     paths:
@@ -13,24 +13,17 @@ jobs:
       - run: |
           python - <<'PY'
           from pathlib import Path
-          p = Path('whitefox-elena-43.html')
-          s = p.read_text(encoding='utf-8')
-          start = '<div class="whitefox-section-title"><span>💕</span><h3>Клуб романтики госа 58, неделя 43</h3></div>'
-          end = '<div class="anon-comments-v557" data-comment-key="whitefox-elena-43-romance">'
-          a = s.index(start) + len(start)
-          b = s.index(end, a)
-          body = '\n' + '\n'.join([
-              '<div class="whitefox-romance-item-v557">💙💙 Атаман и Безразличие не скрывают своих чувств 😌</div>',
-              '<div class="whitefox-romance-item-v557">🚗 🚗 Банкир подарил Puss и ее подружке по машинке. Щедрый мужчина ☺</div>',
-              '<div class="whitefox-romance-item-v557">В LAF замечен романтический жест от Солнышка в сторону Irko007. Любофф..?</div>',
-              '<div class="whitefox-romance-item-v557">🎁 Насчитали 3 подарка от Адмирала соклановцам. Будет 4ый?</div>',
-              '<div class="whitefox-romance-item-v557">🌸 Видела подарки игрокам ZOV, один точно был от DK. Но кажется он шифруется (стесняется) и остальные 2-3 (?) подарил тайно.. 👀</div>',
-              '<div class="whitefox-romance-item-v557">🐻 Братский жест от Dias в сторону Modest мы тоже заметили 😉</div>'
-          ]) + '\n'
-          p.write_text(s[:a] + body + s[b:], encoding='utf-8')
+          p=Path('whitefox-elena-43.html')
+          s=p.read_text(encoding='utf-8')
+          old="function scopeFor(key){return key.indexOf('romance')!==-1?'r':'q'}"
+          new="function scopeFor(key){return key.indexOf('romance')!==-1?'r43':'q43'}"
+          if old not in s:
+              raise SystemExit('scopeFor not found')
+          s=s.replace(old,new,1)
+          p.write_text(s,encoding='utf-8')
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add whitefox-elena-43.html
-          git diff --cached --quiet || git commit -m 'Update week 43 romance club text'
+          git diff --cached --quiet || git commit -m 'Separate WhiteFox week 43 comments from old news'
           git push
