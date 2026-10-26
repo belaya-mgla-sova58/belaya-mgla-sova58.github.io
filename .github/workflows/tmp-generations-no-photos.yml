@@ -1,4 +1,4 @@
-name: Bust splash script cache
+name: Rebuild mobile splash flow
 on:
   push:
     paths:
@@ -10,31 +10,66 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Update splash cache versions
+      - name: Rebuild splash flow
         run: |
           python - <<'PY'
           from pathlib import Path
+          import re, base64
 
-          p = Path('site-v629.min.js')
-          s = p.read_text(encoding='utf-8')
-          old = 'app-splash-v726.js?v=729'
-          new = 'app-splash-v726.js?v=911'
-          if old not in s and new not in s:
-              raise SystemExit('splash script reference not found')
-          s = s.replace(old, new, 1)
-          p.write_text(s, encoding='utf-8')
+          # 1) Extract the current approved splash artwork from the heavy inline data URI
+          wp = Path('welcome.html')
+          w = wp.read_text(encoding='utf-8')
+          m = re.search(r'src="data:image/webp;base64,([A-Za-z0-9+/=]+)"', w)
+          art = Path('welcome-splash-v912.webp')
+          if m:
+              art.write_bytes(base64.b64decode(m.group(1)))
+          elif not art.exists():
+              raise SystemExit('welcome artwork data URI not found')
 
-          p = Path('index.html')
-          s = p.read_text(encoding='utf-8')
-          old = 'site-v629.min.js?v=629'
-          new = 'site-v629.min.js?v=911'
-          if old not in s and new not in s:
-              raise SystemExit('site loader reference not found')
-          s = s.replace(old, new, 1)
-          p.write_text(s, encoding='utf-8')
+          # 2) Make welcome.html lightweight so the artwork paints immediately
+          welcome = '''<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#031426">
+<meta name="robots" content="noindex,nofollow">
+<title>Белая Мгла</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#031426;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}.welcome{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(22px,6vh,56px) 22px;background:radial-gradient(circle at 50% 38%,rgba(27,111,192,.22),transparent 38%),linear-gradient(180deg,#031426 0%,#041a31 55%,#031426 100%);overflow:hidden}.welcome:before{content:"";position:absolute;width:78vw;height:78vw;max-width:620px;max-height:620px;border-radius:50%;background:radial-gradient(circle,rgba(74,177,255,.16),transparent 66%);filter:blur(12px);pointer-events:none}.splash-art{position:relative;z-index:1;width:min(82vw,520px);max-height:57vh;aspect-ratio:1/1;object-fit:cover;display:block;border-radius:26px;box-shadow:0 0 0 1px rgba(143,219,255,.18),0 22px 70px rgba(0,0,0,.38),0 0 58px rgba(49,154,255,.20)}.splash-copy{position:relative;z-index:2;margin-top:22px;text-align:center;color:#f5fbff;text-shadow:0 2px 18px rgba(25,132,225,.35)}.splash-copy h1{margin:0;font-size:clamp(34px,10vw,54px);line-height:.95;font-weight:900;letter-spacing:.02em}.splash-copy strong{display:block;margin-top:7px;font-size:clamp(20px,5.8vw,30px);letter-spacing:.08em}.splash-copy small{display:block;margin-top:9px;color:#b8d8ef;font-size:clamp(12px,3.4vw,16px);font-weight:700;letter-spacing:.06em}.welcome.fade{animation:fadeOut .42s ease forwards}@keyframes fadeOut{to{opacity:0}}@media(max-height:650px){.splash-art{width:min(68vw,420px);max-height:48vh}.splash-copy{margin-top:14px}.splash-copy h1{font-size:32px}.splash-copy strong{font-size:19px}.splash-copy small{margin-top:5px}}
+</style>
+<link rel="preload" href="welcome-splash-v912.webp" as="image" type="image/webp">
+</head>
+<body>
+<main class="welcome" id="welcomeScreen" aria-label="Белая мгла: Выживание. Независимый сайт">
+<img class="splash-art" alt="Белая мгла" src="welcome-splash-v912.webp" decoding="sync" fetchpriority="high">
+<div class="splash-copy"><h1>Белая мгла</h1><strong>ВЫЖИВАНИЕ</strong><small>НЕЗАВИСИМЫЙ САЙТ</small></div>
+</main>
+<script>
+(function(){var s=document.getElementById('welcomeScreen');setTimeout(function(){if(s)s.classList.add('fade');setTimeout(function(){location.replace('index.html?from=welcome-v912')},420)},2800)})();
+</script>
+</body>
+</html>'''
+          wp.write_text(welcome, encoding='utf-8')
+
+          # 3) Redirect to welcome before the home page can paint.
+          ip = Path('index.html')
+          s = ip.read_text(encoding='utf-8')
+          if 'splash-early-v912' not in s:
+              marker = '<meta content="width=device-width, initial-scale=1" name="viewport"/>'
+              early = '''<script id="splash-early-v912">(function(){try{var q=new URLSearchParams(location.search),f=q.get('from')||'';if(/^welcome-v\\d+/i.test(f))return;var mobile=matchMedia('(hover:none)').matches||matchMedia('(pointer:coarse)').matches||Math.min(screen.width||9999,screen.height||9999)<900;if(!mobile)return;location.replace('/welcome.html?v=912')}catch(e){}})();</script>'''
+              if marker not in s: raise SystemExit('index viewport marker not found')
+              s = s.replace(marker, marker + early, 1)
+          ip.write_text(s, encoding='utf-8')
+
+          # 4) Update manifest start URL for new installs.
+          mp = Path('manifest-v541.webmanifest')
+          ms = mp.read_text(encoding='utf-8')
+          ms = re.sub(r'"start_url"\s*:\s*"[^"]+"', '"start_url": "./welcome.html?v=912"', ms, count=1)
+          mp.write_text(ms, encoding='utf-8')
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add site-v629.min.js index.html
-          git diff --cached --quiet || git commit -m 'Refresh mobile splash scripts'
+          git add welcome.html welcome-splash-v912.webp index.html manifest-v541.webmanifest
+          git diff --cached --quiet || git commit -m 'Fix mobile splash sequence and rendering'
           git push
