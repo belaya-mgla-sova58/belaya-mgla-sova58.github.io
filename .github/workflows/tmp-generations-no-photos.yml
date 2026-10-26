@@ -1,4 +1,4 @@
-name: Add WhiteFox week 43 romance club
+name: Update WhiteFox week 43 romance club
 on:
   push:
     paths:
@@ -13,33 +13,24 @@ jobs:
       - run: |
           python - <<'PY'
           from pathlib import Path
-          import re
           p=Path('whitefox-elena-43.html')
           s=p.read_text(encoding='utf-8')
-          if 'id="whitefox43Romance"' in s:
-              raise SystemExit('romance section already exists')
-          m=re.search(r'(<section class="whitefox-story-block whitefox-questions-v557" id="whitefox43Questions">.*?</section>)',s,re.S)
-          if not m:
-              raise SystemExit('questions section not found')
-          sec=m.group(1)
-          romance=sec
-          romance=romance.replace('class="whitefox-story-block whitefox-questions-v557" id="whitefox43Questions"','class="whitefox-story-block whitefox-romance-v557" id="whitefox43Romance"',1)
-          romance=re.sub(r'<div class="whitefox-section-title"><span>❓</span><h3>.*?</h3></div>', '<div class="whitefox-section-title"><span>💕</span><h3>Клуб романтики госа 58, неделя 43</h3></div>', romance, count=1, flags=re.S)
-          body='''<div class="whitefox-romance-item-v557">🚗 🚗 Банкир подарил Puss и ее подружке по машинке. Какой щедрый мужчина ☺</div>\n<div class="whitefox-romance-item-v557">В LAF был замечен романтический жест со стороны Солнышка в сторону Irko007. Любофф..?</div>\n<div class="whitefox-romance-item-v557">🎁 Насчитали три подарка от Адмирала соклановцам. Будет 4ый?</div>\n<div class="whitefox-romance-item-v557">🌸 Еще видела подарки игрокам ZOV, один из них точно был от DK. Но кажется он шифруется (стесняется) и остальные 2-3 (?) подарил тайно.. 👀</div>'''
-          romance=re.sub(r'<div class="whitefox-question-list-v557">.*?</div>\s*<div class="whitefox-editor-note-v557">.*?</div>', body, romance, count=1, flags=re.S)
-          romance=romance.replace('data-comment-key="whitefox-elena-43-questions"','data-comment-key="whitefox-elena-43-romance"',1)
-          romance=romance.replace('💬 Анонимные комментарии к вопросам','💬 Анонимные комментарии к клубу романтики',1)
-          romance=romance.replace('aria-label="Анонимный комментарий к вопросам"','aria-label="Анонимный комментарий к клубу романтики"',1)
-          romance=romance.replace('placeholder="Напишите комментарий без имени…"','placeholder="Что думаете? Напишите анонимно…"',1)
-          s=s[:m.end()]+"\n"+romance+s[m.end():]
-          jump='<div class="whitefox-week42-jump-v558" aria-label="Быстрые переходы по публикации"><a href="#whitefox43Questions">❓ Вопросы</a></div>'
-          jump2='<div class="whitefox-week42-jump-v558" aria-label="Быстрые переходы по публикации"><a href="#whitefox43Questions">❓ Вопросы</a><a href="#whitefox43Romance">💕 Клуб романтики</a></div>'
-          if jump in s:
-              s=s.replace(jump,jump2,1)
-          p.write_text(s,encoding='utf-8')
+          old='''<div class="whitefox-romance-item-v557">🚗 🚗 Банкир подарил Puss и ее подружке по машинке. Какой щедрый мужчина ☺</div>
+<div class="whitefox-romance-item-v557">В LAF был замечен романтический жест со стороны Солнышка в сторону Irko007. Любофф..?</div>
+<div class="whitefox-romance-item-v557">🎁 Насчитали три подарка от Адмирала соклановцам. Будет 4ый?</div>
+<div class="whitefox-romance-item-v557">🌸 Еще видела подарки игрокам ZOV, один из них точно был от DK. Но кажется он шифруется (стесняется) и остальные 2-3 (?) подарил тайно.. 👀</div>'''
+          new='''<div class="whitefox-romance-item-v557">💙💙 Атаман и Безразличие не скрывают своих чувств 😌</div>
+<div class="whitefox-romance-item-v557">🚗 🚗 Банкир подарил Puss и ее подружке по машинке. Щедрый мужчина ☺</div>
+<div class="whitefox-romance-item-v557">В LAF замечен романтический жест от Солнышка в сторону Irko007. Любофф..?</div>
+<div class="whitefox-romance-item-v557">🎁 Насчитали 3 подарка от Адмирала соклановцам. Будет 4ый?</div>
+<div class="whitefox-romance-item-v557">🌸 Видела подарки игрокам ZOV, один точно был от DK. Но кажется он шифруется (стесняется) и остальные 2-3 (?) подарил тайно.. 👀</div>
+<div class="whitefox-romance-item-v557">🐻 Братский жест от Dias в сторону Modest мы тоже заметили 😉</div>'''
+          if old not in s:
+              raise SystemExit('old romance block not found')
+          p.write_text(s.replace(old,new,1),encoding='utf-8')
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add whitefox-elena-43.html
-          git diff --cached --quiet || git commit -m 'Add week 43 romance club with anonymous comments'
+          git diff --cached --quiet || git commit -m 'Update week 43 romance club text'
           git push
