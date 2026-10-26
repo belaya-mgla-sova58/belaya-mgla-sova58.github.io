@@ -53,4 +53,12 @@
     n.setAttribute('data-news-halloween-card-v764','');
     document.head.appendChild(n);
   }
+
+  if(!document.querySelector('link[data-news-halloween-livefix-v766]')){
+    var halloweenFix=document.createElement('link');
+    halloweenFix.rel='stylesheet';
+    halloweenFix.href='news-halloween-livefix-v766.css?v=766';
+    halloweenFix.setAttribute('data-news-halloween-livefix-v766','');
+    document.head.appendChild(halloweenFix);
+  }
 })();
