@@ -3,7 +3,7 @@
   "short_name": "Белая Мгла",
   "description": "Гайды, события, калькуляторы и база знаний по Белой мгле для государства 58.",
   "lang": "ru",
-  "start_url": "./welcome.html?v=909",
+  "start_url": "./index.html?from=welcome-v913",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
