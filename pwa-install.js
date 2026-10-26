@@ -10,6 +10,33 @@
     ec.setAttribute('data-event-calendar-auto-v771','');
     document.head.appendChild(ec);
   }
+  if(document.body&&document.body.classList.contains('is-canyon-clash-route')){
+    var canyonStyle=document.createElement('style');
+    canyonStyle.textContent='body.is-canyon-clash-route .canyon-hero img{object-fit:contain!important;max-height:520px!important;background:#071426}@media(max-width:760px){body.is-canyon-clash-route .canyon-hero img{max-height:360px!important}}';
+    document.head.appendChild(canyonStyle);
+    var canyonHero=document.querySelector('.canyon-hero img');
+    if(canyonHero){
+      canyonHero.src='assets/canyon-vote-v775.jpg?v=775';
+      canyonHero.removeAttribute('srcset');
+    }
+    var canyonShop=document.querySelector('img[alt="Магазин Битвы в каньоне"]');
+    if(canyonShop){
+      canyonShop.removeAttribute('srcset');
+      canyonShop.style.opacity='0';
+      canyonShop.style.transition='opacity .15s ease';
+      fetch('assets/canyon-shop-v773.svg?v=776',{cache:'no-store'})
+        .then(function(r){if(!r.ok)throw new Error('shop image');return r.text();})
+        .then(function(t){
+          var m=t.match(/href=["'](data:image\/webp;base64,[^"']+)["']/i);
+          if(!m)throw new Error('shop data');
+          canyonShop.onload=function(){canyonShop.style.opacity='1';};
+          canyonShop.src=m[1];
+          canyonShop.setAttribute('data-canyon-shop-user-v776','');
+          if(canyonShop.complete)canyonShop.style.opacity='1';
+        })
+        .catch(function(){canyonShop.style.opacity='1';});
+    }
+  }
   if(!document.querySelector('link[data-news-update-reactions-v761]')){var css=document.createElement('link');css.rel='stylesheet';css.href='news-update-reactions-v761.css?v=769';css.setAttribute('data-news-update-reactions-v761','');document.head.appendChild(css);}
   if(!document.querySelector('script[data-news-update-reactions-v760]')){var s=document.createElement('script');s.src='news-update-reactions-v760.js?v=769';s.defer=true;s.setAttribute('data-news-update-reactions-v760','');document.head.appendChild(s);}
   if(!document.querySelector('script[data-news-home-category-v762]')){var h=document.createElement('script');h.src='news-home-category-v762.js?v=769';h.defer=true;h.setAttribute('data-news-home-category-v762','');document.head.appendChild(h);}
