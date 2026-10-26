@@ -1,4 +1,4 @@
-name: Fix Canyon Clash map block
+name: Remove Canyon Clash shop section
 on:
   push:
     branches: [main]
@@ -13,23 +13,21 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Fix Canyon Clash map sizing
+      - name: Remove Canyon Clash shop section
         run: |
           set -euo pipefail
           python - <<'PY'
           from pathlib import Path
+          import re
           p = Path('canyon-clash.html')
           s = p.read_text(encoding='utf-8')
-          s = s.replace('<div class="media"><img src="https://truth.bahamut.com.tw/s01/202407/forum/76999/4f3eb413455116893a68382c8cb007b0.JPG"', '<div class="map-media"><img src="https://truth.bahamut.com.tw/s01/202407/forum/76999/4f3eb413455116893a68382c8cb007b0.JPG"')
-          marker = '</style>'
-          css = '''\nbody.is-canyon-clash-route .map-media{display:block!important;margin:15px auto 4px!important;max-width:760px!important;padding:8px!important;border-radius:18px!important;background:rgba(7,23,42,.8)!important;border:1px solid rgba(119,194,255,.2)!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:hidden!important;aspect-ratio:auto!important}\nbody.is-canyon-clash-route .map-media img{display:block!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;aspect-ratio:auto!important;object-fit:contain!important;border-radius:12px!important;background:transparent!important}\nbody.is-canyon-clash-route .map-media .caption{display:block!important;margin:8px 0 0!important;padding:0 5px 2px!important;height:auto!important;min-height:0!important;color:#9ebbd5!important;font-size:12px!important;text-align:center!important;line-height:1.45!important}\n'''
-          if '.map-media{' not in s:
-              s = s.replace(marker, css + marker)
+          s = re.sub(r'<section class="guide-section"><h2>Магазин в каньоне</h2>.*?</section>\s*', '', s, flags=re.S)
+          s = re.sub(r'body\.is-canyon-clash-route \.shop-placeholder\{[^}]*\}\s*', '', s)
           p.write_text(s, encoding='utf-8')
           PY
           git add canyon-clash.html
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git diff --cached --quiet || git commit -m 'Fix Canyon Clash map sizing'
+          git diff --cached --quiet || git commit -m 'Remove Canyon Clash shop section'
           git pull --rebase --autostash origin main
           git push
