@@ -12,9 +12,10 @@
   }
 
   function makeCard(){
+    var header=window.BM_HALLOWEEN_HEADER_V765||'assets/halloween-header-2026-v764.webp';
     var card=document.createElement('div');
     card.className='news-category-card ru halloween-update-card-v764';
-    card.innerHTML='<a class="halloween-card-link-v764" href="news-halloween-2026.html?v=764" aria-label="Хэллоуинская вечеринка 2026"><img class="halloween-card-image-v764" src="assets/halloween-header-2026-v764.webp" alt=""><span class="halloween-card-shade-v764"></span><span class="halloween-card-copy-v764"><b>Хэллоуинская вечеринка</b><small>27 октября — 2 ноября 2026</small></span></a><span class="halloween-new-v764">НОВОЕ</span><span class="halloween-view-v764">👁 <b data-halloween-card-views-v764>…</b></span>';
+    card.innerHTML='<a class="halloween-card-link-v764" href="news-halloween-2026.html?v=765" aria-label="Хэллоуинская вечеринка 2026"><img class="halloween-card-image-v764" src="'+header+'" alt=""><span class="halloween-card-shade-v764"></span><span class="halloween-card-copy-v764"><b>Хэллоуинская вечеринка</b><small>27 октября — 2 ноября 2026</small></span></a><span class="halloween-new-v764">НОВОЕ</span><span class="halloween-view-v764">👁 <b data-halloween-card-views-v764>…</b></span>';
     return card;
   }
 
@@ -25,8 +26,10 @@
     if(!existing){
       existing=makeCard();
       grid.insertBefore(existing,grid.firstChild);
-    } else if(existing!==grid.firstElementChild){
-      grid.insertBefore(existing,grid.firstChild);
+    } else {
+      var img=existing.querySelector('.halloween-card-image-v764');
+      if(img&&window.BM_HALLOWEEN_HEADER_V765)img.src=window.BM_HALLOWEEN_HEADER_V765;
+      if(existing!==grid.firstElementChild)grid.insertBefore(existing,grid.firstChild);
     }
     loadViews();
     return true;
