@@ -24,5 +24,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add news-update-2026-10-19.html
           git diff --cached --quiet && exit 0
-          git commit -m "Update Justus data from video"
+          git commit -m "Update exact Justus skills from new video"
           git push
+
+# run-v2 exact skills from new video
