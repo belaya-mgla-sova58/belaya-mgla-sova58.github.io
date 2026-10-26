@@ -1,4 +1,4 @@
-name: Build WhiteFox week 43 news
+name: Repair WhiteFox week 43 page
 on:
   push:
     paths:
@@ -6,7 +6,7 @@ on:
 permissions:
   contents: write
 jobs:
-  build:
+  repair:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,17 +16,25 @@ jobs:
           import re
 
           src=Path('whitefox-elena-42.html').read_text(encoding='utf-8')
-          s=src.replace('42','43')
+          s=src
+          # Only semantic identifiers/text change. CSS numeric values stay untouched.
+          for old,new in [
+              ('whitefox-elena-42','whitefox-elena-43'),
+              ('whitefox42','whitefox43'),
+              ('Неделя 42','Неделя 43'),
+              ('неделя 42','неделя 43')]:
+              s=s.replace(old,new)
 
-          # Keep only the Questions jump for this issue.
-          s=re.sub(r'<div class="whitefox-week43-jump-v558"[^>]*>.*?</div>',
-                   '<div class="whitefox-week43-jump-v558" aria-label="Быстрые переходы по публикации"><a href="#whitefox43Questions">❓ Вопросы</a></div>',
+          s=re.sub(r'<div class="whitefox-week42-jump-v558"[^>]*>.*?</div>',
+                   '<div class="whitefox-week42-jump-v558" aria-label="Быстрые переходы по публикации"><a href="#whitefox43Questions">❓ Вопросы</a></div>',
                    s, count=1, flags=re.S)
 
-          # Reuse the proven anonymous-comment block from week 42, with fresh week-43 keys.
           q_start=s.index('<section class="whitefox-story-block whitefox-questions-v557"')
           romance_start=s.index('<section class="whitefox-story-block whitefox-romance-v557"', q_start)
           qblock=s[q_start:romance_start]
+          qblock=re.sub(r'<div class="whitefox-section-title"><span>.*?</span><h3>.*?</h3></div>',
+                        '<div class="whitefox-section-title"><span>❓</span><h3>Вопросы госа 58, неделя 43</h3></div>',
+                        qblock, count=1, flags=re.S)
           questions='''<div class="whitefox-question-list-v557">
           <div class="whitefox-question-v557">Кто подарил больше всего подарков? А кто получил? 😏</div>
           <div class="whitefox-question-v557">RUS теперь в VgB, малыши ушли к большим?</div>
@@ -38,9 +46,8 @@ jobs:
           </div>'''
           qblock=re.sub(r'<div class="whitefox-question-list-v557">.*?</div>\s*<div class="whitefox-editor-note-v557">',
                         questions+'\n<div class="whitefox-editor-note-v557">', qblock, count=1, flags=re.S)
-          qblock=qblock.replace('Вопросы недели 43','Вопросы госа 58, неделя 43')
 
-          body='''<section class="whitefox-story-block whitefox-week43-intro-v557">
+          body='''<section class="whitefox-story-block whitefox-week42-intro-v557">
           <p><strong>💥 Замок был слишком спокойный, стоило ожидать подлянки к концу недели. 🚬</strong></p>
           <p>Но давайте по порядку 😌</p>
           <p>👣👣 Заходила в гости Джо. Дважды. Альянсы подсуетились и мы с интересом наблюдали за местами в топе: ARM(Адмирал, Лира, Джулиан), VgB (ЛиХ, MissiamDi), MOM (Godfather), HDA (Dias, AmoonRa).</p>
@@ -72,29 +79,13 @@ jobs:
           </section>
           '''+qblock
 
-          content_start=s.index('<section class="whitefox-story-block whitefox-week43-intro-v557">')
+          content_start=s.index('<section class="whitefox-story-block whitefox-week42-intro-v557">')
           signature_start=s.index('<div class="whitefox-story-signature">', content_start)
           s=s[:content_start]+body+'\n'+s[signature_start:]
           Path('whitefox-elena-43.html').write_text(s,encoding='utf-8')
-
-          # Add the new issue to the WhiteFox index while keeping week 42 below it.
-          p=Path('news-elena.html')
-          idx=p.read_text(encoding='utf-8')
-          m=re.search(r'<a aria-label="Открыть новости госа 58 от Elena, неделя 42".*?</a>', idx, re.S)
-          if not m:
-              raise SystemExit('week 42 card not found')
-          old=m.group(0)
-          new=old.replace('неделя 42','неделя 43').replace('Неделя 42','Неделя 43').replace('whitefox-elena-42.html?v=565','whitefox-elena-43.html?v=571').replace('whitefox42IndexLikes','whitefox43IndexLikes').replace('whitefox42IndexViews','whitefox43IndexViews')
-          new=new.replace('class="whitefox-publication-row whitefox-elena-card whitefox-week42-card-v557"','class="whitefox-publication-row whitefox-elena-card whitefox-week42-card-v557"')
-          new=re.sub(r'<span class="whitefox-index-badge-r-v557".*?</span>','',new,count=1,flags=re.S)
-          old2=old.replace('✒️ ELENA • НОВОЕ','✒️ ELENA • ВЫПУСК')
-          idx=idx.replace(old,new+'\n'+old2,1)
-          stats="<script id=\"whitefox43-index-stats-v571\">(function(){const B='https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/';async function n(k,id){try{const r=await fetch(B+encodeURIComponent(k)+'.json',{cache:'no-store'});const v=await r.json();const e=document.getElementById(id);if(e)e.textContent=(typeof v==='number'?Math.max(0,v):0).toLocaleString('ru-RU')}catch(e){}}n('news-elena-43-v1','whitefox43IndexLikes');n('__views__whitefox-elena-43','whitefox43IndexViews');})();</script>"
-          idx=idx.replace('</body></html>',stats+'</body></html>',1)
-          p.write_text(idx,encoding='utf-8')
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add whitefox-elena-43.html news-elena.html
-          git diff --cached --quiet || git commit -m 'Publish WhiteFox News week 43'
+          git add whitefox-elena-43.html
+          git diff --cached --quiet || git commit -m 'Repair WhiteFox News week 43 page'
           git push
