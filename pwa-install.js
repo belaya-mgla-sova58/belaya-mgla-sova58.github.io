@@ -21,20 +21,10 @@
     }
     var canyonShop=document.querySelector('img[alt="Магазин Битвы в каньоне"]');
     if(canyonShop){
+      canyonShop.src='assets/canyon-shop-user-v777.webp?v=777';
       canyonShop.removeAttribute('srcset');
-      canyonShop.style.opacity='0';
-      canyonShop.style.transition='opacity .15s ease';
-      fetch('assets/canyon-shop-user-v776.webp?v=776',{cache:'no-store'})
-        .then(function(r){if(!r.ok)throw new Error('shop image data');return r.text();})
-        .then(function(t){
-          var data=t.trim();
-          if(!data)throw new Error('empty shop image');
-          canyonShop.onload=function(){canyonShop.style.opacity='1';};
-          canyonShop.src='data:image/webp;base64,'+data;
-          canyonShop.setAttribute('data-canyon-shop-user-v776','1');
-          if(canyonShop.complete)canyonShop.style.opacity='1';
-        })
-        .catch(function(){canyonShop.style.opacity='1';});
+      canyonShop.style.opacity='1';
+      canyonShop.setAttribute('data-canyon-shop-user-v777','1');
     }
   }
   if(!document.querySelector('link[data-news-update-reactions-v761]')){var css=document.createElement('link');css.rel='stylesheet';css.href='news-update-reactions-v761.css?v=769';css.setAttribute('data-news-update-reactions-v761','');document.head.appendChild(css);}
