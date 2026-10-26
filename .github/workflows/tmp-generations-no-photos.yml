@@ -1,4 +1,4 @@
-name: Fix Canyon map source
+name: Normalize Canyon map block
 on: [push]
 permissions:
   contents: write
@@ -12,11 +12,14 @@ jobs:
           from pathlib import Path
           p=Path('canyon-clash.html')
           s=p.read_text(encoding='utf-8')
-          s=s.replace('https://truth.bahamut.com.tw/s01/202407/forum/76999/4f3eb413455116893a68382c8cb007b0.JPG','https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2024/04/cc6-300x283.webp')
-          p.write_text(s,encoding='utf-8')
+          old='<div class="map-media"><img src="https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2024/04/cc6-300x283.webp" alt="Карта Битвы в каньоне" loading="lazy"><div class="caption">Пример схемы маршрутов и связанных точек Каньона.</div></div>'
+          new='<div class="photo" style="max-width:520px;margin:14px auto 4px"><img src="https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2024/04/cc6-300x283.webp" alt="Карта Битвы в каньоне"><div class="caption">Пример схемы маршрутов и связанных точек Каньона.</div></div>'
+          if old not in s:
+              raise SystemExit('map block not found')
+          p.write_text(s.replace(old,new),encoding='utf-8')
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add canyon-clash.html
-          git diff --cached --quiet || git commit -m 'Fix Canyon map source'
+          git diff --cached --quiet || git commit -m 'Normalize Canyon map block'
           git push
