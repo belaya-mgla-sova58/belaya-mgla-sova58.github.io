@@ -1,7 +1,7 @@
 АУДИТ САЙТА «БЕЛАЯ МГЛА»
 ====================================
 HTML-страниц проверено: 137
-Битых локальных ссылок/файлов: 0
+Битых локальных ссылок/файлов: 82
 Несуществующих якорей: 0
 Повторяющихся id: 0
 Видимых технических фраз: 0
@@ -10,7 +10,88 @@ HTML-страниц проверено: 137
 
 БИТЫЕ ССЫЛКИ / ФАЙЛЫ
 --------------------
-Нет.
+alliance-championship.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+alliance-mobilization.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+alliance-showdown.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+alliance.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+arena.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+armament-competition.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+beacon.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+bear.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+brothers-in-arms.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+buildings-after-fire.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+buildings-before-fire.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+buildings.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+canyon-clash.html: src="notifications-v630.js?v=632" → отсутствует notifications-v630.js
+castle.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+crazy-joe.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+creative-amoress-painting.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+creative-bananovyi-mom.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+creative-boss-joe.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+creative-boss-little-furnace.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+creative-corner.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+creative-roman48.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+creative-solnechny-zamok.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+dreams.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+endless-trial.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+events.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+experts.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+exploration.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+farm.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+fire-furnace-calculator.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+fishing.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+forts.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+foundry.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+frostfire-mine.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+furnace-calculator.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+gear.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+ginas-revenge.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+governor-orders.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+governor.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+hero-generation-01.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+hero-generation-02.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+hero-generation-03.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+hero-generation-04.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+hero-generation-05.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+hero-generation-06.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+hero-generation-07.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+hero-generation-08.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+hero-generation-09.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+hero-generation-10.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+hero-generation-11.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+hero-generation-12.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+hero-hervor.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+hero-karol.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+hero-ligeia.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+heroes.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+island.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+labyrinth.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+mails.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+mercenary-prestige.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+newbie.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+news-elena.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+news-eu.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+news-halloween-2026.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+news-ru.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+news-update-2026-10-19.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+news.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+other.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+pets.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+president-guide.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+research.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+resources.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+snowplow.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+state-positions.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+state-power.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+svs-prep.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+svs.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+troops.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+tundra-trade-route.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+whitefox-elena-38-39.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+whitefox-elena-40-41.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+whitefox-elena-42.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+whitefox-elena-43.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
+winter-siege.html: src="notifications-v630.js?v=630" → отсутствует notifications-v630.js
 
 ЯКОРЯ
 -----
