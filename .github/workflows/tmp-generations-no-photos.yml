@@ -1,4 +1,4 @@
-name: Add WhiteFox week 43 romance badge
+name: Update WhiteFox week 43 questions
 on:
   push:
     paths:
@@ -13,22 +13,25 @@ jobs:
       - run: |
           python - <<'PY'
           from pathlib import Path
-          p=Path('news-elena.html')
+          import re
+          p=Path('whitefox-elena-43.html')
           s=p.read_text(encoding='utf-8')
-          start=s.index('href="whitefox-elena-43.html?v=571"')
-          end=s.index('<div class="whitefox-card-stats-v557"', start)
-          block=s[start:end]
-          badge='<span class="whitefox-index-badge-r-v557" style="display:inline-flex!important;align-items:center!important;padding:6px 10px!important;border-radius:999px!important;background:#ffe1ee!important;border:1px solid #f0a8c7!important;color:#8d2458!important;-webkit-text-fill-color:#8d2458!important;text-shadow:none!important;opacity:1!important;font-size:11px!important;font-weight:900!important;line-height:1!important">💕 Романтика</span>'
-          if '💕 Романтика' not in block:
-              marker='</span>\n\n</div>'
-              if marker not in block:
-                  raise SystemExit('week 43 badge block marker not found')
-              block=block.replace(marker,'</span>\n'+badge+'\n</div>',1)
-              s=s[:start]+block+s[end:]
-              p.write_text(s,encoding='utf-8')
+          start=s.index('<section class="whitefox-story-block whitefox-questions-v557" id="whitefox43Questions">')
+          qlist=s.index('<div class="whitefox-question-list-v557">', start)
+          qend=s.index('</div>\n<div class="whitefox-editor-note-v557">', qlist)
+          new='''<div class="whitefox-question-list-v557">
+<div class="whitefox-question-v557">Кто подарил больше всего подарков? А кто получил? 😏</div>
+<div class="whitefox-question-v557">Малыши RUS ушли к большим в VgB?</div>
+<div class="whitefox-question-v557">Сколько солдатиков ZOV пали на этих выходных? 👀 А сколько солдатиков HDA? 👀</div>
+<div class="whitefox-question-v557">В чем корни конфликта топ 2 и топ 3?</div>
+<div class="whitefox-question-v557">Момосята уйдут в другой гос? Виноваты ZOV? Или не дождались в подарок 🏰 от ..?</div>
+<div class="whitefox-question-v557">А кто-то реально еще хочет быть президентом, чтобы слушать какое он *** и вообще во всем не прав?</div>
+<div class="whitefox-question-v557">Будут ли еще «подарки» панде от «тайного» поклонника?</div>'''
+          s=s[:qlist]+new+s[qend:]
+          p.write_text(s,encoding='utf-8')
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add news-elena.html
-          git diff --cached --quiet || git commit -m 'Add romance badge to WhiteFox week 43 card'
+          git add whitefox-elena-43.html
+          git diff --cached --quiet || git commit -m 'Update WhiteFox week 43 questions'
           git push
