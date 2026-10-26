@@ -13,9 +13,9 @@
   if(document.body&&document.body.classList.contains('is-canyon-clash-route')){
     var canyonShop=document.querySelector('img[alt="Магазин Битвы в каньоне"]');
     if(canyonShop){
-      canyonShop.src='assets/canyon-shop-v773.svg?v=773';
+      canyonShop.src='https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2025/10/Screenshot_2024-03-31-17-43-44-94_182c2b2bee76298bea542bec3d6fb844-135x300.jpg';
       canyonShop.removeAttribute('srcset');
-      canyonShop.setAttribute('data-canyon-shop-v773','');
+      canyonShop.removeAttribute('data-canyon-shop-v773');
     }
   }
   if(!document.querySelector('link[data-news-update-reactions-v761]')){var css=document.createElement('link');css.rel='stylesheet';css.href='news-update-reactions-v761.css?v=769';css.setAttribute('data-news-update-reactions-v761','');document.head.appendChild(css);}
