@@ -1,4 +1,4 @@
-name: Update WhiteFox week 43 questions
+name: Update WhiteFox week 43 questions safely
 on:
   push:
     paths:
@@ -10,25 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: |
+      - name: Patch questions
+        run: |
           python - <<'PY'
           from pathlib import Path
-          import re
+          import base64
           p=Path('whitefox-elena-43.html')
           s=p.read_text(encoding='utf-8')
-          start=s.index('<section class="whitefox-story-block whitefox-questions-v557" id="whitefox43Questions">')
-          qlist=s.index('<div class="whitefox-question-list-v557">', start)
-          qend=s.index('</div>\n<div class="whitefox-editor-note-v557">', qlist)
-          new='''<div class="whitefox-question-list-v557">
-<div class="whitefox-question-v557">Кто подарил больше всего подарков? А кто получил? 😏</div>
-<div class="whitefox-question-v557">Малыши RUS ушли к большим в VgB?</div>
-<div class="whitefox-question-v557">Сколько солдатиков ZOV пали на этих выходных? 👀 А сколько солдатиков HDA? 👀</div>
-<div class="whitefox-question-v557">В чем корни конфликта топ 2 и топ 3?</div>
-<div class="whitefox-question-v557">Момосята уйдут в другой гос? Виноваты ZOV? Или не дождались в подарок 🏰 от ..?</div>
-<div class="whitefox-question-v557">А кто-то реально еще хочет быть президентом, чтобы слушать какое он *** и вообще во всем не прав?</div>
-<div class="whitefox-question-v557">Будут ли еще «подарки» панде от «тайного» поклонника?</div>'''
-          s=s[:qlist]+new+s[qend:]
-          p.write_text(s,encoding='utf-8')
+          a=s.index('<div class="whitefox-question-list-v557">', s.index('id="whitefox43Questions"'))
+          b=s.index('</div>\n<div class="whitefox-editor-note-v557">', a)
+          payload='PGRpdiBjbGFzcz0id2hpdGVmb3gtcXVlc3Rpb24tbGlzdC12NTU3Ij4KPGRpdiBjbGFzcz0id2hpdGVmb3gtcXVlc3Rpb24tdjU1NyI+0JrRgtC+INC/0L7QtNCw0YDQuNC7INCx0L7Qu9GM0YjQtSDQstGB0LXQs9C+INC/0L7QtNCw0YDQutC+0LI/INCQINC60YLQviDQv9C+0LvRg9GH0LjQuz8g8J+YjzwvZGl2Pgo8ZGl2IGNsYXNzPSJ3aGl0ZWZveC1xdWVzdGlvbi12NTU3Ij7QnNCw0LvRi9GI0LggUlVTINGD0YjQu9C4INC6INCx0L7Qu9GM0YjQuNC8INCyIFZnQj88L2Rpdj4KPGRpdiBjbGFzcz0id2hpdGVmb3gtcXVlc3Rpb24tdjU1NyI+0KHQutC+0LvRjNC60L4g0YHQvtC70LTQsNGC0LjQutC+0LIgWk9WINC/0LDQu9C4INC90LAg0Y3RgtC40YUg0LLRi9GF0L7QtNC90YvRhT8g8J+RgCDQkCDRgdC60L7Qu9GM0LrQviDRgdC+0LvQtNCw0YLQuNC60L7QsiBIREE/IPCfkYA8L2Rpdj4KPGRpdiBjbGFzcz0id2hpdGVmb3gtcXVlc3Rpb24tdjU1NyI+0JIg0YfQtdC8INC60L7RgNC90Lgg0LrQvtC90YTQu9C40LrRgtCwINGC0L7QvyAyINC4INGC0L7QvyAzPzwvZGl2Pgo8ZGl2IGNsYXNzPSJ3aGl0ZWZveC1xdWVzdGlvbi12NTU3Ij7QnNC+0LzQvtGB0Y/RgtCwINGD0LnQtNGD0YIg0LIg0LTRgNGD0LPQvtC5INCz0L7RgT8g0JLQuNC90L7QstCw0YLRiyBaT1Y/INCY0LvQuCDQvdC1INC00L7QttC00LDQu9C40YHRjCDQsiDQv9C+0LTQsNGA0L7QuiDwn4+wwqDQvtGCIC4uPzwvZGl2Pgo8ZGl2IGNsYXNzPSJ3aGl0ZWZveC1xdWVzdGlvbi12NTU3Ij7QkCDQutGC0L4t0YLQviDRgNC10LDQu9GM0L3QviDQtdGJ0LUg0YXQvtGH0LXRgiDQsdGL0YLRjCDQv9GA0LXQt9C40LTQtdC90YLQvtC8LCDRh9GC0L7QsdGLINGB0LvRg9GI0LDRgtGMINC60LDQutC+0LUg0L7QvSAqKiog0Lgg0LLQvtC+0LHRidC1INCy0L7QstGB0LXQvCDQvdC1INC/0YDQsNCyPzwvZGl2Pgo8ZGl2IGNsYXNzPSJ3aGl0ZWZveC1xdWVzdGlvbi12NTU3Ij7QkdGD0LTRg9GCINC70Lgg0LXRidC1IMKr0L/QvtC00LDRgNC60LjCuyDQv9Cw0L3QtNC1INC+0YIgwqvRgtCw0LnQvdC+0LPQvsK7INC/0L7QutC70L7QvdC90LjQutCwPzwvZGl2Pg=='
+          new=base64.b64decode(payload).decode('utf-8')
+          p.write_text(s[:a]+new+s[b:],encoding='utf-8')
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
