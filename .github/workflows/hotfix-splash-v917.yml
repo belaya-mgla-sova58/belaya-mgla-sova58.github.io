@@ -1,0 +1,44 @@
+name: Hotfix splash v917
+on:
+  push:
+    paths:
+      - '.github/workflows/hotfix-splash-v917.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bump splash and cache versions
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          replacements = {
+              'site-v629.min.js': [
+                  ('app-splash-v726.js?v=915', 'app-splash-v726.js?v=917'),
+              ],
+              'index.html': [
+                  ('site-v629.min.js?v=916', 'site-v629.min.js?v=917'),
+              ],
+              'service-worker.js': [
+                  ("belaya-mgla-v655", "belaya-mgla-v656"),
+                  ('site-v629.min.js?v=916', 'site-v629.min.js?v=917'),
+                  ('app-splash-v726.js?v=754', 'app-splash-v726.js?v=917'),
+              ],
+          }
+          for name, reps in replacements.items():
+              p = Path(name)
+              s = p.read_text(encoding='utf-8')
+              for old, new in reps:
+                  if old not in s:
+                      raise SystemExit(f'{old!r} not found in {name}')
+                  s = s.replace(old, new, 1)
+              p.write_text(s, encoding='utf-8')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add site-v629.min.js index.html service-worker.js
+          git diff --cached --quiet || git commit -m 'Hotfix mobile splash cache v917'
+          git push
