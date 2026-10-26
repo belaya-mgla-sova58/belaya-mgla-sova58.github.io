@@ -13,20 +13,20 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Fix Canyon Clash shop image sizing
+      - name: Restore natural Canyon Clash shop image size
         run: |
           set -euo pipefail
           python - <<'PY'
           from pathlib import Path
           p = Path('canyon-clash.html')
           s = p.read_text(encoding='utf-8')
-          s = s.replace("body.is-canyon-clash-route .shop-shot{max-width:430px;margin:15px auto 5px;padding:8px;border-radius:18px;background:rgba(7,23,42,.82);border:1px solid rgba(124,203,255,.18)}", "body.is-canyon-clash-route .shop-shot{max-width:720px;margin:18px auto 8px;padding:0;border-radius:18px;background:transparent;border:1px solid rgba(124,203,255,.18);overflow:hidden}")
-          s = s.replace("body.is-canyon-clash-route .shop-shot img{display:block;width:100%;max-height:600px;object-fit:contain;border-radius:13px;background:#dfe9f3}", "body.is-canyon-clash-route .shop-shot img{display:block;width:100%;height:auto;max-height:none;object-fit:contain;border-radius:0;background:transparent}")
+          s = s.replace("body.is-canyon-clash-route .shop-shot{max-width:720px;margin:18px auto 8px;padding:0;border-radius:18px;background:transparent;border:1px solid rgba(124,203,255,.18);overflow:hidden}", "body.is-canyon-clash-route .shop-shot{max-width:430px;margin:15px auto 5px;padding:0;border-radius:18px;background:transparent;border:1px solid rgba(124,203,255,.18);overflow:hidden}")
+          s = s.replace("body.is-canyon-clash-route .shop-shot img{display:block;width:100%;height:auto;max-height:none;object-fit:contain;border-radius:0;background:transparent}", "body.is-canyon-clash-route .shop-shot img{display:block;width:100%;height:auto;max-height:none;object-fit:contain;border-radius:0;background:transparent}")
           p.write_text(s, encoding='utf-8')
           PY
           git add canyon-clash.html
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git diff --cached --quiet || git commit -m 'Show Canyon Clash shop screenshot at full size'
+          git diff --cached --quiet || git commit -m 'Restore Canyon Clash shop image size'
           git pull --rebase --autostash origin main
           git push
