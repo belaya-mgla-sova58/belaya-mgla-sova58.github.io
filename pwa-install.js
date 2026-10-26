@@ -10,6 +10,14 @@
     ec.setAttribute('data-event-calendar-auto-v771','');
     document.head.appendChild(ec);
   }
+  if(document.body&&document.body.classList.contains('is-canyon-clash-route')){
+    var canyonShop=document.querySelector('img[alt="Магазин Битвы в каньоне"]');
+    if(canyonShop){
+      canyonShop.src='assets/canyon-shop-v773.svg?v=773';
+      canyonShop.removeAttribute('srcset');
+      canyonShop.setAttribute('data-canyon-shop-v773','');
+    }
+  }
   if(!document.querySelector('link[data-news-update-reactions-v761]')){var css=document.createElement('link');css.rel='stylesheet';css.href='news-update-reactions-v761.css?v=769';css.setAttribute('data-news-update-reactions-v761','');document.head.appendChild(css);}
   if(!document.querySelector('script[data-news-update-reactions-v760]')){var s=document.createElement('script');s.src='news-update-reactions-v760.js?v=769';s.defer=true;s.setAttribute('data-news-update-reactions-v760','');document.head.appendChild(s);}
   if(!document.querySelector('script[data-news-home-category-v762]')){var h=document.createElement('script');h.src='news-home-category-v762.js?v=769';h.defer=true;h.setAttribute('data-news-home-category-v762','');document.head.appendChild(h);}
