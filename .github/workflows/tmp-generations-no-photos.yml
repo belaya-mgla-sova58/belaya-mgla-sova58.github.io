@@ -1,4 +1,4 @@
-name: Refresh notification script cache
+name: Remove notification feature
 on:
   push:
     paths:
@@ -10,21 +10,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Refresh notification script version
+      - name: Remove notification feature
         run: |
           python - <<'PY'
           from pathlib import Path
 
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
-          if 'notifications-v630.js?v=630' in s:
-              s = s.replace('notifications-v630.js?v=630', 'notifications-v630.js?v=631', 1)
-          elif 'notifications-v630.js?v=631' not in s:
-              raise SystemExit('notification script reference not found')
+          ref = '<script defer="" src="notifications-v630.js?v=631"></script>'
+          if ref in s:
+              s = s.replace(ref, '', 1)
+          elif 'notifications-v630.js' in s:
+              raise SystemExit('unexpected notification script reference')
           p.write_text(s, encoding='utf-8')
           PY
+          git rm -f notifications-v630.js OneSignalSDKWorker.js
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html
-          git diff --cached --quiet || git commit -m 'Refresh notification script cache'
+          git diff --cached --quiet || git commit -m 'Remove notification feature'
           git push
