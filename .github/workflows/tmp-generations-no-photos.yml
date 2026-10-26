@@ -1,4 +1,4 @@
-name: Remove notification feature
+name: Refresh home card cleanup cache
 on:
   push:
     paths:
@@ -10,23 +10,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Remove notification feature
+      - name: Refresh home cleanup cache
         run: |
           python - <<'PY'
           from pathlib import Path
 
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
-          ref = '<script defer="" src="notifications-v630.js?v=631"></script>'
-          if ref in s:
-              s = s.replace(ref, '', 1)
-          elif 'notifications-v630.js' in s:
-              raise SystemExit('unexpected notification script reference')
+          if 'site-v629.min.js?v=915' in s:
+              s = s.replace('site-v629.min.js?v=915', 'site-v629.min.js?v=916', 1)
+          elif 'site-v629.min.js?v=916' not in s:
+              raise SystemExit('site loader reference not found')
+          p.write_text(s, encoding='utf-8')
+
+          p = Path('service-worker.js')
+          s = p.read_text(encoding='utf-8')
+          s = s.replace("const CACHE_NAME = 'belaya-mgla-v654';", "const CACHE_NAME = 'belaya-mgla-v655';", 1)
+          s = s.replace("'./site-v629.min.js?v=629'", "'./site-v629.min.js?v=916'", 1)
           p.write_text(s, encoding='utf-8')
           PY
-          git rm -f notifications-v630.js OneSignalSDKWorker.js
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add index.html
-          git diff --cached --quiet || git commit -m 'Remove notification feature'
+          git add index.html service-worker.js
+          git diff --cached --quiet || git commit -m 'Refresh home card cleanup cache'
           git push
