@@ -1,4 +1,4 @@
-name: Update WhiteFox week 43 romance
+name: Bust splash script cache
 on:
   push:
     paths:
@@ -10,23 +10,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Patch romance
+      - name: Update splash cache versions
         run: |
           python - <<'PY'
           from pathlib import Path
-          import base64
-          p=Path('whitefox-elena-43.html')
-          s=p.read_text(encoding='utf-8')
-          start_marker='<div class="whitefox-section-title"><span>💕</span><h3>Клуб романтики госа 58, неделя 43</h3></div>'
-          end_marker='<div class="anon-comments-v557" data-comment-key="whitefox-elena-43-romance">'
-          a=s.index(start_marker)+len(start_marker)
-          b=s.index(end_marker,a)
-          payload='PGRpdiBjbGFzcz0id2hpdGVmb3gtcm9tYW5jZS1pdGVtLXY1NTciPvCfkpnwn5KZINCQ0YLQsNC80LDQvSDQuCDQkdC10LfRgNCw0LfQu9C40YfQuNC1INC90LUg0YHQutGA0YvQstCw0Y7RgiDRh9GD0LLRgdGC0LIg8J+YjDwvZGl2Pgo8ZGl2IGNsYXNzPSJ3aGl0ZWZveC1yb21hbmNlLWl0ZW0tdjU1NyI+8J+alyDwn5qXINCR0LDQvdC60LjRgCDQv9C+0LTQsNGA0LjQuyBQdXNzINC4INC10LUg0L/QvtC00YDRg9C20LrQtSDQv9C+INC80LDRiNC40L3QutC1LiDQqdC10LTRgNGL0Lkg0LzRg9C20YfQuNC90LAg8J+YjzwvZGl2Pgo8ZGl2IGNsYXNzPSJ3aGl0ZWZveC1yb21hbmNlLWl0ZW0tdjU1NyI+8J+SnSDQkiBMQUYg0LfQsNC80LXRh9C10L0g0YDQvtC80LDQvdGC0LjRh9C10YHQutC40Lkg0LbQtdGB0YIg0L7RgiDQodC+0LvQvdGL0YjQutCwINCyINGB0YLQvtGA0L7QvdGDIElya28wMDcuINCb0Y7QsdC+0YTRhC4uPzwvZGl2Pgo8ZGl2IGNsYXNzPSJ3aGl0ZWZveC1yb21hbmNlLWl0ZW0tdjU1NyI+8J+OgSDQndCw0YHRh9C40YLQsNC70LggMyDQv9C+0LTQsNGA0LrQsCDQvtGCINCQ0LTQvNC40YDQsNC70LAg0YHQvtC60LvQsNC90L7QstGG0LDQvC4g0JHRg9C00LXRgiA00YvQuT88L2Rpdj4KPGRpdiBjbGFzcz0id2hpdGVmb3gtcm9tYW5jZS1pdGVtLXY1NTciPvCfjLggREsg0L7QtNCw0YDQuNC7IFpPVi4g0J3QviDRgtC+0LvRjNC60L4gMSDQv9C+0LTQv9C40YHQsNC7LiDQodGC0LXRgdC90Y/QtdGC0YHRjz8pPC9kaXY+CjxkaXYgY2xhc3M9IndoaXRlZm94LXJvbWFuY2UtaXRlbS12NTU3Ij7wn5C7INCR0YDQsNGC0YHQutC40Lkg0LbQtdGB0YIg0L7RgiBEaWFzINCyINGB0YLQvtGA0L7QvdGDIE1vZGVzdCDwn5Sl8J+UpTwvZGl2Pgo8ZGl2IGNsYXNzPSJ3aGl0ZWZveC1yb21hbmNlLWl0ZW0tdjU1NyI+8J+YuyDQn9Cw0YDQvdGL0LUg0LDQstGLINGDINCV0LPQvtC30Ysg0LggTW9kZXN0IOKYujwvZGl2Pgo8ZGl2IGNsYXNzPSJ3aGl0ZWZveC1yb21hbmNlLWl0ZW0tdjU1NyI+8J+MuiDQn9Cw0YDQvdGL0LUg0LDQstGLINGDIEJybyDQuCBMb3Rpcy4uPyDwn5KbPC9kaXY+'
-          new='\n'+base64.b64decode(payload).decode('utf-8')+'\n'
-          p.write_text(s[:a]+new+s[b:],encoding='utf-8')
+
+          p = Path('site-v629.min.js')
+          s = p.read_text(encoding='utf-8')
+          old = 'app-splash-v726.js?v=729'
+          new = 'app-splash-v726.js?v=911'
+          if old not in s and new not in s:
+              raise SystemExit('splash script reference not found')
+          s = s.replace(old, new, 1)
+          p.write_text(s, encoding='utf-8')
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          old = 'site-v629.min.js?v=629'
+          new = 'site-v629.min.js?v=911'
+          if old not in s and new not in s:
+              raise SystemExit('site loader reference not found')
+          s = s.replace(old, new, 1)
+          p.write_text(s, encoding='utf-8')
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add whitefox-elena-43.html
-          git diff --cached --quiet || git commit -m 'Update WhiteFox week 43 romance'
+          git add site-v629.min.js index.html
+          git diff --cached --quiet || git commit -m 'Refresh mobile splash scripts'
           git push
