@@ -321,7 +321,7 @@
   function b64uDecode(s){
     try{let b=s.replace(/-/g,'+').replace(/_/g,'/');while(b.length%4)b+='=';const bin=atob(b);const bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);return new TextDecoder().decode(bytes)}catch(e){return ''}
   }
-  function scopeFor(key){return key.indexOf('romance')!==-1?'r':'q'}
+  function scopeFor(key){return key.indexOf('romance')!==-1?'r43':'q43'}
   function splitText(text,size){const a=Array.from(text),out=[];for(let i=0;i<a.length;i+=size)out.push(a.slice(i,i+size).join(''));return out}
 
   async function initStats(){
