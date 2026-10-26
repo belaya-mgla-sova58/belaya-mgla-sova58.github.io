@@ -1,4 +1,4 @@
-name: Repair WhiteFox week 43 page
+name: Separate WhiteFox week 43 like key
 on:
   push:
     paths:
@@ -6,86 +6,23 @@ on:
 permissions:
   contents: write
 jobs:
-  repair:
+  fix:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - run: |
           python - <<'PY'
           from pathlib import Path
-          import re
-
-          src=Path('whitefox-elena-42.html').read_text(encoding='utf-8')
-          s=src
-          # Only semantic identifiers/text change. CSS numeric values stay untouched.
-          for old,new in [
-              ('whitefox-elena-42','whitefox-elena-43'),
-              ('whitefox42','whitefox43'),
-              ('Неделя 42','Неделя 43'),
-              ('неделя 42','неделя 43')]:
-              s=s.replace(old,new)
-
-          s=re.sub(r'<div class="whitefox-week42-jump-v558"[^>]*>.*?</div>',
-                   '<div class="whitefox-week42-jump-v558" aria-label="Быстрые переходы по публикации"><a href="#whitefox43Questions">❓ Вопросы</a></div>',
-                   s, count=1, flags=re.S)
-
-          q_start=s.index('<section class="whitefox-story-block whitefox-questions-v557"')
-          romance_start=s.index('<section class="whitefox-story-block whitefox-romance-v557"', q_start)
-          qblock=s[q_start:romance_start]
-          qblock=re.sub(r'<div class="whitefox-section-title"><span>.*?</span><h3>.*?</h3></div>',
-                        '<div class="whitefox-section-title"><span>❓</span><h3>Вопросы госа 58, неделя 43</h3></div>',
-                        qblock, count=1, flags=re.S)
-          questions='''<div class="whitefox-question-list-v557">
-          <div class="whitefox-question-v557">Кто подарил больше всего подарков? А кто получил? 😏</div>
-          <div class="whitefox-question-v557">RUS теперь в VgB, малыши ушли к большим?</div>
-          <div class="whitefox-question-v557">Сколько солдатиков ZOV пали на этих выходных?👀</div>
-          <div class="whitefox-question-v557">Сколько солдатиков HDA пали на этих выходных? 👀</div>
-          <div class="whitefox-question-v557">Так в чем же корни конфликта топ 2 и топ 3?</div>
-          <div class="whitefox-question-v557">Момосята уйдут в другой гос?</div>
-          <div class="whitefox-question-v557">А кто-то реально еще хочет быть президентом, чтобы слушать какое он *** и вообще во всем не прав?</div>
-          </div>'''
-          qblock=re.sub(r'<div class="whitefox-question-list-v557">.*?</div>\s*<div class="whitefox-editor-note-v557">',
-                        questions+'\n<div class="whitefox-editor-note-v557">', qblock, count=1, flags=re.S)
-
-          body='''<section class="whitefox-story-block whitefox-week42-intro-v557">
-          <p><strong>💥 Замок был слишком спокойный, стоило ожидать подлянки к концу недели. 🚬</strong></p>
-          <p>Но давайте по порядку 😌</p>
-          <p>👣👣 Заходила в гости Джо. Дважды. Альянсы подсуетились и мы с интересом наблюдали за местами в топе: ARM(Адмирал, Лира, Джулиан), VgB (ЛиХ, MissiamDi), MOM (Godfather), HDA (Dias, AmoonRa).</p>
-          <p>Видела еще в топ 10 ребят с FOX и WOW 😉</p>
-          </section>
-          <section class="whitefox-story-block">
-          <div class="whitefox-section-title"><span>🎢</span><h3>Рудник. Рудник. Рудник.</h3></div>
-          <p>Посидеть в центре мне в этот раз не дали, забрала только 2ое место. Но практика показывает, что тактика и скорость реакции могут принести топ место любому игроку. Я писала, что ферма Хопера как-то забрала 2ое место, уступив только киту в центре? Моя ферма в этот раз забрала 12ое место (топка 27 и 4 марша).</p>
-          <p>🍕 Но не всем нравится рудник. Мне обещали пиццу, если я пройду рудник моему милому другу с другого госа. Как думаете, согласилась? 😉</p>
-          </section>
-          <section class="whitefox-story-block">
-          <div class="whitefox-section-title"><span>🏰</span><h3>Крепости и форты</h3></div>
-          <p>Крепость 3 в этот раз осталась без сражения. Битва развернулась на крепости 4 (ZOV vs VgB). Но ДК уже вернулся из отпуска, домик остался у ZOV.</p>
-          <p>Интересненькое было на форте 3: началась тусовка с HDA и MOM, кит момосят активно держал домик. Но в скором времени на тусовку пришел третий игрок - VgB. Спустя два часа с начала тусовки на последних секундах HDA выбили форт у МОМ, но сразу же следом их выбили VgB. Домик остался у VgB.</p>
-          </section>
-          <section class="whitefox-story-block">
-          <div class="whitefox-section-title"><span>📢</span><h3>«Братья по оружию»</h3></div>
-          <p>Столкновения на плитках были разные. Я вот храбро убивалась пару раз об Ворона и даже об Адмирала. Но самая жара ждала нас уже после.</p>
-          </section>
-          <section class="whitefox-story-block">
-          <div class="whitefox-section-title"><span>🚨</span><h3>HDA и KSV</h3></div>
-          <p>Сначала взглянем на ситуацию HDA и KSV. Говорят первые строили стяги к крепости вторых. Не дождались ответа по проходу и начали прокладывать путь путем сожжения стяг малышей. На защиту малышей пришли ребята с VgB и не только. Кто прав?</p>
-          </section>
-          <section class="whitefox-story-block">
-          <div class="whitefox-section-title"><span>🔥</span><h3>Штаб все таки сгорел</h3></div>
-          <p>И так. Штаб все таки сгорел. Послушаем мнения сторон.</p>
-          <div class="whitefox-quote"><strong>💬 MOM:</strong> «нельзя решить конфликт, который никто по факту решать не хочет) за что пришли мстить ответа так и не поступило вроде)»</div>
-          <div class="whitefox-quote"><strong>💬 ZOV:</strong> «Добрый вечер, я как участник конфликта, могу сказать, что сегодняшняя акция это логичный финал, провокаций и оскорблений со стороны МОМ в адрес наших соклановцев. Прошу заметить, что на оскорбления личности, мы ответили по игре, не опускаясь до их уровня.»</div>
-          </section>
-          '''+qblock
-
-          content_start=s.index('<section class="whitefox-story-block whitefox-week42-intro-v557">')
-          signature_start=s.index('<div class="whitefox-story-signature">', content_start)
-          s=s[:content_start]+body+'\n'+s[signature_start:]
-          Path('whitefox-elena-43.html').write_text(s,encoding='utf-8')
+          p=Path('whitefox-elena-43.html')
+          s=p.read_text(encoding='utf-8')
+          old="const articleKey='news-elena-42-v1';"
+          new="const articleKey='news-elena-43-v1';"
+          if old not in s:
+              raise SystemExit('old article like key not found')
+          p.write_text(s.replace(old,new,1),encoding='utf-8')
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add whitefox-elena-43.html
-          git diff --cached --quiet || git commit -m 'Repair WhiteFox News week 43 page'
+          git diff --cached --quiet || git commit -m 'Separate WhiteFox week 43 like key'
           git push
