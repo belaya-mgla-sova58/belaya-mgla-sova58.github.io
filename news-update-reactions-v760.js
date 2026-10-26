@@ -42,41 +42,46 @@
     }catch(e){setCount(before);setBusy(false);}
   }
 
-  function makeButton(extraClass,compact){
+  function makeButton(extraClass){
     var b=document.createElement('button');b.type='button';
     b.className='update-like-v760 '+(extraClass||'');
     b.setAttribute('data-update-like-v760','');b.setAttribute('aria-label','Поставить лайк новости');
-    b.innerHTML='<span class="update-like-heart-v760" aria-hidden="true">♥</span>'+(compact?'':'<span data-like-label-v760>Нравится</span>')+'<b data-like-count-v760>…</b>';
+    b.innerHTML='<span class="update-like-heart-v760" aria-hidden="true">♥</span><span data-like-label-v760>Нравится</span><b data-like-count-v760>…</b>';
     b.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();addLike();});return b;
   }
 
   function addStyles(){
     if(document.getElementById('news-update-reactions-style-v760'))return;
     var s=document.createElement('style');s.id='news-update-reactions-style-v760';
-    s.textContent='.update-like-v760{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:38px;padding:8px 12px;border:1px solid rgba(255,190,210,.42);border-radius:999px;background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,126,170,.12));color:#fff;font:inherit;font-size:13px;font-weight:850;line-height:1;cursor:pointer;box-shadow:inset 0 1px rgba(255,255,255,.08),0 8px 20px rgba(0,0,0,.13);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}.update-like-v760.is-liked{background:linear-gradient(145deg,rgba(255,93,145,.25),rgba(188,74,146,.22));border-color:rgba(255,166,198,.72)}.update-like-heart-v760{color:#ff759f;font-size:20px;line-height:1}.update-like-v760 b{color:#fff;font-size:13px}.update-meta .update-like-v760{min-height:auto;padding:9px 12px}.ru-update-like-v760{position:absolute;right:12px;top:12px;z-index:6;min-width:58px;background:rgba(4,16,38,.88)}.home-news-update-v760{display:none!important}@media(max-width:700px){.ru-update-like-v760{right:10px;top:10px;padding:7px 9px}}';
+    s.textContent='.update-like-v760{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:38px;padding:8px 12px;border:1px solid rgba(255,190,210,.42);border-radius:999px;background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,126,170,.12));color:#fff;font:inherit;font-size:13px;font-weight:850;line-height:1;cursor:pointer;box-shadow:inset 0 1px rgba(255,255,255,.08),0 8px 20px rgba(0,0,0,.13);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}.update-like-v760.is-liked{background:linear-gradient(145deg,rgba(255,93,145,.25),rgba(188,74,146,.22));border-color:rgba(255,166,198,.72)}.update-like-heart-v760{color:#ff759f;font-size:20px;line-height:1}.update-like-v760 b{color:#fff;font-size:13px}.update-meta .update-like-v760{min-height:auto;padding:9px 12px}.home-news-update-v760{display:none!important}';
     document.head.appendChild(s);
   }
 
   function addArticleLike(){
     var meta=document.querySelector('.update-news-20261019 .update-meta');
-    if(meta&&!meta.querySelector('[data-update-like-v760]'))meta.appendChild(makeButton('article-update-like-v760',false));
+    if(meta&&!meta.querySelector('[data-update-like-v760]'))meta.appendChild(makeButton('article-update-like-v760'));
   }
 
-  function addRuListLike(){
-    document.querySelectorAll('.ru-updates-grid-v545 .news-category-card.ru').forEach(function(card){
-      var link=card.querySelector('a[href*="news-update-2026-10-19.html"]');
-      if(link&&!card.querySelector('[data-update-like-v760]'))card.appendChild(makeButton('ru-update-like-v760',true));
-    });
+  function removeCategoryLikes(){
+    document.querySelectorAll('.ru-updates-grid-v545 [data-update-like-v760], .ru-updates-grid-v545 .ru-update-like-v760').forEach(function(el){el.remove();});
   }
 
   function removeLegacyHomeCard(){document.querySelectorAll('.home-news-update-v760').forEach(function(el){el.remove();});}
 
   function start(){
-    addStyles();removeLegacyHomeCard();addArticleLike();addRuListLike();setState();loadLikes();
+    addStyles();
+    removeLegacyHomeCard();
+    removeCategoryLikes();
+    addArticleLike();
+    setState();
+    loadLikes();
+
     if(document.body.classList.contains('is-home-route')){
       var grid=document.querySelector('.home-news-grid-v442');
       if(grid)new MutationObserver(removeLegacyHomeCard).observe(grid,{childList:true});
     }
+    var ruGrid=document.querySelector('.ru-updates-grid-v545');
+    if(ruGrid)new MutationObserver(removeCategoryLikes).observe(ruGrid,{childList:true,subtree:true});
   }
 
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
