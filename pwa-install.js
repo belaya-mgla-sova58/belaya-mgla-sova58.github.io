@@ -24,14 +24,14 @@
       canyonShop.removeAttribute('srcset');
       canyonShop.style.opacity='0';
       canyonShop.style.transition='opacity .15s ease';
-      fetch('assets/canyon-shop-v773.svg?v=776',{cache:'no-store'})
-        .then(function(r){if(!r.ok)throw new Error('shop image');return r.text();})
+      fetch('assets/canyon-shop-user-v776.webp?v=776',{cache:'no-store'})
+        .then(function(r){if(!r.ok)throw new Error('shop image data');return r.text();})
         .then(function(t){
-          var m=t.match(/href=["'](data:image\/webp;base64,[^"']+)["']/i);
-          if(!m)throw new Error('shop data');
+          var data=t.trim();
+          if(!data)throw new Error('empty shop image');
           canyonShop.onload=function(){canyonShop.style.opacity='1';};
-          canyonShop.src=m[1];
-          canyonShop.setAttribute('data-canyon-shop-user-v776','');
+          canyonShop.src='data:image/webp;base64,'+data;
+          canyonShop.setAttribute('data-canyon-shop-user-v776','1');
           if(canyonShop.complete)canyonShop.style.opacity='1';
         })
         .catch(function(){canyonShop.style.opacity='1';});
