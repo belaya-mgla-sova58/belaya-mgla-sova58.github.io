@@ -1,4 +1,4 @@
-name: Refresh home card cleanup cache
+name: Style WhiteFox week 43 stats badges
 on:
   push:
     paths:
@@ -10,27 +10,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Refresh home cleanup cache
+      - name: Style week 43 stats badges
         run: |
           python - <<'PY'
           from pathlib import Path
+          import re
 
-          p = Path('index.html')
+          p = Path('news-elena.html')
           s = p.read_text(encoding='utf-8')
-          if 'site-v629.min.js?v=915' in s:
-              s = s.replace('site-v629.min.js?v=915', 'site-v629.min.js?v=916', 1)
-          elif 'site-v629.min.js?v=916' not in s:
-              raise SystemExit('site loader reference not found')
-          p.write_text(s, encoding='utf-8')
 
-          p = Path('service-worker.js')
-          s = p.read_text(encoding='utf-8')
-          s = s.replace("const CACHE_NAME = 'belaya-mgla-v654';", "const CACHE_NAME = 'belaya-mgla-v655';", 1)
-          s = s.replace("'./site-v629.min.js?v=629'", "'./site-v629.min.js?v=916'", 1)
+          if 'data-wf43-stat="likes"' not in s:
+              like_pattern = re.compile(r'<span class="whitefox-card-stat-v557"[^>]*>♥ <b id="whitefox43IndexLikes"[^>]*>0</b></span>')
+              like_repl = '<span class="whitefox-card-stat-v557" data-wf43-stat="likes" style="display:inline-flex!important;align-items:center!important;gap:6px!important;padding:6px 10px!important;border-radius:999px!important;background:linear-gradient(135deg,#0b2340 0%,#12385f 100%)!important;border:1px solid rgba(133,185,231,.38)!important;color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;text-shadow:none!important;opacity:1!important;font-size:11px!important;font-weight:900!important;line-height:1!important;box-shadow:0 6px 16px rgba(4,20,38,.28)!important"><span aria-hidden="true" style="color:#ff4d61!important;-webkit-text-fill-color:#ff4d61!important;font-size:14px!important;line-height:1!important">♥</span><b id="whitefox43IndexLikes" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;text-shadow:none!important;opacity:1!important">0</b></span>'
+              s, n = like_pattern.subn(like_repl, s, count=1)
+              if n != 1:
+                  raise SystemExit(f'week43 likes badge not found: {n}')
+
+          if 'data-wf43-stat="views"' not in s:
+              view_pattern = re.compile(r'<span class="whitefox-card-stat-v557"[^>]*>👀 <b id="whitefox43IndexViews"[^>]*>0</b></span>')
+              view_repl = '<span class="whitefox-card-stat-v557" data-wf43-stat="views" style="display:inline-flex!important;align-items:center!important;gap:6px!important;padding:6px 10px!important;border-radius:999px!important;background:linear-gradient(135deg,#0b2340 0%,#12385f 100%)!important;border:1px solid rgba(133,185,231,.38)!important;color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;text-shadow:none!important;opacity:1!important;font-size:11px!important;font-weight:900!important;line-height:1!important;box-shadow:0 6px 16px rgba(4,20,38,.28)!important"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;flex:none"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" stroke="#cfefff" stroke-width="2"/><circle cx="12" cy="12" r="2.7" fill="#cfefff"/></svg><b id="whitefox43IndexViews" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;text-shadow:none!important;opacity:1!important">0</b></span>'
+              s, n = view_pattern.subn(view_repl, s, count=1)
+              if n != 1:
+                  raise SystemExit(f'week43 views badge not found: {n}')
+
           p.write_text(s, encoding='utf-8')
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add index.html service-worker.js
-          git diff --cached --quiet || git commit -m 'Refresh home card cleanup cache'
+          git add news-elena.html
+          git diff --cached --quiet || git commit -m 'Style WhiteFox week 43 stats badges'
           git push
