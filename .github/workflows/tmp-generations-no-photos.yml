@@ -1,4 +1,4 @@
-name: Style WhiteFox week 43 stats badges
+name: Style creative corner card counters
 on:
   push:
     paths:
@@ -10,33 +10,83 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Style week 43 stats badges
+      - name: Style creative card counters
         run: |
           python - <<'PY'
           from pathlib import Path
           import re
 
-          p = Path('news-elena.html')
+          p = Path('creative-corner.html')
           s = p.read_text(encoding='utf-8')
 
-          if 'data-wf43-stat="likes"' not in s:
-              like_pattern = re.compile(r'<span class="whitefox-card-stat-v557"[^>]*>♥ <b id="whitefox43IndexLikes"[^>]*>0</b></span>')
-              like_repl = '<span class="whitefox-card-stat-v557" data-wf43-stat="likes" style="display:inline-flex!important;align-items:center!important;gap:6px!important;padding:6px 10px!important;border-radius:999px!important;background:linear-gradient(135deg,#0b2340 0%,#12385f 100%)!important;border:1px solid rgba(133,185,231,.38)!important;color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;text-shadow:none!important;opacity:1!important;font-size:11px!important;font-weight:900!important;line-height:1!important;box-shadow:0 6px 16px rgba(4,20,38,.28)!important"><span aria-hidden="true" style="color:#ff4d61!important;-webkit-text-fill-color:#ff4d61!important;font-size:14px!important;line-height:1!important">♥</span><b id="whitefox43IndexLikes" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;text-shadow:none!important;opacity:1!important">0</b></span>'
-              s, n = like_pattern.subn(like_repl, s, count=1)
-              if n != 1:
-                  raise SystemExit(f'week43 likes badge not found: {n}')
+          marker = 'creative-card-counter-contrast-v920'
+          css = '''
+<style id="creative-card-counter-contrast-v920">
+body.news-top-creative .creative-card-stats-v367 .creative-card-like-v367,
+body.news-top-creative .creative-card-stats-v367 .creative-card-views-v367{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:6px!important;
+  min-height:25px!important;
+  padding:4px 9px!important;
+  border-radius:999px!important;
+  background:linear-gradient(135deg,rgba(8,31,58,.96),rgba(18,57,95,.96))!important;
+  border:1px solid rgba(143,203,244,.40)!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  text-shadow:none!important;
+  opacity:1!important;
+  box-shadow:0 5px 14px rgba(0,12,28,.24)!important;
+  font-size:10px!important;
+  font-weight:900!important;
+  line-height:1!important;
+}
+body.news-top-creative .creative-card-stats-v367 .creative-card-like-v367 > span:first-child,
+body.news-top-creative .creative-card-stats-v367 .creative-card-like-v367 .news-like-heart{
+  color:#ff4d61!important;
+  -webkit-text-fill-color:#ff4d61!important;
+  font-size:15px!important;
+  line-height:1!important;
+  filter:none!important;
+}
+body.news-top-creative .creative-card-stats-v367 .creative-card-like-v367 b,
+body.news-top-creative .creative-card-stats-v367 .creative-card-like-v367 .news-like-count,
+body.news-top-creative .creative-card-stats-v367 .creative-card-views-v367 b{
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  text-shadow:none!important;
+  opacity:1!important;
+}
+body.news-top-creative .creative-card-stats-v367 .creative-card-view-icon-v920{
+  display:block!important;
+  flex:none!important;
+  width:14px!important;
+  height:14px!important;
+}
+@media(max-width:640px){
+  body.news-top-creative .creative-card-stats-v367 .creative-card-like-v367,
+  body.news-top-creative .creative-card-stats-v367 .creative-card-views-v367{
+    min-height:23px!important;
+    padding:3px 8px!important;
+  }
+}
+</style>
+'''
+          if marker not in s:
+              if '</head>' not in s:
+                  raise SystemExit('head close not found')
+              s = s.replace('</head>', css + '</head>', 1)
 
-          if 'data-wf43-stat="views"' not in s:
-              view_pattern = re.compile(r'<span class="whitefox-card-stat-v557"[^>]*>👀 <b id="whitefox43IndexViews"[^>]*>0</b></span>')
-              view_repl = '<span class="whitefox-card-stat-v557" data-wf43-stat="views" style="display:inline-flex!important;align-items:center!important;gap:6px!important;padding:6px 10px!important;border-radius:999px!important;background:linear-gradient(135deg,#0b2340 0%,#12385f 100%)!important;border:1px solid rgba(133,185,231,.38)!important;color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;text-shadow:none!important;opacity:1!important;font-size:11px!important;font-weight:900!important;line-height:1!important;box-shadow:0 6px 16px rgba(4,20,38,.28)!important"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;flex:none"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" stroke="#cfefff" stroke-width="2"/><circle cx="12" cy="12" r="2.7" fill="#cfefff"/></svg><b id="whitefox43IndexViews" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;text-shadow:none!important;opacity:1!important">0</b></span>'
-              s, n = view_pattern.subn(view_repl, s, count=1)
-              if n != 1:
-                  raise SystemExit(f'week43 views badge not found: {n}')
+          eye_svg = '<svg aria-hidden="true" class="creative-card-view-icon-v920" width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" stroke="#cfefff" stroke-width="2"/><circle cx="12" cy="12" r="2.7" fill="#cfefff"/></svg>'
+          pattern = re.compile(r'(<span[^>]*class="creative-card-views-v367"[^>]*>)\s*<span aria-hidden="true">👀</span>')
+          s, n = pattern.subn(lambda m: m.group(1) + eye_svg, s)
+          if n == 0 and 'creative-card-view-icon-v920' not in s:
+              raise SystemExit('creative view icons not found')
 
           p.write_text(s, encoding='utf-8')
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add news-elena.html
-          git diff --cached --quiet || git commit -m 'Style WhiteFox week 43 stats badges'
+          git add creative-corner.html
+          git diff --cached --quiet || git commit -m 'Style creative corner card counters'
           git push
