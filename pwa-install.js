@@ -3,6 +3,10 @@
   if('serviceWorker' in navigator){
     window.addEventListener('load',function(){navigator.serviceWorker.register('./service-worker.js?v=634').catch(function(){});},{once:true});
   }
+  if(document.body&&document.body.classList.contains('is-home-route')){
+    var today=document.querySelector('.home-today-v581');
+    if(today) today.remove();
+  }
   if(document.body&&document.body.classList.contains('is-events-route')&&!document.querySelector('script[data-event-calendar-auto-v771]')){
     var ec=document.createElement('script');
     ec.src='event-calendar-auto-v770.js?v=771';
