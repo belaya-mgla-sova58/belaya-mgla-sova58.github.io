@@ -27,6 +27,15 @@
       canyonShop.setAttribute('data-canyon-shop-user-v779','1');
     }
   }
+  if(document.body&&document.body.classList.contains('is-other-route')){
+    var tools=document.querySelector('#kb-calculators .kb-tools-grid-v415');
+    if(tools&&!tools.querySelector('a[href="bear-helper.html"]')){
+      var bear=document.createElement('a');
+      bear.href='bear-helper.html';
+      bear.innerHTML='<strong>Помощник для Мишки</strong><span>Герои, войска, марши и подбор соотношения</span>';
+      tools.appendChild(bear);
+    }
+  }
   if(!document.querySelector('link[data-news-update-reactions-v761]')){var css=document.createElement('link');css.rel='stylesheet';css.href='news-update-reactions-v761.css?v=769';css.setAttribute('data-news-update-reactions-v761','');document.head.appendChild(css);}
   if(!document.querySelector('script[data-news-update-reactions-v760]')){var s=document.createElement('script');s.src='news-update-reactions-v760.js?v=769';s.defer=true;s.setAttribute('data-news-update-reactions-v760','');document.head.appendChild(s);}
   if(!document.querySelector('script[data-news-home-category-v762]')){var h=document.createElement('script');h.src='news-home-category-v762.js?v=769';h.defer=true;h.setAttribute('data-news-home-category-v762','');document.head.appendChild(h);}
