@@ -57,40 +57,22 @@
 })();
 
 (function(){
-  function loadNoArt(){
-    if(document.getElementById('sova58-fortune-no-art')) return;
-    var n=document.createElement('script');
-    n.id='sova58-fortune-no-art';
-    n.src='owl-fortune-no-art-v1.js?v=20261028-1';
-    n.defer=true;
-    document.head.appendChild(n);
-  }
-  function loadStates(){
-    if(document.getElementById('sova58-fortune-states')){loadNoArt();return;}
+  function loadStatesV3(){
+    if(document.getElementById('sova58-fortune-states-v3')) return;
     var x=document.createElement('script');
-    x.id='sova58-fortune-states';
-    x.src='owl-fortune-states-v2.js?v=20261028-2';
+    x.id='sova58-fortune-states-v3';
+    x.src='owl-fortune-states-v3.js?v=20261028-owlfix-1';
     x.defer=true;
-    x.onload=loadNoArt;
     document.head.appendChild(x);
-  }
-  function loadFrameFix(){
-    if(document.getElementById('sova58-fortune-poster-fix')){loadStates();return;}
-    var f=document.createElement('script');
-    f.id='sova58-fortune-poster-fix';
-    f.src='owl-fortune-poster-fix.js?v=20261028-3';
-    f.defer=true;
-    f.onload=loadStates;
-    document.head.appendChild(f);
   }
   if(!document.getElementById('sova58-fortune-loader')){
     var s=document.createElement('script');
     s.id='sova58-fortune-loader';
-    s.src='owl-fortune-v1.js?v=20261028-8';
+    s.src='owl-fortune-v1.js?v=20261028-9';
     s.defer=true;
-    s.onload=loadFrameFix;
+    s.onload=loadStatesV3;
     document.head.appendChild(s);
   }else{
-    loadFrameFix();
+    loadStatesV3();
   }
 })();
