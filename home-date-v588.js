@@ -61,7 +61,7 @@
     if(document.getElementById('sova58-fortune-states-v3')) return;
     var x=document.createElement('script');
     x.id='sova58-fortune-states-v3';
-    x.src='owl-fortune-states-v3.js?v=20261028-owlfix-1';
+    x.src='owl-fortune-states-v3.js?v=20261028-owlfix-2';
     x.defer=true;
     document.head.appendChild(x);
   }
