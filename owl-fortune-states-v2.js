@@ -48,6 +48,10 @@
     var rare=document.getElementById('sova58FortuneRare');
     if(!rare){rare=document.createElement('div');rare.id='sova58FortuneRare';rare.textContent='✨ Редкое предсказание ✨';var counter=document.getElementById('sova58FortuneCounter');lower.insertBefore(rare,counter)}
 
+    var revealing=false;
+    var capturedResult='';
+    var justRevealed=false;
+
     function setState(name){
       panel.classList.remove('state-idle','state-reading','state-done');panel.classList.add('state-'+name);
       if(video){
@@ -58,36 +62,66 @@
     }
     function clearGolden(){text.classList.remove('golden');rare.classList.remove('show');panel.classList.remove('golden-hit');orb.classList.remove('golden-hit')}
     function applyGolden(){text.classList.add('golden');rare.classList.add('show');panel.classList.add('golden-hit');orb.classList.add('golden-hit');setTimeout(function(){orb.classList.remove('golden-hit')},1000)}
-    function refreshLabels(){
+    function refreshLabels(keepResult){
       var s=getState(),left=Math.max(0,MAX-s.used);
       badge.classList.toggle('moon',left===0);badge.textContent=left===0?'🌙':left;
-      if(left===0){btn.textContent='🌙 Приходи завтра';btn.setAttribute('aria-label','Приходи завтра');setState('done')}
-      else if(s.used===0){btn.textContent='🔮 Узнать предсказание';btn.setAttribute('aria-label','Узнать предсказание');setState('idle')}
-      else{btn.textContent='🔮 Ещё одно предсказание';btn.setAttribute('aria-label','Ещё одно предсказание');setState('idle')}
+      if(left===0){
+        btn.textContent='🌙 Приходи завтра';btn.setAttribute('aria-label','Приходи завтра');setState('done');
+        if(!keepResult){clearGolden();text.textContent='На сегодня предсказания закончились. Сова тоже отдыхает. 🦉';}
+      }else if(s.used===0){
+        clearGolden();btn.textContent='🔮 Узнать предсказание';btn.setAttribute('aria-label','Узнать предсказание');setState('idle');
+      }else{
+        btn.textContent='🔮 Ещё одно предсказание';btn.setAttribute('aria-label','Ещё одно предсказание');setState('idle');
+      }
     }
 
-    var revealing=false;
+    var textObserver=new MutationObserver(function(){
+      if(!revealing)return;
+      var t=(text.textContent||'').trim();
+      if(!t)return;
+      if(t==='🔮 Сова заглядывает в будущее…')return;
+      if(t.indexOf('На сегодня предсказания закончились')===0)return;
+      capturedResult=t;
+    });
+    textObserver.observe(text,{childList:true,subtree:true,characterData:true});
+
     btn.addEventListener('click',function(){
       var before=getState();
-      if(before.used>=MAX){clearGolden();setState('done');refreshLabels();return;}
-      revealing=true;clearGolden();setState('reading');
+      if(before.used>=MAX){
+        justRevealed=false;capturedResult='';clearGolden();refreshLabels(false);return;
+      }
+      revealing=true;justRevealed=false;capturedResult='';clearGolden();setState('reading');
       setTimeout(function(){
         var s=getState();
-        var result=text.textContent;
         var idx=s.last;
+        var result=capturedResult;
+        if(!result){
+          var now=(text.textContent||'').trim();
+          if(now && now.indexOf('На сегодня предсказания закончились')!==0)result=now;
+        }
         text.textContent='🔮 Сова заглядывает в будущее…';
         setTimeout(function(){
-          text.textContent=result;
-          if(GOLDEN.has(idx))applyGolden();
-          revealing=false;refreshLabels();
+          if(result)text.textContent=result;
+          revealing=false;justRevealed=true;
+          if(GOLDEN.has(idx))applyGolden();else clearGolden();
+          refreshLabels(true);
         },1400);
-      },0);
+      },40);
     },true);
 
-    var observer=new MutationObserver(function(){if(!revealing)refreshLabels()});
-    observer.observe(text,{childList:true,subtree:true});
-    orb.addEventListener('click',function(){setTimeout(function(){clearGolden();refreshLabels()},0)});
-    refreshLabels();
+    orb.addEventListener('click',function(){
+      setTimeout(function(){
+        if(justRevealed){refreshLabels(true);}
+        else{clearGolden();refreshLabels(false);}
+      },0);
+    });
+
+    var close=document.getElementById('sova58FortuneClose');
+    if(close)close.addEventListener('click',function(){justRevealed=false;capturedResult='';clearGolden()});
+    var back=document.getElementById('sova58FortuneBackdrop');
+    if(back)back.addEventListener('click',function(e){if(e.target===back){justRevealed=false;capturedResult='';clearGolden()}});
+
+    clearGolden();refreshLabels(false);
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();
 })();
