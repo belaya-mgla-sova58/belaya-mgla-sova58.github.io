@@ -2,17 +2,57 @@
   var KEY='belaya_mgla_owl_fortune_v1';
   var MAX=3;
   var GOLDEN=new Set([5,29,48,79,95]);
-  var MEDIA={
-    idle:'assets/owl-start.mp4?v=20261028-owl5',
-    reading:'assets/owl-preparing.mp4?v=20261028-owl5',
-    ready:'assets/owl-ready.mp4?v=20261028-owl5',
-    rare:'assets/owl-rare.mp4?v=20261028-owl5',
-    sleep:'assets/owl-sleep.mp4?v=20261028-owl5'
+  var CHUNKS={
+    idle:['assets/owl-video/start-01.b64','assets/owl-video/start-02.b64','assets/owl-video/start-03.b64','assets/owl-video/start-04.b64'],
+    reading:['assets/owl-video/reading-01.b64','assets/owl-video/reading-02.b64','assets/owl-video/reading-03.b64'],
+    ready:['assets/owl-video/ready-01.b64','assets/owl-video/ready-02.b64','assets/owl-video/ready-03.b64'],
+    rare:['assets/owl-video/rare-01.b64'],
+    sleep:[]
   };
+  var POSTER={
+    idle:'https://cdn.creativeclaw.co/u/9f9da7ef/images/46299034-a48a-48db-9536-480a438c9f33.png',
+    reading:'https://cdn.creativeclaw.co/u/9f9da7ef/images/0043c267-4133-4e99-bbed-39131412de0e.png',
+    ready:'https://cdn.creativeclaw.co/u/9f9da7ef/images/c63dbcab-c50c-4408-9a23-643284d4fb7f.png',
+    rare:'https://cdn.creativeclaw.co/u/9f9da7ef/images/089099d8-7a94-4188-b738-b08b46d15c8b.png',
+    sleep:'https://cdn.creativeclaw.co/u/9f9da7ef/images/ec5e7825-c2d5-4c44-a8d6-d343c510b440.png'
+  };
+  var mediaCache={};
+  var mediaPromise={};
   var tries=0;
 
   function day(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
   function getState(){try{var s=JSON.parse(localStorage.getItem(KEY)||'{}');return s.day===day()?s:{day:day(),used:0,last:-1}}catch(e){return{day:day(),used:0,last:-1}}}
+
+  function decodeBase64ToBlob(parts){
+    var b64=parts.join('').replace(/\s+/g,'');
+    if(!b64)throw new Error('empty owl video');
+    var binary=atob(b64);
+    var bytes=new Uint8Array(binary.length);
+    for(var i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
+    return new Blob([bytes],{type:'video/mp4'});
+  }
+
+  function loadMedia(kind){
+    if(mediaCache[kind])return Promise.resolve(mediaCache[kind]);
+    if(mediaPromise[kind])return mediaPromise[kind];
+    var files=CHUNKS[kind]||[];
+    if(!files.length)return Promise.reject(new Error('no animated media for '+kind));
+    mediaPromise[kind]=Promise.all(files.map(function(url){
+      return fetch(url+'?v=20261028-owlchunks2',{cache:'force-cache'}).then(function(r){
+        if(!r.ok)throw new Error(url+' '+r.status);
+        return r.text();
+      });
+    })).then(function(parts){
+      var blob=decodeBase64ToBlob(parts);
+      var url=URL.createObjectURL(blob);
+      mediaCache[kind]=url;
+      return url;
+    }).catch(function(err){
+      delete mediaPromise[kind];
+      throw err;
+    });
+    return mediaPromise[kind];
+  }
 
   function install(){
     tries++;
@@ -30,6 +70,7 @@
     if(window.__sova58FortuneStatesV3)return;window.__sova58FortuneStatesV3=true;
 
     video.removeAttribute('poster');
+    video.removeAttribute('src');
     video.muted=true;video.loop=true;video.autoplay=true;video.playsInline=true;video.preload='auto';
     art.querySelectorAll('.owlFortunePosterWrap,.sova58FortunePosterWrap').forEach(function(x){x.remove()});
 
@@ -38,8 +79,8 @@
     style.textContent=`
 #sova58FortunePanel{border:1px solid rgba(157,222,255,.78)!important;box-shadow:0 34px 110px rgba(0,0,0,.72),0 0 0 1px rgba(102,91,255,.26),0 0 34px rgba(65,137,255,.32),inset 0 0 34px rgba(94,139,255,.08)!important;background:linear-gradient(180deg,#09162f,#06101f)!important;transition:.35s ease}
 #sova58FortunePanel:after{content:'';position:absolute;inset:4px;border-radius:21px;border:1px solid rgba(190,234,255,.20);box-shadow:inset 0 0 20px rgba(123,91,255,.12);pointer-events:none;z-index:4}
-#sova58FortuneArt{position:relative!important;display:block!important;visibility:visible!important;opacity:1!important;width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:3/2!important;overflow:hidden!important;background:#07152f!important;border-bottom:1px solid rgba(140,213,255,.34)!important;box-shadow:inset 0 -20px 30px rgba(3,8,22,.22)!important;transform:none!important;filter:none!important}
-#sova58FortuneVideo{position:absolute!important;inset:0!important;display:block!important;visibility:visible!important;opacity:1!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;background:#07152f!important;filter:none!important;transform:none!important;z-index:1!important;pointer-events:none!important}
+#sova58FortuneArt{position:relative!important;display:block!important;visibility:visible!important;opacity:1!important;width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:3/2!important;overflow:hidden!important;background-color:#07152f!important;background-position:center!important;background-size:cover!important;background-repeat:no-repeat!important;border-bottom:1px solid rgba(140,213,255,.34)!important;box-shadow:inset 0 -20px 30px rgba(3,8,22,.22)!important;transform:none!important;filter:none!important}
+#sova58FortuneVideo{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;background:transparent!important;filter:none!important;transform:none!important;z-index:1!important;pointer-events:none!important;transition:opacity .22s ease!important}
 #sova58FortuneText{border:1px solid rgba(123,205,255,.82)!important;box-shadow:0 0 0 1px rgba(111,91,255,.25),0 0 22px rgba(54,130,255,.17),inset 0 0 18px rgba(83,120,255,.08)!important;background:linear-gradient(180deg,rgba(14,35,75,.97),rgba(9,23,51,.98))!important;transition:.35s ease}
 #sova58FortunePanel.state-reading{box-shadow:0 34px 110px rgba(0,0,0,.72),0 0 0 1px rgba(167,125,255,.42),0 0 52px rgba(91,87,255,.48),inset 0 0 34px rgba(94,139,255,.12)!important}
 #sova58FortuneText.golden{color:#ffe9a3!important;border-color:#ffd76a!important;background:radial-gradient(circle at 50% 0%,rgba(255,210,84,.18),transparent 58%),linear-gradient(180deg,#2f2550,#171c3b)!important;box-shadow:0 0 0 1px rgba(255,206,77,.38),0 0 32px rgba(255,197,58,.42),inset 0 0 24px rgba(255,208,79,.12)!important;animation:sova58GoldReveal .65s ease,sova58GoldPulse 1.8s ease-in-out 1}
@@ -57,28 +98,64 @@
     var rare=document.getElementById('sova58FortuneRare');
     if(!rare){rare=document.createElement('div');rare.id='sova58FortuneRare';rare.textContent='✨ Редкое предсказание ✨';var counter=document.getElementById('sova58FortuneCounter');lower.insertBefore(rare,counter)}
 
-    Object.keys(MEDIA).forEach(function(k){var l=document.createElement('link');l.rel='preload';l.as='video';l.href=MEDIA[k];document.head.appendChild(l)});
-
     var revealing=false;
     var capturedResult='';
     var justRevealed=false;
-    var currentMedia='';
+    var currentKind='';
+    var sceneToken=0;
 
-    function setVideo(kind,restart){
-      var src=MEDIA[kind]||MEDIA.idle;
-      if(currentMedia!==kind || video.getAttribute('src')!==src){
-        currentMedia=kind;
-        video.setAttribute('src',src);
-        try{video.load()}catch(e){}
-        restart=true;
-      }
+    function showPoster(kind){
+      var poster=POSTER[kind]||POSTER.idle;
+      art.style.setProperty('background-image','url("'+poster+'")','important');
+      art.style.setProperty('background-position','center','important');
+      art.style.setProperty('background-size','cover','important');
+      art.style.setProperty('background-repeat','no-repeat','important');
+    }
+
+    function hideVideo(){
+      try{video.pause()}catch(e){}
+      video.style.setProperty('display','block','important');
+      video.style.setProperty('visibility','visible','important');
+      video.style.setProperty('opacity','0','important');
+    }
+
+    function revealVideo(){
       video.style.setProperty('display','block','important');
       video.style.setProperty('visibility','visible','important');
       video.style.setProperty('opacity','1','important');
-      video.loop=true;video.muted=true;video.playbackRate=1;
-      if(restart){try{video.currentTime=0}catch(e){}}
-      try{var p=video.play();if(p&&p.catch)p.catch(function(){})}catch(e){}
     }
+
+    function setVideo(kind,restart){
+      currentKind=kind;
+      var token=++sceneToken;
+      showPoster(kind);
+      hideVideo();
+      var files=CHUNKS[kind]||[];
+      if(!files.length)return;
+      loadMedia(kind).then(function(src){
+        if(token!==sceneToken||currentKind!==kind)return;
+        var onReady=function(){
+          video.removeEventListener('loadeddata',onReady);
+          if(token!==sceneToken||currentKind!==kind)return;
+          revealVideo();
+          if(restart){try{video.currentTime=0}catch(e){}}
+          try{var p=video.play();if(p&&p.catch)p.catch(function(){})}catch(e){}
+        };
+        video.addEventListener('loadeddata',onReady);
+        video.setAttribute('src',src);
+        video.loop=true;video.muted=true;video.playbackRate=1;
+        try{video.load()}catch(e){}
+        if(video.readyState>=2)onReady();
+      }).catch(function(){
+        if(token!==sceneToken||currentKind!==kind)return;
+        hideVideo();
+      });
+    }
+
+    video.addEventListener('error',function(){
+      hideVideo();
+      showPoster(currentKind||'idle');
+    });
 
     function setState(name,kind,restart){
       panel.classList.remove('state-idle','state-reading','state-done');
@@ -144,7 +221,7 @@
       setTimeout(function(){
         var s=getState();
         justRevealed=false;capturedResult='';clearGolden();
-        if(s.used>=MAX)refreshLabels(false);else refreshLabels(false);
+        refreshLabels(false);
       },0);
     });
 
@@ -152,6 +229,8 @@
     back.addEventListener('click',function(e){if(e.target===back){justRevealed=false;capturedResult='';clearGolden()}});
 
     refreshLabels(false);
+    loadMedia('reading').catch(function(){});
+    loadMedia('ready').catch(function(){});
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();
 })();
