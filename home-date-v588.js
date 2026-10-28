@@ -57,12 +57,21 @@
 })();
 
 (function(){
+  function loadStates(){
+    if(document.getElementById('sova58-fortune-states')) return;
+    var x=document.createElement('script');
+    x.id='sova58-fortune-states';
+    x.src='owl-fortune-states-v1.js?v=20261028-1';
+    x.defer=true;
+    document.head.appendChild(x);
+  }
   function loadFrameFix(){
-    if(document.getElementById('sova58-fortune-poster-fix')) return;
+    if(document.getElementById('sova58-fortune-poster-fix')){loadStates();return;}
     var f=document.createElement('script');
     f.id='sova58-fortune-poster-fix';
     f.src='owl-fortune-poster-fix.js?v=20261028-3';
     f.defer=true;
+    f.onload=loadStates;
     document.head.appendChild(f);
   }
   if(!document.getElementById('sova58-fortune-loader')){
