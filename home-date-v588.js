@@ -61,7 +61,7 @@
     if(document.getElementById('sova58-fortune-static-hq-v1')) return;
     var h=document.createElement('script');
     h.id='sova58-fortune-static-hq-v1';
-    h.src='owl-fortune-static-hq-v1.js?v=20261028-hq2';
+    h.src='owl-fortune-static-hq-v1.js?v=20261028-hq3';
     h.defer=true;
     document.head.appendChild(h);
   }
