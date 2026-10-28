@@ -57,12 +57,31 @@
 })();
 
 (function(){
+  function loadStaticHQ(){
+    if(document.getElementById('sova58-fortune-static-hq-v1')) return;
+    var h=document.createElement('script');
+    h.id='sova58-fortune-static-hq-v1';
+    h.src='owl-fortune-static-hq-v1.js?v=20261028-hq2';
+    h.defer=true;
+    document.head.appendChild(h);
+  }
   function loadStatesV3(){
-    if(document.getElementById('sova58-fortune-states-v3')) return;
+    var old=document.getElementById('sova58-fortune-states-v3');
+    if(old){
+      if(window.__sova58FortuneStatesV3) loadStaticHQ();
+      else{
+        old.addEventListener('load',loadStaticHQ,{once:true});
+        old.addEventListener('error',loadStaticHQ,{once:true});
+        setTimeout(loadStaticHQ,500);
+      }
+      return;
+    }
     var x=document.createElement('script');
     x.id='sova58-fortune-states-v3';
     x.src='owl-fortune-states-v3.js?v=20261028-owlfix-2';
     x.defer=true;
+    x.onload=loadStaticHQ;
+    x.onerror=loadStaticHQ;
     document.head.appendChild(x);
   }
   if(!document.getElementById('sova58-fortune-loader')){
@@ -71,6 +90,7 @@
     s.src='owl-fortune-v1.js?v=20261028-9';
     s.defer=true;
     s.onload=loadStatesV3;
+    s.onerror=loadStatesV3;
     document.head.appendChild(s);
   }else{
     loadStatesV3();
