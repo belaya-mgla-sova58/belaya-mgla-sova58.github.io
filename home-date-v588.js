@@ -57,10 +57,11 @@
 })();
 
 (function(){
-  if(document.getElementById('sova58-fortune-loader')) return;
-  var s=document.createElement('script');
-  s.id='sova58-fortune-loader';
-  s.src='owl-fortune-v1.js?v=20261028-5';
-  s.defer=true;
-  document.head.appendChild(s);
+  if(!document.getElementById('sova58-fortune-loader')){
+    var s=document.createElement('script');
+    s.id='sova58-fortune-loader';
+    s.src='owl-fortune-v1.js?v=20261028-5';
+    s.defer=true;
+    document.head.appendChild(s);
+  }
 })();
