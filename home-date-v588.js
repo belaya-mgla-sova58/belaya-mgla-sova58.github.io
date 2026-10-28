@@ -61,7 +61,7 @@
     if(document.getElementById('sova58-fortune-states')) return;
     var x=document.createElement('script');
     x.id='sova58-fortune-states';
-    x.src='owl-fortune-states-v1.js?v=20261028-1';
+    x.src='owl-fortune-states-v2.js?v=20261028-2';
     x.defer=true;
     document.head.appendChild(x);
   }
@@ -77,7 +77,7 @@
   if(!document.getElementById('sova58-fortune-loader')){
     var s=document.createElement('script');
     s.id='sova58-fortune-loader';
-    s.src='owl-fortune-v1.js?v=20261028-7';
+    s.src='owl-fortune-v1.js?v=20261028-8';
     s.defer=true;
     s.onload=loadFrameFix;
     document.head.appendChild(s);
