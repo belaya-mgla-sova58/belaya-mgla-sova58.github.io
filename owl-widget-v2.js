@@ -1,0 +1,31 @@
+(()=>{
+  const OLD_SELECTORS=['#owlButton','#dismissOwl','#orbModal','#fortuneOwlV933','#fortuneOwlV932','#fortuneOwlV931','#sova58FortuneOwlV2','#sova58FortunePanel','#sova58FortuneBackdrop','.fortune-overlay-v933','.fortune-hint-v933','.fortune-overlay-v932','.fortune-hint-v932','.fortune-overlay-v931','.fortune-owl-hint-v931'];
+  OLD_SELECTORS.forEach(sel=>document.querySelectorAll(sel).forEach(el=>el.remove()));
+  document.querySelectorAll('script[src*="owl-fortune-v933"],script[src*="owl-widget-v1.js"]').forEach(el=>el.remove());
+  if(document.getElementById('owlWidgetV2Style'))document.getElementById('owlWidgetV2Style').remove();
+  const s=document.createElement('style');
+  s.id='owlWidgetV2Style';
+  s.textContent=`
+  .owl-corner-v2{position:fixed!important;right:12px!important;bottom:112px!important;left:auto!important;top:auto!important;z-index:2147483000!important;width:150px!important;max-width:24vw!important;height:auto!important;aspect-ratio:288/424;border:0!important;background:transparent!important;padding:0!important;margin:0!important;cursor:pointer!important;pointer-events:auto!important;touch-action:manipulation!important;overflow:visible!important;filter:drop-shadow(0 10px 18px rgba(89,43,154,.45));animation:owlFloatV2 3.2s ease-in-out infinite!important;transform-origin:50% 72%!important;-webkit-tap-highlight-color:transparent!important}
+  .owl-corner-v2 img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:contain!important;opacity:0!important;pointer-events:none!important;transition:opacity .25s ease!important;animation:owlBreathV2 2.7s ease-in-out infinite!important}
+  .owl-corner-v2 img.active{opacity:1!important}.owl-corner-v2.hidden{display:none!important}
+  .owl-dismiss-v2{position:fixed!important;right:5px!important;bottom:250px!important;left:auto!important;top:auto!important;z-index:2147483002!important;width:28px!important;height:28px!important;border:1px solid rgba(240,226,255,.38)!important;border-radius:50%!important;background:rgba(18,8,34,.88)!important;color:#fff!important;font:700 18px/1 system-ui!important;cursor:pointer!important;display:grid!important;place-items:center!important;pointer-events:auto!important;box-shadow:0 5px 16px rgba(0,0,0,.38)!important}.owl-dismiss-v2.hidden{display:none!important}
+  @keyframes owlFloatV2{0%,100%{transform:translate3d(0,0,0) rotate(-1.2deg)}50%{transform:translate3d(0,-12px,0) rotate(1.2deg)}}
+  @keyframes owlBreathV2{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
+  .owl-modal-v2{position:fixed!important;inset:0!important;z-index:2147483640!important;display:none!important;place-items:center!important;padding:10px!important;box-sizing:border-box!important;pointer-events:none!important}
+  .owl-modal-v2.open{display:grid!important;pointer-events:auto!important}.owl-backdrop-v2{position:absolute!important;inset:0!important;background:rgba(2,1,8,.74)!important;backdrop-filter:blur(7px)!important}
+  .owl-dialog-v2{position:relative!important;z-index:1!important;width:min(760px,96vw)!important;height:min(760px,88vh)!important;border-radius:26px!important;overflow:hidden!important;background:#05020c!important;border:1px solid rgba(227,201,255,.24)!important;box-shadow:0 30px 100px rgba(0,0,0,.68),0 0 70px rgba(125,59,193,.24)!important}
+  .owl-frame-v2{width:100%!important;height:100%!important;border:0!important;display:block!important;background:#05020c!important}.owl-close-v2{position:absolute!important;right:12px!important;top:10px!important;z-index:3!important;width:40px!important;height:40px!important;border:1px solid rgba(255,255,255,.25)!important;border-radius:50%!important;background:rgba(17,8,29,.86)!important;color:#fff!important;font:400 29px/1 system-ui!important;cursor:pointer!important;display:grid!important;place-items:center!important}
+  @media(max-width:640px){.owl-corner-v2{right:12px!important;bottom:112px!important;width:150px!important;max-width:24vw!important}.owl-dismiss-v2{right:5px!important;bottom:250px!important}.owl-dialog-v2{width:96vw!important;height:82vh!important;border-radius:20px!important}}
+  `;
+  document.head.appendChild(s);
+  document.body.insertAdjacentHTML('beforeend',`<button id="owlButtonV2" class="owl-corner-v2" type="button" aria-label="Открыть предсказания совы"><img id="owlActiveV2" class="active" src="owl-fortune/media/owl-active.webp?v=20261029-2" alt=""><img id="owlSleepV2" src="owl-fortune/media/owl-sleep.webp?v=20261029-2" alt=""></button><button id="dismissOwlV2" class="owl-dismiss-v2" type="button" aria-label="Скрыть сову до обновления страницы">×</button><div id="orbModalV2" class="owl-modal-v2" aria-hidden="true"><div class="owl-backdrop-v2"></div><div class="owl-dialog-v2"><button id="closeModalV2" class="owl-close-v2" type="button" aria-label="Закрыть">×</button><iframe id="orbFrameV2" class="owl-frame-v2" src="owl-fortune/orb-popup.html?v=20261029-2" title="Сова-предсказательница" allow="autoplay"></iframe></div></div>`);
+  const owl=document.getElementById('owlButtonV2'),dismiss=document.getElementById('dismissOwlV2'),modal=document.getElementById('orbModalV2'),close=document.getElementById('closeModalV2'),backdrop=modal.querySelector('.owl-backdrop-v2'),active=document.getElementById('owlActiveV2'),sleep=document.getElementById('owlSleepV2');
+  function openModal(e){if(e){e.preventDefault();e.stopPropagation()}modal.classList.add('open');modal.setAttribute('aria-hidden','false');const f=document.getElementById('orbFrameV2');if(f)f.focus()}
+  function closeModal(e){if(e){e.preventDefault();e.stopPropagation()}modal.classList.remove('open');modal.setAttribute('aria-hidden','true')}
+  owl.addEventListener('click',openModal,{passive:false});
+  owl.addEventListener('pointerup',e=>{if(e.pointerType==='touch')openModal(e)},{passive:false});
+  dismiss.addEventListener('click',e=>{closeModal(e);owl.classList.add('hidden');dismiss.classList.add('hidden')});
+  close.addEventListener('click',closeModal);backdrop.addEventListener('click',closeModal);document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+  window.addEventListener('message',e=>{if(!e.data||e.data.type!=='owl-state')return;const isSleep=e.data.state==='sleep';active.classList.toggle('active',!isSleep);sleep.classList.toggle('active',isSleep)});
+})();
