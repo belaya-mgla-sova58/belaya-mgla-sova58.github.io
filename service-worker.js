@@ -1,4 +1,4 @@
-const CACHE_NAME = 'belaya-mgla-v661';
+const CACHE_NAME = 'belaya-mgla-v662';
 const STATIC_CORE = [
   './site-v626.min.css?v=626',
   './manifest-v541.webmanifest',
@@ -12,11 +12,7 @@ const STATIC_CORE = [
 ];
 
 self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(STATIC_CORE))
-      .catch(() => {})
-  );
+  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(STATIC_CORE)).catch(()=>{}));
   self.skipWaiting();
 });
 
@@ -28,42 +24,45 @@ self.addEventListener('activate', event => {
   );
 });
 
-self.addEventListener('fetch', event => {
-  const req = event.request;
-  if (req.method !== 'GET') return;
-  const url = new URL(req.url);
-  if (url.origin !== self.location.origin) return;
+async function freshPage(req){
+  const resp=await fetch(req,{cache:'no-store'});
+  const type=(resp.headers.get('content-type')||'').toLowerCase();
+  if(!resp.ok||!type.includes('text/html')) return resp;
+  let html=await resp.text();
+  const tag='<script defer src="site-repair-v662.js?v=20261030-662"></script>';
+  if(!html.includes('site-repair-v662.js')) html=html.includes('</body>')?html.replace('</body>',tag+'</body>'):html+tag;
+  const headers=new Headers(resp.headers);
+  headers.set('Cache-Control','no-store, no-cache, must-revalidate, max-age=0');
+  headers.delete('content-length');
+  return new Response(html,{status:resp.status,statusText:resp.statusText,headers});
+}
 
-  // HTML and JavaScript must never come from an old site cache.
-  if (req.mode === 'navigate' || req.destination === 'script' || url.pathname.endsWith('.html') || url.pathname.endsWith('.js')) {
-    event.respondWith(
-      fetch(req, { cache: 'no-store' }).catch(async () => {
-        if (req.mode === 'navigate') {
-          const fresh = await fetch('./index.html?offline-fallback=661', { cache: 'no-store' }).catch(() => null);
-          if (fresh) return fresh;
-        }
-        return Response.error();
-      })
-    );
+self.addEventListener('fetch', event => {
+  const req=event.request;
+  if(req.method!=='GET') return;
+  const url=new URL(req.url);
+  if(url.origin!==self.location.origin) return;
+
+  if(req.mode==='navigate'||url.pathname.endsWith('.html')){
+    event.respondWith(freshPage(req).catch(()=>Response.error()));
     return;
   }
 
-  if (req.destination === 'audio' || req.destination === 'video') return;
+  if(req.destination==='script'||url.pathname.endsWith('.js')){
+    event.respondWith(fetch(req,{cache:'no-store'}).catch(()=>Response.error()));
+    return;
+  }
 
-  // Images/CSS can use stale-while-revalidate safely.
-  event.respondWith((async () => {
-    const cache = await caches.open(CACHE_NAME);
-    const cached = await cache.match(req);
-    const network = fetch(req, { cache: 'no-store' })
-      .then(resp => {
-        if (resp && resp.ok && resp.type === 'basic') cache.put(req, resp.clone());
-        return resp;
-      })
-      .catch(() => null);
-    if (cached) {
-      event.waitUntil(network);
-      return cached;
-    }
-    return (await network) || Response.error();
+  if(req.destination==='audio'||req.destination==='video') return;
+
+  event.respondWith((async()=>{
+    const cache=await caches.open(CACHE_NAME);
+    const cached=await cache.match(req);
+    const network=fetch(req,{cache:'no-store'}).then(resp=>{
+      if(resp&&resp.ok&&resp.type==='basic') cache.put(req,resp.clone());
+      return resp;
+    }).catch(()=>null);
+    if(cached){event.waitUntil(network);return cached;}
+    return(await network)||Response.error();
   })());
 });
