@@ -1,7 +1,7 @@
 (function(){
   'use strict';
   if('serviceWorker' in navigator){
-    window.addEventListener('load',function(){navigator.serviceWorker.register('./service-worker.js?v=634').catch(function(){});},{once:true});
+    window.addEventListener('load',function(){navigator.serviceWorker.register('./service-worker.js?v=663-frameblink2',{updateViaCache:'none'}).catch(function(){});},{once:true});
   }
   if(document.body&&document.body.classList.contains('is-home-route')){
     var today=document.querySelector('.home-today-v581');
