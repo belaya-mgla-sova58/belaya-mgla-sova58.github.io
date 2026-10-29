@@ -57,18 +57,18 @@
 })();
 
 (function(){
-  function loadFortuneOwlV932(){
-    if(document.getElementById('fortuneOwlV932')) return;
-    if(document.querySelector('script[data-owl-fortune-v932]')) return;
+  function loadFortuneOwlV933(){
+    if(document.getElementById('fortuneOwlV933')) return;
+    if(document.querySelector('script[data-owl-fortune-v933]')) return;
     var s=document.createElement('script');
-    s.src='/owl-fortune-v932.js?v=932-20261029';
+    s.src='https://belaya-mgla-sova58.github.io/owl-fortune-v933.js?v=20261029-right4';
     s.defer=true;
-    s.dataset.owlFortuneV932='1';
+    s.dataset.owlFortuneV933='1';
     document.head.appendChild(s);
   }
   if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',loadFortuneOwlV932,{once:true});
+    document.addEventListener('DOMContentLoaded',loadFortuneOwlV933,{once:true});
   }else{
-    loadFortuneOwlV932();
+    loadFortuneOwlV933();
   }
 })();
