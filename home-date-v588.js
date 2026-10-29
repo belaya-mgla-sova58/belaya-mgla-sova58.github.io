@@ -57,30 +57,18 @@
 })();
 
 (function(){
-  function loadFortuneOwl(){
-    if(document.getElementById('fortuneOwlV931')) return;
-    if(document.querySelector('script[data-owl-fortune-v931]')) return;
-
-    function loadMain(){
-      if(document.querySelector('script[data-owl-fortune-v931]')) return;
-      var s=document.createElement('script');
-      s.src='owl-fortune-v930.js?v=933';
-      s.defer=true;
-      s.dataset.owlFortuneV931='1';
-      document.head.appendChild(s);
-    }
-
-    var c=document.createElement('script');
-    c.src='owl-fortune-cooldown-v931.js?v=933';
-    c.defer=true;
-    c.onload=loadMain;
-    c.onerror=loadMain;
-    document.head.appendChild(c);
+  function loadFortuneOwlV932(){
+    if(document.getElementById('fortuneOwlV932')) return;
+    if(document.querySelector('script[data-owl-fortune-v932]')) return;
+    var s=document.createElement('script');
+    s.src='/owl-fortune-v932.js?v=932-20261029';
+    s.defer=true;
+    s.dataset.owlFortuneV932='1';
+    document.head.appendChild(s);
   }
-
   if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',loadFortuneOwl,{once:true});
+    document.addEventListener('DOMContentLoaded',loadFortuneOwlV932,{once:true});
   }else{
-    loadFortuneOwl();
+    loadFortuneOwlV932();
   }
 })();
