@@ -1,1 +1,86 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Предсказания совы</title><style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#05020c;color:#fff;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}body{display:grid;place-items:center}.loading{opacity:.72;font-size:15px;letter-spacing:.02em}</style><script src="https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js"></script></head><body><div class="loading">🔮</div><script>(async()=>{try{const src=await fetch('orb-original-packed.html?v=20261030-1',{cache:'no-store'}).then(r=>r.text());const m=src.match(/atob\("([A-Za-z0-9+/=]+)"\)/);if(!m)throw new Error('packed orb not found');const bytes=Uint8Array.from(atob(m[1]),c=>c.charCodeAt(0));let html;if('DecompressionStream' in window){html=await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).text()}else{if(!window.pako)throw new Error('pako unavailable');html=new TextDecoder('utf-8').decode(window.pako.ungzip(bytes))}const fix='<style id="orbTextFix">.prediction{left:50%!important;top:50%!important;right:auto!important;bottom:auto!important;width:76%!important;max-width:76%!important;max-height:58%!important;margin:0!important;text-align:center!important;justify-items:center!important;align-items:center!important;transform:translate(-50%,-50%) scale(.94)!important;transform-origin:center center!important;line-height:1.3!important;word-break:normal!important;overflow-wrap:break-word!important}.prediction.show{transform:translate(-50%,-50%) scale(1)!important}.exhaustedText{left:50%!important;right:auto!important;width:82%!important;transform:translateX(-50%)!important;text-align:center!important}</style>';html=html.includes('</head>')?html.replace('</head>',fix+'</head>'):fix+html;document.open();document.write(html);document.close()}catch(e){document.body.innerHTML='<div style="padding:24px;text-align:center;color:#ffe7a3;font:700 17px/1.4 Georgia,serif">Шар временно прячется в тумане 🔮<br>Обнови страницу.</div>'}})();</script></body></html>
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Предсказания совы</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#05020c;color:#fff;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+body{display:flex;align-items:center;justify-content:center}
+.wrap{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px 16px 16px}
+.stage{position:relative;width:min(92vw,470px);height:min(76vh,500px);display:flex;align-items:center;justify-content:center;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none}
+.orbVideo{position:absolute;left:50%;top:50%;width:100%;height:100%;transform:translate(-50%,-50%);object-fit:contain;display:block;background:transparent}
+.prediction{position:absolute;left:50%;top:50%;z-index:5;width:70%;max-width:330px;transform:translate(-50%,-50%) scale(.96);padding:12px 14px;text-align:center;font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:clamp(16px,4.4vw,23px);line-height:1.28;color:#fff;text-shadow:0 2px 5px #000,0 0 10px #000;opacity:0;transition:opacity .28s ease,transform .28s ease;pointer-events:none;overflow-wrap:break-word;word-break:normal}
+.prediction.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.exhausted{position:absolute;left:50%;top:50%;z-index:6;width:72%;transform:translate(-50%,-50%);text-align:center;font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:clamp(17px,4.5vw,23px);line-height:1.3;color:#ffe8a5;text-shadow:0 2px 5px #000,0 0 10px #000;opacity:0;pointer-events:none}
+.stage.locked .exhausted{opacity:1}
+.meta{width:min(90vw,430px);display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:2px;color:#ffe8a5;font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:15px;text-shadow:0 1px 4px #000}
+.counter{white-space:nowrap}
+@media(max-width:640px){.wrap{padding:10px 8px 14px}.stage{width:94vw;height:72vh}.prediction{width:72%;font-size:clamp(15px,4.1vw,20px);line-height:1.26}.exhausted{width:74%;font-size:clamp(16px,4.2vw,20px)}.meta{width:88vw;font-size:14px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="stage" class="stage" role="button" tabindex="0" aria-label="Получить предсказание">
+    <video id="orbVideo" class="orbVideo" autoplay muted loop playsinline preload="auto">
+      <source src="media/orb-1-idle.mp4?v=20261030-2" type="video/mp4">
+    </video>
+    <div id="fortuneText" class="prediction" aria-live="polite"></div>
+    <div class="exhausted">Сова устала 😴🔮<br>Приходи завтра.</div>
+  </div>
+  <div class="meta"><span id="status">Нажми на шар</span><span id="counter" class="counter"></span></div>
+</div>
+<script>
+(function(){
+  var MAX=3, RARE=.02, KEY='belaya_mgla_original_orb_plain_v1';
+  var files={idle:'media/orb-1-idle.mp4?v=20261030-2',charge:'media/orb-2-charge.mp4?v=20261030-2',normal:'media/orb-3-normal.mp4?v=20261030-2',rare:'media/orb-4-rare.mp4?v=20261030-2',tired:'media/orb-5-exhausted.mp4?v=20261030-2'};
+  var normal=[
+    'Сегодня кто-то неожиданно окажется на твоей стороне.',
+    'Небольшая случайность сыграет тебе на руку.',
+    'Один разговор многое расставит по местам.',
+    'Сегодня лучше довериться интуиции.',
+    'Нужная подсказка попадётся случайно.',
+    'К вечеру появится повод улыбнуться.',
+    'Сегодня твой юмор спасёт ситуацию.',
+    'Запасной вариант внезапно станет главным.',
+    'Кто-то заметит твои усилия.',
+    'Нужный человек объявится сам.',
+    'Сегодня можно чуть меньше сомневаться.',
+    'То, чего ты опасалась, окажется проще.'
+  ];
+  var rare=[
+    'Редкий знак: одному желанию сегодня особенно везёт. ✨',
+    'Сова видит золотую нить. Скоро случится то, что захочется запомнить. ✨',
+    'Сегодня судьба решила немного подыграть тебе. 🍀',
+    'Редкое совпадение откроет нужную дверь. ⭐'
+  ];
+  var stage=document.getElementById('stage'),video=document.getElementById('orbVideo'),text=document.getElementById('fortuneText'),status=document.getElementById('status'),counter=document.getElementById('counter');
+  var busy=false,state=load();
+  function day(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
+  function load(){try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(!s||s.day!==day())return{day:day(),count:0};return{day:s.day,count:Math.max(0,Math.min(MAX,Number(s.count)||0))}}catch(e){return{day:day(),count:0}}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function parentState(s){try{parent.postMessage({type:'owl-state',state:s},'*')}catch(e){}}
+  function setVideo(src,loop){video.loop=loop!==false;if(video.getAttribute('src')!==src){video.setAttribute('src',src);video.load()}var p=video.play();if(p&&p.catch)p.catch(function(){})}
+  function update(){counter.textContent='Осталось: '+Math.max(0,MAX-state.count)+'/'+MAX}
+  function idle(){stage.classList.remove('locked');text.classList.remove('show');text.textContent='';status.textContent='Нажми на шар';setVideo(files.idle,true);parentState('active');update()}
+  function tired(){busy=false;stage.classList.add('locked');text.classList.remove('show');text.textContent='';status.textContent='На сегодня всё';setVideo(files.tired,true);parentState('sleep');update()}
+  function reveal(){
+    if(busy||state.count>=MAX)return;
+    busy=true;text.classList.remove('show');text.textContent='';status.textContent='Сова смотрит в туман…';setVideo(files.charge,true);
+    setTimeout(function(){
+      var isRare=Math.random()<RARE;
+      var arr=isRare?rare:normal;
+      var msg=arr[Math.floor(Math.random()*arr.length)];
+      state.count++;save();setVideo(isRare?files.rare:files.normal,true);text.textContent=msg;text.classList.add('show');status.textContent=isRare?'Редкое предсказание ✨':'Предсказание готово';update();busy=false;
+      if(state.count>=MAX)setTimeout(tired,3600);
+    },1200);
+  }
+  stage.addEventListener('click',reveal);
+  stage.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();reveal()}});
+  video.addEventListener('error',function(){status.textContent='Не удалось загрузить шар';});
+  update();if(state.count>=MAX)tired();else idle();
+})();
+</script>
+</body>
+</html>
