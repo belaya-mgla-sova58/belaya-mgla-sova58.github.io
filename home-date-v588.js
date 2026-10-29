@@ -65,7 +65,7 @@
     });
     if(document.getElementById('owlButtonV2')) return;
     var s=document.createElement('script');
-    s.src='owl-widget-v2.js?v=20261030-frameblink1';
+    s.src='owl-widget-v2.js?v=20261030-frameblink2';
     s.defer=true;
     s.dataset.owlFortuneV2='1';
     document.head.appendChild(s);
