@@ -57,42 +57,30 @@
 })();
 
 (function(){
-  function loadStaticHQ(){
-    if(document.getElementById('sova58-fortune-static-hq-v1')) return;
-    var h=document.createElement('script');
-    h.id='sova58-fortune-static-hq-v1';
-    h.src='owl-fortune-static-hq-v1.js?v=20261028-hq3';
-    h.defer=true;
-    document.head.appendChild(h);
-  }
-  function loadStatesV3(){
-    var old=document.getElementById('sova58-fortune-states-v3');
-    if(old){
-      if(window.__sova58FortuneStatesV3) loadStaticHQ();
-      else{
-        old.addEventListener('load',loadStaticHQ,{once:true});
-        old.addEventListener('error',loadStaticHQ,{once:true});
-        setTimeout(loadStaticHQ,500);
-      }
-      return;
+  function loadFortuneOwl(){
+    if(document.getElementById('fortuneOwlV931')) return;
+    if(document.querySelector('script[data-owl-fortune-v931]')) return;
+
+    function loadMain(){
+      if(document.querySelector('script[data-owl-fortune-v931]')) return;
+      var s=document.createElement('script');
+      s.src='owl-fortune-v930.js?v=933';
+      s.defer=true;
+      s.dataset.owlFortuneV931='1';
+      document.head.appendChild(s);
     }
-    var x=document.createElement('script');
-    x.id='sova58-fortune-states-v3';
-    x.src='owl-fortune-states-v3.js?v=20261028-owlfix-2';
-    x.defer=true;
-    x.onload=loadStaticHQ;
-    x.onerror=loadStaticHQ;
-    document.head.appendChild(x);
+
+    var c=document.createElement('script');
+    c.src='owl-fortune-cooldown-v931.js?v=933';
+    c.defer=true;
+    c.onload=loadMain;
+    c.onerror=loadMain;
+    document.head.appendChild(c);
   }
-  if(!document.getElementById('sova58-fortune-loader')){
-    var s=document.createElement('script');
-    s.id='sova58-fortune-loader';
-    s.src='owl-fortune-v1.js?v=20261028-9';
-    s.defer=true;
-    s.onload=loadStatesV3;
-    s.onerror=loadStatesV3;
-    document.head.appendChild(s);
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',loadFortuneOwl,{once:true});
   }else{
-    loadStatesV3();
+    loadFortuneOwl();
   }
 })();
