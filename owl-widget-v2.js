@@ -18,25 +18,8 @@
   `;
   document.head.appendChild(s);
   document.body.insertAdjacentHTML('beforeend',`<button id="owlButtonV2" class="owl-corner-v2" type="button" aria-label="Открыть предсказания совы"><img id="owlActiveV2" class="active" src="owl-fortune/media/owl-active.webp?v=20261029-3" alt=""><img id="owlSleepV2" src="owl-fortune/media/owl-sleep.webp?v=20261029-3" alt=""></button><button id="dismissOwlV2" class="owl-dismiss-v2" type="button" aria-label="Скрыть сову до обновления страницы">×</button><div id="orbModalV2" class="owl-modal-v2" aria-hidden="true"><div class="owl-backdrop-v2"></div><div class="owl-dialog-v2"><button id="closeModalV2" class="owl-close-v2" type="button" aria-label="Закрыть">×</button><iframe id="orbFrameV2" class="owl-frame-v2" src="owl-fortune/orb-popup.html?v=20261030-1" title="Сова-предсказательница" allow="autoplay"></iframe></div></div>`);
-  const owl=document.getElementById('owlButtonV2'),dismiss=document.getElementById('dismissOwlV2'),modal=document.getElementById('orbModalV2'),close=document.getElementById('closeModalV2'),backdrop=modal.querySelector('.owl-backdrop-v2'),active=document.getElementById('owlActiveV2'),sleep=document.getElementById('owlSleepV2'),frame=document.getElementById('orbFrameV2');
-  function alignOrbText(){
-    try{
-      const d=frame.contentDocument;if(!d||!d.head)return;
-      let style=d.getElementById('sova58OrbTextAlign');
-      if(!style){
-        style=d.createElement('style');style.id='sova58OrbTextAlign';
-        style.textContent=`
-          #fortuneText,.prediction{left:50%!important;top:50%!important;right:auto!important;bottom:auto!important;width:72%!important;max-width:72%!important;min-height:0!important;height:auto!important;text-align:center!important;line-height:1.3!important;padding:12px 14px!important;display:flex!important;align-items:center!important;justify-content:center!important;white-space:normal!important;word-break:normal!important;overflow-wrap:break-word!important;transform:translate(-50%,-50%) scale(.94)!important;transform-origin:50% 50%!important}
-          #fortuneText.show,.prediction.show{transform:translate(-50%,-50%) scale(1)!important}
-          #exhaustedText,.exhaustedText{left:12%!important;right:12%!important;width:auto!important;text-align:center!important;line-height:1.3!important}
-          @media(max-width:640px){#fortuneText,.prediction{width:76%!important;max-width:76%!important;padding:10px 12px!important;line-height:1.28!important}}
-        `;
-        d.head.appendChild(style);
-      }
-    }catch(e){}
-  }
-  frame.addEventListener('load',()=>{setTimeout(alignOrbText,120);setTimeout(alignOrbText,700)});
-  function openModal(e){if(e){e.preventDefault();e.stopPropagation()}modal.classList.add('open');modal.setAttribute('aria-hidden','false');setTimeout(alignOrbText,80)}
+  const owl=document.getElementById('owlButtonV2'),dismiss=document.getElementById('dismissOwlV2'),modal=document.getElementById('orbModalV2'),close=document.getElementById('closeModalV2'),backdrop=modal.querySelector('.owl-backdrop-v2'),active=document.getElementById('owlActiveV2'),sleep=document.getElementById('owlSleepV2');
+  function openModal(e){if(e){e.preventDefault();e.stopPropagation()}modal.classList.add('open');modal.setAttribute('aria-hidden','false')}
   function closeModal(e){if(e){e.preventDefault();e.stopPropagation()}modal.classList.remove('open');modal.setAttribute('aria-hidden','true')}
   owl.addEventListener('click',openModal,{passive:false});owl.addEventListener('pointerup',e=>{if(e.pointerType==='touch')openModal(e)},{passive:false});dismiss.addEventListener('click',e=>{closeModal(e);owl.classList.add('hidden');dismiss.classList.add('hidden')});close.addEventListener('click',closeModal);backdrop.addEventListener('click',closeModal);document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
   window.addEventListener('message',e=>{if(!e.data||e.data.type!=='owl-state')return;const isSleep=e.data.state==='sleep';active.classList.toggle('active',!isSleep);sleep.classList.toggle('active',isSleep)});
