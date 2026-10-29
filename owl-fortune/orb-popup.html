@@ -8,12 +8,8 @@
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{display:grid;place-items:center;background:radial-gradient(circle at 50% 42%,#17072e 0,#090313 54%,#030107 100%);font-family:Georgia,'Times New Roman',serif;color:#fff}
 .scene{position:relative;width:min(86vw,500px);aspect-ratio:1;display:grid;place-items:center;filter:drop-shadow(0 28px 40px rgba(0,0,0,.5))}
 .aura{position:absolute;width:82%;height:82%;border-radius:50%;background:radial-gradient(circle,rgba(142,74,255,.18),rgba(96,39,190,.09) 45%,transparent 72%);filter:blur(8px);animation:aura 4.8s ease-in-out infinite}
-.orb{position:relative;width:72%;height:72%;border-radius:50%;overflow:hidden;cursor:pointer;touch-action:manipulation;background:
-radial-gradient(circle at 33% 25%,rgba(255,255,255,.82) 0 2%,rgba(255,255,255,.16) 8%,transparent 22%),
-radial-gradient(circle at 62% 68%,rgba(109,70,255,.8),transparent 28%),
-radial-gradient(circle at 34% 61%,rgba(44,170,255,.5),transparent 34%),
-radial-gradient(circle at 52% 48%,#5120a2 0,#260957 42%,#0a021c 76%,#030107 100%);
-box-shadow:inset 0 0 28px rgba(255,255,255,.14),inset 0 0 85px rgba(104,52,235,.5),0 0 12px rgba(216,188,255,.8),0 0 44px rgba(117,51,226,.75),0 0 90px rgba(68,34,173,.44);border:1px solid rgba(235,221,255,.62);animation:float 4.6s ease-in-out infinite}
+.orb{position:relative;width:72%;height:72%;border-radius:50%;overflow:hidden;cursor:pointer;touch-action:manipulation;background:radial-gradient(circle at 33% 25%,rgba(255,255,255,.82) 0 2%,rgba(255,255,255,.16) 8%,transparent 22%),radial-gradient(circle at 62% 68%,rgba(109,70,255,.8),transparent 28%),radial-gradient(circle at 34% 61%,rgba(44,170,255,.5),transparent 34%),radial-gradient(circle at 52% 48%,#5120a2 0,#260957 42%,#0a021c 76%,#030107 100%);box-shadow:inset 0 0 28px rgba(255,255,255,.14),inset 0 0 85px rgba(104,52,235,.5),0 0 12px rgba(216,188,255,.8),0 0 44px rgba(117,51,226,.75),0 0 90px rgba(68,34,173,.44);border:1px solid rgba(235,221,255,.62);animation:float 4.6s ease-in-out infinite}
+.orb.preparing{animation:prepareShake .085s linear infinite}
 .orb:before{content:"";position:absolute;inset:-25%;background:conic-gradient(from 0deg,transparent 0 9%,rgba(130,79,255,.28) 15%,transparent 24% 42%,rgba(34,151,255,.22) 49%,transparent 61% 76%,rgba(216,120,255,.2) 84%,transparent 96%);filter:blur(18px);animation:spin 13s linear infinite}
 .orb:after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 50% 52%,transparent 0 57%,rgba(225,210,255,.2) 73%,rgba(255,255,255,.38) 81%,transparent 86%);pointer-events:none}
 .nebula,.nebula2{position:absolute;border-radius:50%;filter:blur(24px);mix-blend-mode:screen;opacity:.72;pointer-events:none}.nebula{width:58%;height:28%;left:8%;top:49%;background:linear-gradient(90deg,transparent,#793cff,#3cbcff,transparent);transform:rotate(-18deg);animation:drift1 8s ease-in-out infinite alternate}.nebula2{width:46%;height:24%;right:6%;top:31%;background:linear-gradient(90deg,transparent,#ff69dc,#5a44ff,transparent);transform:rotate(24deg);animation:drift2 9s ease-in-out infinite alternate}
@@ -21,48 +17,14 @@ box-shadow:inset 0 0 28px rgba(255,255,255,.14),inset 0 0 85px rgba(104,52,235,.
 .text{position:absolute;z-index:6;left:50%;top:50%;width:66%;transform:translate(-50%,-50%);text-align:center;font-size:clamp(17px,4.2vw,27px);line-height:1.22;font-weight:700;text-shadow:0 2px 9px #170327,0 0 13px rgba(216,190,255,.9);opacity:0;transition:opacity .35s ease,transform .35s ease;pointer-events:none}.text.show{opacity:1;transform:translate(-50%,-50%) scale(1.02)}
 .hint{position:absolute;bottom:2.5%;left:50%;transform:translateX(-50%);font:600 clamp(12px,2.7vw,15px)/1.2 system-ui,-apple-system,'Segoe UI',sans-serif;color:rgba(239,229,255,.74);letter-spacing:.03em;white-space:nowrap}.count{position:absolute;top:3%;left:50%;transform:translateX(-50%);font:600 12px/1.2 system-ui,-apple-system,'Segoe UI',sans-serif;color:rgba(234,218,255,.62)}
 .exhausted .orb{filter:saturate(.72) brightness(.78)}.exhausted .hint{color:#d9c4ff}
-@keyframes spin{to{transform:rotate(360deg)}}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}@keyframes aura{0%,100%{transform:scale(.95);opacity:.58}50%{transform:scale(1.06);opacity:.95}}@keyframes drift1{0%{transform:translate(-7%,4%) rotate(-18deg) scale(.92)}100%{transform:translate(10%,-8%) rotate(-10deg) scale(1.12)}}@keyframes drift2{0%{transform:translate(8%,-4%) rotate(24deg) scale(1)}100%{transform:translate(-10%,9%) rotate(32deg) scale(1.13)}}@keyframes twinkle{0%{opacity:.46;transform:scale(.985)}100%{opacity:1;transform:scale(1.015)}}
+@keyframes spin{to{transform:rotate(360deg)}}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}@keyframes prepareShake{0%{transform:translate(-2px,0) rotate(-.35deg)}25%{transform:translate(1px,-1px) rotate(.25deg)}50%{transform:translate(2px,1px) rotate(.35deg)}75%{transform:translate(-1px,1px) rotate(-.2deg)}100%{transform:translate(-2px,0) rotate(-.35deg)}}@keyframes aura{0%,100%{transform:scale(.95);opacity:.58}50%{transform:scale(1.06);opacity:.95}}@keyframes drift1{0%{transform:translate(-7%,4%) rotate(-18deg) scale(.92)}100%{transform:translate(10%,-8%) rotate(-10deg) scale(1.12)}}@keyframes drift2{0%{transform:translate(8%,-4%) rotate(24deg) scale(1)}100%{transform:translate(-10%,9%) rotate(32deg) scale(1.13)}}@keyframes twinkle{0%{opacity:.46;transform:scale(.985)}100%{opacity:1;transform:scale(1.015)}}
 @media(max-width:560px){.scene{width:min(92vw,470px)}.orb{width:76%;height:76%}.text{width:68%}}
 </style>
 </head>
 <body>
-<div class="scene" id="scene">
-  <div class="aura"></div>
-  <div class="count" id="count"></div>
-  <div class="orb" id="orb" role="button" tabindex="0" aria-label="Получить предсказание">
-    <div class="nebula"></div><div class="nebula2"></div><div class="stars"></div>
-    <div class="text" id="fortuneText"></div>
-  </div>
-  <div class="hint" id="hint">Нажми на шар</div>
-</div>
+<div class="scene" id="scene"><div class="aura"></div><div class="count" id="count"></div><div class="orb" id="orb" role="button" tabindex="0" aria-label="Получить предсказание"><div class="nebula"></div><div class="nebula2"></div><div class="stars"></div><div class="text" id="fortuneText"></div></div><div class="hint" id="hint">Нажми на шар</div></div>
 <script>
-(()=>{
-const MAX=3;
-const fortunes=[
-'Сегодня удача любит тех, кто действует первым.',
-'Не спеши тратить ресурсы. Скоро они пригодятся сильнее.',
-'Хорошая новость придёт оттуда, откуда её не ждали.',
-'Сегодня лучшее оружие — терпение и точный момент.',
-'Один небольшой шаг сегодня даст большой результат позже.',
-'Кто-то рядом окажется полезнее, чем кажется.',
-'Твоя интуиция сегодня видит дальше цифр.',
-'Удачный момент уже близко. Не пропусти его.',
-'Сегодня стоит беречь силы для действительно важного боя.',
-'Случайная идея может оказаться самым правильным планом.',
-'В ближайшее время тебя ждёт приятный игровой сюрприз.',
-'Сегодня союзники удивят тебя в хорошем смысле.',
-'Не всё должно идти по плану, чтобы закончиться хорошо.',
-'Там, где другие отступят, у тебя появится шанс.',
-'Сегодня звёзды советуют не нажимать всё подряд 😂',
-'Скоро появится повод сказать: «А я же чувствовала!»'
-];
-const key='sova58-orb-'+new Date().toISOString().slice(0,10);
-let used=Math.max(0,Math.min(MAX,Number(localStorage.getItem(key)||0)));
-const scene=document.getElementById('scene'),orb=document.getElementById('orb'),text=document.getElementById('fortuneText'),hint=document.getElementById('hint'),count=document.getElementById('count');
-function sync(){count.textContent=used<MAX?`Предсказания: ${used}/${MAX}`:`Предсказания: ${MAX}/${MAX}`;if(used>=MAX){scene.classList.add('exhausted');text.textContent='Сова устала предсказывать ✨\nПриходи завтра';text.style.whiteSpace='pre-line';text.classList.add('show');hint.textContent='На сегодня магия закончилась';parent.postMessage({type:'owl-state',state:'sleep'},'*')}else{scene.classList.remove('exhausted');hint.textContent='Нажми на шар';parent.postMessage({type:'owl-state',state:'active'},'*')}}
-function predict(){if(used>=MAX){sync();return}used++;localStorage.setItem(key,String(used));text.classList.remove('show');setTimeout(()=>{text.style.whiteSpace='normal';text.textContent=fortunes[Math.floor(Math.random()*fortunes.length)];text.classList.add('show');hint.textContent=used<MAX?'Можно спросить ещё':'Последнее предсказание на сегодня';count.textContent=`Предсказания: ${used}/${MAX}`;if(used>=MAX)setTimeout(sync,3200)},220)}
-orb.addEventListener('click',predict);orb.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();predict()}});sync();
-})();
+(()=>{const MAX=3;const fortunes=['Сегодня удача любит тех, кто действует первым.','Не спеши тратить ресурсы. Скоро они пригодятся сильнее.','Хорошая новость придёт оттуда, откуда её не ждали.','Сегодня лучшее оружие — терпение и точный момент.','Один небольшой шаг сегодня даст большой результат позже.','Кто-то рядом окажется полезнее, чем кажется.','Твоя интуиция сегодня видит дальше цифр.','Удачный момент уже близко. Не пропусти его.','Сегодня стоит беречь силы для действительно важного боя.','Случайная идея может оказаться самым правильным планом.','В ближайшее время тебя ждёт приятный игровой сюрприз.','Сегодня союзники удивят тебя в хорошем смысле.','Не всё должно идти по плану, чтобы закончиться хорошо.','Там, где другие отступят, у тебя появится шанс.','Сегодня звёзды советуют не нажимать всё подряд 😂','Скоро появится повод сказать: «А я же чувствовала!»'];const key='sova58-orb-'+new Date().toISOString().slice(0,10);let used=Math.max(0,Math.min(MAX,Number(localStorage.getItem(key)||0)));const scene=document.getElementById('scene'),orb=document.getElementById('orb'),text=document.getElementById('fortuneText'),hint=document.getElementById('hint'),count=document.getElementById('count');function sync(){count.textContent=used<MAX?`Предсказания: ${used}/${MAX}`:`Предсказания: ${MAX}/${MAX}`;if(used>=MAX){scene.classList.add('exhausted');text.textContent='Сова устала предсказывать ✨\nПриходи завтра';text.style.whiteSpace='pre-line';text.classList.add('show');hint.textContent='На сегодня магия закончилась';parent.postMessage({type:'owl-state',state:'sleep'},'*')}else{scene.classList.remove('exhausted');hint.textContent='Нажми на шар';parent.postMessage({type:'owl-state',state:'active'},'*')}}function predict(){if(used>=MAX){sync();return}used++;localStorage.setItem(key,String(used));text.classList.remove('show');orb.classList.add('preparing');hint.textContent='Сова заглядывает в туман...';setTimeout(()=>{orb.classList.remove('preparing');text.style.whiteSpace='normal';text.textContent=fortunes[Math.floor(Math.random()*fortunes.length)];text.classList.add('show');hint.textContent=used<MAX?'Можно спросить ещё':'Последнее предсказание на сегодня';count.textContent=`Предсказания: ${used}/${MAX}`;if(used>=MAX)setTimeout(sync,3200)},720)}orb.addEventListener('click',predict);orb.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();predict()}});sync()})();
 </script>
 </body>
 </html>
