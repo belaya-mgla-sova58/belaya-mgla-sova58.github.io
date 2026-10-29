@@ -1,6 +1,6 @@
 (()=>{
   'use strict';
-  const VERSION='20261030-662';
+  const VERSION='20261030-frameblink2';
 
   function removeLegacyHome(){
     if(!document.body||!document.body.classList.contains('is-home-route')) return;
@@ -20,6 +20,19 @@
     document.head.appendChild(s);
   }
 
+  function ensureFortuneOwl(){
+    if(!document.body||!document.body.classList.contains('is-home-route')) return;
+    if(document.getElementById('owlOpenV2')&&document.getElementById('owlBlinkV2')&&document.getElementById('owlSleepV2')) return;
+    ['owlButtonV2','dismissOwlV2','orbModalV2'].forEach(id=>{const el=document.getElementById(id);if(el)el.remove();});
+    document.querySelectorAll('script[data-owl-fortune-v2],script[data-repair-owl-v662],script[src*="owl-widget-v2.js"]').forEach(el=>el.remove());
+    const oldStyle=document.getElementById('owlWidgetV2Style');if(oldStyle)oldStyle.remove();
+    const s=document.createElement('script');
+    s.src='owl-widget-v2.js?v='+VERSION;
+    s.defer=true;
+    s.dataset.repairOwlV662='1';
+    document.head.appendChild(s);
+  }
+
   function freshExpertsLinks(){
     document.querySelectorAll('a[href="experts.html"],a[href^="experts.html?"]').forEach(a=>{
       a.href='experts.html?v='+VERSION;
@@ -29,6 +42,7 @@
   function clean(){
     removeLegacyHome();
     ensureQuestionnaire();
+    ensureFortuneOwl();
     freshExpertsLinks();
   }
 
