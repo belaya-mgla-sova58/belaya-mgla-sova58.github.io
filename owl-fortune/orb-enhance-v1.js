@@ -9,7 +9,7 @@
   const BOOK_KEY='belaya_mgla_orb_book_v1';
   const STREAK_KEY='belaya_mgla_orb_streak_v1';
 
-  function dayKey(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+  function dayKey(){return new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Moscow',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date())}
   try{
     if(localStorage.getItem(RESET_KEY)!=='1'){
       localStorage.setItem(BASE_STORE_KEY,JSON.stringify({day:dayKey(),count:0,used:[]}));
