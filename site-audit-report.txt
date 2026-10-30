@@ -1,11 +1,52 @@
 АУДИТ САЙТА «БЕЛАЯ МГЛА»
 ====================================
-Проверка продолжается.
+HTML-страниц проверено: 155
+Битых локальных ссылок/файлов: 4
+Несуществующих якорей: 0
+Повторяющихся id: 0
+Видимых технических фраз: 0
+Замечаний по базовой разметке: 8
+Orphan-страниц без входящих HTML-ссылок: 5
+Ошибок разбора HTML: 0
 
-Текущий подтверждённый статус:
-- Битва в каньоне: гайд существует и обновлён.
-- Новая шапка Каньона подключена в гайд и карточку события.
-- Битый файл canyon-header-v800.webp выявлен и исправлен.
-- После публикации нужно проверить отображение на странице событий и в самом гайде.
+БИТЫЕ ССЫЛКИ / ФАЙЛЫ
+--------------------
+halloween-header-apply-v765.js: asset="halloween-header-2026-v764.webp" → отсутствует halloween-header-2026-v764.webp
+pwa-install.js: asset="halloween-header-2026-v764.webp" → отсутствует halloween-header-2026-v764.webp
+site-v269.css: asset="-v528.webp" → отсутствует -v528.webp
+site-v626-base-v631.min.css: asset="-v528.webp" → отсутствует -v528.webp
 
-Важно: автоматический аудит ранее возвращал устаревшие ложные результаты по отсутствующим файлам. Их нельзя считать актуальными без повторной проверки.
+ЯКОРЯ
+-----
+Нет.
+
+ДУБЛИ ID
+--------
+Нет.
+
+ТЕХНИЧЕСКИЕ ФРАЗЫ
+-----------------
+Нет.
+
+БАЗОВАЯ РАЗМЕТКА
+----------------
+expert-generations.html: нет <h1>
+owl-fortune/orb-original-packed.html: нет <title>
+owl-fortune/orb-original-packed.html: нет meta viewport
+owl-fortune/orb-original-packed.html: нет <h1>
+owl-fortune/orb-popup.html: нет <h1>
+owl-reset-20261028.html: нет <h1>
+owl-reset.html: нет <h1>
+welcome.html: нет <h1>
+
+ORPHAN-СТРАНИЦЫ
+---------------
+alliance-questionnaire.html
+canyon-clash.html
+expert-generations.html
+poll.html
+sova-predskazatelnitsa.html
+
+ОШИБКИ РАЗБОРА
+--------------
+Нет.
