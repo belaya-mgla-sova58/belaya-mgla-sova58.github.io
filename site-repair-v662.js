@@ -1,6 +1,6 @@
 (()=>{
   'use strict';
-  const VERSION='20261030-frameblink2';
+  const VERSION='20261030-blobfix1';
 
   function removeLegacyHome(){
     if(!document.body||!document.body.classList.contains('is-home-route')) return;
