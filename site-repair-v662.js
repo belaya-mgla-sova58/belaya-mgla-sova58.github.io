@@ -1,7 +1,7 @@
 (()=>{
   'use strict';
   const VERSION='20261030-activeowl3';
-  const WORKER='./service-worker.js?v=677-reset4';
+  const WORKER='./service-worker.js?v=678-thirdhold1';
   const RESET_KEY='belaya_mgla_orb_reset_keep2_v4';
 
   function resetFortuneCounterOnce(){
@@ -116,6 +116,16 @@
     setTimeout(inject,700);
   }
 
+  function ensureThirdHold(){
+    if(!document.body||!document.body.classList.contains('is-home-route')) return;
+    if(document.getElementById('orbThirdHoldLoaderV1')) return;
+    const s=document.createElement('script');
+    s.id='orbThirdHoldLoaderV1';
+    s.src='owl-fortune/orb-third-hold-v1.js?v=20261030-thirdhold1';
+    s.defer=true;
+    document.head.appendChild(s);
+  }
+
   function freshExpertsLinks(){
     document.querySelectorAll('a[href="experts.html"],a[href^="experts.html?"]').forEach(a=>{a.href='experts.html?v='+VERSION;});
   }
@@ -124,6 +134,7 @@
     removeLegacyHome();
     ensureQuestionnaire();
     ensureFortuneOwl();
+    ensureThirdHold();
     ensureRuneSystem();
     ensureOrbHelp();
     freshExpertsLinks();
@@ -133,6 +144,7 @@
   else clean();
   setTimeout(clean,250);
   setTimeout(clean,1000);
+  setTimeout(ensureThirdHold,1200);
   setTimeout(ensureRuneSystem,1800);
   setTimeout(ensureOrbHelp,1850);
 })();
