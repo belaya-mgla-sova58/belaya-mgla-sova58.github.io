@@ -1,6 +1,7 @@
-const CACHE_NAME = 'belaya-mgla-v678';
+const CACHE_NAME = 'belaya-mgla-v679';
 const STATIC_CORE = [
   './site-v626.min.css?v=626',
+  './site-performance-v1.css?v=20261030-perf1',
   './manifest-v541.webmanifest',
   './app-icon-192-v541.png',
   './app-icon-512-v541.png',
@@ -29,12 +30,26 @@ async function freshPage(req){
   const type=(resp.headers.get('content-type')||'').toLowerCase();
   if(!resp.ok||!type.includes('text/html')) return resp;
   let html=await resp.text();
-  const tag='<script defer src="site-repair-v662.js?v=20261030-thirdhold1"></script>';
+  const tag='<script defer src="site-repair-v662.js?v=20261030-perf1"></script>';
   if(!html.includes('site-repair-v662.js')) html=html.includes('</body>')?html.replace('</body>',tag+'</body>'):html+tag;
   const headers=new Headers(resp.headers);
   headers.set('Cache-Control','no-store, no-cache, must-revalidate, max-age=0');
   headers.delete('content-length');
   return new Response(html,{status:resp.status,statusText:resp.statusText,headers});
+}
+
+async function cachedAsset(req,event){
+  const cache=await caches.open(CACHE_NAME);
+  const cached=await cache.match(req);
+  const network=fetch(req).then(resp=>{
+    if(resp&&resp.ok&&resp.type==='basic') return cache.put(req,resp.clone()).then(()=>resp);
+    return resp;
+  }).catch(()=>null);
+  if(cached){
+    event.waitUntil(network);
+    return cached;
+  }
+  return (await network)||Response.error();
 }
 
 self.addEventListener('fetch', event => {
@@ -48,21 +63,7 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  if(req.destination==='script'||url.pathname.endsWith('.js')||url.pathname.endsWith('.b64')||url.pathname.includes('owl-')||url.pathname.includes('rune-')){
-    event.respondWith(fetch(req,{cache:'no-store'}).catch(()=>Response.error()));
-    return;
-  }
-
   if(req.destination==='audio'||req.destination==='video') return;
 
-  event.respondWith((async()=>{
-    const cache=await caches.open(CACHE_NAME);
-    const cached=await cache.match(req);
-    const network=fetch(req,{cache:'no-store'}).then(resp=>{
-      if(resp&&resp.ok&&resp.type==='basic') cache.put(req,resp.clone());
-      return resp;
-    }).catch(()=>null);
-    if(cached){event.waitUntil(network);return cached;}
-    return(await network)||Response.error();
-  })());
+  event.respondWith(cachedAsset(req,event));
 });
