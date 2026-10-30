@@ -1,4 +1,4 @@
-const CACHE_NAME = 'belaya-mgla-v680';
+const CACHE_NAME = 'belaya-mgla-v681';
 const STATIC_CORE = [
   './site-v626.min.css?v=626',
   './site-performance-v1.css?v=20261030-perf1',
@@ -30,7 +30,7 @@ async function freshPage(req){
   const type=(resp.headers.get('content-type')||'').toLowerCase();
   if(!resp.ok||!type.includes('text/html')) return resp;
   let html=await resp.text();
-  const tag='<script defer src="site-repair-v662.js?v=20261030-layoutfix1"></script>';
+  const tag='<script defer src="site-repair-v662.js?v=20261030-audit1"></script>';
   if(!html.includes('site-repair-v662.js')) html=html.includes('</body>')?html.replace('</body>',tag+'</body>'):html+tag;
   const headers=new Headers(resp.headers);
   headers.set('Cache-Control','no-store, no-cache, must-revalidate, max-age=0');
@@ -52,6 +52,17 @@ async function cachedAsset(req,event){
   return (await network)||Response.error();
 }
 
+function isCriticalInteractive(url){
+  const p=url.pathname;
+  return p.endsWith('/site-repair-v662.js') ||
+    p.endsWith('/home-date-v588.js') ||
+    p.includes('/owl-fortune/') ||
+    p.includes('/owl-widget-') ||
+    p.includes('rune-system') ||
+    p.includes('orb-') ||
+    p.endsWith('.b64');
+}
+
 self.addEventListener('fetch', event => {
   const req=event.request;
   if(req.method!=='GET') return;
@@ -63,8 +74,7 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Interactive logic must never be mixed with stale cached versions.
-  if(req.destination==='script'||url.pathname.endsWith('.js')||url.pathname.endsWith('.b64')||url.pathname.includes('owl-')||url.pathname.includes('rune-')){
+  if(isCriticalInteractive(url)){
     event.respondWith(fetch(req,{cache:'no-store'}).catch(()=>Response.error()));
     return;
   }
