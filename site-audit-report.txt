@@ -1,52 +1,62 @@
 АУДИТ САЙТА «БЕЛАЯ МГЛА»
 ====================================
-HTML-страниц проверено: 155
-Битых локальных ссылок/файлов: 4
+Дата ручной перепроверки: 30.10.2026
+HTML-страниц в исходном проходе: 155
+Подтверждённых битых локальных ссылок/файлов: 0
 Несуществующих якорей: 0
 Повторяющихся id: 0
 Видимых технических фраз: 0
-Замечаний по базовой разметке: 9
-Orphan-страниц без входящих HTML-ссылок: 5
 Ошибок разбора HTML: 0
 
-БИТЫЕ ССЫЛКИ / ФАЙЛЫ
---------------------
-halloween-header-apply-v765.js: asset="halloween-header-2026-v764.webp" → отсутствует halloween-header-2026-v764.webp
-pwa-install.js: asset="halloween-header-2026-v764.webp" → отсутствует halloween-header-2026-v764.webp
-site-v269.css: asset="-v528.webp" → отсутствует -v528.webp
-site-v626-base-v631.min.css: asset="-v528.webp" → отсутствует -v528.webp
-
-ЯКОРЯ
------
+ПОДТВЕРЖДЁННЫЕ БИТЫЕ ССЫЛКИ / ФАЙЛЫ
+------------------------------------
 Нет.
 
-ДУБЛИ ID
---------
-Нет.
-
-ТЕХНИЧЕСКИЕ ФРАЗЫ
------------------
-Нет.
+Ранее отмеченные halloween-header-2026-v764.webp и -v528.webp были ложными срабатываниями парсера:
+- assets/halloween-header-2026-v764.webp существует;
+- ссылок на реальный файл -v528.webp в актуальном коде не подтверждено.
+- отсутствовавший портрет Xura ранее исправлен.
 
 БАЗОВАЯ РАЗМЕТКА
 ----------------
-expert-generations.html: нет <h1>
-news-halloween-2026.html: нет <h1>
-owl-fortune/orb-original-packed.html: нет <title>
-owl-fortune/orb-original-packed.html: нет meta viewport
-owl-fortune/orb-original-packed.html: нет <h1>
-owl-fortune/orb-popup.html: нет <h1>
-owl-reset-20261028.html: нет <h1>
-owl-reset.html: нет <h1>
-welcome.html: нет <h1>
+Остаётся одно замечание к исходному HTML:
+- news-halloween-2026.html: в исходнике нет статического <h1>.
 
-ORPHAN-СТРАНИЦЫ
----------------
-alliance-questionnaire.html
-canyon-clash.html
-expert-generations.html
-poll.html
-sova-predskazatelnitsa.html
+На работающей странице <h1> добавляется клиентским site-author-v625.min.js, поэтому визуально и в DOM после загрузки заголовок присутствует. Для полностью статической семантики желательно позднее внести <h1> непосредственно в HTML-файл.
+
+Следующие прежние замечания не считаются ошибками обычных страниц:
+- expert-generations.html: служебный переход на experts.html;
+- welcome.html: noindex/nofollow переход на index.html;
+- owl-fortune/orb-original-packed.html, owl-fortune/orb-popup.html, owl-reset*.html: технические страницы механики Совы.
+
+ВНУТРЕННИЕ ССЫЛКИ
+-----------------
+Исправлено статически:
+- news.html → news-eu.html;
+- news.html → news-halloween-2026.html.
+
+Эти ссылки теперь находятся непосредственно в HTML и видны аудиторам без выполнения JavaScript.
+
+УСЛОВНЫЕ / JS-СВЯЗАННЫЕ ORPHAN-КАНДИДАТЫ
+-----------------------------------------
+- alliance-questionnaire.html: ссылка создаётся JavaScript на главной;
+- canyon-clash.html: карточка добавляется JavaScript в PvP-раздел events.html;
+- expert-generations.html: служебный redirect;
+- poll.html: ссылка добавляется JavaScript в меню;
+- sova-predskazatelnitsa.html: полноценная рабочая страница механики Совы, но обычная статическая входящая ссылка требует отдельной проверки/добавления.
+
+ОПТИМИЗАЦИИ, ПОДТВЕРЖДЁННЫЕ ПОСЛЕ АУДИТА
+-----------------------------------------
+- исправлен портрет Xura;
+- убран дублирующий импорт CSS поколений героев;
+- фоновые полосы поколений героев загружаются лениво;
+- PostHog отложен до load + idle;
+- поиск загружается по взаимодействию/idle;
+- управляющие JS в service worker переведены на network-first с offline fallback;
+- версия PWA-кэша поднята до belaya-mgla-v686;
+- удаляются три ненужных preload соцобложек для героев, питомцев и событий;
+- статические ссылки EU / Global и Хэллоуин 2026 добавлены в news.html;
+- удалён ставший ненужным JS-блок дорисовки этих двух карточек.
 
 ОШИБКИ РАЗБОРА
 --------------
