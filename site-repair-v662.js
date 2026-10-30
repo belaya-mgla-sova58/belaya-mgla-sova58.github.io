@@ -1,6 +1,6 @@
 (()=>{
   'use strict';
-  const VERSION='20261030-activeowl4';
+  const VERSION='20261030-activeowl3';
   const WORKER='./service-worker.js?v=672-activeowl4';
   const RESET_KEY='belaya_mgla_orb_reset_keep2_v1';
 
@@ -22,6 +22,29 @@
   window.addEventListener('load',()=>setTimeout(registerFreshWorker,300),{once:true});
   setTimeout(registerFreshWorker,1400);
 
+  function ensureOwlBlinkFix(){
+    if(document.getElementById('owlBlinkEyesOnlyV662')) return;
+    const st=document.createElement('style');
+    st.id='owlBlinkEyesOnlyV662';
+    st.textContent=`
+      #owlButtonV4:not(.sleeping) #owlOpenV4{opacity:1!important}
+      #owlButtonV4:not(.sleeping) #owlBlinkV4{
+        -webkit-mask-image:radial-gradient(ellipse 14% 8% at 49% 23.5%,#000 0 72%,rgba(0,0,0,.9) 82%,transparent 100%),radial-gradient(ellipse 14% 8% at 65% 25.5%,#000 0 72%,rgba(0,0,0,.9) 82%,transparent 100%);
+        mask-image:radial-gradient(ellipse 14% 8% at 49% 23.5%,#000 0 72%,rgba(0,0,0,.9) 82%,transparent 100%),radial-gradient(ellipse 14% 8% at 65% 25.5%,#000 0 72%,rgba(0,0,0,.9) 82%,transparent 100%);
+        -webkit-mask-repeat:no-repeat,no-repeat;
+        mask-repeat:no-repeat,no-repeat;
+      }
+      #owlButtonV4.sleeping #owlOpenV4,#owlButtonV4.sleeping #owlBlinkV4{opacity:0!important}
+    `;
+    document.head.appendChild(st);
+  }
+  ensureOwlBlinkFix();
+
+  function registerFreshWorker(){
+    if(!('serviceWorker' in navigator)) return;
+    navigator.serviceWorker.register(WORKER,{updateViaCache:'none'}).catch(()=>{});
+  }
+
   function removeLegacyHome(){
     if(!document.body||!document.body.classList.contains('is-home-route')) return;
     document.querySelectorAll('.pwa-install-v540').forEach(el=>el.remove());
@@ -42,6 +65,7 @@
 
   function ensureFortuneOwl(){
     if(!document.body||!document.body.classList.contains('is-home-route')) return;
+    ensureOwlBlinkFix();
     const current=document.getElementById('owlButtonV4');
     const valid=current&&current.getAttribute('data-owl-version')===VERSION&&document.getElementById('owlOpenV4')&&document.getElementById('owlBlinkV4')&&document.getElementById('owlSleepV4');
     if(valid) return;
