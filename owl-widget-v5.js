@@ -34,11 +34,42 @@
     var modal=document.createElement('div');modal.id='oracleModalV5';modal.setAttribute('aria-hidden','true');
     var panel=document.createElement('div');panel.id='oraclePanelV5';
     var close=document.createElement('button');close.id='closeModalV5';close.type='button';close.setAttribute('aria-label','Закрыть');close.textContent='×';
-    var frame=document.createElement('iframe');frame.id='oracleFrameV5';frame.title='Предсказание совы';frame.loading='eager';frame.allow='autoplay';frame.src='/owl-fortune/orb-popup.html?v=5';
+    var frame=document.createElement('iframe');frame.id='oracleFrameV5';frame.title='Предсказание совы';frame.loading='eager';frame.allow='autoplay';frame.src='/owl-fortune/orb-popup.html?v=5.1';
     panel.appendChild(close);panel.appendChild(frame);modal.appendChild(panel);document.body.appendChild(modal);
 
+    function patchOracleFrame(){
+      try{
+        var doc=frame.contentDocument||(frame.contentWindow&&frame.contentWindow.document);
+        if(!doc||!doc.head||!doc.body) return;
+
+        if(!doc.getElementById('orbV5ContrastPatch')){
+          var contrast=doc.createElement('style');
+          contrast.id='orbV5ContrastPatch';
+          contrast.textContent=
+            '.hint,.count,.streak-v2,.orb-mini-btn-v2,.orb-help-btn-v1,.book-title-v2,.book-list-v2,.book-empty-v2,.toast-v2,.orb-help-title-v1,.orb-help-body-v1,.orb-help-item-v1,.orb-help-note-v1{color:#fff8ff!important;font-weight:700!important;text-shadow:0 1px 2px rgba(0,0,0,.98),0 0 9px rgba(223,194,255,.72)!important}' +
+            '.count,.streak-v2{background:rgba(25,9,48,.82)!important;border:1px solid rgba(236,218,255,.42)!important;border-radius:999px!important;padding:6px 10px!important;box-shadow:0 5px 18px rgba(0,0,0,.34),0 0 18px rgba(141,88,232,.24)!important}' +
+            '.hint{color:#fff7ff!important;font-weight:800!important}' +
+            '.orb-mini-btn-v2,.orb-help-btn-v1{color:#fff!important;background:rgba(36,14,62,.92)!important;border-color:rgba(240,224,255,.6)!important;box-shadow:0 5px 18px rgba(0,0,0,.34),0 0 17px rgba(145,89,235,.3)!important}' +
+            '.book-panel-v2,.orb-help-panel-v1{color:#fff!important}' +
+            '.book-close-v2,.orb-help-close-v1{color:#fff!important}' +
+            '#fortuneText.text{font-weight:700!important}';
+          doc.head.appendChild(contrast);
+        }
+
+        if(!doc.getElementById('orbHelpLoaderV5')&&!doc.querySelector('.orb-help-btn-v1')){
+          var help=doc.createElement('script');
+          help.id='orbHelpLoaderV5';
+          help.src='/owl-fortune/orb-help-v1.js?v=5.1';
+          help.async=false;
+          doc.body.appendChild(help);
+        }
+      }catch(e){}
+    }
+
+    frame.addEventListener('load',patchOracleFrame);
+
     function setOwl(state){var isSleep=state==='sleep';active.classList.toggle('active',!isSleep);sleep.classList.toggle('active',isSleep)}
-    function openModal(){modal.classList.add('open');modal.setAttribute('aria-hidden','false')}
+    function openModal(){modal.classList.add('open');modal.setAttribute('aria-hidden','false');patchOracleFrame()}
     function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true')}
     function hideOwlUntilReload(){closeModal();owl.classList.add('hidden');dismiss.classList.add('hidden')}
 
