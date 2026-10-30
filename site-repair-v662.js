@@ -1,7 +1,7 @@
 (()=>{
   'use strict';
-  const VERSION='20261030-motion1';
-  const WORKER='./service-worker.js?v=667-motion1';
+  const VERSION='20261030-phrases1';
+  const WORKER='./service-worker.js?v=668-phrases1';
 
   function registerFreshWorker(){
     if(!('serviceWorker' in navigator)) return;
