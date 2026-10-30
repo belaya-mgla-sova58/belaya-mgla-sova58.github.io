@@ -1,4 +1,4 @@
-const CACHE_NAME = 'belaya-mgla-v663';
+const CACHE_NAME = 'belaya-mgla-v664';
 const STATIC_CORE = [
   './site-v626.min.css?v=626',
   './manifest-v541.webmanifest',
@@ -29,7 +29,7 @@ async function freshPage(req){
   const type=(resp.headers.get('content-type')||'').toLowerCase();
   if(!resp.ok||!type.includes('text/html')) return resp;
   let html=await resp.text();
-  const tag='<script defer src="site-repair-v662.js?v=20261030-frameblink2"></script>';
+  const tag='<script defer src="site-repair-v662.js?v=20261030-blobfix1"></script>';
   if(!html.includes('site-repair-v662.js')) html=html.includes('</body>')?html.replace('</body>',tag+'</body>'):html+tag;
   const headers=new Headers(resp.headers);
   headers.set('Cache-Control','no-store, no-cache, must-revalidate, max-age=0');
@@ -48,7 +48,7 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  if(req.destination==='script'||url.pathname.endsWith('.js')){
+  if(req.destination==='script'||url.pathname.endsWith('.js')||url.pathname.endsWith('.b64')){
     event.respondWith(fetch(req,{cache:'no-store'}).catch(()=>Response.error()));
     return;
   }
