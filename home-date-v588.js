@@ -80,3 +80,34 @@
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',loadFortuneOwlV4,{once:true});
   else loadFortuneOwlV4();
 })();
+
+(function(){
+  var RUNES_VERSION='20261030-runes1';
+  function injectRealRunes(){
+    var frame=document.querySelector('#orbModalV4 .owl-frame-v4');
+    if(!frame) return false;
+    try{
+      var doc=frame.contentDocument;
+      if(!doc||!doc.head) return false;
+      if(doc.getElementById('realRunesLoaderV1')) return true;
+      var s=doc.createElement('script');
+      s.id='realRunesLoaderV1';
+      s.src='orb-runes-v1.js?v='+RUNES_VERSION;
+      doc.head.appendChild(s);
+      return true;
+    }catch(e){return false}
+  }
+  function bind(){
+    var frame=document.querySelector('#orbModalV4 .owl-frame-v4');
+    if(frame&&!frame.dataset.realRunesBound){
+      frame.dataset.realRunesBound='1';
+      frame.addEventListener('load',function(){setTimeout(injectRealRunes,80)});
+    }
+    injectRealRunes();
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bind,{once:true});
+  else bind();
+  setTimeout(bind,350);
+  setTimeout(bind,1000);
+  setTimeout(bind,2200);
+})();
