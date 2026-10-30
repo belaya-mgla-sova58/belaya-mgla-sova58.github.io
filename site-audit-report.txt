@@ -6,7 +6,7 @@ HTML-страниц проверено: 155
 Повторяющихся id: 0
 Видимых технических фраз: 0
 Замечаний по базовой разметке: 9
-Orphan-страниц без входящих HTML-ссылок: 7
+Orphan-страниц без входящих HTML-ссылок: 5
 Ошибок разбора HTML: 0
 
 БИТЫЕ ССЫЛКИ / ФАЙЛЫ
@@ -45,8 +45,6 @@ ORPHAN-СТРАНИЦЫ
 alliance-questionnaire.html
 canyon-clash.html
 expert-generations.html
-news-eu.html
-news-halloween-2026.html
 poll.html
 sova-predskazatelnitsa.html
 
