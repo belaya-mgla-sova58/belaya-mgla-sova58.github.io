@@ -49,33 +49,24 @@
     restore();
   }
 
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',init,{once:true});
-  }else{
-    init();
-  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true});
+  else init();
 })();
 
 (function(){
   function loadFortuneOwlV4(){
     document.querySelectorAll('script[data-owl-fortune-v5],script[data-owl-fortune-v2],script[data-owl-fortune-v3],script[data-owl-fortune-v4],script[src*="owl-widget-v1.js"],script[src*="owl-widget-v2.js"],script[src*="owl-widget-v3.js"],script[src*="owl-fortune-v933.js"]').forEach(function(el){el.remove();});
-    ['owlButton','dismissOwl','orbModal','fortuneOwlV933','fortuneOwlV932','fortuneOwlV931','sova58FortuneOwlV2','sova58FortunePanel','sova58FortuneBackdrop','owlButtonV2','dismissOwlV2','orbModalV2','owlButtonV3','dismissOwlV3','orbModalV3'].forEach(function(id){
-      var el=document.getElementById(id);
-      if(el) el.remove();
-    });
+    ['owlButton','dismissOwl','orbModal','fortuneOwlV933','fortuneOwlV932','fortuneOwlV931','sova58FortuneOwlV2','sova58FortunePanel','sova58FortuneBackdrop','owlButtonV2','dismissOwlV2','orbModalV2','owlButtonV3','dismissOwlV3','orbModalV3'].forEach(function(id){var el=document.getElementById(id);if(el)el.remove();});
     var current=document.getElementById('owlButtonV4');
-    if(current&&current.getAttribute('data-owl-version')==='20261030-activeowl2') return;
+    if(current&&current.getAttribute('data-owl-version')==='20261030-activeowl3') return;
     if(current) current.remove();
     ['dismissOwlV4','orbModalV4'].forEach(function(id){var el=document.getElementById(id);if(el)el.remove();});
     var s=document.createElement('script');
-    s.src='owl-widget-v4.js?v=20261030-activeowl2';
+    s.src='owl-widget-v4.js?v=20261030-activeowl3';
     s.defer=true;
     s.dataset.owlFortuneV4='1';
     document.head.appendChild(s);
   }
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',loadFortuneOwlV4,{once:true});
-  }else{
-    loadFortuneOwlV4();
-  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',loadFortuneOwlV4,{once:true});
+  else loadFortuneOwlV4();
 })();
