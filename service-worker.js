@@ -1,4 +1,4 @@
-const CACHE_NAME = 'belaya-mgla-v682';
+const CACHE_NAME = 'belaya-mgla-v683';
 const STATIC_CORE = [
   './site-v626.min.css?v=626',
   './site-performance-v1.css?v=20261030-perf1',
@@ -23,11 +23,17 @@ self.addEventListener('activate', event => {
   );
 });
 
+function optimizeHtml(html){
+  html=html.replace(/<section\s+class=["']pwa-install-v540["'][\s\S]*?<\/section>/i,'');
+  html=html.replace(/<img\b(?![^>]*\bloading\s*=)(?![^>]*\bfetchpriority\s*=\s*["']high["'])/gi,'<img loading="lazy" ');
+  return html;
+}
+
 async function freshPage(req){
   const resp=await fetch(req,{cache:'no-store'});
   const type=(resp.headers.get('content-type')||'').toLowerCase();
   if(!resp.ok||!type.includes('text/html')) return resp;
-  let html=await resp.text();
+  let html=optimizeHtml(await resp.text());
   const tag='<script defer src="site-repair-v662.js?v=20261030-audit1"></script>';
   if(!html.includes('site-repair-v662.js')) html=html.includes('</body>')?html.replace('</body>',tag+'</body>'):html+tag;
   const headers=new Headers(resp.headers);
