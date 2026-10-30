@@ -22,7 +22,7 @@
   style.id='owlOrbVisualStyleV2';
   style.textContent=`
     body{background:radial-gradient(circle at 50% 38%,#1d0937 0,#0a0315 53%,#030107 100%)!important}
-    .scene{filter:drop-shadow(0 24px 38px rgba(0,0,0,.52))!important}
+    .scene{filter:drop-shadow(0 24px 38px rgba(0,0,0,.52))!important;overflow:visible!important}
 
     .text{
       width:70%!important;
@@ -38,7 +38,7 @@
     .text.show{transform:translate(-50%,-50%) scale(1.015)!important}
 
     .count{
-      top:2.8%!important;
+      top:-4.5%!important;
       padding:5px 11px!important;
       border:1px solid rgba(221,199,255,.18)!important;
       border-radius:999px!important;
@@ -55,7 +55,11 @@
       box-shadow:inset 0 0 12px rgba(255,255,255,.025),0 0 18px rgba(108,61,194,.1)!important;
     }
     .streak-v2{
-      top:9.2%!important;
+      top:8.7%!important;
+      left:9%!important;
+      transform:none!important;
+      width:auto!important;
+      text-align:left!important;
       color:rgba(220,201,244,.78)!important;
       font-family:"Cormorant Garamond",Georgia,serif!important;
       font-size:clamp(12px,2.7vw,14px)!important;
@@ -65,9 +69,11 @@
     }
 
     .hint{
-      bottom:2.1%!important;
-      width:88%!important;
-      text-align:center!important;
+      bottom:-1.2%!important;
+      left:8%!important;
+      transform:none!important;
+      width:auto!important;
+      text-align:left!important;
       font-family:"Forum","Cormorant Garamond",Georgia,serif!important;
       font-size:clamp(15px,3.55vw,20px)!important;
       font-weight:400!important;
@@ -76,7 +82,7 @@
       text-shadow:0 0 8px rgba(166,109,255,.58),0 0 18px rgba(92,46,173,.32)!important;
     }
 
-    .orb-controls-v2{bottom:8.5%!important;gap:8px!important}
+    .orb-controls-v2{bottom:5.8%!important;gap:8px!important}
     .orb-mini-btn-v2{
       padding:7px 12px!important;
       border:1px solid rgba(221,198,255,.34)!important;
@@ -117,12 +123,12 @@
     .orb.magic-rare-v1{border-color:rgba(255,234,155,.88)!important}
 
     @media(max-width:560px){
-      .count{top:2.5%!important;font-size:13px!important;padding:5px 9px!important}
-      .streak-v2{top:8.8%!important;font-size:12px!important}
+      .count{top:-5.5%!important;font-size:13px!important;padding:5px 9px!important}
+      .streak-v2{top:8.2%!important;left:7%!important;font-size:12px!important}
       .rare-badge-v2{top:14.3%;font-size:10.5px;padding:4px 9px}
       .orb-mini-btn-v2{font-size:12px!important;padding:6px 9px!important}
-      .orb-controls-v2{gap:6px!important;bottom:8.3%!important}
-      .hint{bottom:1.8%!important;font-size:17px!important}
+      .orb-controls-v2{gap:6px!important;bottom:5.3%!important}
+      .hint{bottom:-1.6%!important;left:7%!important;font-size:17px!important}
     }
   `;
   document.head.appendChild(style);
