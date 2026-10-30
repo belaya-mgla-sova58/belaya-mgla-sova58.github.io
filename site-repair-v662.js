@@ -141,34 +141,17 @@
     const intro=document.querySelector('.experts-head p');
     if(intro) intro.textContent='Выбери нужного эксперта.';
     document.querySelectorAll('.wave-arrow').forEach(el=>{
-      el.textContent='✓';
+      el.textContent='';
       el.setAttribute('aria-hidden','true');
     });
-    if(!document.getElementById('expertsCleanV1')){
-      const st=document.createElement('style');
-      st.id='expertsCleanV1';
-      st.textContent=`
-        .is-experts-route .wave>summary::before{
-          width:auto!important;height:auto!important;min-width:0!important;min-height:0!important;
-          border-radius:0!important;display:block!important;place-items:normal!important;
-          padding:0!important;margin:0!important;font-size:0!important;color:transparent!important;
-          box-shadow:none!important;
-        }
-        .is-experts-route .wave-copy{padding-left:0!important}
-        .is-experts-route .wave-arrow{
-          transform:translateY(-50%)!important;
-          color:#9cf5d2!important;
-          font-size:17px!important;
-          line-height:1!important;
-          text-shadow:0 0 9px rgba(111,239,190,.62);
-        }
-        .is-experts-route .wave[open] .wave-arrow{
-          transform:translateY(-50%)!important;
-          background:rgba(19,67,60,.72)!important;
-          border-color:rgba(127,242,198,.62)!important;
-        }
-      `;
-      document.head.appendChild(st);
+    const old=document.getElementById('expertsCleanV1');
+    if(old) old.remove();
+    if(!document.getElementById('expertsPolishV1')){
+      const link=document.createElement('link');
+      link.id='expertsPolishV1';
+      link.rel='stylesheet';
+      link.href='experts-polish-v1.css?v=20261030-polish1';
+      document.head.appendChild(link);
     }
   }
 
