@@ -151,3 +151,34 @@
   setTimeout(bindSmooth,1100);
   setTimeout(bindSmooth,2300);
 })();
+
+(function(){
+  var VISUAL_VERSION='20261030-visual2';
+  function injectOrbVisual(){
+    var frame=document.querySelector('#orbModalV4 .owl-frame-v4');
+    if(!frame) return false;
+    try{
+      var doc=frame.contentDocument;
+      if(!doc||!doc.head) return false;
+      if(doc.getElementById('orbVisualLoaderV2')) return true;
+      var s=document.createElement('script');
+      s.id='orbVisualLoaderV2';
+      s.src='orb-visual-v2.js?v='+VISUAL_VERSION;
+      doc.head.appendChild(s);
+      return true;
+    }catch(e){return false}
+  }
+  function bindVisual(){
+    var frame=document.querySelector('#orbModalV4 .owl-frame-v4');
+    if(frame&&!frame.dataset.orbVisualBound){
+      frame.dataset.orbVisualBound='1';
+      frame.addEventListener('load',function(){setTimeout(injectOrbVisual,120)});
+    }
+    injectOrbVisual();
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bindVisual,{once:true});
+  else bindVisual();
+  setTimeout(bindVisual,450);
+  setTimeout(bindVisual,1200);
+  setTimeout(bindVisual,2400);
+})();
