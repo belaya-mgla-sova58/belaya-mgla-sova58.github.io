@@ -129,7 +129,7 @@ const F=[
 '🎊 Всё обязательно получится. Сова просто не уточняет, с какой попытки. 🦉'
 ];
 const scene=document.getElementById('scene'),orb=document.getElementById('orb'),text=document.getElementById('fortuneText'),hint=document.getElementById('hint'),count=document.getElementById('count');
-function dayKey(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function dayKey(){return new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Moscow',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date())}
 function fresh(){return{day:dayKey(),count:0,used:[]}}
 function load(){try{const s=JSON.parse(localStorage.getItem(STORE_KEY)||'null');if(!s||s.day!==dayKey())return fresh();return{day:s.day,count:Math.max(0,Math.min(MAX,+s.count||0)),used:Array.isArray(s.used)?s.used:[]}}catch(e){return fresh()}}
 let state=load(),busy=false;
