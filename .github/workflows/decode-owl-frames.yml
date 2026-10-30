@@ -17,27 +17,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Decode PNG frames safely
+      - name: Decode WebP frames safely
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
           import base64, re
           pairs = [
-              ('owl-fortune/media/owl-awake-open-180-q80.b64','owl-fortune/media/owl-awake-open-180-q80.png'),
-              ('owl-fortune/media/owl-awake-blink-180-q80.b64','owl-fortune/media/owl-awake-blink-180-q80.png'),
-              ('owl-fortune/media/owl-sleep-180-q80.b64','owl-fortune/media/owl-sleep-180-q80.png'),
+              ('owl-fortune/media/owl-awake-open-180-q80.b64','owl-fortune/media/owl-awake-open-180-q80.webp'),
+              ('owl-fortune/media/owl-awake-blink-180-q80.b64','owl-fortune/media/owl-awake-blink-180-q80.webp'),
+              ('owl-fortune/media/owl-sleep-180-q80.b64','owl-fortune/media/owl-sleep-180-q80.webp'),
           ]
           for src, dst in pairs:
               text = Path(src).read_text(encoding='utf-8', errors='ignore')
-              pos = text.find('iVBOR')
+              pos = text.find('UklGR')
               if pos >= 0:
                   text = text[pos:]
               text = ''.join(re.findall(r'[A-Za-z0-9+/=]', text))
               text += '=' * ((4 - len(text) % 4) % 4)
               data = base64.b64decode(text, validate=False)
-              if not data.startswith(b'\x89PNG\r\n\x1a\n'):
-                  raise SystemExit(f'{src}: decoded data is not PNG')
+              if not (data.startswith(b'RIFF') and data[8:12] == b'WEBP'):
+                  raise SystemExit(f'{src}: decoded data is not WebP')
               Path(dst).write_bytes(data)
           PY
       - name: Commit frames
@@ -45,7 +45,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add owl-fortune/media/owl-awake-open-180-q80.png owl-fortune/media/owl-awake-blink-180-q80.png owl-fortune/media/owl-sleep-180-q80.png
+          git add owl-fortune/media/owl-awake-open-180-q80.webp owl-fortune/media/owl-awake-blink-180-q80.webp owl-fortune/media/owl-sleep-180-q80.webp
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Decode owl PNG frames'
+          git commit -m 'Decode owl WebP frames'
           git push
