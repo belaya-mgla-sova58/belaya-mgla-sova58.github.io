@@ -1,4 +1,4 @@
-name: Optimize event header images
+name: Optimize heavy site WebP images
 
 on:
   push:
@@ -21,15 +21,27 @@ jobs:
       - name: Install WebP tools
         run: sudo apt-get update && sudo apt-get install -y webp
 
-      - name: Recompress heavy event headers
+      - name: Recompress next batch of heavy WebP assets
         shell: bash
         run: |
           set -euo pipefail
-          files=(
-            "assets/alliance-showdown-header-v505.webp"
-            "assets/alliance-mobilization-header-v517.webp"
-            "assets/alliance-championship-header-v509.webp"
+
+          mapfile -t files < <(
+            find assets -type f -iname '*.webp' -size +300k -printf '%s %p\n' \
+              | sort -nr \
+              | awk '{print $2}' \
+              | grep -Ev '(^|/)(owl|sphere|rune)|app-icon|alliance-showdown-header-v505\.webp$|alliance-mobilization-header-v517\.webp$|alliance-championship-header-v509\.webp$' \
+              | head -n 12 || true
           )
+
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "No eligible heavy WebP files found"
+            exit 0
+          fi
+
+          printf 'Selected files:\n'
+          printf '  %s\n' "${files[@]}"
+
           for f in "${files[@]}"; do
             [ -f "$f" ] || continue
             tmp="${f%.webp}.optimized.webp"
@@ -47,12 +59,12 @@ jobs:
       - name: Commit optimized images
         shell: bash
         run: |
-          if git diff --quiet; then
+          if git diff --quiet -- assets; then
             echo "No smaller images produced"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/alliance-showdown-header-v505.webp assets/alliance-mobilization-header-v517.webp assets/alliance-championship-header-v509.webp
-          git commit -m "Optimize heavy event header images"
+          git add -- assets
+          git commit -m "Optimize next batch of heavy WebP assets"
           git push
