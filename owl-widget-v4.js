@@ -1,6 +1,6 @@
 (()=>{
   'use strict';
-  const VERSION='20261030-phrases1';
+  const VERSION='20261030-orbmagic1';
   ['owlButtonV2','dismissOwlV2','orbModalV2','owlButtonV3','dismissOwlV3','orbModalV3','owlButtonV4','dismissOwlV4','orbModalV4'].forEach(id=>{const el=document.getElementById(id);if(el)el.remove();});
   ['owlWidgetV2Style','owlWidgetV3Style','owlWidgetV4Style'].forEach(id=>{const el=document.getElementById(id);if(el)el.remove();});
 
@@ -21,25 +21,50 @@
   `;
   document.head.appendChild(style);
 
-  document.body.insertAdjacentHTML('beforeend',`<button id="owlButtonV4" data-owl-version="${VERSION}" class="owl-corner-v4" type="button" aria-label="Открыть предсказания совы"><img id="owlOpenV4" class="owl-img-v4 show" src="owl-fortune/media/owl-awake-open-170.webp?v=${VERSION}" alt=""><img id="owlBlinkV4" class="owl-img-v4" src="owl-fortune/media/owl-awake-blink-170.webp?v=${VERSION}" alt=""><img id="owlSleepV4" class="owl-img-v4" src="owl-fortune/media/owl-sleep-170.webp?v=${VERSION}" alt=""><span class="owl-z-v4 z1">Z</span><span class="owl-z-v4 z2">Z</span><span class="owl-z-v4 z3">Z</span></button><button id="dismissOwlV4" class="owl-dismiss-v4" type="button" aria-label="Скрыть сову до обновления страницы">×</button><div id="orbModalV4" class="owl-modal-v4" aria-hidden="true"><div class="owl-backdrop-v4"></div><div class="owl-dialog-v4"><button id="closeModalV4" class="owl-close-v4" type="button" aria-label="Закрыть">×</button><iframe class="owl-frame-v4" src="owl-fortune/orb-popup.html?v=20261030-phrases1" title="Сова-предсказательница" allow="autoplay"></iframe></div></div>`);
+  document.body.insertAdjacentHTML('beforeend',`<button id="owlButtonV4" data-owl-version="${VERSION}" class="owl-corner-v4" type="button" aria-label="Открыть предсказания совы"><img id="owlOpenV4" class="owl-img-v4 show" src="owl-fortune/media/owl-awake-open-170.webp?v=${VERSION}" alt=""><img id="owlBlinkV4" class="owl-img-v4" src="owl-fortune/media/owl-awake-blink-170.webp?v=${VERSION}" alt=""><img id="owlSleepV4" class="owl-img-v4" src="owl-fortune/media/owl-sleep-170.webp?v=${VERSION}" alt=""><span class="owl-z-v4 z1">Z</span><span class="owl-z-v4 z2">Z</span><span class="owl-z-v4 z3">Z</span></button><button id="dismissOwlV4" class="owl-dismiss-v4" type="button" aria-label="Скрыть сову до обновления страницы">×</button><div id="orbModalV4" class="owl-modal-v4" aria-hidden="true"><div class="owl-backdrop-v4"></div><div class="owl-dialog-v4"><button id="closeModalV4" class="owl-close-v4" type="button" aria-label="Закрыть">×</button><iframe class="owl-frame-v4" src="owl-fortune/orb-popup.html?v=${VERSION}" title="Сова-предсказательница" allow="autoplay"></iframe></div></div>`);
 
   const owl=document.getElementById('owlButtonV4');
   const dismiss=document.getElementById('dismissOwlV4');
   const modal=document.getElementById('orbModalV4');
   const close=document.getElementById('closeModalV4');
   const backdrop=modal.querySelector('.owl-backdrop-v4');
+  const frame=modal.querySelector('.owl-frame-v4');
   const openImg=document.getElementById('owlOpenV4');
   const blinkImg=document.getElementById('owlBlinkV4');
   const sleepImg=document.getElementById('owlSleepV4');
   const zs=[...owl.querySelectorAll('.owl-z-v4')];
-  let sleeping=false,blinkTimer=0,blinkBack=0,raf=0;
+  let sleeping=false,blinkTimer=0,blinkBack=0,raf=0,sleepTaps=0;
 
-  function openModal(e){if(e){e.preventDefault();e.stopPropagation()}modal.classList.add('open');modal.setAttribute('aria-hidden','false')}
+  function injectOrbEnhance(){
+    try{
+      const doc=frame.contentDocument;
+      if(!doc||!doc.head||doc.getElementById('orbEnhanceLoaderV1'))return;
+      const s=doc.createElement('script');
+      s.id='orbEnhanceLoaderV1';
+      s.src='orb-enhance-v1.js?v='+VERSION;
+      doc.head.appendChild(s);
+    }catch(e){}
+  }
+  frame.addEventListener('load',()=>setTimeout(injectOrbEnhance,40));
+  setTimeout(injectOrbEnhance,450);
+
+  function openModal(e){
+    if(e){e.preventDefault();e.stopPropagation()}
+    modal.classList.add('open');modal.setAttribute('aria-hidden','false');
+    setTimeout(injectOrbEnhance,30);
+    if(sleeping){
+      sleepTaps++;
+      if(sleepTaps>=4){
+        sleepTaps=0;
+        setTimeout(()=>{try{frame.contentWindow.postMessage({type:'owl-sleep-secret'},'*')}catch(err){}},140);
+      }
+    }else sleepTaps=0;
+  }
   function closeModal(e){if(e){e.preventDefault();e.stopPropagation()}modal.classList.remove('open');modal.setAttribute('aria-hidden','true')}
   function showAwake(blink){if(sleeping)return;openImg.classList.toggle('show',!blink);blinkImg.classList.toggle('show',blink);sleepImg.classList.remove('show')}
   function doBlink(){if(sleeping)return;showAwake(true);blinkBack=setTimeout(()=>{if(sleeping)return;showAwake(false);if(Math.random()<.3){blinkBack=setTimeout(()=>{if(sleeping)return;showAwake(true);blinkBack=setTimeout(()=>{if(!sleeping){showAwake(false);scheduleBlink()}},180)},130)}else scheduleBlink()},210)}
   function scheduleBlink(){clearTimeout(blinkTimer);clearTimeout(blinkBack);if(sleeping)return;blinkTimer=setTimeout(doBlink,1500+Math.random()*1800)}
-  function setOwl(state){sleeping=state==='sleep';owl.classList.toggle('sleeping',sleeping);clearTimeout(blinkTimer);clearTimeout(blinkBack);if(sleeping){openImg.classList.remove('show');blinkImg.classList.remove('show');sleepImg.classList.add('show')}else{sleepImg.classList.remove('show');showAwake(false);scheduleBlink()}}
+  function setOwl(state){sleeping=state==='sleep';owl.classList.toggle('sleeping',sleeping);clearTimeout(blinkTimer);clearTimeout(blinkBack);if(sleeping){openImg.classList.remove('show');blinkImg.classList.remove('show');sleepImg.classList.add('show')}else{sleepTaps=0;sleepImg.classList.remove('show');showAwake(false);scheduleBlink()}}
 
   function animate(now){
     const t=now/1000;
