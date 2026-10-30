@@ -1,10 +1,15 @@
 (()=>{
   'use strict';
-  const VERSION='20261030-direct1';
+  const VERSION='20261030-direct2';
+  const WORKER='./service-worker.js?v=666-direct2';
 
-  if('serviceWorker' in navigator){
-    navigator.serviceWorker.register('./service-worker.js?v=665-direct1',{updateViaCache:'none'}).catch(()=>{});
+  function registerFreshWorker(){
+    if(!('serviceWorker' in navigator)) return;
+    navigator.serviceWorker.register(WORKER,{updateViaCache:'none'}).catch(()=>{});
   }
+  registerFreshWorker();
+  window.addEventListener('load',()=>setTimeout(registerFreshWorker,300),{once:true});
+  setTimeout(registerFreshWorker,1400);
 
   function removeLegacyHome(){
     if(!document.body||!document.body.classList.contains('is-home-route')) return;
@@ -26,11 +31,12 @@
 
   function ensureFortuneOwl(){
     if(!document.body||!document.body.classList.contains('is-home-route')) return;
-    if(document.getElementById('owlButtonV3')&&document.getElementById('owlOpenV3')&&document.getElementById('owlBlinkV3')&&document.getElementById('owlSleepV3')) return;
+    const current=document.getElementById('owlButtonV3');
+    const valid=current&&current.getAttribute('data-owl-version')===VERSION&&document.getElementById('owlOpenV3')&&document.getElementById('owlBlinkV3')&&document.getElementById('owlSleepV3');
+    if(valid) return;
     ['owlButtonV2','dismissOwlV2','orbModalV2','owlButtonV3','dismissOwlV3','orbModalV3'].forEach(id=>{const el=document.getElementById(id);if(el)el.remove();});
     document.querySelectorAll('script[data-owl-fortune-v2],script[data-owl-fortune-v3],script[data-repair-owl-v662],script[src*="owl-widget-v2.js"],script[src*="owl-widget-v3.js"]').forEach(el=>el.remove());
-    const oldStyle2=document.getElementById('owlWidgetV2Style');if(oldStyle2)oldStyle2.remove();
-    const oldStyle3=document.getElementById('owlWidgetV3Style');if(oldStyle3)oldStyle3.remove();
+    ['owlWidgetV2Style','owlWidgetV3Style'].forEach(id=>{const el=document.getElementById(id);if(el)el.remove();});
     const s=document.createElement('script');
     s.src='owl-widget-v3.js?v='+VERSION;
     s.defer=true;
@@ -39,9 +45,7 @@
   }
 
   function freshExpertsLinks(){
-    document.querySelectorAll('a[href="experts.html"],a[href^="experts.html?"]').forEach(a=>{
-      a.href='experts.html?v='+VERSION;
-    });
+    document.querySelectorAll('a[href="experts.html"],a[href^="experts.html?"]').forEach(a=>{a.href='experts.html?v='+VERSION;});
   }
 
   function clean(){
