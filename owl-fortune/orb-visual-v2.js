@@ -21,8 +21,10 @@
   const style=document.createElement('style');
   style.id='owlOrbVisualStyleV2';
   style.textContent=`
-    body{background:radial-gradient(circle at 50% 38%,#1d0937 0,#0a0315 53%,#030107 100%)!important}
-    .scene{filter:drop-shadow(0 24px 38px rgba(0,0,0,.52))!important;overflow:visible!important}
+    body{background:radial-gradient(circle at 50% 36%,#3a1762 0,#24103f 34%,#130725 68%,#090217 100%)!important}
+    .scene{filter:drop-shadow(0 24px 38px rgba(0,0,0,.4))!important;overflow:visible!important;background:radial-gradient(circle at 50% 48%,rgba(143,84,236,.13),rgba(79,35,139,.07) 48%,transparent 72%)!important;border-radius:28px!important}
+    .aura{opacity:1!important;filter:blur(6px)!important;background:radial-gradient(circle,rgba(174,112,255,.27),rgba(116,61,203,.14) 46%,transparent 73%)!important}
+    .orb{box-shadow:inset 0 0 30px rgba(255,255,255,.17),inset 0 0 90px rgba(119,66,245,.56),0 0 15px rgba(232,213,255,.9),0 0 50px rgba(145,79,244,.82),0 0 104px rgba(93,52,194,.56)!important}
 
     .text{
       width:70%!important;
@@ -40,19 +42,19 @@
     .count{
       top:-4.5%!important;
       padding:5px 11px!important;
-      border:1px solid rgba(221,199,255,.18)!important;
+      border:1px solid rgba(228,211,255,.28)!important;
       border-radius:999px!important;
-      background:linear-gradient(180deg,rgba(39,16,70,.42),rgba(18,7,35,.25))!important;
+      background:linear-gradient(180deg,rgba(84,43,132,.58),rgba(42,18,76,.42))!important;
       backdrop-filter:blur(5px)!important;
-      color:#efe4ff!important;
+      color:#f6edff!important;
       font-family:"Cormorant Garamond",Georgia,serif!important;
       font-size:clamp(13px,3vw,16px)!important;
       font-weight:700!important;
       line-height:1!important;
       letter-spacing:.025em!important;
-      text-shadow:0 0 10px rgba(157,98,255,.7)!important;
+      text-shadow:0 0 10px rgba(190,139,255,.82)!important;
       white-space:nowrap!important;
-      box-shadow:inset 0 0 12px rgba(255,255,255,.025),0 0 18px rgba(108,61,194,.1)!important;
+      box-shadow:inset 0 0 12px rgba(255,255,255,.04),0 0 20px rgba(144,83,235,.2)!important;
     }
     .streak-v2{
       top:8.7%!important;
@@ -60,12 +62,12 @@
       transform:none!important;
       width:auto!important;
       text-align:left!important;
-      color:rgba(220,201,244,.78)!important;
+      color:rgba(237,222,255,.9)!important;
       font-family:"Cormorant Garamond",Georgia,serif!important;
       font-size:clamp(12px,2.7vw,14px)!important;
       font-weight:600!important;
       letter-spacing:.035em!important;
-      text-shadow:0 0 9px rgba(132,78,224,.65)!important;
+      text-shadow:0 0 10px rgba(164,105,255,.76)!important;
     }
 
     .hint{
@@ -78,34 +80,34 @@
       font-size:clamp(15px,3.55vw,20px)!important;
       font-weight:400!important;
       letter-spacing:.035em!important;
-      color:#eadcff!important;
-      text-shadow:0 0 8px rgba(166,109,255,.58),0 0 18px rgba(92,46,173,.32)!important;
+      color:#f2e8ff!important;
+      text-shadow:0 0 9px rgba(186,132,255,.7),0 0 20px rgba(111,57,198,.4)!important;
     }
 
     .orb-controls-v2{bottom:5.8%!important;gap:8px!important}
     .orb-mini-btn-v2{
       padding:7px 12px!important;
-      border:1px solid rgba(221,198,255,.34)!important;
+      border:1px solid rgba(229,211,255,.46)!important;
       border-radius:999px!important;
-      background:linear-gradient(180deg,rgba(55,25,91,.68),rgba(21,8,42,.62))!important;
-      color:#f4eaff!important;
+      background:linear-gradient(180deg,rgba(91,48,143,.78),rgba(45,20,81,.7))!important;
+      color:#fbf4ff!important;
       font-family:"Cormorant Garamond",Georgia,serif!important;
       font-size:13px!important;
       font-weight:700!important;
       letter-spacing:.02em!important;
       backdrop-filter:blur(7px)!important;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 5px 18px rgba(0,0,0,.24),0 0 16px rgba(135,78,226,.16)!important;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 5px 18px rgba(0,0,0,.2),0 0 19px rgba(158,95,255,.25)!important;
       transition:transform .18s ease,box-shadow .22s ease,background .22s ease!important;
     }
-    .orb-mini-btn-v2:active{transform:scale(.96)!important;background:rgba(82,41,130,.78)!important}
+    .orb-mini-btn-v2:active{transform:scale(.96)!important;background:rgba(112,61,172,.86)!important}
 
     .rare-badge-v2{
       position:absolute;z-index:22;left:50%;top:15.2%;transform:translateX(-50%) translateY(-5px) scale(.96);
-      padding:5px 11px;border:1px solid rgba(255,225,126,.58);border-radius:999px;
-      background:linear-gradient(180deg,rgba(113,69,20,.46),rgba(43,22,6,.36));
-      color:#ffe89c;font-family:"Forum","Cormorant Garamond",Georgia,serif;font-size:12px;letter-spacing:.11em;
-      text-shadow:0 0 7px rgba(255,244,190,.92),0 0 16px rgba(255,190,61,.62);
-      box-shadow:inset 0 0 10px rgba(255,236,170,.08),0 0 20px rgba(255,191,57,.18);
+      padding:5px 11px;border:1px solid rgba(255,225,126,.72);border-radius:999px;
+      background:linear-gradient(180deg,rgba(134,82,25,.58),rgba(63,33,10,.5));
+      color:#fff0ae;font-family:"Forum","Cormorant Garamond",Georgia,serif;font-size:12px;letter-spacing:.11em;
+      text-shadow:0 0 7px rgba(255,244,190,.96),0 0 16px rgba(255,190,61,.72);
+      box-shadow:inset 0 0 10px rgba(255,236,170,.1),0 0 22px rgba(255,191,57,.24);
       opacity:0;pointer-events:none;transition:opacity .28s ease,transform .28s ease;
       white-space:nowrap;
     }
@@ -116,10 +118,10 @@
       text-shadow:0 1px 2px rgba(32,17,0,.95),0 0 7px rgba(255,252,226,.98),0 0 18px rgba(255,220,106,.88),0 0 34px rgba(255,169,48,.54)!important;
     }
     .orb.magic-secret-v1 .text{
-      color:#eaf8ff!important;
+      color:#f1fbff!important;
       text-shadow:0 1px 2px rgba(0,11,32,.95),0 0 8px rgba(235,251,255,.98),0 0 19px rgba(116,207,255,.86),0 0 34px rgba(139,94,255,.6)!important;
     }
-    .orb.magic-rare-v1{border-color:rgba(255,234,155,.88)!important}
+    .orb.magic-rare-v1{border-color:rgba(255,234,155,.9)!important}
 
     @media(max-width:560px){
       .count{top:-5.5%!important;font-size:13px!important;padding:5px 9px!important}
