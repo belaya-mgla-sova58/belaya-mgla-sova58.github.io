@@ -1,4 +1,4 @@
-name: Optimize heavy site WebP images
+name: Optimize event card loading priority
 
 on:
   push:
@@ -18,53 +18,53 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install WebP tools
-        run: sudo apt-get update && sudo apt-get install -y webp
+      - name: Lower non-critical event card image priority
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
 
-      - name: Recompress remaining heavy WebP assets
+          path = Path('events.html')
+          text = path.read_text(encoding='utf-8')
+
+          replacements = {
+              '<img alt="Охота на медведя" decoding="async" fetchpriority="high" src="assets/bear-card-v499.webp"/>':
+              '<img alt="Охота на медведя" decoding="async" loading="lazy" src="assets/bear-card-v499.webp"/>',
+              '<img alt="Месть Джины" decoding="async" fetchpriority="high" src="assets/gina-revenge-final-v607.jpg?v=607"/>':
+              '<img alt="Месть Джины" decoding="async" loading="lazy" src="assets/gina-revenge-final-v607.jpg?v=607"/>',
+          }
+
+          changed = 0
+          for old, new in replacements.items():
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'Expected exactly 1 match, found {count}: {old}')
+              text = text.replace(old, new, 1)
+              changed += 1
+
+          path.write_text(text, encoding='utf-8')
+          print(f'Updated {changed} event card images')
+          PY
+
+      - name: Verify priority setup
         shell: bash
         run: |
           set -euo pipefail
+          grep -F 'fetchpriority="high" href="assets/img_5c51535e4e647ea6.webp"' events.html
+          ! grep -F 'alt="Охота на медведя" decoding="async" fetchpriority="high"' events.html
+          ! grep -F 'alt="Месть Джины" decoding="async" fetchpriority="high"' events.html
+          grep -F 'alt="Охота на медведя" decoding="async" loading="lazy"' events.html
+          grep -F 'alt="Месть Джины" decoding="async" loading="lazy"' events.html
 
-          mapfile -t files < <(
-            find assets -type f -iname '*.webp' -size +300k -printf '%s %p\n' \
-              | sort -nr \
-              | awk '{print $2}' \
-              | grep -Ev '(^|/)(owl|sphere|rune)|app-icon|alliance-showdown-header-v505\.webp$|alliance-mobilization-header-v517\.webp$|alliance-championship-header-v509\.webp$|bear-header-v499\.webp$|crazy-joe-header-v500\.webp$|frostfire-header-v502\.webp$|img_50ddce9361de1ed0\.webp$|img_663eac42a1984120\.webp$|img_8b01f5860443ac9f\.webp$|img_ddf444d7224b5870\.webp$|img_e09768c2f29b6624\.webp$|img_f9651370ac9d325d\.webp$|img_fb7ecd6419e3fb97\.webp$|news-update-2026-10-19/inline-10\.webp$|img_9cc742a30a7df7e8\.webp$|bear-approved-v478\.webp$|img_4658cb9607ac5b2f\.webp$|img_5821ca746911c7c6\.webp$|svs-battle-header-v514\.webp$|img_d4f356a62348617b\.webp$|img_60db18acff7ed344\.webp$|foundry-header-v510\.webp$|img_327a7ecd26554bcb\.webp$|endless-trial-header-v503\.webp$|img_494e5af9ee1a6e7e\.webp$|img_b9410816bb58fe7a\.webp$|winter-siege-header-v519\.webp$|castle-header-v512\.webp$|fishing-header-v506\.webp$|brothers-in-arms-header-v518\.webp$|img_22767d469133f308\.webp$|tundra-trade-route-header-v504\.webp$|img_10c3893346a35f1a\.webp$|img_c39f375dabb9ee41\.webp$|svs-prep-header-v513\.webp$|img_3f7cd577a357c93b\.webp$|img_7c0124820bdf95d9\.webp$|img_4631502b5e860156\.webp$|bear-approved-v497\.webp$|img_9b1ff30a01c29dda\.webp$|img_f4053b4bd49b720d\.webp$|svs-prep-header-v516\.webp$' \
-              | head -n 12 || true
-          )
-
-          if [ "${#files[@]}" -eq 0 ]; then
-            echo "No eligible heavy WebP files found"
-            exit 0
-          fi
-
-          printf 'Selected files:\n'
-          printf '  %s\n' "${files[@]}"
-
-          for f in "${files[@]}"; do
-            [ -f "$f" ] || continue
-            tmp="${f%.webp}.optimized.webp"
-            cwebp -quiet -q 86 -m 6 -metadata none "$f" -o "$tmp"
-            old=$(stat -c%s "$f")
-            new=$(stat -c%s "$tmp")
-            echo "$f: $old -> $new bytes"
-            if [ "$new" -lt "$old" ]; then
-              mv "$tmp" "$f"
-            else
-              rm -f "$tmp"
-            fi
-          done
-
-      - name: Commit optimized images
+      - name: Commit events optimization
         shell: bash
         run: |
-          if git diff --quiet -- assets; then
-            echo "No smaller images produced"
+          if git diff --quiet -- events.html; then
+            echo "No changes needed"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- assets
-          git commit -m "Optimize remaining heavy WebP assets"
+          git add events.html
+          git commit -m "Optimize event overview image loading"
           git push
