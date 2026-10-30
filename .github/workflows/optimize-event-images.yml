@@ -21,7 +21,7 @@ jobs:
       - name: Install WebP tools
         run: sudo apt-get update && sudo apt-get install -y webp
 
-      - name: Recompress next batch of heavy WebP assets
+      - name: Recompress remaining heavy WebP assets
         shell: bash
         run: |
           set -euo pipefail
@@ -30,7 +30,7 @@ jobs:
             find assets -type f -iname '*.webp' -size +300k -printf '%s %p\n' \
               | sort -nr \
               | awk '{print $2}' \
-              | grep -Ev '(^|/)(owl|sphere|rune)|app-icon|alliance-showdown-header-v505\.webp$|alliance-mobilization-header-v517\.webp$|alliance-championship-header-v509\.webp$' \
+              | grep -Ev '(^|/)(owl|sphere|rune)|app-icon|alliance-showdown-header-v505\.webp$|alliance-mobilization-header-v517\.webp$|alliance-championship-header-v509\.webp$|bear-header-v499\.webp$|crazy-joe-header-v500\.webp$|frostfire-header-v502\.webp$|img_50ddce9361de1ed0\.webp$|img_663eac42a1984120\.webp$|img_8b01f5860443ac9f\.webp$|img_ddf444d7224b5870\.webp$|img_e09768c2f29b6624\.webp$|img_f9651370ac9d325d\.webp$|img_fb7ecd6419e3fb97\.webp$|news-update-2026-10-19/inline-10\.webp$' \
               | head -n 12 || true
           )
 
@@ -66,5 +66,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -- assets
-          git commit -m "Optimize next batch of heavy WebP assets"
+          git commit -m "Optimize remaining heavy WebP assets"
           git push
