@@ -1,0 +1,34 @@
+name: Decode owl frames
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/decode-owl-frames.yml'
+      - 'owl-fortune/media/owl-awake-open-180-q80.b64'
+      - 'owl-fortune/media/owl-awake-blink-180-q80.b64'
+      - 'owl-fortune/media/owl-sleep-180-q80.b64'
+
+permissions:
+  contents: write
+
+jobs:
+  decode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Decode PNG frames
+        shell: bash
+        run: |
+          base64 -d owl-fortune/media/owl-awake-open-180-q80.b64 > owl-fortune/media/owl-awake-open-180-q80.png
+          base64 -d owl-fortune/media/owl-awake-blink-180-q80.b64 > owl-fortune/media/owl-awake-blink-180-q80.png
+          base64 -d owl-fortune/media/owl-sleep-180-q80.b64 > owl-fortune/media/owl-sleep-180-q80.png
+      - name: Commit frames
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add owl-fortune/media/owl-awake-open-180-q80.png owl-fortune/media/owl-awake-blink-180-q80.png owl-fortune/media/owl-sleep-180-q80.png
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Decode owl PNG frames'
+          git push
