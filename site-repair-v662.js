@@ -1,7 +1,7 @@
 (()=>{
   'use strict';
-  const VERSION='20261030-activeowl2';
-  const WORKER='./service-worker.js?v=670-activeowl2';
+  const VERSION='20261030-activeowl3';
+  const WORKER='./service-worker.js?v=671-activeowl3';
 
   function registerFreshWorker(){
     if(!('serviceWorker' in navigator)) return;
@@ -32,7 +32,7 @@
   function ensureFortuneOwl(){
     if(!document.body||!document.body.classList.contains('is-home-route')) return;
     const current=document.getElementById('owlButtonV4');
-    const valid=current&&current.getAttribute('data-owl-version')===VERSION&&document.getElementById('owlActiveV4')&&document.getElementById('owlSleepV4');
+    const valid=current&&current.getAttribute('data-owl-version')===VERSION&&document.getElementById('owlOpenV4')&&document.getElementById('owlBlinkV4')&&document.getElementById('owlSleepV4');
     if(valid) return;
     ['owlButtonV2','dismissOwlV2','orbModalV2','owlButtonV3','dismissOwlV3','orbModalV3','owlButtonV4','dismissOwlV4','orbModalV4'].forEach(id=>{const el=document.getElementById(id);if(el)el.remove();});
     document.querySelectorAll('script[data-owl-fortune-v2],script[data-owl-fortune-v3],script[data-owl-fortune-v4],script[data-repair-owl-v662],script[src*="owl-widget-v2.js"],script[src*="owl-widget-v3.js"],script[src*="owl-widget-v4.js"]').forEach(el=>el.remove());
