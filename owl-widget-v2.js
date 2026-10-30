@@ -7,10 +7,9 @@
   const s=document.createElement('style');
   s.id='owlWidgetV2Style';
   s.textContent=`
-  .owl-corner-v2{position:fixed!important;right:8px!important;bottom:88px!important;z-index:2147483645!important;width:180px!important;height:265px!important;border:0!important;background:transparent!important;padding:0!important;margin:0!important;cursor:pointer!important;overflow:visible!important;display:block!important;opacity:1!important;pointer-events:auto!important;touch-action:manipulation!important;animation:owlFloatV2 3.2s ease-in-out infinite!important;transform-origin:50% 72%!important;-webkit-tap-highlight-color:transparent!important}
-  .owl-corner-v2.loading{visibility:hidden!important}.owl-corner-v2:not(.loading){visibility:visible!important}
+  .owl-corner-v2{position:fixed!important;right:8px!important;bottom:88px!important;z-index:2147483645!important;width:180px!important;height:265px!important;border:0!important;background:transparent!important;padding:0!important;margin:0!important;cursor:pointer!important;overflow:visible!important;display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;touch-action:manipulation!important;animation:owlFloatV2 3.2s ease-in-out infinite!important;transform-origin:50% 72%!important;-webkit-tap-highlight-color:transparent!important}
   .owl-corner-v2.sleeping{width:194px!important;height:194px!important;bottom:94px!important;animation:owlSleepFloatV2 3.8s ease-in-out infinite!important}
-  .owl-img-v2{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;opacity:0!important;display:block!important;pointer-events:none!important;transition:opacity .07s linear!important;filter:drop-shadow(0 10px 18px rgba(89,43,154,.42))!important;mix-blend-mode:normal!important;mask-image:none!important;-webkit-mask-image:none!important;transform:none!important}
+  .owl-img-v2{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;opacity:0!important;display:block!important;visibility:visible!important;pointer-events:none!important;transition:opacity .07s linear!important;filter:drop-shadow(0 10px 18px rgba(89,43,154,.42))!important;mix-blend-mode:normal!important;mask-image:none!important;-webkit-mask-image:none!important;transform:none!important}
   .owl-img-v2.show{opacity:1!important}
   .owl-z-v2{position:absolute!important;z-index:5!important;color:#eadfff!important;font:800 22px/1 Georgia,serif!important;text-shadow:0 0 8px #8f65ff,0 0 16px rgba(126,79,255,.9)!important;opacity:0!important;display:none!important;pointer-events:none!important}
   .owl-corner-v2.sleeping .owl-z-v2{display:block!important;animation:owlZV2 2.5s ease-in-out infinite!important}
@@ -21,14 +20,12 @@
   @keyframes owlSleepFloatV2{0%,100%{transform:translate3d(0,0,0) rotate(-.5deg)}50%{transform:translate3d(0,-7px,0) rotate(.5deg)}}
   @keyframes owlZV2{0%{opacity:0;transform:translate3d(0,8px,0) scale(.82)}24%{opacity:1}72%{opacity:.72}100%{opacity:0;transform:translate3d(10px,-25px,0) scale(1.12)}}
   .owl-modal-v2{position:fixed!important;inset:0!important;z-index:2147483640!important;display:none!important;place-items:center!important;padding:12px!important;box-sizing:border-box!important;pointer-events:none!important}.owl-modal-v2.open{display:grid!important;pointer-events:auto!important}
-  .owl-backdrop-v2{position:absolute!important;inset:0!important;background:rgba(2,1,8,.58)!important;backdrop-filter:blur(4px)!important}
-  .owl-dialog-v2{position:relative!important;z-index:1!important;width:min(560px,84vw)!important;height:min(610px,70vh)!important;border-radius:22px!important;overflow:hidden!important;background:#05020c!important;border:1px solid rgba(227,201,255,.24)!important;box-shadow:0 24px 70px rgba(0,0,0,.62),0 0 45px rgba(125,59,193,.2)!important}
-  .owl-frame-v2{width:100%!important;height:100%!important;border:0!important;display:block!important;background:#05020c!important}.owl-close-v2{position:absolute!important;right:9px!important;top:8px!important;z-index:3!important;width:34px!important;height:34px!important;border:1px solid rgba(255,255,255,.25)!important;border-radius:50%!important;background:rgba(17,8,29,.86)!important;color:#fff!important;font:400 25px/1 system-ui!important;cursor:pointer!important;display:grid!important;place-items:center!important}
+  .owl-backdrop-v2{position:absolute!important;inset:0!important;background:rgba(2,1,8,.58)!important;backdrop-filter:blur(4px)!important}.owl-dialog-v2{position:relative!important;z-index:1!important;width:min(560px,84vw)!important;height:min(610px,70vh)!important;border-radius:22px!important;overflow:hidden!important;background:#05020c!important;border:1px solid rgba(227,201,255,.24)!important;box-shadow:0 24px 70px rgba(0,0,0,.62),0 0 45px rgba(125,59,193,.2)!important}.owl-frame-v2{width:100%!important;height:100%!important;border:0!important;display:block!important;background:#05020c!important}.owl-close-v2{position:absolute!important;right:9px!important;top:8px!important;z-index:3!important;width:34px!important;height:34px!important;border:1px solid rgba(255,255,255,.25)!important;border-radius:50%!important;background:rgba(17,8,29,.86)!important;color:#fff!important;font:400 25px/1 system-ui!important;cursor:pointer!important;display:grid!important;place-items:center!important}
   @media(max-width:640px){.owl-corner-v2{right:7px!important;bottom:86px!important;width:180px!important;height:265px!important;max-width:none!important}.owl-corner-v2.sleeping{width:194px!important;height:194px!important;bottom:92px!important}.owl-dismiss-v2{right:3px!important;bottom:244px!important}.owl-dialog-v2{width:82vw!important;height:62vh!important;max-height:560px!important;border-radius:18px!important}.owl-modal-v2{padding-bottom:76px!important}}
   `;
   document.head.appendChild(s);
 
-  document.body.insertAdjacentHTML('beforeend',`<button id="owlButtonV2" class="owl-corner-v2 loading" type="button" aria-label="Открыть предсказания совы"><img id="owlOpenV2" class="owl-img-v2" alt=""><img id="owlBlinkV2" class="owl-img-v2" alt=""><img id="owlSleepV2" class="owl-img-v2" alt=""><span class="owl-z-v2 z1">Z</span><span class="owl-z-v2 z2">Z</span><span class="owl-z-v2 z3">Z</span></button><button id="dismissOwlV2" class="owl-dismiss-v2" type="button" aria-label="Скрыть сову до обновления страницы">×</button><div id="orbModalV2" class="owl-modal-v2" aria-hidden="true"><div class="owl-backdrop-v2"></div><div class="owl-dialog-v2"><button id="closeModalV2" class="owl-close-v2" type="button" aria-label="Закрыть">×</button><iframe id="orbFrameV2" class="owl-frame-v2" src="owl-fortune/orb-popup.html?v=20261030-neworb2" title="Сова-предсказательница" allow="autoplay"></iframe></div></div>`);
+  document.body.insertAdjacentHTML('beforeend',`<button id="owlButtonV2" class="owl-corner-v2" type="button" aria-label="Открыть предсказания совы"><img id="owlOpenV2" class="owl-img-v2" alt=""><img id="owlBlinkV2" class="owl-img-v2" alt=""><img id="owlSleepV2" class="owl-img-v2" alt=""><span class="owl-z-v2 z1">Z</span><span class="owl-z-v2 z2">Z</span><span class="owl-z-v2 z3">Z</span></button><button id="dismissOwlV2" class="owl-dismiss-v2" type="button" aria-label="Скрыть сову до обновления страницы">×</button><div id="orbModalV2" class="owl-modal-v2" aria-hidden="true"><div class="owl-backdrop-v2"></div><div class="owl-dialog-v2"><button id="closeModalV2" class="owl-close-v2" type="button" aria-label="Закрыть">×</button><iframe id="orbFrameV2" class="owl-frame-v2" src="owl-fortune/orb-popup.html?v=20261030-neworb2" title="Сова-предсказательница" allow="autoplay"></iframe></div></div>`);
 
   const owl=document.getElementById('owlButtonV2'),dismiss=document.getElementById('dismissOwlV2'),modal=document.getElementById('orbModalV2'),close=document.getElementById('closeModalV2'),backdrop=modal.querySelector('.owl-backdrop-v2'),openImg=document.getElementById('owlOpenV2'),blinkImg=document.getElementById('owlBlinkV2'),sleepImg=document.getElementById('owlSleepV2');
   let sleeping=false,blinkTimer=0,blinkSeqTimer=0,framesReady=false;
@@ -38,9 +35,26 @@
   function showAwakeFrame(blink){if(!framesReady||sleeping)return;openImg.classList.toggle('show',!blink);blinkImg.classList.toggle('show',blink);sleepImg.classList.remove('show')}
   function scheduleBlink(){clearTimeout(blinkTimer);clearTimeout(blinkSeqTimer);if(sleeping||!framesReady)return;blinkTimer=setTimeout(()=>{if(sleeping)return;showAwakeFrame(true);blinkSeqTimer=setTimeout(()=>{if(sleeping)return;showAwakeFrame(false);if(Math.random()<.34){blinkSeqTimer=setTimeout(()=>{if(sleeping)return;showAwakeFrame(true);blinkSeqTimer=setTimeout(()=>{if(!sleeping)showAwakeFrame(false);scheduleBlink()},105)},145)}else scheduleBlink()},115)},3200+Math.random()*2600)}
   function setOwl(state){sleeping=state==='sleep';owl.classList.toggle('sleeping',sleeping);clearTimeout(blinkTimer);clearTimeout(blinkSeqTimer);if(!framesReady)return;if(sleeping){openImg.classList.remove('show');blinkImg.classList.remove('show');sleepImg.classList.add('show')}else{sleepImg.classList.remove('show');showAwakeFrame(false);scheduleBlink()}}
-  async function loadB64(path){const r=await fetch(path+'?v=20261030-frameblink1',{cache:'no-store'});if(!r.ok)throw new Error(path);return(await r.text()).replace(/\s+/g,'')}
-  async function loadFrames(){const [a,b,c]=await Promise.all([loadB64('owl-fortune/media/owl-awake-open-180-q80.b64'),loadB64('owl-fortune/media/owl-awake-blink-180-q80.b64'),loadB64('owl-fortune/media/owl-sleep-180-q80.b64')]);openImg.src='data:image/webp;base64,'+a;blinkImg.src='data:image/webp;base64,'+b;sleepImg.src='data:image/webp;base64,'+c;await Promise.all([openImg.decode?openImg.decode().catch(()=>{}):Promise.resolve(),blinkImg.decode?blinkImg.decode().catch(()=>{}):Promise.resolve(),sleepImg.decode?sleepImg.decode().catch(()=>{}):Promise.resolve()]);framesReady=true;owl.classList.remove('loading');setOwl(sleeping?'sleep':'awake')}
-  loadFrames().catch(()=>setTimeout(()=>loadFrames().catch(()=>{}),900));
+
+  function b64ToBlobUrl(b64){
+    const clean=b64.replace(/\s+/g,'');
+    const bin=atob(clean),bytes=new Uint8Array(bin.length);
+    for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);
+    return URL.createObjectURL(new Blob([bytes],{type:'image/webp'}));
+  }
+  async function loadB64(path){const r=await fetch(path+'?v=20261030-blobfix1',{cache:'no-store'});if(!r.ok)throw new Error(path);return r.text()}
+  async function loadFrames(){
+    const data=await Promise.all([
+      loadB64('owl-fortune/media/owl-awake-open-180-q80.b64'),
+      loadB64('owl-fortune/media/owl-awake-blink-180-q80.b64'),
+      loadB64('owl-fortune/media/owl-sleep-180-q80.b64')
+    ]);
+    openImg.src=b64ToBlobUrl(data[0]);blinkImg.src=b64ToBlobUrl(data[1]);sleepImg.src=b64ToBlobUrl(data[2]);
+    framesReady=true;setOwl(sleeping?'sleep':'awake');
+  }
+  loadFrames().catch(()=>{
+    setTimeout(()=>loadFrames().catch(()=>{}),700);
+  });
 
   owl.addEventListener('click',openModal,{passive:false});owl.addEventListener('pointerup',e=>{if(e.pointerType==='touch')openModal(e)},{passive:false});dismiss.addEventListener('click',e=>{closeModal(e);owl.classList.add('hidden');dismiss.classList.add('hidden')});close.addEventListener('click',closeModal);backdrop.addEventListener('click',closeModal);document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});window.addEventListener('message',e=>{if(!e.data||e.data.type!=='owl-state')return;setOwl(e.data.state)});
 })();
