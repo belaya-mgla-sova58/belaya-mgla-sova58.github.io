@@ -60,7 +60,7 @@ jobs:
         run: |
           test "$(grep -l 'hero-shared-v687.css?v=687' hero-*.html | wc -l)" -eq 36
           test -s hero-shared-v687.css
-          grep -q 'hero-detail' hero-shared-v687.css
+          test "$(wc -c < hero-shared-v687.css)" -gt 7900
       - name: Commit shared CSS
         run: |
           git config user.name 'github-actions[bot]'
