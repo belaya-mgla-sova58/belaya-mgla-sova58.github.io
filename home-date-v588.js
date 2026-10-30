@@ -153,7 +153,7 @@
 })();
 
 (function(){
-  var VISUAL_VERSION='20261030-visual3';
+  var VISUAL_VERSION='20261030-visual4';
   function injectOrbVisual(){
     var frame=document.querySelector('#orbModalV4 .owl-frame-v4');
     if(!frame) return false;
