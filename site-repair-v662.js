@@ -1,7 +1,7 @@
 (()=>{
   'use strict';
   const VERSION='20261030-activeowl3';
-  const WORKER='./service-worker.js?v=673-eyesfix1';
+  const WORKER='./service-worker.js?v=674-runes1';
   const RESET_KEY='belaya_mgla_orb_reset_keep2_v1';
 
   function resetFortuneCounterOnce(){
@@ -74,6 +74,27 @@
     document.head.appendChild(s);
   }
 
+  function ensureRuneSystem(){
+    if(!document.body||!document.body.classList.contains('is-home-route')) return;
+    const frame=document.querySelector('#orbModalV4 .owl-frame-v4');
+    if(!frame) return;
+    const inject=()=>{
+      try{
+        const doc=frame.contentDocument;
+        if(!doc||!doc.head||doc.getElementById('runeSystemLoaderV1')) return;
+        const s=doc.createElement('script');
+        s.id='runeSystemLoaderV1';
+        s.src='rune-system-v1.js?v=20261030-runes1';
+        doc.head.appendChild(s);
+      }catch(e){}
+    };
+    if(!frame.dataset.runeListenerV1){
+      frame.dataset.runeListenerV1='1';
+      frame.addEventListener('load',()=>setTimeout(inject,650));
+    }
+    setTimeout(inject,650);
+  }
+
   function freshExpertsLinks(){
     document.querySelectorAll('a[href="experts.html"],a[href^="experts.html?"]').forEach(a=>{a.href='experts.html?v='+VERSION;});
   }
@@ -82,6 +103,7 @@
     removeLegacyHome();
     ensureQuestionnaire();
     ensureFortuneOwl();
+    ensureRuneSystem();
     freshExpertsLinks();
   }
 
@@ -89,4 +111,5 @@
   else clean();
   setTimeout(clean,250);
   setTimeout(clean,1000);
+  setTimeout(ensureRuneSystem,1800);
 })();
