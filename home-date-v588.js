@@ -54,7 +54,17 @@
 })();
 
 (function(){
+  function ensureOwlSizeOverride(){
+    var old=document.getElementById('owlSizeOverrideV588');
+    if(old) old.remove();
+    var st=document.createElement('style');
+    st.id='owlSizeOverrideV588';
+    st.textContent='#owlButtonV4.owl-corner-v4{width:115px!important;height:169px!important;right:7px!important;bottom:96px!important}#owlButtonV4.owl-corner-v4.sleeping{width:115px!important;height:115px!important;bottom:102px!important}#dismissOwlV4.owl-dismiss-v4{bottom:180px!important}@media(max-width:640px){#owlButtonV4.owl-corner-v4{width:115px!important;height:169px!important;right:7px!important;bottom:96px!important}#owlButtonV4.owl-corner-v4.sleeping{width:115px!important;height:115px!important;bottom:102px!important}#dismissOwlV4.owl-dismiss-v4{bottom:180px!important}}';
+    document.head.appendChild(st);
+  }
+
   function loadFortuneOwlV4(){
+    ensureOwlSizeOverride();
     document.querySelectorAll('script[data-owl-fortune-v5],script[data-owl-fortune-v2],script[data-owl-fortune-v3],script[data-owl-fortune-v4],script[src*="owl-widget-v1.js"],script[src*="owl-widget-v2.js"],script[src*="owl-widget-v3.js"],script[src*="owl-fortune-v933.js"]').forEach(function(el){el.remove();});
     ['owlButton','dismissOwl','orbModal','fortuneOwlV933','fortuneOwlV932','fortuneOwlV931','sova58FortuneOwlV2','sova58FortunePanel','sova58FortuneBackdrop','owlButtonV2','dismissOwlV2','orbModalV2','owlButtonV3','dismissOwlV3','orbModalV3'].forEach(function(id){var el=document.getElementById(id);if(el)el.remove();});
     var current=document.getElementById('owlButtonV4');
