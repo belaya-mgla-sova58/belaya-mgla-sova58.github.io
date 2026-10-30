@@ -2,6 +2,10 @@
   'use strict';
   const VERSION='20261030-direct1';
 
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('./service-worker.js?v=665-direct1',{updateViaCache:'none'}).catch(()=>{});
+  }
+
   function removeLegacyHome(){
     if(!document.body||!document.body.classList.contains('is-home-route')) return;
     document.querySelectorAll('.pwa-install-v540').forEach(el=>el.remove());
