@@ -1,52 +1,69 @@
 АУДИТ САЙТА «БЕЛАЯ МГЛА»
 ====================================
+Дата ручной перепроверки: 30.10.2026
+
 HTML-страниц проверено: 155
-Битых локальных ссылок/файлов: 4
+Подтверждённых битых локальных ссылок/файлов: 0
 Несуществующих якорей: 0
 Повторяющихся id: 0
 Видимых технических фраз: 0
-Замечаний по базовой разметке: 8
-Orphan-страниц без входящих HTML-ссылок: 5
 Ошибок разбора HTML: 0
 
 БИТЫЕ ССЫЛКИ / ФАЙЛЫ
 --------------------
-halloween-header-apply-v765.js: asset="halloween-header-2026-v764.webp" → отсутствует halloween-header-2026-v764.webp
-pwa-install.js: asset="halloween-header-2026-v764.webp" → отсутствует halloween-header-2026-v764.webp
-site-v269.css: asset="-v528.webp" → отсутствует -v528.webp
-site-v626-base-v631.min.css: asset="-v528.webp" → отсутствует -v528.webp
+Подтверждённых ошибок нет.
 
-ЯКОРЯ
------
-Нет.
-
-ДУБЛИ ID
---------
-Нет.
-
-ТЕХНИЧЕСКИЕ ФРАЗЫ
------------------
-Нет.
+Старые автоматические срабатывания по halloween-header-2026-v764.webp и -v528.webp были ложными:
+- assets/halloween-header-2026-v764.webp существует;
+- ссылки вида -v528.webp возникали из-за упрощённого разбора CSS и не являются реальными файлами сайта.
 
 БАЗОВАЯ РАЗМЕТКА
 ----------------
-expert-generations.html: нет <h1>
-owl-fortune/orb-original-packed.html: нет <title>
-owl-fortune/orb-original-packed.html: нет meta viewport
-owl-fortune/orb-original-packed.html: нет <h1>
-owl-fortune/orb-popup.html: нет <h1>
-owl-reset-20261028.html: нет <h1>
-owl-reset.html: нет <h1>
-welcome.html: нет <h1>
+news-halloween-2026.html: исправлено, статический <h1> «Хэллоуинская вечеринка 2026» находится прямо в исходном HTML.
 
-ORPHAN-СТРАНИЦЫ
----------------
-alliance-questionnaire.html
-canyon-clash.html
-expert-generations.html
-poll.html
-sova-predskazatelnitsa.html
+Не считать ошибками разметки:
+- expert-generations.html: служебный redirect на experts.html;
+- welcome.html: noindex,nofollow redirect на index.html;
+- owl-reset.html и owl-reset-20261028.html: служебные noindex,nofollow redirect-страницы;
+- owl-fortune/orb-original-packed.html: технический контейнер;
+- owl-fortune/orb-popup.html: технический/резервный прототип шара.
 
-ОШИБКИ РАЗБОРА
---------------
-Нет.
+ВНУТРЕННИЕ ССЫЛКИ
+-----------------
+news.html: EU / Global и Хэллоуин 2026 теперь имеют обычные статические HTML-ссылки.
+
+canyon-clash.html: полноценная страница и находится в sitemap, но карточка на events.html пока добавляется JavaScript после загрузки страницы. Для простого статического HTML-аудита это остаётся единственным заметным хвостом.
+
+УСЛОВНЫЕ / ЛОЖНЫЕ ORPHAN-СРАБАТЫВАНИЯ
+--------------------------------------
+alliance-questionnaire.html: ссылка формируется логикой главной страницы.
+poll.html: ссылка добавляется в меню режима просмотра.
+expert-generations.html: redirect-служебная страница.
+sova-predskazatelnitsa.html: полноценная страница, добавлена в отдельный sitemap-owl.xml.
+
+SEO / SITEMAP
+-------------
+- canyon-clash.html находится в основном sitemap.xml;
+- news-halloween-2026.html находится в основном sitemap.xml;
+- news-eu.html находится в основном sitemap.xml;
+- sova-predskazatelnitsa.html находится в sitemap-owl.xml;
+- служебные owl-reset и прототипы шара в sitemap не добавляются.
+
+ОПТИМИЗАЦИИ, УЖЕ ВНЕСЁННЫЕ
+--------------------------
+- PostHog отложен до полной загрузки/idle;
+- search-expanded-v724.js загружается по взаимодействию с поиском или во время idle;
+- search-index.json по-прежнему загружается только после ввода минимум 2 символов;
+- фоны поколений героев лениво подгружаются через IntersectionObserver;
+- портреты экспертов волн 2–5 переведены на lazy loading;
+- анкета альянса на главной перенесена на idle, глобальный MutationObserver убран;
+- PWA service worker использует network-first для ключевых управляющих JS;
+- PWA-кэш обновлён до belaya-mgla-v686;
+- три подтверждённых preload соцобложок убираются HTML-оптимизатором service worker;
+- статические карточки EU / Global и Хэллоуин 2026 добавлены непосредственно в news.html;
+- runtime-инжектор H1 для Хэллоуина удалён после добавления статического заголовка.
+
+ТЕКУЩИЙ ПРИОРИТЕТ
+-----------------
+1. Сделать canyon-clash.html статической карточкой внутри PvP-группы events.html и обновить счётчик 7 → 8.
+2. После этого повторить статический аудит внутренних ссылок.
