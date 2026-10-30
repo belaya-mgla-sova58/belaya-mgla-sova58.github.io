@@ -1,7 +1,7 @@
 (()=>{
   'use strict';
-  const VERSION='20261030-activeanim1';
-  const WORKER='./service-worker.js?v=670-activeanim1';
+  const VERSION='20261030-activeowl2';
+  const WORKER='./service-worker.js?v=670-activeowl2';
 
   function registerFreshWorker(){
     if(!('serviceWorker' in navigator)) return;
