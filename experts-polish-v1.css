@@ -21,6 +21,11 @@
   justify-content:center;
 }
 
+/* Keep portrait group visually separate from the disclosure button. */
+.is-experts-route .wave-faces{
+  right:62px!important;
+}
+
 /* Cleaner, luminous disclosure button on the right. */
 .is-experts-route .wave-arrow{
   right:12px!important;
@@ -57,6 +62,7 @@
 
 @media(max-width:620px){
   .is-experts-route .wave>summary{padding-left:15px!important;padding-right:50px!important}
+  .is-experts-route .wave-faces{right:56px!important}
   .is-experts-route .wave-arrow{right:9px!important;width:34px!important;height:34px!important}
   .is-experts-route .wave-arrow::before{width:8px;height:8px}
 }
