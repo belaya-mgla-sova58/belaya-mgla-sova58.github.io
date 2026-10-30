@@ -1,7 +1,7 @@
 (()=>{
   'use strict';
   const VERSION='20261030-activeowl3';
-  const WORKER='./service-worker.js?v=679-perf1';
+  const WORKER='./service-worker.js?v=680-layoutfix1';
   const RESET_KEY='belaya_mgla_orb_reset_keep2_v4';
 
   function resetFortuneCounterOnce(){
