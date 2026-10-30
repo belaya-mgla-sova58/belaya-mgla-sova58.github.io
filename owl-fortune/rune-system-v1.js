@@ -67,17 +67,6 @@
     }catch(e){return randomRune()}
   }
 
-  // Перехватываем старую декоративную руну и заменяем её настоящей руной Старшего Футарка.
-  document.addEventListener('click',e=>{
-    const target=e.target.closest&&e.target.closest('.rune-v2');
-    if(!target) return;
-    e.preventDefault();
-    e.stopPropagation();
-    e.stopImmediatePropagation();
-    try{target.remove()}catch(err){}
-    showRune(randomRune());
-  },true);
-
   function addDailyButton(){
     const controls=document.querySelector('.orb-controls-v2');
     if(!controls||document.getElementById('runeDayBtnV1')) return false;
@@ -93,6 +82,6 @@
   if(!addDailyButton()){
     const observer=new MutationObserver(()=>{if(addDailyButton()) observer.disconnect()});
     observer.observe(scene,{childList:true,subtree:true});
-    setTimeout(()=>observer.disconnect(),10000);
+    setTimeout(()=>observer.disconnect(),6000);
   }
 })();
