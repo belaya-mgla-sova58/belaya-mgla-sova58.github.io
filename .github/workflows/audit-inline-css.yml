@@ -1,0 +1,33 @@
+name: Audit inline CSS
+
+on:
+  push:
+    paths:
+      - '.github/workflows/audit-inline-css.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rank HTML pages by inline CSS
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          rows=[]
+          pattern=re.compile(r'<style(?:\s[^>]*)?>([\s\S]*?)</style>',re.I)
+          for p in Path('.').glob('*.html'):
+              text=p.read_text(encoding='utf-8',errors='ignore')
+              blocks=pattern.findall(text)
+              css_bytes=sum(len(b.encode('utf-8')) for b in blocks)
+              if css_bytes:
+                  rows.append((css_bytes,len(blocks),len(text.encode('utf-8')),p.name))
+          rows.sort(reverse=True)
+          print('INLINE_CSS_AUDIT')
+          for css_bytes,blocks,total,name in rows[:40]:
+              print(f'{css_bytes:8d} bytes | {blocks:3d} blocks | html {total:8d} bytes | {name}')
+          PY
