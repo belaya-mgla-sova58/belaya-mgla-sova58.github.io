@@ -56,7 +56,7 @@ jobs:
           grep -q 'Белая мгла: гайды, события и калькуляторы' index.html
           grep -q 'home-stamped-hero-v441' index.html
           grep -q 'home-today-v581' home-inline-v686.css
-          grep -q 'home-hero-v447-fit' home-inline-v686.css
+          grep -q 'modern-home-hero-v424.home-stamped-hero-v441' home-inline-v686.css
       - name: Commit extraction
         run: |
           git config user.name 'github-actions[bot]'
