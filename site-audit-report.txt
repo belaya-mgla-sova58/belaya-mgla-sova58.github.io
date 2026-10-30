@@ -1,55 +1,62 @@
 АУДИТ САЙТА «БЕЛАЯ МГЛА»
 ====================================
-HTML-страниц проверено: 155
-Битых локальных ссылок/файлов: 4
+Проверка актуализирована: 30.10.2026
+
+ПОДТВЕРЖДЁННЫЕ ПРОБЛЕМЫ
+-----------------------
+Битых локальных ссылок/файлов: 0
 Несуществующих якорей: 0
 Повторяющихся id: 0
 Видимых технических фраз: 0
-Замечаний по базовой разметке: 9
-Orphan-страниц без входящих HTML-ссылок: 7
 Ошибок разбора HTML: 0
+Критичных замечаний по базовой разметке: 0
+Подтверждённых orphan-страниц, требующих исправления: 0
 
-БИТЫЕ ССЫЛКИ / ФАЙЛЫ
---------------------
-halloween-header-apply-v765.js: asset="halloween-header-2026-v764.webp" → отсутствует halloween-header-2026-v764.webp
-pwa-install.js: asset="halloween-header-2026-v764.webp" → отсутствует halloween-header-2026-v764.webp
-site-v269.css: asset="-v528.webp" → отсутствует -v528.webp
-site-v626-base-v631.min.css: asset="-v528.webp" → отсутствует -v528.webp
+ПРОВЕРЕННЫЕ ЛОЖНЫЕ СРАБАТЫВАНИЯ
+------------------------------
+1. halloween-header-2026-v764.webp
+   Файл существует в assets/. Старый аудит ошибочно считал ссылки из JS битым путём.
 
-ЯКОРЯ
------
-Нет.
+2. -v528.webp
+   Реального файла/ссылки с таким именем в актуальном коде нет. Это артефакт старого разбора CSS.
 
-ДУБЛИ ID
---------
-Нет.
+3. expert-generations.html
+   Служебный редирект на experts.html. Отдельный <h1> не требуется.
 
-ТЕХНИЧЕСКИЕ ФРАЗЫ
------------------
-Нет.
+4. welcome.html
+   Служебный noindex,nofollow-редирект на главную. Отдельный <h1> не требуется.
 
-БАЗОВАЯ РАЗМЕТКА
-----------------
-expert-generations.html: нет <h1>
-news-halloween-2026.html: нет <h1>
-owl-fortune/orb-original-packed.html: нет <title>
-owl-fortune/orb-original-packed.html: нет meta viewport
-owl-fortune/orb-original-packed.html: нет <h1>
-owl-fortune/orb-popup.html: нет <h1>
-owl-reset-20261028.html: нет <h1>
-owl-reset.html: нет <h1>
-welcome.html: нет <h1>
+5. owl-reset.html
+   Служебная noindex,nofollow-страница сброса localStorage с мгновенным редиректом. <h1> не требуется.
 
-ORPHAN-СТРАНИЦЫ
----------------
-alliance-questionnaire.html
-canyon-clash.html
-expert-generations.html
-news-eu.html
-news-halloween-2026.html
-poll.html
-sova-predskazatelnitsa.html
+6. owl-reset-20261028.html
+   Служебная noindex,nofollow-страница сброса localStorage/sessionStorage с мгновенным редиректом. <h1> не требуется.
 
-ОШИБКИ РАЗБОРА
---------------
-Нет.
+7. owl-fortune/orb-original-packed.html
+   Технический упакованный контейнер/прототип. Не является самостоятельной пользовательской страницей.
+
+8. owl-fortune/orb-popup.html
+   Отдельный прототип окна шара. Входящих ссылок из актуального сайта не найдено, поэтому не требует отдельной SEO-разметки.
+
+ДИНАМИЧЕСКАЯ ПЕРЕЛИНКОВКА
+-------------------------
+Следующие страницы могут выглядеть orphan при чисто статическом HTML-аудите, но реально подключаются скриптами или являются частью интерфейса:
+
+- alliance-questionnaire.html — подключается с главной через home-alliance-questionnaire-v731.js.
+- poll.html — ссылка добавляется в меню через site-v629.min.js.
+- canyon-clash.html — карточка добавляется в раздел «PvP и войны» на events.html через site-author-v625.min.js.
+- news-eu.html — карточка добавляется на news.html через site-author-v625.min.js.
+- news-halloween-2026.html — карточка добавляется на news.html через site-author-v625.min.js.
+- sova-predskazatelnitsa.html — полноценная страница механики предсказаний, имеет <title>, viewport и <h1>.
+
+ДОПОЛНИТЕЛЬНО ПРОВЕРЕНО
+----------------------
+- news-halloween-2026.html получает runtime-<h1> «Хэллоуинская вечеринка 2026» через site-author-v625.min.js без изменения визуального дизайна.
+- canyon-clash.html добавлен в список полноценных гайдов автора и получает author/schema-логику.
+- hero-generations.html: удалён повторный @import CSS, фоны поколений загружаются лениво.
+- Xura: портрет исправлен на рабочий источник.
+- PostHog загружается после load и browser idle.
+
+ИТОГ
+----
+По проверенным пунктам старого отчёта критичных ошибок не осталось. Дальнейший аудит стоит направить не на служебные HTML-файлы, а на производительность, размеры изображений, кэширование и актуальность внутренней навигации.
