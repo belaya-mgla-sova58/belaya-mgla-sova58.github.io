@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Белая Мгла • Здания • Новый вариант</title>
+  <meta name="robots" content="noindex,nofollow"/>
+  <meta name="description" content="Черновой новый вариант каталога зданий Белой Мглы."/>
+  <meta name="theme-color" content="#031426"/>
+  <link href="site-v626.min.css?v=626" rel="stylesheet"/>
+  <link href="favicon.ico" rel="icon" sizes="any"/>
+  <link href="manifest-v541.webmanifest" rel="manifest"/>
+  <style>
+    body.is-buildings-new-route{background:#031426;color:#eef8ff}
+    .buildings-new-wrap{max-width:1180px;margin:0 auto;padding:24px 20px 70px}
+    .buildings-hero{position:relative;overflow:hidden;padding:34px;border:1px solid rgba(116,210,255,.24);border-radius:28px;background:radial-gradient(circle at 85% 20%,rgba(104,193,255,.18),transparent 30%),linear-gradient(145deg,rgba(9,42,73,.98),rgba(4,20,39,.98));box-shadow:0 22px 60px rgba(0,0,0,.28)}
+    .buildings-hero:after{content:"🏙️";position:absolute;right:34px;bottom:10px;font-size:112px;opacity:.08;pointer-events:none}
+    .buildings-kicker{display:block;margin-bottom:7px;color:#77dcff;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.13em}
+    .buildings-hero h1{margin:0;font-size:clamp(34px,6vw,58px);line-height:1.02}
+    .buildings-hero p{max-width:760px;margin:13px 0 0;color:#b7d2e5;font-size:16px;line-height:1.55}
+    .buildings-stage-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:22px}
+    .stage-card{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:17px 18px;border:1px solid rgba(116,210,255,.2);border-radius:18px;background:rgba(255,255,255,.045);color:#fff!important;text-decoration:none!important;transition:.17s ease}
+    .stage-card:hover{transform:translateY(-2px);border-color:rgba(116,210,255,.55);background:rgba(255,255,255,.07)}
+    .stage-card small{display:block;color:#78d9ff;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}
+    .stage-card strong{display:block;margin-top:3px;font-size:18px}
+    .stage-card b{font-size:27px;color:#aeeaff}
+    .buildings-toolbar{position:sticky;top:8px;z-index:20;margin:24px 0 18px;padding:11px;border:1px solid rgba(117,203,244,.2);border-radius:18px;background:rgba(3,20,38,.94);backdrop-filter:blur(10px);box-shadow:0 12px 28px rgba(0,0,0,.2)}
+    .building-filters{display:flex;gap:8px;overflow:auto;padding-bottom:2px;scrollbar-width:thin}
+    .building-filter{flex:0 0 auto;border:1px solid rgba(122,211,255,.2);border-radius:999px;padding:9px 13px;background:rgba(255,255,255,.045);color:#ccecff;font:800 12px/1.1 system-ui;cursor:pointer}
+    .building-filter.active{border-color:#73d9ff;background:linear-gradient(180deg,#1f9fd0,#127da9);color:#fff}
+    .buildings-section-title{margin:30px 0 13px;font-size:25px}
+    .buildings-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+    .building-card{position:relative;display:flex;flex-direction:column;min-height:225px;padding:19px;border:1px solid rgba(119,203,244,.18);border-radius:22px;background:linear-gradient(150deg,rgba(9,38,66,.95),rgba(4,23,43,.96));box-shadow:0 14px 34px rgba(0,0,0,.16);transition:.17s ease}
+    .building-card:hover{transform:translateY(-2px);border-color:rgba(113,211,255,.4)}
+    .building-card[hidden]{display:none!important}
+    .building-icon{display:grid;place-items:center;width:48px;height:48px;border:1px solid rgba(122,211,255,.19);border-radius:15px;background:rgba(255,255,255,.05);font-size:26px}
+    .building-type{position:absolute;right:15px;top:15px;padding:6px 9px;border-radius:999px;background:rgba(111,206,249,.09);color:#8edfff;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}
+    .building-card h2{margin:14px 0 7px;font-size:21px;line-height:1.1}
+    .building-card p{margin:0;color:#abc8da;font-size:13px;line-height:1.48}
+    .building-meta{display:grid;gap:7px;margin-top:auto;padding-top:16px}
+    .building-meta span{display:flex;gap:7px;color:#d5ecf8;font-size:12px;line-height:1.35}
+    .building-meta b{color:#73d9ff}
+    .building-tip{margin-top:26px;padding:20px;border:1px solid rgba(255,196,109,.28);border-radius:20px;background:linear-gradient(145deg,rgba(78,48,13,.34),rgba(19,27,40,.86));color:#f4e1bf;line-height:1.55}
+    .building-tip strong{color:#ffc66d}
+    .back-row{margin:18px 0 0}.back-row a{color:#8edfff;text-decoration:none;font-weight:800}
+    @media(max-width:900px){.buildings-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.buildings-hero{padding:25px}.buildings-hero:after{font-size:82px}}
+    @media(max-width:620px){.buildings-new-wrap{padding:14px 12px 48px}.buildings-hero{padding:20px;border-radius:21px}.buildings-hero p{font-size:14px}.buildings-stage-links{grid-template-columns:1fr}.buildings-grid{grid-template-columns:1fr}.building-card{min-height:0}.buildings-toolbar{top:5px;margin-top:16px}.buildings-hero:after{display:none}}
+  </style>
+</head>
+<body class="is-buildings-new-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="buildings-new">
+  <div aria-hidden="true" class="site-cosmic-background-v442"></div>
+  <main class="buildings-new-wrap">
+    <div class="back-row"><a href="buildings.html">‹ Вернуться к текущей странице зданий</a></div>
+
+    <section class="buildings-hero">
+      <span class="buildings-kicker">Новый вариант страницы</span>
+      <h1>Здания города</h1>
+      <p>Не просто список построек, а быстрый справочник: что делает каждое здание, когда оно становится важным и на что влияет.</p>
+      <div class="buildings-stage-links">
+        <a class="stage-card" href="buildings-before-fire.html"><span><small>Этап 1</small><strong>До Топки 30</strong></span><b>›</b></a>
+        <a class="stage-card" href="buildings-after-fire.html"><span><small>Этап 2</small><strong>Эпоха кристалла огня</strong></span><b>›</b></a>
+      </div>
+    </section>
+
+    <div class="buildings-toolbar" aria-label="Фильтр зданий">
+      <div class="building-filters">
+        <button class="building-filter active" type="button" data-filter="all">Все</button>
+        <button class="building-filter" type="button" data-filter="main">Главные</button>
+        <button class="building-filter" type="button" data-filter="military">Военные</button>
+        <button class="building-filter" type="button" data-filter="research">Исследования</button>
+        <button class="building-filter" type="button" data-filter="healing">Лечение</button>
+        <button class="building-filter" type="button" data-filter="alliance">Альянс</button>
+        <button class="building-filter" type="button" data-filter="resources">Ресурсы</button>
+      </div>
+    </div>
+
+    <h2 class="buildings-section-title">Основные здания</h2>
+    <section class="buildings-grid" id="buildingsGrid">
+      <article class="building-card" data-category="main">
+        <div class="building-icon">🔥</div><span class="building-type">Главное</span>
+        <h2>Топка</h2>
+        <p>Центр развития города. Её уровень определяет максимальный уровень большинства остальных зданий и открывает новые игровые системы.</p>
+        <div class="building-meta"><span><b>Влияет:</b> на общий прогресс города</span><span><b>Приоритет:</b> главный ориентир развития</span></div>
+      </article>
+
+      <article class="building-card" data-category="alliance main">
+        <div class="building-icon">🤝</div><span class="building-type">Альянс</span>
+        <h2>Посольство</h2>
+        <p>Увеличивает помощь от альянса и вместимость подкреплений. Часто требуется для следующего уровня Топки.</p>
+        <div class="building-meta"><span><b>Влияет:</b> помощь и подкрепления</span><span><b>Важно:</b> не отставать от Топки</span></div>
+      </article>
+
+      <article class="building-card" data-category="research main">
+        <div class="building-icon">🔬</div><span class="building-type">Исследования</span>
+        <h2>Научный центр</h2>
+        <p>Открывает исследования развития, экономики и боя. Чем меньше простаивает очередь исследований, тем быстрее растёт город.</p>
+        <div class="building-meta"><span><b>Влияет:</b> экономика, армия, развитие</span><span><b>Совет:</b> исследования держать активными</span></div>
+      </article>
+
+      <article class="building-card" data-category="healing military">
+        <div class="building-icon">➕</div><span class="building-type">Лечение</span>
+        <h2>Медпункт</h2>
+        <p>Принимает и лечит раненые войска. Чем выше уровень, тем больше раненых можно разместить.</p>
+        <div class="building-meta"><span><b>Влияет:</b> вместимость раненых</span><span><b>Важно:</b> перед крупными боями</span></div>
+      </article>
+
+      <article class="building-card" data-category="military main">
+        <div class="building-icon">⚔️</div><span class="building-type">Военное</span>
+        <h2>Командный центр</h2>
+        <p>Увеличивает вместимость создаваемых вами рейдов. Особенно важен для Медведя, фортов и совместных атак.</p>
+        <div class="building-meta"><span><b>Влияет:</b> размер рейда</span><span><b>Важно:</b> активным лидерам сборов</span></div>
+      </article>
+
+      <article class="building-card" data-category="military">
+        <div class="building-icon">🛡️</div><span class="building-type">Военное</span>
+        <h2>Лагерь пехоты</h2>
+        <p>Обучает пехоту и открывает более высокие уровни войск этого типа.</p>
+        <div class="building-meta"><span><b>Влияет:</b> уровень и обучение пехоты</span><span><b>Роль:</b> передняя линия</span></div>
+      </article>
+
+      <article class="building-card" data-category="military">
+        <div class="building-icon">🔱</div><span class="building-type">Военное</span>
+        <h2>Лагерь копейщиков</h2>
+        <p>Обучает копейщиков и открывает более высокие уровни войск этого типа.</p>
+        <div class="building-meta"><span><b>Влияет:</b> уровень и обучение копейщиков</span><span><b>Роль:</b> средняя линия</span></div>
+      </article>
+
+      <article class="building-card" data-category="military">
+        <div class="building-icon">🏹</div><span class="building-type">Военное</span>
+        <h2>Лагерь стрелков</h2>
+        <p>Обучает стрелков и открывает более высокие уровни войск этого типа.</p>
+        <div class="building-meta"><span><b>Влияет:</b> уровень и обучение стрелков</span><span><b>Роль:</b> дальний урон</span></div>
+      </article>
+
+      <article class="building-card" data-category="resources">
+        <div class="building-icon">🌲</div><span class="building-type">Ресурсы</span>
+        <h2>Лесопилка</h2>
+        <p>Производит древесину для строительства, исследований и улучшений.</p>
+        <div class="building-meta"><span><b>Ресурс:</b> древесина</span><span><b>Приоритет:</b> вторичный</span></div>
+      </article>
+
+      <article class="building-card" data-category="resources">
+        <div class="building-icon">⛏️</div><span class="building-type">Ресурсы</span>
+        <h2>Угольная шахта</h2>
+        <p>Производит уголь, необходимый для развития города и ряда улучшений.</p>
+        <div class="building-meta"><span><b>Ресурс:</b> уголь</span><span><b>Приоритет:</b> вторичный</span></div>
+      </article>
+
+      <article class="building-card" data-category="resources">
+        <div class="building-icon">⛓️</div><span class="building-type">Ресурсы</span>
+        <h2>Железный рудник</h2>
+        <p>Производит железо, которое постепенно становится всё важнее на высоких уровнях развития.</p>
+        <div class="building-meta"><span><b>Ресурс:</b> железо</span><span><b>Важно:</b> поздние уровни</span></div>
+      </article>
+
+      <article class="building-card" data-category="resources">
+        <div class="building-icon">🥩</div><span class="building-type">Ресурсы</span>
+        <h2>Охотничья хижина</h2>
+        <p>Производит мясо для развития города и содержания темпа строительства.</p>
+        <div class="building-meta"><span><b>Ресурс:</b> мясо</span><span><b>Приоритет:</b> вторичный</span></div>
+      </article>
+    </section>
+
+    <div class="building-tip"><strong>Главный принцип:</strong> не нужно поднимать все здания одинаково. Сначала смотри требования следующего уровня Топки, затем подтягивай обязательные здания и только после этого расходуй ресурсы на второстепенные улучшения.</div>
+  </main>
+
+  <script>
+    (function(){
+      const buttons=[...document.querySelectorAll('.building-filter')];
+      const cards=[...document.querySelectorAll('.building-card')];
+      buttons.forEach(btn=>btn.addEventListener('click',()=>{
+        const filter=btn.dataset.filter;
+        buttons.forEach(x=>x.classList.toggle('active',x===btn));
+        cards.forEach(card=>{card.hidden=filter!=='all'&&!card.dataset.category.split(/\s+/).includes(filter)});
+      }));
+    })();
+  </script>
+</body>
+</html>
