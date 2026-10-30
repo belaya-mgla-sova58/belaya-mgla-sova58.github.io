@@ -95,6 +95,27 @@
     setTimeout(inject,650);
   }
 
+  function ensureOrbHelp(){
+    if(!document.body||!document.body.classList.contains('is-home-route')) return;
+    const frame=document.querySelector('#orbModalV4 .owl-frame-v4');
+    if(!frame) return;
+    const inject=()=>{
+      try{
+        const doc=frame.contentDocument;
+        if(!doc||!doc.head||doc.getElementById('orbHelpLoaderV1')) return;
+        const s=doc.createElement('script');
+        s.id='orbHelpLoaderV1';
+        s.src='orb-help-v1.js?v=20261030-help1';
+        doc.head.appendChild(s);
+      }catch(e){}
+    };
+    if(!frame.dataset.helpListenerV1){
+      frame.dataset.helpListenerV1='1';
+      frame.addEventListener('load',()=>setTimeout(inject,700));
+    }
+    setTimeout(inject,700);
+  }
+
   function freshExpertsLinks(){
     document.querySelectorAll('a[href="experts.html"],a[href^="experts.html?"]').forEach(a=>{a.href='experts.html?v='+VERSION;});
   }
@@ -104,6 +125,7 @@
     ensureQuestionnaire();
     ensureFortuneOwl();
     ensureRuneSystem();
+    ensureOrbHelp();
     freshExpertsLinks();
   }
 
@@ -112,4 +134,5 @@
   setTimeout(clean,250);
   setTimeout(clean,1000);
   setTimeout(ensureRuneSystem,1800);
+  setTimeout(ensureOrbHelp,1850);
 })();
