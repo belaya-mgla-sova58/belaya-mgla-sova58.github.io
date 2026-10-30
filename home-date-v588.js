@@ -120,3 +120,34 @@
   setTimeout(bind,1000);
   setTimeout(bind,2200);
 })();
+
+(function(){
+  var SMOOTH_VERSION='20261030-smooth1';
+  function injectSmoothPrep(){
+    var frame=document.querySelector('#orbModalV4 .owl-frame-v4');
+    if(!frame) return false;
+    try{
+      var doc=frame.contentDocument;
+      if(!doc||!doc.head) return false;
+      if(doc.getElementById('orbSmoothPrepLoaderV1')) return true;
+      var s=document.createElement('script');
+      s.id='orbSmoothPrepLoaderV1';
+      s.src='orb-smooth-prep-v1.js?v='+SMOOTH_VERSION;
+      doc.head.appendChild(s);
+      return true;
+    }catch(e){return false}
+  }
+  function bindSmooth(){
+    var frame=document.querySelector('#orbModalV4 .owl-frame-v4');
+    if(frame&&!frame.dataset.smoothPrepBound){
+      frame.dataset.smoothPrepBound='1';
+      frame.addEventListener('load',function(){setTimeout(injectSmoothPrep,90)});
+    }
+    injectSmoothPrep();
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bindSmooth,{once:true});
+  else bindSmooth();
+  setTimeout(bindSmooth,400);
+  setTimeout(bindSmooth,1100);
+  setTimeout(bindSmooth,2300);
+})();
