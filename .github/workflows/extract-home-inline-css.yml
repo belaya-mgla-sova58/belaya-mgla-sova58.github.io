@@ -1,0 +1,68 @@
+name: Extract home inline CSS
+
+on:
+  push:
+    paths:
+      - '.github/workflows/extract-home-inline-css.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract inline styles from index.html
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          html_path = Path('index.html')
+          css_path = Path('home-inline-v686.css')
+          html = html_path.read_text(encoding='utf-8')
+
+          pattern = re.compile(r'<style(?:\s+id=["\'][^"\']+["\'])?>([\s\S]*?)</style>', re.I)
+          matches = list(pattern.finditer(html))
+          if not matches:
+              raise SystemExit('No inline styles found in index.html')
+
+          css = '\n\n'.join(m.group(1).strip() for m in matches if m.group(1).strip()) + '\n'
+          link = '<link href="home-inline-v686.css?v=686" rel="stylesheet"/>'
+
+          out = pattern.sub('', html)
+          canonical = '<link href="https://belaya-mgla-sova58.github.io/" rel="canonical"/>'
+          if canonical in out:
+              out = out.replace(canonical, canonical + link, 1)
+          else:
+              marker = '<link href="manifest-v541.webmanifest" rel="manifest"/>'
+              if marker not in out:
+                  raise SystemExit('Could not find safe link insertion point')
+              out = out.replace(marker, link + marker, 1)
+
+          if '<style' in out.lower():
+              raise SystemExit('Inline style remained')
+          if link not in out:
+              raise SystemExit('CSS link insertion failed')
+
+          css_path.write_text(css, encoding='utf-8')
+          html_path.write_text(out, encoding='utf-8')
+          print(f'Extracted {len(matches)} style blocks, CSS bytes={len(css.encode())}, HTML saved={len(html.encode())-len(out.encode())}')
+          PY
+      - name: Verify key home markers remain
+        run: |
+          grep -q 'home-inline-v686.css?v=686' index.html
+          grep -q 'Белая мгла: гайды, события и калькуляторы' index.html
+          grep -q 'home-stamped-hero-v441' index.html
+          grep -q 'home-today-v581' home-inline-v686.css
+          grep -q 'home-hero-v447-fit' /dev/null || true
+          grep -q 'owl-widget-v5.js' index.html
+      - name: Commit extraction
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html home-inline-v686.css
+          git diff --cached --quiet && exit 0
+          git commit -m 'Extract home inline CSS for caching'
+          git push
