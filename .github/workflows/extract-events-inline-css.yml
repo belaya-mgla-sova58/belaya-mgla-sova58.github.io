@@ -1,0 +1,65 @@
+name: Extract events inline CSS
+
+on:
+  push:
+    paths:
+      - '.github/workflows/extract-events-inline-css.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract inline styles from events.html
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          html_path = Path('events.html')
+          css_path = Path('events-inline-v685.css')
+          html = html_path.read_text(encoding='utf-8')
+
+          pattern = re.compile(r'<style(?:\s+id=["\'][^"\']+["\'])?>([\s\S]*?)</style>', re.I)
+          matches = list(pattern.finditer(html))
+          if not matches:
+              raise SystemExit('No inline styles found in events.html')
+
+          css = '\n\n'.join(m.group(1).strip() for m in matches if m.group(1).strip()) + '\n'
+          link = '<link href="events-inline-v685.css?v=685" rel="stylesheet"/>'
+
+          first = matches[0]
+          out = html[:first.start()] + link + html[first.end():]
+          for m in reversed(matches[1:]):
+              start = m.start() - (first.end() - first.start() - len(link))
+              end = m.end() - (first.end() - first.start() - len(link))
+              out = out[:start] + out[end:]
+
+          # Safer second pass in case offsets changed due variable lengths.
+          out = pattern.sub('', out)
+          if link not in out:
+              raise SystemExit('CSS link insertion failed')
+          if '<style' in out.lower():
+              raise SystemExit('Inline style remained')
+
+          css_path.write_text(css, encoding='utf-8')
+          html_path.write_text(out, encoding='utf-8')
+          print(f'Extracted {len(matches)} style blocks, CSS bytes={len(css.encode())}, HTML saved={len(html.encode())-len(out.encode())}')
+          PY
+      - name: Verify key page markers remain
+        run: |
+          grep -q 'events-inline-v685.css?v=685' events.html
+          grep -q 'Белая Мгла • События' events.html
+          grep -q 'event-group-v522' events.html
+          grep -q 'bear-event-card-v499' events-inline-v685.css
+      - name: Commit extraction
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add events.html events-inline-v685.css
+          git diff --cached --quiet && exit 0
+          git commit -m 'Extract events inline CSS for caching'
+          git push
