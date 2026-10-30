@@ -1,7 +1,7 @@
 (()=>{
   'use strict';
   const VERSION='20261030-activeowl3';
-  const WORKER='./service-worker.js?v=672-activeowl4';
+  const WORKER='./service-worker.js?v=673-eyesfix1';
   const RESET_KEY='belaya_mgla_orb_reset_keep2_v1';
 
   function resetFortuneCounterOnce(){
@@ -39,11 +39,6 @@
     document.head.appendChild(st);
   }
   ensureOwlBlinkFix();
-
-  function registerFreshWorker(){
-    if(!('serviceWorker' in navigator)) return;
-    navigator.serviceWorker.register(WORKER,{updateViaCache:'none'}).catch(()=>{});
-  }
 
   function removeLegacyHome(){
     if(!document.body||!document.body.classList.contains('is-home-route')) return;
