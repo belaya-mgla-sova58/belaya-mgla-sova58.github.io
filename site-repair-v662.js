@@ -1,7 +1,7 @@
 (()=>{
   'use strict';
   const VERSION='20261030-activeowl3';
-  const WORKER='./service-worker.js?v=681-audit1';
+  const WORKER='./service-worker.js?v=685-perf3';
 
   function ensurePerformanceCSS(){
     if(document.getElementById('sitePerformanceV1')) return;
