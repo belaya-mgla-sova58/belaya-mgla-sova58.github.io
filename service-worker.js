@@ -1,7 +1,11 @@
-const CACHE_NAME = 'belaya-mgla-v684';
+const CACHE_NAME = 'belaya-mgla-v685';
 const STATIC_CORE = [
   './site-v626.min.css?v=626',
   './site-performance-v1.css?v=20261030-perf1',
+  './home-inline-v686.css?v=686',
+  './events-inline-v685.css?v=685',
+  './hero-shared-v687.css?v=687',
+  './hero-generation-shared-v688.css?v=688',
   './manifest-v541.webmanifest',
   './assets/home-hero-polish-v447.webp',
   './assets/ui-home-v534.webp',
