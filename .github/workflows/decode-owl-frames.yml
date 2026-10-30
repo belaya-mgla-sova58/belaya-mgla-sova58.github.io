@@ -17,12 +17,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Decode PNG frames
+      - name: Decode PNG frames safely
         shell: bash
         run: |
-          base64 -d owl-fortune/media/owl-awake-open-180-q80.b64 > owl-fortune/media/owl-awake-open-180-q80.png
-          base64 -d owl-fortune/media/owl-awake-blink-180-q80.b64 > owl-fortune/media/owl-awake-blink-180-q80.png
-          base64 -d owl-fortune/media/owl-sleep-180-q80.b64 > owl-fortune/media/owl-sleep-180-q80.png
+          python - <<'PY'
+          from pathlib import Path
+          import base64, re
+          pairs = [
+              ('owl-fortune/media/owl-awake-open-180-q80.b64','owl-fortune/media/owl-awake-open-180-q80.png'),
+              ('owl-fortune/media/owl-awake-blink-180-q80.b64','owl-fortune/media/owl-awake-blink-180-q80.png'),
+              ('owl-fortune/media/owl-sleep-180-q80.b64','owl-fortune/media/owl-sleep-180-q80.png'),
+          ]
+          for src, dst in pairs:
+              text = Path(src).read_text(encoding='utf-8', errors='ignore')
+              pos = text.find('iVBOR')
+              if pos >= 0:
+                  text = text[pos:]
+              text = ''.join(re.findall(r'[A-Za-z0-9+/=]', text))
+              text += '=' * ((4 - len(text) % 4) % 4)
+              data = base64.b64decode(text, validate=False)
+              if not data.startswith(b'\x89PNG\r\n\x1a\n'):
+                  raise SystemExit(f'{src}: decoded data is not PNG')
+              Path(dst).write_bytes(data)
+          PY
       - name: Commit frames
         shell: bash
         run: |
