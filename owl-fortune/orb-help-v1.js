@@ -35,7 +35,6 @@
     .orb-help-item-v1{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.075);font-size:15px;line-height:1.25}
     .orb-help-item-v1:last-child{border-bottom:0}
     .orb-help-item-v1 b{color:#fff7d7;font-weight:700}
-    .orb-help-note-v1{margin-top:10px;padding:9px 11px;border:1px solid rgba(202,176,255,.2);border-radius:13px;background:rgba(80,43,126,.16);font-size:13px;line-height:1.3;color:#d9c8ed}
     @media(max-width:560px){
       .orb-help-btn-v1{left:0;bottom:-9.5%;font-size:12px;padding:7px 12px}
       .orb-help-panel-v1{inset:-7% 3% -8%}
@@ -61,15 +60,14 @@
     </div>
     <div class="orb-help-body-v1">
       <div class="orb-help-item-v1"><b>🔮 Предсказания</b><br>Нажми на шар. В день доступно 2 обычных предсказания.</div>
-      <div class="orb-help-item-v1"><b>Сегодня: X/2</b><br>Показывает, сколько предсказаний уже получено сегодня.</div>
-      <div class="orb-help-item-v1"><b>Всего: X</b><br>Общее количество полученных предсказаний. Этот счётчик не обнуляется каждый день.</div>
+      <div class="orb-help-item-v1"><b>Сегодня: X/2</b><br>Сколько предсказаний уже получено сегодня.</div>
+      <div class="orb-help-item-v1"><b>Всего: X</b><br>Сколько предсказаний получено за всё время.</div>
       <div class="orb-help-item-v1"><b>📖 Книга</b><br>Показывает, сколько разных обычных предсказаний из 100 уже найдено.</div>
       <div class="orb-help-item-v1"><b>🔹 Сохранить</b><br>Копирует текущее предсказание, чтобы его можно было отправить в чат.</div>
       <div class="orb-help-item-v1"><b>✨ Редкое предсказание</b><br>Выпадает нечасто и выделяется золотым свечением.</div>
-      <div class="orb-help-item-v1"><b>ᚠ Руны</b><br>Очень редкий хороший знак, связанный с «Белой мглой». Руна не расходует одну из 2 попыток и может появиться не чаще одного раза в день.</div>
+      <div class="orb-help-item-v1"><b>ᚠ Руны</b><br>Очень редкий знак, связанный с «Белой мглой». Руна не расходует одну из 2 попыток и может появиться не чаще одного раза в день.</div>
       <div class="orb-help-item-v1"><b>Серия визитов</b><br>Считает дни, когда ты возвращаешься к сове подряд.</div>
-      <div class="orb-help-item-v1"><b>🦉 После 2/2</b><br>Второе предсказание остаётся на экране. Сова засыпает только если после этого ещё раз нажать на шар.</div>
-      <div class="orb-help-note-v1">Шар любит сюрпризы: некоторые эффекты и редкие знаки специально появляются не каждый раз.</div>
+      <div class="orb-help-item-v1"><b>🦉 После 2/2</b><br>На сегодня предсказания заканчиваются, и сова отправляется отдыхать до следующего дня.</div>
     </div>`;
 
   scene.appendChild(btn);
