@@ -35,11 +35,60 @@ jobs:
       - name: Audit all HTML pages
         run: python tools/audit_site.py
 
-      - name: Update lastmod for meaningful page changes
+      - name: Update sitemap safely
         shell: python
         run: |
           import datetime, json, pathlib, re, subprocess
+          from urllib.parse import urlparse
           from xml.sax.saxutils import escape
+
+          base = 'https://belaya-mgla-sova58.github.io/'
+          sitemap = pathlib.Path('sitemap.xml')
+          text = sitemap.read_text(encoding='utf-8')
+
+          def page_name_from_loc(loc):
+              if loc == base or loc == base.rstrip('/'):
+                  return 'index.html'
+              if not loc.startswith(base):
+                  return None
+              path = urlparse(loc).path.lstrip('/')
+              return path or 'index.html'
+
+          def page_is_indexable(name, loc=None):
+              if not name or '/' in name:
+                  return False
+              p = pathlib.Path(name)
+              if not p.exists() or p.suffix.lower() != '.html':
+                  return False
+              html = p.read_text(encoding='utf-8', errors='ignore')
+              if re.search(r'<meta\b[^>]*name=["\']robots["\'][^>]*content=["\'][^"\']*noindex', html, re.I) or re.search(r'<meta\b[^>]*content=["\'][^"\']*noindex[^"\']*["\'][^>]*name=["\']robots["\']', html, re.I):
+                  return False
+              canonical = re.search(r'<link\b[^>]*rel=["\']canonical["\'][^>]*href=["\']([^"\']+)', html, re.I)
+              if not canonical:
+                  canonical = re.search(r'<link\b[^>]*href=["\']([^"\']+)["\'][^>]*rel=["\']canonical["\']', html, re.I)
+              if canonical and loc:
+                  if canonical.group(1).rstrip('/') != loc.rstrip('/'):
+                      return False
+              return True
+
+          # Remove stale entries that are noindex, non-canonical, missing, or otherwise not indexable.
+          removed = []
+          def keep_url(match):
+              block = match.group(0)
+              m = re.search(r'<loc>([^<]+)</loc>', block)
+              if not m:
+                  return block
+              loc = m.group(1).strip()
+              name = page_name_from_loc(loc)
+              if page_is_indexable(name, loc):
+                  return block
+              removed.append(loc)
+              return ''
+
+          text = re.sub(r'\s*<url><loc>[^<]+</loc><lastmod>[^<]+</lastmod></url>', keep_url, text)
+          sitemap.write_text(text, encoding='utf-8')
+          if removed:
+              print('Removed non-indexable sitemap entries:', ', '.join(removed))
 
           message = subprocess.check_output(['git','log','-1','--format=%s'], text=True).strip().lower()
           technical = (
@@ -60,14 +109,13 @@ jobs:
 
           excluded = {'404.html','maintenance.html','google94584035fdf43cd0.html','yandex_ee69138efc48d1ec.html'}
           changed = [x for x in changed if x and '/' not in x and x not in excluded and pathlib.Path(x).exists()]
+          changed = [x for x in changed if page_is_indexable(x, base if x == 'index.html' else base + x)]
           if not changed:
               print('No indexable HTML pages changed.')
               pathlib.Path('.sitemap-skip').write_text('1')
               raise SystemExit(0)
 
           date = subprocess.check_output(['git','log','-1','--format=%cs'], text=True).strip() or datetime.date.today().isoformat()
-          base = 'https://belaya-mgla-sova58.github.io/'
-          sitemap = pathlib.Path('sitemap.xml')
           text = sitemap.read_text(encoding='utf-8')
 
           for name in changed:
