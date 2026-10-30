@@ -64,11 +64,11 @@
       if(el) el.remove();
     });
     var current=document.getElementById('owlButtonV4');
-    if(current&&current.getAttribute('data-owl-version')==='20261030-orbmagic1') return;
+    if(current&&current.getAttribute('data-owl-version')==='20261030-activeanim1') return;
     if(current) current.remove();
     ['dismissOwlV4','orbModalV4'].forEach(function(id){var el=document.getElementById(id);if(el)el.remove();});
     var s=document.createElement('script');
-    s.src='owl-widget-v4.js?v=20261030-orbmagic1';
+    s.src='owl-widget-v4.js?v=20261030-activeanim1';
     s.defer=true;
     s.dataset.owlFortuneV4='1';
     document.head.appendChild(s);
