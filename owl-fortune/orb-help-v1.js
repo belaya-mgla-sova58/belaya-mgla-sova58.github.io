@@ -10,7 +10,7 @@
   style.id='orbHelpStyleV1';
   style.textContent=`
     .orb-help-btn-v1{
-      position:absolute;z-index:24;left:7%;bottom:-9.2%;
+      position:absolute;z-index:24;left:.5%;bottom:-10.2%;
       border:1px solid rgba(225,205,255,.34);border-radius:999px;
       background:linear-gradient(180deg,rgba(67,32,108,.78),rgba(27,11,48,.72));
       color:#f6edff;padding:7px 13px;
@@ -37,7 +37,7 @@
     .orb-help-item-v1 b{color:#fff7d7;font-weight:700}
     .orb-help-note-v1{margin-top:10px;padding:9px 11px;border:1px solid rgba(202,176,255,.2);border-radius:13px;background:rgba(80,43,126,.16);font-size:13px;line-height:1.3;color:#d9c8ed}
     @media(max-width:560px){
-      .orb-help-btn-v1{left:7%;bottom:-8.2%;font-size:12px;padding:7px 12px}
+      .orb-help-btn-v1{left:0;bottom:-9.5%;font-size:12px;padding:7px 12px}
       .orb-help-panel-v1{inset:-7% 3% -8%}
       .orb-help-title-v1{font-size:21px}
       .orb-help-body-v1{padding:10px 13px 15px}
@@ -68,7 +68,7 @@
       <div class="orb-help-item-v1"><b>✨ Редкое предсказание</b><br>Выпадает нечасто и выделяется золотым свечением.</div>
       <div class="orb-help-item-v1"><b>ᚠ Руны</b><br>Очень редкий хороший знак, связанный с «Белой мглой». Руна не расходует одну из 3 попыток и может появиться не чаще одного раза в день.</div>
       <div class="orb-help-item-v1"><b>Серия визитов</b><br>Считает дни, когда ты возвращаешься к сове подряд.</div>
-      <div class="orb-help-item-v1"><b>🦉 После 3/3</b><br>Сова засыпает и новые обычные предсказания становятся доступны на следующий день.</div>
+      <div class="orb-help-item-v1"><b>🦉 После 3/3</b><br>Третье предсказание остаётся на экране. Сова засыпает только если после этого ещё раз нажать на шар.</div>
       <div class="orb-help-note-v1">Шар любит сюрпризы: некоторые эффекты и редкие знаки специально появляются не каждый раз.</div>
     </div>`;
 
