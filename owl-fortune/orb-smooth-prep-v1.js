@@ -5,10 +5,24 @@
   const style=document.createElement('style');
   style.id='owlSmoothPrepStyleV1';
   style.textContent=`
+    html,body,.scene,.orb,.orb *{
+      -webkit-tap-highlight-color:transparent!important;
+    }
+    .orb{
+      outline:none!important;
+      -webkit-user-select:none!important;
+      user-select:none!important;
+      -webkit-touch-callout:none!important;
+    }
+    .orb:focus,.orb:focus-visible,.orb:active{
+      outline:none!important;
+      border-radius:50%!important;
+    }
     .orb.preparing{
       animation:prepareSmoothV1 .72s cubic-bezier(.4,0,.2,1) both!important;
       transform-origin:50% 52%!important;
       will-change:transform,filter!important;
+      outline:none!important;
     }
     .orb.preparing:before{animation-duration:3.8s!important;filter:blur(16px)!important}
     .orb.preparing .stars{animation:prepStarsV1 .72s ease-in-out both!important}
