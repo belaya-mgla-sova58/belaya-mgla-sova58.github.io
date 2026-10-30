@@ -1,0 +1,71 @@
+name: Extract shared hero CSS
+
+on:
+  push:
+    paths:
+      - '.github/workflows/extract-shared-hero-css.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace exact duplicate hero styles
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, hashlib
+
+          TARGET='e2a9f8da9982a491269e0f63ebadad88365265d202d304dc8f382364847005cc'
+          OUT=Path('hero-shared-v687.css')
+          LINK='<link href="hero-shared-v687.css?v=687" rel="stylesheet"/>'
+          pattern=re.compile(r'<style(?:\s[^>]*)?>([\s\S]*?)</style>',re.I)
+
+          changed=[]
+          shared_css=None
+          total_saved=0
+          for p in sorted(Path('.').glob('hero-*.html')):
+              text=p.read_text(encoding='utf-8',errors='strict')
+              hits=[]
+              for m in pattern.finditer(text):
+                  css=m.group(1)
+                  h=hashlib.sha256(css.encode('utf-8')).hexdigest()
+                  if h==TARGET:
+                      hits.append(m)
+                      if shared_css is None: shared_css=css
+              if not hits:
+                  continue
+              if len(hits)!=1:
+                  raise SystemExit(f'{p}: expected exactly one target block, got {len(hits)}')
+              m=hits[0]
+              out=text[:m.start()]+LINK+text[m.end():]
+              p.write_text(out,encoding='utf-8')
+              changed.append(p.name)
+              total_saved += len(text.encode('utf-8'))-len(out.encode('utf-8'))
+
+          if len(changed)!=36:
+              raise SystemExit(f'Expected 36 matching hero pages, got {len(changed)}')
+          if shared_css is None:
+              raise SystemExit('Target CSS not found')
+          if hashlib.sha256(shared_css.encode()).hexdigest()!=TARGET:
+              raise SystemExit('Shared CSS hash changed')
+          OUT.write_text(shared_css.strip()+'\n',encoding='utf-8')
+          print(f'Updated {len(changed)} hero pages; aggregate HTML saved={total_saved} bytes')
+          print('\n'.join(changed))
+          PY
+      - name: Verify extraction
+        run: |
+          test "$(grep -l 'hero-shared-v687.css?v=687' hero-*.html | wc -l)" -eq 36
+          test -s hero-shared-v687.css
+          grep -q 'hero-detail' hero-shared-v687.css
+      - name: Commit shared CSS
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add hero-*.html hero-shared-v687.css
+          git diff --cached --quiet && exit 0
+          git commit -m 'Share cached CSS across hero pages'
+          git push
