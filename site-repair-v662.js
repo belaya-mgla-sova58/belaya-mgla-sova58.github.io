@@ -1,7 +1,7 @@
 (()=>{
   'use strict';
-  const VERSION='20261030-direct2';
-  const WORKER='./service-worker.js?v=666-direct2';
+  const VERSION='20261030-motion1';
+  const WORKER='./service-worker.js?v=667-motion1';
 
   function registerFreshWorker(){
     if(!('serviceWorker' in navigator)) return;
@@ -31,14 +31,14 @@
 
   function ensureFortuneOwl(){
     if(!document.body||!document.body.classList.contains('is-home-route')) return;
-    const current=document.getElementById('owlButtonV3');
-    const valid=current&&current.getAttribute('data-owl-version')===VERSION&&document.getElementById('owlOpenV3')&&document.getElementById('owlBlinkV3')&&document.getElementById('owlSleepV3');
+    const current=document.getElementById('owlButtonV4');
+    const valid=current&&current.getAttribute('data-owl-version')===VERSION&&document.getElementById('owlOpenV4')&&document.getElementById('owlBlinkV4')&&document.getElementById('owlSleepV4');
     if(valid) return;
-    ['owlButtonV2','dismissOwlV2','orbModalV2','owlButtonV3','dismissOwlV3','orbModalV3'].forEach(id=>{const el=document.getElementById(id);if(el)el.remove();});
-    document.querySelectorAll('script[data-owl-fortune-v2],script[data-owl-fortune-v3],script[data-repair-owl-v662],script[src*="owl-widget-v2.js"],script[src*="owl-widget-v3.js"]').forEach(el=>el.remove());
-    ['owlWidgetV2Style','owlWidgetV3Style'].forEach(id=>{const el=document.getElementById(id);if(el)el.remove();});
+    ['owlButtonV2','dismissOwlV2','orbModalV2','owlButtonV3','dismissOwlV3','orbModalV3','owlButtonV4','dismissOwlV4','orbModalV4'].forEach(id=>{const el=document.getElementById(id);if(el)el.remove();});
+    document.querySelectorAll('script[data-owl-fortune-v2],script[data-owl-fortune-v3],script[data-owl-fortune-v4],script[data-repair-owl-v662],script[src*="owl-widget-v2.js"],script[src*="owl-widget-v3.js"],script[src*="owl-widget-v4.js"]').forEach(el=>el.remove());
+    ['owlWidgetV2Style','owlWidgetV3Style','owlWidgetV4Style'].forEach(id=>{const el=document.getElementById(id);if(el)el.remove();});
     const s=document.createElement('script');
-    s.src='owl-widget-v3.js?v='+VERSION;
+    s.src='owl-widget-v4.js?v='+VERSION;
     s.defer=true;
     s.dataset.repairOwlV662='1';
     document.head.appendChild(s);
