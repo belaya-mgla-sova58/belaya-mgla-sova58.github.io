@@ -82,18 +82,27 @@
 })();
 
 (function(){
-  var RUNES_VERSION='20261030-runes1';
+  var RUNES_VERSION='20261030-runes2';
   function injectRealRunes(){
     var frame=document.querySelector('#orbModalV4 .owl-frame-v4');
     if(!frame) return false;
     try{
       var doc=frame.contentDocument;
       if(!doc||!doc.head) return false;
-      if(doc.getElementById('realRunesLoaderV1')) return true;
-      var s=doc.createElement('script');
-      s.id='realRunesLoaderV1';
-      s.src='orb-runes-v1.js?v='+RUNES_VERSION;
-      doc.head.appendChild(s);
+
+      if(!doc.getElementById('runeRarityLoaderV1')){
+        var r=document.createElement('script');
+        r.id='runeRarityLoaderV1';
+        r.src='orb-rune-rarity-v1.js?v='+RUNES_VERSION;
+        doc.head.appendChild(r);
+      }
+
+      if(!doc.getElementById('realRunesLoaderV1')){
+        var s=document.createElement('script');
+        s.id='realRunesLoaderV1';
+        s.src='orb-runes-v1.js?v='+RUNES_VERSION;
+        doc.head.appendChild(s);
+      }
       return true;
     }catch(e){return false}
   }
