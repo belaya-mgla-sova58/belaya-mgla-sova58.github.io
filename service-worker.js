@@ -1,4 +1,4 @@
-const CACHE_NAME = 'belaya-mgla-v685';
+const CACHE_NAME = 'belaya-mgla-v686';
 const STATIC_CORE = [
   './site-v626.min.css?v=626',
   './site-performance-v1.css?v=20261030-perf1',
@@ -60,6 +60,17 @@ async function cachedAsset(req,event){
   return (await network)||Response.error();
 }
 
+async function freshControlAsset(req){
+  const cache=await caches.open(CACHE_NAME);
+  try{
+    const resp=await fetch(req,{cache:'no-store'});
+    if(resp&&resp.ok&&resp.type==='basic') await cache.put(req,resp.clone());
+    return resp;
+  }catch(e){
+    return (await cache.match(req))||Response.error();
+  }
+}
+
 function isCriticalInteractive(url){
   const p=url.pathname;
   return p.endsWith('/site-repair-v662.js') ||
@@ -69,6 +80,15 @@ function isCriticalInteractive(url){
     p.includes('rune-system') ||
     p.includes('orb-') ||
     p.endsWith('.b64');
+}
+
+function isControlAsset(url){
+  const p=url.pathname;
+  return p.endsWith('/site-v629.min.js') ||
+    p.endsWith('/site-author-v625.min.js') ||
+    p.endsWith('/pwa-install.js') ||
+    p.endsWith('/home-alliance-questionnaire-v731.js') ||
+    p.endsWith('/search-expanded-v724.js');
 }
 
 self.addEventListener('fetch', event => {
@@ -84,6 +104,11 @@ self.addEventListener('fetch', event => {
 
   if(isCriticalInteractive(url)){
     event.respondWith(fetch(req,{cache:'no-store'}).catch(()=>Response.error()));
+    return;
+  }
+
+  if(isControlAsset(url)){
+    event.respondWith(freshControlAsset(req));
     return;
   }
 
