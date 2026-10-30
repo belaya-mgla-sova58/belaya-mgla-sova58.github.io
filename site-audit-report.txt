@@ -1,73 +1,55 @@
 АУДИТ САЙТА «БЕЛАЯ МГЛА»
 ====================================
-Проверка актуализирована: 30.10.2026
-
-ПОДТВЕРЖДЁННОЕ СОСТОЯНИЕ
-------------------------
 HTML-страниц проверено: 155
-Подтверждённых битых локальных ссылок/файлов: 0
+Битых локальных ссылок/файлов: 4
 Несуществующих якорей: 0
 Повторяющихся id: 0
 Видимых технических фраз: 0
+Замечаний по базовой разметке: 9
+Orphan-страниц без входящих HTML-ссылок: 7
 Ошибок разбора HTML: 0
 
 БИТЫЕ ССЫЛКИ / ФАЙЛЫ
 --------------------
-Не подтверждены.
+halloween-header-apply-v765.js: asset="halloween-header-2026-v764.webp" → отсутствует halloween-header-2026-v764.webp
+pwa-install.js: asset="halloween-header-2026-v764.webp" → отсутствует halloween-header-2026-v764.webp
+site-v269.css: asset="-v528.webp" → отсутствует -v528.webp
+site-v626-base-v631.min.css: asset="-v528.webp" → отсутствует -v528.webp
 
-Ранее отчёт ошибочно отмечал:
-- halloween-header-2026-v764.webp из halloween-header-apply-v765.js
-- halloween-header-2026-v764.webp из pwa-install.js
-- -v528.webp из site-v269.css
-- -v528.webp из site-v626-base-v631.min.css
+ЯКОРЯ
+-----
+Нет.
 
-Хэллоуинский заголовок реально существует по пути assets/halloween-header-2026-v764.webp.
-Строки -v528.webp в актуальном коде репозитория нет.
-Портрет Ксуры ранее был реальной проблемой и уже исправлен.
+ДУБЛИ ID
+--------
+Нет.
+
+ТЕХНИЧЕСКИЕ ФРАЗЫ
+-----------------
+Нет.
 
 БАЗОВАЯ РАЗМЕТКА
 ----------------
-Требует внимания:
-- news-halloween-2026.html: нет статического <h1>
-
-Не считаются ошибками пользовательских страниц:
-- expert-generations.html: технический редирект на experts.html
-- welcome.html: технический noindex,nofollow редирект на главную
-- owl-fortune/orb-original-packed.html: служебная страница/заготовка механики совы
-- owl-fortune/orb-popup.html: служебная страница/заготовка механики совы
-- owl-reset-20261028.html: техническая страница сброса
-- owl-reset.html: техническая страница сброса
-
-Проверено отдельно:
-- sova-predskazatelnitsa.html имеет <title>, meta viewport и <h1>
-- hero-generations.html имеет <h1>
+expert-generations.html: нет <h1>
+news-halloween-2026.html: нет <h1>
+owl-fortune/orb-original-packed.html: нет <title>
+owl-fortune/orb-original-packed.html: нет meta viewport
+owl-fortune/orb-original-packed.html: нет <h1>
+owl-fortune/orb-popup.html: нет <h1>
+owl-reset-20261028.html: нет <h1>
+owl-reset.html: нет <h1>
+welcome.html: нет <h1>
 
 ORPHAN-СТРАНИЦЫ
 ---------------
-Старый статический аудит помечал 7 страниц, но часть ссылок создаётся JavaScript и потому не видна простому HTML-парсеру.
+alliance-questionnaire.html
+canyon-clash.html
+expert-generations.html
+news-eu.html
+news-halloween-2026.html
+poll.html
+sova-predskazatelnitsa.html
 
-Проверенные ложные/условные orphan:
-- alliance-questionnaire.html: ссылка добавляется JavaScript на главной
-- poll.html: ссылка добавляется JavaScript в меню
-- expert-generations.html: технический редирект
-- sova-predskazatelnitsa.html: полноценная рабочая страница совы
-
-Полноценные страницы, которые есть в sitemap.xml, но требуют улучшения обычной внутренней перелинковки:
-- canyon-clash.html
-- news-eu.html
-- news-halloween-2026.html
-
-ОПТИМИЗАЦИЯ, УЖЕ СДЕЛАНО
-------------------------
-- whitefox-elena-43.html добавлена в sitemap.xml
-- исправлен портрет Ксуры в поколениях героев
-- PostHog перенесён после основной загрузки страницы и в idle
-- обновлена версия подключения site-author для обхода старого кэша
-- убран дублирующий @import hero-generations-v714.css
-- фоновые полосы поколений героев переведены на ленивую загрузку через IntersectionObserver
-
-СЛЕДУЮЩИЕ РЕАЛЬНЫЕ ЗАДАЧИ
--------------------------
-1. Добавить статический <h1> в news-halloween-2026.html безопасным способом.
-2. Улучшить обычные внутренние ссылки на canyon-clash.html, news-eu.html и news-halloween-2026.html.
-3. Дальше проверять вес крупных ресурсов и первоначальную загрузку без изменений механик совы, шара, рун и предсказаний.
+ОШИБКИ РАЗБОРА
+--------------
+Нет.
