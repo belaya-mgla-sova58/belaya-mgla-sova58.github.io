@@ -1,0 +1,38 @@
+name: Audit duplicate inline CSS
+
+on:
+  push:
+    paths:
+      - '.github/workflows/audit-duplicate-inline-css.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Find identical inline style blocks
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, hashlib
+          from collections import defaultdict
+          pattern=re.compile(r'<style(?:\s[^>]*)?>([\s\S]*?)</style>',re.I)
+          groups=defaultdict(list)
+          sizes={}
+          for p in Path('.').glob('*.html'):
+              text=p.read_text(encoding='utf-8',errors='ignore')
+              for i,css in enumerate(pattern.findall(text),1):
+                  b=css.encode('utf-8')
+                  h=hashlib.sha256(b).hexdigest()
+                  groups[h].append((p.name,i))
+                  sizes[h]=len(b)
+          dup=[(sizes[h],h,items) for h,items in groups.items() if len(items)>=2]
+          dup.sort(reverse=True)
+          print('DUPLICATE_INLINE_CSS')
+          for size,h,items in dup[:30]:
+              print(f'\n{size} bytes | {len(items)} copies | sha256={h}')
+              print(' '.join(f'{name}#{idx}' for name,idx in items[:80]))
+          PY
