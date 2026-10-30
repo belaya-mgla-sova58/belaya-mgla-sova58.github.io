@@ -63,9 +63,12 @@
       var el=document.getElementById(id);
       if(el) el.remove();
     });
-    if(document.getElementById('owlButtonV3')) return;
+    var current=document.getElementById('owlButtonV3');
+    if(current&&current.getAttribute('data-owl-version')==='20261030-direct2') return;
+    if(current) current.remove();
+    ['dismissOwlV3','orbModalV3'].forEach(function(id){var el=document.getElementById(id);if(el)el.remove();});
     var s=document.createElement('script');
-    s.src='owl-widget-v3.js?v=20261030-direct1';
+    s.src='owl-widget-v3.js?v=20261030-direct2';
     s.defer=true;
     s.dataset.owlFortuneV3='1';
     document.head.appendChild(s);
