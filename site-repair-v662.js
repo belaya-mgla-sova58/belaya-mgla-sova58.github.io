@@ -1,7 +1,18 @@
 (()=>{
   'use strict';
-  const VERSION='20261030-activeowl3';
-  const WORKER='./service-worker.js?v=671-activeowl3';
+  const VERSION='20261030-activeowl4';
+  const WORKER='./service-worker.js?v=672-activeowl4';
+  const RESET_KEY='belaya_mgla_orb_reset_keep2_v1';
+
+  function resetFortuneCounterOnce(){
+    try{
+      if(localStorage.getItem(RESET_KEY)==='1') return;
+      localStorage.removeItem('belaya_mgla_orb_phrases_v1');
+      localStorage.setItem('belaya_mgla_orb_total_v1','2');
+      localStorage.setItem(RESET_KEY,'1');
+    }catch(e){}
+  }
+  resetFortuneCounterOnce();
 
   function registerFreshWorker(){
     if(!('serviceWorker' in navigator)) return;
