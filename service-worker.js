@@ -29,6 +29,7 @@ self.addEventListener('activate', event => {
 
 function optimizeHtml(html){
   html=html.replace(/<section\s+class=["']pwa-install-v540["'][\s\S]*?<\/section>/i,'');
+  html=html.replace(/<link\b(?=[^>]*\brel=["']preload["'])(?=[^>]*\bas=["']image["'])(?=[^>]*\bhref=["']assets\/(?:img_e430aab46e8893e4|img_e3dc0571d069e24d|img_5c51535e4e647ea6)\.webp["'])[^>]*\/?\s*>/gi,'');
   html=html.replace(/<img\b(?![^>]*\bloading\s*=)(?![^>]*\bfetchpriority\s*=\s*["']high["'])/gi,'<img loading="lazy" ');
   return html;
 }
