@@ -1,16 +1,21 @@
 АУДИТ САЙТА «БЕЛАЯ МГЛА»
 ====================================
 HTML-страниц проверено: 155
-Битых локальных ссылок/файлов: 0
+Битых локальных ссылок/файлов: 5
 Несуществующих якорей: 0
 Повторяющихся id: 0
 Видимых технических фраз: 0
 Замечаний по базовой разметке: 9
+Orphan-страниц без входящих HTML-ссылок: 7
 Ошибок разбора HTML: 0
 
 БИТЫЕ ССЫЛКИ / ФАЙЛЫ
 --------------------
-Нет.
+halloween-header-apply-v765.js: asset="halloween-header-2026-v764.webp" → отсутствует halloween-header-2026-v764.webp
+hero-generations-v714.css: asset="assets/heroes/gen-09/xura/portrait.webp" → отсутствует assets/heroes/gen-09/xura/portrait.webp
+pwa-install.js: asset="halloween-header-2026-v764.webp" → отсутствует halloween-header-2026-v764.webp
+site-v269.css: asset="-v528.webp" → отсутствует -v528.webp
+site-v626-base-v631.min.css: asset="-v528.webp" → отсутствует -v528.webp
 
 ЯКОРЯ
 -----
@@ -35,6 +40,16 @@ owl-fortune/orb-popup.html: нет <h1>
 owl-reset-20261028.html: нет <h1>
 owl-reset.html: нет <h1>
 welcome.html: нет <h1>
+
+ORPHAN-СТРАНИЦЫ
+---------------
+alliance-questionnaire.html
+canyon-clash.html
+expert-generations.html
+news-eu.html
+news-halloween-2026.html
+poll.html
+sova-predskazatelnitsa.html
 
 ОШИБКИ РАЗБОРА
 --------------
