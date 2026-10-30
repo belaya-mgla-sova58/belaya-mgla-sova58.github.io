@@ -1,7 +1,7 @@
 (()=>{
   'use strict';
   const VERSION='20261030-activeowl3';
-  const WORKER='./service-worker.js?v=678-thirdhold1';
+  const WORKER='./service-worker.js?v=679-perf1';
   const RESET_KEY='belaya_mgla_orb_reset_keep2_v4';
 
   function resetFortuneCounterOnce(){
@@ -14,13 +14,22 @@
   }
   resetFortuneCounterOnce();
 
+  function ensurePerformanceCSS(){
+    if(document.getElementById('sitePerformanceV1')) return;
+    const link=document.createElement('link');
+    link.id='sitePerformanceV1';
+    link.rel='stylesheet';
+    link.href='site-performance-v1.css?v=20261030-perf1';
+    document.head.appendChild(link);
+  }
+  ensurePerformanceCSS();
+
   function registerFreshWorker(){
     if(!('serviceWorker' in navigator)) return;
     navigator.serviceWorker.register(WORKER,{updateViaCache:'none'}).catch(()=>{});
   }
   registerFreshWorker();
-  window.addEventListener('load',()=>setTimeout(registerFreshWorker,300),{once:true});
-  setTimeout(registerFreshWorker,1400);
+  window.addEventListener('load',()=>setTimeout(registerFreshWorker,250),{once:true});
 
   function ensureOwlBlinkFix(){
     if(document.getElementById('owlBlinkEyesOnlyV662')) return;
@@ -131,6 +140,7 @@
   }
 
   function clean(){
+    ensurePerformanceCSS();
     removeLegacyHome();
     ensureQuestionnaire();
     ensureFortuneOwl();
@@ -142,9 +152,6 @@
 
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',clean,{once:true});
   else clean();
-  setTimeout(clean,250);
-  setTimeout(clean,1000);
-  setTimeout(ensureThirdHold,1200);
-  setTimeout(ensureRuneSystem,1800);
-  setTimeout(ensureOrbHelp,1850);
+  setTimeout(clean,800);
+  setTimeout(()=>{ensureThirdHold();ensureRuneSystem();ensureOrbHelp();},1800);
 })();
