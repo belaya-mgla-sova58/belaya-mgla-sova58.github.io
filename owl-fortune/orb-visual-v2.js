@@ -110,7 +110,6 @@
       white-space:nowrap;
     }
     .rare-badge-v2.show{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}
-    .secret-badge-v2{border-color:rgba(173,221,255,.62)!important;background:linear-gradient(180deg,rgba(41,78,128,.46),rgba(23,20,74,.4))!important;color:#dff5ff!important;text-shadow:0 0 8px #fff,0 0 18px rgba(95,180,255,.72)!important;box-shadow:0 0 22px rgba(96,151,255,.22)!important}
 
     .orb.magic-rare-v1 .text{
       color:#fff0ad!important;
@@ -141,9 +140,8 @@
   function syncBadge(){
     const rare=orb.classList.contains('magic-rare-v1');
     const secret=orb.classList.contains('magic-secret-v1');
-    badge.classList.toggle('show',rare||secret);
-    badge.classList.toggle('secret-badge-v2',secret&&!rare);
-    badge.textContent=secret&&!rare?'✦ ТАЙНОЕ ПРЕДСКАЗАНИЕ ✦':'✦ РЕДКОЕ ПРЕДСКАЗАНИЕ ✦';
+    badge.classList.toggle('show',rare&&!secret);
+    badge.textContent='✦ РЕДКОЕ ПРЕДСКАЗАНИЕ ✦';
   }
   const mo=new MutationObserver(syncBadge);
   mo.observe(orb,{attributes:true,attributeFilter:['class']});
