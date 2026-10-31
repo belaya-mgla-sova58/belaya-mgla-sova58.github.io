@@ -39,12 +39,12 @@
     .orb.magic-secret-v1 .text{color:#f1fbff!important;text-shadow:0 1px 2px rgba(0,11,32,.95),0 0 8px rgba(235,251,255,.98),0 0 19px rgba(116,207,255,.86),0 0 34px rgba(139,94,255,.6)!important}
     .orb.magic-rare-v1{border-color:rgba(255,234,155,.9)!important}
     @media(max-width:560px){
-      .count{top:-5.5%!important;font-size:13px!important;padding:5px 9px!important}
-      .streak-v2{top:8.2%!important;left:7%!important;font-size:12px!important}
-      .rare-badge-v2{top:14.3%;font-size:10.5px;padding:4px 9px}
+      .count{top:-12%!important;font-size:13px!important;padding:5px 9px!important}
+      .streak-v2{top:-3.5%!important;left:7%!important;font-size:12px!important}
+      .rare-badge-v2{top:10%;font-size:10.5px;padding:4px 9px}
       .orb-mini-btn-v2{font-size:12px!important;padding:6px 9px!important}
-      .orb-controls-v2{gap:6px!important;bottom:10.2%!important}
-      .hint{bottom:-1.8%!important;left:7%!important;width:86%!important;font-size:15px!important;line-height:1.18!important}
+      .orb-controls-v2{gap:6px!important;bottom:-7%!important}
+      .hint{bottom:-18%!important;left:7%!important;width:86%!important;font-size:15px!important;line-height:1.18!important}
     }
   `;
   document.head.appendChild(style);
