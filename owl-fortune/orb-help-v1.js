@@ -9,7 +9,7 @@
   const style=document.createElement('style');
   style.id='orbHelpStyleV1';
   style.textContent=`
-    .orb-help-btn-v1{position:absolute;z-index:24;left:.5%;bottom:-14.5%;border:1px solid rgba(225,205,255,.34);border-radius:999px;background:linear-gradient(180deg,rgba(67,32,108,.78),rgba(27,11,48,.72));color:#f6edff;padding:7px 13px;font:700 13px/1 "Cormorant Garamond",Georgia,serif;letter-spacing:.035em;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 5px 18px rgba(0,0,0,.24),0 0 18px rgba(141,88,232,.2);-webkit-tap-highlight-color:transparent;outline:none}
+    .orb-help-btn-v1{position:absolute;z-index:24;left:.5%;bottom:-19%;border:1px solid rgba(225,205,255,.34);border-radius:999px;background:linear-gradient(180deg,rgba(67,32,108,.78),rgba(27,11,48,.72));color:#f6edff;padding:7px 13px;font:700 13px/1 "Cormorant Garamond",Georgia,serif;letter-spacing:.035em;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 5px 18px rgba(0,0,0,.24),0 0 18px rgba(141,88,232,.2);-webkit-tap-highlight-color:transparent;outline:none}
     .orb-help-btn-v1:active{transform:scale(.97)}
     .orb-help-panel-v1{position:absolute;z-index:80;inset:-5% 4% -7%;display:none;flex-direction:column;border:1px solid rgba(225,204,255,.38);border-radius:22px;background:radial-gradient(circle at 50% 10%,rgba(122,72,193,.32),transparent 32%),linear-gradient(180deg,rgba(36,15,61,.985),rgba(12,5,25,.99));box-shadow:0 22px 58px rgba(0,0,0,.62),0 0 42px rgba(136,78,230,.3);overflow:hidden;color:#fff}
     .orb-help-panel-v1.open{display:flex}
@@ -19,7 +19,17 @@
     .orb-help-body-v1{padding:12px 15px 17px;overflow:auto;text-align:left;font-family:"Cormorant Garamond",Georgia,serif;color:#f4eaff}
     .orb-help-item-v1{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.075);font-size:15px;line-height:1.25}
     .orb-help-item-v1:last-child{border-bottom:0}.orb-help-item-v1 b{color:#fff7d7;font-weight:700}
-    @media(max-width:560px){.orb-help-btn-v1{left:0;bottom:-15.5%;font-size:12px;padding:7px 12px}.orb-help-panel-v1{inset:-7% 3% -8%}.orb-help-title-v1{font-size:21px}.orb-help-body-v1{padding:10px 13px 15px}.orb-help-item-v1{font-size:14px;padding:8px 0}}
+    /* v2: more breathing room around the orb on phones */
+    .count{top:-2.5%!important}
+    .streak-v2{top:2.5%!important}
+    .orb-controls-v2{bottom:2.5%!important}
+    @media(max-width:560px){
+      .count{top:-4%!important}
+      .streak-v2{top:1%!important}
+      .orb-controls-v2{bottom:1%!important}
+      .orb-help-btn-v1{left:0;bottom:-23%!important;font-size:12px;padding:7px 12px}
+      .orb-help-panel-v1{inset:-7% 3% -8%}.orb-help-title-v1{font-size:21px}.orb-help-body-v1{padding:10px 13px 15px}.orb-help-item-v1{font-size:14px;padding:8px 0}
+    }
   `;
   document.head.appendChild(style);
 
