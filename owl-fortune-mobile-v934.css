@@ -1,0 +1,16 @@
+/* Mobile layout fix for the owl fortune popup. Keeps the crystal ball, prediction and counter from overlapping on narrow screens. */
+@media (max-width:620px){
+  body .fortune-overlay-v933{padding:24px 8px 96px!important;align-items:center!important;overflow-y:auto!important}
+  body .fortune-shell-v933{width:min(94vw,430px)!important;grid-template-rows:auto auto!important;gap:10px!important;padding-top:8px!important}
+  body .fortune-ball-v933{width:min(88vw,390px)!important;max-height:68vh!important}
+  body .fortune-text-v933{width:62%!important;max-height:42%!important;overflow:auto!important;font-size:clamp(16px,4.8vw,22px)!important;line-height:1.2!important;padding:4px!important;box-sizing:border-box!important}
+  body .fortune-count-v933{position:relative!important;margin-top:0!important;z-index:8!important;padding:8px 13px!important;max-width:90vw!important;text-align:center!important}
+  body .fortune-close-v933{right:2%!important;top:0!important}
+  body .fortune-ball-v933.ready:after{bottom:5%!important}
+}
+@media (max-width:380px),(max-height:700px){
+  body .fortune-overlay-v933{padding-top:16px!important;padding-bottom:78px!important}
+  body .fortune-ball-v933{width:min(82vw,340px)!important;max-height:62vh!important}
+  body .fortune-text-v933{font-size:clamp(15px,4.5vw,19px)!important;line-height:1.16!important}
+  body .fortune-count-v933{font-size:11px!important;padding:6px 10px!important}
+}
