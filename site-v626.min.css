@@ -1004,10 +1004,10 @@ html.force-desktop-root body:is(.site-hq-v407,.home-site-v407).modern-v424 .nav-
 /* Additional shared overrides */
 .news-category-card.ru .smart-badge-v452,.news-category-card.elena .smart-badge-v452{display:none!important}
 
-/* PC design system v980. Screen-wide only; phone/tablet are unchanged. */
+/* PC design system v981. Screen-wide only; phone/tablet are unchanged. */
 @media screen and (min-width:1100px) and (hover:hover) and (pointer:fine){
-:root{--pc-max:1120px;--pc-line:rgba(145,210,255,.3);--pc-shadow:0 8px 24px rgba(0,9,30,.19)}
-body.modern-v424 main#appMain>.route-page.active{width:min(100%,var(--pc-max))!important;max-width:var(--pc-max)!important;min-width:0!important;margin-inline:auto!important;padding:12px 20px 44px!important;box-sizing:border-box!important}
+:root{--pc-max:1680px;--pc-line:rgba(145,210,255,.3);--pc-shadow:0 8px 24px rgba(0,9,30,.19)}
+body.modern-v424 main#appMain>.route-page.active{width:calc(100% - 28px)!important;max-width:var(--pc-max)!important;min-width:0!important;margin-inline:auto!important;padding:12px 20px 44px!important;box-sizing:border-box!important}
 body.modern-v424 .route-page .guide-page-v69{width:100%!important;max-width:100%!important;min-width:0!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important;align-items:start!important}
 body.modern-v424 .route-page .guide-page-v69>:not(details.guide-section.guide-fold-v414){grid-column:1/-1!important;min-width:0!important}
 body.modern-v424 .route-page .guide-page-v69>details.guide-section.guide-fold-v414{grid-column:auto!important;min-width:0!important;width:100%!important;margin:0!important;padding:0!important;overflow:hidden!important;border:1px solid var(--pc-line)!important;border-radius:16px!important;background:linear-gradient(145deg,rgba(16,58,101,.96),rgba(6,28,57,.98))!important;box-shadow:var(--pc-shadow)!important}
@@ -1036,4 +1036,4 @@ body.is-home-route.modern-v424 .modern-panel-v424{border-radius:18px!important;p
 body.is-home-route.modern-v424 :is(.modern-topic-card-v424,.home-news-card-v442){border-radius:14px!important;padding:14px!important}
 body.modern-v424 :is(.guide-fold-summary-v414,.guide-nav-card,.related-guide-card-v625):focus-visible{outline:2px solid #a2e8ff!important;outline-offset:3px!important}
 }
-/* end PC design system v980 */
+/* end PC design system v981 */
