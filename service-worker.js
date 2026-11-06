@@ -1,6 +1,6 @@
-const CACHE_NAME = 'belaya-mgla-v974';
+const CACHE_NAME = 'belaya-mgla-v984';
 const STATIC_CORE = [
-  './site-v626.min.css?v=974',
+  './site-v626.min.css?v=984',
   './manifest-v541.webmanifest',
   './assets/home-hero-polish-v447.webp',
   './assets/ui-home-v534.webp',
@@ -27,8 +27,8 @@ self.addEventListener('activate', event => {
       .then(clients => Promise.all(clients.map(client => {
         try{
           const u=new URL(client.url);
-          if(u.origin===self.location.origin){
-            u.searchParams.set('ugu_refresh','974');
+          if(u.origin===self.location.origin && u.searchParams.get('ugu_refresh')!=='984'){
+            u.searchParams.set('ugu_refresh','984');
             return client.navigate(u.toString());
           }
         }catch(e){}
@@ -44,7 +44,7 @@ function optimizeHtml(html){
   html=html.replace(/madam-ugu-mobile-match-v701\.js\?v=\d+/g,'madam-ugu-mobile-match-v701.js?v=714');
   html=html.replace(/pwa-install\.js\?v=\d+/g,'pwa-install.js?v=955');
   html=html.replace(/site-v629\.min\.js\?v=\d+/g,'site-v629.min.js?v=960');
-  html=html.replace(/site-v626\.min\.css\?v=\d+/g,"site-v626.min.css?v=974");
+  // Preserve the actual CSS version declared by each page; do not rewrite to an old cached asset.
   return html;
 }
 
@@ -70,6 +70,7 @@ function isFresh(url){
          p.endsWith('/predictions-cosmic.html') ||
          p.endsWith('/fortune-phrases.txt') ||
          p.endsWith('/pwa-install.js') ||
+         p.endsWith('/site-v626.min.css') ||
          p.endsWith('/home-date-v588.js');
 }
 
