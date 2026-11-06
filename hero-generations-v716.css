@@ -142,10 +142,10 @@
 /* v724: compact desktop card scale; leave the tablet and mobile layout unchanged */
 @media (min-width: 721px) {
   .hero-gens-page .gen-grid {
-    grid-template-columns: repeat(3, minmax(0, 222px));
+    grid-template-columns: repeat(3, minmax(0, 170px));
     justify-content: center;
-    column-gap: 18px;
-    row-gap: 18px;
+    column-gap: 14px;
+    row-gap: 14px;
   }
   .hero-gens-page .hero-mini {
     width: 100%;
@@ -154,7 +154,7 @@
     padding: 8px 6px 7px;
   }
   .hero-gens-page .hero-mini-caption strong {
-    font-size: 17px;
+    font-size: 15px;
   }
   .hero-gens-page .gen-panel {
     padding: 16px 12px;
