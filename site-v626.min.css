@@ -1037,3 +1037,24 @@ body.is-home-route.modern-v424 :is(.modern-topic-card-v424,.home-news-card-v442)
 body.modern-v424 :is(.guide-fold-summary-v414,.guide-nav-card,.related-guide-card-v625):focus-visible{outline:2px solid #a2e8ff!important;outline-offset:3px!important}
 }
 /* end PC design system v981 */
+
+/* PC width override v982: supersedes the older 1320px readability cap */
+@media screen and (min-width:1100px){
+  html:not(.force-desktop-root) body.site-hq-v407.modern-v424 main#appMain>.route-page.active,
+  html:not(.force-desktop-root) body.modern-v422.modern-v424 main#appMain>.route-page.active{
+    width:calc(100% - 24px)!important;
+    max-width:none!important;
+    min-width:0!important;
+    margin-left:12px!important;
+    margin-right:12px!important;
+    padding-left:16px!important;
+    padding-right:16px!important;
+    box-sizing:border-box!important;
+  }
+  html:not(.force-desktop-root) body.site-hq-v407.modern-v424 main#appMain>.route-page.active>.guide-page-v69{
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+  }
+}
+/* end PC width override v982 */
