@@ -1003,3 +1003,37 @@ html.force-desktop-root body:is(.site-hq-v407,.home-site-v407).modern-v424 .nav-
 
 /* Additional shared overrides */
 .news-category-card.ru .smart-badge-v452,.news-category-card.elena .smart-badge-v452{display:none!important}
+
+/* PC design system v980. Screen-wide only; phone/tablet are unchanged. */
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine){
+:root{--pc-max:1120px;--pc-line:rgba(145,210,255,.3);--pc-shadow:0 8px 24px rgba(0,9,30,.19)}
+body.modern-v424 main#appMain>.route-page.active{width:min(100%,var(--pc-max))!important;max-width:var(--pc-max)!important;min-width:0!important;margin-inline:auto!important;padding:12px 20px 44px!important;box-sizing:border-box!important}
+body.modern-v424 .route-page .guide-page-v69{width:100%!important;max-width:100%!important;min-width:0!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important;align-items:start!important}
+body.modern-v424 .route-page .guide-page-v69>:not(details.guide-section.guide-fold-v414){grid-column:1/-1!important;min-width:0!important}
+body.modern-v424 .route-page .guide-page-v69>details.guide-section.guide-fold-v414{grid-column:auto!important;min-width:0!important;width:100%!important;margin:0!important;padding:0!important;overflow:hidden!important;border:1px solid var(--pc-line)!important;border-radius:16px!important;background:linear-gradient(145deg,rgba(16,58,101,.96),rgba(6,28,57,.98))!important;box-shadow:var(--pc-shadow)!important}
+body.modern-v424 .route-page .guide-page-v69>details.guide-section.guide-fold-v414[open]{grid-column:1/-1!important;border-color:rgba(168,224,255,.53)!important}
+body.modern-v424 .route-page .guide-fold-summary-v414{min-height:78px!important;padding:16px 20px!important;display:flex!important;align-items:center!important;gap:12px!important;border-radius:0!important}
+body.modern-v424 .route-page .guide-fold-title-v414{flex:1 1 auto!important;min-width:0!important;margin:0!important;font-size:17px!important;line-height:1.45!important;font-weight:760!important;letter-spacing:0!important}
+body.modern-v424 .route-page .guide-fold-action-v414{flex:0 0 auto!important;white-space:nowrap!important;font-size:0!important;padding:7px 12px!important;border:1px solid rgba(145,214,255,.28)!important;border-radius:999px!important;background:rgba(57,147,218,.15)!important}
+body.modern-v424 .route-page .guide-fold-action-v414:after{content:"Открыть"!important;font-size:12px!important;color:#c8eaff!important;font-weight:750!important}
+body.modern-v424 .route-page details.guide-fold-v414[open] .guide-fold-action-v414:after{content:"Свернуть"!important}
+body.modern-v424 .route-page .guide-fold-body-v414{padding:20px 23px 24px!important;border-top:1px solid rgba(141,204,243,.19)!important;font-size:15px!important;line-height:1.7!important}
+body.modern-v424 .route-page .guide-fold-body-v414 p,body.modern-v424 .route-page .guide-fold-body-v414 li{font-size:15px!important;line-height:1.7!important}
+body.modern-v424 .route-page .guide-fold-body-v414 :is(figure.site-photo-card,.site-photo-card,.training-camp-photo){width:100%!important;max-width:660px!important;margin:20px auto!important;border-radius:14px!important;overflow:hidden!important}
+body.modern-v424 .route-page .guide-fold-body-v414 .site-photo-card img{display:block!important;width:100%!important;max-width:660px!important;height:auto!important;object-fit:contain!important}
+body.modern-v424 .route-page .guide-fold-body-v414 .site-photo-card figcaption{padding:10px 14px!important;font-size:13px!important;line-height:1.55!important}
+body.modern-v424 .route-page .page-heading-v424{margin:6px 0 18px!important;padding:22px 24px!important;border-radius:20px!important}
+body.modern-v424 .route-page .page-heading-v424 h1{font-size:clamp(25px,2vw,32px)!important;line-height:1.3!important}
+body.modern-v424 .route-page .page-heading-v424 p{max-width:80ch!important;font-size:14px!important;line-height:1.65!important}
+body.modern-v424 .route-page :is(.guide-nav-grid,.related-guides-grid-v625){gap:12px!important}
+body.modern-v424 .route-page :is(.guide-nav-card,.related-guide-card-v625){border-radius:14px!important;min-height:84px!important;padding:14px 16px!important;box-shadow:var(--pc-shadow)!important}
+body.modern-v424 .route-page .guide-callout{max-width:100%!important;border-radius:13px!important;padding:14px 16px!important}
+body.modern-v424 .route-page .hero-category-link-v708{border-radius:18px!important;padding:18px 22px!important}
+body.modern-v424 .route-page .hero-category-copy-v708 strong{font-size:25px!important}
+body.modern-v424 :is(.jero-page,.hero-gens-page,.faq-wrap){max-width:var(--pc-max)!important;margin-inline:auto!important;box-sizing:border-box!important}
+body.modern-v424 .jero-page .jero-portrait-wrap{max-width:270px!important}
+body.is-home-route.modern-v424 .modern-panel-v424{border-radius:18px!important;padding:18px!important}
+body.is-home-route.modern-v424 :is(.modern-topic-card-v424,.home-news-card-v442){border-radius:14px!important;padding:14px!important}
+body.modern-v424 :is(.guide-fold-summary-v414,.guide-nav-card,.related-guide-card-v625):focus-visible{outline:2px solid #a2e8ff!important;outline-offset:3px!important}
+}
+/* end PC design system v980 */
