@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" aria-label="Обновления сайта">
+<defs>
+  <linearGradient id="sheet" x1="0" y1="0" x2=".95" y2="1"><stop stop-color="#f2fcff"/><stop offset=".48" stop-color="#acdeff"/><stop offset="1" stop-color="#58a4e7"/></linearGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2=".65" y2="1"><stop stop-color="#fff4a8"/><stop offset=".45" stop-color="#ffc95b"/><stop offset="1" stop-color="#e38828"/></linearGradient>
+  <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#72d4ff"/><stop offset="1" stop-color="#3072d5"/></linearGradient>
+  <filter id="shadow" x="-35%" y="-35%" width="170%" height="170%"><feDropShadow dx="0" dy="7" stdDeviation="6" flood-color="#071631" flood-opacity=".6"/></filter>
+  <filter id="glow" x="-65%" y="-65%" width="230%" height="230%"><feGaussianBlur stdDeviation="5"/></filter>
+</defs>
+<path d="M64 31h112l33 36v157c0 9-8 15-17 15H64c-10 0-18-8-18-18V49c0-10 8-18 18-18Z" fill="#2266b5" opacity=".35" filter="url(#glow)"/>
+<g filter="url(#shadow)">
+  <path d="M68 26h107l35 38v159c0 11-8 18-19 18H68c-11 0-20-9-20-20V45c0-10 9-19 20-19Z" fill="url(#sheet)" stroke="#3171b2" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M174 27v30c0 8 5 12 13 12h22" fill="#6bb8ee" stroke="#3171b2" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M76 184h102M76 204h86" stroke="#3171a8" stroke-width="9" stroke-linecap="round" opacity=".72"/>
+  <path d="M129 74 178 126h-28v38h-43v-38H79Z" fill="url(#gold)" stroke="#ad7224" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M129 86 164 121h-21v33" fill="none" stroke="#fff9d9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity=".7"/>
+</g>
+<g filter="url(#shadow)">
+  <path d="m202 28 7 21 21 7-21 7-7 21-7-21-21-7 21-7Z" fill="url(#gold)" stroke="#fff4bd" stroke-width="3"/>
+  <circle cx="226" cy="101" r="5" fill="#8fecff"/>
+  <circle cx="37" cy="122" r="4.5" fill="#a7e7ff"/>
+</g>
+</svg>

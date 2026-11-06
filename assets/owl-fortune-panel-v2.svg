@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071226"/><stop offset=".52" stop-color="#14265a"/><stop offset="1" stop-color="#20144a"/></linearGradient>
+  <radialGradient id="orb" cx="50%" cy="45%" r="60%"><stop stop-color="#c9f4ff"/><stop offset=".35" stop-color="#75dfff"/><stop offset=".7" stop-color="#7e62ff"/><stop offset="1" stop-color="#312669"/></radialGradient>
+  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="12" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="720" height="380" fill="url(#bg)"/>
+<g opacity=".7" fill="#b9e7ff"><circle cx="70" cy="58" r="2"/><circle cx="154" cy="93" r="1.7"/><circle cx="232" cy="48" r="2.2"/><circle cx="584" cy="62" r="2"/><circle cx="648" cy="120" r="1.5"/><circle cx="534" cy="145" r="1.4"/><circle cx="114" cy="168" r="1.3"/></g>
+<circle cx="360" cy="304" r="76" fill="#6e61ff" opacity=".18" filter="url(#glow)"/>
+<circle cx="360" cy="300" r="63" fill="url(#orb)" stroke="#d2f4ff" stroke-width="4" filter="url(#glow)"/>
+<path d="M261 121 232 70 285 98M459 121l29-51-53 28" fill="#eef9ff" stroke="#c3deef" stroke-width="5" stroke-linejoin="round"/>
+<ellipse cx="360" cy="154" rx="108" ry="100" fill="#f5fbff" stroke="#c8e0ef" stroke-width="5"/>
+<path d="M272 123c20-25 52-39 88-39s68 14 88 39c-19-11-48-17-88-17s-69 6-88 17z" fill="#dcecf8"/>
+<ellipse cx="316" cy="150" rx="42" ry="40" fill="#d8edfb"/><ellipse cx="404" cy="150" rx="42" ry="40" fill="#d8edfb"/>
+<circle cx="316" cy="151" r="22" fill="#f8cb4d"/><circle cx="404" cy="151" r="22" fill="#f8cb4d"/>
+<circle cx="316" cy="151" r="10" fill="#101522"/><circle cx="404" cy="151" r="10" fill="#101522"/>
+<circle cx="309" cy="144" r="4" fill="#fff"/><circle cx="397" cy="144" r="4" fill="#fff"/>
+<path d="M344 177 360 193 376 177 360 168z" fill="#ef962e"/>
+<path d="M292 209c31 28 105 28 136 0-12 54-124 54-136 0z" fill="#d8edf8"/>
+<path d="M300 248c20 28 100 28 120 0l-13 55h-94z" fill="#122651" opacity=".96"/>
+<path d="M337 257 360 238 383 257 375 284 345 284z" fill="#70dfff" opacity=".8"/>
+<path d="M270 284c-38 4-72 21-99 51 52-16 96-16 132-5zM450 284c38 4 72 21 99 51-52-16-96-16-132-5z" fill="#e8f6ff" opacity=".9"/>
+<ellipse cx="360" cy="358" rx="140" ry="14" fill="#020713" opacity=".55"/>
+</svg>

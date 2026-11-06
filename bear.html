@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>Белая Мгла • Охота на медведя</title><link href="site-v626.min.css?v=979" rel="stylesheet"/><link href="favicon.ico" rel="icon" sizes="any"/><link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/><link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="apple-touch-icon.png" rel="apple-touch-icon"/><link as="image" fetchpriority="high" href="assets/bear-header-v499.webp" rel="preload"/><script defer src="site-v629.min.js?v=977"></script><script defer src="notifications-v630.js?v=630"></script><meta content="Гайд по Медведю в Белой мгле: роли капитана и участника, первые навыки героев, подбор войск, питомцы, эксперименты и ссылки на калькулятор." name="description"/><meta content="#031426" name="theme-color"/><meta content="article" property="og:type"/><meta content="Белая мгла · SOVA58" property="og:site_name"/><meta content="Белая Мгла • Охота на медведя" property="og:title"/><meta content="Продвинутая шпаргалка по Охоте на медведя." property="og:description"/><meta content="https://belaya-mgla-sova58.github.io/bear.html" property="og:url"/><meta content="https://belaya-mgla-sova58.github.io/assets/bear-header-v499.webp" property="og:image"/><link href="https://belaya-mgla-sova58.github.io/bear.html" rel="canonical"/><link href="manifest-v541.webmanifest" rel="manifest"/><meta content="yes" name="mobile-web-app-capable"/><meta content="Белая Мгла" name="apple-mobile-web-app-title"/><meta name="author" content="SOVA58"/><style>
+/* Медведь: спокойные ночные тона только на этой странице. */
+/* Высокая специфичность и !important нейтрализуют общие светлые стили details/summary. */
+body.is-bear-route{
+ --bear-deep:#091a2c;
+ --bear-card:#10243a;
+ --bear-card-top:#142a42;
+ --bear-card-open:#183149;
+ --bear-line:rgba(112,151,185,.27);
+ --bear-copy:#d2e1ee;
+ --bear-muted:#a3bacb;
+ --bear-accent:#90b4d0;
+}
+body.is-bear-route .bear-image-header-v499{
+ display:block;width:100%;margin:6px auto 10px;padding:0;
+ border:0!important;background:transparent!important;box-shadow:none!important;
+}
+body.is-bear-route .bear-image-header-v499 img{
+ display:block;width:100%;height:auto;border:0!important;box-shadow:none!important;
+}
+body.is-bear-route .bear-guide{
+ display:grid;gap:11px;color:var(--bear-copy);
+}
+body.is-bear-route .bear-page-links{
+ display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 20px;
+}
+body.is-bear-route .bear-page-links a{
+ display:inline-flex;align-items:center;justify-content:center;
+ min-height:44px;border-radius:12px;padding:10px 16px;
+ font-weight:800;text-decoration:none;box-shadow:none!important;
+ transition:background .18s ease,border-color .18s ease;
+}
+body.is-bear-route .bear-page-links .bear-primary-link{
+ background:linear-gradient(125deg,#c39550,#ae783b)!important;
+ border:1px solid rgba(219,172,105,.36)!important;
+ color:#fff5df!important;
+}
+body.is-bear-route .bear-page-links .bear-secondary-link{
+ background:#11263a!important;border:1px solid var(--bear-line)!important;
+ color:#c8dbe9!important;
+}
+body.is-bear-route .bear-page-links .bear-primary-link:hover{background:#b27b3c!important}
+body.is-bear-route .bear-page-links .bear-secondary-link:hover{background:#193148!important}
+body.is-bear-route .bear-page-links-bottom{margin:17px 0 26px}
+body.is-bear-route .bear-kpi{
+ display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;
+}
+body.is-bear-route .bear-kpi>div{
+ padding:13px 10px;border:1px solid var(--bear-line)!important;
+ border-radius:12px!important;background:#10243a!important;
+ color:var(--bear-copy)!important;text-align:center;box-shadow:none!important;
+}
+body.is-bear-route .bear-kpi b{
+ display:block;font-size:18px;margin-bottom:4px;color:#e0ebf5!important;
+}
+body.is-bear-route .bear-kpi span{
+ color:var(--bear-muted)!important;font-size:12px;
+}
+body.is-bear-route .bear-short{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;
+ padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;
+}
+body.is-bear-route .bear-short p{
+ margin:0;padding:12px 14px;border-radius:12px;
+ background:#10243a!important;border:1px solid var(--bear-line)!important;
+ color:var(--bear-copy)!important;line-height:1.55;
+}
+body.is-bear-route .bear-short b{color:#ecf3f8!important}
+body.is-bear-route .bear-expand-help{
+ margin:6px 2px 8px;color:var(--bear-muted)!important;font-size:13px;
+}
+body.is-bear-route .bear-guide details.bear-card.bear-explain-section{
+ padding:0!important;margin:0!important;min-width:0;
+ border:1px solid var(--bear-line)!important;border-radius:14px!important;
+ background:var(--bear-card)!important;color:var(--bear-copy)!important;
+ box-shadow:0 5px 14px rgba(0,5,17,.12)!important;overflow:hidden;
+ scroll-margin-top:90px;
+}
+body.is-bear-route .bear-guide details.bear-explain-section>summary{
+ display:flex!important;align-items:center!important;justify-content:space-between!important;
+ gap:12px;min-height:52px!important;padding:14px 18px!important;
+ border:0!important;border-radius:0!important;
+ background:var(--bear-card-top)!important;color:#d4e6f2!important;
+ font-size:16px!important;line-height:1.4!important;font-weight:780!important;
+ list-style:none;cursor:pointer;text-align:left!important;
+ box-shadow:none!important;transition:background .18s ease!important;
+}
+body.is-bear-route .bear-guide details.bear-explain-section>summary:hover{
+ background:#19334c!important;color:#edf3f8!important;
+}
+body.is-bear-route .bear-guide details.bear-explain-section[open]>summary{
+ background:var(--bear-card-open)!important;
+ border-bottom:1px solid var(--bear-line)!important;
+}
+body.is-bear-route .bear-guide details.bear-explain-section>summary span{
+ color:inherit!important;font-size:inherit!important;font-weight:inherit!important;
+}
+body.is-bear-route .bear-guide details.bear-explain-section>summary::before{
+ display:none!important;content:none!important;
+}
+body.is-bear-route .bear-guide details.bear-explain-section>summary::after{
+ content:"+"!important;display:block!important;flex:0 0 auto;
+ font-size:20px!important;font-weight:450!important;color:#8faec8!important;
+ transform:none!important;background:transparent!important;border:0!important;
+ box-shadow:none!important;
+}
+body.is-bear-route .bear-guide details.bear-explain-section[open]>summary::after{
+ content:"−"!important;color:#b7ccdc!important;
+}
+body.is-bear-route .bear-guide details.bear-explain-section>summary small{display:none!important}
+body.is-bear-route .bear-guide .bear-explain-body{
+ padding:13px 18px 18px!important;background:var(--bear-deep)!important;
+ color:var(--bear-copy)!important;border:0!important;line-height:1.6;
+}
+body.is-bear-route .bear-explain-body p{
+ margin:9px 0;line-height:1.65;color:var(--bear-copy)!important;
+}
+body.is-bear-route .bear-explain-body ul{
+ margin:8px 0 12px;padding-left:21px;
+}
+body.is-bear-route .bear-explain-body li{
+ color:var(--bear-copy)!important;line-height:1.58;margin:7px 0;
+}
+body.is-bear-route .bear-explain-body strong,
+body.is-bear-route .bear-explain-body b{color:#edf3f9!important}
+body.is-bear-route .bear-explain-body .bear-table-wrap{
+ overflow-x:auto;margin:13px 0;border:1px solid var(--bear-line);
+ border-radius:12px;background:var(--bear-deep);
+}
+body.is-bear-route .bear-explain-body table.bear-table{
+ width:100%;min-width:500px;border-collapse:collapse;
+ background:var(--bear-deep)!important;font-size:13px;
+}
+body.is-bear-route .bear-explain-body .bear-table th,
+body.is-bear-route .bear-explain-body .bear-table td{
+ padding:10px 11px;text-align:left;vertical-align:top;
+ border-bottom:1px solid rgba(112,151,185,.18)!important;
+ color:var(--bear-copy)!important;
+}
+body.is-bear-route .bear-explain-body .bear-table th{
+ background:#1b364d!important;color:#e1ecf5!important;font-weight:800;
+}
+body.is-bear-route .bear-explain-body .bear-table td:first-child{font-weight:750}
+body.is-bear-route .bear-explain-body .bear-caution{
+ padding:11px 13px;border:1px solid rgba(190,141,79,.35)!important;
+ border-left:3px solid #c4a06b!important;border-radius:10px!important;
+ background:rgba(91,68,44,.25)!important;color:#ead6b9!important;
+}
+body.is-bear-route .bear-explain-body a.bear-text-link{
+ color:#a5cde8!important;text-decoration:underline;
+}
+body.is-bear-route .bear-guide details.bear-explain-section>summary:focus-visible,
+body.is-bear-route .bear-page-links a:focus-visible{
+ outline:2px solid #91bbd6!important;outline-offset:3px;
+}
+@media(max-width:720px){
+ body.is-bear-route .bear-kpi{grid-template-columns:repeat(2,minmax(0,1fr))}
+ body.is-bear-route .bear-short{grid-template-columns:1fr}
+ body.is-bear-route .bear-page-links a{flex:1 1 100%}
+ body.is-bear-route .bear-guide details.bear-explain-section>summary{
+  font-size:14px!important;padding:13px 14px!important;min-height:48px!important;
+ }
+ body.is-bear-route .bear-guide .bear-explain-body{padding:11px 14px 15px!important}
+ body.is-bear-route .bear-explain-body table.bear-table{min-width:450px;font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){
+ body.is-bear-route .bear-guide details.bear-explain-section>summary,
+ body.is-bear-route .bear-page-links a{transition:none!important}
+}
+</style></head><body class="is-bear-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="bear"><div aria-hidden="true" class="site-cosmic-background-v442"></div><div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar"><button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button><div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div><a aria-label="На главную" href="index.html">⌂</a></div><div aria-hidden="true" class="mobile-nav-overlay" id="mobileNavOverlay"></div><div class="nav-wrap"><img alt="Белая мгла" class="sidebar-exact-logo" data-src="assets/img_6dc1ef08d6ab264b.webp" decoding="async" loading="lazy"/><nav><a class="route-link" href="index.html"><img alt="" aria-hidden="true" class="sidebar-color-icon home-v531-icon" src="assets/ui-home-v534.webp"/><span>Главная</span></a><a class="route-link active" aria-current="page" href="events.html"><img alt="" aria-hidden="true" class="sidebar-color-icon home-v531-icon" src="assets/ui-events-v534.webp"/><span>События</span></a><a class="route-link" href="heroes.html"><img alt="" aria-hidden="true" class="sidebar-color-icon home-v531-icon" src="assets/ui-heroes-v534.webp"/><span>Герои</span></a><a class="route-link" href="gear.html"><img alt="" aria-hidden="true" class="sidebar-color-icon home-v531-icon" src="assets/ui-gear-v534.webp"/><span>Снаряжение</span></a><a class="route-link" href="experts.html"><img alt="" aria-hidden="true" class="sidebar-color-icon home-v531-icon" src="assets/ui-experts-v534.webp"/><span>Эксперты</span></a><a class="route-link" href="pets.html"><img alt="" aria-hidden="true" class="sidebar-color-icon home-v531-icon" src="assets/ui-pets-v534.webp"/><span>Питомцы</span></a><a class="route-link route-link-calculator" href="calculators.html"><img alt="" aria-hidden="true" class="sidebar-color-icon home-v531-icon" src="assets/ui-calculator-v534.webp"/><span>Калькуляторы</span></a><a class="route-link route-link-knowledge" href="other.html"><img alt="" aria-hidden="true" class="sidebar-color-icon home-v531-icon" src="assets/ui-knowledge-v534.webp"/><span>База знаний</span></a></nav></div><main id="appMain"><div class="site-search-v426" data-site-search=""><div class="site-search-box-v426"><span aria-hidden="true" class="site-search-icon-v426">⌕</span><input aria-expanded="false" aria-label="Поиск по сайту" autocomplete="off" class="site-search-input-v426" inputmode="search" placeholder="Поиск по сайту..." spellcheck="false" type="search"/><button aria-label="Очистить поиск" class="site-search-clear-v426" type="button">×</button></div><div aria-label="Результаты поиска" class="site-search-results-v426" role="listbox"></div></div><div class="route-page active" data-route="bear"><nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><a href="events.html">События</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><span aria-current="page">Охота на медведя</span></nav><section aria-label="Охота на медведя" class="bear-image-header-v499"><img alt="Охота на медведя" decoding="async" fetchpriority="high" src="assets/bear-header-v499.webp"/></section><section class="intro" id="bear"><span class="eyebrow">Пояснения и проверенные механики</span><div class="owl-page-title"><h1 class="owl-heading"><span class="owl-title-text">Охота на медведя</span></h1></div><p>Как устроены сборы, какие герои усиливают урон, как выбирать войска и что проверять в отчётах. Разобрали подтверждённые правила и отделили их от советов игроков.</p></section>
+<div class="bear-page-links"><a class="bear-primary-link" href="bear-helper.html">🧮 Открыть калькулятор Медведя</a><a class="bear-secondary-link" href="events.html">← Все события</a></div>
+<section class="section bear-guide">
+<div class="bear-kpi"><div><b>30 минут</b><span>сессия охоты</span></div><div><b>9 навыков</b><span>от героев создателя</span></div><div><b>4 навыка</b><span>от участников</span></div><div><b>1-й герой</b><span>важен участнику</span></div></div>
+<div class="bear-short"><p>👑 <b>Создатель</b>: все три героя и их навыки.</p><p>👥 <b>Участник</b>: первый навык героя в первом слоте.</p><p>🔵 <b>Синие герои</b>: не усиливают урон, но допустимы во 2–3 слотах участника.</p><p>🏹 <b>Войска</b>: правильное соотношение подбираем по отчётам, универсальной формулы нет.</p></div>
+<p class="bear-expand-help">Выберите нужную тему. Разделы раскрываются отдельно.</p>
+<details class="bear-card bear-explain-section" id="bear-section-1" open><summary><span>Что происходит во время охоты</span><small>Показать</small></summary><div class="bear-explain-body"><p>Участники альянса атакуют Медведя сборными рейдами в течение 30 минут. Главная задача — набрать как можно больше <b>общего урона за всю сессию</b>, а не провести один рекордный удар.</p><ul><li>Создатели открывают рейды и подбирают сильную тройку героев.</li><li>Остальные игроки присоединяются, следят за первым героем и свободными маршами.</li><li>После возвращения войск важно как можно быстрее войти в следующий подходящий сбор.</li></ul><p class="bear-caution">Медведь не наносит ответного урона войскам: советы о лечении между ударами здесь не нужны.</p></div></details>
+<details class="bear-card bear-explain-section" id="bear-section-2" ><summary><span>Создатель сбора и участник — разные роли</span><small>Показать</small></summary><div class="bear-explain-body"><div class="bear-table-wrap"><table class="bear-table"><thead><tr><th>Роль</th><th>Какие навыки влияют</th><th>На что смотреть</th></tr></thead><tbody><tr><td>👑 Создатель</td><td>Экспедиционные навыки всех трёх выбранных героев, до девяти навыков</td><td>Прокачка героев, боевые характеристики, вместимость и состав собственного рейда</td></tr><tr><td>👥 Участник</td><td>Только первый экспедиционный навык героя в первой позиции</td><td>Правильный первый герой, его уровень навыка и численность отправляемых войск</td></tr></tbody></table></div><p>Второй и третий герои участника могут помочь с вместимостью его марша, но <b>не добавляют свои навыки в общую четвёрку</b>.</p></div></details>
+<details class="bear-card bear-explain-section" id="bear-section-3" ><summary><span>Четыре навыка участников: как работает отбор</span><small>Показать</small></summary><div class="bear-explain-body"><p>В одном рейде учитывается <b>до четырёх первых экспедиционных навыков участников</b>. По игровым руководствам, приоритет определяется уровнем навыка, а при равном уровне раньше вступившие сохраняют преимущество.</p><ul><li>Первый навык 5-го уровня неподходящего героя может занять место полезного навыка того же уровня.</li><li>Одинаковых героев могут отправлять разные участники. Часть одинаковых бонусов складывается, но повторение не всегда даёт максимальную пользу; у отдельных эффектов и ослаблений могут быть ограничения. Проверяйте фактический результат по отчётам.</li><li>Проверяйте итоговый состав навыков через <b>жёлтый флаг</b> в информации о рейде.</li><li>Если подходящих первых героев не осталось, можно вступить без героев, когда игра это позволяет и хватает вместимости.</li></ul><p class="bear-caution">Не следует считать, что игра сама выбирает четыре самых полезных усиления именно против Медведя.</p></div></details>
+<details class="bear-card bear-explain-section" id="bear-section-4" ><summary><span>🔵 Синие герои: что можно и чего не стоит делать</span><small>Показать</small></summary><div class="bear-explain-body"><p><b>Синие ресурсные герои не дают нужного атакующего бонуса против Медведя.</b> Поэтому не используйте их как основных героев для повышения урона.</p><ul><li><b>Первый слот:</b> не рекомендуется как источник урона. При низком уровне навыка возможен временный заполнитель, но он не заменяет полезного первого героя.</li><li><b>Второй и третий слоты участника:</b> могут быть заняты синими героями, если это помогает вместить войска. Их навыки не входят в четыре бонуса.</li><li><b>Собственный сбор:</b> выбирайте профильных боевых героев, а не ресурсных.</li></ul><p>На практике допустимость заполнителя зависит от правил альянса и того, какие навыки уже заняли четыре места.</p></div></details>
+<details class="bear-card bear-explain-section"><summary><span>💾 Сохранённые отряды и автовступление</span><small>Показать</small></summary><div class="bear-explain-body"><p><b>Перед Медведем</b> сохрани отдельные построения: одно для создания своего сбора с тремя подходящими героями и несколько для вступления к другим капитанам. В шаблонах участника первым слева должен стоять герой с нужным первым навыком Экспедиции; остальные герои и численность войск выбираются с учётом вместимости и правил альянса.</p><p><b>Во время Медведя</b> сохранённый шаблон нужно выбрать на экране отправки отряда. Сам факт сохранения не гарантирует автоматического выбора первого героя. Перед отправкой проверь портрет слева, тип и число войск, особенно если другие марши уже заняли героев или часть армии.</p><p><b>Не путай с автовступлением в рейды на Полярный ужас:</b> это отдельная игровая функция для поддерживаемых рейдов, где может выбираться сохранённое построение. Не считай, что она автоматически отправляет твой лучший шаблон в сборы на Медведя. <b>Перед Медведем проверь автовступление:</b> если оно активно для Полярного ужаса, нужные герои и войска могут оказаться заняты чужим PvE-рейдом, даже когда ты в игре. При необходимости отключи автовступление или используй доступный в текущей версии режим только вне игры; проверь свободные марши и восстанови нужные построения. Названия пунктов и доступные события могут отличаться в RU-версии.</p></div></details>
+<details class="bear-card bear-explain-section" id="bear-section-5" ><summary><span>🦸 Герои для вступления в чужие сборы, поколения 1–3</span><small>Показать</small></summary><div class="bear-explain-body"><div class="bear-table-wrap"><table class="bear-table"><thead><tr><th>Герой</th><th>Первый экспедиционный навык</th><th>Вывод</th></tr></thead><tbody><tr><td>Джесси, Джассер</td><td>Наносимый урон всех войск, до +25%</td><td>✅ Надёжный выбор</td></tr><tr><td>Джеронимо</td><td>Наносимый урон всех войск, до +25%</td><td>✅ Если не нужен в своём сборе</td></tr><tr><td>Со-Юн</td><td>Атака войск, до +25%</td><td>✅ Полезный альтернативный тип бонуса</td></tr><tr><td>Миа</td><td>Вероятностное повышение получаемого целью урона</td><td>⚠️ Нужны сравнения по отчётам</td></tr><tr><td>Филли</td><td>Усиление атаки войск, слабее основных вариантов</td><td>⚠️ Запасной</td></tr><tr><td>Флинт</td><td>Урон только пехоты</td><td>⚠️ Зависит от доли пехоты</td></tr><tr><td>Алонсо, Грег</td><td>Вероятностные эффекты</td><td>⚠️ Экспериментально</td></tr><tr><td>Синие герои, Джина</td><td>Не дают нужного атакующего усиления первым навыком</td><td>❌ Не для усиления урона</td></tr></tbody></table></div><p>Важен <b>уровень первого экспедиционного навыка</b>, а не только мощность героя или число звёзд. Герои могут быть недоступны игроку; калькулятор не должен автоматически считать, что они есть в его составе.</p></div></details>
+<details class="bear-card bear-explain-section" id="bear-section-6" ><summary><span>👑 Герои для создания собственного сбора</span><small>Показать</small></summary><div class="bear-explain-body"><p>У создателя работают навыки всей тройки, поэтому состав зависит от открытого поколения и развития конкретных героев.</p><ul><li><b>Ранние поколения:</b> Джеронимо или Наталия, Молли, подходящий стрелок.</li><li><b>Второе поколение:</b> Флинт, Филли, Алонсо в зависимости от прокачки.</li><li><b>Третье поколение:</b> Джеронимо / Наталия / Флинт + Миа + Алонсо — кандидаты для испытаний.</li></ul><p>При выборе между такими составами учитывайте звёзды, уровни экспедиционных навыков, эксклюзивное и обычное снаряжение, показатели войск. Не присваивайте победу конкретной тройке без сравнения отчётов.</p></div></details>
+<details class="bear-card bear-explain-section" id="bear-section-7" ><summary><span>🏹 Соотношение войск: нет единственной формулы</span><small>Показать</small></summary><div class="bear-explain-body"><div class="bear-table-wrap"><table class="bear-table"><thead><tr><th>Пехота / копейщики / стрелки</th><th>Когда тестировать</th></tr></thead><tbody><tr><td>10 / 30 / 60</td><td>Ранние поколения или нехватка стрелков</td></tr><tr><td>10 / 20 / 70</td><td>Сбалансированная отправная точка</td></tr><tr><td>10 / 10 / 80</td><td>Популярный вариант для проверки</td></tr><tr><td>5 / 5 / 90</td><td>Когда стрелков много</td></tr><tr><td>1 / 4 / 95 или 0 / 0 / 100</td><td>Экспериментальные схемы, только по отчётам</td></tr></tbody></table></div><p>Число войск каждого типа не активирует экспедиционные навыки автоматически: официальная справка подтверждает, что навыки героя могут работать без соответствующего типа войск в отряде.</p><p class="bear-caution">Правило «обязательно не меньше 10 000 пехоты и копейщиков» не доказано как универсальное. Не вводите его в качестве ограничения.</p></div></details>
+<details class="bear-card bear-explain-section" id="bear-section-8" ><summary><span>🧮 Что рассчитывает помощник Медведя</span><small>Показать</small></summary><div class="bear-explain-body"><p>Калькулятор помогает <b>распределить имеющиеся войска по доступным маршам</b> с учётом вместимости и выбранной схемы. Он также показывает подсказки по первым героям.</p><ul><li>Введите точное количество пехоты, копейщиков и стрелков.</li><li>Укажите число свободных маршей и вместимость одного марша.</li><li>Выберите роль и соотношение войск или автоматический подбор.</li><li>Посмотрите реальные количества и проценты войск каждого марша.</li><li>Сравните полученную схему с результатами своих охот.</li></ul><p><b>Не путайте расчёт состава с прогнозом урона.</b> Точную боевую формулу RU-версии мы не считаем установленной.</p><p><a class="bear-text-link" href="bear-helper.html">🐻 Перейти к калькулятору</a></p></div></details>
+<details class="bear-card bear-explain-section" id="bear-section-9" ><summary><span>🐾 Питомцы, эксперты и постоянные бонусы</span><small>Показать</small></summary><div class="bear-explain-body"><p>Разделяйте <b>боевой урон</b>, <b>вместимость</b>, <b>скорость марша</b> и <b>личные очки</b>: эти эффекты не равнозначны.</p><ul><li>Боевые активные навыки питомцев и другие применимые бонусы проверяют и при необходимости включают до начала охоты.</li><li>Бонусы вместимости полезны, если помогают отправить больше эффективных войск.</li><li>Скорость марша может увеличить число посещённых сборов за сессию, но не является прямым множителем урона.</li><li>Некоторые таланты экспертов увеличивают наградные очки, а не наносимый урон всем участникам.</li></ul><p class="bear-caution">Работу конкретных питомцев и скоростных навыков Джины или Лумака Бокана на Медведе проверяйте на своей RU-версии: часть утверждений происходит из тестов других серверов.</p></div></details>
+<details class="bear-card bear-explain-section" id="bear-section-10" ><summary><span>⏱ Организация сборов и экономия времени</span><small>Показать</small></summary><div class="bear-explain-body"><p>Высокий итог за 30 минут зависит не только от силы каждого рейда, но и от количества успешных присоединений.</p><ul><li>Капитаны заранее занимают удобные позиции относительно ловушки и готовят отряды.</li><li>Запускайте рейды согласованными волнами, чтобы остальные игроки успевали переходить между ними.</li><li>Не создавайте слишком много слабых собственных сборов, если выгоднее отправить войска к сильному капитану.</li><li>Следите за заполняемостью рейдов и свободными маршами: лишние минуты ожидания могут стоить больше, чем маленькая прибавка к навыку.</li></ul><p>Точные интервалы волн зависят от фактического времени подхода, вместимости и онлайна альянса. Универсальный тайминг не доказан.</p></div></details>
+<details class="bear-card bear-explain-section" id="bear-section-11" ><summary><span>⚔️ Бонусы атаки и наносимого урона: не одно и то же</span><small>Показать</small></summary><div class="bear-explain-body"><p>Джесси и Джассер усиливают наносимый урон; Со-Юн повышает атаку. Это разные характеристики. Пользовательские испытания предполагают, что сочетание разных категорий может быть выгоднее четырёх одинаковых бонусов.</p><p><b>Но универсальную формулу «два навыка урона + два навыка атаки = максимальный результат» мы не подтверждали для RU.</b> Нельзя применять к Медведю любой PvP-калькулятор без оговорок.</p><ul><li>Сравнивайте варианты с одинаковыми капитаном, войсками и активными бонусами.</li><li>Для вероятностных навыков Мии и других героев делайте несколько повторов.</li><li>Учитывайте уже действующие навыки и бонусы капитана.</li></ul><p class="bear-caution">Сведения о нелинейной зависимости урона от численности войск и десяти боевых ходах относятся к пользовательским исследованиям, а не официально раскрытой формуле.</p></div></details>
+<details class="bear-card bear-explain-section" id="bear-section-12" ><summary><span>🧪 Как проверять тактики по боевым отчётам</span><small>Показать</small></summary><div class="bear-explain-body"><p>Чтобы сравнение имело смысл, меняйте <b>один параметр за один эксперимент</b> и повторяйте измерение.</p><div class="bear-table-wrap"><table class="bear-table"><thead><tr><th>Записываем</th><th>Зачем</th></tr></thead><tbody><tr><td>Герои и уровни их навыков</td><td>Отделить влияние выбранной тройки и первых навыков участников</td></tr><tr><td>Четыре навыка участников, жёлтый флаг</td><td>Проверить фактические эффекты рейда</td></tr><tr><td>Тир и количество войск по типам</td><td>Сравнить пропорции при одинаковой вместимости</td></tr><tr><td>Бонусы, питомцы, снаряжение</td><td>Исключить скрытые отличия между попытками</td></tr><tr><td>Урон рейда, личные очки, число рейдов</td><td>Не смешивать боевой эффект с наградными очками и скоростью</td></tr></tbody></table></div><p>Лучше несколько сопоставимых попыток, чем один рекорд. Для случайных навыков ориентируйтесь не только на максимум, но и на средний результат.</p></div></details>
+<details class="bear-card bear-explain-section" id="bear-section-13" ><summary><span>❗ Частые ошибки</span><small>Показать</small></summary><div class="bear-explain-body"><ul><li>Ставить неподходящего героя с первым навыком 5-го уровня в чужой сбор.</li><li>Думать, что навыки второго и третьего героя участника усиливают общий рейд.</li><li>Считать всю мощность и снаряжение участника полноценными бонусами капитана.</li><li>Слепо применять 5/5/90, когда стрелков не хватает на все марши.</li><li>Считать бонусы личных очков бонусами боевого урона.</li><li>Путать гипотезы игроков с доказанными правилами RU.</li><li>Пробовать новую пропорцию и другого героя одновременно, а затем делать вывод по одному рейду.</li></ul></div></details>
+<details class="bear-card bear-explain-section" id="bear-section-14" ><summary><span>📚 Источники и уровень достоверности</span><small>Показать</small></summary><div class="bear-explain-body"><p><b>Официально подтверждённые правила:</b> экспедиционные навыки и их действие без обязательного типа войск, навыки создателя и четырёх участников.</p><ul><li><a class="bear-text-link" href="https://centurygames.helpshift.com/hc/ru/64-whiteout-survival/faq/8048-combat-faq/" target="_blank" rel="noopener">Официальная русскоязычная справка: боевые вопросы</a></li><li><a class="bear-text-link" href="https://centurygames.helpshift.com/hc/ru/64-whiteout-survival/section/1260-beast-hunting/" target="_blank" rel="noopener">Официальная справка по охоте</a></li><li><a class="bear-text-link" href="https://www.whiteoutsurvival.wiki/bear-hunt-guide-for-beginners-2/" target="_blank" rel="noopener">Руководство игроков по сборам и проверке навыков</a></li><li><a class="bear-text-link" href="https://www.whiteoutsurvival.wiki/events/bear-hunt/" target="_blank" rel="noopener">Игровая энциклопедия по событию</a></li></ul><p class="bear-caution">Точные оптимальные пропорции, математическая модель урона, эффекты некоторых питомцев и особенности новых поколений пока требуют тестов на RU. Дата сверки: 4 ноября 2026 года.</p></div></details>
+</section><div class="bear-page-links bear-page-links-bottom"><a class="bear-primary-link" href="bear-helper.html">🧮 Рассчитать войска и марши</a></div>
+<div class="footer">Белая Мгла • Автор: SOVA58</div></div></main></body></html>

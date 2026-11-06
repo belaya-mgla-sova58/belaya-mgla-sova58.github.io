@@ -1,0 +1,793 @@
+/* Белая мгла · единая адаптивная типографика и компоновка v961.
+   Слой касается общих блоков. Калькуляторы, таблицы данных и выбор
+   «Версия для ПК» сохраняют собственную логику. */
+:root{--site-readable-max:1320px}
+body.modern-v424 .route-page :is(h1,h2,h3),
+body.modern-v424 .modern-panel-v424 :is(h2,h3){overflow-wrap:break-word}
+body.modern-v424 .route-page :is(p,li,small),
+body.modern-v424 .modern-home-v424 :is(b,small){overflow-wrap:break-word}
+body.modern-v424 .modern-list-v424>a,
+body.modern-v424 .modern-topic-card-v424,
+body.modern-v424 .modern-panel-v424{min-width:0}
+body.modern-v424 a:focus-visible,
+body.modern-v424 button:focus-visible{outline:2px solid #91dcff!important;outline-offset:2px!important}
+
+/* Широкие экраны: содержимое остаётся в зоне удобного чтения. */
+@media (min-width:981px){
+  body.site-hq-v407.modern-v424 main#appMain>.route-page.active{
+    width:100%!important;max-width:var(--site-readable-max)!important;
+    margin-left:auto!important;margin-right:auto!important;
+  }
+  body.site-hq-v407.modern-v424 main#appMain>.site-search-v426{
+    width:min(100%,720px)!important;max-width:720px!important;
+    margin-left:auto!important;margin-right:auto!important;
+  }
+}
+
+/* Телефоны и планшеты без искусственно мелкого текста. */
+@media (max-width:980px){
+  html:not(.force-desktop-root) body.is-home-route .modern-list-v424>a>div>b{
+    font-size:clamp(12px,1.8vw,14px)!important;line-height:1.35!important;
+    white-space:normal!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .modern-list-v424>a>div>small{
+    font-size:clamp(11px,1.5vw,12px)!important;line-height:1.4!important;
+    white-space:normal!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .modern-topic-card-v424 b{
+    font-size:clamp(13px,2vw,15px)!important;line-height:1.35!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .modern-topic-card-v424 small{
+    font-size:11px!important;line-height:1.45!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .modern-panel-head-v424>a{
+    font-size:12px!important;line-height:1.4!important;
+  }
+  html:not(.force-desktop-root) body.modern-v424 .site-search-input-v426{
+    font-size:16px!important;height:44px!important;min-width:0!important;
+  }
+  html:not(.force-desktop-root) body.modern-v424 .site-search-box-v426{
+    min-height:48px!important;
+  }
+  html:not(.force-desktop-root) body.modern-v424 .mobile-bottom-v424{
+    min-height:72px!important;bottom:max(7px,env(safe-area-inset-bottom))!important;
+  }
+  html:not(.force-desktop-root) body.modern-v424 .mobile-bottom-v424 a{
+    min-width:0!important;min-height:56px!important;
+  }
+  html:not(.force-desktop-root) body.modern-v424 .mobile-bottom-v424 a b{
+    font-size:10px!important;line-height:1.25!important;
+    white-space:normal!important;text-align:center!important;
+    overflow-wrap:anywhere!important;
+  }
+  body.modern-v424 .site-search-suggest-head-v452{
+    font-size:11px!important;line-height:1.4!important;
+  }
+  body.modern-v424 .site-search-result-v452-badge{
+    font-size:10px!important;line-height:1.3!important;
+  }
+}
+
+/* Смартфоны: одна широкая карточка лучше двух обрезанных. */
+@media (max-width:560px){
+  html:not(.force-desktop-root) body.is-home-route .modern-list-v424{
+    grid-template-columns:minmax(0,1fr)!important;gap:9px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .modern-list-v424>a{
+    min-height:68px!important;padding:10px!important;gap:10px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .home-news-v442 .home-news-grid-v442{
+    grid-template-columns:minmax(0,1fr)!important;gap:10px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .home-news-v442 .home-news-banner-v449{
+    min-height:123px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .home-news-banner-copy-v449{
+    left:8px!important;right:25px!important;bottom:8px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .home-news-banner-copy-v449 b{
+    font-size:12px!important;line-height:1.35!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .home-news-banner-copy-v449 small{
+    font-size:10.5px!important;line-height:1.4!important;
+  }
+  html:not(.force-desktop-root) body.modern-v424 #appMain{
+    padding-bottom:max(100px,calc(82px + env(safe-area-inset-bottom)))!important;
+  }
+}
+@media (max-width:390px){
+  html:not(.force-desktop-root) body.is-home-route .modern-card-grid-v424{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .modern-topic-card-v424{
+    min-height:74px!important;padding:11px!important;
+  }
+}
+
+/* Не усиливаем анимации, если пользователь отключил движение. */
+@media (prefers-reduced-motion:reduce){
+  body.modern-v424 .modern-list-v424>a,
+  body.modern-v424 .modern-topic-card-v424{
+    transition:none!important;
+  }
+}
+
+
+/* Desktop layout v963. Use the available screen width instead of a giant single image. */
+@media (min-width:1201px) and (hover:hover) and (pointer:fine){
+  html:not(.force-desktop-root) body:is(.site-hq-v407,.home-site-v407).modern-v424 .nav-wrap{
+    display:flex!important;flex-direction:column!important;align-items:stretch!important;
+    padding:13px 12px 22px!important;
+  }
+  html:not(.force-desktop-root) body:is(.site-hq-v407,.home-site-v407).modern-v424 .nav-wrap>.sidebar-exact-logo{
+    position:static!important;top:auto!important;right:auto!important;
+    bottom:auto!important;left:auto!important;inset:auto!important;
+    display:block!important;transform:none!important;flex:0 0 70px!important;
+    width:min(166px,100%)!important;max-width:166px!important;
+    height:70px!important;min-height:70px!important;max-height:70px!important;
+    object-fit:contain!important;margin:0 auto 14px!important;padding:0!important;
+  }
+  html:not(.force-desktop-root) body:is(.site-hq-v407,.home-site-v407).modern-v424 .nav-wrap>nav{
+    position:static!important;top:auto!important;inset:auto!important;
+    display:flex!important;flex-direction:column!important;align-items:stretch!important;
+    flex:0 0 auto!important;min-width:0!important;width:100%!important;
+    margin:0!important;padding:0!important;transform:none!important;gap:4px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .modern-home-v424{
+    display:grid!important;
+    grid-template-columns:minmax(0,1.6fr) minmax(330px,1fr)!important;
+    column-gap:14px!important;row-gap:12px!important;align-items:stretch!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .modern-home-v424>:not(.modern-home-hero-v424):not(.home-news-v442){
+    grid-column:1/-1!important;min-width:0!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .modern-home-v424>.modern-home-hero-v424.home-stamped-hero-v441{
+    grid-column:1!important;grid-row:auto!important;
+    width:100%!important;max-width:none!important;min-width:0!important;
+    height:auto!important;min-height:0!important;
+    align-self:start!important;margin:0!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .modern-home-v424>.modern-home-hero-v424.home-stamped-hero-v441 .home-stamped-img-v441{
+    width:100%!important;height:auto!important;max-height:none!important;
+    object-fit:contain!important;object-position:center!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .modern-home-v424>.home-news-v442{
+    grid-column:2!important;grid-row:auto!important;min-width:0!important;
+    margin:0!important;padding:13px!important;
+    display:flex!important;flex-direction:column!important;align-self:stretch!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .modern-home-v424>.home-news-v442>.modern-panel-head-v424{
+    flex:0 0 auto!important;margin-bottom:10px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .modern-home-v424>.home-news-v442 .home-news-grid-v442{
+    flex:1 1 auto!important;display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:repeat(2,minmax(124px,1fr))!important;gap:10px!important;
+    min-height:0!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .modern-home-v424>.home-news-v442 .home-news-banner-v449{
+    width:100%!important;min-height:124px!important;height:100%!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .modern-home-v424>.home-news-v442 .home-news-banner-copy-v449 b{
+    font-size:14px!important;line-height:1.35!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .modern-home-v424>.home-news-v442 .home-news-banner-copy-v449 small{
+    font-size:11px!important;line-height:1.35!important;
+  }
+}
+/* Forced desktop mode on touch devices keeps its desktop sidebar, with reserved logo height. */
+html.force-desktop-root body:is(.site-hq-v407,.home-site-v407).modern-v424 .nav-wrap{
+  display:flex!important;flex-direction:column!important;align-items:stretch!important;
+  padding:13px 12px 22px!important;
+}
+html.force-desktop-root body:is(.site-hq-v407,.home-site-v407).modern-v424 .nav-wrap>.sidebar-exact-logo{
+  position:static!important;inset:auto!important;top:auto!important;left:auto!important;
+  transform:none!important;display:block!important;flex:0 0 70px!important;
+  width:min(166px,100%)!important;max-width:166px!important;
+  height:70px!important;min-height:70px!important;max-height:70px!important;
+  margin:0 auto 14px!important;object-fit:contain!important;
+}
+html.force-desktop-root body:is(.site-hq-v407,.home-site-v407).modern-v424 .nav-wrap>nav{
+  position:static!important;inset:auto!important;transform:none!important;
+  width:100%!important;margin:0!important;padding:0!important;
+}
+
+/* Desktop main area v965: the right workspace fills all available width.
+   The left navigation stays fixed; small screens retain their own layout. */
+@media (min-width:1201px) and (hover:hover) and (pointer:fine){
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 main#appMain{
+    margin-left:var(--desktop-sidebar)!important;
+    width:calc(100% - var(--desktop-sidebar))!important;
+    max-width:none!important;
+    padding:14px 16px 64px!important;
+    box-sizing:border-box!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 main#appMain>.route-page.active{
+    width:100%!important;max-width:none!important;min-width:0!important;
+    margin:0!important;padding:0!important;box-sizing:border-box!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 main#appMain .modern-home-v424{
+    width:100%!important;max-width:none!important;min-width:0!important;
+    margin:0!important;box-sizing:border-box!important;
+  }
+}
+
+
+/* desktop portal polish v966: header, shortcuts, calmer panels, readable news, owl */
+.pc-topbar-title-v966,.pc-shortcuts-v966,.pc-news-title-v966{display:none}
+@media (min-width:1201px) and (hover:hover) and (pointer:fine){
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 main#appMain{
+    position:relative!important;
+    padding-top:13px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 .pc-topbar-title-v966{
+    display:flex!important;flex-direction:column!important;justify-content:center!important;
+    position:absolute!important;top:12px!important;left:17px!important;
+    height:49px!important;max-width:44%!important;z-index:25!important;
+    pointer-events:none!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .pc-topbar-title-v966 strong{
+    font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif!important;
+    color:#f4faff!important;font-size:19px!important;line-height:1.25!important;
+    font-weight:850!important;letter-spacing:-.015em!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .pc-topbar-title-v966 span{
+    display:block!important;font-size:12px!important;line-height:1.4!important;
+    color:#a7d3ee!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 main#appMain>.site-search-v426{
+    position:relative!important;width:min(56%,690px)!important;max-width:690px!important;
+    margin:0 0 13px auto!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 .site-search-box-v426{
+    min-height:48px!important;border-radius:13px!important;
+    border-color:rgba(125,190,240,.35)!important;
+    background:#081f3f!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 .site-search-input-v426{
+    height:46px!important;font-size:14px!important;
+  }
+
+  /* Keep the mobile news title unchanged. */
+  html:not(.force-desktop-root) body.is-home-route .pc-news-title-v966{
+    display:inline!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .mobile-news-title-v966{
+    display:none!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 .modern-home-v424>.home-news-v442 .modern-panel-head-v424 h2{
+    font-size:19px!important;line-height:1.3!important;color:#f6fbff!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 .modern-home-v424>.home-news-v442 .modern-panel-head-v424>a{
+    font-size:12px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 .modern-home-v424>.home-news-v442 .home-news-banner-copy-v449{
+    left:9px!important;right:24px!important;bottom:9px!important;
+    background:rgba(5,18,40,.88)!important;border:1px solid rgba(146,199,243,.18)!important;
+    border-radius:10px!important;padding:9px 11px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 .modern-home-v424>.home-news-v442 .home-news-banner-copy-v449 b{
+    font-size:15px!important;line-height:1.4!important;color:#fff!important;
+    text-shadow:none!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 .modern-home-v424>.home-news-v442 .home-news-banner-copy-v449 small{
+    font-size:12.5px!important;line-height:1.45!important;color:#d9edfc!important;
+    text-shadow:none!important;
+  }
+
+  /* Replace the duplicate navigation strip only on desktop. */
+  html:not(.force-desktop-root) body.is-home-route .modern-home-v424>.modern-home-strip-v424{
+    display:none!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .modern-home-v424>.pc-shortcuts-v966{
+    grid-column:1/-1!important;display:grid!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:11px!important;min-width:0!important;margin-top:0!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .pc-shortcuts-v966>a{
+    display:flex!important;align-items:center!important;gap:12px!important;min-width:0!important;
+    min-height:86px!important;padding:13px 14px!important;text-decoration:none!important;
+    color:#f3faff!important;
+    border-radius:14px!important;border:1px solid rgba(123,189,242,.34)!important;
+    background:linear-gradient(130deg,rgba(13,48,82,.96),rgba(16,37,76,.96))!important;
+    box-shadow:0 4px 12px rgba(0,7,29,.14)!important;
+    transition:border-color .16s ease,background .16s ease!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .pc-shortcuts-v966>a:is(:hover,:focus-visible){
+    border-color:#a5dfff!important;background:#184467!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .pc-shortcuts-v966 .pc-shortcut-icon-v966{
+    flex:0 0 44px!important;width:44px!important;height:44px!important;display:grid!important;
+    place-items:center!important;border-radius:12px!important;
+    background:#1d507b!important;color:#fff!important;font-size:23px!important;
+    border:1px solid rgba(129,207,255,.28)!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .pc-shortcuts-v966 .pc-shortcut-icon-v966 img{
+    display:block!important;width:33px!important;height:33px!important;object-fit:contain!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .pc-shortcuts-v966 .pc-shortcut-copy-v966{
+    min-width:0!important;display:flex!important;flex:1 1 auto!important;flex-direction:column!important;gap:4px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .pc-shortcuts-v966 .pc-shortcut-copy-v966 strong{
+    font-size:15px!important;line-height:1.32!important;color:#f5faff!important;
+    font-weight:850!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .pc-shortcuts-v966 .pc-shortcut-copy-v966 small{
+    font-size:11.5px!important;line-height:1.36!important;color:#bdd9ed!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .pc-shortcuts-v966 .pc-shortcut-arrow-v966{
+    color:#8ccfff!important;flex:0 0 auto!important;font-size:20px!important;
+  }
+
+  /* Let the cosmic backdrop frame solid, readable dashboard cards. */
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 .modern-home-v424 .modern-panel-v424:not(.home-news-v442){
+    background:linear-gradient(145deg,rgba(6,26,54,.97),rgba(8,30,58,.96))!important;
+    border-color:rgba(108,167,218,.3)!important;
+    box-shadow:0 8px 19px rgba(0,8,30,.18)!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 .modern-home-v424 .modern-list-v424>a,
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 .modern-home-v424 .modern-topic-card-v424{
+    background:linear-gradient(135deg,rgba(15,49,86,.96),rgba(18,39,77,.95))!important;
+    border-color:rgba(121,178,232,.3)!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 .modern-home-v424 .modern-list-v424>a:is(:hover,:focus-visible),
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 .modern-home-v424 .modern-topic-card-v424:is(:hover,:focus-visible){
+    background:#174770!important;border-color:rgba(149,211,255,.7)!important;
+  }
+
+  /* Reduce Madam Ugu's footprint. A compact restore control remains at the edge. */
+  html:not(.force-desktop-root) body.is-home-route #madamUguLauncherV720{
+    right:6px!important;bottom:12px!important;width:85px!important;height:82px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route #madamUguLauncherV720 img{
+    width:85px!important;height:82px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route #madamUguLauncherV720.pc-owl-collapsed-v966{
+    display:none!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route #madamUguCloseLauncherV720{
+    position:fixed!important;right:8px!important;bottom:93px!important;
+    z-index:2147483590!important;width:28px!important;height:28px!important;
+    font-size:19px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route #madamUguCloseLauncherV720.pc-owl-reopen-v966{
+    display:flex!important;align-items:center!important;justify-content:center!important;
+    right:13px!important;bottom:13px!important;width:110px!important;height:41px!important;
+    padding:0 10px!important;border-radius:12px!important;
+    font:800 13px/1 "Segoe UI",Arial,sans-serif!important;
+    letter-spacing:0!important;cursor:pointer!important;
+    border:1px solid rgba(190,149,250,.7)!important;
+    background:#241841!important;color:#fff!important;
+  }
+}
+@media (min-width:1201px) and (max-width:1350px) and (hover:hover) and (pointer:fine){
+  html:not(.force-desktop-root) body.is-home-route .pc-shortcuts-v966>a{
+    gap:8px!important;padding:10px 9px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .pc-shortcuts-v966 .pc-shortcut-copy-v966 strong{
+    font-size:13px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route .pc-shortcuts-v966 .pc-shortcut-copy-v966 small{
+    font-size:10.5px!important;
+  }
+}
+
+/* Desktop game-art icons v970. Restored original v534 artwork, aligned as a calm matching set. */
+@media (min-width:1201px) and (hover:hover) and (pointer:fine) {
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 .nav-wrap>nav>a {
+    display:flex!important;align-items:center!important;gap:11px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 .nav-wrap>nav>a>img.sidebar-color-icon {
+    display:block!important;flex:0 0 26px!important;
+    width:26px!important;height:26px!important;
+    min-width:26px!important;min-height:26px!important;
+    max-width:26px!important;max-height:26px!important;
+    margin:0 1px 0 0!important;padding:0!important;
+    position:static!important;transform:none!important;
+    object-fit:contain!important;visibility:visible!important;opacity:1!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 .modern-home-v424 :is(.pc-shortcut-icon-v966,.v445-topic-icon,.v424-list-icon) {
+    display:grid!important;place-items:center!important;align-content:center!important;
+    border-radius:12px!important;
+    background:linear-gradient(140deg,rgba(43,105,165,.26),rgba(16,43,80,.34))!important;
+    border:1px solid rgba(112,184,238,.30)!important;
+    box-shadow:inset 0 1px 0 rgba(205,232,255,.07)!important;
+    overflow:hidden!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 .modern-home-v424 .pc-shortcut-icon-v966 {
+    width:46px!important;height:46px!important;min-width:46px!important;min-height:46px!important;
+    flex:0 0 46px!important;padding:5px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 .modern-home-v424 .v445-topic-icon {
+    width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;
+    margin:0!important;padding:5px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 .modern-home-v424 .v424-list-icon {
+    width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;
+    margin:0!important;padding:5px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424 .modern-home-v424 :is(.pc-shortcut-icon-v966,.v445-topic-icon,.v424-list-icon)>img {
+    display:block!important;width:100%!important;height:100%!important;
+    min-width:0!important;min-height:0!important;
+    max-width:100%!important;max-height:100%!important;
+    object-fit:contain!important;object-position:center!important;
+    position:static!important;transform:none!important;
+    margin:0!important;padding:0!important;
+    opacity:1!important;visibility:visible!important;filter:none!important;
+  }
+}
+
+
+/* State 58 and calculator icon polish v972.
+   Original game-art assets, more visible crowns / flag / swords on desktop,
+   calculator is slightly inset so its lower edge cannot touch the frame. */
+@media (min-width:1201px) and (hover:hover) and (pointer:fine) {
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .modern-home-v424 .modern-list-v424>a:is(
+      [href="state-positions.html"],[href="svs-prep.html"],[href="svs.html"]
+    )>.v424-list-icon {
+      overflow:hidden!important;
+      display:grid!important;place-items:center!important;
+      width:42px!important;height:42px!important;
+      min-width:42px!important;min-height:42px!important;
+      max-width:42px!important;max-height:42px!important;
+      padding:5px!important;border-radius:11px!important;
+      box-shadow:inset 0 1px 0 rgba(245,247,255,.12),0 2px 5px rgba(0,12,35,.2)!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .modern-home-v424 .modern-list-v424>a[href="state-positions.html"]>.v424-list-icon {
+      background:linear-gradient(145deg,rgba(150,112,44,.38),rgba(34,38,78,.64))!important;
+      border:1px solid rgba(243,207,115,.52)!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .modern-home-v424 .modern-list-v424>a[href="svs-prep.html"]>.v424-list-icon {
+      background:linear-gradient(145deg,rgba(101,70,164,.48),rgba(30,43,91,.55))!important;
+      border:1px solid rgba(197,158,251,.47)!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .modern-home-v424 .modern-list-v424>a[href="svs.html"]>.v424-list-icon {
+      background:linear-gradient(145deg,rgba(37,129,172,.47),rgba(23,49,95,.65))!important;
+      border:1px solid rgba(122,223,255,.5)!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .modern-home-v424 .modern-list-v424>a:is(
+      [href="state-positions.html"],[href="svs-prep.html"],[href="svs.html"]
+    )>.v424-list-icon>img {
+      width:100%!important;height:100%!important;
+      max-width:100%!important;max-height:100%!important;
+      object-fit:contain!important;object-position:center!important;
+      display:block!important;visibility:visible!important;opacity:1!important;
+      position:static!important;
+      filter:drop-shadow(0 2px 2px rgba(0,0,0,.33))!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .modern-home-v424 .modern-list-v424>a[href="state-positions.html"]>.v424-list-icon>img {
+      transform:scale(1.5)!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .modern-home-v424 .modern-list-v424>a[href="svs-prep.html"]>.v424-list-icon>img {
+      transform:scale(1.28)!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .modern-home-v424 .modern-list-v424>a[href="svs.html"]>.v424-list-icon>img {
+      transform:scale(1.38)!important;
+  }
+
+  /* Calculator: keep the keypad, screen and lower border inside the badge. */
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .nav-wrap>nav>a[href="calculators.html"]>img.sidebar-color-icon {
+      object-fit:contain!important;transform:scale(.83)!important;
+      transform-origin:center center!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .modern-home-v424 a[href="calculators.html"] :is(.pc-shortcut-icon-v966,.v424-list-icon)>img {
+      object-fit:contain!important;transform:scale(.82)!important;
+      transform-origin:center center!important;
+  }
+}
+
+
+/* desktop homepage compact panels and footer v974
+   Keep the current cards and mobile layout; don't stretch a short column
+   merely to match a taller panel in its neighboring column. */
+@media (min-width:1201px) and (hover:hover) and (pointer:fine) {
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .modern-home-v424>.modern-home-columns-v424 {
+      align-items:start!important;
+      grid-auto-rows:max-content!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .modern-home-v424>.modern-home-columns-v424>.modern-panel-v424 {
+      align-self:start!important;
+      height:fit-content!important;
+      min-height:0!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .modern-home-v424>.modern-home-columns-bottom-v424 {
+      align-items:start!important;
+      column-gap:12px!important;
+      row-gap:12px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .modern-home-v424>.modern-home-columns-bottom-v424>.modern-panel-v424 {
+      align-self:start!important;
+      min-height:0!important;
+      height:fit-content!important;
+  }
+
+  /* The site core adds a functional footer with an ↑ Наверх button.
+     On desktop use that one footer and hide the duplicate inside home. */
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .modern-home-footer-v424 {
+      display:none!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    main#appMain {
+      padding-bottom:3px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .site-footer-v256 {
+      box-sizing:border-box!important;
+      width:calc(100% - var(--desktop-sidebar, 214px) - 32px)!important;
+      max-width:none!important;
+      margin:12px 16px 22px calc(var(--desktop-sidebar, 214px) + 16px)!important;
+      padding:12px 17px!important;
+      border:1px solid rgba(111,178,229,.35)!important;
+      border-radius:14px!important;
+      background:linear-gradient(120deg,rgba(8,32,62,.98),rgba(13,38,78,.97))!important;
+      box-shadow:0 5px 17px rgba(0,8,27,.17)!important;
+      color:#c0dced!important;
+      display:flex!important;
+      align-items:center!important;
+      justify-content:space-between!important;
+      gap:14px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .site-footer-v256 .site-footer-copy strong {
+      color:#f0f8ff!important;
+      font-size:13px!important;
+      line-height:1.4!important;
+      font-weight:800!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .site-footer-v256 .site-footer-copy span {
+      color:#a3c6dc!important;
+      font-size:11px!important;
+      line-height:1.45!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .site-footer-v256 .site-footer-top {
+      min-height:38px!important;
+      border:1px solid rgba(119,200,249,.44)!important;
+      border-radius:10px!important;
+      background:#173f68!important;
+      color:#e6f7ff!important;
+      box-shadow:none!important;
+      padding:9px 13px!important;
+      font-size:12px!important;
+      font-weight:800!important;
+      cursor:pointer!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .site-footer-v256 .site-footer-top:is(:hover,:focus-visible) {
+      background:#1b5687!important;
+      border-color:#a0dfff!important;
+  }
+}
+
+/* Desktop typography and readability v975.
+   Unified system font, clearer secondary labels and more comfortable guide text.
+   Desktop mouse layouts only: preserve mobile, forced-desktop choice, cards and icons. */
+@media (min-width:1201px) and (hover:hover) and (pointer:fine) {
+  html:not(.force-desktop-root) body.modern-v424
+    :is(.route-page,.modern-home-v424) :is(h1,h2,h3,h4) {
+      font-family:"Segoe UI Variable Display","Segoe UI",system-ui,Arial,sans-serif!important;
+      letter-spacing:-.015em!important;
+      line-height:1.3!important;
+      text-wrap:balance;
+  }
+  html:not(.force-desktop-root) body.modern-v424 .nav-wrap>nav>a {
+    line-height:1.4!important;
+  }
+  /* Front page: titles and the labels underneath them read as one system. */
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .modern-home-v424 .modern-panel-head-v424 h2 {
+      font-size:19px!important;line-height:1.3!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .modern-home-v424 .modern-panel-head-v424>a {
+      font-size:13px!important;line-height:1.45!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .modern-topic-card-v424 b {
+      font-size:15px!important;line-height:1.35!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .modern-topic-card-v424 small {
+      font-size:12.5px!important;line-height:1.45!important;
+      color:#c4dbed!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .modern-list-v424 b {
+      font-size:14px!important;line-height:1.4!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .modern-list-v424 small {
+      font-size:12.5px!important;line-height:1.45!important;
+      color:#c1d9eb!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .pc-shortcuts-v966 .pc-shortcut-copy-v966 small {
+      font-size:12.5px!important;line-height:1.42!important;
+      color:#c5e0ef!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    :is(.home-today-item-v581 span,.home-today-rule-v581) {
+      font-size:14.5px!important;line-height:1.53!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    :is(.home-today-link-v581 small,.home-today-note-v581) {
+      font-size:12.5px!important;line-height:1.45!important;
+      color:#b8d4e8!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route.modern-v424
+    .pc-topbar-title-v966 span {
+      font-size:13px!important;color:#badcf1!important;
+  }
+  html:not(.force-desktop-root) body.modern-v424
+    .site-search-input-v426::placeholder {
+      color:#b5cfe2!important;
+  }
+  /* Guide articles: long paragraphs are easier to scan on wide monitors. */
+  html:not(.force-desktop-root) body.modern-v424
+    :is(.guide-section,.guide-fold-body-v414) :is(p,li) {
+      font-size:15px!important;line-height:1.65!important;
+      overflow-wrap:break-word;
+  }
+  html:not(.force-desktop-root) body.modern-v424
+    :is(.guide-section,.guide-fold-body-v414)>p {
+      max-width:84ch;
+  }
+  html:not(.force-desktop-root) body.modern-v424
+    .guide-section :is(h2,h3) {
+      line-height:1.35!important;
+  }
+}
+
+/* Unified desktop internal-page hierarchy v976.
+   Improve the same headings, descriptions, section headers and information boxes
+   across guides and sections. Desktop pointer devices only; mobile, icons,
+   page artwork, data tables and calculators keep their existing styles. */
+@media (min-width:1201px) and (hover:hover) and (pointer:fine) {
+  html:not(.force-desktop-root) body.modern-v424:not(.is-home-route)
+    .route-page .page-heading-v424 h1 {
+      font-family:"Segoe UI Variable Display","Segoe UI",system-ui,Arial,sans-serif!important;
+      font-size:clamp(30px,2.45vw,38px)!important;
+      font-weight:800!important;
+      line-height:1.18!important;
+      letter-spacing:-.025em!important;
+      text-wrap:balance;
+  }
+  html:not(.force-desktop-root) body.modern-v424:not(.is-home-route)
+    .route-page .page-heading-v424>p {
+      font-size:15px!important;
+      line-height:1.6!important;
+      font-weight:450!important;
+      max-width:86ch!important;
+      margin-top:9px!important;
+      margin-bottom:0!important;
+      overflow-wrap:break-word;
+  }
+  html:not(.force-desktop-root) body.modern-v424:not(.is-home-route)
+    .guide-page-v69>.guide-section:not(.guide-fold-v414)>h2,
+  html:not(.force-desktop-root) body.modern-v424:not(.is-home-route)
+    .route-page>.guide-section:not(.guide-fold-v414)>h2 {
+      font-size:21px!important;
+      line-height:1.35!important;
+      font-weight:800!important;
+      letter-spacing:-.015em!important;
+  }
+  html:not(.force-desktop-root) body.modern-v424:not(.is-home-route)
+    .guide-fold-summary-v414 .guide-fold-title-v414 {
+      font-family:"Segoe UI Variable Display","Segoe UI",system-ui,Arial,sans-serif!important;
+      font-size:18px!important;
+      font-weight:750!important;
+      line-height:1.4!important;
+      letter-spacing:-.012em!important;
+      overflow-wrap:break-word;
+  }
+  html:not(.force-desktop-root) body.modern-v424:not(.is-home-route)
+    .guide-fold-summary-v414 .guide-fold-action-v414 {
+      font-size:12px!important;
+      line-height:1.4!important;
+  }
+  html:not(.force-desktop-root) body.modern-v424:not(.is-home-route)
+    .guide-fold-body-v414 :is(h3,h4) {
+      line-height:1.4!important;
+      letter-spacing:-.012em!important;
+  }
+  /* Tips and warnings retain their established meaning, colors and copy controls. */
+  html:not(.force-desktop-root) body.modern-v424:not(.is-home-route)
+    :is(.guide-callout,.guide-fold-body-v414 .tip,.guide-fold-body-v414 .rule) {
+      font-size:14.5px!important;
+      line-height:1.65!important;
+      border-radius:14px!important;
+      overflow-wrap:break-word;
+  }
+  html:not(.force-desktop-root) body.modern-v424:not(.is-home-route)
+    :is(.guide-section,.guide-fold-body-v414) :is(p,li) {
+      font-size:15px!important;
+      line-height:1.68!important;
+  }
+  html:not(.force-desktop-root) body.modern-v424:not(.is-home-route)
+    :is(.guide-section,.guide-fold-body-v414) :is(p,ul,ol) + :is(p,ul,ol) {
+      margin-top:10px;
+  }
+  html:not(.force-desktop-root) body.modern-v424:not(.is-home-route)
+    :is(.route-page,.guide-page-v69) :is(a,button,summary):focus-visible {
+      outline:2px solid #98dcff!important;
+      outline-offset:3px!important;
+  }
+}
+
+/* Navigation and desktop search keyboard cues v977.
+   Keep touch-first search layout untouched. */
+.site-search-hotkey-v977 { display:none; }
+.site-search-results-v426 a.site-search-selected-v977 {
+  border-color:rgba(151,222,255,.65)!important;
+  background:rgba(21,86,136,.9)!important;
+  box-shadow:inset 3px 0 0 #96dcff!important;
+}
+@media (min-width:1201px) and (hover:hover) and (pointer:fine) {
+  html:not(.force-desktop-root) body.modern-v424 .site-search-hotkey-v977 {
+    position:absolute;right:12px;top:50%;transform:translateY(-50%);
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:47px;padding:4px 7px;border:1px solid rgba(124,181,224,.4);
+    border-radius:7px;background:rgba(125,180,225,.09);
+    font:700 11px/1.2 "Segoe UI",Arial,sans-serif;color:#aacbe0;
+    pointer-events:none;white-space:nowrap;
+  }
+  html:not(.force-desktop-root) body.modern-v424
+    .site-search-box-v426:focus-within .site-search-hotkey-v977,
+  html:not(.force-desktop-root) body.modern-v424
+    .site-search-typed-v977 .site-search-hotkey-v977 {
+    display:none!important;
+  }
+}
+
+/* Long-guide quick actions v978. Existing reader sheet supplies the sections;
+   compact actions appear only on desktop after scrolling. */
+.guide-quick-nav-v978{display:none!important}
+@media (min-width:1201px) and (hover:hover) and (pointer:fine) {
+  html:not(.force-desktop-root) body.modern-v424:not(.is-home-route)
+    .guide-quick-nav-v978:not([hidden]) {
+      position:fixed;top:116px;right:15px;z-index:129;
+      display:flex!important;flex-direction:column;gap:7px;
+      width:110px;padding:7px;box-sizing:border-box;
+      border:1px solid rgba(132,199,246,.33);
+      border-radius:14px;
+      background:rgba(8,30,58,.96);
+      box-shadow:0 8px 26px rgba(0,9,27,.25);
+  }
+  html:not(.force-desktop-root) body.modern-v424
+    .guide-quick-nav-v978 button {
+      width:100%;min-height:39px;padding:8px 5px;
+      border:1px solid rgba(123,194,243,.32);
+      border-radius:10px;background:rgba(23,70,115,.75);
+      color:#edf8ff;font:750 12px/1.3 "Segoe UI",Arial,sans-serif;
+      cursor:pointer;white-space:nowrap;
+  }
+  html:not(.force-desktop-root) body.modern-v424
+    .guide-quick-nav-v978 button:hover,
+  html:not(.force-desktop-root) body.modern-v424
+    .guide-quick-nav-v978 button:focus-visible {
+      background:#205885;border-color:#a1ddff;
+      outline:2px solid #91d6ff;outline-offset:2px;
+  }
+  /* Opened sections should be easy to scan even with 20+ fold titles. */
+  html:not(.force-desktop-root) body.modern-v424
+    .reader-sections-links-v451 {
+      max-height:min(60vh,520px);overflow-y:auto;
+      scrollbar-gutter:stable;
+  }
+}

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Шар предсказаний | Белая мгла</title>
+<meta name="description" content="Шар предсказаний от Совы для игроков 58-го государства. Развлекательная страница сайта «Белая мгла».">
+<link rel="canonical" href="https://belaya-mgla-sova58.github.io/predictions.html">
+<meta name="theme-color" content="#080312"/>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Arial,sans-serif;background:#0a0413}
+body{min-height:100vh;color:#f7f1ff;overflow-x:hidden}
+.page{min-height:100vh;display:grid;place-items:center;padding:8px;position:relative;overflow:hidden;background:#0a0413}
+.stage{width:min(96%,620px);min-height:calc(100vh - 16px);padding:12px;border-radius:22px;background:linear-gradient(180deg,#221036 0%,#160b26 48%,#0f071b 100%);border:1px solid rgba(191,161,255,.16);box-shadow:0 24px 70px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.03)}
+.inner{position:relative;text-align:center;padding:16px 10px 18px}
+.title{margin:0 0 3px;font-size:clamp(24px,4.2vw,34px);font-weight:700;font-family:"Palatino Linotype","Book Antiqua",Georgia,serif;letter-spacing:.035em;text-shadow:0 0 10px rgba(235,219,255,.22),0 0 24px rgba(153,92,230,.18)}
+.greeting{width:min(92%,440px);margin:4px auto 6px;padding:7px 10px;border:1px solid rgba(220,198,255,.22);border-radius:13px;background:rgba(110,68,160,.18);color:#e4daf2;line-height:1.3;font-size:12.5px}
+.greeting strong{color:#fff;font-size:14px;font-family:"Palatino Linotype","Book Antiqua",Georgia,serif}
+.counter{display:inline-flex;margin:1px auto 4px;padding:6px 10px;border:1px solid rgba(220,198,255,.20);border-radius:999px;color:#d6c9e8;background:rgba(106,66,156,.16);font-size:11.5px}
+.back{position:absolute;top:0;left:0;color:#bcaed0;text-decoration:none;font-size:12px;padding:6px 9px;border-radius:10px;background:rgba(255,255,255,.02);border:1px solid rgba(205,183,255,.09)}
+.orb-wrap{position:relative;min-height:385px;display:grid;place-items:center}
+.nebula{position:absolute;width:min(65vw,360px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(147,83,255,.18),rgba(78,33,152,.11) 40%,transparent 72%);filter:blur(18px);animation:neb 5.4s ease-in-out infinite}
+@keyframes neb{50%{transform:scale(1.06);opacity:.82}}
+.orbit,.orbit2,.orbit3{position:absolute;border-radius:50%;pointer-events:none}
+.orbit{width:min(64vw,320px);height:min(44vw,220px);border:1px solid rgba(181,151,255,.22);transform:rotate(-13deg);animation:orbit1 22s linear infinite}
+.orbit2{width:min(58vw,290px);height:min(39vw,195px);border:1px solid rgba(226,214,255,.15);transform:rotate(31deg);animation:orbit2 28s linear infinite reverse}
+.orbit3{width:min(68vw,340px);height:min(30vw,150px);border:1px solid rgba(143,102,255,.12);transform:rotate(7deg);animation:orbit3 34s linear infinite}
+@keyframes orbit1{to{transform:rotate(347deg)}}@keyframes orbit2{to{transform:rotate(391deg)}}@keyframes orbit3{to{transform:rotate(367deg)}}
+.planet{position:absolute;width:7px;height:7px;border-radius:50%;background:#eee8ff;box-shadow:0 0 8px #fff,0 0 16px #9b75ff;pointer-events:none}
+.p1{transform:translate(-128px,-66px)}.p2{transform:translate(126px,32px);width:5px;height:5px}.p3{transform:translate(-68px,106px);width:4px;height:4px}
+.orb{width:min(61vw,305px);aspect-ratio:1;border-radius:50%;position:relative;display:grid;place-items:center;cursor:pointer;overflow:hidden;z-index:3;user-select:none;-webkit-tap-highlight-color:transparent;outline:none!important;border:1px solid rgba(232,222,255,.28);background:radial-gradient(circle at 30% 23%,rgba(255,255,255,.85) 0 2.2%,rgba(219,202,255,.14) 7%,transparent 15%),radial-gradient(circle at 45% 38%,rgba(153,96,255,.18),transparent 26%),radial-gradient(circle at 50% 48%,#6c33bd 0,#4b1e87 30%,#2b104e 54%,#160827 75%,#09030f 100%);box-shadow:0 0 25px rgba(128,70,224,.42),0 0 76px rgba(85,41,165,.22),inset -28px -32px 54px rgba(0,0,0,.5),inset 18px 16px 34px rgba(237,226,255,.08);animation:float 5s ease-in-out infinite}
+.orb:focus,.orb:focus-visible{outline:none!important;-webkit-tap-highlight-color:transparent!important}
+@keyframes float{50%{transform:translateY(-8px)}}
+.mist,.mist2{position:absolute;border-radius:50%;pointer-events:none}
+.mist{inset:10%;background:conic-gradient(from 10deg,transparent,rgba(187,158,255,.12),transparent 30%,rgba(123,67,220,.15),transparent 57%,rgba(220,208,255,.08),transparent 80%);filter:blur(13px);animation:spin 16s linear infinite}
+.mist2{inset:22%;background:conic-gradient(from 170deg,transparent,rgba(181,143,255,.12),transparent 44%,rgba(96,43,180,.14),transparent 73%);filter:blur(10px);animation:spinBack 12s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}@keyframes spinBack{to{transform:rotate(-360deg)}}
+.ugu-stars,.ugu-lines,.ugu-vortex,.ugu-sigil{position:absolute;inset:0;pointer-events:none;border-radius:50%}
+.ugu-stars{z-index:2;background:radial-gradient(circle at 22% 31%,rgba(255,255,255,.95) 0 1.2px,transparent 2px),radial-gradient(circle at 72% 26%,rgba(223,203,255,.9) 0 1.5px,transparent 2.4px),radial-gradient(circle at 68% 67%,rgba(255,255,255,.82) 0 1px,transparent 2px),radial-gradient(circle at 37% 72%,rgba(196,164,255,.95) 0 1.3px,transparent 2.2px),radial-gradient(circle at 49% 48%,rgba(255,255,255,.72) 0 1px,transparent 2px);animation:uguTwinkle 3.2s ease-in-out infinite}
+.ugu-lines{z-index:2;inset:12%;border:1px solid rgba(224,204,255,.12);box-shadow:inset 0 0 28px rgba(182,128,255,.08);background:conic-gradient(from 30deg,transparent 0 14%,rgba(221,190,255,.12) 15% 17%,transparent 18% 42%,rgba(160,104,255,.10) 43% 45%,transparent 46% 68%,rgba(244,230,255,.10) 69% 71%,transparent 72% 100%);animation:uguInnerTurn 14s linear infinite}
+.ugu-vortex{z-index:3;inset:18%;opacity:0;background:conic-gradient(from 0deg,transparent,rgba(255,255,255,.36),transparent 18%,rgba(190,137,255,.48),transparent 42%,rgba(129,74,235,.32),transparent 70%);filter:blur(8px);transform:scale(.65)}
+.ugu-sigil{z-index:3;display:grid;place-items:center;font:700 72px/1 Georgia,serif;color:rgba(243,232,255,.11);text-shadow:0 0 18px rgba(200,151,255,.40);opacity:.35;animation:uguSigilBreath 5s ease-in-out infinite}
+.message{position:relative;z-index:4;width:74%;font-weight:700;font-size:clamp(16px,2.8vw,21px);line-height:1.36;color:#fff;text-shadow:0 0 14px rgba(206,187,255,.35);transition:.3s ease;font-family:"Palatino Linotype","Book Antiqua",Georgia,serif}
+.message.hide{opacity:0;transform:translateY(10px) scale(.97);filter:blur(7px)}
+.message.reveal{animation:reveal 1s ease both}
+@keyframes reveal{0%{opacity:0;transform:translateY(13px) scale(.95);filter:blur(10px)}100%{opacity:1;transform:none;filter:none}}
+.kind{position:absolute;z-index:5;top:25%;left:50%;transform:translateX(-50%);font-size:10px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:#cdbfff;opacity:0}
+.kind.show{opacity:.9}
+.rune-symbol{position:absolute;z-index:2;font-size:88px;color:rgba(237,229,255,.10);text-shadow:0 0 24px rgba(151,89,255,.52);opacity:0;transform:scale(.65)}
+.rune-symbol.show{opacity:1;transform:scale(1)}
+.orb.is-reading{filter:brightness(1.22) saturate(1.18)}
+.orb.is-reading .ugu-vortex{opacity:.9;animation:uguVortex 1.1s linear infinite}
+.orb.is-reading .ugu-stars{animation-duration:.75s;filter:brightness(1.8)}
+.orb.is-rare{filter:brightness(1.12) saturate(1.22)}
+.orb.is-rune{filter:brightness(1.18) saturate(1.28)}
+.orb.is-rune .ugu-sigil{opacity:.85;color:rgba(250,242,255,.22)}
+@keyframes uguTwinkle{0%,100%{opacity:.42;transform:scale(1)}50%{opacity:1;transform:scale(1.025)}}
+@keyframes uguInnerTurn{to{transform:rotate(360deg)}}
+@keyframes uguVortex{0%{transform:scale(.68) rotate(0deg)}50%{transform:scale(1.02) rotate(180deg)}100%{transform:scale(.68) rotate(360deg)}}
+@keyframes uguSigilBreath{0%,100%{opacity:.18;transform:scale(.94)}50%{opacity:.42;transform:scale(1.04)}}
+.tap-wave{position:absolute;width:22px;height:22px;border-radius:50%;pointer-events:none;z-index:8;border:1px solid rgba(240,233,255,.88);box-shadow:0 0 14px rgba(172,127,255,.55);transform:translate(-50%,-50%) scale(.2);opacity:0}
+.tap-wave.play{animation:wave .75s ease-out forwards}
+@keyframes wave{0%{opacity:.9;transform:translate(-50%,-50%) scale(.2)}100%{opacity:0;transform:translate(-50%,-50%) scale(8)}}
+.actions,.details,.history{width:min(94%,520px);margin:9px auto 0;text-align:left}
+.actions{display:none}.actions.show{display:block}
+.btn{width:100%;padding:9px 11px;border-radius:11px;background:linear-gradient(180deg,rgba(116,73,165,.20),rgba(83,48,126,.16));border:1px solid rgba(223,201,255,.22);color:#f2ebfb;font-weight:700;cursor:pointer;text-align:left;font-family:"Palatino Linotype","Book Antiqua",Georgia,serif}
+.copy-btn{text-align:center}
+.details{display:block}.history{display:none}.details.show,.history.show{display:block}
+.details-body,.history-body{display:none;margin-top:6px;padding:10px 11px;border-radius:11px;background:rgba(105,67,150,.17);border:1px solid rgba(222,199,255,.18);color:#ded2ea;font-size:12.5px;line-height:1.45}
+.details.open .details-body,.history.open .history-body{display:block}
+.rarity-note{margin-top:10px;padding-top:9px;border-top:1px solid rgba(224,204,255,.17);color:#d5c6e4;font-size:12px;line-height:1.45}
+.history-list{display:grid;gap:7px}
+.history-item{padding:8px 9px;border-radius:10px;background:rgba(116,75,161,.14);border:1px solid rgba(222,199,255,.14)}
+.history-tag{display:block;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#bca9e5;margin-bottom:3px}
+.hint{margin:8px 0 0;color:#aa9ab9;font-size:11.5px}
+.feather{position:fixed;z-index:9999;pointer-events:none;width:20px;height:64px;opacity:0;filter:drop-shadow(0 2px 2px rgba(0,0,0,.16)) drop-shadow(0 0 5px rgba(238,231,255,.35));transform-origin:50% 70%;will-change:transform,opacity}
+.feather svg{display:block;width:100%;height:100%;overflow:visible}
+@keyframes featherFly{0%{opacity:0;transform:translate(var(--x),var(--y)) rotate(var(--r0)) scale(.58)}10%{opacity:.95}42%{transform:translate(calc(var(--x) + var(--dx1)),calc(var(--y) + var(--dy1))) rotate(var(--rm)) scale(.9)}100%{opacity:0;transform:translate(calc(var(--x) + var(--dx2)),calc(var(--y) + var(--dy2))) rotate(var(--r1)) scale(1)}}
+</style>
+<script defer src="/analytics-metrika-v1.js?v=3"></script>
+</head>
+<body>
+<main class="page"><section class="stage"><div class="inner">
+<a class="back" href="index.html">← На главную</a>
+<h1 class="title">Шар предсказаний</h1>
+<div class="greeting"><strong>Мадам Угу приветствует тебя ✨</strong><br>Коснись шара и открой своё предсказание.</div>
+<div class="counter" id="counter">✨ Доступно предсказаний: 2 из 2</div>
+<div class="orb-wrap">
+<div class="nebula"></div><div class="orbit"></div><div class="orbit2"></div><div class="orbit3"></div>
+<i class="planet p1"></i><i class="planet p2"></i><i class="planet p3"></i>
+<div class="orb" id="orb" role="button" tabindex="0">
+<div class="mist"></div><div class="mist2"></div>
+<div class="ugu-stars"></div><div class="ugu-lines"></div><div class="ugu-vortex"></div><div class="ugu-sigil">✦</div>
+<div class="kind" id="kind"></div><div class="rune-symbol" id="runeSymbol"></div><div class="message" id="message"></div>
+</div></div>
+<div class="actions" id="actions"><button class="btn copy-btn" id="copyBtn" type="button">📋 Скопировать предсказание</button></div>
+<div class="details" id="details"><button class="btn" id="detailsBtn" type="button">Подробнее</button><div class="details-body"><strong id="detailsTitle">Как работает шар</strong><div id="detailsText">Большинство знаков обычные. Иногда Мадам Угу показывает редкое предсказание, а ещё реже появляется руна дня со своим символом и отдельным значением.</div></div></div>
+<div class="history" id="history"><button class="btn" id="historyBtn" type="button">Предсказания</button><div class="history-body"><div class="history-list" id="historyList"></div></div></div>
+<p class="hint">Некоторые знаки встречаются крайне редко.</p>
+</div></section></main>
+<script>
+(function(){
+const MAX=2,KEY='sova58-predictions-cosmic-v1';
+let common=['Ресурсы ещё пригодятся. Не спеши устраивать им торжественные проводы.','Удача любит нормальный состав чуть больше, чем красивую цифру силы.','Одна кнопка будет выглядеть особенно заманчиво. Мадам Угу уже подозревает, чем это закончится.'];
+fetch('fortune-phrases.txt?v=8').then(r=>r.ok?r.text():Promise.reject()).then(t=>{const a=t.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);if(a.length)common=a}).catch(()=>{});
+const rare=[
+{text:'✨ Судьба оставляет дверь открытой. Постарайся хотя бы не пройти мимо.',detail:'Редкое предсказание. Неожиданная возможность может оказаться полезнее привычного плана.'},
+{text:'✨ То, что долго не складывалось, внезапно может сдвинуться. Игра иногда делает вид, что помогает.',detail:'Редкое предсказание. Подходящий момент может появиться там, где раньше всё стояло на месте.'},
+{text:'✨ Один правильный выбор окажется важнее десяти мелких. Да, придётся выбирать.',detail:'Редкое предсказание. Лучше сосредоточиться на одном действительно полезном решении.'}
+];
+const runes=[
+{symbol:'ᚠ',name:'Феху',text:'ᚠ Руна Феху. Береги то, что уже накоплено.',detail:'Феху связана с ресурсами, запасом и умением распоряжаться тем, что уже есть.'},
+{symbol:'ᚢ',name:'Уруз',text:'ᚢ Руна Уруз. Силы больше, чем тебе кажется.',detail:'Уруз говорит о внутренней силе и запасе энергии.'},
+{symbol:'ᚱ',name:'Райдо',text:'ᚱ Руна Райдо. Путь уже начался.',detail:'Райдо связана с движением и правильным направлением.'},
+{symbol:'ᚷ',name:'Гебо',text:'ᚷ Руна Гебо. Хорошее приходит через обмен и союз.',detail:'Гебо напоминает о взаимности, поддержке и союзе.'},
+{symbol:'ᛃ',name:'Йера',text:'ᛃ Руна Йера. Всё созревает в своё время.',detail:'Йера связана с результатом накопленных усилий.'},
+{symbol:'ᛉ',name:'Альгиз',text:'ᛉ Руна Альгиз. Защита окажется важнее лишней самоуверенности.',detail:'Альгиз означает осторожность и защиту.'}
+];
+const orb=document.getElementById('orb'),message=document.getElementById('message'),counter=document.getElementById('counter'),kind=document.getElementById('kind'),runeSymbol=document.getElementById('runeSymbol'),actions=document.getElementById('actions'),copyBtn=document.getElementById('copyBtn'),details=document.getElementById('details'),detailsBtn=document.getElementById('detailsBtn'),detailsTitle=document.getElementById('detailsTitle'),detailsText=document.getElementById('detailsText'),history=document.getElementById('history'),historyBtn=document.getElementById('historyBtn'),historyList=document.getElementById('historyList');
+let busy=false,lastText='',feathersEnabled=true;
+function dayKey(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function readState(){try{const v=JSON.parse(localStorage.getItem(KEY)||'{}');return v.day===dayKey()?v:{day:dayKey(),count:0,items:[]}}catch(e){return{day:dayKey(),count:0,items:[]}}}
+function saveState(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+function renderHistory(){const s=readState(),items=(s.items||[]).slice(-2);if(!items.length){history.classList.remove('show','open');return}history.classList.add('show');historyList.innerHTML=items.map(x=>'<div class="history-item"><span class="history-tag">'+x.kind+'</span>'+x.text.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</div>').join('')}
+function refresh(){const s=readState(),left=Math.max(0,MAX-s.count);counter.textContent='✨ Доступно предсказаний: '+left+' из '+MAX;renderHistory()}
+function showDetails(title,text){details.classList.add('show');details.classList.remove('open');detailsTitle.textContent=title;detailsText.textContent=text;detailsBtn.textContent='Подробнее'}
+detailsBtn.onclick=()=>{details.classList.toggle('open');detailsBtn.textContent=details.classList.contains('open')?'Скрыть':'Подробнее'};
+historyBtn.onclick=()=>history.classList.toggle('open');
+function touchWave(e){const r=orb.getBoundingClientRect(),w=document.createElement('span');w.className='tap-wave play';w.style.left=((e&&e.clientX?e.clientX-r.left:r.width/2))+'px';w.style.top=((e&&e.clientY?e.clientY-r.top:r.height/2))+'px';orb.appendChild(w);setTimeout(()=>w.remove(),800)}
+function featherSvg(){return '<svg viewBox="0 0 26 72" aria-hidden="true"><path d="M14.3 3.5 C19.4 7.8 21.1 14.8 19.4 23.4 C17.8 31.2 13.7 38.8 10.8 47.2 C8.8 53.2 8.1 59.8 8.5 66.5 C6.3 58.9 4.5 51.6 4.9 43.8 C5.3 34.4 7.6 25.1 10.1 17.6 C11.6 12.9 13 7.8 14.3 3.5 Z" fill="#f2eefc" fill-opacity=".82" stroke="#ddd4f1" stroke-width=".5"/><path d="M14.2 5.2 C13.4 15.6 11.8 27.2 10.2 39.1 C9.1 47.1 8.6 56.2 8.7 68" fill="none" stroke="#a999cb" stroke-width="1" stroke-linecap="round"/></svg>'}
+function feathers(x,y,n){for(let i=0;i<n;i++){const f=document.createElement('i');f.className='feather';f.innerHTML=featherSvg();f.style.setProperty('--x',x+'px');f.style.setProperty('--y',y+'px');f.style.setProperty('--dx1',(Math.random()*90-45)+'px');f.style.setProperty('--dy1',(Math.random()*45+22)+'px');f.style.setProperty('--dx2',(Math.random()*180-90)+'px');f.style.setProperty('--dy2',(Math.random()*140+70)+'px');f.style.setProperty('--r0',(Math.random()*70-35)+'deg');f.style.setProperty('--rm',(Math.random()*120-60)+'deg');f.style.setProperty('--r1',(Math.random()*260-130)+'deg');f.style.left='0';f.style.top='0';f.style.animation='featherFly '+(1.4+Math.random()*.8)+'s ease-out forwards';document.body.appendChild(f);setTimeout(()=>f.remove(),2400)}}
+document.addEventListener('pointerdown',e=>{if(!feathersEnabled||e.target.closest('button,a'))return;feathers(e.clientX,e.clientY,e.target.closest('#orb')?7:3)});
+copyBtn.onclick=async()=>{if(!lastText)return;try{await navigator.clipboard.writeText(lastText)}catch(e){const t=document.createElement('textarea');t.value=lastText;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove()}feathersEnabled=false;copyBtn.textContent='✓ Скопировано';setTimeout(()=>copyBtn.textContent='📋 Скопировать предсказание',1200)};
+function reveal(e){
+ if(busy)return;
+ const s=readState();
+ if(s.count>=MAX){message.textContent='На сегодня всё ✨\nПриходи завтра';message.style.whiteSpace='pre-line';actions.classList.remove('show');details.classList.remove('open');feathersEnabled=false;return}
+ feathersEnabled=true;
+ touchWave(e);busy=true;kind.classList.remove('show');runeSymbol.classList.remove('show');orb.classList.remove('is-rare','is-rune');message.classList.add('hide');orb.classList.add('is-reading');
+ setTimeout(()=>{
+   let roll=Math.random(),text='',tag='Обычное';
+   if(roll<.05){const x=runes[Math.floor(Math.random()*runes.length)];text=x.text;tag='Руна '+x.name;kind.textContent='Редкая руна';kind.classList.add('show');runeSymbol.textContent=x.symbol;runeSymbol.classList.add('show');orb.classList.add('is-rune');showDetails('Руна '+x.name,x.detail)}
+   else if(roll<.17){const x=rare[Math.floor(Math.random()*rare.length)];text=x.text;tag='Редкое';kind.textContent='Редкое';kind.classList.add('show');orb.classList.add('is-rare');showDetails('Редкое предсказание',x.detail)}
+   else{text=common[Math.floor(Math.random()*common.length)];showDetails('Предсказание','Это обычное предсказание шара. Иногда самый простой знак оказывается самым точным.')}
+   s.count++;s.items=(s.items||[]).slice(-1);s.items.push({kind:tag,text});saveState(s);lastText=text;actions.classList.add('show');message.style.whiteSpace='normal';message.textContent=text;message.classList.remove('hide','reveal');void message.offsetWidth;message.classList.add('reveal');refresh()
+ },700);
+ setTimeout(()=>{orb.classList.remove('is-reading');busy=false},1350)
+}
+orb.addEventListener('click',reveal);
+orb.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();reveal()}});
+refresh();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+/* v716: darker generation headers and stronger text contrast across all generations */
+.hero-gens-page .gen-acc{--gen-space:none!important;--gen-space-src:none}
+.gen-acc>summary{
+  background-color:#030b18!important;
+  background-image:linear-gradient(90deg,rgba(2,8,20,.84),rgba(3,12,27,.68) 52%,rgba(2,7,18,.80)),var(--gen-space)!important;
+  border-color:rgba(117,196,238,.48)!important;
+}
+.gen-acc>summary::after{
+  background:linear-gradient(180deg,rgba(0,5,15,.16),rgba(0,7,18,.36))!important;
+}
+.gen-acc>summary:hover{filter:saturate(1.08) brightness(1.02)!important}
+.gen-acc[open]>summary{
+  background-image:linear-gradient(90deg,rgba(2,8,20,.78),rgba(3,12,27,.60) 52%,rgba(2,7,18,.74)),var(--gen-space)!important;
+}
+.gen-title strong{
+  color:#f8fcff!important;
+  text-shadow:0 0 8px rgba(255,255,255,.34),0 0 18px rgba(81,190,255,.52),0 2px 8px rgba(0,0,0,.96)!important;
+}
+.gen-title span{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:26px!important;
+  padding:4px 10px!important;
+  border-radius:999px!important;
+  border:1px solid rgba(145,220,255,.48)!important;
+  background:linear-gradient(180deg,rgba(32,117,177,.72),rgba(8,48,86,.82))!important;
+  color:#dff7ff!important;
+  font-size:12px!important;
+  font-weight:900!important;
+  letter-spacing:.02em!important;
+  box-shadow:inset 0 0 10px rgba(147,225,255,.10),0 0 14px rgba(69,178,236,.20)!important;
+  text-shadow:0 1px 6px rgba(0,0,0,.95)!important;
+}
+.gen-chevron{
+  background:rgba(3,15,33,.82)!important;
+  color:#dff5ff!important;
+  border-color:rgba(150,218,255,.42)!important;
+}
+@media(max-width:430px){.gen-title span{display:none!important}}
+
+/* v717: only the intended caption may exist as a real child of a hero card.
+   The large portrait and sparkle are CSS pseudo-elements, so they stay visible. */
+.hero-mini > :not(.hero-mini-caption){display:none!important}
+.hero-mini .hero-mini-caption > :not(strong):not(span){display:none!important}
+
+/* v718: separate Epic Heroes accordion row before generations. Re-map the
+   existing generation backgrounds because the new row becomes nth-of-type(1). */
+.gen-acc:nth-of-type(1){--gen-space-src:url("assets/generation-space-07-v713.webp?v=714")}
+.gen-acc:nth-of-type(2){--gen-space-src:url("assets/generation-space-01-v713.webp?v=714")}
+.gen-acc:nth-of-type(3){--gen-space-src:url("assets/generation-space-02-v713.webp?v=714")}
+.gen-acc:nth-of-type(4){--gen-space-src:url("assets/generation-space-03-v713.webp?v=714")}
+.gen-acc:nth-of-type(5){--gen-space-src:url("assets/generation-space-04-v713.webp?v=714")}
+.gen-acc:nth-of-type(6){--gen-space-src:url("assets/generation-space-05-v713.webp?v=714")}
+.gen-acc:nth-of-type(7){--gen-space-src:url("assets/generation-space-06-v713.webp?v=714")}
+.gen-acc:nth-of-type(8){--gen-space-src:url("assets/generation-space-07-v713.webp?v=714")}
+.gen-acc:nth-of-type(9){--gen-space-src:url("assets/generation-space-08-v713.webp?v=714")}
+.gen-acc:nth-of-type(10){--gen-space-src:url("assets/generation-space-09-v713.webp?v=714")}
+.gen-acc:nth-of-type(11){--gen-space-src:url("assets/generation-space-10-v713.webp?v=714")}
+.gen-acc:nth-of-type(12){--gen-space-src:url("assets/generation-space-11-v713.webp?v=714")}
+.gen-acc:nth-of-type(13){--gen-space-src:url("assets/generation-space-12-v713.webp?v=714")}
+
+.gen-acc.epic-line>summary{
+  border-color:rgba(194,161,255,.64)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 12px 30px rgba(0,0,0,.27),0 0 26px rgba(142,100,255,.13)!important;
+}
+.gen-acc.epic-line[open]>summary{
+  border-color:rgba(220,198,255,.92)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 16px 36px rgba(0,0,0,.32),0 0 34px rgba(158,113,255,.25)!important;
+}
+.gen-acc.epic-line .gen-title span{
+  border-color:rgba(211,184,255,.54)!important;
+  background:linear-gradient(180deg,rgba(122,78,190,.78),rgba(55,29,104,.86))!important;
+  color:#f1e8ff!important;
+  box-shadow:inset 0 0 10px rgba(229,211,255,.10),0 0 14px rgba(162,112,255,.22)!important;
+}
+.gen-acc.epic-line .gen-panel{
+  box-shadow:0 14px 32px rgba(0,0,0,.24),0 0 24px rgba(151,106,255,.12)!important;
+}
+
+/* Epic hero portraits from the supplied reference catalogue. */
+.hero-mini[data-epic="bahiti"]{--portrait:url("assets/heroes/epic/bahiti/portrait.webp")}
+.hero-mini[data-epic="jasser"]{--portrait:url("assets/heroes/epic/jasser/portrait.webp")}
+.hero-mini[data-epic="jessie"]{--portrait:url("assets/heroes/epic/jessie/portrait.webp")}
+.hero-mini[data-epic="gina"]{--portrait:url("assets/heroes/epic/gina/portrait.webp")}
+.hero-mini[data-epic="patrick"]{--portrait:url("assets/heroes/epic/patrick/portrait.webp")}
+.hero-mini[data-epic="sergey"]{--portrait:url("assets/heroes/epic/sergey/portrait.webp")}
+.hero-mini[data-epic="seo-yoon"]{--portrait:url("assets/heroes/epic/seo-yoon/portrait.webp")}
+.hero-mini[data-epic="lumak-bokan"]{--portrait:url("assets/heroes/epic/lumak-bokan/portrait.webp")}
+.hero-mini[data-epic="ling-xue"]{--portrait:url("assets/heroes/epic/ling-xue/portrait.webp")}
+
+/* v720: Rare Heroes row before Epic Heroes. */
+.gen-acc:nth-of-type(1){--gen-space-src:url("assets/generation-space-08-v713.webp?v=714")}
+.gen-acc:nth-of-type(2){--gen-space-src:url("assets/generation-space-07-v713.webp?v=714")}
+.gen-acc:nth-of-type(3){--gen-space-src:url("assets/generation-space-01-v713.webp?v=714")}
+.gen-acc:nth-of-type(4){--gen-space-src:url("assets/generation-space-02-v713.webp?v=714")}
+.gen-acc:nth-of-type(5){--gen-space-src:url("assets/generation-space-03-v713.webp?v=714")}
+.gen-acc:nth-of-type(6){--gen-space-src:url("assets/generation-space-04-v713.webp?v=714")}
+.gen-acc:nth-of-type(7){--gen-space-src:url("assets/generation-space-05-v713.webp?v=714")}
+.gen-acc:nth-of-type(8){--gen-space-src:url("assets/generation-space-06-v713.webp?v=714")}
+.gen-acc:nth-of-type(9){--gen-space-src:url("assets/generation-space-07-v713.webp?v=714")}
+.gen-acc:nth-of-type(10){--gen-space-src:url("assets/generation-space-08-v713.webp?v=714")}
+.gen-acc:nth-of-type(11){--gen-space-src:url("assets/generation-space-09-v713.webp?v=714")}
+.gen-acc:nth-of-type(12){--gen-space-src:url("assets/generation-space-10-v713.webp?v=714")}
+.gen-acc:nth-of-type(13){--gen-space-src:url("assets/generation-space-11-v713.webp?v=714")}
+.gen-acc:nth-of-type(14){--gen-space-src:url("assets/generation-space-12-v713.webp?v=714")}
+.gen-acc.rare-line>summary{border-color:rgba(117,205,255,.70)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 12px 30px rgba(0,0,0,.27),0 0 25px rgba(74,180,255,.14)!important}
+.gen-acc.rare-line[open]>summary{border-color:rgba(168,228,255,.94)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 16px 36px rgba(0,0,0,.32),0 0 34px rgba(67,188,255,.25)!important}
+.gen-acc.rare-line .gen-title span{border-color:rgba(139,219,255,.58)!important;background:linear-gradient(180deg,rgba(31,127,190,.82),rgba(8,61,108,.90))!important;color:#e5f8ff!important;box-shadow:inset 0 0 10px rgba(199,239,255,.11),0 0 14px rgba(75,192,255,.22)!important}
+.hero-mini[data-rare="smith"]{--portrait:url("assets/heroes/rare/smith/portrait.webp")}
+.hero-mini[data-rare="cloris"]{--portrait:url("assets/heroes/rare/cloris/portrait.webp")}
+.hero-mini[data-rare="eugene"]{--portrait:url("assets/heroes/rare/eugene/portrait.webp")}
+.hero-mini[data-rare="charlie"]{--portrait:url("assets/heroes/rare/charlie/portrait.webp")}
+
+/* v721: remove all small duplicate hero thumbnails from card captions. */
+.hero-mini-caption::before,.hero-mini-caption::after{content:none!important;display:none!important;background:none!important}
+.hero-mini-caption img,.hero-mini-caption picture,.hero-mini-caption svg,.hero-mini-caption [style*="background-image"],.hero-mini-caption [class*="avatar"],.hero-mini-caption [class*="icon"],.hero-mini-caption [class*="thumb"]{display:none!important}
+
+
+/* v722: brighten generation banner artwork; preserve text contrast without burying the backgrounds. */
+.hero-gens-page .gen-acc>summary{
+  background-color:#071a31!important;
+  background-image:linear-gradient(90deg,rgba(2,8,20,.30),rgba(3,12,27,.12) 52%,rgba(2,7,18,.24)),var(--gen-space)!important;
+  background-blend-mode:normal!important;
+}
+.hero-gens-page .gen-acc>summary::after{
+  background:linear-gradient(180deg,rgba(0,5,15,.04),rgba(0,7,18,.10))!important;
+}
+.hero-gens-page .gen-acc[open]>summary{
+  background-image:linear-gradient(90deg,rgba(2,8,20,.24),rgba(3,12,27,.09) 52%,rgba(2,7,18,.18)),var(--gen-space)!important;
+}
+
+/* v723: authentic Whiteout Lab unit and role icons for new generations */
+.hero-mini .hero-mini-caption .gen-new-tags{display:flex!important;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px;margin-top:7px}
+.hero-mini .gen-new-tags .gen-new-tag{display:inline-flex!important;align-items:center;gap:4px;border:1px solid rgba(140,215,255,.28);border-radius:10px;padding:3px 5px;background:#102b45;color:#d9f3ff;font-size:10px;line-height:1.2;white-space:nowrap}
+.hero-mini .gen-new-tags img{display:block!important;width:18px!important;height:18px!important;object-fit:contain}
+.hero-gens-page .gen-acc:nth-of-type(n+15){--gen-space-src:url("assets/generation-space-12-v713.webp?v=714")}
+.hero-gens-page .gen-acc:nth-of-type(n+15){--gen-space:var(--gen-space-src)!important}
+.hero-gens-page .gen-acc:nth-of-type(n+15)>summary{background-image:linear-gradient(90deg,rgba(2,8,20,.3),rgba(3,12,27,.12) 52%,rgba(2,7,18,.24)),var(--gen-space)!important}
+@media(max-width:720px){.hero-mini .gen-new-tags{gap:2px!important}.hero-mini .gen-new-tags .gen-new-tag{font-size:8px;padding:2px 3px}.hero-mini .gen-new-tags img{width:13px!important;height:13px!important}}

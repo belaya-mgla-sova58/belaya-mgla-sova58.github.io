@@ -1,0 +1,31 @@
+/* Mobile performance layer: keeps the visual style while avoiding full-screen repaints. */
+@media (max-width: 900px){
+  /* Full-screen fixed particle layers are the biggest scrolling cost on phones. */
+  .fx-feathers,
+  .fx-snow{
+    display:none!important;
+  }
+
+  /* Blur on a sticky element is expensive because it is recomputed while scrolling. */
+  .nav-wrap{
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+    background:rgba(248,251,255,.985)!important;
+  }
+
+  .brand{
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+    background:rgba(255,255,255,.97)!important;
+  }
+
+  /* Avoid animated smooth-scrolling work on touch devices. Native scrolling stays intact. */
+  html{scroll-behavior:auto!important}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .fx-feathers,
+  .fx-snow{
+    display:none!important;
+  }
+}

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 520" preserveAspectRatio="xMidYMid slice">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#071f4b"/>
+    <stop offset="0.52" stop-color="#0b2d66"/>
+    <stop offset="1" stop-color="#071a3d"/>
+  </linearGradient>
+  <radialGradient id="glow" cx="78%" cy="22%" r="55%">
+    <stop offset="0" stop-color="#4f84d8" stop-opacity=".30"/>
+    <stop offset=".45" stop-color="#385da8" stop-opacity=".12"/>
+    <stop offset="1" stop-color="#0a1b40" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="mount1" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#294b83"/>
+    <stop offset="1" stop-color="#10284d"/>
+  </linearGradient>
+  <linearGradient id="mount2" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#1b396a"/>
+    <stop offset="1" stop-color="#0b1f40"/>
+  </linearGradient>
+  <linearGradient id="snow" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#d6eaff" stop-opacity=".64"/>
+    <stop offset="1" stop-color="#8cb8ec" stop-opacity=".10"/>
+  </linearGradient>
+  <filter id="blur"><feGaussianBlur stdDeviation="16"/></filter>
+</defs>
+
+<rect width="1600" height="520" fill="url(#sky)"/>
+<rect width="1600" height="520" fill="url(#glow)"/>
+
+<!-- soft aurora -->
+<path d="M620 0 C810 80 940 30 1150 95 C1320 145 1450 105 1600 65 L1600 0 Z"
+      fill="#4a6dca" opacity=".09" filter="url(#blur)"/>
+<path d="M790 0 C960 55 1090 10 1300 70 C1430 108 1510 82 1600 55"
+      fill="none" stroke="#6bc7ff" stroke-width="26" opacity=".06" filter="url(#blur)"/>
+
+<!-- distant mountains -->
+<path d="M0 350 L140 235 L245 305 L390 180 L510 300 L690 205 L820 310 L995 170 L1130 302 L1280 215 L1420 300 L1600 205 L1600 520 L0 520 Z"
+      fill="url(#mount1)" opacity=".78"/>
+<path d="M0 410 L175 310 L310 380 L520 275 L690 390 L885 285 L1040 385 L1235 300 L1390 395 L1600 292 L1600 520 L0 520 Z"
+      fill="url(#mount2)" opacity=".88"/>
+
+<!-- snow caps -->
+<path d="M355 210 L390 180 L425 222 L397 213 L383 227 Z M953 205 L995 170 L1039 220 L1004 209 L986 227 Z M1260 236 L1280 215 L1301 242 L1282 235 Z"
+      fill="url(#snow)"/>
+
+<!-- minimal pines -->
+<g fill="#071b38" opacity=".78">
+  <path d="M85 330 l26-54 26 54 h-16 l22 45 h-64 l22-45z"/>
+  <path d="M210 370 l20-43 20 43 h-12 l18 37 h-52 l18-37z"/>
+  <path d="M1445 345 l24-50 24 50 h-14 l20 42 h-60 l20-42z"/>
+  <path d="M1515 390 l18-38 18 38 h-11 l16 33 h-46 l16-33z"/>
+</g>
+
+<!-- subtle warm lights -->
+<g fill="#ffd37d" opacity=".72">
+  <circle cx="1270" cy="300" r="3"/><circle cx="1308" cy="318" r="2.6"/>
+  <circle cx="1370" cy="335" r="2.4"/><circle cx="1194" cy="332" r="2.5"/>
+</g>
+
+<!-- mist -->
+<ellipse cx="870" cy="490" rx="720" ry="92" fill="#b9d7fb" opacity=".08" filter="url(#blur)"/>
+
+<!-- snow / stars -->
+<g fill="#d9ecff">
+  <circle cx="150" cy="92" r="1.8" opacity=".62"/><circle cx="280" cy="65" r="1.2" opacity=".55"/>
+  <circle cx="430" cy="118" r="1.6" opacity=".58"/><circle cx="590" cy="72" r="1.2" opacity=".47"/>
+  <circle cx="740" cy="128" r="1.5" opacity=".50"/><circle cx="910" cy="82" r="1.3" opacity=".55"/>
+  <circle cx="1070" cy="122" r="1.9" opacity=".52"/><circle cx="1230" cy="76" r="1.4" opacity=".60"/>
+  <circle cx="1390" cy="118" r="1.6" opacity=".58"/><circle cx="1510" cy="70" r="1.1" opacity=".42"/>
+  <circle cx="340" cy="155" r="1.0" opacity=".45"/><circle cx="820" cy="160" r="1.1" opacity=".42"/>
+</g>
+</svg>

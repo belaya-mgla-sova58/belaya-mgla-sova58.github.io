@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<defs>
+  <radialGradient id="g" cx="50%" cy="42%" r="60%"><stop offset="0" stop-color="#8ad8ff"/><stop offset=".45" stop-color="#6659ff"/><stop offset="1" stop-color="#172050"/></radialGradient>
+  <filter id="glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<circle cx="100" cy="100" r="84" fill="#101832" opacity=".9"/>
+<circle cx="100" cy="100" r="76" fill="url(#g)" stroke="#bfeaff" stroke-width="4" filter="url(#glow)"/>
+<path d="M58 69 45 45 73 58M142 69l13-24-28 13" fill="#eaf8ff" stroke="#bfd9ef" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="100" cy="96" rx="50" ry="48" fill="#f4fbff" stroke="#c6dff2" stroke-width="3"/>
+<circle cx="78" cy="91" r="20" fill="#dcefff"/><circle cx="122" cy="91" r="20" fill="#dcefff"/>
+<circle cx="78" cy="91" r="11" fill="#f7c94f"/><circle cx="122" cy="91" r="11" fill="#f7c94f"/>
+<circle cx="78" cy="91" r="5" fill="#101522"/><circle cx="122" cy="91" r="5" fill="#101522"/>
+<circle cx="74" cy="87" r="2.5" fill="#fff"/><circle cx="118" cy="87" r="2.5" fill="#fff"/>
+<path d="M93 104 100 111 107 104 100 100z" fill="#f39a31"/>
+<path d="M67 124c13 12 53 12 66 0-7 25-59 25-66 0z" fill="#d7eefb"/>
+<ellipse cx="100" cy="154" rx="39" ry="12" fill="#121a41" opacity=".65"/>
+<circle cx="100" cy="151" r="26" fill="#8b63ff" opacity=".25" filter="url(#glow)"/>
+<path d="M80 153c14-8 26-8 40 0-7 19-33 19-40 0z" fill="#91e7ff" opacity=".75"/>
+</svg>

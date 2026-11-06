@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+
+<html lang="ru"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><script id="view-mode-early-v622">(function(){try{var k='sova58-view-mode-v622',m=localStorage.getItem(k);if(m==='desktop'&&(matchMedia('(hover:none)').matches||matchMedia('(pointer:coarse)').matches||Math.min(screen.width||9999,screen.height||9999)<900)){var v=document.querySelector('meta[name=\"viewport\"]');if(v)v.setAttribute('content','width=1280, initial-scale=0.3, minimum-scale=0.1, maximum-scale=5, user-scalable=yes');document.documentElement.classList.add('force-desktop-root')}}catch(e){}})();</script><title>Белая мгла • Калькулятор Эссенции и Мифрила</title><!-- v112: events overview uses catalog icons only; decorative event-name emoji removed -->
+<!-- v119: merged approved header updates from v102-v104 onto v118 mobile branch -->
+<link href="site-v626.min.css?v=626" rel="stylesheet"/><link href="favicon.ico" rel="icon" sizes="any"/><link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/><link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="apple-touch-icon.png" rel="apple-touch-icon"/><script defer="" src="site-v629.min.js?v=629"></script><script defer="" src="notifications-v630.js?v=630"></script><meta content="Калькулятор Камней эссенции, Мифрила и мифического снаряжения: уровни Ковки мастерства 0–20, усиления красного снаряжения и остаток ресурсов." name="description"/><meta content="#031426" name="theme-color"/><meta content="website" property="og:type"/><meta content="Белая мгла · SOVA58" property="og:site_name"/><meta content="Белая мгла • Калькулятор Эссенции и Мифрила" property="og:title"/><meta content="Рассчитай Камни эссенции, Мифрил и мифическое снаряжение для нескольких предметов." property="og:description"/><meta content="https://belaya-mgla-sova58.github.io/essence-mithril-calculator.html" property="og:url"/><meta content="https://belaya-mgla-sova58.github.io/assets/img_55f2688a367250fb.webp" property="og:image"/><meta content="Белая мгла • Калькулятор Эссенции и Мифрила" property="og:image:alt"/><meta content="summary_large_image" name="twitter:card"/><meta content="Белая мгла • Калькулятор Эссенции и Мифрила" name="twitter:title"/><meta content="Калькулятор Камней эссенции, Мифрила и мифического снаряжения: Ковка мастерства 0–20, затраты на улучшения и остаток материалов." name="twitter:description"/><meta content="https://belaya-mgla-sova58.github.io/assets/img_55f2688a367250fb.webp" name="twitter:image"/><link href="https://belaya-mgla-sova58.github.io/essence-mithril-calculator.html" rel="canonical"/><style id="other-guide-icons-v376">
+.other-guide-icon-card{display:flex!important;align-items:center!important;gap:10px!important;}
+.other-guide-mini-icon{width:25px!important;height:25px!important;flex:0 0 25px!important;object-fit:contain!important;}
+@media(max-width:700px){.other-guide-mini-icon{width:23px!important;height:23px!important;flex-basis:23px!important}.other-guide-icon-card{gap:9px!important}}
+</style><link href="manifest-v541.webmanifest" rel="manifest"/><meta content="yes" name="mobile-web-app-capable"/><meta content="yes" name="apple-mobile-web-app-capable"/><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/><meta content="Белая Мгла" name="apple-mobile-web-app-title"/><!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "27839cc78a264d74992dd789027ce255"}'></script><!-- End Cloudflare Web Analytics -->
+<style id="fire-refine-planner-css-v1">
+.calc-refining-v1{margin:22px 0;border:1px solid rgba(141,176,210,.4);border-radius:18px;overflow:hidden;background:rgba(95,151,196,.08)}
+.calc-refining-v1>summary{padding:17px 20px;cursor:pointer;font-weight:800;font-size:1.07rem}
+.calc-refining-v1[open]>summary{border-bottom:1px solid rgba(141,176,210,.27)}
+.calc-refining-inner-v1{padding:18px 20px}
+.calc-refining-inner-v1>p{line-height:1.6;margin:0 0 13px}
+.calc-refining-controls-v1{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.calc-refining-controls-v1 label{display:flex;flex-direction:column;gap:7px;font-size:.95rem;font-weight:650}
+.calc-refining-controls-v1 input,.calc-refining-controls-v1 select{box-sizing:border-box;display:block;width:100%;padding:11px;border:1px solid rgba(127,158,190,.55);border-radius:10px;color:inherit;background:var(--card-bg,rgba(25,48,70,.25));font:inherit}
+.calc-refining-controls-v1 select option{background:#253e55;color:white}
+.calc-refining-grid-v1{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.calc-refining-grid-v1>div{display:flex;flex-direction:column;gap:5px;padding:13px;border:1px solid rgba(127,158,190,.3);border-radius:12px}
+.calc-refining-grid-v1 strong{font-size:1.4rem;font-variant-numeric:tabular-nums}
+.calc-refining-grid-v1 span{font-size:.85rem;line-height:1.25}
+.calc-refining-grid-v1 small{opacity:.75;font-size:.77rem}
+.calc-refining-caption-v1{margin-top:16px!important;font-weight:600}
+.calc-refining-guarantee-v1{margin:8px 0 14px;line-height:1.5}
+.calc-refining-fine-v1{font-size:.85rem;opacity:.84}
+.calc-refining-fine-v1 a{text-decoration:underline}
+@media(max-width:680px){.calc-refining-controls-v1,.calc-refining-grid-v1{grid-template-columns:1fr}.calc-refining-inner-v1{padding:14px}}
+</style>
+<style id="essence-mithril-calculator-v1">
+body.is-essence-mithril-calc-route .ec-shell{width:min(100%,960px);margin:0 auto 30px;padding:0 14px 80px;box-sizing:border-box;color:#e4f1f8}
+body.is-essence-mithril-calc-route .ec-hero{max-width:960px;margin:0 auto 20px;padding:23px 20px 19px;border:1px solid rgba(118,173,207,.29);border-radius:18px;background:linear-gradient(130deg,rgba(17,51,73,.97),rgba(9,27,46,.98));box-shadow:0 10px 30px rgba(0,0,0,.12)}
+body.is-essence-mithril-calc-route .ec-kicker{display:inline-flex;align-items:center;gap:6px;color:#9cdbf2;font-size:12px;letter-spacing:.09em;font-weight:800;text-transform:uppercase}
+body.is-essence-mithril-calc-route .ec-hero h1{margin:7px 0 9px;font-size:clamp(22px,4vw,32px);line-height:1.18;letter-spacing:-.02em;color:#f4f9ff}
+body.is-essence-mithril-calc-route .ec-hero p{margin:0;color:#b6d0de;line-height:1.56;font-size:14px}
+body.is-essence-mithril-calc-route .ec-panel{margin:0 0 15px;padding:18px;border:1px solid rgba(118,173,207,.23);border-radius:16px;background:linear-gradient(135deg,rgba(13,36,56,.97),rgba(9,26,42,.96));box-shadow:0 6px 25px rgba(0,0,0,.09)}
+body.is-essence-mithril-calc-route .ec-panel-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+body.is-essence-mithril-calc-route .ec-panel h2{font-size:18px;color:#f5f9ff;line-height:1.3;margin:0}
+body.is-essence-mithril-calc-route .ec-panel p{color:#b6cddd;line-height:1.55;font-size:13px;margin:4px 0 12px}
+body.is-essence-mithril-calc-route .ec-stock-grid,body.is-essence-mithril-calc-route .ec-result-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+body.is-essence-mithril-calc-route .ec-stock-grid label{display:grid;gap:7px;padding:12px;border:1px solid rgba(117,165,193,.22);border-radius:12px;background:rgba(7,24,40,.68);font-weight:700;font-size:13px;color:#d9ebf5}
+body.is-essence-mithril-calc-route .ec-field-title{display:flex;gap:7px;align-items:center}
+body.is-essence-mithril-calc-route input,body.is-essence-mithril-calc-route select{box-sizing:border-box;width:100%;height:43px;min-width:0;border:1px solid #365670;border-radius:9px;padding:8px 10px;background:#102d44;color:#f4f9fd;font-family:inherit;font-size:16px;font-weight:650;color-scheme:dark}
+body.is-essence-mithril-calc-route input:focus-visible,body.is-essence-mithril-calc-route select:focus-visible,body.is-essence-mithril-calc-route button:focus-visible{outline:3px solid #8dd1f2;outline-offset:2px}
+body.is-essence-mithril-calc-route button{min-height:40px;border-radius:10px;border:1px solid #54819b;padding:8px 13px;font-family:inherit;font-weight:750;font-size:13px;cursor:pointer}
+body.is-essence-mithril-calc-route .ec-primary{background:linear-gradient(130deg,#3286b4,#22648e);color:white}
+body.is-essence-mithril-calc-route .ec-secondary{background:#14364d;color:#dceff8}
+body.is-essence-mithril-calc-route .ec-remove{background:#1d3043;color:#f0c7c6;border-color:#674753;font-size:12px;min-height:34px}
+body.is-essence-mithril-calc-route .ec-panel-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+body.is-essence-mithril-calc-route .ec-item{border:1px solid rgba(120,175,201,.26);border-radius:14px;padding:14px;background:rgba(8,29,47,.86);margin-bottom:12px}
+body.is-essence-mithril-calc-route .ec-item-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+body.is-essence-mithril-calc-route .ec-item-title{font-weight:850;color:#e9f6ff;font-size:14px}
+body.is-essence-mithril-calc-route .ec-item-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+body.is-essence-mithril-calc-route .ec-item-grid label{display:grid;gap:7px;color:#bbd2df;font-size:12px;font-weight:750}
+body.is-essence-mithril-calc-route .ec-item-grid .ec-gear{grid-column:span 2}
+body.is-essence-mithril-calc-route .ec-item-grid .ec-pair-head{grid-column:1/-1;margin-top:5px;color:#93cbeb;font-size:12px;font-weight:850;letter-spacing:.025em}
+body.is-essence-mithril-calc-route .ec-item-grid .ec-pair-head strong{font-weight:650;color:#9daebb;margin-left:4px}
+body.is-essence-mithril-calc-route .ec-item-note{margin:10px 0 0;color:#8daebf;font-size:12px;line-height:1.5}
+body.is-essence-mithril-calc-route .ec-summary{background:linear-gradient(125deg,#123753,#0b243a);border-color:#3c6a85}
+body.is-essence-mithril-calc-route .ec-result{min-width:0;border-radius:12px;border:1px solid rgba(126,178,202,.26);padding:13px 11px;background:rgba(5,23,38,.7)}
+body.is-essence-mithril-calc-route .ec-result b{display:block;line-height:1.4;font-size:12px;color:#bed6e3}
+body.is-essence-mithril-calc-route .ec-result strong{display:block;margin:6px 0 6px;font-size:clamp(20px,3.7vw,27px);color:white;font-weight:850;font-variant-numeric:tabular-nums;word-break:break-word}
+body.is-essence-mithril-calc-route .ec-result small{display:block;line-height:1.4;font-size:12px;color:#a2bdce}
+body.is-essence-mithril-calc-route .ec-result .ec-deficit{font-weight:850;color:#ffccae}
+body.is-essence-mithril-calc-route .ec-result .ec-ok{font-weight:850;color:#a1e5cc}
+body.is-essence-mithril-calc-route .ec-step-card{padding:13px 14px;border:1px solid rgba(126,178,202,.2);border-radius:12px;background:#0a263d;margin:0 0 9px}
+body.is-essence-mithril-calc-route .ec-step-card h3{color:#eef8fd;font-size:15px;margin:0 0 6px}
+body.is-essence-mithril-calc-route .ec-step-card p{margin:0 0 6px;font-size:12px;color:#b4ccdd}
+body.is-essence-mithril-calc-route .ec-step-card ul{margin:8px 0 0;padding-left:18px;font-size:12px;line-height:1.7;color:#bed2df}
+body.is-essence-mithril-calc-route .ec-chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+body.is-essence-mithril-calc-route .ec-chip{font-size:11px;display:inline-flex;gap:4px;padding:5px 8px;border-radius:999px;background:#16415e;border:1px solid #376887;color:#e2f5ff;font-weight:800}
+body.is-essence-mithril-calc-route .ec-note{font-size:12px;padding:12px 14px;border-left:3px solid #7db5d6;border-radius:8px;background:#112e44;color:#c8dce9;line-height:1.65;margin:12px 0}
+body.is-essence-mithril-calc-route .ec-notice{font-size:13px;color:#b9d6e7;line-height:1.65}
+body.is-essence-mithril-calc-route .ec-table-wrap{width:100%;overflow-x:auto;border-radius:10px;border:1px solid #33536b}
+body.is-essence-mithril-calc-route .ec-table{border-collapse:collapse;width:100%;min-width:340px;background:#102d44;font-size:12px;color:#dceaf2}
+body.is-essence-mithril-calc-route .ec-table th,body.is-essence-mithril-calc-route .ec-table td{padding:9px 10px;border-bottom:1px solid #28495d;text-align:left}
+body.is-essence-mithril-calc-route .ec-table th{background:#173a53;color:#c0e6fb}
+body.is-essence-mithril-calc-route .ec-table td:last-child,body.is-essence-mithril-calc-route .ec-table th:last-child{text-align:right}
+body.is-essence-mithril-calc-route .ec-info-details{margin:14px 0 0;border-top:1px solid rgba(149,185,207,.2);padding-top:12px}
+body.is-essence-mithril-calc-route .ec-info-details summary{cursor:pointer;font-size:13px;font-weight:800;color:#b7dff6;padding:4px}
+body.is-essence-mithril-calc-route .ec-source{color:#9bbfd4!important;font-size:12px!important}
+body.is-essence-mithril-calc-route .ec-source a{color:#b5e1fb;text-decoration:underline}
+body.is-essence-mithril-calc-route .ec-status{margin:8px 0 0;min-height:18px;font-size:12px;color:#a7e8d1}
+@media(max-width:700px){
+ body.is-essence-mithril-calc-route .ec-shell{padding:0 9px 70px}
+ body.is-essence-mithril-calc-route .ec-hero{padding:17px 14px;border-radius:14px}
+ body.is-essence-mithril-calc-route .ec-panel{padding:14px;border-radius:13px}
+ body.is-essence-mithril-calc-route .ec-stock-grid,body.is-essence-mithril-calc-route .ec-result-grid{grid-template-columns:1fr}
+ body.is-essence-mithril-calc-route .ec-result{display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:10px}
+ body.is-essence-mithril-calc-route .ec-result strong{grid-column:2;grid-row:1/3;text-align:right;margin:0}
+ body.is-essence-mithril-calc-route .ec-item-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ body.is-essence-mithril-calc-route .ec-item-grid .ec-gear{grid-column:span 2}
+ body.is-essence-mithril-calc-route .ec-item-grid label[data-field-wrap="qty"]{grid-column:span 2}
+}
+@media(max-width:380px){
+ body.is-essence-mithril-calc-route .ec-panel-actions{width:100%}
+ body.is-essence-mithril-calc-route .ec-panel-actions button{flex:1}
+ body.is-essence-mithril-calc-route .ec-item-grid select{font-size:14px}
+}
+</style>
+
+<style id="ec-expansion-xp-v2">
+body.is-essence-mithril-calc-route #ecXpSection .ec-xp-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:12px 0 16px}
+body.is-essence-mithril-calc-route #ecXpSection .ec-xp-fields label{display:grid;gap:6px;padding:10px;border:1px solid rgba(117,165,193,.22);border-radius:10px;background:rgba(7,24,40,.68);font-weight:700;font-size:12px;color:#cbdde8}
+body.is-essence-mithril-calc-route #ecXpSection .ec-xp-fields select,body.is-essence-mithril-calc-route #ecXpSection .ec-xp-fields input{margin-top:3px}
+body.is-essence-mithril-calc-route #ecXpSection h3{font-size:15px;line-height:1.4;color:#cce6f5;margin:18px 0 8px}
+body.is-essence-mithril-calc-route #ecXpSection .ec-xp-total-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0}
+body.is-essence-mithril-calc-route #ecXpSection .ec-xp-value{min-width:0;background:rgba(12,46,67,.82);border:1px solid rgba(112,163,197,.25);padding:12px;border-radius:12px}
+body.is-essence-mithril-calc-route #ecXpSection .ec-xp-value span{display:block;color:#accde0;font-size:12px;margin-bottom:6px}
+body.is-essence-mithril-calc-route #ecXpSection .ec-xp-value strong{display:block;font-size:clamp(17px,2.4vw,24px);color:#f0faff;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+body.is-essence-mithril-calc-route #ecXpSection .ec-xp-missing{color:#ffcfad!important}
+body.is-essence-mithril-calc-route #ecXpSection .ec-xp-message{font-size:12px;color:#b0cbd9;line-height:1.55;margin:8px 0}
+@media(max-width:720px){
+body.is-essence-mithril-calc-route #ecXpSection .ec-xp-fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+body.is-essence-mithril-calc-route #ecXpSection .ec-xp-total-grid{grid-template-columns:1fr}
+body.is-essence-mithril-calc-route #ecXpSection .ec-xp-value{display:flex;align-items:center;justify-content:space-between;gap:10px}
+body.is-essence-mithril-calc-route #ecXpSection .ec-xp-value span{margin:0}
+body.is-essence-mithril-calc-route #ecXpSection .ec-xp-value strong{font-size:20px}
+}
+@media(max-width:390px){
+body.is-essence-mithril-calc-route #ecXpSection .ec-xp-fields{grid-template-columns:1fr}
+}
+</style>
+
+<style id="ec-simplify-mobile-v6">
+body.is-essence-mithril-calc-route .ec-shell{width:min(100%,720px);padding:0 12px 100px}
+body.is-essence-mithril-calc-route .ec-hero{margin-bottom:12px;padding:19px 20px}
+body.is-essence-mithril-calc-route .ec-hero h1{font-size:clamp(23px,4vw,29px)}
+body.is-essence-mithril-calc-route .ec-hero p{font-size:13px}
+body.is-essence-mithril-calc-route .ec-simple-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 14px}
+body.is-essence-mithril-calc-route .ec-simple-steps span{background:#173c56;border:1px solid #3a6983;border-radius:10px;padding:10px 5px;text-align:center;font-size:13px;color:#aad5ed}
+body.is-essence-mithril-calc-route .ec-simple-steps b{font-weight:750;color:#f2faff}
+body.is-essence-mithril-calc-route .ec-panel{margin-bottom:11px;padding:16px}
+body.is-essence-mithril-calc-route .ec-panel-head{margin-bottom:10px}
+body.is-essence-mithril-calc-route .ec-panel h2{font-size:18px}
+body.is-essence-mithril-calc-route .ec-simple-hint{margin:0 0 13px!important;font-size:12px!important}
+body.is-essence-mithril-calc-route .ec-item{padding:13px;margin-bottom:10px}
+body.is-essence-mithril-calc-route .ec-item-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+body.is-essence-mithril-calc-route .ec-item-grid label{min-width:0}
+body.is-essence-mithril-calc-route .ec-item-grid .ec-pair-head{margin-top:3px;padding:4px 0 0}
+body.is-essence-mithril-calc-route .ec-item-grid .ec-pair-head:not(:first-child){border-top:1px solid rgba(125,178,212,.20);margin-top:9px;padding-top:13px}
+body.is-essence-mithril-calc-route .ec-item-grid .ec-gear{grid-column:1/-1}
+body.is-essence-mithril-calc-route .ec-extra-grid{margin-top:13px}
+body.is-essence-mithril-calc-route .ec-fold{margin:0 0 11px;border:1px solid rgba(118,173,207,.24);border-radius:12px;background:#102f46;overflow:hidden}
+body.is-essence-mithril-calc-route .ec-fold>summary{cursor:pointer;list-style:none;padding:13px 15px;font-weight:750;font-size:13px;color:#bfe6fb;display:flex;align-items:center;justify-content:space-between;gap:10px}
+body.is-essence-mithril-calc-route .ec-fold>summary::-webkit-details-marker{display:none}
+body.is-essence-mithril-calc-route .ec-fold>summary::after{content:"⌄";font-size:21px;line-height:1;transition:transform .18s}
+body.is-essence-mithril-calc-route .ec-fold[open]>summary::after{transform:rotate(180deg)}
+body.is-essence-mithril-calc-route .ec-fold:focus-within{border-color:#639cbd}
+body.is-essence-mithril-calc-route .ec-fold>.ec-panel{margin:0;border:0;border-top:1px solid #34526a;border-radius:0;background:transparent;box-shadow:none}
+body.is-essence-mithril-calc-route #ecMoreItems .ec-panel-actions{margin:12px 14px}
+body.is-essence-mithril-calc-route .ec-item-extra{margin:13px 0 0;background:#0a2639}
+body.is-essence-mithril-calc-route .ec-item-extra .ec-item-grid{padding:0 13px 13px}
+body.is-essence-mithril-calc-route .ec-subtle-note{color:#a5bfd1!important;font-size:12px!important;margin:10px 14px!important}
+body.is-essence-mithril-calc-route #ecMoreResults .ec-panel{padding:11px}
+body.is-essence-mithril-calc-route #ecExperienceAdvanced .ec-panel{padding:13px}
+body.is-essence-mithril-calc-route .ec-knowledge-content{padding:7px}
+body.is-essence-mithril-calc-route .ec-knowledge-content .ec-panel{padding:13px}
+body.is-essence-mithril-calc-route .ec-stock-grid{gap:8px}
+body.is-essence-mithril-calc-route .ec-stock-grid label{padding:10px}
+body.is-essence-mithril-calc-route .ec-result-grid{gap:8px}
+body.is-essence-mithril-calc-route .ec-result{padding:11px 12px}
+body.is-essence-mithril-calc-route .ec-result strong{font-size:23px}
+@media(max-width:600px){
+body.is-essence-mithril-calc-route .ec-shell{padding:0 8px 78px}
+body.is-essence-mithril-calc-route .ec-panel{padding:12px}
+body.is-essence-mithril-calc-route .ec-simple-steps span{font-size:11px}
+body.is-essence-mithril-calc-route .ec-simple-steps b{display:block;font-size:11px}
+body.is-essence-mithril-calc-route .ec-item-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+body.is-essence-mithril-calc-route .ec-stock-grid{grid-template-columns:1fr}
+body.is-essence-mithril-calc-route .ec-stock-grid label{grid-template-columns:1fr 110px;align-items:center;gap:8px}
+body.is-essence-mithril-calc-route .ec-stock-grid label .ec-field-title{font-size:13px}
+body.is-essence-mithril-calc-route .ec-stock-grid label input{height:39px}
+body.is-essence-mithril-calc-route .ec-hero{padding:14px 13px}
+body.is-essence-mithril-calc-route .ec-item-extra .ec-item-grid{grid-template-columns:1fr}
+body.is-essence-mithril-calc-route .ec-item-grid label[data-field-wrap="qty"]{grid-column:auto}
+}
+@media(max-width:360px){
+body.is-essence-mithril-calc-route .ec-stock-grid label{grid-template-columns:1fr}
+body.is-essence-mithril-calc-route .ec-stock-grid label input{width:100%}
+body.is-essence-mithril-calc-route .ec-item-grid select{font-size:14px}
+}
+</style>
+
+<style id="ec-contrast-fix-v7">
+/* Force this calculator's optional rows to stay dark despite global details/summary styles. */
+body.is-essence-mithril-calc-route #ecApp details.ec-fold {
+  background:#0d2c45!important;
+  border:1px solid #396583!important;
+  border-radius:12px!important;
+  color:#eaf6ff!important;
+  box-shadow:0 3px 10px rgba(1,11,26,.18)!important;
+  overflow:hidden;
+}
+body.is-essence-mithril-calc-route #ecApp details.ec-fold>summary,
+body.is-essence-mithril-calc-route #ecApp details.ec-fold>summary:hover,
+body.is-essence-mithril-calc-route #ecApp details.ec-fold>summary:focus {
+  background:linear-gradient(105deg,#17435f,#123550)!important;
+  background-color:#17435f!important;
+  color:#f0faff!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  opacity:1!important;
+  font-weight:800!important;
+  font-size:14px!important;
+  line-height:1.5!important;
+  text-shadow:none!important;
+  padding:13px 15px!important;
+}
+body.is-essence-mithril-calc-route #ecApp details.ec-fold>summary *,
+body.is-essence-mithril-calc-route #ecApp details.ec-fold>summary::before,
+body.is-essence-mithril-calc-route #ecApp details.ec-fold>summary::after {
+  color:#c4f0ff!important;
+}
+body.is-essence-mithril-calc-route #ecApp details.ec-fold>summary::before {
+  content:none!important;
+  display:none!important;
+}
+body.is-essence-mithril-calc-route #ecApp details.ec-fold>summary::after {
+  content:"⌄"!important;
+  background:none!important;
+  width:auto!important;
+  height:auto!important;
+  font-size:21px!important;
+  border:none!important;
+  box-shadow:none!important;
+  margin-left:auto!important;
+}
+body.is-essence-mithril-calc-route #ecApp details.ec-fold[open]>summary {
+  background:linear-gradient(105deg,#235574,#1d496c)!important;
+  box-shadow:inset 3px 0 0 #5dc4ec!important;
+}
+body.is-essence-mithril-calc-route #ecApp #ecMoreItems>summary,
+body.is-essence-mithril-calc-route #ecApp #ecMoreResults>summary {
+  background:linear-gradient(110deg,#184667,#0f3c60)!important;
+}
+body.is-essence-mithril-calc-route #ecApp #ecExperienceAdvanced>summary {
+  background:linear-gradient(110deg,#36305f,#242a55)!important;
+}
+body.is-essence-mithril-calc-route #ecApp #ecMithrilAdvanced>summary {
+  background:linear-gradient(110deg,#34315f,#282c53)!important;
+}
+body.is-essence-mithril-calc-route #ecApp #ecKnowledgeFold>summary {
+  background:linear-gradient(110deg,#21475d,#16344d)!important;
+}
+body.is-essence-mithril-calc-route #ecApp .ec-item-extra>summary {
+  background:linear-gradient(110deg,#1c4059,#12334d)!important;
+}
+body.is-essence-mithril-calc-route #ecApp .ec-simple-steps span {
+  background:linear-gradient(135deg,#1f5375,#153d62)!important;
+  border-color:#457b9f!important;
+  color:#d9f3ff!important;
+}
+body.is-essence-mithril-calc-route #ecApp .ec-simple-steps b {color:white!important}
+body.is-essence-mithril-calc-route #ecApp .ec-item-grid .ec-pair-head {color:#83dafd!important;font-size:13px!important}
+body.is-essence-mithril-calc-route #ecApp .ec-item-grid .ec-pair-head:nth-of-type(2) {color:#c4a4ff!important}
+body.is-essence-mithril-calc-route #ecApp .ec-panel.ec-summary {
+  background:linear-gradient(145deg,#173e60,#0b2c49)!important;
+  border-color:#538fbd!important;
+}
+body.is-essence-mithril-calc-route #ecApp .ec-result strong {color:#fff!important}
+body.is-essence-mithril-calc-route #ecApp input,
+body.is-essence-mithril-calc-route #ecApp select {
+  background:#123650!important;
+  border-color:#4c7998!important;
+  color:#fff!important;
+}
+body.is-essence-mithril-calc-route #ecApp input:focus,
+body.is-essence-mithril-calc-route #ecApp select:focus {
+  border-color:#70c8f3!important;
+  outline:2px solid rgba(109,203,246,.45)!important;
+}
+@media(max-width:600px){
+  body.is-essence-mithril-calc-route #ecApp details.ec-fold>summary{font-size:13px!important;padding:12px 13px!important}
+  body.is-essence-mithril-calc-route #ecApp .ec-simple-steps b{font-size:11px!important}
+}
+</style>
+
+<style id="ec-vivid-contrast-v7">
+/* Local contrast layer: never change colors of the rest of the site. */
+body.is-essence-mithril-calc-route .ec-shell{
+ --em-cyan:#63dcff;--em-violet:#caa0ff;--em-gold:#ffe38e;--em-border:#4283ac;
+}
+body.is-essence-mithril-calc-route .ec-hero{
+ background:linear-gradient(125deg,#144977 0%,#103553 45%,#252b59 100%)!important;
+ border:1px solid #55b7e9!important;
+ box-shadow:0 10px 28px rgba(0,10,31,.3),inset 0 1px 0 rgba(160,230,255,.18)!important;
+}
+body.is-essence-mithril-calc-route .ec-kicker{color:#85e9ff!important;text-shadow:0 0 12px rgba(90,221,255,.25)}
+body.is-essence-mithril-calc-route .ec-hero h1{color:#fff!important}
+body.is-essence-mithril-calc-route .ec-hero p{color:#daedff!important}
+body.is-essence-mithril-calc-route .ec-simple-steps span{
+ color:#d1eaff!important;background:linear-gradient(145deg,#184b77,#1c355b)!important;
+ border-color:#3f8fbd!important;box-shadow:inset 0 1px 0 rgba(150,226,255,.14)!important
+}
+body.is-essence-mithril-calc-route .ec-simple-steps b{color:#fff!important}
+body.is-essence-mithril-calc-route .ec-panel{
+ background:linear-gradient(145deg,rgba(15,43,67,.98),rgba(12,35,59,.98))!important;
+ border-color:rgba(87,154,200,.56)!important;
+ box-shadow:0 5px 18px rgba(0,9,30,.18)!important
+}
+body.is-essence-mithril-calc-route .ec-panel h2{color:#f2faff!important}
+body.is-essence-mithril-calc-route .ec-simple-hint{color:#c7e6fa!important}
+body.is-essence-mithril-calc-route .ec-item{
+ background:#0c253e!important;border-color:#457ca0!important;
+ box-shadow:inset 0 1px 0 rgba(124,208,255,.1)!important;
+}
+body.is-essence-mithril-calc-route .ec-item-title{color:#fff!important}
+body.is-essence-mithril-calc-route .ec-pair-head{color:var(--em-cyan)!important;font-size:13px!important}
+body.is-essence-mithril-calc-route .ec-pair-head:nth-of-type(2){color:var(--em-violet)!important}
+body.is-essence-mithril-calc-route .ec-item-grid label{color:#d4eaf8!important}
+body.is-essence-mithril-calc-route .ec-item-grid select,
+body.is-essence-mithril-calc-route .ec-stock-grid input,
+body.is-essence-mithril-calc-route .ec-extra-grid input{
+ background:#0c324f!important;color:#fff!important;
+ border:1px solid #4b94c0!important;box-shadow:inset 0 1px 3px rgba(1,11,30,.35)!important
+}
+body.is-essence-mithril-calc-route .ec-item-grid select:focus,
+body.is-essence-mithril-calc-route .ec-stock-grid input:focus{
+ outline:2px solid #80e7ff!important;outline-offset:1px!important;border-color:#80e7ff!important
+}
+body.is-essence-mithril-calc-route .ec-stock-grid label{
+ background:#102e49!important;border:1px solid #3879a8!important;
+}
+body.is-essence-mithril-calc-route .ec-field-title{color:#edf9ff!important;font-weight:800!important}
+body.is-essence-mithril-calc-route .ec-summary{
+ background:linear-gradient(130deg,#0e4168,#122e59 72%,#232b60)!important;
+ border:1px solid #5bc4ed!important;
+ box-shadow:0 5px 24px rgba(0,22,59,.34),inset 0 1px 0 rgba(134,231,255,.15)!important
+}
+body.is-essence-mithril-calc-route .ec-summary .ec-result{
+ background:rgba(5,29,54,.74)!important;
+ border:1px solid #477ca8!important
+}
+body.is-essence-mithril-calc-route .ec-summary .ec-result:nth-child(1){border-top:3px solid #5ae1ff!important}
+body.is-essence-mithril-calc-route .ec-summary .ec-result:nth-child(2){border-top:3px solid #be8cff!important}
+body.is-essence-mithril-calc-route .ec-summary .ec-result:nth-child(3){border-top:3px solid #ffdf7b!important}
+body.is-essence-mithril-calc-route .ec-summary .ec-result b{color:#dfedff!important}
+body.is-essence-mithril-calc-route .ec-summary .ec-result strong{color:#fff!important;text-shadow:0 0 15px rgba(111,193,252,.16)}
+body.is-essence-mithril-calc-route .ec-result .ec-deficit{color:#ffd0b1!important}
+body.is-essence-mithril-calc-route .ec-result .ec-ok{color:#a1f6ce!important}
+body.is-essence-mithril-calc-route .ec-shell .ec-fold{
+ background:#112e4c!important;color:#e9f8ff!important;
+ border:1px solid #4f8eaf!important;border-radius:12px!important;
+ box-shadow:0 2px 9px rgba(0,11,28,.21)!important;
+}
+body.is-essence-mithril-calc-route .ec-shell .ec-fold>summary{
+ background:linear-gradient(115deg,#153d61,#1b3b64)!important;
+ background-color:#153d61!important;
+ color:#eaf8ff!important;
+ -webkit-text-fill-color:#eaf8ff!important;
+ border:0!important;box-shadow:none!important;
+ font-weight:800!important;font-size:13px!important;
+ min-height:48px!important;
+}
+body.is-essence-mithril-calc-route .ec-shell .ec-fold>summary:hover,
+body.is-essence-mithril-calc-route .ec-shell .ec-fold>summary:focus-visible{
+ background:linear-gradient(115deg,#215b84,#254e81)!important;
+ background-color:#215b84!important;color:#fff!important;
+ -webkit-text-fill-color:#fff!important
+}
+body.is-essence-mithril-calc-route .ec-shell .ec-fold>summary::before{
+ color:#082742!important;background:#85deff!important;
+ border:1px solid #c0f3ff!important;box-shadow:0 1px 5px rgba(0,14,32,.18)!important;
+ flex:0 0 24px!important;text-align:center!important;
+}
+body.is-essence-mithril-calc-route .ec-shell .ec-fold>summary::after{color:#b0eaff!important}
+body.is-essence-mithril-calc-route .ec-shell .ec-fold[open]>summary{
+ background:linear-gradient(115deg,#1d567c,#2b4578)!important;color:#fff!important
+}
+body.is-essence-mithril-calc-route .ec-shell .ec-fold>.ec-panel{
+ background:#102c46!important;border:0!important;box-shadow:none!important;
+}
+body.is-essence-mithril-calc-route .ec-shell .ec-fold .ec-panel h2{color:#f6fbff!important}
+body.is-essence-mithril-calc-route .ec-primary{
+ background:linear-gradient(125deg,#328dda,#166fba)!important;color:#fff!important;
+ border-color:#69caff!important
+}
+body.is-essence-mithril-calc-route .ec-secondary,
+body.is-essence-mithril-calc-route #ecCopy{
+ background:linear-gradient(125deg,#2269a1,#184d83)!important;
+ color:#fff!important;border-color:#5bb5ef!important
+}
+body.is-essence-mithril-calc-route .ec-shell button:hover{filter:brightness(1.13)}
+body.is-essence-mithril-calc-route .ec-shell a{color:#89e2ff}
+body.is-essence-mithril-calc-route .ec-note{background:#133650!important;color:#d9effe!important}
+@media(max-width:600px){
+ body.is-essence-mithril-calc-route .ec-shell .ec-fold>summary{padding:12px 13px!important}
+ body.is-essence-mithril-calc-route .ec-summary .ec-result strong{font-size:22px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ body.is-essence-mithril-calc-route .ec-shell .ec-fold>summary::before,
+ body.is-essence-mithril-calc-route .ec-shell .ec-fold>summary::after{transition:none!important}
+}
+</style>
+<style id="ec-mobile-usability-v8">
+/* Small-screen readability and tap targets; scoped to this calculator only. */
+@media(max-width:420px){
+ body.is-essence-mithril-calc-route #ecApp .ec-simple-steps{gap:6px}
+ body.is-essence-mithril-calc-route #ecApp .ec-simple-steps span{min-width:0;padding:10px 3px;line-height:1.3}
+ body.is-essence-mithril-calc-route #ecApp .ec-summary .ec-panel-head>button{width:100%;min-height:44px}
+ body.is-essence-mithril-calc-route #ecApp .ec-result-grid .ec-result{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+ body.is-essence-mithril-calc-route #ecApp .ec-result-grid .ec-result strong{grid-column:auto;grid-row:auto;max-width:100%;margin:0;text-align:left;overflow-wrap:anywhere}
+ body.is-essence-mithril-calc-route #ecApp .ec-result-grid .ec-result small,
+ body.is-essence-mithril-calc-route #ecApp .ec-item-title{overflow-wrap:anywhere}
+ body.is-essence-mithril-calc-route #ecApp .ec-fold>summary{overflow-wrap:anywhere}
+}
+@media(max-width:360px){
+ body.is-essence-mithril-calc-route #ecApp .ec-item-grid{grid-template-columns:minmax(0,1fr)}
+ body.is-essence-mithril-calc-route #ecApp .ec-item-grid .ec-gear,
+ body.is-essence-mithril-calc-route #ecApp .ec-item-grid label[data-field-wrap="qty"]{grid-column:auto}
+}
+</style>
+<style id="ec-render-stability-v9">
+/* Reduce graphics-layer glitches in Android emulators: no backdrop blur in calculator. */
+body.is-essence-mithril-calc-route .route-page.active,
+body.is-essence-mithril-calc-route #ecApp,
+body.is-essence-mithril-calc-route #ecApp .ec-hero,
+body.is-essence-mithril-calc-route #ecApp .ec-panel,
+body.is-essence-mithril-calc-route #ecApp .ec-item,
+body.is-essence-mithril-calc-route #ecApp .ec-fold,
+body.is-essence-mithril-calc-route #ecApp input,
+body.is-essence-mithril-calc-route #ecApp select,
+body.is-essence-mithril-calc-route #ecApp button {
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  content-visibility:visible!important;
+}
+body.is-essence-mithril-calc-route .route-page.active,
+body.is-essence-mithril-calc-route #ecApp .ec-hero,
+body.is-essence-mithril-calc-route #ecApp .ec-panel,
+body.is-essence-mithril-calc-route #ecApp .ec-item{
+  transform:none!important;
+  filter:none!important;
+  contain:none!important;
+}
+body.is-essence-mithril-calc-route #ecApp,
+body.is-essence-mithril-calc-route #ecApp .ec-panel,
+body.is-essence-mithril-calc-route #ecApp .ec-item{
+  box-sizing:border-box!important;
+  min-width:0!important;
+  min-height:0!important;
+}
+body.is-essence-mithril-calc-route #ecApp .ec-item-grid{
+  display:grid!important;
+  grid-auto-rows:max-content!important;
+  align-content:start!important;
+  align-items:start!important;
+}
+body.is-essence-mithril-calc-route #ecApp .ec-item-grid>label{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  justify-content:flex-start!important;
+  gap:7px!important;
+  min-width:0!important;
+  min-height:0!important;
+  height:auto!important;
+  margin:0!important;
+  position:static!important;
+}
+body.is-essence-mithril-calc-route #ecApp .ec-item-grid>label>span{
+  display:block!important;
+  position:static!important;
+  color:#d4eaf8!important;
+  line-height:1.35!important;
+}
+body.is-essence-mithril-calc-route #ecApp .ec-item-grid>label>select,
+body.is-essence-mithril-calc-route #ecApp .ec-item-grid>label>input {
+  position:static!important;
+  width:100%!important;
+  max-width:100%!important;
+  height:44px!important;
+  min-height:44px!important;
+  margin:0!important;
+}
+body.is-essence-mithril-calc-route #ecApp .ec-pair-head {
+  position:static!important;
+  min-width:0!important;
+  line-height:1.45!important;
+}
+@media(max-width:600px){
+ body.is-essence-mithril-calc-route #ecApp .ec-panel{overflow:visible!important}
+ body.is-essence-mithril-calc-route #ecApp .ec-item-grid{column-gap:9px!important;row-gap:11px!important}
+}
+</style>
+<style id="ec-android-paint-fix-v10">
+/* Android WebView / MEmu: avoid compositor holes on this calculator only.
+   Keep native page scrolling, all calculations and other site pages unchanged. */
+@media (max-width: 820px), (hover: none) and (pointer: coarse) {
+  body.is-essence-mithril-calc-route,
+  body.is-essence-mithril-calc-route #appMain,
+  body.is-essence-mithril-calc-route #appMain .route-page.active {
+    background-color: #07172e !important;
+    background-image: none !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    filter: none !important;
+    transform: none !important;
+    content-visibility: visible !important;
+    contain: none !important;
+    contain-intrinsic-size: none !important;
+    will-change: auto !important;
+  }
+  body.is-essence-mithril-calc-route .site-cosmic-background-v442 {
+    display: none !important;
+  }
+  body.is-essence-mithril-calc-route #ecApp,
+  body.is-essence-mithril-calc-route #ecApp .ec-hero,
+  body.is-essence-mithril-calc-route #ecApp .ec-panel,
+  body.is-essence-mithril-calc-route #ecApp .ec-item,
+  body.is-essence-mithril-calc-route #ecApp .ec-item-grid,
+  body.is-essence-mithril-calc-route #ecApp .ec-item-grid > label,
+  body.is-essence-mithril-calc-route #ecApp .ec-item-grid > .ec-pair-head,
+  body.is-essence-mithril-calc-route #ecApp .ec-item-extra,
+  body.is-essence-mithril-calc-route #ecApp .ec-fold {
+    content-visibility: visible !important;
+    contain: none !important;
+    contain-intrinsic-size: none !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    filter: none !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+  body.is-essence-mithril-calc-route #ecApp {
+    display: block !important;
+    width: 100% !important;
+    max-width: 720px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+  }
+  body.is-essence-mithril-calc-route #ecApp .ec-hero {
+    background: #133a60 !important;
+    border-color: #549bc9 !important;
+  }
+  body.is-essence-mithril-calc-route #ecApp .ec-panel {
+    background: #102a46 !important;
+    border-color: #407aa5 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+  body.is-essence-mithril-calc-route #ecApp .ec-item {
+    background: #0c2540 !important;
+    border-color: #427a9e !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  body.is-essence-mithril-calc-route #ecApp .ec-item-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2,minmax(0,1fr)) !important;
+    grid-auto-rows: max-content !important;
+    grid-auto-flow: row !important;
+    align-items: start !important;
+    gap: 10px !important;
+    height: auto !important;
+  }
+  body.is-essence-mithril-calc-route #ecApp .ec-item-grid > .ec-gear,
+  body.is-essence-mithril-calc-route #ecApp .ec-item-grid > .ec-pair-head {
+    grid-column: 1 / -1 !important;
+  }
+  body.is-essence-mithril-calc-route #ecApp .ec-item-grid > label {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    gap: 7px !important;
+    height: auto !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+  }
+  body.is-essence-mithril-calc-route #ecApp .ec-item-grid > label > span,
+  body.is-essence-mithril-calc-route #ecApp .ec-item-grid > .ec-pair-head {
+    display: block !important;
+    visibility: visible !important;
+    color: #e0f0ff !important;
+    opacity: 1 !important;
+    height: auto !important;
+    margin-bottom: 0 !important;
+  }
+  body.is-essence-mithril-calc-route #ecApp .ec-item-grid select,
+  body.is-essence-mithril-calc-route #ecApp .ec-item-grid input {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    margin: 0 !important;
+    background: #153954 !important;
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+  }
+  body.is-essence-mithril-calc-route #ecApp .ec-fold,
+  body.is-essence-mithril-calc-route #ecApp .ec-fold[open] {
+    background-color: #102e4b !important;
+  }
+  body.is-essence-mithril-calc-route #ecApp .ec-result {
+    background: #0c2a48 !important;
+    box-shadow: none !important;
+  }
+}
+@media (max-width: 360px) {
+  body.is-essence-mithril-calc-route #ecApp .ec-item-grid {
+    grid-template-columns: minmax(0,1fr) !important;
+  }
+}
+</style>
+</head><body class="is-other-route is-essence-mithril-calc-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="essence-mithril-calculator"><div aria-hidden="true" class="site-cosmic-background-v442"></div>
+<div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
+<button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
+<div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div>
+<a aria-label="На главную" href="index.html">⌂</a>
+</div>
+<div aria-hidden="true" class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<div class="nav-wrap"><img alt="Белая мгла" class="sidebar-exact-logo" data-src="assets/img_6dc1ef08d6ab264b.webp" decoding="async" fetchpriority="low" loading="lazy"/><nav><a class="route-link" href="index.html"><img alt="" aria-hidden="true" class="sidebar-color-icon home-v531-icon" decoding="async" loading="lazy" src="assets/ui-home-v534.webp"/><span>Главная</span></a><a class="route-link" href="events.html"><img alt="" aria-hidden="true" class="sidebar-color-icon home-v531-icon" decoding="async" loading="lazy" src="assets/ui-events-v534.webp"/><span>События</span></a><a class="route-link" href="heroes.html"><img alt="" aria-hidden="true" class="sidebar-color-icon home-v531-icon" decoding="async" loading="lazy" src="assets/ui-heroes-v534.webp"/><span>Герои</span></a><a class="route-link" href="gear.html"><img alt="" aria-hidden="true" class="sidebar-color-icon home-v531-icon" decoding="async" loading="lazy" src="assets/ui-gear-v534.webp"/><span>Снаряжение</span></a><a class="route-link" href="experts.html"><img alt="" aria-hidden="true" class="sidebar-color-icon home-v531-icon" decoding="async" loading="lazy" src="assets/ui-experts-v534.webp"/><span>Эксперты</span></a><a class="route-link" href="pets.html"><img alt="" aria-hidden="true" class="sidebar-color-icon home-v531-icon" decoding="async" loading="lazy" src="assets/ui-pets-v534.webp"/><span>Питомцы</span></a><a aria-current="page" class="route-link active route-link-calculator" href="calculators.html"><img alt="" aria-hidden="true" class="sidebar-color-icon home-v531-icon" decoding="async" loading="lazy" src="assets/ui-calculator-v534.webp"/><span>Калькуляторы</span></a><a class="route-link route-link-knowledge" href="other.html"><img alt="" aria-hidden="true" class="sidebar-color-icon home-v531-icon" decoding="async" loading="lazy" src="assets/ui-knowledge-v534.webp"/><span>База знаний</span></a></nav></div>
+<main id="appMain"><div class="site-search-v426" data-site-search="">
+<div class="site-search-box-v426">
+<span aria-hidden="true" class="site-search-icon-v426">⌕</span>
+<input aria-expanded="false" aria-label="Поиск по сайту" autocomplete="off" class="site-search-input-v426" inputmode="search" placeholder="Поиск по сайту..." spellcheck="false" type="search"/>
+<button aria-label="Очистить поиск" class="site-search-clear-v426" type="button">×</button>
+</div>
+<div aria-label="Результаты поиска" class="site-search-results-v426" role="listbox"></div>
+</div>
+<div class="route-page active" data-route="essence-mithril-calculator">
+<nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><a href="other.html#kb-calculators">Калькуляторы</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><span aria-current="page">Эссенция и Мифрил</span></nav>
+<div class="ec-shell" id="ecApp">
+<header class="ec-hero">
+<span class="ec-kicker">🦉 Простой калькулятор</span>
+<h1>Эссенция и Мифрил</h1>
+<p>Выбери уровни, введи запас материалов и узнай, сколько нужно.</p>
+</header>
+<div id="ecSimpleGuideV6" class="ec-simple-steps" aria-label="Шаги"><span>1 <b>Улучшение</b></span><span>2 <b>Запасы</b></span><span>3 <b>Итог</b></span></div>
+<section class="ec-panel" aria-labelledby="ecItemsTitle">
+<div class="ec-panel-head"><h2 id="ecItemsTitle">1. Что улучшаем?</h2></div>
+<p class="ec-simple-hint">Выбери текущий уровень и цель. Если красное снаряжение пока не планируешь, оставь «Не планирую».</p>
+<div id="ecItems"></div>
+<details class="ec-fold" id="ecMoreItems">
+<summary>➕ Добавить предмет или сбросить</summary>
+<div class="ec-panel-actions" style="margin:12px 15px">
+<button class="ec-primary" type="button" id="ecAdd">+ Ещё предмет</button>
+<button class="ec-secondary" type="button" id="ecReset">Сбросить всё</button>
+</div>
+<p class="ec-subtle-note">Можно посчитать несколько предметов с разными уровнями.</p>
+</details>
+<details class="ec-fold"><summary>ℹ️ Что требуется для красного снаряжения?</summary>
+<div class="ec-note">Перед переходом в красное нужны золотое усиление +100 и Ковка 10. Для укреплений красного +20...+100 требуется Ковка 11–15. Опыт обычного усиления рассчитывается отдельно.</div></details>
+</section><section class="ec-panel" aria-labelledby="ecInventoryTitle">
+<div class="ec-panel-head"><h2 id="ecInventoryTitle">2. Что уже есть?</h2></div>
+<div class="ec-stock-grid">
+<label><span class="ec-field-title">💎 Камни эссенции</span><input type="number" inputmode="numeric" min="0" step="1" max="999999999" id="ecStockEssence" value="0"/></label>
+<label><span class="ec-field-title">🟣 Мифрил</span><input type="number" inputmode="numeric" min="0" step="1" max="999999999" id="ecStockMithril" value="0"/></label>
+<label><span class="ec-field-title">🟨 Мифическое снаряжение</span><input type="number" inputmode="numeric" min="0" step="1" max="999999999" id="ecStockMythic" value="0"/></label>
+</div>
+</section>
+<section class="ec-panel ec-summary" aria-labelledby="ecResultTitle">
+<div class="ec-panel-head"><h2 id="ecResultTitle">3. Результат</h2><button class="ec-secondary" id="ecCopy" type="button">⧉ Скопировать расчёт</button></div>
+<div class="ec-result-grid" aria-live="polite">
+<div class="ec-result"><b>💎 Камни эссенции</b><strong id="ecNeedEssence">0</strong><small id="ecLeftEssence">Из запаса: 0</small></div>
+<div class="ec-result"><b>🟣 Мифрил</b><strong id="ecNeedMithril">0</strong><small id="ecLeftMithril">Из запаса: 0</small></div>
+<div class="ec-result"><b>🟨 Мифическое снаряжение</b><strong id="ecNeedMythic">0</strong><small id="ecLeftMythic">Из запаса: 0</small></div>
+</div>
+<p class="ec-status" role="status" aria-live="polite" id="ecStatus"></p>
+</section>
+
+<details class="ec-fold ec-panel-disclosure" id="ecMoreResults">
+<summary>🔍 Подробнее по каждому предмету</summary><section class="ec-panel" aria-labelledby="ecBreakdownTitle">
+<div class="ec-panel-head"><h2 id="ecBreakdownTitle">📝 По каждому предмету</h2></div>
+<div id="ecBreakdown"></div>
+</section>
+
+</details>
+<details class="ec-fold ec-panel-disclosure" id="ecMithrilAdvanced">
+<summary>⚙️ Настройка первого укрепления +20</summary><section class="ec-panel" aria-labelledby="ecProfileTitle">
+<h2 id="ecProfileTitle">Настройка первого укрепления</h2>
+<p>Большинство проверенных таблиц указывает 3 мифических предмета для красного +20, но в одной базе встречается 5. Выбери число, которое показывает RU-версия твоей игры. Итог автоматически пересчитается.</p>
+<div class="ec-stock-grid"><label><span class="ec-field-title">🟨 На первое укрепление +20</span><select id="ecFirstGateMythic" aria-label="Стоимость первого укрепления в мифических предметах"><option value="3">3 мифических (основной вариант)</option><option value="5">5 мифических (альтернативный)</option></select></label></div>
+<div class="ec-note">Официальная справка подтверждает пять этапов укрепления, но не приводит таблицу точной стоимости каждого. <a href="https://centurygames.helpshift.com/hc/ru/64-whiteout-survival/faq/6721-what-is-gear-empowerment/" target="_blank" rel="noopener noreferrer">Проверить описание разработчика</a>.</div>
+</section>
+</details>
+<details class="ec-fold ec-panel-disclosure" id="ecExperienceAdvanced">
+<summary>⚡ Посчитать опыт усиления снаряжения</summary><section class="ec-panel" id="ecXpSection" aria-labelledby="ecXpTitle">
+<div class="ec-panel-head"><h2 id="ecXpTitle">⚡ Опыт усиления снаряжения</h2><button type="button" id="ecXpCopy" class="ec-secondary">⧉ Скопировать опыт</button></div>
+<p>Точный расчёт по двум опубликованным таблицам: обычное усиление <b>золотого предмета 0–100</b> и отдельное усиление <b>красного предмета 1–100</b>. Здесь считаются только очки опыта, без Камней эссенции, Мифрила и прочих материалов. Выбери реальные уровни и свой запас.</p>
+<div class="ec-xp-fields">
+<label>Сколько предметов с одинаковым планом?<select id="ecXpQuantity"></select></label>
+<label>Отдельный запас опыта (в очках)<input id="ecXpStock" type="number" min="0" max="999999999" step="1" inputmode="numeric" value="0"/></label>
+</div>
+<details class="ec-info-details" id="ecXpFeed">
+<summary>🎒 Посчитать опыт из предметов моего инвентаря</summary>
+<p>Введи <b>количество предметов</b>, а не очков. Расчёт автоматически переведёт их в опыт и добавит к отдельному запасу выше.</p>
+<div class="ec-xp-fields">
+<label>Серое снаряжение (10 опыта)<input id="ecXpFeedCommon" type="number" inputmode="numeric" min="0" max="9999999" step="1" value="0"/></label>
+<label>Зелёное (30 опыта)<input id="ecXpFeedUncommon" type="number" inputmode="numeric" min="0" max="9999999" step="1" value="0"/></label>
+<label>Синее (60 опыта)<input id="ecXpFeedRare" type="number" inputmode="numeric" min="0" max="9999999" step="1" value="0"/></label>
+<label>Фиолетовое (150 опыта)<input id="ecXpFeedEpic" type="number" inputmode="numeric" min="0" max="9999999" step="1" value="0"/></label>
+<label>Компоненты опыта по 10<input id="ecXpFeedComponent10" type="number" inputmode="numeric" min="0" max="9999999" step="1" value="0"/></label>
+<label>Компоненты опыта по 100<input id="ecXpFeedComponent100" type="number" inputmode="numeric" min="0" max="9999999" step="1" value="0"/></label>
+</div>
+<p class="ec-xp-message">Вещи остаются в инвентаре до момента использования. Калькулятор показывает их потенциальную стоимость, а не расходует их. <b>Опыт из предметов: <output id="ecXpFeedTotal">0</output>.</b></p>
+</details>
+<h3>🟡 Золотое снаряжение</h3>
+<div class="ec-xp-fields">
+<label>Текущий уровень<select id="ecXpGoldFrom"></select></label>
+<label>Нужный уровень<select id="ecXpGoldTo"></select></label>
+</div>
+<h3>🔴 Красное снаряжение</h3>
+<div class="ec-xp-fields">
+<label>Считать усиление красного?<select id="ecXpRedEnabled"><option value="1">Да</option><option value="0">Нет</option></select></label>
+<label>Текущий уровень<select id="ecXpRedFrom"></select></label>
+<label>Нужный уровень<select id="ecXpRedTo"></select></label>
+</div>
+<p class="ec-xp-message">Первый уровень красного снаряжения выдаётся при повышении золотого. В таблице опыта расчёт начинается с уровня <b>1</b>. Переходы на +20, +40, +60, +80, +100 оплачиваются Мифрилом и мифическим снаряжением в основном блоке выше, поэтому здесь они добавляют <b>0 опыта</b>.</p>
+<div class="ec-xp-total-grid" aria-live="polite">
+<div class="ec-xp-value"><span>🟡 Опыт золотого</span><strong id="ecXpGoldNeed">0</strong></div>
+<div class="ec-xp-value"><span>🔴 Опыт красного</span><strong id="ecXpRedNeed">0</strong></div>
+<div class="ec-xp-value"><span>⚡ Всего опыта</span><strong id="ecXpTotalNeed">0</strong></div>
+</div>
+<div class="ec-xp-total-grid" aria-live="polite">
+<div class="ec-xp-value"><span>📦 Есть опыта</span><strong id="ecXpHave">0</strong></div>
+<div class="ec-xp-value"><span>📉 Не хватает</span><strong class="ec-xp-missing" id="ecXpMissing">0</strong></div>
+<div class="ec-xp-value"><span>📈 Останется после улучшения</span><strong id="ecXpSurplus">0</strong></div>
+</div>
+<div class="ec-panel-actions"><button type="button" class="ec-secondary" id="ecXpReset">Сбросить расчёт опыта</button><span class="ec-status" role="status" aria-live="polite" id="ecXpStatus"></span></div>
+<details class="ec-info-details"><summary>📋 Как считается опыт и что можно использовать</summary>
+<p>Золотое 0→100: <b>73 320 опыта</b>. Красное 1→100: <b>502 000 опыта</b>. Полный путь по обеим шкалам: <b>575 320 опыта</b> на один предмет (плюс отдельные материалы Ковки, повышения и укрепления).</p>
+<p>Для усиления можно использовать предметы опыта по 10 или 100 единиц, а также ненужное снаряжение: серое даёт 10, зелёное 30, синее 60, фиолетовое 150 опыта. При обычной перековке доступного золотого снаряжения возвращается 100% потраченного опыта; перековка мастерства возвращает только 50% Камней эссенции. <b>Важно:</b> по свидетельствам игроков, после повышения предмета до красного обычная перековка его опыта недоступна. Поэтому до повышения в красное проверь, правильно ли распределён опыт.</p>
+<p class="ec-source">Таблицы: <a href="https://whiteoutdata.com/data/hero-gear-xp-chart/" target="_blank" rel="noopener noreferrer">обычное усиление 1–100</a> · <a href="https://wos.h5joy-games.com/gears/hero-gears/" target="_blank" rel="noopener noreferrer">красное усиление 1–100</a> · <a href="https://www.bluestacks.com/blog/updates/white-out-survival/wos-ramadan-update-en.html" target="_blank" rel="noopener noreferrer">изменения перековки</a>.</p>
+<p class="ec-source">Данные получены из сторонних игровых таблиц. Перед крупным расходом в RU-версии сверь отображаемую стоимость с игрой. Если опыт уже частично вложен в текущий уровень, калькулятор не вычитает этот остаток автоматически.</p>
+</details>
+</section>
+</details>
+<details class="ec-fold ec-panel-disclosure ec-knowledge" id="ecKnowledgeFold">
+<summary>📚 Гайды, RU-магазины и таблицы</summary><div class="ec-knowledge-content"><section class="ec-panel" id="ecRuShopScreenshotsV5" aria-labelledby="ecRuShopTitle">
+<h2 id="ecRuShopTitle">📸 Источники Эссенции в RU: проверено по экрану игры</h2>
+<p>Сверено по предоставленным скриншотам русского игрового интерфейса от <b>5 ноября 2026 года</b>. Это прямое наблюдение в игре, а не перевод зарубежного гайда. Номер государства на скриншотах не указан.</p>
+<div class="ec-note"><b>Подтверждённые источники Камней эссенции в самом описании предмета:</b> <b>Охота на медведя</b>, <b>Тайный магазин</b> и <b>Магазин литейной</b>. Другие магазины по этим кадрам не подтверждаются.</div>
+<p><b>Стоимость текущего действия Ковки:</b> на одном снимке видно <b>12 / 24 Камней эссенции</b>. Это означает, что на экране есть 12 камней при требуемых 24. На снимке не показан точный номер уровня/подэтапа, поэтому привязывать 24 к определённой Ковке без дополнительного экрана нельзя.</p>
+<div class="ec-table-wrap"><table class="ec-table"><thead><tr><th>RU-предложение</th><th>Что видно</th><th>Цена</th></tr></thead><tbody>
+<tr><td>Мастерство кузнеца</td><td>10 Камней эссенции и сопутствующие награды; ограничение 1 покупка за неделю</td><td>449 ₽</td></tr>
+<tr><td>Укрепление снаряжения</td><td>1 фиолетовый материал укрепления и сопутствующие награды; ограничение 1 покупка за неделю. Название материала без карточки предмета ещё не подтверждено</td><td>449 ₽</td></tr>
+<tr><td>Карта снаряжения на неделю</td><td>7 сундуков сразу; в ежедневных наградах изображён 1 Камень эссенции и другие предметы; срок действия 7 дней</td><td>449 ₽</td></tr>
+</tbody></table></div>
+<p class="ec-source"><b>Внимание:</b> это платные и временные предложения, а не постоянные цены отдельных предметов. Надпись <b>💎 2 500</b> в карточках не является подтверждением альтернативной цены в алмазах: кнопка покупки показывает рубли. Наличие и комплектация предложений могут измениться.</p>
+<p class="ec-source">Для проверки Мифрила: открой описание фиолетового предмета в карточке «Укрепление снаряжения» и его список «Источник». Это поможет подтвердить название и бесплатные способы получения без догадок.</p>
+</section>
+<section class="ec-panel" id="ecRuVerificationV3" aria-labelledby="ecRuVerifyTitle">
+<h2 id="ecRuVerifyTitle">🔎 Проверка для RU-версии</h2>
+<p><b>Подтверждено описанием обновления российского приложения:</b> начиная с 4-го уровня мастерства улучшение разбивается на подэтапы. <b>Общая стоимость Ковки при этом не меняется</b>. В калькуляторе промежуточные шаги вычитают уже вложенные Камни эссенции, но не увеличивают итог на весь уровень. <a href="https://apps.apple.com/ru/app/%D0%B1%D0%B5%D0%BB%D0%B0%D1%8F-%D0%BC%D0%B3%D0%BB%D0%B0-%D0%B2%D1%8B%D0%B6%D0%B8%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5/id6748215412" target="_blank" rel="noopener noreferrer">История обновлений российского приложения</a>.</p>
+<p><b>Подтверждено несколькими справочниками, но не отдельным скриншотом из 58-го:</b> для Ковки 11–20 стандартные полные цены 110, 120, 130, 140, 150, 160, 170, 180, 190 и 200 Камней; мифических предметов соответственно 1–10. Эти данные одинаковы у <a href="https://whiteoutdata.com/others/mastery-forging/" target="_blank" rel="noopener noreferrer">WhiteoutData</a>, <a href="https://papazot.com/hero-gear" target="_blank" rel="noopener noreferrer">PapaZot</a> и <a href="https://mobi.gg/en/tips/whiteout-survival-hero-gear-guide/" target="_blank" rel="noopener noreferrer">Mobi.gg</a>.</p>
+<p><b>Первое укрепление красного +20:</b> опубликованные русскоязычные гайды и большинство справочников указывают <b>10 Мифрила + 3 мифических предмета</b>. <a href="https://whiteoutdata.com/items/mithril/" target="_blank" rel="noopener noreferrer">Одна старая таблица от 15 июня 2024 года</a> указывает 5 предметов. Поэтому в расчёте основной вариант 3, а альтернативный 5 оставлен для сравнения. <b>Точной стоимости для государственного RU-58 без снимка игрового окна подтвердить пока нельзя.</b></p>
+<div class="ec-note"><b>Статус проверки:</b> появление подэтапов и неизменность полной стоимости подтверждены в RU. Поэтапное списание мифических предметов теперь взято из подробной таблицы сообщества и совпадает с полными расходами, но скриншот из RU-58 всё ещё не найден. Первое красное +20 по большинству источников требует 3 мифических предмета; альтернативные 5 можно выбрать выше.</div>
+</section>
+<section class="ec-panel" id="ecReforgeWarningV4" aria-labelledby="ecReforgeTitle">
+<h2 id="ecReforgeTitle">⚠️ Перед превращением золотого предмета в красный</h2>
+<p>Судя по нескольким независимым рассказам игроков, <b>после перехода в красное снаряжение обычная перековка с возвратом опыта недоступна</b>. Это практическое наблюдение игроков, не отдельный ответ разработчика. Если хочешь перенести опыт усиления между предметами, проверь возможность перековки <b>до повышения в красное</b>. <a href="https://www.reddit.com/r/whiteoutsurvival/comments/1tfsdyz/niche_question_when_upgrading_legendary_to_mythic/" target="_blank" rel="noopener noreferrer">Обсуждение с опытом игроков</a> · <a href="https://www.reddit.com/r/whiteoutsurvival/comments/1k7i32l/" target="_blank" rel="noopener noreferrer">Ещё одно подтверждение</a>.</p>
+<p><b>Первый рубеж +20:</b> в подробном гайде игрока и русскоязычной статье совпадают <b>Ковка 11 (110 Камней эссенции и 1 мифический предмет)</b> и отдельное укрепление <b>10 Мифрила и 3 мифических предмета</b>. Эти затраты складываются, но нельзя приписывать все четыре предмета только Мифрилу. <a href="https://www.reddit.com/r/whiteoutsurvival/comments/1fhpyqu/" target="_blank" rel="noopener noreferrer">Рассказ игрока</a> · <a href="https://app-time.ru/article/gayd-pro-snaryazhenie-geroev-i-kamni-essencii-v-whiteout-survival" target="_blank" rel="noopener noreferrer">Русскоязычный гайд</a>.</p>
+<div class="ec-note">В открытой <a href="https://github.com/chiefpansancolt/whiteout-survival-data/blob/main/src/modules/hero-gear-mastery-forging/README.md" target="_blank" rel="noopener noreferrer">таблице из 84 этапов</a> перечислены расходы на каждом шаге, включая частичную Ковку 11–20. Пример 11 → 12: один мифический предмет на 11.3 и один на 12.0. В калькуляторе теперь используется именно поэтапная схема. Она согласуется с полными ценами 110–200 камней и 1–10 мифических предметов, но ещё не подтверждена экраном из RU-58.</div>
+</section>
+<section class="ec-panel" id="ecResearchNotes" aria-labelledby="ecResearchTitle">
+<h2 id="ecResearchTitle">🦉 Что важно знать перед улучшением</h2>
+<p><b>Ковка и красное снаряжение:</b> Ковка доступна на мифическом снаряжении от уровня усиления +20 при Топке 20. Для превращения предмета в красный нужны уровень усиления +100, Ковка 10 и ещё 2 мифических предмета. Открытие красного снаряжения также зависит от возраста государства.</p>
+<div class="ec-chips"><span class="ec-chip">Ковка 0 → 10: 550 камней</span><span class="ec-chip">Ковка 0 → 15: 1 200 камней и 15 мифических</span><span class="ec-chip">Красное +0 → +100: 150 Мифрила</span></div>
+<p><b>Полный путь одного предмета с Ковки 0 до красного +100:</b> 1 200 Камней эссенции, 150 Мифрила и <b>50 либо 52 дополнительных мифических предмета</b>, в зависимости от расхода на первое укрепление. Для этого дополнительно нужны материалы обычного усиления сначала до +100 на золотом предмете, а затем внутри красных этапов. Эти обычные материалы калькулятор пока не считает.</p>
+<p><b>Промежуточные этапы Ковки:</b> начиная с 4-го уровня следующий уровень разбит на пять шагов. По открытой базе из 84 строк калькулятор считает Камни эссенции и мифические предметы <b>по каждому ещё не завершённому шагу</b>. Например, переход 11 → 12 требует 120 камней и 2 мифических предмета: один на 11.3, другой при завершении 12. Данные сообщества требуют проверки по игровому интерфейсу RU-58. <a href="https://github.com/chiefpansancolt/whiteout-survival-data/blob/main/src/modules/hero-gear-mastery-forging/README.md" target="_blank" rel="noopener noreferrer">Источник поэтапной таблицы</a>.</p>
+<p><b>Где искать материалы именно в RU:</b> описание Камней эссенции на скриншоте от 05.11.2026 прямо называет <b>Охоту на медведя, Тайный магазин и Магазин литейной</b>. Камни также видны в некоторых временных платных предложениях. Источники Мифрила и его магазинные цены в RU по этим скриншотам пока не установлены: фиолетовый материал на карточке «Укрепление снаряжения» требует проверки названия.</p>
+<p><b>Когда тратить:</b> дорогую прокачку выгоднее совмещать с подходящими заданиями развития и подготовки к СВС. Для 58-го государства ориентируйся на <b>условия текущего запуска RU-события</b>, а не на старое расписание глобальной версии.</p>
+<div class="ec-note"><b>Разница в источниках:</b> большинство таблиц указывают для первого усиления красного снаряжения +20 <b>10 Мифрила и 3 мифических предмета</b>, но отдельная база приводит 5. По умолчанию выбран вариант 3, но выше можно переключить стоимость на 5. Перед дорогим улучшением проверь точное число во внутриигровом окне.</div>
+<p class="ec-source">Подробности: <a href="https://centurygames.helpshift.com/hc/en/64-whiteout-survival/faq/6720-how-to-unlock-gear-ascension/" target="_blank" rel="noopener noreferrer">условия открытия, справка разработчика</a> · <a href="https://centurygames.helpshift.com/hc/en/64-whiteout-survival/faq/6721-what-is-gear-empowerment/" target="_blank" rel="noopener noreferrer">пять усилений, справка разработчика</a> · <a href="https://whiteoutdata.com/items/essence-stones/" target="_blank" rel="noopener noreferrer">расходы Камней эссенции</a> · <a href="https://www.whiteoutsurvival.wiki/items/mithril/" target="_blank" rel="noopener noreferrer">таблица Мифрила</a>.</p>
+<p><b>Уточнение от разработчика:</b> перекованное мифическое снаряжение разрешено использовать как материал для повышения и укрепления. <a href="https://centurygames.helpshift.com/hc/ru/64-whiteout-survival/faq/6723-can-reforged-mythic-gear-be-used-as-materials-for-gear-ascension-and-empowerment/" target="_blank" rel="noopener noreferrer">Официальный ответ</a>.</p>
+<p><b>Этапы Мифрила:</b> после перехода в красное предмет сначала усиливают обычными материалами до +19, +39, +59, +79 или +99. Мифрил и мифическое снаряжение расходуются при переходе к +20, +40, +60, +80 или +100.</p>
+<h3 style="font-size:15px;color:#cce6f5;margin:16px 0 8px">📌 Планирование Мифрила без лишних затрат</h3>
+<p><b>До красного +60:</b> на три укрепления нужно 10 + 20 + 30 = <b>60 Мифрила</b> и 3 + 5 + 5 = <b>13 мифических предметов</b> (без двух предметов на первоначальное повышение). При выборе альтернативной стоимости первого укрепления потребуется 15 мифических предметов. Ещё понадобятся нужные уровни Ковки и опыт усиления.</p>
+<p><b>От +60 до +100:</b> следующие два укрепления требуют дополнительно <b>90 Мифрила</b> и 20 мифических предметов. Поэтому игроку с ограниченным запасом стоит отдельно сравнить выгоду от первого +20 или +60 на другом важном предмете и продолжения до +100 на одном.</p>
+<p><b>Снаряжение как материал:</b> в официальных заметках об обновлении от февраля 2024 года разработчики разрешили использовать мифическое снаряжение с Ковкой <b>не выше 10</b> как материал Ковки. При перековке обычного усиления доступного золотого снаряжения возвращается весь потраченный опыт, а при перековке Ковки только 50% Камней эссенции. Для красного снаряжения игроки сообщают об отсутствии обычной перековки; возврат Мифрила также не подтверждён. <a href="https://www.bluestacks.com/blog/updates/white-out-survival/wos-ramadan-update-en.html" target="_blank" rel="noopener noreferrer">Разбор опубликованных заметок обновления</a>.</p>
+<div class="ec-note"><b>Почему числа Ковки не меняем:</b> справочники <a href="https://whiteoutdata.com/others/mastery-forging/" target="_blank" rel="noopener noreferrer">Белая мгла Data</a> и <a href="https://www.whiteoutsurvival.wiki/hero-gears/hero-gear/" target="_blank" rel="noopener noreferrer">игровая вики с пошаговой таблицей</a> дают полную стоимость уровней 1–20 по схеме 10, 20, 30 … 200 Камней. Но <a href="https://www.whiteoutsurvival-community.com/tools/wiki/hero-gear-db.html" target="_blank" rel="noopener noreferrer">другая база, обновлённая 4 ноября 2026 года</a>, приводит отличающиеся значения. Для RU-версии точное окно расхода в самой игре остаётся главным ориентиром; числовую формулу автоматически не заменяем по одному противоречивому источнику.</div>
+</section>
+<section class="ec-panel" aria-labelledby="ecRulesTitle">
+<h2 id="ecRulesTitle">📚 Таблицы расходов</h2>
+<p>Все цифры относятся к одному предмету. Камни эссенции расходуются на каждый следующий уровень Ковки, Мифрил только на определённых этапах усиления красного снаряжения.</p>
+<details class="ec-info-details"><summary>💎 Ковка мастерства: уровни 1–20</summary>
+<div class="ec-table-wrap"><table class="ec-table"><thead><tr><th>Уровень Ковки</th><th>Камни</th><th>Мифические предметы</th></tr></thead><tbody id="ecEssenceTable"></tbody></table></div>
+</details>
+<details class="ec-info-details"><summary>🟣 Мифрил: этапы +20, +40, +60, +80, +100</summary>
+<div class="ec-table-wrap"><table class="ec-table"><thead><tr><th>Этап</th><th>Мифрил</th><th>Мифические предметы</th><th>Нужная Ковка</th></tr></thead><tbody id="ecMithrilTable"></tbody></table></div>
+<p class="ec-source">Переход из мифического в красное: ещё 2 мифических предмета. Они включаются в расчёт, если выбран переход в красное.</p>
+</details>
+<p class="ec-source">Источник таблиц: <a href="https://whiteoutdata.com/items/essence-stones/" target="_blank" rel="noopener noreferrer">Камни эссенции</a> и <a href="https://www.whiteoutsurvival.wiki/items/mithril/" target="_blank" rel="noopener noreferrer">Мифрил и красное снаряжение</a>. При изменении механик в RU-версии проверяй стоимость в самой игре.</p>
+<p class="ec-source">🦉 <a href="gear.html">Гайд по снаряжению</a> · <a href="other.html#kb-calculators">Все калькуляторы</a></p>
+</section></div></details>
+
+</div>
+</div></main>
+
+<script id="essence-mithril-calculator-logic-v1">
+(function(){
+ 'use strict';
+ const storageKey='sova58-essence-mithril-calculator-v1';
+ const optionNames={
+  'inf-goggles':'🛡️ Пехота · Очки','inf-gloves':'🛡️ Пехота · Перчатки','inf-belt':'🛡️ Пехота · Пояс','inf-boots':'🛡️ Пехота · Сапоги',
+  'lan-goggles':'🔱 Копейщики · Очки','lan-gloves':'🔱 Копейщики · Перчатки','lan-belt':'🔱 Копейщики · Пояс','lan-boots':'🔱 Копейщики · Сапоги',
+  'mrk-goggles':'🏹 Стрелки · Очки','mrk-gloves':'🏹 Стрелки · Перчатки','mrk-belt':'🏹 Стрелки · Пояс','mrk-boots':'🏹 Стрелки · Сапоги'
+ };
+ const gates=[
+  {level:20,mithril:10,mythic:3,mastery:11},
+  {level:40,mithril:20,mythic:5,mastery:12},
+  {level:60,mithril:30,mythic:5,mastery:13},
+  {level:80,mithril:40,mythic:10,mastery:14},
+  {level:100,mithril:50,mythic:10,mastery:15}
+ ];
+
+ // Step-level forging costs from community game-data rows (84 stages).
+ // Stage 0 completes the named level, and stages 1-4 are after that level.
+ // Source: chiefpansancolt/whiteout-survival-data/data/chief/hero-gear-mastery-forging.json
+ const forgeMythicStages={"11":[1,0,0,1,0],"12":[1,0,1,0,1],"13":[1,0,1,1,1],"14":[1,1,1,1,1],"15":[1,1,1,1,1],"16":[2,1,1,2,1],"17":[2,1,2,1,2],"18":[2,1,2,2,2],"19":[2,2,2,2,2],"20":[2]};
+ const forgeCosts=(from,progress,to)=>{
+  const rows=[];
+  for(let level=from;level<to;level++){
+   const next=level+1;
+   if(level<4){rows.push({label:String(next),essence:next*10,mythic:0});continue;}
+   const skip=level===from?progress:0;
+   for(let stage=skip+1;stage<=4;stage++){
+    rows.push({label:level+'.'+stage,essence:next*2,mythic:forgeMythicStages[level]?.[stage]||0});
+   }
+   rows.push({label:String(next),essence:next*2,mythic:forgeMythicStages[next]?.[0]||0});
+  }
+  return rows;
+ };
+ const stageValues=[-1,0,20,40,60,80,100];
+ const $=id=>document.getElementById(id);
+ const fmt=n=>Math.max(0,Math.floor(Number(n)||0)).toLocaleString('ru-RU');
+ const num=(n,max=999999999)=>Math.max(0,Math.min(max,Math.floor(Number(n)||0)));
+ const defaultItem=()=>({gear:'inf-gloves',qty:1,masteryFrom:0,masteryProgress:0,masteryTo:0,mithrilFrom:-1,mithrilTo:-1});
+ const defaultState=()=>({items:[defaultItem()],firstGateMythic:3,stock:{essence:0,mithril:0,mythic:0}});
+ const requiredMastery=s=>s<0?0:s===0?10:(10+s/20);
+ const mLabel=s=>s===-1?'Не красное':s===0?'Красное, +0':'+'+s;
+ const toStage=n=>stageValues.includes(Number(n))?Number(n):-1;
+ const safeItem=v=>{
+  const x=v&&typeof v==='object'?v:{};
+  let a={
+   gear:Object.hasOwn(optionNames,String(x.gear))?String(x.gear):'inf-gloves',
+   qty:Math.max(1,Math.min(12,num(x.qty,12))),
+   masteryFrom:num(x.masteryFrom,20),masteryProgress:num(x.masteryProgress,4),masteryTo:num(x.masteryTo,20),
+   mithrilFrom:toStage(x.mithrilFrom),mithrilTo:toStage(x.mithrilTo)
+  };
+  const legalFrom=Math.max(a.masteryFrom,requiredMastery(a.mithrilFrom));
+  if(legalFrom!==a.masteryFrom)a.masteryProgress=0;
+  a.masteryFrom=legalFrom;
+  if(a.masteryFrom<4||a.masteryFrom>=20)a.masteryProgress=0;
+  a.masteryTo=Math.max(a.masteryTo,a.masteryFrom);
+  if(a.mithrilTo<a.mithrilFrom)a.mithrilTo=a.mithrilFrom;
+  return a;
+ };
+ const recover=()=>{
+  try{
+   const val=JSON.parse(localStorage.getItem(storageKey)||'null');
+   if(!val||!Array.isArray(val.items)||!val.items.length)return defaultState();
+   return {items:val.items.slice(0,12).map(safeItem),firstGateMythic:val.firstGateMythic===5?5:3,stock:{
+    essence:num(val.stock?.essence),mithril:num(val.stock?.mithril),mythic:num(val.stock?.mythic)
+   }};
+  }catch{return defaultState();}
+ };
+ let state=recover();
+ let latest=null;
+ const save=()=>{try{localStorage.setItem(storageKey,JSON.stringify(state));}catch{}};
+ const levelOptions=(selected)=>Array.from({length:21},(_,i)=>'<option value="'+i+'"'+(i===selected?' selected':'')+'>Ковка '+i+'</option>').join('');
+ const stageOptions=(selected,goal)=>stageValues.map(i=>'<option value="'+i+'"'+(i===selected?' selected':'')+'>'+((i<0)?(goal?'Не планирую':'Ещё не красное'):(i===0?'Красное, без Мифрила':'Усиление +'+i))+'</option>').join('');
+ const gearOptions=(selected)=>Object.keys(optionNames).map(key=>'<option value="'+key+'"'+(key===selected?' selected':'')+'>'+optionNames[key]+'</option>').join('');
+ const progressOptions=(selected)=>Array.from({length:5},(_,i)=>'<option value="'+i+'"'+(i===selected?' selected':'')+'>'+(i===0?'Нет':i+' из 5 шагов')+'</option>').join('');
+ const wrap=(id,text,child)=>'<label><span>'+text+'</span>'+child+'</label>';
+ const fieldLabels={
+  masteryFrom:'Ковка мастерства: текущий уровень',
+  masteryTo:'Ковка мастерства: нужный уровень',
+  mithrilFrom:'Красное снаряжение: текущий этап',
+  mithrilTo:'Красное снаряжение: нужный этап',
+  gear:'Тип снаряжения'
+ };
+ const chooser=(field,options)=>'<select aria-label="'+(fieldLabels[field]||field)+'" data-field="'+field+'">'+options+'</select>';
+
+ const renderItems=()=>{
+  const opened=new Set(Array.from($('ecItems').querySelectorAll('.ec-item-extra[open]')).map(el=>Number(el.closest('[data-index]')?.dataset.index)));
+  $('ecItems').innerHTML=state.items.map((a,i)=>'<article class="ec-item" data-index="'+i+'">'+
+   '<div class="ec-item-top"><span class="ec-item-title">'+(state.items.length>1?'Предмет '+(i+1):'Моё снаряжение')+'</span>'+
+   (state.items.length>1?'<button type="button" class="ec-remove" data-action="remove">Убрать</button>':'')+'</div>'+
+   '<div class="ec-item-grid">'+
+   '<div class="ec-pair-head">💎 Ковка мастерства</div>'+
+   wrap('masteryFrom'+i,'Сейчас',chooser('masteryFrom',levelOptions(a.masteryFrom)))+
+   wrap('masteryTo'+i,'Хочу',chooser('masteryTo',levelOptions(a.masteryTo)))+
+   '<div class="ec-pair-head">🟣 Красное снаряжение (Мифрил)</div>'+
+   wrap('mithrilFrom'+i,'Сейчас',chooser('mithrilFrom',stageOptions(a.mithrilFrom,false)))+
+   wrap('mithrilTo'+i,'Хочу',chooser('mithrilTo',stageOptions(a.mithrilTo,true)))+
+   '</div>'+
+   '<details class="ec-fold ec-item-extra"'+(opened.has(i)?' open':'')+'><summary>⚙️ Ещё настройки предмета</summary>'+
+   '<div class="ec-item-grid ec-extra-grid">'+
+   '<div class="ec-gear">'+wrap('gear'+i,'Какое снаряжение',chooser('gear',gearOptions(a.gear)))+'</div>'+
+   '<label data-field-wrap="qty"><span>Сколько таких предметов</span><input type="number" min="1" max="12" step="1" inputmode="numeric" data-field="qty" value="'+a.qty+'"/></label>'+
+   '<label><span>Пройдено шагов Ковки после '+a.masteryFrom+'</span><select data-field="masteryProgress" aria-label="Промежуточная Ковка"'+(a.masteryFrom<4||a.masteryFrom>=20?' disabled':'')+'>'+progressOptions(a.masteryProgress)+'</select></label>'+
+   '</div></details></article>').join('');
+  $('ecAdd').disabled=state.items.length>=12;
+ };
+ const compute=(raw)=>{
+  const x=safeItem(raw),qty=x.qty;
+  const masteryGoal=Math.max(x.masteryTo,requiredMastery(x.mithrilTo));
+  const steps=[];
+  const forgeRows=forgeCosts(x.masteryFrom,x.masteryProgress,masteryGoal);
+  const essence=forgeRows.reduce((sum,r)=>sum+r.essence,0);
+  const forgingMythic=forgeRows.reduce((sum,r)=>sum+r.mythic,0);
+  let mithril=0,mythic=forgingMythic;
+  const savedStones=(masteryGoal>x.masteryFrom&&x.masteryFrom>=4&&x.masteryFrom<20)?x.masteryProgress*2*(x.masteryFrom+1):0;
+  if(masteryGoal>x.masteryFrom)steps.push('Ковка '+x.masteryFrom+(x.masteryProgress?'.'+x.masteryProgress:'')+' → '+masteryGoal+': '+fmt(essence)+' камней и '+fmt(forgingMythic)+' мифических предметов'+(savedStones?' (не считаем '+fmt(savedStones)+' уже потраченных камней)':''));
+  if(x.mithrilFrom<0&&x.mithrilTo>=0){
+   mythic+=2;
+   steps.push('Переход в красное снаряжение: 2 мифических предмета');
+  }
+  for(const gate of gates){
+   if(x.mithrilTo>=gate.level&&x.mithrilFrom<gate.level){
+    const mythicAtGate=gate.level===20?state.firstGateMythic:gate.mythic;
+    mithril+=gate.mithril;mythic+=mythicAtGate;
+    steps.push('Усиление +'+gate.level+': '+gate.mithril+' Мифрила и '+mythicAtGate+' мифических предмета');
+   }
+  }
+  const per={essence,mithril,mythic};
+  return {item:x,masteryGoal,savedStones,forgeRows,steps,per,total:{essence:essence*qty,mithril:mithril*qty,mythic:mythic*qty}};
+ };
+ const recalc=()=>{
+  $('ecMithrilTable').innerHTML=gates.map(x=>'<tr><td>+'+x.level+'</td><td>'+fmt(x.mithril)+'</td><td>'+fmt(x.level===20?state.firstGateMythic:x.mythic)+'</td><td>'+x.mastery+'</td></tr>').join('');
+  const rows=state.items.map(compute);
+  const totals=rows.reduce((a,r)=>({essence:a.essence+r.total.essence,mithril:a.mithril+r.total.mithril,mythic:a.mythic+r.total.mythic}),{essence:0,mithril:0,mythic:0});
+  const keys=['essence','mithril','mythic'],target=['Essence','Mithril','Mythic'];
+  keys.forEach((key,i)=>{
+   $('ecNeed'+target[i]).textContent=fmt(totals[key]);
+   const missing=Math.max(0,totals[key]-state.stock[key]),surplus=Math.max(0,state.stock[key]-totals[key]);
+   const el=$('ecLeft'+target[i]);
+   el.className=missing?'ec-deficit':'ec-ok';
+   el.textContent=missing?'Не хватает: '+fmt(missing):'Хватит • останется: '+fmt(surplus);
+  });
+  $('ecBreakdown').innerHTML=rows.map((r,i)=>{
+    const q=r.item.qty,m=r.masteryGoal;
+    const labels='<span class="ec-chip">💎 '+fmt(r.total.essence)+'</span><span class="ec-chip">🟣 '+fmt(r.total.mithril)+'</span><span class="ec-chip">🟨 '+fmt(r.total.mythic)+'</span>';
+    return '<article class="ec-step-card"><h3>'+(i+1)+'. '+optionNames[r.item.gear]+(q>1?' × '+q:'')+'</h3>'+
+    '<p>Ковка '+r.item.masteryFrom+(r.item.masteryProgress?'.'+r.item.masteryProgress:'')+' → '+m+' · Мифрил '+mLabel(r.item.mithrilFrom)+' → '+mLabel(r.item.mithrilTo)+'</p>'+
+    '<div class="ec-chips">'+labels+'</div>'+
+    (r.steps.length?'<ul>'+r.steps.map(t=>'<li>'+t+(q>1?' (× '+q+' предмета)':'')+'</li>').join('')+'</ul>':'<p>Новые улучшения не выбраны.</p>')+
+    (r.forgeRows.length?'<details class="ec-info-details"><summary>💎 Посмотреть все шаги Ковки ('+r.forgeRows.length+')</summary><div class="ec-table-wrap"><table class="ec-table"><thead><tr><th>Шаг</th><th>Камни</th><th>Мифические</th></tr></thead><tbody>'+r.forgeRows.map(fr=>'<tr><td>'+fr.label+'</td><td>'+fmt(fr.essence*q)+'</td><td>'+fmt(fr.mythic*q)+'</td></tr>').join('')+'</tbody></table></div></details>':'')+
+    '</article>';
+  }).join('');
+  latest={rows,totals};
+  save();
+ };
+ const syncInputs=()=>{
+  state.stock.essence=num($('ecStockEssence').value);
+  state.stock.mithril=num($('ecStockMithril').value);
+  state.stock.mythic=num($('ecStockMythic').value);
+  recalc();
+ };
+ const clipboardText=()=>{
+  if(!latest)return '';
+  const t=latest.totals;
+  let out=['Белая мгла • Калькулятор снаряжения','Первое укрепление +20: '+state.firstGateMythic+' мифических предмета',
+  'Камни эссенции: '+fmt(t.essence)+' (есть '+fmt(state.stock.essence)+', не хватает '+fmt(Math.max(0,t.essence-state.stock.essence))+')',
+  'Мифрил: '+fmt(t.mithril)+' (есть '+fmt(state.stock.mithril)+', не хватает '+fmt(Math.max(0,t.mithril-state.stock.mithril))+')',
+  'Мифическое снаряжение: '+fmt(t.mythic)+' (есть '+fmt(state.stock.mythic)+', не хватает '+fmt(Math.max(0,t.mythic-state.stock.mythic))+')'];
+  latest.rows.forEach((r,i)=>out.push((i+1)+'. '+optionNames[r.item.gear]+' × '+r.item.qty+': Ковка '+r.item.masteryFrom+(r.item.masteryProgress?'.'+r.item.masteryProgress:'')+'→'+r.masteryGoal+', Мифрил '+mLabel(r.item.mithrilFrom)+'→'+mLabel(r.item.mithrilTo)+'; камни '+fmt(r.total.essence)+', Мифрил '+fmt(r.total.mithril)+', мифические '+fmt(r.total.mythic)));
+  out.push('Без затрат на обычное усиление предметов и опыт экипировки.');
+  return out.join('\n');
+ };
+ function renderAll(){
+  $('ecFirstGateMythic').value=String(state.firstGateMythic);
+  $('ecStockEssence').value=state.stock.essence;
+  $('ecStockMithril').value=state.stock.mithril;
+  $('ecStockMythic').value=state.stock.mythic;
+  renderItems();recalc();
+ }
+ $('ecEssenceTable').innerHTML=Array.from({length:20},(_,i)=>'<tr><td>'+String(i+1)+'</td><td>'+fmt((i+1)*10)+'</td><td>'+(i<10?'—':fmt(i-9))+'</td></tr>').join('');
+ $('ecFirstGateMythic').addEventListener('change',e=>{state.firstGateMythic=e.target.value==='5'?5:3;recalc();});
+ $('ecItems').addEventListener('change',e=>{
+  const target=e.target;
+  const field=target.dataset.field,index=Number(target.closest('[data-index]')?.dataset.index);
+  if(!field||!Number.isInteger(index)||!state.items[index])return;
+  state.items[index][field]=field==='gear'?target.value:Number(target.value);
+  state.items[index]=safeItem(state.items[index]);
+  renderAll();
+ });
+ $('ecItems').addEventListener('click',e=>{
+  if(!e.target.closest('[data-action="remove"]'))return;
+  const index=Number(e.target.closest('[data-index]')?.dataset.index);
+  if(state.items.length<=1||!Number.isInteger(index))return;
+  state.items.splice(index,1);renderAll();
+ });
+ $('ecAdd').addEventListener('click',()=>{
+  if(state.items.length>=12)return;
+  const newItem=defaultItem();newItem.masteryTo=0;newItem.gear=Object.keys(optionNames)[state.items.length%12];
+  state.items.push(newItem);renderAll();
+ });
+ $('ecReset').addEventListener('click',()=>{
+  if(!window.confirm('Сбросить все выбранные предметы и запасы материалов?'))return;
+  state=defaultState();renderAll();$('ecStatus').textContent='Поля сброшены.';
+ });
+ ['Essence','Mithril','Mythic'].forEach(k=>{
+  const el=$('ecStock'+k);
+  el.addEventListener('input',syncInputs);
+  el.addEventListener('change',()=>{
+   el.value=state.stock[k.toLowerCase()];syncInputs();
+  });
+ });
+ $('ecCopy').addEventListener('click',async()=>{
+  const value=clipboardText();
+  try{
+   if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(value);
+   else{
+    const el=document.createElement('textarea');el.value=value;el.style.position='fixed';el.style.opacity='0';document.body.appendChild(el);el.select();
+    if(!document.execCommand('copy'))throw new Error('Copy unsupported');el.remove();
+   }
+   $('ecStatus').textContent='Расчёт скопирован! Можно отправлять игрокам.';
+  }catch{$('ecStatus').textContent='Не удалось скопировать. Выдели итог вручную.';}
+ });
+ renderAll();
+})();
+</script>
+
+<script id="ec-xp-gear-calculator-v2">
+(function(){
+"use strict";
+const storageKey="sova58-gear-xp-v2",$=id=>document.getElementById(id);
+const fmt=n=>Math.round(Math.max(0,n)).toLocaleString("ru-RU");
+const safeNum=(v,max=999999999)=>Math.min(max,Math.max(0,Math.floor(Number(v)||0)));
+const regularXP=level=>{
+if(level<1||level>100)return 0;
+if(level<=29)return 10+5*(level-1);
+if(level<=39)return 160+10*(level-30);
+if(level<=59)return 270+20*(level-40);
+if(level<=69)return 680+30*(level-60);
+if(level<=79)return 990+40*(level-70);
+if(level<=89)return 1400+50*(level-80);
+return 1900+50*(level-90);
+};
+const legendaryXP=level=>{
+if(level<=1||level>100||level%20===0)return 0;
+if(level<=19)return 2500+50*(level-2);
+if(level<=39)return 3500+50*(level-21);
+if(level<=59)return 4450+50*(level-41);
+if(level<=79)return 5500+100*(level-61);
+return 7500+100*(level-81);
+};
+const sum=(fn,from,to)=>{let total=0;for(let lv=from+1;lv<=to;lv++)total+=fn(lv);return total;};
+const feedValues={common:10,uncommon:30,rare:60,epic:150,component10:10,component100:100};
+const feedInputs={common:"ecXpFeedCommon",uncommon:"ecXpFeedUncommon",rare:"ecXpFeedRare",epic:"ecXpFeedEpic",component10:"ecXpFeedComponent10",component100:"ecXpFeedComponent100"};
+const emptyFeed=()=>({common:0,uncommon:0,rare:0,epic:0,component10:0,component100:0});
+const feedPoints=feed=>Object.keys(feedValues).reduce((total,key)=>total+safeNum(feed[key],9999999)*feedValues[key],0);
+const defaults=()=>({quantity:1,stock:0,feed:emptyFeed(),goldFrom:0,goldTo:100,redEnabled:true,redFrom:1,redTo:100});
+const recover=()=>{
+try{const x=JSON.parse(localStorage.getItem(storageKey)||"null");if(!x||typeof x!=="object")return defaults();
+const d=defaults();
+d.quantity=Math.min(12,Math.max(1,safeNum(x.quantity,12)));
+d.stock=safeNum(x.stock);Object.keys(feedValues).forEach(k=>d.feed[k]=safeNum(x.feed?.[k],9999999));d.goldFrom=safeNum(x.goldFrom,100);d.goldTo=Math.max(d.goldFrom,safeNum(x.goldTo,100));
+d.redEnabled=x.redEnabled!==false;d.redFrom=Math.min(100,Math.max(1,safeNum(x.redFrom,100)));
+d.redTo=Math.max(d.redFrom,Math.min(100,Math.max(1,safeNum(x.redTo,100))));
+return d;}catch{return defaults();}
+};
+let state=recover(),summary=null;
+const save=()=>{try{localStorage.setItem(storageKey,JSON.stringify(state));}catch{}};
+const options=(min,max,chosen)=>Array.from({length:max-min+1},(_,i)=>{const x=i+min;return '<option value="'+x+'"'+(x===chosen?' selected':'')+'>'+x+'</option>';}).join("");
+function draw(){
+$("ecXpQuantity").innerHTML=options(1,12,state.quantity);
+$("ecXpGoldFrom").innerHTML=options(0,100,state.goldFrom);
+$("ecXpGoldTo").innerHTML=options(state.goldFrom,100,state.goldTo);
+$("ecXpRedFrom").innerHTML=options(1,100,state.redFrom);
+$("ecXpRedTo").innerHTML=options(state.redFrom,100,state.redTo);
+$("ecXpRedEnabled").value=state.redEnabled?"1":"0";
+$("ecXpRedFrom").disabled=!state.redEnabled;
+$("ecXpRedTo").disabled=!state.redEnabled;
+$("ecXpStock").value=state.stock;
+Object.keys(feedInputs).forEach(k=>$(feedInputs[k]).value=state.feed[k]);
+const inventoryXP=feedPoints(state.feed);
+$("ecXpFeedTotal").textContent=fmt(inventoryXP);
+const effectiveStock=state.stock+inventoryXP;
+const gold=sum(regularXP,state.goldFrom,state.goldTo)*state.quantity;
+const red=(state.redEnabled?sum(legendaryXP,state.redFrom,state.redTo):0)*state.quantity;
+const total=gold+red,missing=Math.max(0,total-effectiveStock),surplus=Math.max(0,effectiveStock-total);
+$("ecXpGoldNeed").textContent=fmt(gold);
+$("ecXpRedNeed").textContent=fmt(red);
+$("ecXpTotalNeed").textContent=fmt(total);
+$("ecXpHave").textContent=fmt(effectiveStock);
+$("ecXpMissing").textContent=fmt(missing);
+$("ecXpSurplus").textContent=fmt(surplus);
+summary={gold,red,total,missing,surplus,inventoryXP,effectiveStock};save();
+}
+function change(){
+const curr=state;
+curr.quantity=Math.max(1,safeNum($("ecXpQuantity").value,12));
+curr.stock=safeNum($("ecXpStock").value);
+curr.goldFrom=safeNum($("ecXpGoldFrom").value,100);
+curr.goldTo=Math.max(curr.goldFrom,safeNum($("ecXpGoldTo").value,100));
+curr.redEnabled=$("ecXpRedEnabled").value==="1";
+curr.redFrom=Math.max(1,safeNum($("ecXpRedFrom").value,100));
+curr.redTo=Math.max(curr.redFrom,safeNum($("ecXpRedTo").value,100));
+draw();
+}
+["ecXpQuantity","ecXpGoldFrom","ecXpGoldTo","ecXpRedEnabled","ecXpRedFrom","ecXpRedTo"].forEach(id=>$(id).addEventListener("change",change));
+$("ecXpStock").addEventListener("input",()=>{
+state.stock=safeNum($("ecXpStock").value);draw();
+});
+Object.keys(feedInputs).forEach(key=>{
+$(feedInputs[key]).addEventListener("input",()=>{
+state.feed[key]=safeNum($(feedInputs[key]).value,9999999);
+draw();
+});
+});
+$("ecXpReset").addEventListener("click",()=>{state=defaults();draw();$("ecXpStatus").textContent="Расчёт опыта сброшен."});
+$("ecXpCopy").addEventListener("click",async()=>{
+const msg=[
+"Белая мгла • Опыт снаряжения",
+"Предметов: "+state.quantity,
+"Золотое: "+state.goldFrom+" → "+state.goldTo+" = "+fmt(summary.gold),
+"Красное: "+(state.redEnabled?state.redFrom+" → "+state.redTo+" = "+fmt(summary.red):"не считаем"),
+"Всего опыта: "+fmt(summary.total),
+"Отдельных очков опыта: "+fmt(state.stock),
+"Из предметов: "+fmt(summary.inventoryXP),
+"Всего доступного опыта: "+fmt(summary.effectiveStock),
+"Не хватает: "+fmt(summary.missing),
+"Останется: "+fmt(summary.surplus),
+"Камни эссенции, Мифрил и мифические предметы считаются отдельно."
+].join("\n");
+try{
+if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(msg);
+else{const ta=document.createElement("textarea");ta.value=msg;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();const ok=document.execCommand("copy");ta.remove();if(!ok)throw Error("copy unavailable");}
+$("ecXpStatus").textContent="Расчёт опыта скопирован.";
+}catch{$("ecXpStatus").textContent="Не удалось скопировать.";}
+});
+draw();
+})();
+</script>
+
+<nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424"><a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-home-v534.webp"/></span><b>Главная</b></a><a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-events-v534.webp"/></span><b>События</b></a><a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-heroes-v534.webp"/></span><b>Герои</b></a><a data-v424-nav="calc" href="calculators.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-calculator-v534.webp"/></span><b>Калькуляторы</b></a><a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-knowledge-v534.webp"/></span><b>База знаний</b></a></nav><script defer="" src="pwa-install.js?v=586"></script></body></html>
