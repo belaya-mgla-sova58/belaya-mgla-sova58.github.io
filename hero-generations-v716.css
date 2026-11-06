@@ -138,3 +138,25 @@
 .hero-gens-page .gen-acc:nth-of-type(n+15){--gen-space:var(--gen-space-src)!important}
 .hero-gens-page .gen-acc:nth-of-type(n+15)>summary{background-image:linear-gradient(90deg,rgba(2,8,20,.3),rgba(3,12,27,.12) 52%,rgba(2,7,18,.24)),var(--gen-space)!important}
 @media(max-width:720px){.hero-mini .gen-new-tags{gap:2px!important}.hero-mini .gen-new-tags .gen-new-tag{font-size:8px;padding:2px 3px}.hero-mini .gen-new-tags img{width:13px!important;height:13px!important}}
+
+/* v724: compact desktop card scale; leave the tablet and mobile layout unchanged */
+@media (min-width: 721px) {
+  .hero-gens-page .gen-grid {
+    grid-template-columns: repeat(3, minmax(0, 222px));
+    justify-content: center;
+    column-gap: 18px;
+    row-gap: 18px;
+  }
+  .hero-gens-page .hero-mini {
+    width: 100%;
+  }
+  .hero-gens-page .hero-mini-caption {
+    padding: 8px 6px 7px;
+  }
+  .hero-gens-page .hero-mini-caption strong {
+    font-size: 17px;
+  }
+  .hero-gens-page .gen-panel {
+    padding: 16px 12px;
+  }
+}
