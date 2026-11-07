@@ -27,7 +27,10 @@ const bin=path.join(ROOT,'node_modules','.bin','lighthouse');
 if(!fs.existsSync(bin)){console.error('Install Lighthouse package first');process.exit(1);}
 for(const page of PAGES)for(const mode of MODES){
   const output=path.join(OUT,page.replace(/\.html$/,'')+'-'+mode+'.json');
-  const args=[new URL(page,BASE).toString(),
+  // GitHub Pages serves index.html at /; Lighthouse must test that canonical URL.
+  // Testing /index.html while its rel=canonical points to / produces a false SEO warning.
+  const targetUrl=new URL(page==='index.html'?'':page,BASE).toString();
+  const args=[targetUrl,
     '--output=json','--output-path='+output,
     '--only-categories=performance,accessibility,best-practices,seo',
     '--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage',
