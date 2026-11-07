@@ -50,7 +50,7 @@
       "#sova-metrika-consent p{margin:0 0 13px;color:#d4e0ed}",
       "#sova-metrika-actions{display:flex;flex-wrap:wrap;gap:9px}",
       "#sova-metrika-actions button{min-height:38px;padding:8px 15px;border-radius:9px;border:1px solid #9fb8c9;background:transparent;color:#fff;font:600 14px system-ui,Arial,sans-serif;cursor:pointer}",
-      "#sova-metrika-actions #sova-metrika-accept{background:#4a8ce4;border-color:#4a8ce4;color:#fff}",
+      "#sova-metrika-actions #sova-metrika-accept{background:#245fae;border-color:#245fae;color:#fff}",
       "#sova-metrika-open{position:fixed;left:9px;bottom:9px;z-index:2147482999;background:#10283de0;color:#e9f3ff;border:1px solid #50708a;border-radius:8px;padding:5px 8px;font:11px system-ui,Arial,sans-serif;cursor:pointer;opacity:.75}",
       "#sova-metrika-open:focus-visible,#sova-metrika-actions button:focus-visible{outline:3px solid #ffd775;outline-offset:3px}"
     ].join("\n");
