@@ -36,6 +36,19 @@ body.is-state-power-route .state-power-guide-v701 h3{margin-top:26px}
 body.is-state-power-route .state-power-guide-v701 .tip-list{padding-left:22px}
 body.is-state-power-route .state-power-guide-v701 .savebox,body.is-state-power-route .state-power-guide-v701 .rule{margin:18px 0}
 @media(max-width:720px){body.is-state-power-route .state-power-guide-v701{font-size:14.5px;line-height:1.55}body.is-state-power-route .state-power-guide-v701 h3{margin-top:22px}}
+
+/* Desktop editorial guide layout v989: state-power.html. Mobile layout untouched. */
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine){
+  html:not(.force-desktop-root) body.is-state-power-route .route-page.active>.state-power-guide-v701{
+    box-sizing:border-box!important;width:100%!important;max-width:none!important;
+    min-width:0!important;margin:0!important;padding:clamp(18px,1.8vw,28px)!important;
+    font-size:16px!important;line-height:1.7!important;
+  }
+  html:not(.force-desktop-root) body.is-state-power-route .route-page.active>.state-power-guide-v701>:is(p,ul,ol){max-width:96ch;line-height:1.7!important}
+  html:not(.force-desktop-root) body.is-state-power-route .route-page.active>.state-power-guide-v701>:is(p,ul,ol)+:is(p,ul,ol){margin-top:11px}
+  html:not(.force-desktop-root) body.is-state-power-route .state-power-guide-v701 .savebox,.state-power-guide-v701 .rule{padding:clamp(15px,1.7vw,23px)!important}
+html:not(.force-desktop-root) body.is-state-power-route .state-power-guide-v701 h3{font-size:21px!important;line-height:1.4!important}
+}
 </style>
 <link href="manifest-v541.webmanifest" rel="manifest"/>
 <meta content="yes" name="mobile-web-app-capable"/>
