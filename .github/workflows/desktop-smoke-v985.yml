@@ -1,0 +1,70 @@
+name: Desktop layout smoke test v985
+on:
+  push:
+    paths:
+      - '.github/workflows/desktop-smoke-v985.yml'
+permissions:
+  contents: read
+jobs:
+  browser-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser
+        run: |
+          npm install --no-save --no-package-lock playwright
+          npx playwright install --with-deps chromium
+      - name: Check live desktop and mobile pages
+        run: |
+          node <<'JS'
+          const {chromium}=require('playwright');
+          const assert=require('node:assert/strict');
+          const base='https://belaya-mgla-sova58.github.io/';
+          const pages=['index.html','events.html','hero-generations.html','pets.html','experts.html','gear.html','crazy-joe.html','endless-trial.html','bear.html','fishing.html','foundry.html','faq.html','calculators.html','canyon-clash.html','ginas-revenge.html'];
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            let failures=[];
+            for(const mode of ['desktop','mobile']){
+              const context=await browser.newContext(mode==='desktop'?{viewport:{width:1440,height:900},deviceScaleFactor:1,serviceWorkers:'block'}:{viewport:{width:390,height:844},deviceScaleFactor:1,isMobile:true,hasTouch:true,serviceWorkers:'block'});
+              for(const name of pages){
+                const page=await context.newPage();
+                const errors=[];
+                page.on('pageerror',e=>errors.push(String(e).slice(0,150)));
+                try{
+                  const res=await page.goto(base+name+'?smoke=v985',{waitUntil:'domcontentloaded',timeout:30000});
+                  await page.waitForTimeout(1200);
+                  const result=await page.evaluate(()=>{
+                    const main=document.querySelector('#appMain'),route=document.querySelector('.route-page.active'),sheet=Array.from(document.styleSheets).some(x=>x.href&&x.href.includes('site-desktop-v985.css'));
+                    const hero=route&&route.querySelector('section[class*="-image-header-"] img');
+                    return {status:document.readyState,routeWidth:route?Math.round(route.getBoundingClientRect().width):0,mainWidth:main?Math.round(main.getBoundingClientRect().width):0,
+                    viewport:innerWidth,overflow:document.documentElement.scrollWidth-innerWidth,cssLink:!!document.querySelector('link[data-sova-desktop-v985]'),cssLoaded:sheet,
+                    bannerFound:!!hero,bannerValid:!hero||(hero.complete&&hero.naturalWidth>0),title:document.title};
+                  });
+                  console.log(JSON.stringify({mode,page:name,http:res?.status(),...result,errors}));
+                  if(!res?.ok()) failures.push(mode+':'+name+':HTTP');
+                  if(!result.routeWidth)failures.push(mode+':'+name+':no route');
+                  if(result.overflow>15)failures.push(mode+':'+name+':horizontal overflow '+result.overflow);
+                  if(mode==='desktop'&&(!result.cssLoaded||result.routeWidth<result.mainWidth*.75))failures.push(mode+':'+name+':desktop CSS or width');
+                  if(!result.bannerValid)failures.push(mode+':'+name+':missing image');
+                  if(mode==='desktop'&&name==='endless-trial.html'){
+                    const button=page.locator('details.guide-overview-v640 > summary').first();
+                    if(await button.count()){
+                      await button.click();
+                      const opened=await page.locator('details.guide-overview-v640').first().getAttribute('open');
+                      if(opened===null)failures.push('More button did not open');
+                    }
+                  }
+                }catch(e){failures.push(mode+':'+name+':'+String(e).slice(0,160));console.log('CHECK ERROR '+mode+' '+name+' '+e)}
+                await page.close();
+              }
+              await context.close();
+            }
+            await browser.close();
+            console.log('SMOKE FAILURES: '+JSON.stringify(failures));
+            if(failures.length)process.exitCode=1;
+          })().catch(e=>{console.error(e);process.exitCode=1;});
+          JS
