@@ -118,7 +118,7 @@ jobs:
           const path = 'visual-tests/test-results/results.json';
           const summary = process.env.GITHUB_STEP_SUMMARY;
           if (!fs.existsSync(path)) {
-            fs.appendFileSync(summary, '\\n## Playwright tests\\nNo JSON result available. Check the test job log.\\n');
+            fs.appendFileSync(summary, '\n## Playwright tests\nNo JSON result available. Check the test job log.\n');
             process.exit(0);
           }
           const result = JSON.parse(fs.readFileSync(path, 'utf8'));
@@ -127,8 +127,8 @@ jobs:
           const failed = count.unexpected ?? 0;
           const skipped = count.skipped ?? 0;
           const flaky = count.flaky ?? 0;
-          let text = '\\n## Playwright tests\\n';
-          text += `Passed: **${passed}**, failed: **${failed}**, skipped: **${skipped}**, flaky: **${flaky}**.\\n`;
+          let text = '\n## Playwright tests\n';
+          text += `Passed: **${passed}**, failed: **${failed}**, skipped: **${skipped}**, flaky: **${flaky}**.\n`;
           const problems=[];
           function walk(suites, parts=[]) {
             for (const suite of suites || []) {
@@ -146,9 +146,9 @@ jobs:
           }
           walk(result.suites);
           if (problems.length) {
-            text += '\\n### Failing checks\\n';
+            text += '\n### Failing checks\n';
             for (const p of problems.slice(0, 40)) {
-              text += '- ' + p.name.replaceAll('\\n',' ') + ': ' + p.detail.replaceAll('\\n',' ').replaceAll('|','/') + '\\n';
+              text += '- ' + p.name.replaceAll('\n',' ') + ': ' + p.detail.replaceAll('\n',' ').replaceAll('|','/') + '\n';
             }
           }
           fs.appendFileSync(summary,text);
