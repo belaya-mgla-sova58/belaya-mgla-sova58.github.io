@@ -57,7 +57,7 @@ test.describe('Мобильная навигация и калькуляторы
       // The homepage can delay the full load event while decorative assets load.
       // Confirm the actual user navigation as soon as DOMContentLoaded fires.
       await Promise.all([
-        page.waitForURL(/\\/index\\.html$/, { waitUntil: 'domcontentloaded', timeout: 15000 }),
+        page.waitForURL(new RegExp('/index[.]html$'), { waitUntil: 'domcontentloaded', timeout: 15000 }),
         homeLink.tap({ noWaitAfter: true, timeout: 10000 }),
       ]);
       await expect(page.locator('.home-stamped-hero-v441 img.home-stamped-img-v441'))
