@@ -41,7 +41,7 @@ jobs:
           node-version: '22'
 
       - name: Install browser audit packages
-        run: npm install --no-save --no-audit --no-fund playwright axe-core
+        run: npm install --no-save --no-audit --no-fund playwright axe-core lighthouse
 
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
@@ -65,6 +65,12 @@ jobs:
         continue-on-error: true
         run: node tests/pwa-audit.cjs
 
+      - name: Measure Lighthouse performance and SEO on core pages
+        id: lighthouse
+        if: always()
+        continue-on-error: true
+        run: node tests/lighthouse-audit.cjs
+
       - name: Save screenshots and JSON/Markdown reports
         if: always()
         uses: actions/upload-artifact@v4
@@ -81,6 +87,7 @@ jobs:
           echo "Static audit: ${{ steps.static.outcome }}"
           echo "Browser audit: ${{ steps.browser.outcome }}"
           echo "PWA audit: ${{ steps.pwa.outcome }}"
-          if [[ "${{ steps.static.outcome }}" == "failure" || "${{ steps.browser.outcome }}" == "failure" || "${{ steps.pwa.outcome }}" == "failure" ]]; then
+          echo "Lighthouse audit: ${{ steps.lighthouse.outcome }}"
+          if [[ "${{ steps.static.outcome }}" == "failure" || "${{ steps.browser.outcome }}" == "failure" || "${{ steps.pwa.outcome }}" == "failure" || "${{ steps.lighthouse.outcome }}" == "failure" ]]; then
             exit 1
           fi
