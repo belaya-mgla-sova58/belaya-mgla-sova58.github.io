@@ -61,6 +61,27 @@ test.describe('Ковка 10–20 и красное снаряжение', () =>
   });
 });
 
+// Independent whole-level reference table: costs for completing the NEXT
+// mastery level, not just its final sub-stage. This guards against confusing
+// 19.4→20 (last sub-stage) with 19→20 (all five sub-stages).
+test.describe('Ковка 1–20: полные уровни', () => {
+  const levelCosts = [
+    [10,0],[20,0],[30,0],[40,0],[50,0],
+    [60,0],[70,0],[80,0],[90,0],[100,0],
+    [110,1],[120,2],[130,3],[140,4],[150,5],
+    [160,6],[170,7],[180,8],[190,9],[200,10],
+  ];
+  for (let from = 0; from < levelCosts.length; from++) {
+    const [essence, mythic] = levelCosts[from];
+    test(`Ковка ${from}→${from + 1}: ${essence} камней, ${mythic} мифических`, async ({ page }) => {
+      await openWithScenario(page, gear([item(from, from + 1)]));
+      await expect(page.locator('#ecNeedEssence')).toHaveText(String(essence));
+      await expect(page.locator('#ecNeedMythic')).toHaveText(String(mythic));
+      await expect(page.locator('#ecNeedMithril')).toHaveText('0');
+    });
+  }
+});
+
 test.describe('Промежуточные шаги ковки', () => {
   test('Ковка 10.2→11: не считаем два уже оплаченных шага', async ({ page }) => {
     const partial = { ...item(10, 11), masteryProgress: 2 };
