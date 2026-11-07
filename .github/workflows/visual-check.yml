@@ -109,6 +109,52 @@ jobs:
         working-directory: visual-tests
         run: npm test
 
+      - name: Summarize Playwright tests and failures
+        if: always()
+        shell: bash
+        run: |
+          node - <<'JS'
+          const fs = require('node:fs');
+          const path = 'visual-tests/test-results/results.json';
+          const summary = process.env.GITHUB_STEP_SUMMARY;
+          if (!fs.existsSync(path)) {
+            fs.appendFileSync(summary, '\\n## Playwright tests\\nNo JSON result available. Check the test job log.\\n');
+            process.exit(0);
+          }
+          const result = JSON.parse(fs.readFileSync(path, 'utf8'));
+          const count = result.stats || {};
+          const passed = count.expected ?? 0;
+          const failed = count.unexpected ?? 0;
+          const skipped = count.skipped ?? 0;
+          const flaky = count.flaky ?? 0;
+          let text = '\\n## Playwright tests\\n';
+          text += `Passed: **${passed}**, failed: **${failed}**, skipped: **${skipped}**, flaky: **${flaky}**.\\n`;
+          const problems=[];
+          function walk(suites, parts=[]) {
+            for (const suite of suites || []) {
+              const next=[...parts, suite.title].filter(Boolean);
+              for (const spec of suite.specs || []) {
+                for (const test of spec.tests || []) {
+                  if (test.status !== 'unexpected') continue;
+                  const last = test.results?.at(-1);
+                  problems.push({ name: [...next, spec.title, test.projectName].filter(Boolean).join(' / '),
+                    detail: (last?.error?.message || last?.errors?.[0]?.message || 'Unknown failure').slice(0, 350) });
+                }
+              }
+              walk(suite.suites,next);
+            }
+          }
+          walk(result.suites);
+          if (problems.length) {
+            text += '\\n### Failing checks\\n';
+            for (const p of problems.slice(0, 40)) {
+              text += '- ' + p.name.replaceAll('\\n',' ') + ': ' + p.detail.replaceAll('\\n',' ').replaceAll('|','/') + '\\n';
+            }
+          }
+          fs.appendFileSync(summary,text);
+          console.log(text);
+          JS
+
       - name: Compare before and after screenshots
         if: steps.reference.outputs.available == 'true'
         working-directory: visual-tests
