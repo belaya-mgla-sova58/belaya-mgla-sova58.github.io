@@ -11,18 +11,21 @@ function updateHomeDate(){
 function ensureHomeHero(){
   var hero=document.querySelector('.home-stamped-hero-v441');
   if(!hero)return;
-  var img=hero.querySelector('.home-stamped-img-v441');
-  if(!img){
-    img=document.createElement('img');
-    img.alt='Независимый сайт с гайдами по Белой мгле от SOVA58';
-    img.className='home-stamped-img-v441';
-    hero.innerHTML='';
-    hero.appendChild(img);
-  }
-  img.src='assets/home-hero-polish-v446.webp?v=630';
+  // Never replace the already-rendered, high-priority image. Reassigning src
+  // after DOMContentLoaded triggers a second image request and late repaint.
+  if(hero.querySelector('.home-stamped-img-v441'))return;
+  // Fallback only for older pages that do not contain the hero image.
+  var img=document.createElement('img');
+  img.alt='Независимый сайт с гайдами по Белой мгле от SOVA58';
+  img.className='home-stamped-img-v441';
+  img.width=1800;
+  img.height=643;
+  img.decoding='async';
+  img.setAttribute('fetchpriority','high');
+  img.src='assets/home-hero-polish-v447.webp';
+  hero.innerHTML='';
+  hero.appendChild(img);
   hero.hidden=false;
-  hero.style.cssText+='display:block!important;visibility:visible!important;opacity:1!important';
-  img.style.cssText+='display:block!important;width:100%!important;height:auto!important';
 }
 
 function loadTouchFeathers(){
