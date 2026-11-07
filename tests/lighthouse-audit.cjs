@@ -11,9 +11,17 @@ const ROOT=path.resolve(__dirname,'..');
 const OUT=path.join(ROOT,'visual-audit-results','lighthouse');
 fs.mkdirSync(OUT,{recursive:true});
 const BASE='https://belaya-mgla-sova58.github.io/';
-const PAGES=['index.html','pets.html','hero-generations.html',
+const DEFAULT_PAGES=['index.html','pets.html','hero-generations.html',
   'experts.html','calculators.html','events.html'];
-const MODES=['mobile','desktop'];
+// Optional single-page/fast workflow: leave environment variables unset for the full audit.
+const PAGES=process.env.SOVA_LH_PAGES
+  ? process.env.SOVA_LH_PAGES.split(',').map(s=>s.trim()).filter(Boolean) : DEFAULT_PAGES;
+const MODES=process.env.SOVA_LH_MODES
+  ? process.env.SOVA_LH_MODES.split(',').map(s=>s.trim()).filter(Boolean) : ['mobile','desktop'];
+if (!PAGES.length || PAGES.length>12 || PAGES.some(p=>!/^[a-z0-9-]+\.html$/.test(p)))
+  throw new Error('SOVA_LH_PAGES must contain 1–12 simple .html file names');
+if (!MODES.length || MODES.some(mode=>!['mobile','desktop'].includes(mode)))
+  throw new Error('SOVA_LH_MODES must be mobile or desktop');
 const result={checked:0,reports:[],errors:[],created:new Date().toISOString()};
 const bin=path.join(ROOT,'node_modules','.bin','lighthouse');
 if(!fs.existsSync(bin)){console.error('Install Lighthouse package first');process.exit(1);}
