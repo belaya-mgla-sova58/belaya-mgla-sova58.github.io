@@ -190,9 +190,12 @@ async function safeInteractions(page, file) {
   try {
     const summary=page.locator('details:not([open]) > summary:visible').first();
     if (await summary.count()) {
-      await summary.click({timeout:3500});
-      const opened=await summary.evaluate(el=>el.parentElement.open);
-      if (opened) await summary.click({timeout:3500});
+      // Use a stable element handle: after opening, :not([open]) no longer
+      // matches, which previously caused a misleading timeout warning.
+      const handle=await summary.elementHandle();
+      await handle.click({timeout:3500});
+      const opened=await handle.evaluate(el=>!!el.parentElement?.open);
+      if (opened) await handle.click({timeout:3500});
       checks.push({test:'expandable-section',ok:opened});
     }
   } catch(e) {checks.push({test:'expandable-section',ok:false,detail:String(e.message||e).slice(0,120)});}
