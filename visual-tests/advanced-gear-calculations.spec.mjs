@@ -92,6 +92,14 @@ test.describe('Красное снаряжение: этапы +20…+100', () =
     await expect(page.locator('#ecNeedMythic')).toHaveText('33');
   });
 
+  test('Переход из мифического в красное +100 включает ещё 2 предмета', async ({ page }) => {
+    // 33 for five empowerment gates, plus 2 to turn mythic into legendary.
+    await openWithScenario(page, gear([item(15, 15, -1, 100)]));
+    await expect(page.locator('#ecNeedEssence')).toHaveText('0');
+    await expect(page.locator('#ecNeedMithril')).toHaveText('150');
+    await expect(page.locator('#ecNeedMythic')).toHaveText('35');
+  });
+
   test('Красное +40→+100: не начисляем повторно +20 и +40', async ({ page }) => {
     await openWithScenario(page, gear([item(15, 15, 40, 100)]));
     await expect(page.locator('#ecNeedEssence')).toHaveText('0');
