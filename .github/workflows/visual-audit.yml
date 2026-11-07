@@ -56,7 +56,7 @@ jobs:
           if-no-files-found: warn
 
   browser:
-    name: Browser QA: ${{ matrix.profile }}
+    name: 'Browser QA: ${{ matrix.profile }}'
     runs-on: ubuntu-latest
     timeout-minutes: 50
     strategy:
