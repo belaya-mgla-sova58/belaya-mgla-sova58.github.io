@@ -99,7 +99,7 @@ const markdown=['# SOVA58 Lighthouse sample scores','',
     (r.audits.tbt==null?'n/a':Math.round(r.audits.tbt)+'ms')+' | '+
     (r.audits.renderBlockingSavingsMs==null?'n/a':Math.round(r.audits.renderBlockingSavingsMs)+'ms')+' | '+
     (r.audits.unusedCssSavingsMs==null?'n/a':Math.round(r.audits.unusedCssSavingsMs)+'ms')+' | '+
-    (r.audits.lcpElement||'n/a').replace(/\\|/g,'/')+' |'),
+    (r.audits.lcpElement||'n/a').replace(/\|/g,'/')+' |'),
   '', '## Highest priority audits',
   ...result.reports.flatMap(r=>r.audits.failedAudits.slice(0,8).map(a=>
     '- '+r.page+' / '+r.mode+': '+a.category+' / '+a.title+
