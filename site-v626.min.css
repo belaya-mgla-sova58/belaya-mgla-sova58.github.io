@@ -1111,3 +1111,26 @@ body.modern-v424 :is(.guide-fold-summary-v414,.guide-nav-card,.related-guide-car
   }
 }
 /* end desktop full-width workspace v983 */
+
+
+/* v640: sitewide accessible guide overview panel */
+body.site-hq-v407 .route-page>.guide-tools{display:none!important}
+body.site-hq-v407 .route-page>details.guide-overview-v640{box-sizing:border-box;display:block!important;position:relative;z-index:3;overflow:hidden;pointer-events:auto!important;width:100%;margin:12px 0 16px!important;padding:0!important;border:1px solid rgba(113,201,248,.42)!important;border-radius:17px!important;background:linear-gradient(125deg,#092743 0%,#104574 100%)!important;box-shadow:0 10px 27px rgba(0,14,38,.2)!important;color:#eaf7ff!important}
+body.site-hq-v407 .route-page>details.guide-overview-v640>summary{box-sizing:border-box;display:flex!important;align-items:center;gap:12px;min-height:52px;width:100%;padding:12px 16px!important;margin:0!important;border:0!important;border-radius:0!important;background:rgba(11,58,101,.15)!important;color:#fff!important;font-family:inherit;font-size:15px!important;font-weight:800!important;line-height:1.45;list-style:none!important;cursor:pointer!important;pointer-events:auto!important;user-select:none}
+body.site-hq-v407 .route-page>details.guide-overview-v640>summary::-webkit-details-marker{display:none}
+body.site-hq-v407 .route-page>details.guide-overview-v640>summary::marker{content:""}
+body.site-hq-v407 .route-page>details.guide-overview-v640>summary:hover{background:rgba(26,121,188,.36)!important}
+body.site-hq-v407 .route-page>details.guide-overview-v640>summary:focus-visible{outline:3px solid #75d8ff!important;outline-offset:-3px!important}
+body.site-hq-v407 .route-page>details.guide-overview-v640[open]>summary{background:rgba(27,119,181,.3)!important;border-bottom:1px solid rgba(145,219,255,.18)!important}
+body.site-hq-v407 .guide-overview-v640 .guide-close-v640{display:none}
+body.site-hq-v407 .guide-overview-v640[open] .guide-open-v640{display:none}
+body.site-hq-v407 .guide-overview-v640[open] .guide-close-v640{display:inline}
+body.site-hq-v407 .guide-overview-v640 .guide-chevron-v640{margin-left:auto;color:#a8e7ff;font-size:26px;line-height:1;transition:transform .18s ease}
+body.site-hq-v407 .guide-overview-v640[open] .guide-chevron-v640{transform:rotate(180deg)}
+body.site-hq-v407 .route-page>.guide-overview-v640 .guide-overview-body-v640{padding:13px 16px 17px!important;background:rgba(0,17,39,.13)!important}
+body.site-hq-v407 .route-page>.guide-overview-v640 .guide-overview-description-v640{padding:0!important;margin:0 0 14px!important;max-width:100%!important;color:#d9eeff!important;font-size:14px!important;font-weight:400!important;line-height:1.65!important}
+body.site-hq-v407 .route-page>.guide-overview-v640 a.guide-overview-link-v640{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:8px 13px;border:1px solid rgba(161,226,255,.43)!important;border-radius:11px!important;background:linear-gradient(135deg,#167db9,#115d9a)!important;color:#fff!important;font-weight:800!important;text-decoration:none!important;cursor:pointer;pointer-events:auto}
+body.site-hq-v407 .route-page>.guide-overview-v640 a.guide-overview-link-v640:hover{background:linear-gradient(135deg,#2197d4,#1973b0)!important}
+body.site-hq-v407 .route-page>.guide-mini-nav a{background:rgba(12,56,94,.84)!important;color:#e7f7ff!important;border-color:rgba(108,202,250,.32)!important}
+body.site-hq-v407 .route-page>.section[id^="guide-start-"]{scroll-margin-top:82px}
+@media(max-width:600px){body.site-hq-v407 .route-page>details.guide-overview-v640>summary{padding:11px 13px!important;min-height:46px;font-size:14px!important}body.site-hq-v407 .route-page>.guide-overview-v640 .guide-overview-body-v640{padding:11px 13px 14px!important}}
