@@ -1,0 +1,85 @@
+name: Lossless PNG optimization
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/optimize-png-lossless.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lossless-png-optimization
+  cancel-in-progress: false
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Install optimizer and pixel verifier
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq optipng
+          python3 -m pip install --quiet --break-system-packages pillow
+      - name: Recompress only if RGBA pixels match and files become smaller
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          import hashlib, subprocess, shutil, tempfile
+          paths = sorted(p for p in Path("assets").rglob("*.png") if p.is_file())
+          paths += sorted(p for p in Path(".").glob("*.png") if p.is_file())
+          total_before, total_after, changed = 0, 0, []
+          for path in paths:
+              size = path.stat().st_size
+              total_before += size
+              if size < 100 * 1024:
+                  total_after += size
+                  continue
+              with Image.open(path) as original:
+                  pixels_before = hashlib.sha256(original.convert("RGBA").tobytes()).digest()
+                  dimensions_before = original.size
+              with tempfile.TemporaryDirectory() as tmp:
+                  candidate = Path(tmp) / path.name
+                  shutil.copy2(path, candidate)
+                  result = subprocess.run(["optipng", "-quiet", "-o2", str(candidate)], capture_output=True, text=True)
+                  if result.returncode != 0:
+                      print("SKIP optimizer error:", path, result.stderr[:200])
+                      total_after += size
+                      continue
+                  with Image.open(candidate) as after:
+                      pixels_after = hashlib.sha256(after.convert("RGBA").tobytes()).digest()
+                      dimensions_after = after.size
+                  smaller = candidate.stat().st_size < size
+                  if pixels_before == pixels_after and dimensions_before == dimensions_after and smaller:
+                      new_size = candidate.stat().st_size
+                      shutil.copy2(candidate, path)
+                      changed.append((path, size-new_size))
+                      total_after += new_size
+                  else:
+                      print("SKIP unchanged or mismatch:", path)
+                      total_after += size
+          print(f"PNG files checked: {len(paths)}")
+          print(f"Before: {total_before / 1048576:.2f} MiB; after: {total_after / 1048576:.2f} MiB")
+          print(f"Lossless savings: {(total_before-total_after) / 1048576:.2f} MiB")
+          for path, saved in sorted(changed, key=lambda x:x[1], reverse=True):
+              print(f"SAVED {saved/1024:.1f} KiB | {path}")
+          PY
+      - name: Commit verified lossless PNG changes
+        shell: bash
+        run: |
+          if git diff --quiet -- '*.png'; then
+            echo "No PNG changes worth committing."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- '*.png'
+          git commit -m "Losslessly optimize PNG assets with verified identical pixels"
+          git push
