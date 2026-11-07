@@ -46,6 +46,11 @@ const DEVICES = [
   { name:'small-mobile', width:360, height:780, isMobile:true, hasTouch:true, coreOnly:true },
   { name:'wide-desktop', width:1920, height:1080, isMobile:false, hasTouch:false, coreOnly:true }
 ];
+// GitHub Actions runs each screen profile in a separate parallel job.
+const REQUESTED_DEVICE = process.env.AUDIT_DEVICE || '';
+const ACTIVE_DEVICES = REQUESTED_DEVICE
+  ? DEVICES.filter(d => d.name === REQUESTED_DEVICE) : DEVICES;
+if (!ACTIVE_DEVICES.length) throw new Error('Unknown AUDIT_DEVICE: '+REQUESTED_DEVICE);
 
 function discoverHtmlPages(root) {
   const found = [];
@@ -218,7 +223,7 @@ async function run() {
   const browser=await chromium.launch({headless:true});
   const rows=[];
   try {
-    for (const device of DEVICES) {
+    for (const device of ACTIVE_DEVICES) {
       const pages = device.coreOnly ? allPages.filter(p => CORE.has(p)) : allPages;
       const folder=path.join(OUT,device.name);
       fs.mkdirSync(folder,{recursive:true});
@@ -318,13 +323,13 @@ async function run() {
       await ctx.close();
     }
   } finally {await browser.close();}
-  rows.sort((a,b)=>DEVICES.findIndex(x=>x.name===a.device)-DEVICES.findIndex(x=>x.name===b.device)
+  rows.sort((a,b)=>ACTIVE_DEVICES.findIndex(x=>x.name===a.device)-ACTIVE_DEVICES.findIndex(x=>x.name===b.device)
     ||a.page.localeCompare(b.page));
   const failures=rows.filter(r=>r.failures.length);
   const warned=rows.filter(r=>r.warnings.length);
   const countImages=rows.reduce((n,r)=>n+(r.metrics?.imageCount||0),0);
   const report={created:new Date().toISOString(),htmlPages:allPages.length,
-    deviceProfiles:DEVICES,checks:rows.length,imageElementsChecked:countImages,
+    deviceProfiles:ACTIVE_DEVICES,checks:rows.length,imageElementsChecked:countImages,
     analyticsBeaconsSuppressed:true,
     failures:failures.length,withWarnings:warned.length,rows};
   fs.writeFileSync(path.join(OUT,'report.json'),JSON.stringify(report,null,2));
