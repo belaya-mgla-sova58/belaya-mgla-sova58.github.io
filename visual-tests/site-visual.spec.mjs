@@ -28,6 +28,14 @@ for (const [name, path] of pages) {
     await page.waitForLoadState('load', { timeout: 15_000 }).catch(() => {});
     await page.waitForTimeout(600);
 
+    // Prevent an old homepage script from replacing the preloaded hero.
+    if (path === 'index.html') {
+      const hero = page.locator('.home-stamped-hero-v441 img.home-stamped-img-v441');
+      await expect(hero, 'На главной должен быть оригинальный утверждённый баннер').toHaveAttribute(
+        'src', 'assets/home-hero-polish-v447.webp'
+      );
+    }
+
     const diagnostics = await page.evaluate(() => {
       const viewportWidth = document.documentElement.clientWidth;
       const horizontalOverflowPx = Math.max(0, document.documentElement.scrollWidth - viewportWidth);
