@@ -23,6 +23,12 @@ for(const page of PAGES)for(const mode of MODES){
     '--output=json','--output-path='+output,
     '--only-categories=performance,accessibility,best-practices,seo',
     '--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage',
+    // Avoid artificially inflating visitor counts while retaining page scripts.
+    '--blocked-url-patterns=*mc.yandex.ru/watch*',
+    '--blocked-url-patterns=*google-analytics.com/*collect*',
+    '--blocked-url-patterns=*posthog.com/e*',
+    '--blocked-url-patterns=*posthog.com/batch*',
+    '--blocked-url-patterns=*cloudflareinsights.com/cdn-cgi/rum*',
     '--quiet'];
   if(mode==='desktop')args.push('--preset=desktop');
   const cmd=cp.spawnSync(bin,args,{
