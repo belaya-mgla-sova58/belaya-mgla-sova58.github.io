@@ -19,7 +19,6 @@ test.describe('Мобильная навигация и калькуляторы
         'essence-mithril-calculator.html',
       ];
       for (const path of expectedPaths) {
-        const card = cards.filter({ has: page.locator(`[href="${path}"]`) });
         // The card itself is the link, so find it by href directly.
         const link = page.locator(`a.calc-hub-card[href="${path}"]`);
         await expect(link).toHaveCount(1);
