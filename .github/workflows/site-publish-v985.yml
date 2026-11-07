@@ -1,0 +1,47 @@
+name: Link desktop style directly on every standard site page
+on:
+  push:
+    paths:
+      - '.github/workflows/site-publish-v985.yml'
+permissions:
+  contents: write
+jobs:
+  update-html:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Insert desktop styles after inline CSS and refresh asset versions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          inserted=0
+          changed=[]
+          for p in sorted(Path('.').glob('*.html')):
+              s=p.read_text(encoding='utf-8')
+              if 'site-v626.min.css' not in s or 'site-v629.min.js' not in s:
+                  continue
+              t=re.sub(r'(href=["\']site-v626\.min\.css\?v=)\d+',lambda m:m.group(1)+'985',s)
+              t=re.sub(r'(src=["\']site-v629\.min\.js\?v=)\d+',lambda m:m.group(1)+'985',t)
+              if 'data-sova-desktop-v985' not in t:
+                  link='<link rel="stylesheet" href="site-desktop-v985.css?v=985" media="screen and (min-width:1100px) and (hover:hover) and (pointer:fine)" data-sova-desktop-v985/>'
+                  if '</head>' not in t: raise RuntimeError(f'No head close in {p}')
+                  t=t.replace('</head>',link+'\n</head>',1)
+                  inserted+=1
+              if t!=s:
+                  p.write_text(t,encoding='utf-8')
+                  changed.append(p.name)
+          assert inserted>=150, f'Unexpectedly few pages updated: {inserted}'
+          assert len(changed)==inserted, f'Unexpected count discrepancy: {len(changed)} != {inserted}'
+          print('DIRECT LINK AUDIT:',len(changed),'HTML pages')
+          print('SAMPLE:',', '.join(changed[:20]))
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- '*.html'
+          git diff --cached --stat | tail -5
+          git diff --cached --quiet || (git commit -m "Load desktop layout v985 directly on 181 site pages" && git push)
