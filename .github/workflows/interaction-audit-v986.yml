@@ -1,11 +1,12 @@
-name: Verify mobile tap targets v986
+name: Verify published site interactions v986
 on:
   push:
     paths: ['.github/workflows/interaction-audit-v986.yml']
 permissions: {contents: read}
 jobs:
-  mobile-targets:
+  smoke:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -13,44 +14,83 @@ jobs:
       - run: |
           npm install --no-save --no-package-lock playwright
           npx playwright install --with-deps chromium
-      - name: Locate mobile click blockers and test navigation close
+      - name: Test production browser behavior
         run: |
           node <<'JS'
           const {chromium}=require('playwright');
           (async()=>{
-            const browser=await chromium.launch(),context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,serviceWorkers:'block'});
-            const page=await context.newPage(),base='https://belaya-mgla-sova58.github.io/';
-            await page.goto(base+'essence-mithril-calculator.html?diag=988',{waitUntil:'domcontentloaded'});
-            await page.waitForTimeout(650);
-            await page.locator('#ecMoreItems>summary').click();
-            await page.evaluate(()=>{
-              window._tapEvents=[];
-              ['pointerdown','pointerup','mousedown','mouseup','touchstart','touchend','click'].forEach(type=>{
-                document.addEventListener(type,e=>{const t=e.target;window._tapEvents.push({type,target:t.id||t.className?.toString().slice(0,80)||t.tagName,cancelled:e.defaultPrevented})},true);
+            const browser=await chromium.launch();let passed=0,failures=[];
+            for(const [mode,options] of Object.entries({desktop:{viewport:{width:1440,height:900},serviceWorkers:'block'},mobile:{viewport:{width:390,height:844},isMobile:true,hasTouch:true,serviceWorkers:'block'}})){
+              const ctx=await browser.newContext(options);
+              async function test(file,fn){
+                const p=await ctx.newPage(),bad=[],errors=[];
+                p.on('pageerror',e=>errors.push(e.message.slice(0,100)));
+                p.on('response',r=>{if(r.status()>=400&&r.url().includes('belaya-mgla-sova58.github.io'))bad.push([r.status(),r.url()])});
+                const prefix=mode+' '+file;
+                try{
+                  const res=await p.goto('https://belaya-mgla-sova58.github.io/'+file+'?verify=986',{waitUntil:'domcontentloaded',timeout:30000});
+                  await p.waitForTimeout(650);
+                  if(!res.ok())throw Error('HTTP '+res.status());
+                  await fn(p);
+                  if(bad.length)throw Error('failed local resources: '+JSON.stringify(bad));
+                  if(errors.length)throw Error('JS pageerrors '+JSON.stringify(errors));
+                  passed++;console.log('PASS',prefix);
+                }catch(e){failures.push(prefix+': '+String(e.message||e).slice(0,240));console.log('FAIL',prefix,String(e.message||e).slice(0,240))}
+                await p.close();
+              }
+              await test('index.html',async p=>{
+                const s=p.locator('.site-search-input-v426').first();
+                await s.fill('медвед');await p.waitForTimeout(180);
+                if(await p.locator('a.site-search-result-v426').count()<1)throw Error('No search results');
+                await s.fill('');
+                if(mode==='mobile'){
+                  await p.locator('#mobileMenuToggle').tap();
+                  const b=p.locator('#sovaMobileCloseV986');
+                  if(!await b.isVisible())throw Error('Close button not visible');
+                  await b.tap();
+                  if((await p.locator('#mobileMenuToggle').getAttribute('aria-expanded'))!=='false')throw Error('Menu stayed open');
+                }
               });
-            });
-            console.log('CALC RECT',JSON.stringify(await page.locator('#ecAdd').evaluate(b=>{let r=b.getBoundingClientRect(),s=getComputedStyle(b);let x=r.x+r.width/2,y=r.y+r.height/2;return {rect:r.toJSON(),display:s.display,pe:s.pointerEvents,visibility:s.visibility,hit:document.elementFromPoint(x,Math.min(innerHeight-1,y))?.outerHTML?.slice(0,240),detailsOpen:b.closest('details')?.open,ancestor:b.parentElement.outerHTML.slice(0,250)}})));
-            await page.locator('#ecAdd').click({timeout:4000});
-            console.log('CALC CLICK EVENTS',JSON.stringify(await page.evaluate(()=>window._tapEvents)));
-            console.log('CALC CLICK COUNT',await page.locator('#ecItems .ec-item').count());
-            await page.locator('#ecAdd').tap({timeout:4000});
-            console.log('CALC TAP EVENTS',JSON.stringify(await page.evaluate(()=>window._tapEvents.slice(-14))));
-            console.log('CALC TAP COUNT',await page.locator('#ecItems .ec-item').count());
-            const p=await context.newPage();
-            await p.goto(base+'index.html?diag=988',{waitUntil:'domcontentloaded'});
-            await p.waitForTimeout(550);
-            await p.evaluate(()=>{
-              var nav=document.querySelector('.nav-wrap'),toggle=document.getElementById('mobileMenuToggle');
-              var close=document.createElement('button');close.id='sovaMobileCloseV986';close.type='button';close.setAttribute('aria-label','Закрыть меню');close.textContent='×';
-              close.style.cssText='position:sticky;top:8px;float:right;width:40px;height:40px;z-index:100;background:#144676;border:1px solid #72cfff;border-radius:12px;color:#fff;font-size:28px';
-              close.addEventListener('click',()=>toggle.click());
-              nav.prepend(close);
-            });
-            await p.locator('#mobileMenuToggle').click({timeout:3000});
-            const close=p.locator('#sovaMobileCloseV986');
-            console.log('MENU CUSTOM CLOSE RECT',JSON.stringify(await close.evaluate(b=>{let r=b.getBoundingClientRect();return {r:r.toJSON(),hit:document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)?.outerHTML.slice(0,110)}})));
-            try{await close.click({timeout:3000});console.log('MENU CUSTOM CLOSE STATUS',await p.locator('#mobileMenuToggle').getAttribute('aria-expanded'))}
-            catch(e){console.log('MENU CUSTOM CLOSE ERROR',String(e.message).slice(0,550))}
+              await test('events.html',async p=>{
+                const details=p.locator('details.guide-fold-v414');
+                if(mode==='desktop'){
+                  const button=p.locator('.guide-fold-all-v414');
+                  await button.click();
+                  const allClosed=await details.evaluateAll(xs=>xs.every(e=>!e.open));
+                  await button.click();
+                  const allOpened=await details.evaluateAll(xs=>xs.every(e=>e.open));
+                  if(!allClosed||!allOpened)throw Error('Expand/collapse all incorrect');
+                }else{
+                  const first=details.first();
+                  await first.locator('summary').tap();
+                  if(!await first.evaluate(e=>!e.open))throw Error('Section did not toggle');
+                }
+              });
+              await test('essence-mithril-calculator.html',async p=>{
+                p.on('dialog',d=>d.accept());
+                const count=()=>p.locator('#ecItems .ec-item').count();
+                await p.locator('#ecMoreItems > summary')[mode==='mobile'?'tap':'click']();
+                const before=await count();
+                await p.locator('#ecAdd')[mode==='mobile'?'tap':'click']();
+                if((await count())!==before+1)throw Error('Add item failed');
+                await p.locator('#ecReset')[mode==='mobile'?'tap':'click']();
+                if((await count())!==1)throw Error('Reset failed');
+              });
+              await test('pets.html',async p=>{
+                const card=p.locator('details.pet-catalog-card').first();
+                await card.locator('summary')[mode==='mobile'?'tap':'click']();
+                if(!await card.evaluate(e=>e.open))throw Error('Pet did not open');
+              });
+              await test('faq.html',async p=>{
+                const card=p.locator('details.faq-answer-card').first();
+                await card.locator('summary')[mode==='mobile'?'tap':'click']();
+                if(!await card.evaluate(e=>e.open))throw Error('FAQ did not open');
+              });
+              await ctx.close();
+            }
             await browser.close();
-          })().catch(e=>{console.error('TARGETS ERROR',e);process.exitCode=1});
+            console.log('FINAL PASS COUNT',passed,'EXPECTED',10);
+            console.log('FINAL FAILURES',JSON.stringify(failures));
+            if(failures.length||passed!==10)process.exitCode=1;
+          })().catch(e=>{console.error(e);process.exitCode=1});
           JS
