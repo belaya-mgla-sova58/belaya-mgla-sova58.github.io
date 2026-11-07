@@ -2,17 +2,7 @@ const CACHE_NAME = 'belaya-mgla-v987';
 const STATIC_CORE = [
   './site-v626.min.css?v=985',
   './site-desktop-v985.css?v=985',
-  './site-v629.min.js?v=986',
-  './manifest-v541.webmanifest',
-  './assets/home-hero-polish-v447.webp',
-  './assets/ui-home-v534.webp',
-  './assets/ui-events-v534.webp',
-  './assets/ui-heroes-v534.webp',
-  './assets/ui-gear-v534.webp',
-  './assets/ui-experts-v534.webp',
-  './assets/ui-pets-v534.webp',
-  './assets/ui-calculator-v534.webp',
-  './assets/ui-knowledge-v534.webp'
+  './site-v629.min.js?v=986'
 ];
 
 self.addEventListener('install', event => {
@@ -20,22 +10,16 @@ self.addEventListener('install', event => {
   self.skipWaiting();
 });
 
+// Updates should not forcibly reload open tabs or discard user input.
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys()
-      .then(keys => Promise.all(keys.filter(k => k.startsWith('belaya-mgla-') && k !== CACHE_NAME).map(k => caches.delete(k))))
-      .then(() => self.clients.claim())
-      .then(() => self.clients.matchAll({type:'window',includeUncontrolled:true}))
-      .then(clients => Promise.all(clients.map(client => {
-        try{
-          const u=new URL(client.url);
-          if(u.origin===self.location.origin && u.searchParams.get('ugu_refresh')!=='987'){
-            u.searchParams.set('ugu_refresh','987');
-            return client.navigate(u.toString());
-          }
-        }catch(e){}
-        return Promise.resolve();
-      })))
+    self.clients.claim().then(() => {
+      // Cleanup is best-effort; it cannot block the newly active worker.
+      caches.keys().then(keys => Promise.all(
+        keys.filter(k => k.startsWith('belaya-mgla-') && k !== CACHE_NAME)
+          .map(k => caches.delete(k))
+      )).catch(() => {});
+    })
   );
 });
 
