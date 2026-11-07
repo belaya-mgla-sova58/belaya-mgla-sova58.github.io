@@ -1,0 +1,73 @@
+name: Audit site asset sizes
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/asset-audit.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  asset-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Report large files and exact duplicates (read-only)
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from collections import defaultdict
+          import hashlib
+          root = Path(".")
+          excluded = {".git", "node_modules", ".venv", "venv"}
+          files = []
+          for path in root.rglob("*"):
+              if not path.is_file() or any(x in excluded for x in path.parts):
+                  continue
+              try:
+                  size = path.stat().st_size
+              except OSError:
+                  continue
+              files.append((size, path))
+          files.sort(reverse=True)
+          total = sum(size for size, _ in files)
+          print(f"Repository files: {len(files)}; total: {total / 1048576:.1f} MiB")
+          print("TOP 40 largest files (MiB, path)")
+          for size, path in files[:40]:
+              print(f"{size/1048576:8.2f}  {path}")
+          by_ext = defaultdict(lambda: [0,0])
+          for size, path in files:
+              ext = path.suffix.lower() or "(none)"
+              by_ext[ext][0] += 1
+              by_ext[ext][1] += size
+          print("TOP extensions by total size (MiB, count, extension)")
+          for ext, (count, size) in sorted(by_ext.items(), key=lambda x:x[1][1], reverse=True)[:25]:
+              print(f"{size/1048576:8.2f}  {count:5d}  {ext}")
+          by_size = defaultdict(list)
+          for size, path in files:
+              if size >= 1024 * 100:
+                  by_size[size].append(path)
+          duplicates = []
+          for size, paths in by_size.items():
+              if len(paths) < 2:
+                  continue
+              hashes = defaultdict(list)
+              for path in paths:
+                  h = hashlib.sha256()
+                  with path.open("rb") as source:
+                      for chunk in iter(lambda:source.read(1048576), b""):
+                          h.update(chunk)
+                  hashes[h.hexdigest()].append(path)
+              for paths in hashes.values():
+                  if len(paths) > 1:
+                      duplicates.append((size*(len(paths)-1), paths))
+          duplicates.sort(reverse=True)
+          print("TOP exact duplicate groups >= 100 KiB (possible reclaim MiB, paths)")
+          for wasted, paths in duplicates[:30]:
+              print(f"{wasted/1048576:8.2f}  " + " | ".join(map(str,paths)))
+          print(f"Potential exact duplicate savings: {sum(s for s,_ in duplicates)/1048576:.1f} MiB")
+          PY
