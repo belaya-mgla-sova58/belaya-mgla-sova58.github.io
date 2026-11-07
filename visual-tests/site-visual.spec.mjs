@@ -34,6 +34,10 @@ for (const [name, path] of pages) {
       await expect(hero, 'На главной должен быть оригинальный утверждённый баннер').toHaveAttribute(
         'src', 'assets/home-hero-polish-v447.webp'
       );
+      // Stable, server-rendered Bear helper card replaces the old late DOM swap.
+      await expect(page.locator('.modern-home-v424 > .home-bear-calc-v780')).toHaveCount(1);
+      await expect(page.locator('style[data-home-bear-calc-v780]')).toHaveCount(0);
+      await expect(page.locator('.home-today-v581')).toHaveCount(0);
     }
 
     const diagnostics = await page.evaluate(() => {
