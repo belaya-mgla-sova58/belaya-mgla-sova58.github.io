@@ -1,7 +1,8 @@
-const CACHE_NAME = 'belaya-mgla-v986';
+const CACHE_NAME = 'belaya-mgla-v987';
 const STATIC_CORE = [
   './site-v626.min.css?v=985',
   './site-desktop-v985.css?v=985',
+  './site-v629.min.js?v=986',
   './manifest-v541.webmanifest',
   './assets/home-hero-polish-v447.webp',
   './assets/ui-home-v534.webp',
@@ -28,8 +29,8 @@ self.addEventListener('activate', event => {
       .then(clients => Promise.all(clients.map(client => {
         try{
           const u=new URL(client.url);
-          if(u.origin===self.location.origin && u.searchParams.get('ugu_refresh')!=='986'){
-            u.searchParams.set('ugu_refresh','986');
+          if(u.origin===self.location.origin && u.searchParams.get('ugu_refresh')!=='987'){
+            u.searchParams.set('ugu_refresh','987');
             return client.navigate(u.toString());
           }
         }catch(e){}
@@ -60,6 +61,18 @@ async function freshPage(req){
   return new Response(html,{status:resp.status,statusText:resp.statusText,headers});
 }
 
+// Only explicitly versioned core CSS/JS are cache-first. A new ?v= URL
+// always creates a separate entry; HTML navigation still fetches fresh.
+function isVersionedCoreAsset(url){
+  const path=url.pathname;
+  const version=url.searchParams.get('v')||'';
+  return /^\\d{3,4}$/.test(version) && (
+    path.endsWith('/site-v626.min.css') ||
+    path.endsWith('/site-desktop-v985.css') ||
+    path.endsWith('/site-v629.min.js')
+  );
+}
+
 function isFresh(url){
   const p=url.pathname;
   return p.endsWith('/site-v629.min.js') ||
@@ -83,6 +96,23 @@ self.addEventListener('fetch', event => {
 
   if(req.mode==='navigate'||url.pathname.endsWith('.html')){
     event.respondWith(freshPage(req).catch(()=>fetch(req,{cache:'no-store'})));
+    return;
+  }
+
+  // Avoid re-downloading the same versioned stylesheet and loader on
+  // every route. Cached responses also remain available temporarily offline.
+  if(isVersionedCoreAsset(url)){
+    event.respondWith(
+      caches.open(CACHE_NAME).then(async cache=>{
+        const cached=await cache.match(req);
+        if(cached)return cached;
+        const response=await fetch(req,{cache:'no-store'});
+        if(response.ok&&response.type!=='opaque'){
+          try{await cache.put(req,response.clone())}catch(e){}
+        }
+        return response;
+      }).catch(()=>fetch(req))
+    );
     return;
   }
 
