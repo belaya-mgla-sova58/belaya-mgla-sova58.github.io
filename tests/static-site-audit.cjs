@@ -98,6 +98,39 @@ for (const file of htmlFiles) {
   }
   pages.push(page);
 }
+
+/* Check public sitemap coverage without including redirects, noindex or admin pages. */
+const sitemapNames = allFiles.filter(name => /^sitemap(?:-[a-z0-9-]+)?\.xml$/i.test(name));
+const listedSitemapPaths = new Set();
+for (const name of sitemapNames) {
+  const xml = fs.readFileSync(path.join(ROOT, name), 'utf8');
+  const urls = [...xml.matchAll(/<loc>\s*([^<]+)\s*<\/loc>/gi)].map(m => m[1].trim());
+  const uniqueInFile = new Set();
+  for (const url of urls) {
+    const target = targetUrl(url, name);
+    if (!target || !target.path.endsWith('.html')) continue;
+    if (uniqueInFile.has(target.path)) {
+      issue('error', name, 'sitemap-duplicate', 'Repeated URL: '+target.path);
+      continue;
+    }
+    uniqueInFile.add(target.path);
+    listedSitemapPaths.add(target.path);
+    if (!existing.has(target.path)) issue('error', name, 'sitemap-broken', 'Missing page: '+target.path);
+  }
+}
+for (const file of htmlFiles) {
+  if (/^(?:404|maintenance|welcome|owl-reset(?:-[0-9]+)?|google[0-9a-z]+|yandex_[^.]+)\.html$/i.test(file)) continue;
+  const html = fs.readFileSync(path.join(ROOT, file), 'utf8');
+  const robotsMeta = [...html.matchAll(/<meta\b[^>]*>/gi)].map(m => attrs(m[0]))
+    .find(a => (a.name||'').toLowerCase()==='robots');
+  if (robotsMeta && /noindex/i.test(robotsMeta.content||'')) continue;
+  const canonical = [...html.matchAll(/<link\b[^>]*>/gi)].map(m => attrs(m[0]))
+    .find(a => /(?:^|\s)canonical(?:\s|$)/i.test(a.rel||''));
+  const canonicalTarget = canonical?.href ? targetUrl(canonical.href, file) : null;
+  if (canonicalTarget && canonicalTarget.path!==file) continue;
+  if (!listedSitemapPaths.has(file))
+    issue('warning', file, 'sitemap-missing', 'Indexable page missing from sitemap');
+}
 for (const file of cssFiles) {
   const s = fs.readFileSync(path.join(ROOT, file), 'utf8');
   const urls = [...s.matchAll(/url\(\s*(['"]?)(.*?)\1\s*\)/gi)];
@@ -131,6 +164,7 @@ fs.writeFileSync(path.join(OUT, 'static-report.json'), JSON.stringify(report, nu
 const summary = [
   '# SOVA58 static site audit', '',
   'HTML pages: '+report.htmlPages+'; CSS: '+report.cssFiles+'; image tags: '+report.images+'.',
+  'Unique sitemap HTML URLs: '+listedSitemapPaths.size+'.',
   'Errors: '+errors.length+'; warnings: '+warnings.length+'.', '',
   '## Errors', ...(errors.length ? errors.slice(0,100).map(x => '- '+x.file+': '+x.category+': '+x.details) : ['No missing local assets or links detected.']),
   '', '## Warnings (first 80)', ...warnings.slice(0,80).map(x => '- '+x.file+': '+x.category+': '+x.details),
