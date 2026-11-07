@@ -1,4 +1,4 @@
-const CACHE_NAME = 'belaya-mgla-v996';
+const CACHE_NAME = 'belaya-mgla-v997';
 const STATIC_CORE = [
   './site-v626.min.css?v=985',
   './site-desktop-v985.css?v=985',
@@ -23,25 +23,10 @@ self.addEventListener('activate', event => {
   );
 });
 
-function optimizeHtml(html){
-  html=html.replace(/<section\s+class=["']pwa-install-v540["'][\s\S]*?<\/section>/i,'');
-  html=html.replace(/madam-ugu-v655\.js\?v=\d+/g,'madam-ugu-v655.js?v=959');
-  html=html.replace(/madam-ugu-mobile-match-v701\.js\?v=\d+/g,'madam-ugu-mobile-match-v701.js?v=714');
-  html=html.replace(/pwa-install\.js\?v=\d+/g,'pwa-install.js?v=988');
-  html=html.replace(/site-v629\.min\.js\?v=\d+/g,'site-v629.min.js?v=986');
-  // Preserve the actual CSS version declared by each page; do not rewrite to an old cached asset.
-  return html;
-}
-
+// HTML is always loaded directly from the network. Do not rewrite resource
+// versions or remove page sections: the published HTML is the source of truth.
 async function freshPage(req){
-  const resp=await fetch(req,{cache:'no-store'});
-  const type=(resp.headers.get('content-type')||'').toLowerCase();
-  if(!resp.ok||!type.includes('text/html')) return resp;
-  let html=optimizeHtml(await resp.text());
-  const headers=new Headers(resp.headers);
-  headers.set('Cache-Control','no-store, no-cache, must-revalidate, max-age=0');
-  headers.delete('content-length');
-  return new Response(html,{status:resp.status,statusText:resp.statusText,headers});
+  return fetch(req,{cache:'no-store'});
 }
 
 // Only explicitly versioned core CSS/JS are cache-first. A new ?v= URL
