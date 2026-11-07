@@ -61,6 +61,36 @@ test.describe('Ковка 10–20 и красное снаряжение', () =>
   });
 });
 
+test.describe('Промежуточные шаги ковки', () => {
+  test('Ковка 10.2→11: не считаем два уже оплаченных шага', async ({ page }) => {
+    const partial = { ...item(10, 11), masteryProgress: 2 };
+    await openWithScenario(page, gear([partial]));
+    // 10→11: 5 шагов по 22 камня. После двух выполненных остаётся 3 × 22.
+    await expect(page.locator('#ecNeedEssence')).toHaveText('66');
+    await expect(page.locator('#ecNeedMythic')).toHaveText('1');
+  });
+
+  test('Ковка 14.3→15: учитываются только последний этап и завершение', async ({ page }) => {
+    await openWithScenario(page, gear([{ ...item(14, 15), masteryProgress: 3 }]));
+    // Два оставшихся шага по 30 камней, по 1 мифическому за каждый.
+    await expect(page.locator('#ecNeedEssence')).toHaveText('60');
+    await expect(page.locator('#ecNeedMythic')).toHaveText('2');
+  });
+
+  test('Ковка 19.4→20: только завершающий шаг', async ({ page }) => {
+    await openWithScenario(page, gear([{ ...item(19, 20), masteryProgress: 4 }]));
+    await expect(page.locator('#ecNeedEssence')).toHaveText('40');
+    await expect(page.locator('#ecNeedMythic')).toHaveText('2');
+  });
+
+  test('Ковка 10.2→11: запасы не вычитаются дважды', async ({ page }) => {
+    await openWithScenario(page, gear([{ ...item(10, 11), masteryProgress: 2 }]));
+    await page.locator('#ecStockEssence').fill('50');
+    await expect(page.locator('#ecNeedEssence')).toHaveText('66');
+    await expect(page.locator('#ecLeftEssence')).toContainText('Не хватает: 16');
+  });
+});
+
 test.describe('Опыт улучшения', () => {
   test('Усиление золотого 0→1 требует 10 опыта, корм учитывается в запасах', async ({ page }) => {
     await openWithScenario(page, null, {
