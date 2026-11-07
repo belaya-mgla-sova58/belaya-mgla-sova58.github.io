@@ -13,8 +13,8 @@ async function run(){
   // Verify published PWA update version stays aligned with registration.
   const swSource=fs.readFileSync(path.resolve(__dirname,'..','service-worker.js'),'utf8');
   const installSource=fs.readFileSync(path.resolve(__dirname,'..','pwa-install.js'),'utf8');
-  const cacheVersion=swSource.match(/const CACHE_NAME\\s*=\\s*['"]belaya-mgla-v(\\d+)['"]/);
-  const registrationVersion=installSource.match(/service-worker\\.js\\?v=(\\d+)/);
+  const cacheVersion=swSource.match(/const CACHE_NAME\s*=\s*['"]belaya-mgla-v(\d+)['"]/);
+  const registrationVersion=installSource.match(/service-worker\.js\?v=(\d+)/);
   report.checks.push({name:'pwa-cache-registration-version',
     ok:!!cacheVersion&&!!registrationVersion&&cacheVersion[1]===registrationVersion[1],
     cache:cacheVersion?.[1],registration:registrationVersion?.[1]});
