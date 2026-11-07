@@ -1,12 +1,12 @@
-name: Interactive site diagnostics v986
+name: Verify mobile fixes before publication v986
 on:
   push:
     paths: ['.github/workflows/interaction-audit-v986.yml']
 permissions: {contents: read}
 jobs:
-  diagnose:
+  verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 9
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -14,54 +14,48 @@ jobs:
       - run: |
           npm install --no-save --no-package-lock playwright
           npx playwright install --with-deps chromium
-      - name: Inspect exact click and HTTP behaviors
+      - name: Verify proposed menu fix and calculator add
         run: |
           node <<'JS'
           const {chromium}=require('playwright');
           (async()=>{
             const browser=await chromium.launch();
-            for(const mode of ['desktop','mobile']){
-              const ctx=await browser.newContext(mode==='desktop'?{viewport:{width:1440,height:900},serviceWorkers:'block'}:{viewport:{width:390,height:844},isMobile:true,hasTouch:true,serviceWorkers:'block'});
-              const test=async(name,fn)=>{
-                const p=await ctx.newPage();const bad=[];
-                p.on('response',r=>{if(r.status()>=400&&r.url().includes('belaya-mgla-sova58.github.io'))bad.push([r.status(),r.url()])});
-                p.on('pageerror',e=>console.log('PAGE ERROR',mode,name,e.message));
-                await p.goto('https://belaya-mgla-sova58.github.io/'+name+'?diag=986',{waitUntil:'domcontentloaded'});
-                await p.waitForTimeout(650);
-                try{await fn(p)}catch(e){console.log('DIAG EXCEPTION',mode,name,String(e.message||e).slice(0,700))}
-                console.log('BAD REQUESTS',mode,name,JSON.stringify(bad.slice(0,15)));
-                await p.close();
-              };
-              await test('index.html',async(p)=>{
-                const btn=p.locator('#mobileMenuToggle');
-                if(mode==='mobile'){
-                  console.log('MENU INIT',await p.evaluate(()=>{let b=document.querySelector('#mobileMenuToggle');let s=getComputedStyle(b);return {rect:b.getBoundingClientRect().toJSON(),z:s.zIndex,position:s.position,display:s.display}}));
-                  await btn.click({timeout:3000});console.log('MENU OPEN',await p.evaluate(()=>{const b=document.querySelector('#mobileMenuToggle'),r=b.getBoundingClientRect(),top=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return {exp:b.getAttribute('aria-expanded'),rect:r.toJSON(),top:top?.outerHTML?.slice(0,140),buttonZ:getComputedStyle(b).zIndex,overlayZ:getComputedStyle(document.querySelector('#mobileNavOverlay')).zIndex}}));
-                  try{await btn.click({timeout:2500});console.log('MENU CLOSE BUTTON SUCCESS')}catch(e){console.log('MENU CLOSE BUTTON ERROR',String(e.message).slice(0,400));}
-                  await p.locator('#mobileNavOverlay').click({timeout:2500,force:true});
-                  console.log('MENU AFTER OVERLAY',await btn.getAttribute('aria-expanded'));
-                }
-              });
-              await test('events.html',async(p)=>{
-                const all=p.locator('details.guide-fold-v414'),btn=p.locator('.guide-fold-all-v414');
-                console.log('EVENT INIT',mode,await all.evaluateAll(xs=>xs.map(x=>x.open)));
-                const b=await btn.evaluate(e=>{const r=e.getBoundingClientRect(),s=getComputedStyle(e),el=document.elementFromPoint(Math.max(1,r.x+r.width/2),Math.max(1,Math.min(innerHeight-1,r.y+r.height/2)));return {rect:r.toJSON(),visibility:s.visibility,display:s.display,pe:s.pointerEvents,hit:el?.outerHTML?.slice(0,200)}});
-                console.log('EVENT BUTTON',mode,JSON.stringify(b));
-                try{await btn.click({timeout:3000});console.log('EVENT FIRST',mode,await all.evaluateAll(xs=>xs.map(x=>x.open)))}catch(e){console.log('EVENT CLICK ERR',mode,String(e.message).slice(0,500));}
-                try{await btn.click({timeout:3000});console.log('EVENT SECOND',mode,await all.evaluateAll(xs=>xs.map(x=>x.open)))}catch(e){console.log('EVENT SECOND ERR',mode,String(e.message).slice(0,500));}
-              });
-              await test('essence-mithril-calculator.html',async(p)=>{
-                p.on('dialog',async d=>{console.log('CALC DIALOG',mode,d.type(),d.message());await d.accept()});
-                const count=()=>p.locator('#ecItems .ec-item').count();
-                console.log('CALC START',mode,await count());
-                const more=p.locator('#ecMoreItems');
-                console.log('CALC OPEN BEFORE',mode,await more.getAttribute('open'));
-                try{await more.locator('summary').click({timeout:3000});console.log('CALC OPEN AFTER',mode,await more.getAttribute('open'))}catch(e){console.log('CALC SUMMARY ERROR',mode,String(e.message).slice(0,500))}
-                try{await p.locator('#ecAdd').click({timeout:3000});await p.waitForTimeout(200);console.log('CALC AFTER ADD',mode,await count(),await p.locator('#ecAdd').isDisabled());}catch(e){console.log('CALC ADD ERROR',mode,String(e.message).slice(0,500))}
-                try{await p.locator('#ecReset').click({timeout:3000});await p.waitForTimeout(200);console.log('CALC AFTER RESET',mode,await count())}catch(e){console.log('CALC RESET ERROR',mode,String(e.message).slice(0,500))}
-              });
-              await ctx.close();
-            }
-            await browser.close();
-          })().catch(e=>{console.error(e);process.exitCode=1});
+            const ctx=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,serviceWorkers:'block'});
+            const b='https://belaya-mgla-sova58.github.io/';
+            const page=await ctx.newPage();
+            await page.goto(b+'index.html?diag=987',{waitUntil:'domcontentloaded'});
+            await page.waitForTimeout(700);
+            const css=`@media(max-width:980px),(hover:none) and (pointer:coarse){
+              body.modern-v422.mobile-menu-open .mobile-topbar #mobileMenuToggle,
+              body.modern-v422.mobile-nav-open .mobile-topbar #mobileMenuToggle{
+                position:fixed!important;left:182px!important;top:30vh!important;
+                z-index:2147483400!important;transition:none!important;
+                pointer-events:auto!important;transform:none!important;
+              }
+            }`;
+            await page.addStyleTag({content:css});
+            const btn=page.locator('#mobileMenuToggle');
+            await btn.click({timeout:3000});
+            await page.waitForTimeout(400);
+            console.log('MOBILE MENU OPEN',await page.evaluate(()=>{let x=document.querySelector('#mobileMenuToggle'),r=x.getBoundingClientRect();return JSON.stringify({expanded:x.getAttribute('aria-expanded'),rect:r.toJSON(),top:document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)?.tagName})}));
+            try{await btn.click({timeout:3500});console.log('MOBILE MENU CLOSED',await btn.getAttribute('aria-expanded'))}
+            catch(e){console.log('MOBILE MENU FAILED',String(e.message).slice(0,850))}
+            await page.close();
+            const p=await ctx.newPage();
+            await p.goto(b+'essence-mithril-calculator.html?diag=987',{waitUntil:'domcontentloaded'});
+            await p.waitForTimeout(750);
+            p.on('dialog',d=>d.accept());
+            await p.locator('#ecMoreItems > summary').click();
+            const snapshot=()=>p.evaluate(()=>({htmlCount:document.querySelectorAll('#ecItems .ec-item').length,stored:JSON.parse(localStorage.getItem('sova58-essence-mithril-calculator-v1')||'null')?.items?.length,status:document.querySelector('#ecStatus')?.textContent.slice(0,90)}));
+            console.log('MOBILE CALC INITIAL',JSON.stringify(await snapshot()));
+            await p.evaluate(()=>{window._calcClicks=0;document.querySelector('#ecAdd').addEventListener('click',()=>window._calcClicks++)});
+            await p.locator('#ecAdd').click({timeout:3000});
+            console.log('MOBILE CALC AFTER PW CLICK',JSON.stringify(await snapshot()),await p.evaluate(()=>window._calcClicks));
+            await p.evaluate(()=>document.querySelector('#ecAdd').click());
+            await p.waitForTimeout(150);
+            console.log('MOBILE CALC AFTER JS CLICK',JSON.stringify(await snapshot()),await p.evaluate(()=>window._calcClicks));
+            await p.locator('#ecReset').click({timeout:3000});
+            console.log('MOBILE CALC AFTER RESET',JSON.stringify(await snapshot()));
+            await p.close();await ctx.close();await browser.close();
+          })().catch(e=>{console.error('VERIFY ERROR',e);process.exitCode=1});
           JS
