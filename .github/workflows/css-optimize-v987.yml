@@ -1,77 +1,82 @@
-name: Audit CSS optimization without changing site
+name: Verify CSS optimization in-place via Chromium
 on:
   push:
     paths: ['.github/workflows/css-optimize-v987.yml']
 permissions: {contents: read}
 jobs:
-  safe-minification:
+  controlled-css:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: {node-version: '22'}
-      - name: Install audit dependencies
+      - name: Install browser and CSS compiler
         run: |
           npm install --no-save --no-package-lock lightningcss playwright pngjs
           npx playwright install --with-deps chromium
-      - name: Compare original CSS against minified styles in the browser
+      - name: Test optimized CSS without navigating or changing any live files
         run: |
           node <<'JS'
           const fs=require('fs'),{transform}=require('lightningcss'),{chromium}=require('playwright'),{PNG}=require('pngjs');
           const original=fs.readFileSync('site-v626.min.css');
           const optimized=transform({filename:'site-v626.min.css',code:original,minify:true,sourceMap:false,errorRecovery:true}).code;
-          const pct=Math.round((1-optimized.length/original.length)*10000)/100;
-          console.log('MINIFY SIZES',JSON.stringify({original:original.length,optimized:optimized.length,savedPercent:pct}));
-          fs.writeFileSync('/tmp/site-v626-v987-candidate.css',optimized);
-          const pages=['index.html','events.html','hero-generations.html','heroes.html','pets.html','experts.html','gear.html','bear.html','crazy-joe.html','endless-trial.html','fishing.html','foundry.html','faq.html','calculators.html','essence-mithril-calculator.html'];
+          console.log('OPTIMIZATION SIZE',JSON.stringify({originalBytes:original.length,optimizedBytes:optimized.length,percent:Math.round((1-optimized.length/original.length)*10000)/100}));
           (async()=>{
-            let total=0,failures=[];
-            const browser=await chromium.launch({headless:true});
+            const browser=await chromium.launch({headless:true}), failures=[];
+            const pages=['index.html','events.html','hero-generations.html','heroes.html','pets.html','experts.html','gear.html','bear.html','crazy-joe.html','endless-trial.html','fishing.html','foundry.html','faq.html','calculators.html','essence-mithril-calculator.html'];
+            let passed=0;
+            const properties=['display','position','visibility','opacity','color','backgroundColor','backgroundImage','boxShadow','borderColor','borderWidth','borderRadius','padding','margin','fontSize','fontFamily','fontWeight','lineHeight','letterSpacing','textAlign','gridTemplateColumns','gridTemplateRows','gap','width','height','maxWidth','minWidth','objectFit','overflow','outlineColor','transform','filter'];
             for(const mode of ['desktop','mobile']){
               const ctx=await browser.newContext(mode==='desktop'?{viewport:{width:1440,height:900},deviceScaleFactor:1,serviceWorkers:'block',reducedMotion:'reduce'}:{viewport:{width:390,height:844},deviceScaleFactor:1,isMobile:true,hasTouch:true,serviceWorkers:'block',reducedMotion:'reduce'});
               for(const name of pages){
-                const p=await ctx.newPage();
-                const target='https://belaya-mgla-sova58.github.io/'+name+'?cssAudit=987';
-                function geom(){
-                  return p.evaluate(()=>{
-                    const els=document.querySelectorAll('#appMain,.route-page.active,.modern-home-v424,.guide-page-v69,.section,.page-heading-v424,.intro,.guide-nav-card,.endless-card,.bear-card,.pet-stage,.pet-catalog-card,.expert-row,.faq-card,.calc-hub-card,.hero-mini,.gen-panel,.news-category-card');
-                    return Array.from(els).slice(0,90).map((e,i)=>{
-                      const s=getComputedStyle(e),r=e.getBoundingClientRect();
-                      return [i,e.className?.toString().slice(0,55),...['display','position','color','backgroundColor','fontSize','lineHeight','borderRadius','paddingTop','paddingLeft','gridTemplateColumns'].map(q=>s[q]),Math.round(r.width*2)/2,Math.round(r.height*2)/2];
-                    });
-                  });
-                }
-                function screenshot(){return p.screenshot({animations:'disabled',caret:'hide'});}
-                try{
-                  await p.goto(target,{waitUntil:'domcontentloaded',timeout:30000});
-                  await p.waitForTimeout(360);
-                  const beforeGeom=await geom(),beforeScreenshot=PNG.sync.read(await screenshot());
-                  await p.route('**/site-v626.min.css*',route=>route.fulfill({status:200,contentType:'text/css; charset=utf-8',body:optimized}));
-                  await p.reload({waitUntil:'domcontentloaded',timeout:30000});
-                  await p.waitForTimeout(360);
-                  const afterGeom=await geom(),afterScreenshot=PNG.sync.read(await screenshot());
-                  const geometryDiff=JSON.stringify(beforeGeom)===JSON.stringify(afterGeom)?0:beforeGeom.reduce((a,row,i)=>a+(JSON.stringify(row)!==JSON.stringify(afterGeom[i])?1:0),0);
-                  let changed=0,checked=0;
-                  for(let k=0;k<Math.min(beforeScreenshot.data.length,afterScreenshot.data.length);k+=32){
-                    checked++;
-                    let q=k;
-                    if(Math.abs(beforeScreenshot.data[q]-afterScreenshot.data[q])+
-                       Math.abs(beforeScreenshot.data[q+1]-afterScreenshot.data[q+1])+
-                       Math.abs(beforeScreenshot.data[q+2]-afterScreenshot.data[q+2])>45)changed++;
+                const page=await ctx.newPage();
+                try {
+                  await page.goto('https://belaya-mgla-sova58.github.io/'+name+'?cdpCssAudit=v987',{waitUntil:'domcontentloaded',timeout:30000});
+                  await page.waitForTimeout(520);
+                  await page.addStyleTag({content:'*,*::before,*::after{animation-play-state:paused!important;transition-duration:0s!important}'});
+                  const client=await ctx.newCDPSession(page),headers=[];
+                  client.on('CSS.styleSheetAdded',evt=>headers.push(evt.header));
+                  await client.send('DOM.enable');
+                  await client.send('CSS.enable');
+                  const matching=headers.filter(h=>h.sourceURL&&h.sourceURL.includes('site-v626.min.css'));
+                  if(matching.length!==1)throw Error('stylesheet source count '+matching.length);
+                  const id=matching[0].styleSheetId;
+                  async function read(){
+                    return page.evaluate(props=>{
+                      const els=Array.from(document.querySelectorAll('body,body *')).slice(0,1300);
+                      return els.map((el,i)=>{const s=getComputedStyle(el),r=el.getBoundingClientRect();
+                        return {i,t:el.tagName,cls:typeof el.className==='string'?el.className.slice(0,55):'',
+                          css:props.map(k=>s[k]),bounds:[r.x,r.y,r.width,r.height].map(v=>Math.round(v*10)/10)};
+                      });
+                    },properties);
                   }
-                  const pixels=Math.round(10000*changed/Math.max(1,checked))/100;
-                  const info={mode,page:name,geometryDiff,comparedGeometry:beforeGeom.length,pixelDeltaPct:pixels,desktopWidth:afterGeom[1]?.at(-2)};
-                  console.log('CSS COMPARE',JSON.stringify(info));
-                  if(geometryDiff>0||pixels>1.2)failures.push(info);
-                  total++;
-                }catch(e){failures.push({mode,page:name,error:String(e).slice(0,200)})}
-                await p.close();
+                  const before=await read();
+                  const shotBefore=PNG.sync.read(await page.screenshot({animations:'disabled',caret:'hide'}));
+                  await client.send('CSS.setStyleSheetText',{styleSheetId:id,text:optimized.toString('utf8')});
+                  const after=await read();
+                  const shotAfter=PNG.sync.read(await page.screenshot({animations:'disabled',caret:'hide'}));
+                  let mismatches=0, first=[];
+                  for(let i=0;i<Math.max(before.length,after.length);i++){
+                    if(JSON.stringify(before[i])!==JSON.stringify(after[i])){mismatches++;if(first.length<3)first.push({before:before[i],after:after[i]})}
+                  }
+                  let count=0,samples=0;
+                  for(let i=0;i<Math.min(shotBefore.data.length,shotAfter.data.length);i+=32){
+                    samples++;
+                    if(Math.abs(shotBefore.data[i]-shotAfter.data[i])+Math.abs(shotBefore.data[i+1]-shotAfter.data[i+1])+Math.abs(shotBefore.data[i+2]-shotAfter.data[i+2])>45)count++;
+                  }
+                  const pct=Math.round(count/Math.max(1,samples)*10000)/100;
+                  const result={mode,page:name,checkedDom:before.length,changedDom:mismatches,pixelDeltaPct:pct};
+                  console.log('CONTROLLED CSS',JSON.stringify(result));
+                  if(mismatches>0||pct>0.65)failures.push({...result,first});
+                  else passed++;
+                }catch(e){failures.push({mode,page:name,error:String(e).slice(0,300)});console.log('CONTROLLED ERROR',mode,name,String(e).slice(0,230))}
+                await page.close();
               }
               await ctx.close();
             }
             await browser.close();
-            console.log('CSS AUDIT FINAL',JSON.stringify({total,expected:pages.length*2,failures,originalBytes:original.length,minBytes:optimized.length}));
-            if(failures.length||total!==pages.length*2)process.exitCode=1;
+            console.log('CONTROLLED SUMMARY',JSON.stringify({passed,total:pages.length*2,failures}));
+            if(failures.length)process.exitCode=1;
           })().catch(e=>{console.error(e);process.exitCode=1});
           JS
