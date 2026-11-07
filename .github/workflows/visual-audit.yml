@@ -8,6 +8,14 @@ on:
         required: false
         type: boolean
         default: false
+      audit_scope:
+        description: 'All 194 pages or quick test of the two repaired pages'
+        required: false
+        type: choice
+        options:
+          - all
+          - repairs
+        default: all
       accessibility:
         description: 'Axe accessibility coverage'
         required: false
@@ -67,6 +75,7 @@ jobs:
       - name: Audit page layout and images
         env:
           AUDIT_DEVICE: ${{ matrix.profile }}
+          AUDIT_SCOPE: ${{ inputs.audit_scope || 'all' }}
           AUDIT_FULL_PAGE: ${{ inputs.full_page_screenshots && 'all' || 'core' }}
           AUDIT_AXE: ${{ inputs.accessibility || 'desktop' }}
         run: node tests/visual-audit.cjs
@@ -105,6 +114,7 @@ jobs:
           if-no-files-found: warn
 
   lighthouse:
+    if: ${{ inputs.audit_scope != 'repairs' }}
     name: Lighthouse performance and SEO
     runs-on: ubuntu-latest
     timeout-minutes: 45
