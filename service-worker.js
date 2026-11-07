@@ -66,7 +66,7 @@ async function freshPage(req){
 function isVersionedCoreAsset(url){
   const path=url.pathname;
   const version=url.searchParams.get('v')||'';
-  return /^\\d{3,4}$/.test(version) && (
+  return /^[0-9]{3,4}$/.test(version) && (
     path.endsWith('/site-v626.min.css') ||
     path.endsWith('/site-desktop-v985.css') ||
     path.endsWith('/site-v629.min.js')
