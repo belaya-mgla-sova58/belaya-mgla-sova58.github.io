@@ -13,9 +13,9 @@
 :root{--cc-bg:#061326;--cc-card:#0d223c;--cc-line:rgba(119,194,255,.2);--cc-text:#d9ebfb;--cc-muted:#9ebbd5;--cc-blue:#73d8ff;--cc-gold:#ffd479;--cc-green:#76e3ac}
 body.is-canyon-clash-route{background:var(--cc-bg)}
 body.is-canyon-clash-route .canyon-wrap{max-width:1040px;margin:0 auto;padding:0 14px 48px}
-body.is-canyon-clash-route .hero{margin:10px 0 18px;border-radius:24px;overflow:hidden;border:1px solid var(--cc-line);background:#0a1d34;box-shadow:0 20px 50px rgba(0,0,0,.28)}
-body.is-canyon-clash-route .hero img{display:block;width:100%;height:auto;max-height:500px;object-fit:cover}
-body.is-canyon-clash-route .hero-copy{padding:22px 22px 24px;background:linear-gradient(145deg,#0d2948,#101c3b)}
+body.is-canyon-clash-route .canyon-hero{margin:10px 0 18px;border-radius:24px;overflow:hidden;border:1px solid var(--cc-line);background:#0a1d34;box-shadow:0 20px 50px rgba(0,0,0,.28)}
+body.is-canyon-clash-route .canyon-hero img{display:block;width:100%;height:auto;max-height:500px;object-fit:cover}
+body.is-canyon-clash-route .canyon-hero-copy{padding:22px 22px 24px;background:linear-gradient(145deg,#0d2948,#101c3b)}
 body.is-canyon-clash-route .eyebrow{display:inline-block;margin-bottom:8px;color:var(--cc-blue);font-weight:900;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
 body.is-canyon-clash-route h1{margin:0 0 10px;color:#fff;font:700 clamp(32px,6vw,52px)/1.05 Georgia,'Times New Roman',serif}
 body.is-canyon-clash-route .lead{margin:0;color:#d8edff;font-size:17px;line-height:1.65}
@@ -49,7 +49,7 @@ body.is-canyon-clash-route td:first-child{border-radius:12px 0 0 12px;font-weigh
 body.is-canyon-clash-route td:last-child{border-radius:0 12px 12px 0;text-align:right;color:var(--cc-gold);font-weight:900;white-space:nowrap}
 body.is-canyon-clash-route .checklist{margin:8px 0 0;padding-left:21px}.checklist li{margin:5px 0}
 body.is-canyon-clash-route .footer-note{margin:18px 0 0;text-align:center;color:#87a8c4;font-size:12px}
-@media(max-width:760px){body.is-canyon-clash-route .facts{grid-template-columns:repeat(2,1fr)}body.is-canyon-clash-route .timeline{grid-template-columns:repeat(2,1fr)}body.is-canyon-clash-route .grid3,body.is-canyon-clash-route .grid2{grid-template-columns:1fr}body.is-canyon-clash-route .hero img{max-height:360px}body.is-canyon-clash-route .media{max-width:100%}}
+@media(max-width:760px){body.is-canyon-clash-route .facts{grid-template-columns:repeat(2,1fr)}body.is-canyon-clash-route .timeline{grid-template-columns:repeat(2,1fr)}body.is-canyon-clash-route .grid3,body.is-canyon-clash-route .grid2{grid-template-columns:1fr}body.is-canyon-clash-route .canyon-hero img{max-height:360px}body.is-canyon-clash-route .media{max-width:100%}}
 @media(max-width:520px){body.is-canyon-clash-route .photo-grid{grid-template-columns:1fr}body.is-canyon-clash-route .photo{max-width:320px;margin:0 auto;width:100%}body.is-canyon-clash-route .photo img{height:auto;max-height:none}}
 @media(max-width:460px){body.is-canyon-clash-route .canyon-wrap{padding:0 9px 36px}body.is-canyon-clash-route .guide-section{padding:15px}body.is-canyon-clash-route td{padding:9px 8px;font-size:13px}}
 body.is-canyon-clash-route .map-media{display:block!important;margin:15px auto 4px!important;max-width:760px!important;padding:8px!important;border-radius:18px!important;background:rgba(7,23,42,.8)!important;border:1px solid rgba(119,194,255,.2)!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:hidden!important;aspect-ratio:auto!important}
@@ -59,6 +59,91 @@ body.is-canyon-clash-route .map-media{display:block!important;height:auto!import
 body.is-canyon-clash-route .map-media::before,body.is-canyon-clash-route .map-media::after{content:none!important;display:none!important}
 body.is-canyon-clash-route .map-media img{position:static!important;display:block!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;margin:0!important;padding:0!important;inset:auto!important;transform:none!important;float:none!important}
 body.is-canyon-clash-route .map-media .caption{position:static!important;display:block!important;float:none!important;clear:both!important;inset:auto!important;transform:none!important;width:auto!important;height:auto!important;min-height:0!important;max-height:none!important;margin:8px 0 0!important;padding:0 5px 2px!important}
+
+
+/* v801: independent desktop composition for the Canyon guide */
+body.is-canyon-clash-route .canyon-wrap{box-sizing:border-box;width:100%;min-width:0}
+body.is-canyon-clash-route .canyon-hero{
+  display:block!important;box-sizing:border-box!important;position:relative!important;
+  width:100%!important;max-width:none!important;height:auto!important;min-height:0!important;
+  margin:12px 0 18px!important;padding:0!important;overflow:hidden!important;
+  aspect-ratio:auto!important;border:1px solid rgba(107,195,248,.36)!important;
+  border-radius:20px!important;background:#081a32!important;
+  box-shadow:0 16px 38px rgba(0,9,28,.24)!important
+}
+body.is-canyon-clash-route .canyon-hero>img{
+  display:block!important;position:static!important;box-sizing:border-box!important;
+  width:100%!important;max-width:100%!important;height:auto!important;max-height:none!important;
+  margin:0!important;padding:0!important;aspect-ratio:auto!important;
+  object-fit:contain!important;object-position:center!important;border:0!important;
+  border-radius:0!important;transform:none!important;filter:none!important
+}
+body.is-canyon-clash-route .canyon-hero .hero-copy{
+  box-sizing:border-box!important;width:100%!important;max-width:none!important;
+  position:relative!important;inset:auto!important;display:block!important;
+  margin:0!important;padding:17px clamp(16px,2.2vw,26px) 20px!important;
+  background:linear-gradient(110deg,#0b2947 0%,#0b203d 62%,#101e39 100%)!important;
+  border-top:1px solid rgba(124,206,255,.25)!important;color:#e6f4ff!important
+}
+body.is-canyon-clash-route .canyon-hero .hero-copy h1{
+  display:block!important;margin:2px 0 9px!important;font:800 clamp(23px,2.5vw,32px)/1.15 system-ui,-apple-system,"Segoe UI",sans-serif!important;
+  color:#fff!important
+}
+body.is-canyon-clash-route .canyon-hero .hero-copy .lead{
+  width:100%!important;max-width:1000px!important;margin:0!important;
+  color:#dbeeff!important;font-size:clamp(14px,1.15vw,17px)!important;line-height:1.65!important
+}
+body.is-canyon-clash-route .canyon-wrap .facts{gap:12px!important;margin:16px 0 20px!important}
+body.is-canyon-clash-route .canyon-wrap .fact{
+  box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;
+  min-width:0;min-height:86px;padding:15px 12px!important;
+  border:1px solid rgba(115,197,255,.28)!important;border-radius:16px!important;
+  background:linear-gradient(145deg,rgba(19,64,104,.94),rgba(12,39,73,.94))!important;
+  box-shadow:inset 0 1px 0 rgba(183,227,255,.08)!important
+}
+body.is-canyon-clash-route .canyon-wrap .fact b{font-size:clamp(20px,2vw,25px)!important;margin-bottom:5px!important}
+body.is-canyon-clash-route .canyon-wrap .fact span{font-size:14px!important;line-height:1.4}
+body.is-canyon-clash-route .canyon-wrap>.guide-section{
+  box-sizing:border-box!important;width:100%!important;max-width:none!important;
+  margin:16px 0!important;padding:clamp(17px,2vw,27px)!important;
+  border:1px solid rgba(110,190,248,.25)!important;border-radius:19px!important;
+  background:linear-gradient(132deg,rgba(10,33,59,.97),rgba(10,26,52,.98))!important;
+  box-shadow:0 9px 26px rgba(1,12,35,.14)!important
+}
+body.is-canyon-clash-route .canyon-wrap>.guide-section>h2{
+  color:#f4faff!important;font:800 clamp(21px,1.9vw,27px)/1.25 system-ui,-apple-system,"Segoe UI",sans-serif!important;
+  margin:0 0 15px!important;padding-left:12px!important;
+  border-left:4px solid #72d7ff!important;letter-spacing:-.015em
+}
+body.is-canyon-clash-route .canyon-wrap .guide-section p,
+body.is-canyon-clash-route .canyon-wrap .guide-section li{
+  color:#dceeff!important;font-size:clamp(14px,1.05vw,16px)!important;line-height:1.7!important
+}
+body.is-canyon-clash-route .canyon-wrap .card,
+body.is-canyon-clash-route .canyon-wrap .step{
+  box-sizing:border-box!important;min-width:0;border:1px solid rgba(110,195,250,.22)!important;
+  background:linear-gradient(145deg,rgba(18,60,98,.84),rgba(13,44,79,.86))!important;
+  border-radius:15px!important
+}
+body.is-canyon-clash-route .canyon-wrap .note{border-radius:13px!important}
+@media(min-width:1100px) and (hover:hover) and (pointer:fine){
+  body.is-canyon-clash-route .canyon-wrap{
+    max-width:none!important;width:100%!important;
+    margin:0!important;padding:0 clamp(8px,1.2vw,22px) 64px!important
+  }
+  body.is-canyon-clash-route .canyon-wrap .guide-section .grid2{gap:16px}
+  body.is-canyon-clash-route .canyon-wrap .guide-section .grid3{gap:13px}
+}
+@media(max-width:760px){
+  body.is-canyon-clash-route .canyon-hero{border-radius:15px!important;margin:8px 0 13px!important}
+  body.is-canyon-clash-route .canyon-hero .hero-copy{padding:13px 15px 16px!important}
+  body.is-canyon-clash-route .canyon-hero .hero-copy h1{font-size:23px!important}
+  body.is-canyon-clash-route .canyon-wrap .facts{gap:8px!important;margin:12px 0 14px!important}
+  body.is-canyon-clash-route .canyon-wrap .fact{min-height:76px;padding:12px 9px!important}
+  body.is-canyon-clash-route .canyon-wrap>.guide-section{padding:15px!important;margin:12px 0!important}
+  body.is-canyon-clash-route .canyon-wrap>.guide-section>h2{font-size:21px!important}
+}
+
 </style>
 </head>
 <body class="is-canyon-clash-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="canyon-clash">
@@ -68,7 +153,7 @@ body.is-canyon-clash-route .map-media .caption{position:static!important;display
 <div class="nav-wrap"><img alt="Белая мгла" class="sidebar-exact-logo" data-src="assets/img_6dc1ef08d6ab264b.webp" decoding="async" loading="lazy"><nav><a class="route-link" href="index.html"><span>Главная</span></a><a class="route-link" href="events.html"><span>События</span></a><a class="route-link" href="heroes.html"><span>Герои</span></a><a class="route-link" href="gear.html"><span>Снаряжение</span></a><a class="route-link" href="other.html"><span>База знаний</span></a></nav></div>
 <main id="appMain"><div class="route-page active" data-route="canyon-clash"><div class="canyon-wrap">
 <nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span class="breadcrumbs-sep-v409">›</span><a href="events.html">События</a><span class="breadcrumbs-sep-v409">›</span><span aria-current="page">Битва в каньоне</span></nav>
-<section class="hero"><img src="assets/canyon-header-v800.webp" alt="Битва в каньоне" fetchpriority="high"><div class="hero-copy"><span class="eyebrow">PvP • альянсовое событие</span><h1>Битва в каньоне</h1><p class="lead"><b>Три альянса, одна карта и около часа на борьбу за контроль.</b> Здесь важнее не количество убийств, а здания, маршруты, топливо и работа всей команды.</p></div></section>
+<section class="canyon-hero"><img src="assets/canyon-header-v800.webp" alt="Битва в каньоне" fetchpriority="high"><div class="hero-copy"><span class="eyebrow">PvP • альянсовое событие</span><h1>Битва в каньоне</h1><p class="lead"><b>Три альянса, одна карта и около часа на борьбу за контроль.</b> Здесь важнее не количество убийств, а здания, маршруты, топливо и работа всей команды.</p></div></section>
 <div class="facts"><div class="fact"><b>3</b><span>альянса</span></div><div class="fact"><b>≈60 мин</b><span>битва</span></div><div class="fact"><b>3</b><span>отряда у игрока</span></div><div class="fact"><b>0</b><span>реальных потерь</span></div></div>
 <section class="guide-section"><h2>Что это за событие</h2><p><b>Битва в каньоне</b> — ежемесячное альянсовое PvP-событие. Три альянса появляются с разных сторон карты и постепенно продвигаются к центральным объектам.</p><p>Побеждает альянс, который к концу боя набрал больше очков. Основной источник очков — <b>контроль зданий</b>. Убийства важны тогда, когда помогают занять точку, удержать проход или открыть путь дальше.</p><div class="note good"><b>Главная мысль:</b> сильный игрок может выиграть отдельный бой, но весь Каньон выигрывает организованный альянс.</div></section>
 <section class="guide-section"><h2>Расписание события</h2><div class="timeline"><div class="step"><b>Сб–Вс</b><span>Голосование за удобное время.</span></div><div class="step"><b>Пн–Вт</b><span>Регистрация легиона R4/R5.</span></div><div class="step"><b>Среда</b><span>Подбор двух соперников.</span></div><div class="step"><b>Четверг</b><span>Сама Битва в каньоне.</span></div></div><div class="note">Голосование показывает предпочтения игроков, но <b>не фиксирует время автоматически</b>. Итоговый слот выбирают R4/R5 при регистрации. В старых сторонних гайдах встречается другой график: если даты отличаются, ориентируйтесь на актуальное окно события в игре.</div></section>
