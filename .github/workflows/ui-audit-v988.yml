@@ -1,0 +1,72 @@
+name: Visual layout and CSS conflict audit v988
+on:
+  push:
+    paths: ['.github/workflows/ui-audit-v988.yml']
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          npm install --no-save --no-package-lock playwright postcss
+          npx playwright install --with-deps chromium
+      - name: Analyze stylesheet and visually test 66 layouts
+        run: |
+          node <<'JS'
+          const fs=require('fs'),postcss=require('postcss'),{chromium}=require('playwright');
+          const css=fs.readFileSync('site-v626.min.css','utf8'),root=postcss.parse(css);
+          let map=new Map(), ruleCount=0;
+          root.walkRules(rule=>{
+            ruleCount++;
+            const k=rule.selector.trim();
+            const value=map.get(k)||{n:0,last:0,imp:0};
+            value.n++;value.last=rule.source?.start?.line||0;
+            rule.walkDecls(d=>{if(d.important)value.imp++});
+            map.set(k,value);
+          });
+          const duplicates=Array.from(map.entries()).filter(([k,v])=>v.n>=8).sort((a,b)=>b[1].n-a[1].n).slice(0,22).map(([selector,data])=>({selector:selector.slice(0,100),...data}));
+          console.log('STYLE DUPLICATES',JSON.stringify({totalRules:ruleCount,distinctSelectors:map.size,duplicatedSelectors:[...map.values()].filter(x=>x.n>1).length,top:duplicates}));
+          const pages=['index.html','events.html','heroes.html','hero-generations.html','hero-generation-01.html','hero-gina.html','hero-flint.html','hero-alonso.html','pets.html','experts.html','expert-romulus-preview.html','gear.html','other.html','faq.html','news.html','news-ru.html','news-eu.html','calculators.html','essence-mithril-calculator.html','fire-furnace-calculator.html','bear-helper.html','bear.html','crazy-joe.html','endless-trial.html','fishing.html','foundry.html','canyon-clash.html','castle.html','state-58.html','troops.html','buildings.html','svs-prep.html','ginas-revenge.html'];
+          (async()=>{
+            const browser=await chromium.launch();
+            const errors=[],details=[];
+            for(const [mode,opts] of Object.entries({desktop:{viewport:{width:1440,height:900},serviceWorkers:'block'},mobile:{viewport:{width:390,height:844},isMobile:true,hasTouch:true,serviceWorkers:'block'}})){
+              const context=await browser.newContext(opts);
+              for(const file of pages){
+                const page=await context.newPage();
+                const js=[],broken=[];
+                page.on('pageerror',e=>js.push(e.message.slice(0,90)));
+                page.on('response',r=>{if(r.status()>=400 && r.url().includes('belaya-mgla-sova58.github.io'))broken.push({http:r.status(),url:r.url().split('/').pop().slice(0,110)})});
+                try{
+                  const res=await page.goto('https://belaya-mgla-sova58.github.io/'+file+'?audit=988',{waitUntil:'domcontentloaded',timeout:18000});
+                  await page.waitForTimeout(320);
+                  const m=await page.evaluate(()=>{
+                    const route=document.querySelector('.route-page.active');
+                    const main=document.querySelector('main#appMain');
+                    const box=route?.getBoundingClientRect(),mb=main?.getBoundingClientRect();
+                    const outliers=[];
+                    document.querySelectorAll('main img, main table, main article, main section, main .card, main button, main input').forEach(e=>{
+                      const r=e.getBoundingClientRect(),s=getComputedStyle(e);
+                      if(r.width<1||r.height<1||s.display==='none'||s.visibility==='hidden'||!e.isConnected)return;
+                      if(r.right>innerWidth+8||r.left< -9)outliers.push({tag:e.tagName,cls:String(e.className).slice(0,45),left:Math.round(r.left),right:Math.round(r.right)});
+                    });
+                    return {scrollOverflow:Math.max(0,document.documentElement.scrollWidth-innerWidth),viewport:innerWidth,routeWidth:box?Math.round(box.width):0,mainWidth:mb?Math.round(mb.width):0,mainLeft:mb?Math.round(mb.left):0,outerElements:outliers.slice(0,5),images:Array.from(document.querySelectorAll('main img')).filter(x=>x.complete&&x.naturalWidth===0).slice(0,5).map(x=>x.getAttribute('src')?.slice(0,110)),heading:document.querySelector('h1')?.textContent.trim().slice(0,65)};
+                  });
+                  const d={mode,file,http:res?.status(),...m,jsErrors:js.slice(0,3),broken:broken.slice(0,5)};
+                  details.push(d);
+                  if(!res?.ok()||m.scrollOverflow>8||m.outerElements.length||js.length||broken.length)errors.push(d);
+                }catch(e){const x={mode,file,error:String(e).slice(0,170)};details.push(x);errors.push(x)}
+                await page.close();
+              }
+              await context.close();
+            }
+            await browser.close();
+            console.log('UI AUDIT TOTAL',JSON.stringify({tested:details.length,issues:errors.length}));
+            console.log('UI AUDIT ISSUES',JSON.stringify(errors));
+            console.log('UI AUDIT WIDTHS',JSON.stringify(details.filter(x=>!x.error).map(x=>({mode:x.mode,file:x.file,route:x.routeWidth,main:x.mainWidth,overflow:x.scrollOverflow}))));
+          })().catch(e=>{console.error('AUDIT EXCEPTION',e);process.exitCode=1});
+          JS
