@@ -15,6 +15,21 @@ fs.mkdirSync(OUT, { recursive: true });
 const FULL_PAGE_ALL = process.env.AUDIT_FULL_PAGE === 'all';
 const AXE_MODE = process.env.AUDIT_AXE || 'desktop';
 const CONCURRENCY = 3;
+// Avoid polluting the site's visitor analytics with hundreds of QA page views.
+// Let analytics libraries load for realistic rendering, but suppress beacons.
+function isAnalyticsBeacon(value) {
+  try {
+    const u=new URL(value),host=u.hostname.toLowerCase(),p=u.pathname.toLowerCase();
+    if(host==='mc.yandex.ru' && !p.endsWith('/metrika/tag.js')) return true;
+    if(host.endsWith('.google-analytics.com') || host==='google-analytics.com')
+      return /\/(?:g\/)?collect|\/j\/collect/.test(p);
+    if(host.endsWith('posthog.com') || host.endsWith('posthog.io'))
+      return /^\/(?:e|batch|capture)\b/.test(p);
+    if(host.endsWith('cloudflareinsights.com'))
+      return !p.endsWith('/beacon.min.js');
+    return false;
+  }catch(_){return false;}
+}
 const CALCULATORS = new Set(['essence-mithril-calculator.html',
   'furnace-calculator.html','fire-furnace-calculator.html','bear-helper.html']);
 const CORE = new Set([
@@ -213,6 +228,13 @@ async function run() {
         deviceScaleFactor:1, locale:'ru-RU',
         reducedMotion:'reduce', serviceWorkers:'block'
       });
+      await ctx.route('**/*', async route => {
+        if(isAnalyticsBeacon(route.request().url())) {
+          await route.fulfill({status:204,body:'',contentType:'text/plain'}).catch(()=>{});
+          return;
+        }
+        await route.continue().catch(()=>{});
+      });
       for (let i=0;i<pages.length;i+=CONCURRENCY) {
         const chunk=pages.slice(i,i+CONCURRENCY);
         await Promise.all(chunk.map(async file=>{
@@ -303,6 +325,7 @@ async function run() {
   const countImages=rows.reduce((n,r)=>n+(r.metrics?.imageCount||0),0);
   const report={created:new Date().toISOString(),htmlPages:allPages.length,
     deviceProfiles:DEVICES,checks:rows.length,imageElementsChecked:countImages,
+    analyticsBeaconsSuppressed:true,
     failures:failures.length,withWarnings:warned.length,rows};
   fs.writeFileSync(path.join(OUT,'report.json'),JSON.stringify(report,null,2));
   const summary=[
