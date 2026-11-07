@@ -60,4 +60,28 @@ test.describe('Мобильная навигация и калькуляторы
         .toHaveAttribute('src', 'assets/home-hero-polish-v447.webp');
     });
   }
+  // Check every calculator destination separately to pinpoint broken links.
+  for (const destination of [
+    'bear-helper.html',
+    'furnace-calculator.html',
+    'fire-furnace-calculator.html',
+    'essence-mithril-calculator.html',
+  ]) {
+    test(`Карточка калькулятора открывается: ${destination}`, async ({ page }) => {
+      await page.setViewportSize({ width: 360, height: 780 });
+      await page.goto('/calculators.html', { waitUntil: 'domcontentloaded' });
+      const link = page.locator(`a.calc-hub-card[href="${destination}"]`);
+      await expect(link).toBeVisible();
+      await link.tap();
+      await expect(page).toHaveURL(new RegExp('/' + destination.replaceAll('.', '\\.') + '$'));
+      await expect(page.locator('body')).toBeVisible();
+      const stats = await page.evaluate(() => ({
+        textLength: document.body.innerText.trim().length,
+        overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      }));
+      expect(stats.textLength).toBeGreaterThan(100);
+      expect(stats.overflow).toBeLessThanOrEqual(16);
+    });
+  }
+
 });
