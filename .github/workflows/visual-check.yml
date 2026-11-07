@@ -44,6 +44,9 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Verify PWA cache, manifest and critical assets
+        run: node tests/pwa-integrity.cjs
+
       - name: Verify homepage CSS matches shared stylesheet
         run: node scripts/build-home-css.cjs --check
 
