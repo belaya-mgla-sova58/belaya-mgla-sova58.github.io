@@ -64,6 +64,66 @@ test.describe('Ковка 10–20 и красное снаряжение', () =>
 // Independent whole-level reference table: costs for completing the NEXT
 // mastery level, not just its final sub-stage. This guards against confusing
 // 19.4→20 (last sub-stage) with 19→20 (all five sub-stages).
+// Gate costs below are regression fixtures from the existing calculator.
+// The mastery level is already sufficient in the first scenario, so these
+// numbers isolate mithril/mythic upgrades from forging materials.
+test.describe('Красное снаряжение: этапы +20…+100', () => {
+  const gates = [
+    { from: 0, to: 20, mastery: 11, mithril: 10, mythic: 3 },
+    { from: 20, to: 40, mastery: 12, mithril: 20, mythic: 5 },
+    { from: 40, to: 60, mastery: 13, mithril: 30, mythic: 5 },
+    { from: 60, to: 80, mastery: 14, mithril: 40, mythic: 10 },
+    { from: 80, to: 100, mastery: 15, mithril: 50, mythic: 10 },
+  ];
+
+  for (const g of gates) {
+    test(`Красное +${g.from}→+${g.to}: самостоятельный этап`, async ({ page }) => {
+      await openWithScenario(page, gear([item(g.mastery, g.mastery, g.from, g.to)]));
+      await expect(page.locator('#ecNeedEssence')).toHaveText('0');
+      await expect(page.locator('#ecNeedMithril')).toHaveText(String(g.mithril));
+      await expect(page.locator('#ecNeedMythic')).toHaveText(String(g.mythic));
+    });
+  }
+
+  test('Красное +0→+100: все пять этапов суммируются без повторов', async ({ page }) => {
+    await openWithScenario(page, gear([item(15, 15, 0, 100)]));
+    await expect(page.locator('#ecNeedEssence')).toHaveText('0');
+    await expect(page.locator('#ecNeedMithril')).toHaveText('150');
+    await expect(page.locator('#ecNeedMythic')).toHaveText('33');
+  });
+
+  test('Красное +40→+100: не начисляем повторно +20 и +40', async ({ page }) => {
+    await openWithScenario(page, gear([item(15, 15, 40, 100)]));
+    await expect(page.locator('#ecNeedEssence')).toHaveText('0');
+    await expect(page.locator('#ecNeedMithril')).toHaveText('120');
+    await expect(page.locator('#ecNeedMythic')).toHaveText('25');
+  });
+
+  test('Красное +20→+40: при нехватке ковки добавляется необходимый уровень', async ({ page }) => {
+    await openWithScenario(page, gear([item(11, 11, 20, 40)]));
+    await expect(page.locator('#ecNeedEssence')).toHaveText('120');
+    await expect(page.locator('#ecNeedMithril')).toHaveText('20');
+    await expect(page.locator('#ecNeedMythic')).toHaveText('7');
+  });
+
+  test('Первое укрепление +20: вариант 5 вместо 3 и два предмета', async ({ page }) => {
+    await openWithScenario(page, gear([item(11, 11, 0, 20, 2)], 5));
+    await expect(page.locator('#ecNeedEssence')).toHaveText('0');
+    await expect(page.locator('#ecNeedMithril')).toHaveText('20');
+    await expect(page.locator('#ecNeedMythic')).toHaveText('10');
+  });
+
+  test('Запас мифрила и мифических предметов уменьшает дефицит отдельно', async ({ page }) => {
+    await openWithScenario(page, gear([item(15, 15, 40, 100)]));
+    await page.locator('#ecStockMithril').fill('100');
+    await page.locator('#ecStockMythic').fill('30');
+    await expect(page.locator('#ecNeedMithril')).toHaveText('120');
+    await expect(page.locator('#ecLeftMithril')).toContainText('Не хватает: 20');
+    await expect(page.locator('#ecNeedMythic')).toHaveText('25');
+    await expect(page.locator('#ecLeftMythic')).toContainText('останется: 5');
+  });
+});
+
 test.describe('Ковка 1–20: полные уровни', () => {
   const levelCosts = [
     [10,0],[20,0],[30,0],[40,0],[50,0],
