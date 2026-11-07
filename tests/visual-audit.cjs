@@ -139,6 +139,7 @@ async function inspect(page) {
         }
       }
     }
+    const stability = window.__sovaLayoutStability || {cls:0,sources:[]};
     const nav=performance.getEntriesByType('navigation')[0];
     const bigText=[...document.querySelectorAll('main p, main li')].filter(el => {
       const r=el.getBoundingClientRect(), f=parseFloat(getComputedStyle(el).fontSize);
@@ -149,6 +150,7 @@ async function inspect(page) {
     const links=[...document.querySelectorAll('a[href]')];
     return {
       viewport:vw, documentWidth:docW, overflow:docW-vw,
+      layoutShift:+stability.cls.toFixed(3),layoutShiftSources:stability.sources,
       imageCount:images.length, brokenImages:broken.slice(0,30),
       pendingImages:pending.slice(0,20), distortedImages:distorted.slice(0,20),
       croppingCandidates:cropped, lowResolutionImages:lowResolution,
@@ -243,6 +245,33 @@ async function run() {
         deviceScaleFactor:1, locale:'ru-RU',
         reducedMotion:'reduce', serviceWorkers:'block'
       });
+      // Observe layout shifts from document start. Diagnostics only;
+      // the test does not change the rendered page.
+      await ctx.addInitScript(() => {
+        window.__sovaLayoutStability = {cls:0, sources:[]};
+        try {
+          const observer = new PerformanceObserver(list => {
+            const state = window.__sovaLayoutStability;
+            for (const entry of list.getEntries()) {
+              if (entry.hadRecentInput) continue;
+              state.cls += entry.value;
+              if (state.sources.length >= 8) continue;
+              for (const source of entry.sources || []) {
+                if (state.sources.length >= 8) break;
+                const node = source.node;
+                state.sources.push({
+                  selector: node?.id ? '#'+node.id :
+                    node?.className && typeof node.className === 'string'
+                      ? node.tagName.toLowerCase()+'.'+node.className.trim().split(/\\s+/)[0]
+                      : node?.tagName?.toLowerCase() || 'unknown',
+                  score: Math.round(entry.value*1000)/1000
+                });
+              }
+            }
+          });
+          observer.observe({type:'layout-shift', buffered:true});
+        } catch (_) {}
+      });
       await ctx.route('**/*', async route => {
         if(isAnalyticsBeacon(route.request().url())) {
           await route.fulfill({status:204,body:'',contentType:'text/plain'}).catch(()=>{});
@@ -287,6 +316,7 @@ async function run() {
               lowResolution:row.metrics.lowResolutionImages};
             if (row.status!==200) row.failures.push('HTTP '+row.status);
             if (row.metrics.overflow>12) row.failures.push('Horizontal overflow '+row.metrics.overflow+'px');
+            if (row.metrics.layoutShift>0.1) row.warnings.push('Cumulative layout shift '+row.metrics.layoutShift+' (target: 0.1 or less)');
             if (row.metrics.brokenImages.length) row.failures.push('Broken images: '+row.metrics.brokenImages.length);
             if (row.metrics.distortedImages.length) row.warnings.push('Potential image distortion: '+row.metrics.distortedImages.length);
             if (row.metrics.pendingImages.length) row.warnings.push('Images not fully loaded: '+row.metrics.pendingImages.length);
