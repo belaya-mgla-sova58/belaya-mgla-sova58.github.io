@@ -32,7 +32,7 @@ jobs:
           python3 - <<'PY'
           from PIL import Image
           from pathlib import Path
-          import hashlib, subprocess, shutil, tempfile
+          import hashlib, subprocess, shutil, tempfile, os
           paths = sorted(p for p in Path("assets").rglob("*.png") if p.is_file())
           paths += sorted(p for p in Path(".").glob("*.png") if p.is_file())
           total_before, total_after, changed = 0, 0, []
@@ -45,6 +45,8 @@ jobs:
               with Image.open(path) as original:
                   pixels_before = hashlib.sha256(original.convert("RGBA").tobytes()).digest()
                   dimensions_before = original.size
+                  metadata_before = {k: original.info.get(k) for k in ("icc_profile", "gamma", "srgb", "transparency", "dpi", "chromaticity")}
+                  mode_before = original.mode
               with tempfile.TemporaryDirectory() as tmp:
                   candidate = Path(tmp) / path.name
                   shutil.copy2(path, candidate)
@@ -56,8 +58,10 @@ jobs:
                   with Image.open(candidate) as after:
                       pixels_after = hashlib.sha256(after.convert("RGBA").tobytes()).digest()
                       dimensions_after = after.size
+                      metadata_after = {k: after.info.get(k) for k in ("icc_profile", "gamma", "srgb", "transparency", "dpi", "chromaticity")}
+                      mode_after = after.mode
                   smaller = candidate.stat().st_size < size
-                  if pixels_before == pixels_after and dimensions_before == dimensions_after and smaller:
+                  if pixels_before == pixels_after and dimensions_before == dimensions_after and metadata_before == metadata_after and mode_before == mode_after and smaller:
                       new_size = candidate.stat().st_size
                       shutil.copy2(candidate, path)
                       changed.append((path, size-new_size))
@@ -70,6 +74,15 @@ jobs:
           print(f"Lossless savings: {(total_before-total_after) / 1048576:.2f} MiB")
           for path, saved in sorted(changed, key=lambda x:x[1], reverse=True):
               print(f"SAVED {saved/1024:.1f} KiB | {path}")
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as summary:
+              summary.write("## Lossless PNG optimization\\n")
+              summary.write(f"- Checked: **{len(paths)} PNG files**\\n")
+              summary.write(f"- Safely optimized: **{len(changed)}**\\n")
+              summary.write(f"- Total PNG size: **{total_before / 1048576:.2f} MiB → {total_after / 1048576:.2f} MiB**\\n")
+              summary.write(f"- Space saved: **{(total_before-total_after) / 1048576:.2f} MiB**\\n")
+              summary.write("- Pixel hashes, dimensions, image mode, and critical color metadata verified before replacement.\\n")
+              for path, saved in sorted(changed, key=lambda x:x[1], reverse=True)[:25]:
+                  summary.write(f"  - `{path}`: {saved/1024:.1f} KiB\\n")
           PY
       - name: Commit verified lossless PNG changes
         shell: bash
