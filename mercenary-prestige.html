@@ -35,6 +35,32 @@ body.is-mercenary-prestige-route .prestige-image-header-v501 img{display:block;w
 .prestige-player{border-color:rgba(116,218,255,.34);background:linear-gradient(145deg,rgba(11,48,78,.92),rgba(6,30,53,.92))}
 .prestige-flow{font-weight:800;color:#e7f8ff}
 @media(max-width:720px){.prestige-guide{font-size:14.5px;line-height:1.52}.prestige-card{padding:12px 13px;border-radius:14px}.prestige-card h2{font-size:18px}.prestige-short{padding:11px 12px}}
+
+/* Desktop guide polish v988: all cards use the available workspace. */
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine) {
+  html:not(.force-desktop-root) body.is-mercenary-prestige-route .prestige-guide {
+    box-sizing:border-box!important;
+    width:100%!important;max-width:none!important;min-width:0!important;
+    margin:0!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:clamp(14px,1.4vw,22px)!important;
+    align-items:start!important;
+    font-size:16px!important;line-height:1.68!important;
+  }
+  html:not(.force-desktop-root) body.is-mercenary-prestige-route
+    .prestige-guide>.prestige-short {
+    grid-column:1/-1!important;
+  }
+  html:not(.force-desktop-root) body.is-mercenary-prestige-route
+    .prestige-guide>.prestige-card {
+    box-sizing:border-box;min-width:0;
+    padding:clamp(17px,1.65vw,25px)!important;
+  }
+  html:not(.force-desktop-root) body.is-mercenary-prestige-route
+    .prestige-card h2 {
+    font-size:21px!important;line-height:1.35!important;
+  }
+}
 </style>
 <link rel="stylesheet" href="site-desktop-v985.css?v=985" media="screen and (min-width:1100px) and (hover:hover) and (pointer:fine)" data-sova-desktop-v985/>
 </head>
