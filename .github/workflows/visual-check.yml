@@ -53,6 +53,18 @@ jobs:
           npm install --no-audit --no-fund
           npx playwright install --with-deps chromium
 
+      - name: Verify all calculator and mobile tests are discovered
+        working-directory: visual-tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx playwright test --list > /tmp/sova58-playwright-list.txt
+          grep -Fq 'Ковка 19→20' /tmp/sova58-playwright-list.txt
+          grep -Fq 'Красное +0→+100' /tmp/sova58-playwright-list.txt
+          grep -Fq 'Калькуляторы: ссылки, нажатия' /tmp/sova58-playwright-list.txt
+          echo 'Calculator, mastery, and mobile-navigation test suites discovered.'
+          tail -n 4 /tmp/sova58-playwright-list.txt
+
       - name: Prepare previous version for visual comparison
         id: reference
         shell: bash
