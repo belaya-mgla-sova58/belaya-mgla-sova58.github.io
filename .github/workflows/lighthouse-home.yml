@@ -1,6 +1,16 @@
 name: SOVA58 quick homepage Lighthouse
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'home-date-v588.js'
+      - 'site-home-v995.css'
+      - 'site-v626.min.css'
+      - 'assets/home-hero-polish-v447.webp'
+      - 'tests/lighthouse-audit.cjs'
+      - '.github/workflows/lighthouse-home.yml'
   workflow_dispatch:
 
 permissions:
