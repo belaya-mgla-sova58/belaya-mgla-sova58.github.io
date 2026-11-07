@@ -2,6 +2,36 @@ name: Deploy cleaned site to GitHub Pages
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '**/*.html'
+      - '**/*.css'
+      - '**/*.js'
+      - '**/*.json'
+      - '**/*.webmanifest'
+      - '**/*.xml'
+      - '**/*.png'
+      - '**/*.jpg'
+      - '**/*.jpeg'
+      - '**/*.webp'
+      - '**/*.svg'
+      - '**/*.gif'
+      - '**/*.ico'
+      - '**/*.mp3'
+      - '**/*.mp4'
+      - '**/*.woff*'
+      - '**/*.ttf'
+      - '**/*.txt'
+      - '.nojekyll'
+      - '.github/workflows/deploy-clean-pages.yml'
+      - '!visual-tests/**'
+      - '!tests/**'
+      - '!scripts/**'
+      - '!node_modules/**'
+      - '!.github/workflows/asset-audit.yml'
+      - '!.github/workflows/optimize-png-lossless.yml'
 
 permissions:
   contents: read
@@ -59,8 +89,8 @@ jobs:
           size = sum(p.stat().st_size for p in files)
           print(f"Clean website: {len(files)} files, {size/1048576:.2f} MiB")
           with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
-              f.write(f"## Clean Pages deployment\\nWebsite package: **{len(files)} files**, **{size/1048576:.2f} MiB**.\\n\\n")
-              f.write("Site content and image bytes preserved; only test/development tooling excluded.\\n")
+              f.write(f"## Clean Pages deployment\nWebsite package: **{len(files)} files**, **{size/1048576:.2f} MiB**.\n\n")
+              f.write("Site content and image bytes preserved; only test/development tooling excluded.\n")
           PY
 
       - name: Configure Pages
