@@ -36,6 +36,64 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  calculator-check:
+    name: Calculator arithmetic regression tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout website
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright and Chromium
+        working-directory: visual-tests
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Start isolated local website
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/sova58-calculator-server.log 2>&1 &
+          for i in $(seq 1 20); do
+            if curl -fsS http://127.0.0.1:4173/ -o /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/sova58-calculator-server.log
+          exit 1
+      - name: Validate calculator arithmetic
+        working-directory: visual-tests
+        run: npx playwright test essence-calculation.spec.mjs advanced-gear-calculations.spec.mjs --project=desktop
+      - name: Report calculator results
+        if: always()
+        shell: bash
+        run: |
+          node - <<'JS'
+          const fs=require('node:fs');
+          const file='visual-tests/test-results/results.json';
+          const output=process.env.GITHUB_STEP_SUMMARY;
+          if(!fs.existsSync(file)){
+            fs.appendFileSync(output, '\n## Calculator results\nNo JSON result was produced. See job logs.\n');
+            process.exit(0);
+          }
+          const result=JSON.parse(fs.readFileSync(file,'utf8'));
+          const stats=result.stats||{};
+          const message='\n## Calculator results\nPassed: **'+(stats.expected||0)+
+            '**, failed: **'+(stats.unexpected||0)+'**, skipped: **'+(stats.skipped||0)+'**.\n';
+          fs.appendFileSync(output,message);
+          console.log(message);
+          JS
+      - name: Upload calculator report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: calculator-arithmetic-report
+          path: |
+            visual-tests/playwright-report/
+            visual-tests/test-results/
+          if-no-files-found: warn
+          retention-days: 14
+
   visual-check:
     runs-on: ubuntu-latest
     timeout-minutes: 35
@@ -128,7 +186,7 @@ jobs:
 
       - name: Check desktop and mobile layouts
         working-directory: visual-tests
-        run: npm test
+        run: npx playwright test site-visual.spec.mjs mobile-navigation.spec.mjs
 
       - name: Summarize Playwright tests and failures
         if: always()
