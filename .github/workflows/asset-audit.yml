@@ -5,6 +5,10 @@ on:
   push:
     paths:
       - ".github/workflows/asset-audit.yml"
+      - "assets/**"
+      - "*.png"
+      - "*.jpg"
+      - "*.webp"
 
 permissions:
   contents: read
@@ -69,7 +73,8 @@ jobs:
           print("TOP exact duplicate groups >= 100 KiB (possible reclaim MiB, paths)")
           for wasted, paths in duplicates[:30]:
               print(f"{wasted/1048576:8.2f}  " + " | ".join(map(str,paths)))
-          print(f"Potential exact duplicate savings: {sum(s for s,_ in duplicates)/1048576:.1f} MiB")
+          duplicate_bytes = sum(saved for saved,_ in duplicates)
+          print(f"Potential exact duplicate savings: {duplicate_bytes/1048576:.1f} MiB")
           print("Duplicate asset references in HTML/CSS/JS/JSON/manifests (read-only)")
           text_suffixes = {".html", ".css", ".js", ".json", ".webmanifest", ".xml"}
           text_files = []
@@ -92,4 +97,15 @@ jobs:
                           hits.append(str(source))
                   print(f"REFERENCE {relative}: {len(hits)} file(s) | " + " | ".join(hits[:12]))
           print("References can be dynamically constructed; zero matches does NOT mean safe to delete.")
+          import os
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as report:
+              report.write("## Site asset size audit\\n\\n")
+              report.write(f"- All repository files: **{len(files)}**\\n")
+              report.write(f"- Total: **{total/1048576:.2f} MiB**\\n")
+              report.write(f"- Potential savings from exact duplicate groups: **{duplicate_bytes/1048576:.2f} MiB** (not safe to delete without checking references)\\n\\n")
+              report.write("### Largest 15 files\\n\\n")
+              report.write("| Size (MiB) | File |\\n|---:|---|\\n")
+              for size, asset in files[:15]:
+                  report.write(f"| {size/1048576:.2f} | `{asset}` |\\n")
+              report.write("\\n> Read-only audit. Dynamic asset references may not be detected.\\n")
           PY
