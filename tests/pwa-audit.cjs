@@ -10,6 +10,16 @@ fs.mkdirSync(OUT,{recursive:true});
 async function run(){
   const browser=await chromium.launch({headless:true});
   const report={created:new Date().toISOString(),url:BASE,checks:[],warnings:[],errors:[]};
+  // Verify published PWA update version stays aligned with registration.
+  const swSource=fs.readFileSync(path.resolve(__dirname,'..','service-worker.js'),'utf8');
+  const installSource=fs.readFileSync(path.resolve(__dirname,'..','pwa-install.js'),'utf8');
+  const cacheVersion=swSource.match(/const CACHE_NAME\\s*=\\s*['"]belaya-mgla-v(\\d+)['"]/);
+  const registrationVersion=installSource.match(/service-worker\\.js\\?v=(\\d+)/);
+  report.checks.push({name:'pwa-cache-registration-version',
+    ok:!!cacheVersion&&!!registrationVersion&&cacheVersion[1]===registrationVersion[1],
+    cache:cacheVersion?.[1],registration:registrationVersion?.[1]});
+  report.checks.push({name:'pwa-html-not-rewritten',
+    ok:!swSource.includes('optimizeHtml(') && !swSource.includes('new Response(html,')});
   let context;
   try {
     context=await browser.newContext({viewport:{width:390,height:844},
@@ -96,6 +106,6 @@ async function run(){
   fs.writeFileSync(path.join(OUT,'pwa-summary.md'),summary);
   if(process.env.GITHUB_STEP_SUMMARY)fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,summary+'\n');
   console.log(summary);
-  if(report.errors.length)process.exitCode=1;
+  if(report.errors.length || report.checks.some(c=>!c.ok && ['pwa-cache-registration-version','pwa-html-not-rewritten'].includes(c.name)))process.exitCode=1;
 }
 run().catch(e=>{console.error(e);process.exitCode=1;});
