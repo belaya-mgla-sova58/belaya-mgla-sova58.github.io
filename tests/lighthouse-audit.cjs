@@ -1,0 +1,67 @@
+/* Lighthouse is a complementary read-only performance/SEO/accessibility scan.
+   Playwright handles all HTML pages; Lighthouse samples 6 core site routes.
+   Requires npm packages lighthouse and playwright.
+*/
+'use strict';
+const fs=require('node:fs');
+const path=require('node:path');
+const cp=require('node:child_process');
+const {chromium}=require('playwright');
+const ROOT=path.resolve(__dirname,'..');
+const OUT=path.join(ROOT,'visual-audit-results','lighthouse');
+fs.mkdirSync(OUT,{recursive:true});
+const BASE='https://belaya-mgla-sova58.github.io/';
+const PAGES=['index.html','pets.html','hero-generations.html',
+  'experts.html','calculators.html','events.html'];
+const MODES=['mobile','desktop'];
+const result={checked:0,reports:[],errors:[],created:new Date().toISOString()};
+const bin=path.join(ROOT,'node_modules','.bin','lighthouse');
+if(!fs.existsSync(bin)){console.error('Install Lighthouse package first');process.exit(1);}
+for(const page of PAGES)for(const mode of MODES){
+  const output=path.join(OUT,page.replace(/\.html$/,'')+'-'+mode+'.json');
+  const args=[new URL(page,BASE).toString(),
+    '--output=json','--output-path='+output,
+    '--only-categories=performance,accessibility,best-practices,seo',
+    '--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage',
+    '--quiet'];
+  if(mode==='desktop')args.push('--preset=desktop');
+  const cmd=cp.spawnSync(bin,args,{
+    encoding:'utf8',timeout:180000,maxBuffer:6*1024*1024,
+    env:{...process.env,CHROME_PATH:chromium.executablePath()}
+  });
+  if(cmd.status!==0||cmd.error){
+    const error=(cmd.error?.message||cmd.stderr||cmd.stdout||'Unknown Lighthouse error').slice(0,450);
+    result.errors.push({page,mode,error});
+    console.log('ERROR '+mode+' '+page+': '+error);
+    continue;
+  }
+  try {
+    const data=JSON.parse(fs.readFileSync(output,'utf8'));
+    const scores={};
+    for(const [k,v]of Object.entries(data.categories||{}))scores[k]=v.score===null?null:Math.round(v.score*100);
+    const report={page,mode,scores,finalUrl:data.finalUrl,
+      audits:{
+        lcp:data.audits?.['largest-contentful-paint']?.numericValue||null,
+        cls:data.audits?.['cumulative-layout-shift']?.numericValue||null,
+        tbt:data.audits?.['total-blocking-time']?.numericValue||null
+      }};
+    result.reports.push(report);
+    result.checked++;
+    console.log('LIGHTHOUSE '+mode+' '+page+' '+JSON.stringify(scores));
+  }catch(e){result.errors.push({page,mode,error:String(e.message||e)});}
+}
+fs.writeFileSync(path.join(ROOT,'visual-audit-results','lighthouse-summary.json'),JSON.stringify(result,null,2));
+const markdown=['# SOVA58 Lighthouse sample scores','',
+  'Core pages scanned: '+result.checked+' / '+(PAGES.length*MODES.length)+'.',
+  '', '| Page | Device | Performance | Accessibility | Best practices | SEO |',
+  '| --- | --- | ---: | ---: | ---: | ---: |',
+  ...result.reports.map(r=>'| '+r.page+' | '+r.mode+' | '+(r.scores.performance??'n/a')
+    +' | '+(r.scores.accessibility??'n/a')+' | '+(r.scores['best-practices']??'n/a')
+    +' | '+(r.scores.seo??'n/a')+' |'),
+  '', '## Failed scans',
+  ...(result.errors.length?result.errors.map(r=>'- '+r.page+' / '+r.mode+': '+r.error):['None']),
+  '', 'Scores are diagnostic snapshots affected by network and runner conditions.'].join('\n');
+fs.writeFileSync(path.join(ROOT,'visual-audit-results','lighthouse-summary.md'),markdown);
+if(process.env.GITHUB_STEP_SUMMARY)fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,markdown+'\n');
+console.log(markdown);
+if(result.errors.length)process.exitCode=1;
