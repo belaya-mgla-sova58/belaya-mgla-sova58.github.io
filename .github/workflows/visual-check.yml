@@ -9,6 +9,7 @@ on:
       - '**/*.js'
       - 'assets/**'
       - 'visual-tests/**'
+      - 'scripts/**'
       - '.github/workflows/visual-check.yml'
   pull_request:
     paths:
@@ -17,6 +18,7 @@ on:
       - '**/*.js'
       - 'assets/**'
       - 'visual-tests/**'
+      - 'scripts/**'
       - '.github/workflows/visual-check.yml'
   workflow_dispatch:
 
@@ -41,6 +43,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+
+      - name: Verify homepage CSS matches shared stylesheet
+        run: node scripts/build-home-css.cjs --check
 
       - name: Install Playwright
         working-directory: visual-tests
