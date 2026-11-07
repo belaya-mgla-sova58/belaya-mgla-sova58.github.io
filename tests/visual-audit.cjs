@@ -67,6 +67,12 @@ function discoverHtmlPages(root) {
 }
 const allPages = discoverHtmlPages(ROOT);
 if (!allPages.length) throw new Error('No HTML files found');
+const AUDIT_SCOPE=process.env.AUDIT_SCOPE||'all';
+const REPAIR_PAGES=new Set(['foundry.html','sova-predskazatelnitsa.html']);
+if(!['all','repairs'].includes(AUDIT_SCOPE))throw new Error('Unknown AUDIT_SCOPE '+AUDIT_SCOPE);
+const selectedPages=AUDIT_SCOPE==='repairs'
+  ? allPages.filter(p=>REPAIR_PAGES.has(p)):allPages;
+if(!selectedPages.length)throw new Error('No pages selected for audit');
 
 async function waitForImages(page) {
   // Native loading=lazy images are temporarily made eager in this isolated
@@ -224,7 +230,8 @@ async function run() {
   const rows=[];
   try {
     for (const device of ACTIVE_DEVICES) {
-      const pages = device.coreOnly ? allPages.filter(p => CORE.has(p)) : allPages;
+      const pages = device.coreOnly && AUDIT_SCOPE==='all'
+        ? selectedPages.filter(p => CORE.has(p)) : selectedPages;
       const folder=path.join(OUT,device.name);
       fs.mkdirSync(folder,{recursive:true});
       const ctx=await browser.newContext({
@@ -329,13 +336,14 @@ async function run() {
   const warned=rows.filter(r=>r.warnings.length);
   const countImages=rows.reduce((n,r)=>n+(r.metrics?.imageCount||0),0);
   const report={created:new Date().toISOString(),htmlPages:allPages.length,
+    scope:AUDIT_SCOPE,selectedPages:selectedPages.length,
     deviceProfiles:ACTIVE_DEVICES,checks:rows.length,imageElementsChecked:countImages,
     analyticsBeaconsSuppressed:true,
     failures:failures.length,withWarnings:warned.length,rows};
   fs.writeFileSync(path.join(OUT,'report.json'),JSON.stringify(report,null,2));
   const summary=[
     '# SOVA58 browser, images, accessibility and responsive QA','',
-    'HTML pages: '+allPages.length+'; device/page checks: '+rows.length+'.',
+    'HTML pages in repository: '+allPages.length+'; selected: '+selectedPages.length+'; device/page checks: '+rows.length+'.',
     'Image instances reviewed: '+countImages+'. Failed combinations: '+failures.length+
       '. Combinations with warnings: '+warned.length+'.','',
     'Device widths: 1440, 768 and 390px for all pages; 360 and 1920px for the main 16.','',
