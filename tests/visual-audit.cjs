@@ -10,24 +10,26 @@ const path = require('node:path');
 const { chromium } = require('playwright');
 
 const BASE_URL = 'https://belaya-mgla-sova58.github.io/';
-const PAGES = [
-  'index.html',
-  'heroes.html',
-  'hero-generations.html',
-  'pets.html',
-  'experts.html',
-  'events.html',
-  'news.html',
-  'calculators.html',
-  'canyon-clash.html',
-  'troops.html',
-  'furnace-1-30.html',
-  'furnace-fc1-5.html',
-  'furnace-fc5-10.html',
-  'snowplow.html',
-  'mercenary-prestige.html',
-  'faq.html'
-];
+// Discover every HTML page from the checked-out site, including future pages.
+function discoverHtmlPages(root) {
+  const found = [];
+  const skipDirs = new Set(['.git', '.github', 'node_modules', 'visual-audit-results', 'tests']);
+  function visit(dir, prefix = '') {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const rel = prefix ? prefix + '/' + entry.name : entry.name;
+      if (entry.isDirectory()) {
+        if (!skipDirs.has(entry.name)) visit(path.join(dir, entry.name), rel);
+      } else if (entry.isFile() && entry.name.toLowerCase().endsWith('.html')) {
+        found.push(rel);
+      }
+    }
+  }
+  visit(root);
+  return found.sort((a, b) => a.localeCompare(b, 'ru'));
+}
+const PAGES = discoverHtmlPages(process.cwd());
+if (!PAGES.length) throw new Error('No HTML pages found in the checked-out site');
+console.log('Discovered ' + PAGES.length + ' HTML pages for a full responsive audit');
 const DEVICES = [
   { name: 'desktop', width: 1440, height: 900, isMobile: false, hasTouch: false },
   { name: 'mobile', width: 390, height: 844, isMobile: true, hasTouch: true }
@@ -87,7 +89,9 @@ async function inspect(page) {
       const directory = path.join(OUTPUT, device.name);
       fs.mkdirSync(directory, { recursive: true });
 
-      for (const pagePath of PAGES) {
+      // A small concurrency limit makes full-site audits practical on Actions.
+      for (let offset = 0; offset < PAGES.length; offset += 4) {
+        await Promise.all(PAGES.slice(offset, offset + 4).map(async (pagePath) => {
         const page = await context.newPage();
         const failures = [];
         const runtimeErrors = [];
@@ -111,7 +115,7 @@ async function inspect(page) {
         }
         try {
           await page.screenshot({
-            path: path.join(directory, pagePath.replace(/\.html$/, '') + '.png'),
+            path: path.join(directory, pagePath.replace(/\.html$/i, '').replace(/[\\/]/g, '__') + '.png'),
             fullPage: false,
             animations: 'disabled',
             timeout: 20000
@@ -130,6 +134,7 @@ async function inspect(page) {
         console.log((failures.length ? 'FAIL' : 'PASS') + ' ' + device.name
           + ' ' + pagePath + (failures.length ? ': ' + failures.join('; ') : ''));
         await page.close();
+        }));
       }
       await context.close();
     }
@@ -138,11 +143,12 @@ async function inspect(page) {
   }
 
   fs.writeFileSync(path.join(OUTPUT, 'report.json'), JSON.stringify(results, null, 2));
+  results.sort((a, b) => DEVICES.findIndex(d => d.name === a.device) - DEVICES.findIndex(d => d.name === b.device) || a.page.localeCompare(b.page));
   const failures = results.filter(row => row.failures.length);
   const summary = [
-    '# SOVA58 visual smoke check',
+    '# SOVA58 full-site visual audit',
     '',
-    'Checked ' + results.length + ' page/device combinations.',
+    'Discovered ' + PAGES.length + ' HTML pages and checked ' + results.length + ' page/device combinations.',
     'Passed: ' + (results.length - failures.length) + '. Failed: ' + failures.length + '.',
     '',
     '| Device | Page | Result |',
