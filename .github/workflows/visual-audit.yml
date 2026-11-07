@@ -1,16 +1,36 @@
-name: SOVA58 full-site desktop and mobile visual audit
+name: SOVA58 complete website QA
 
 on:
   workflow_dispatch:
+    inputs:
+      full_page_screenshots:
+        description: 'Full-height screenshots for every page (large artifact)'
+        required: false
+        type: boolean
+        default: false
+      accessibility:
+        description: 'Axe accessibility coverage'
+        required: false
+        type: choice
+        options:
+          - desktop
+          - all
+          - core
+          - 'off'
+        default: desktop
 
 permissions:
   contents: read
 
+concurrency:
+  group: sova58-site-audit
+  cancel-in-progress: false
+
 jobs:
-  visual_audit:
-    name: Full-site browser screenshots and layout checks
+  audit:
+    name: Pages, images, accessibility, PWA, responsive and SEO
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - name: Checkout site
         uses: actions/checkout@v4
@@ -20,20 +40,47 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Install Playwright
-        run: npm install --no-save --no-audit --no-fund playwright
+      - name: Install browser audit packages
+        run: npm install --no-save --no-audit --no-fund playwright axe-core
 
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: Check public site at desktop and mobile widths
+      - name: Audit internal links, images, HTML, CSS, SEO and PWA metadata
+        id: static
+        continue-on-error: true
+        run: node tests/static-site-audit.cjs
+
+      - name: Audit all pages on phones, tablet and desktops
+        id: browser
+        continue-on-error: true
+        env:
+          AUDIT_FULL_PAGE: ${{ inputs.full_page_screenshots && 'all' || 'core' }}
+          AUDIT_AXE: ${{ inputs.accessibility || 'desktop' }}
         run: node tests/visual-audit.cjs
 
-      - name: Attach screenshots and detailed report
+      - name: Inspect installability and offline behavior
+        id: pwa
+        if: always()
+        continue-on-error: true
+        run: node tests/pwa-audit.cjs
+
+      - name: Save screenshots and JSON/Markdown reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: sova58-visual-audit
+          name: sova58-complete-site-audit
           path: visual-audit-results/
           retention-days: 7
           if-no-files-found: warn
+          compression-level: 6
+
+      - name: Report errors to GitHub Actions
+        if: always()
+        run: |
+          echo "Static audit: ${{ steps.static.outcome }}"
+          echo "Browser audit: ${{ steps.browser.outcome }}"
+          echo "PWA audit: ${{ steps.pwa.outcome }}"
+          if [[ "${{ steps.static.outcome }}" == "failure" || "${{ steps.browser.outcome }}" == "failure" || "${{ steps.pwa.outcome }}" == "failure" ]]; then
+            exit 1
+          fi
