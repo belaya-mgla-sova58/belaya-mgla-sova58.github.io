@@ -78,8 +78,30 @@ jobs:
           }
           const result=JSON.parse(fs.readFileSync(file,'utf8'));
           const stats=result.stats||{};
-          const message='\n## Calculator results\nPassed: **'+(stats.expected||0)+
+          const failures=[];
+          function visit(suites) {
+            for (const suite of suites||[]) {
+              for (const spec of suite.specs||[]) {
+                for (const test of spec.tests||[]) {
+                  if (test.status!=='unexpected') continue;
+                  const attempt=test.results?.at(-1);
+                  const issue=attempt?.error?.message||attempt?.errors?.[0]?.message||'No error text';
+                  failures.push({name:spec.title, project:test.projectName, error:issue});
+                }
+              }
+              visit(suite.suites);
+            }
+          }
+          visit(result.suites);
+          let message='\n## Calculator results\nPassed: **'+(stats.expected||0)+
             '**, failed: **'+(stats.unexpected||0)+'**, skipped: **'+(stats.skipped||0)+'**.\n';
+          if(failures.length){
+            message+='\n### Failed calculations\n';
+            for(const failure of failures.slice(0,50)){
+              const clean=value=>String(value).replaceAll('\n',' ').replaceAll('|','/').slice(0,280);
+              message+='- **'+clean(failure.name)+'** ('+clean(failure.project)+'): '+clean(failure.error)+'\n';
+            }
+          }
           fs.appendFileSync(output,message);
           console.log(message);
           JS
