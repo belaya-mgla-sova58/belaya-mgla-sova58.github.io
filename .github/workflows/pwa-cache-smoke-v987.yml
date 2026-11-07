@@ -1,0 +1,65 @@
+name: Verify versioned PWA assets are reusable offline
+on:
+  push:
+    paths: ['.github/workflows/pwa-cache-smoke-v987.yml']
+permissions: {contents: read}
+jobs:
+  cache-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install Chromium
+        run: |
+          npm install --no-save --no-package-lock playwright
+          npx playwright install --with-deps chromium
+      - name: Check new SW and cached static assets in Chrome
+        run: |
+          node <<'JS'
+          const {chromium}=require('playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            const errors=[];
+            const assets=['site-v626.min.css?v=985','site-desktop-v985.css?v=985','site-v629.min.js?v=986'];
+            for(const mode of ['desktop','mobile']){
+              const ctx=await browser.newContext(mode==='desktop'?{viewport:{width:1440,height:900}}:{viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+              const p=await ctx.newPage();
+              try{
+                await p.goto('https://belaya-mgla-sova58.github.io/index.html?pwaCheck=987',{waitUntil:'load',timeout:30000});
+                await p.waitForFunction(()=>!!navigator.serviceWorker?.controller,{timeout:30000});
+                await p.waitForTimeout(300);
+                const snap=await p.evaluate(async assets=>{
+                  const controlled=navigator.serviceWorker.controller?.scriptURL||null;
+                  const keys=await caches.keys();
+                  const latest=await caches.open('belaya-mgla-v987');
+                  const saved=[];
+                  for(const u of assets){const r=await latest.match(new Request(new URL(u,location.href)));saved.push({file:u,found:!!r,bytes:r?(await r.arrayBuffer()).byteLength:0})}
+                  return {controlled,keys,saved,href:location.href};
+                },assets);
+                console.log('ONLINE SW',mode,JSON.stringify(snap));
+                if(!snap.controlled?.includes('service-worker.js?v=987'))errors.push(mode+':wrong SW URL');
+                if(snap.saved.some(x=>!x.found||!x.bytes))errors.push(mode+':missing cached asset');
+                await ctx.setOffline(true);
+                const offline=await p.evaluate(async assets=>{
+                  const out=[];
+                  for(const u of assets){
+                    try{const r=await fetch(u);out.push({file:u,ok:r.ok,bytes:(await r.arrayBuffer()).byteLength,status:r.status})}
+                    catch(e){out.push({file:u,error:String(e)})}
+                  }
+                  return out;
+                },assets);
+                console.log('OFFLINE SW',mode,JSON.stringify(offline));
+                if(offline.some(x=>!x.ok||!x.bytes))errors.push(mode+':offline fetch failure');
+                await ctx.setOffline(false);
+                await p.goto('https://belaya-mgla-sova58.github.io/pets.html?swCheck=987',{waitUntil:'domcontentloaded',timeout:30000});
+                if(await p.locator('details.pet-catalog-card').count()<1)errors.push(mode+':pets page failed');
+              }catch(e){errors.push(mode+': '+String(e).slice(0,240));console.log('SW ERROR',mode,String(e).slice(0,350))}
+              await ctx.close();
+            }
+            await browser.close();
+            console.log('PWA CACHE FINAL',JSON.stringify({checks:2,failures:errors}));
+            if(errors.length)process.exitCode=1;
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          JS
