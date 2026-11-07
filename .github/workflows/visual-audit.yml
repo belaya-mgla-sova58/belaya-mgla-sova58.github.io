@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       full_page_screenshots:
-        description: 'Full-height screenshots for every page (large artifact)'
+        description: 'Full-height screenshots for every page (large archive)'
         required: false
         type: boolean
         default: false
@@ -27,67 +27,103 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  audit:
-    name: Pages, images, accessibility, PWA, responsive and SEO
+  static:
+    name: Static paths, HTML, image and PWA references
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 10
     steps:
-      - name: Checkout site
-        uses: actions/checkout@v4
-
-      - name: Prepare Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '22'
-
-      - name: Install browser audit packages
-        run: npm install --no-save --no-audit --no-fund playwright axe-core lighthouse
-
-      - name: Install Chromium
-        run: npx playwright install --with-deps chromium
-
-      - name: Audit internal links, images, HTML, CSS, SEO and PWA metadata
-        id: static
-        continue-on-error: true
+      - name: Verify all files, links and metadata
         run: node tests/static-site-audit.cjs
-
-      - name: Audit all pages on phones, tablet and desktops
-        id: browser
-        continue-on-error: true
-        env:
-          AUDIT_FULL_PAGE: ${{ inputs.full_page_screenshots && 'all' || 'core' }}
-          AUDIT_AXE: ${{ inputs.accessibility || 'desktop' }}
-        run: node tests/visual-audit.cjs
-
-      - name: Inspect installability and offline behavior
-        id: pwa
-        if: always()
-        continue-on-error: true
-        run: node tests/pwa-audit.cjs
-
-      - name: Measure Lighthouse performance and SEO on core pages
-        id: lighthouse
-        if: always()
-        continue-on-error: true
-        run: node tests/lighthouse-audit.cjs
-
-      - name: Save screenshots and JSON/Markdown reports
+      - name: Upload static report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: sova58-complete-site-audit
+          name: sova58-static
+          path: visual-audit-results/
+          retention-days: 7
+          if-no-files-found: warn
+
+  browser:
+    name: Browser QA: ${{ matrix.profile }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    strategy:
+      fail-fast: false
+      matrix:
+        profile: [desktop, mobile, tablet, small-mobile, wide-desktop]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser and accessibility checks
+        run: npm install --no-save --no-audit --no-fund playwright axe-core
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Audit page layout and images
+        env:
+          AUDIT_DEVICE: ${{ matrix.profile }}
+          AUDIT_FULL_PAGE: ${{ inputs.full_page_screenshots && 'all' || 'core' }}
+          AUDIT_AXE: ${{ inputs.accessibility || 'desktop' }}
+        run: node tests/visual-audit.cjs
+      - name: Upload this screen's screenshots and report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sova58-browser-${{ matrix.profile }}
           path: visual-audit-results/
           retention-days: 7
           if-no-files-found: warn
           compression-level: 6
 
-      - name: Report errors to GitHub Actions
+  pwa:
+    name: PWA and offline checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser checks
+        run: npm install --no-save --no-audit --no-fund playwright
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Test PWA and offline assets
+        run: node tests/pwa-audit.cjs
+      - name: Upload PWA report
         if: always()
-        run: |
-          echo "Static audit: ${{ steps.static.outcome }}"
-          echo "Browser audit: ${{ steps.browser.outcome }}"
-          echo "PWA audit: ${{ steps.pwa.outcome }}"
-          echo "Lighthouse audit: ${{ steps.lighthouse.outcome }}"
-          if [[ "${{ steps.static.outcome }}" == "failure" || "${{ steps.browser.outcome }}" == "failure" || "${{ steps.pwa.outcome }}" == "failure" || "${{ steps.lighthouse.outcome }}" == "failure" ]]; then
-            exit 1
-          fi
+        uses: actions/upload-artifact@v4
+        with:
+          name: sova58-pwa
+          path: visual-audit-results/
+          retention-days: 7
+          if-no-files-found: warn
+
+  lighthouse:
+    name: Lighthouse performance and SEO
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Lighthouse and Chromium
+        run: npm install --no-save --no-audit --no-fund playwright lighthouse
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Scan core pages
+        run: node tests/lighthouse-audit.cjs
+      - name: Upload Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sova58-lighthouse
+          path: visual-audit-results/
+          retention-days: 7
+          if-no-files-found: warn
