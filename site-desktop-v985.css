@@ -1,0 +1,250 @@
+/* Белая мгла: professional desktop layout v985.
+   Applies only to physical desktop pointer layouts. Keeps mobile,
+   touch-device desktop switch, gameplay art and calculator logic intact. */
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine) {
+  :root {
+    --bm-pc-gap:clamp(14px,1.35vw,23px);
+    --bm-pc-line:rgba(130,205,250,.28);
+    --bm-pc-panel:linear-gradient(135deg,rgba(13,43,79,.96),rgba(7,26,54,.97));
+    --bm-pc-shadow:0 11px 30px rgba(0,12,39,.18);
+  }
+  html:not(.force-desktop-root) body.site-hq-v407.modern-v424 main#appMain {
+    width:calc(100% - var(--desktop-sidebar,214px))!important;
+    max-width:none!important;
+    margin-left:var(--desktop-sidebar,214px)!important;
+    margin-right:0!important;
+    padding:14px clamp(14px,1.7vw,30px) 64px!important;
+    box-sizing:border-box!important;
+    min-width:0!important;
+  }
+  html:not(.force-desktop-root) body.site-hq-v407.modern-v424 main#appMain>.route-page.active {
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    margin:0!important;
+    padding:0 0 40px!important;
+    box-sizing:border-box!important;
+  }
+  html:not(.force-desktop-root) body.site-hq-v407.modern-v424 main#appMain>.route-page.active>.section,
+  html:not(.force-desktop-root) body.site-hq-v407.modern-v424 main#appMain>.route-page.active>.intro,
+  html:not(.force-desktop-root) body.site-hq-v407.modern-v424 main#appMain>.route-page.active>.guide-page-v69,
+  html:not(.force-desktop-root) body.site-hq-v407.modern-v424 main#appMain>.route-page.active>.related-guides-v625 {
+    box-sizing:border-box!important;
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+  }
+  /* The banner is an authored 3:1 image; preserve full artwork and the
+     border already painted inside it. Do not add artificial cropping. */
+  body.site-hq-v407 .route-page.active > section[class*="-image-header-"]{
+    box-sizing:border-box!important;
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    margin:8px 0 18px!important;
+    padding:0!important;
+    background:transparent!important;
+    border:0!important;
+    box-shadow:none!important;
+    overflow:visible!important;
+  }
+  body.site-hq-v407 .route-page.active > section[class*="-image-header-"] > img {
+    display:block!important;
+    width:100%!important;
+    max-width:100%!important;
+    height:auto!important;
+    object-fit:contain!important;
+    margin:0!important;
+    border:0!important;
+    box-shadow:none!important;
+  }
+
+  /* Generous desktop workspace with controlled reading measure. */
+  body.is-crazy-joe-route .route-page.active>.crazy-joe-guide,
+  body.is-fishing-route .route-page.active>.fishing-guide-v690,
+  body.is-foundry-route .route-page.active>.foundry-guide {
+    box-sizing:border-box!important;
+    width:100%!important;
+    max-width:min(100%,1160px)!important;
+    min-width:0!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    padding:clamp(18px,2vw,30px)!important;
+  }
+  body.is-crazy-joe-route .crazy-joe-guide>p,
+  body.is-crazy-joe-route .crazy-joe-guide>ul,
+  body.is-fishing-route .fishing-guide-v690>p,
+  body.is-fishing-route .fishing-guide-v690>ul,
+  body.is-foundry-route .foundry-guide>p,
+  body.is-foundry-route .foundry-guide>ul {
+    max-width:94ch!important;
+    line-height:1.7!important;
+    font-size:16px!important;
+  }
+  body.is-crazy-joe-route .joe-quick{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:var(--bm-pc-gap)!important;
+  }
+  body.is-crazy-joe-route .joe-player-box,
+  body.is-foundry-route .foundry-quick,
+  body.is-foundry-route .foundry-experience{
+    border-radius:16px!important;
+    padding:clamp(16px,1.8vw,24px)!important;
+  }
+  body.is-fishing-route .fishing-guide-photo{
+    box-sizing:border-box!important;
+    width:min(100%,980px)!important;
+    max-width:980px!important;
+    margin:18px auto 26px!important;
+  }
+  body.is-fishing-route .fishing-guide-photo img{
+    display:block!important;
+    width:100%!important;
+    height:auto!important;
+    object-fit:contain!important;
+  }
+
+  /* Guide index pages already use responsive cards; add consistent spacing. */
+  body.site-hq-v407 .route-page.active .guide-page-v69{
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+  }
+  body.site-hq-v407 .route-page.active .guide-nav-grid,
+  body.site-hq-v407 .route-page.active .related-guides-grid-v625{
+    gap:var(--bm-pc-gap)!important;
+  }
+  body.is-events-route .guide-nav-grid{
+    grid-template-columns:repeat(auto-fit,minmax(245px,1fr))!important;
+  }
+
+  /* Bear: useful overview + a tidy two-column expandable handbook. */
+  body.is-bear-route .route-page.active>.bear-guide{
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:var(--bm-pc-gap)!important;
+    align-items:start!important;
+  }
+  body.is-bear-route .bear-guide>.bear-kpi,
+  body.is-bear-route .bear-guide>.bear-short,
+  body.is-bear-route .bear-guide>.bear-expand-help{
+    grid-column:1/-1!important;
+    min-width:0!important;
+  }
+  body.is-bear-route .bear-guide>details.bear-explain-section{
+    grid-column:auto!important;
+    min-width:0!important;
+    width:100%!important;
+    margin:0!important;
+  }
+  body.is-bear-route .bear-guide>details.bear-explain-section[open]{
+    grid-column:1/-1!important;
+  }
+
+  /* Endless Trial: two useful card columns rather than a 720px strip. */
+  body.is-endless-trial-route .route-page.active>.endless-guide{
+    display:grid!important;
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    margin:0!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:var(--bm-pc-gap)!important;
+    align-items:start!important;
+  }
+  body.is-endless-trial-route .endless-guide>.endless-short{
+    grid-column:1/-1!important;
+  }
+  body.is-endless-trial-route .endless-guide>.endless-card{
+    box-sizing:border-box!important;
+    width:100%!important;
+    min-width:0!important;
+    margin:0!important;
+    padding:clamp(17px,1.7vw,24px)!important;
+    border:1px solid var(--bm-pc-line)!important;
+    border-radius:17px!important;
+    box-shadow:var(--bm-pc-shadow)!important;
+  }
+
+  /* Experts and pets: take advantage of available screen width. */
+  body.is-experts-route .route-page.active>.experts-clean,
+  body.is-pets-route .route-page.active>.pets-redesign,
+  body.is-calculators-route .route-page.active>.calc-hub,
+  body.site-hq-v407 .route-page.active>.faq-wrap{
+    box-sizing:border-box!important;
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+  body.is-pets-route .pets-redesign .pet-card-grid{
+    grid-template-columns:repeat(auto-fit,minmax(265px,1fr))!important;
+    gap:var(--bm-pc-gap)!important;
+  }
+  body.is-pets-route .pets-redesign .pet-stage-list{
+    gap:var(--bm-pc-gap)!important;
+  }
+  body.is-experts-route .experts-clean .wave-stack{
+    gap:var(--bm-pc-gap)!important;
+  }
+  body.is-experts-route .experts-clean .wave,
+  body.is-pets-route .pets-redesign .pet-stage{
+    border-radius:18px!important;
+    min-width:0!important;
+  }
+  body.is-calculators-route .calc-hub .calc-hub-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:var(--bm-pc-gap)!important;
+  }
+  body.site-hq-v407 .faq-wrap .faq-grid.faq-accordion-grid{
+    gap:var(--bm-pc-gap)!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+
+  /* Long articles and news: cards fill the workspace; paragraphs remain readable. */
+  body.site-hq-v407 .route-page.active :is(.news-shell,.news-page,.kb-page-v415,.hero-gens-page,.jero-page,.pet-detail-page,.content-wrap,.page-shell){
+    box-sizing:border-box!important;
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+  }
+  body.site-hq-v407 .route-page.active>.section>p,
+  body.site-hq-v407 .route-page.active>.section>ul,
+  body.site-hq-v407 .route-page.active .guide-fold-body-v414>p,
+  body.site-hq-v407 .route-page.active .guide-fold-body-v414>ul{
+    max-width:96ch!important;
+  }
+  body.site-hq-v407 .route-page.active :is(.guide-nav-card,.related-guide-card-v625,.endless-card,.faq-answer-card) {
+    border-radius:16px!important;
+  }
+  body.site-hq-v407 .route-page.active :is(button,a,summary,input,select,textarea):focus-visible{
+    outline:2px solid #9fe2ff!important;
+    outline-offset:3px!important;
+  }
+  body.site-hq-v407 .route-page.active :is(.guide-nav-card,.related-guide-card-v625,.calc-hub-card,.pet-catalog-card,.expert-row){
+    transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease;
+  }
+  body.site-hq-v407 .route-page.active :is(.guide-nav-card,.related-guide-card-v625,.calc-hub-card,.expert-row):hover{
+    transform:translateY(-2px);
+  }
+}
+@media screen and (min-width:1500px) and (hover:hover) and (pointer:fine) {
+  body.is-experts-route .experts-clean .wave-stack{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    align-items:start!important;
+  }
+  body.is-experts-route .experts-clean .wave-panel{
+    min-width:0!important;
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  body.site-hq-v407 .route-page.active :is(.guide-nav-card,.related-guide-card-v625,.calc-hub-card,.pet-catalog-card,.expert-row){
+    transition:none!important;
+    transform:none!important;
+  }
+}
