@@ -1,0 +1,50 @@
+name: Publish Gina's Revenge banner
+on:
+  push:
+    paths:
+      - '.github/workflows/gina-banner-upload.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Retrieve approved banner and convert to WebP
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --location --retry 3 --connect-timeout 15 --max-time 120 \
+            'https://at.adobe.com/OzJQ1MoV0RcIByuD' --output /tmp/gina-original.png
+          python -m pip install --quiet Pillow
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          original=Image.open('/tmp/gina-original.png')
+          original.load()
+          assert original.width>=2000 and original.height>=650, f'Unexpected image size: {original.size}'
+          converted=original.convert('RGB').resize((2048,682), Image.Resampling.LANCZOS)
+          target=Path('assets/gina-revenge-header-v642.webp')
+          converted.save(target, 'WEBP', quality=84, method=6)
+          check=Image.open(target)
+          assert check.size==(2048,682)
+          page=Path('ginas-revenge.html')
+          html=page.read_text(encoding='utf-8')
+          old='assets/gina-revenge-final-v607.jpg?v=607'
+          assert html.count(old)==3, f'Unexpected existing references: {html.count(old)}'
+          html=html.replace(old,'assets/gina-revenge-header-v642.webp?v=642')
+          html=html.replace('alt="Месть Джины" decoding="async"','alt="Месть Джины" width="2048" height="682" decoding="async"')
+          page.write_text(html, encoding='utf-8')
+          print('Converted', original.size, 'to', target, target.stat().st_size, 'bytes')
+          PY
+      - name: Commit restored banner to site
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/gina-revenge-header-v642.webp ginas-revenge.html
+          git diff --cached --quiet || (git commit -m "Publish 2048px Gina's Revenge banner and replace old header" && git push)
