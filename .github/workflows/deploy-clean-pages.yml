@@ -1,0 +1,78 @@
+name: Deploy cleaned site to GitHub Pages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    timeout-minutes: 25
+    steps:
+      - name: Checkout website
+        uses: actions/checkout@v4
+
+      - name: Prepare clean Pages artifact without changing site files
+        shell: bash
+        run: |
+          mkdir -p _site
+          rsync -a ./ _site/ \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='_site/' \
+            --exclude='visual-tests/' \
+            --exclude='node_modules/' \
+            --exclude='tests/' \
+            --exclude='test-results/' \
+            --exclude='playwright-report/' \
+            --exclude='coverage/' \
+            --exclude='.venv/' \
+            --exclude='venv/' \
+            --exclude='package.json' \
+            --exclude='package-lock.json' \
+            --exclude='pnpm-lock.yaml' \
+            --exclude='yarn.lock' \
+            --exclude='playwright.config.*' \
+            --exclude='*.log'
+          touch _site/.nojekyll
+          python3 - <<'PY'
+          from pathlib import Path
+          import os
+          root = Path("_site")
+          assert (root / "index.html").is_file(), "Missing homepage"
+          assert (root / "assets").is_dir(), "Missing site images"
+          home = (root / "index.html").read_text(encoding="utf-8")
+          assert "home-hero-polish-v447.webp" in home, "Expected homepage image missing in HTML"
+          assert (root / "assets/home-hero-polish-v447.webp").is_file(), "Expected homepage image missing"
+          files = [p for p in root.rglob("*") if p.is_file()]
+          size = sum(p.stat().st_size for p in files)
+          print(f"Clean website: {len(files)} files, {size/1048576:.2f} MiB")
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+              f.write(f"## Clean Pages deployment\\nWebsite package: **{len(files)} files**, **{size/1048576:.2f} MiB**.\\n\\n")
+              f.write("Site content and image bytes preserved; only test/development tooling excluded.\\n")
+          PY
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload only the clean website
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          timeout: 1200000
