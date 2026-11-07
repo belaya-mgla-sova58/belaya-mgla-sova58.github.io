@@ -70,4 +70,26 @@ jobs:
           for wasted, paths in duplicates[:30]:
               print(f"{wasted/1048576:8.2f}  " + " | ".join(map(str,paths)))
           print(f"Potential exact duplicate savings: {sum(s for s,_ in duplicates)/1048576:.1f} MiB")
+          print("Duplicate asset references in HTML/CSS/JS/JSON/manifests (read-only)")
+          text_suffixes = {".html", ".css", ".js", ".json", ".webmanifest", ".xml"}
+          text_files = []
+          for _, path in files:
+              if path.suffix.lower() not in text_suffixes:
+                  continue
+              try:
+                  text_files.append((path, path.read_text(encoding="utf-8", errors="replace")))
+              except OSError:
+                  pass
+          for _, paths in duplicates:
+              for asset in paths:
+                  relative = asset.as_posix()
+                  hits = []
+                  for source, contents in text_files:
+                      if source == asset:
+                          continue
+                      # Search exact relative path, with or without a leading slash.
+                      if relative in contents:
+                          hits.append(str(source))
+                  print(f"REFERENCE {relative}: {len(hits)} file(s) | " + " | ".join(hits[:12]))
+          print("References can be dynamically constructed; zero matches does NOT mean safe to delete.")
           PY
