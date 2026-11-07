@@ -1,0 +1,70 @@
+name: Playwright visual check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**/*.html'
+      - '**/*.css'
+      - '**/*.js'
+      - 'assets/**'
+      - 'visual-tests/**'
+      - '.github/workflows/visual-check.yml'
+  pull_request:
+    paths:
+      - '**/*.html'
+      - '**/*.css'
+      - '**/*.js'
+      - 'assets/**'
+      - 'visual-tests/**'
+      - '.github/workflows/visual-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  visual-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout site
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install Playwright
+        working-directory: visual-tests
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+
+      - name: Start local copy of the site
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/belaya-mgla-http.log 2>&1 &
+          for i in $(seq 1 20); do
+            if curl -fsS http://127.0.0.1:4173/ -o /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/belaya-mgla-http.log
+          exit 1
+
+      - name: Check desktop and mobile layouts
+        working-directory: visual-tests
+        run: npm test
+
+      - name: Upload screenshots and HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-visual-report
+          path: |
+            visual-tests/playwright-report/
+            visual-tests/test-results/
+          if-no-files-found: warn
+          retention-days: 14
