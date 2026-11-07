@@ -1,0 +1,55 @@
+name: Verify improved worker without forced navigation
+on:
+  push:
+    paths: ['.github/workflows/sw-verify-v987.yml']
+permissions: {contents: read}
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          npm install --no-save --no-package-lock playwright
+          npx playwright install --with-deps chromium
+      - name: Check live mobile worker and offline assets
+        run: |
+          node <<'JS'
+          const {chromium}=require('playwright');
+          const timeout=(task,ms=5000)=>Promise.race([task,new Promise((_,reject)=>setTimeout(()=>reject(Error('timeout '+ms+'ms')),ms))]);
+          (async()=>{
+            const browser=await chromium.launch(),ctx=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+            const page=await ctx.newPage();const errors=[];
+            page.on('pageerror',e=>errors.push('page error: '+e.message.slice(0,100)));
+            const res=await page.goto('https://belaya-mgla-sova58.github.io/index.html?workerCheck=20261107',{waitUntil:'domcontentloaded',timeout:25000});
+            console.log('WORKER LIVE HTTP',res?.status());
+            await page.waitForTimeout(3200);
+            const state=await timeout(page.evaluate(async()=>{
+              const regs=await Promise.race([navigator.serviceWorker.getRegistrations(),new Promise(r=>setTimeout(()=>r([]),2000))]);
+              return {url:location.href,state:document.readyState,controller:navigator.serviceWorker.controller?.scriptURL||null,regs:regs.map(x=>x.active?.scriptURL||x.installing?.scriptURL||null)};
+            }),8000);
+            console.log('WORKER STATE',JSON.stringify(state));
+            if(!state.controller||!state.controller.includes('service-worker.js?v=987'))errors.push('worker not controlling');
+            const cache=await timeout(page.evaluate(async()=>{
+              const names=await Promise.race([caches.keys(),new Promise(r=>setTimeout(()=>r(['TIMEOUT']),2400))]);
+              return names;
+            }),6000);
+            console.log('WORKER CACHE NAMES',JSON.stringify(cache));
+            if(cache.includes('TIMEOUT')||!cache.includes('belaya-mgla-v987'))errors.push('cache unavailable');
+            const before=await page.locator('.route-page.active').count();
+            if(!before)errors.push('route missing');
+            await ctx.setOffline(true);
+            const response=await timeout(page.evaluate(async()=>{
+              try{const r=await fetch('site-v626.min.css?v=985');return {ok:r.ok,size:(await r.text()).length}}
+              catch(e){return {ok:false,error:String(e)}}
+            }),5000).catch(e=>({ok:false,error:String(e)}));
+            console.log('WORKER OFFLINE CSS',JSON.stringify(response));
+            if(!response.ok||response.size<100000)errors.push('offline stylesheet missing');
+            await ctx.setOffline(false);
+            await browser.close();
+            console.log('WORKER FINAL',JSON.stringify({failures:errors}));
+            if(errors.length)process.exitCode=1;
+          })().catch(e=>{console.error('WORKER FATAL',e);process.exitCode=1});
+          JS
