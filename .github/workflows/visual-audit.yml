@@ -1,0 +1,39 @@
+name: SOVA58 desktop and mobile visual audit
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  visual_audit:
+    name: Browser screenshots and layout checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout site
+        uses: actions/checkout@v4
+
+      - name: Prepare Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install Playwright
+        run: npm install --no-save --no-audit --no-fund playwright
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Check public site at desktop and mobile widths
+        run: node tests/visual-audit.cjs
+
+      - name: Attach screenshots and detailed report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sova58-visual-audit
+          path: visual-audit-results/
+          retention-days: 7
+          if-no-files-found: warn
