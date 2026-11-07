@@ -54,8 +54,12 @@ test.describe('Мобильная навигация и калькуляторы
       await page.goto('/calculators.html', { waitUntil: 'domcontentloaded' });
       const homeLink = page.locator('nav.mobile-bottom-v424 a[href="index.html"]');
       await expect(homeLink).toBeVisible();
-      await homeLink.tap();
-      await expect(page).toHaveURL(/\/index\.html$/);
+      // The homepage can delay the full load event while decorative assets load.
+      // Confirm the actual user navigation as soon as DOMContentLoaded fires.
+      await Promise.all([
+        page.waitForURL(/\\/index\\.html$/, { waitUntil: 'domcontentloaded', timeout: 15000 }),
+        homeLink.tap({ noWaitAfter: true, timeout: 10000 }),
+      ]);
       await expect(page.locator('.home-stamped-hero-v441 img.home-stamped-img-v441'))
         .toHaveAttribute('src', 'assets/home-hero-polish-v447.webp');
     });
