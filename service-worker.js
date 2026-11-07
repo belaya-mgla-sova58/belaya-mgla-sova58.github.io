@@ -1,4 +1,4 @@
-const CACHE_NAME = 'belaya-mgla-v995';
+const CACHE_NAME = 'belaya-mgla-v996';
 const STATIC_CORE = [
   './site-v626.min.css?v=985',
   './site-desktop-v985.css?v=985',
@@ -25,10 +25,9 @@ self.addEventListener('activate', event => {
 
 function optimizeHtml(html){
   html=html.replace(/<section\s+class=["']pwa-install-v540["'][\s\S]*?<\/section>/i,'');
-  html=html.replace(/<section\s+class=["']home-today-v581["'][\s\S]*?<\/section>/i,'');
   html=html.replace(/madam-ugu-v655\.js\?v=\d+/g,'madam-ugu-v655.js?v=959');
   html=html.replace(/madam-ugu-mobile-match-v701\.js\?v=\d+/g,'madam-ugu-mobile-match-v701.js?v=714');
-  html=html.replace(/pwa-install\.js\?v=\d+/g,'pwa-install.js?v=987');
+  html=html.replace(/pwa-install\.js\?v=\d+/g,'pwa-install.js?v=988');
   html=html.replace(/site-v629\.min\.js\?v=\d+/g,'site-v629.min.js?v=986');
   // Preserve the actual CSS version declared by each page; do not rewrite to an old cached asset.
   return html;
