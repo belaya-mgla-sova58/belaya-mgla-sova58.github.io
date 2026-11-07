@@ -1,4 +1,4 @@
-name: SOVA58 desktop and mobile visual audit
+name: SOVA58 full-site desktop and mobile visual audit
 
 on:
   workflow_dispatch:
@@ -8,9 +8,9 @@ permissions:
 
 jobs:
   visual_audit:
-    name: Browser screenshots and layout checks
+    name: Full-site browser screenshots and layout checks
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
     steps:
       - name: Checkout site
         uses: actions/checkout@v4
