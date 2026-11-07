@@ -186,7 +186,7 @@ test.describe('Опыт улучшения', () => {
       quantity: 1, stock: 0, feed: { common: 2 }, goldFrom: 0, goldTo: 1,
       redEnabled: false, redFrom: 1, redTo: 1,
     });
-    await page.locator('#ecExperienceAdvanced summary').click();
+    await page.locator('#ecExperienceAdvanced > summary').click();
     await expect(page.locator('#ecXpGoldNeed')).toHaveText('10');
     await expect(page.locator('#ecXpRedNeed')).toHaveText('0');
     await expect(page.locator('#ecXpFeedTotal')).toHaveText('20');
@@ -200,7 +200,7 @@ test.describe('Опыт улучшения', () => {
       quantity: 2, stock: 0, feed: {}, goldFrom: 0, goldTo: 2,
       redEnabled: false, redFrom: 1, redTo: 1,
     });
-    await page.locator('#ecExperienceAdvanced summary').click();
+    await page.locator('#ecExperienceAdvanced > summary').click();
     await expect(page.locator('#ecXpGoldNeed')).toHaveText('50');
     await expect(page.locator('#ecXpTotalNeed')).toHaveText('50');
     await expect(page.locator('#ecXpMissing')).toHaveText('50');
