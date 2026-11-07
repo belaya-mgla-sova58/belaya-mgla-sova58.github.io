@@ -56,11 +56,26 @@ for(const page of PAGES)for(const mode of MODES){
     const data=JSON.parse(fs.readFileSync(output,'utf8'));
     const scores={};
     for(const [k,v]of Object.entries(data.categories||{}))scores[k]=v.score===null?null:Math.round(v.score*100);
+    const failureDetails=Object.entries(data.categories||{}).flatMap(([category,c])=>
+      (c.auditRefs||[]).filter(ref=>ref.weight>0)
+        .map(ref=>({category,id:ref.id,audit:data.audits?.[ref.id]}))
+        .filter(x=>x.audit && x.audit.score!==null && x.audit.score<0.9)
+        .map(x=>({category:x.category,id:x.id,
+          score:x.audit.score,title:x.audit.title,
+          displayValue:x.audit.displayValue||'',
+          explanation:x.audit.explanation||''})));
+    const lcpElement=data.audits?.['lcp-breakdown-insight']?.details?.items
+      ?.find(item=>item.type==='node');
     const report={page,mode,scores,finalUrl:data.finalUrl,
       audits:{
         lcp:data.audits?.['largest-contentful-paint']?.numericValue||null,
         cls:data.audits?.['cumulative-layout-shift']?.numericValue||null,
-        tbt:data.audits?.['total-blocking-time']?.numericValue||null
+        tbt:data.audits?.['total-blocking-time']?.numericValue||null,
+        renderBlockingSavingsMs:data.audits?.['render-blocking-insight']?.numericValue??null,
+        unusedCssSavingsMs:data.audits?.['unused-css-rules']?.numericValue??null,
+        unusedJsSavingsMs:data.audits?.['unused-javascript']?.numericValue??null,
+        lcpElement:lcpElement?.selector||null,
+        failedAudits:failureDetails
       }};
     result.reports.push(report);
     result.checked++;
@@ -75,6 +90,20 @@ const markdown=['# SOVA58 Lighthouse sample scores','',
   ...result.reports.map(r=>'| '+r.page+' | '+r.mode+' | '+(r.scores.performance??'n/a')
     +' | '+(r.scores.accessibility??'n/a')+' | '+(r.scores['best-practices']??'n/a')
     +' | '+(r.scores.seo??'n/a')+' |'),
+  '', '## Performance diagnostics', '',
+  '| Page | Device | LCP | CLS | TBT | Render blocking | Unused CSS | LCP element |',
+  '| --- | --- | ---: | ---: | ---: | ---: | ---: | --- |',
+  ...result.reports.map(r=>'| '+r.page+' | '+r.mode+' | '+
+    (r.audits.lcp==null?'n/a':(r.audits.lcp/1000).toFixed(2)+'s')+' | '+
+    (r.audits.cls==null?'n/a':r.audits.cls.toFixed(3))+' | '+
+    (r.audits.tbt==null?'n/a':Math.round(r.audits.tbt)+'ms')+' | '+
+    (r.audits.renderBlockingSavingsMs==null?'n/a':Math.round(r.audits.renderBlockingSavingsMs)+'ms')+' | '+
+    (r.audits.unusedCssSavingsMs==null?'n/a':Math.round(r.audits.unusedCssSavingsMs)+'ms')+' | '+
+    (r.audits.lcpElement||'n/a').replace(/\\|/g,'/')+' |'),
+  '', '## Highest priority audits',
+  ...result.reports.flatMap(r=>r.audits.failedAudits.slice(0,8).map(a=>
+    '- '+r.page+' / '+r.mode+': '+a.category+' / '+a.title+
+    ' ('+a.displayValue+')')),
   '', '## Failed scans',
   ...(result.errors.length?result.errors.map(r=>'- '+r.page+' / '+r.mode+': '+r.error):['None']),
   '', 'Scores are diagnostic snapshots affected by network and runner conditions.'].join('\n');
