@@ -1,0 +1,122 @@
+name: Playwright visual check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**/*.html'
+      - '**/*.css'
+      - '**/*.js'
+      - 'assets/**'
+      - 'visual-tests/**'
+      - '.github/workflows/visual-check.yml'
+  pull_request:
+    paths:
+      - '**/*.html'
+      - '**/*.css'
+      - '**/*.js'
+      - 'assets/**'
+      - 'visual-tests/**'
+      - '.github/workflows/visual-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: visual-check-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  visual-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout site
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install Playwright
+        working-directory: visual-tests
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+
+      - name: Prepare previous version for visual comparison
+        id: reference
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PREVIOUS_SHA: ${{ github.event.before }}
+        run: |
+          set -e
+          if [[ "$EVENT_NAME" == "pull_request" ]]; then
+            BASE_SHA="$PR_BASE_SHA"
+          elif [[ "$EVENT_NAME" == "push" ]]; then
+            BASE_SHA="$PREVIOUS_SHA"
+          else
+            BASE_SHA="$(git rev-parse HEAD^ 2>/dev/null || true)"
+          fi
+          if [[ -z "$BASE_SHA" || "$BASE_SHA" == "0000000000000000000000000000000000000000" ]]; then
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            echo "No previous commit to compare." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          if ! git cat-file -e "$BASE_SHA^{commit}" 2>/dev/null; then
+            git fetch --no-tags --depth=1 origin "$BASE_SHA"
+          fi
+          git worktree add --detach /tmp/belaya-mgla-before "$BASE_SHA"
+          echo "available=true" >> "$GITHUB_OUTPUT"
+
+      - name: Start local copy of the site
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/belaya-mgla-http.log 2>&1 &
+          for i in $(seq 1 20); do
+            if curl -fsS http://127.0.0.1:4173/ -o /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/belaya-mgla-http.log
+          exit 1
+
+      - name: Start previous site version
+        if: steps.reference.outputs.available == 'true'
+        run: |
+          python3 -m http.server 4174 --bind 127.0.0.1 --directory /tmp/belaya-mgla-before > /tmp/belaya-mgla-before-http.log 2>&1 &
+          for i in $(seq 1 20); do
+            if curl -fsS http://127.0.0.1:4174/ -o /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/belaya-mgla-before-http.log
+          exit 1
+
+      - name: Check desktop and mobile layouts
+        working-directory: visual-tests
+        run: npm test
+
+      - name: Compare before and after screenshots
+        if: steps.reference.outputs.available == 'true'
+        working-directory: visual-tests
+        run: npm run compare
+
+      - name: Upload screenshots and comparison galleries
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-visual-report
+          path: |
+            visual-tests/playwright-report/
+            visual-tests/test-results/
+            visual-tests/visual-diff-report/
+          if-no-files-found: warn
+          retention-days: 14
