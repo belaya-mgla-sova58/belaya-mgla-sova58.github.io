@@ -1,0 +1,33 @@
+name: Publish cache-safe PWA installer version
+on:
+  push:
+    paths: ['.github/workflows/pwa-version-v987.yml']
+permissions: {contents: write}
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: true}
+      - name: Link v987 PWA installer on standard pages
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          total=0;changed=[]
+          for p in sorted(Path('.').glob('*.html')):
+              s=p.read_text(encoding='utf-8')
+              if not ('site-v629.min.js' in s and 'pwa-install.js?v=' in s):continue
+              t=re.sub(r'(pwa-install\.js\?v=)\d+',lambda m:m.group(1)+'987',s)
+              total+=1
+              if t!=s:
+                  p.write_text(t,encoding='utf-8')
+                  changed.append(p.name)
+          print('PWA INSTALL LINKS FOUND',total,'CHANGED',len(changed))
+          assert total>80 and len(changed)>80
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- '*.html'
+          git diff --cached --quiet || (git commit -m "Version PWA installer across standard pages for v987" && git push)
