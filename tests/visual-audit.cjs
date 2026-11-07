@@ -262,7 +262,7 @@ async function run() {
                 state.sources.push({
                   selector: node?.id ? '#'+node.id :
                     node?.className && typeof node.className === 'string'
-                      ? node.tagName.toLowerCase()+'.'+node.className.trim().split(/\\s+/)[0]
+                      ? node.tagName.toLowerCase()+'.'+node.className.trim().split(/\s+/)[0]
                       : node?.tagName?.toLowerCase() || 'unknown',
                   score: Math.round(entry.value*1000)/1000
                 });
