@@ -106,3 +106,46 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           timeout: 1200000
+
+      - name: Smoke-test published pages and critical assets
+        shell: bash
+        env:
+          SITE_URL: https://belaya-mgla-sova58.github.io
+        run: |
+          python3 - <<'PY'
+          import os, urllib.request, time
+          base=os.environ["SITE_URL"].rstrip("/")
+          checks=[
+              ("/", b"home-hero-polish-v447.webp"),
+              ("/pets.html", None),
+              ("/essence-mithril-calculator.html", None),
+              ("/assets/home-hero-polish-v447.webp", None),
+          ]
+          report=[]
+          failed=[]
+          for path, marker in checks:
+              url=base+path
+              last=""
+              for attempt in range(8):
+                  try:
+                      req=urllib.request.Request(url,headers={"User-Agent":"SOVA58-Pages-Smoke-Test/1.0","Cache-Control":"no-cache"})
+                      with urllib.request.urlopen(req,timeout=20) as response:
+                          status=response.status
+                          data=response.read(8*1024*1024)
+                          if not (200 <= status < 300): raise RuntimeError(f"HTTP {status}")
+                          if marker and marker not in data: raise RuntimeError("expected home image reference not found")
+                      last=f"PASS HTTP {status}"
+                      break
+                  except Exception as exc:
+                      last=f"FAILED: {exc}"
+                      if attempt<7: time.sleep(10)
+              print(f"{path}: {last}")
+              report.append((path,last))
+              if not last.startswith("PASS"): failed.append(path)
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as summary:
+              summary.write("\n## Live site smoke checks\n\n")
+              for path,status in report:
+                  summary.write(f"- {path}: {status}\n")
+          if failed:
+              raise SystemExit("Live website smoke checks failed for: "+", ".join(failed))
+          PY
