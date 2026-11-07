@@ -1,4 +1,4 @@
-const CACHE_NAME = 'belaya-mgla-v987';
+const CACHE_NAME = 'belaya-mgla-v990';
 const STATIC_CORE = [
   './site-v626.min.css?v=985',
   './site-desktop-v985.css?v=985',
@@ -6,7 +6,7 @@ const STATIC_CORE = [
 ];
 
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(STATIC_CORE)).catch(()=>{}));
+  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(STATIC_CORE.map(path => new Request(path,{cache:'reload'})))).catch(()=>{}));
   self.skipWaiting();
 });
 
