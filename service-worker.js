@@ -1,4 +1,4 @@
-const CACHE_NAME = 'belaya-mgla-v994';
+const CACHE_NAME = 'belaya-mgla-v995';
 const STATIC_CORE = [
   './site-v626.min.css?v=985',
   './site-desktop-v985.css?v=985',
@@ -52,6 +52,7 @@ function isVersionedCoreAsset(url){
   const version=url.searchParams.get('v')||'';
   return /^[0-9]{3,4}$/.test(version) && (
     path.endsWith('/site-v626.min.css') ||
+    path.endsWith('/site-home-v995.css') ||
     path.endsWith('/site-desktop-v985.css') ||
     path.endsWith('/site-v629.min.js')
   );
@@ -69,6 +70,7 @@ function isFresh(url){
          p.endsWith('/fortune-phrases.txt') ||
          p.endsWith('/pwa-install.js') ||
          p.endsWith('/site-v626.min.css') ||
+         p.endsWith('/site-home-v995.css') ||
          p.endsWith('/home-date-v588.js');
 }
 
