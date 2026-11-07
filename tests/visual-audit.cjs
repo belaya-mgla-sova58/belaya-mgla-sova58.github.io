@@ -70,7 +70,7 @@ async function inspect(page) {
     const vw = document.documentElement.clientWidth;
     const docW = Math.max(document.documentElement.scrollWidth, document.body?.scrollWidth||0);
     const images = [...document.querySelectorAll('img')].filter(img => !img.closest('template'));
-    const broken = [], distorted = [], pending = [], withoutAlt = [];
+    const broken = [], distorted = [], pending = [], withoutAlt = [], cropped = [], lowResolution = [];
     for (const img of images) {
       const src = img.currentSrc || img.getAttribute('src') || img.getAttribute('srcset') || '';
       if (!img.hasAttribute('alt')) withoutAlt.push(src);
@@ -80,11 +80,20 @@ async function inspect(page) {
       else {
         const rect = img.getBoundingClientRect();
         const objectFit = getComputedStyle(img).objectFit;
-        if (rect.width > 24 && rect.height > 24 && objectFit === 'fill') {
+        if (rect.width > 24 && rect.height > 24) {
           const actual = img.naturalWidth/img.naturalHeight;
           const rendered = rect.width/rect.height;
-          if (Number.isFinite(actual) && Math.abs(Math.log(rendered/actual)) > .2) {
+          const mismatch = Number.isFinite(actual) ? Math.abs(Math.log(rendered/actual)) : 0;
+          if (objectFit === 'fill' && mismatch > .2) {
             distorted.push({src, actual:+actual.toFixed(2), rendered:+rendered.toFixed(2)});
+          }
+          // cover cropping may be intentional (especially approved banners).
+          // Report only as a candidate for human comparison, never as failure.
+          if (objectFit === 'cover' && mismatch > .2 && cropped.length < 25) {
+            cropped.push({src, actual:+actual.toFixed(2), frame:+rendered.toFixed(2)});
+          }
+          if (img.naturalWidth < rect.width*.7 && rect.width >= 150 && lowResolution.length < 25) {
+            lowResolution.push({src, naturalWidth:img.naturalWidth, displayedWidth:Math.round(rect.width)});
           }
         }
       }
@@ -114,6 +123,7 @@ async function inspect(page) {
       viewport:vw, documentWidth:docW, overflow:docW-vw,
       imageCount:images.length, brokenImages:broken.slice(0,30),
       pendingImages:pending.slice(0,20), distortedImages:distorted.slice(0,20),
+      croppingCandidates:cropped, lowResolutionImages:lowResolution,
       imagesWithoutAlt:withoutAlt.slice(0,20), overflowing,
       title:document.title||'', headings:document.querySelectorAll('h1').length,
       mainPresent, linkCount:links.length, tinyTextParagraphs:bigText,
@@ -220,12 +230,15 @@ async function run() {
             row.metrics=await inspect(page);
             row.images={count:row.metrics.imageCount, broken:row.metrics.brokenImages,
               pending:row.metrics.pendingImages, distorted:row.metrics.distortedImages,
-              missingAlt:row.metrics.imagesWithoutAlt};
+              missingAlt:row.metrics.imagesWithoutAlt,
+              croppingCandidates:row.metrics.croppingCandidates,
+              lowResolution:row.metrics.lowResolutionImages};
             if (row.status!==200) row.failures.push('HTTP '+row.status);
             if (row.metrics.overflow>12) row.failures.push('Horizontal overflow '+row.metrics.overflow+'px');
             if (row.metrics.brokenImages.length) row.failures.push('Broken images: '+row.metrics.brokenImages.length);
             if (row.metrics.distortedImages.length) row.warnings.push('Potential image distortion: '+row.metrics.distortedImages.length);
             if (row.metrics.pendingImages.length) row.warnings.push('Images not fully loaded: '+row.metrics.pendingImages.length);
+            if (row.metrics.lowResolutionImages.length) row.warnings.push('Low-resolution image candidates: '+row.metrics.lowResolutionImages.length);
             if (!row.metrics.title) row.warnings.push('Missing page title');
             if (!row.metrics.headings) row.warnings.push('Missing H1');
             if (row.metrics.tinyTextParagraphs>0) row.warnings.push('Text smaller than 11px: '+row.metrics.tinyTextParagraphs+' paragraphs');
