@@ -54,6 +54,13 @@ test.describe('Мобильная навигация и калькуляторы
       await page.goto('/calculators.html', { waitUntil: 'domcontentloaded' });
       const homeLink = page.locator('nav.mobile-bottom-v424 a[href="index.html"]');
       await expect(homeLink).toBeVisible();
+      // Consent dialog legitimately overlays the mobile bar for first-time visitors.
+      // Decline analytics through its real UI before testing navigation.
+      const consent = page.locator('#sova-metrika-consent');
+      if (await consent.isVisible()) {
+        await page.locator('#sova-metrika-decline').click();
+        await expect(consent).toBeHidden();
+      }
       // The homepage can delay the full load event while decorative assets load.
       // Confirm the actual user navigation as soon as DOMContentLoaded fires.
       await Promise.all([
