@@ -245,11 +245,11 @@ async function run() {
             if(page) {
               try {
                 const label=file.replace(/\.html$/i,'').replace(/[\/\\]/g,'__');
-                await page.screenshot({path:path.join(folder,label+'.png'),
-                  fullPage:false,animations:'disabled',timeout:20000});
+                await page.screenshot({path:path.join(folder,label+'.jpg'),
+                  type:'jpeg',quality:80,fullPage:false,animations:'disabled',timeout:20000});
                 if (FULL_PAGE_ALL || ((device.name==='desktop'||device.name==='mobile') && CORE.has(file))) {
-                  await page.screenshot({path:path.join(folder,label+'--full.png'),
-                    fullPage:true,animations:'disabled',timeout:30000});
+                  await page.screenshot({path:path.join(folder,label+'--full.jpg'),
+                    type:'jpeg',quality:85,fullPage:true,animations:'disabled',timeout:30000});
                 }
               } catch(e){row.warnings.push('Screenshot failed: '+String(e.message||e).slice(0,130));}
               await page.close().catch(()=>{});
@@ -285,7 +285,7 @@ async function run() {
     ...(failures.length?failures.slice(0,100).map(r=>'- '+r.device+' / '+r.page+': '+r.failures.join('; ')):['None']),
     '', '## Warnings (first 100)',
     ...warned.slice(0,100).map(r=>'- '+r.device+' / '+r.page+': '+r.warnings.join('; ')),
-    '', 'See report.json and PNG screenshots in the uploaded artifact.',
+    '', 'See report.json and JPEG screenshots in the uploaded artifact.',
     'Visual composition and correct character artwork require comparison with approved references.'
   ].join('\n');
   fs.writeFileSync(path.join(OUT,'browser-summary.md'),summary);
