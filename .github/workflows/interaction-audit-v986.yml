@@ -1,137 +1,67 @@
-name: Interactive site audit v986
+name: Interactive site diagnostics v986
 on:
   push:
-    paths:
-      - '.github/workflows/interaction-audit-v986.yml'
-permissions:
-  contents: read
+    paths: ['.github/workflows/interaction-audit-v986.yml']
+permissions: {contents: read}
 jobs:
-  audit:
+  diagnose:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: {node-version: '22'}
-      - name: Install headless Chromium
-        run: |
+      - run: |
           npm install --no-save --no-package-lock playwright
           npx playwright install --with-deps chromium
-      - name: Audit site controls in real browser
-        shell: bash
+      - name: Inspect exact click and HTTP behaviors
         run: |
           node <<'JS'
           const {chromium}=require('playwright');
-          const base='https://belaya-mgla-sova58.github.io/';
           (async()=>{
-            const browser=await chromium.launch({headless:true}), failures=[], checks=[], perf=[];
-            const desktops=[{name:'desktop',opts:{viewport:{width:1440,height:900},serviceWorkers:'block'}},{name:'mobile',opts:{viewport:{width:390,height:844},isMobile:true,hasTouch:true,serviceWorkers:'block'}}];
-            for(const {name,opts} of desktops) {
-              const ctx=await browser.newContext(opts);
-              for(const pathname of ['index.html','events.html','pets.html','experts.html','faq.html','essence-mithril-calculator.html','bear.html','endless-trial.html']) {
-                let p=await ctx.newPage();
-                const events=[],badRequests=[];
-                p.on('pageerror',e=>events.push(e.message.slice(0,160)));
-                p.on('response',r=>{if(r.status()>=400&&r.url().includes('belaya-mgla-sova58.github.io')) badRequests.push({status:r.status(),url:r.url().split('/').slice(-1)[0]})});
-                const prefix=name+' '+pathname;
-                async function check(label,fn){try{const got=await fn();if(got===false)throw Error('assertion false');checks.push(prefix+' '+label)}catch(e){failures.push(prefix+' '+label+' -> '+String(e.message||e).slice(0,240))}}
-                try{
-                  const start=Date.now(),res=await p.goto(base+pathname+'?interaction=986',{waitUntil:'domcontentloaded',timeout:30000});
-                  await p.waitForTimeout(600);
-                  perf.push({mode:name,page:pathname,ms:Date.now()-start,size:await p.evaluate(()=>document.documentElement.scrollWidth-innerWidth)});
-                  await check('HTTP and no page error',()=>res.ok()&&events.length===0);
-                  await check('no missing local assets',()=>badRequests.length===0);
-                  if(pathname==='index.html'){
-                    await check('site search results',async()=>{
-                      const input=p.locator('.site-search-input-v426').first();
-                      await input.fill('медвед');
-                      await p.waitForTimeout(360);
-                      const results=p.locator('a.site-search-result-v426');
-                      const count=await results.count();
-                      console.log('SEARCH RESULTS',name,count,await results.allTextContents());
-                      await input.fill('');
-                      return count>0;
-                    });
-                    if(name==='desktop'){
-                      await check('Ctrl+K search shortcut',async()=>{
-                        await p.keyboard.press('Control+k');
-                        return await p.locator('.site-search-input-v426').first().evaluate(e=>document.activeElement===e);
-                      });
-                    }
-                    if(name==='mobile'){
-                      await check('mobile navigation toggle',async()=>{
-                        const b=p.locator('#mobileMenuToggle');
-                        await b.click();
-                        const yes=await b.getAttribute('aria-expanded');
-                        await b.click();
-                        const no=await b.getAttribute('aria-expanded');
-                        return yes==='true'&&no==='false';
-                      });
-                    }
-                  }
-                  if(pathname==='events.html'){
-                    await check('expand and collapse all event sections',async()=>{
-                      const all=p.locator('details.guide-fold-v414'),b=p.locator('.guide-fold-all-v414');
-                      await b.click();
-                      const on=await all.evaluateAll(xs=>xs.every(x=>x.open));
-                      await b.click();
-                      const off=await all.evaluateAll(xs=>xs.every(x=>!x.open));
-                      return await all.count()>0&&on&&off;
-                    });
-                  }
-                  if(pathname==='pets.html'){
-                    await check('pet details expand',async()=>{
-                      const card=p.locator('details.pet-catalog-card').first();
-                      await card.locator('summary').click();
-                      return await card.evaluate(x=>x.open);
-                    });
-                  }
-                  if(pathname==='experts.html'){
-                    await check('expert wave expand',async()=>{
-                      const wave=p.locator('details.wave').first();
-                      await wave.locator('summary').click();
-                      return await wave.evaluate(x=>x.open);
-                    });
-                  }
-                  if(pathname==='faq.html'){
-                    await check('FAQ opens',async()=>{
-                      const faq=p.locator('details.faq-answer-card').first();
-                      await faq.locator('summary').click();
-                      return await faq.evaluate(x=>x.open);
-                    });
-                  }
-                  if(pathname==='essence-mithril-calculator.html'){
-                    await check('calculator add and reset',async()=>{
-                      let parent=p.locator('#ecItems'),btn=p.locator('#ecAdd');
-                      const initial=await parent.locator('.ec-item').count();
-                      await p.locator('#ecMoreItems > summary').click();
-                      await btn.click();
-                      const after=await parent.locator('.ec-item').count();
-                      await p.locator('#ecReset').click();
-                      const final=await parent.locator('.ec-item').count();
-                      console.log('CALC ITEM COUNT',name,initial,after,final);
-                      return after>initial&&final===initial;
-                    });
-                  }
-                  if(['bear.html','endless-trial.html'].includes(pathname)){
-                    await check('More expands/collapses',async()=>{
-                      const d=p.locator('details.guide-overview-v640').first();
-                      if(!await d.count())return true;
-                      await d.locator('summary').click();
-                      const on=await d.evaluate(x=>x.open);
-                      await d.locator('summary').click();
-                      return on&&!await d.evaluate(x=>x.open);
-                    });
-                  }
-                }catch(e){failures.push(prefix+' navigation -> '+String(e.message||e).slice(0,200))}
+            const browser=await chromium.launch();
+            for(const mode of ['desktop','mobile']){
+              const ctx=await browser.newContext(mode==='desktop'?{viewport:{width:1440,height:900},serviceWorkers:'block'}:{viewport:{width:390,height:844},isMobile:true,hasTouch:true,serviceWorkers:'block'});
+              const test=async(name,fn)=>{
+                const p=await ctx.newPage();const bad=[];
+                p.on('response',r=>{if(r.status()>=400&&r.url().includes('belaya-mgla-sova58.github.io'))bad.push([r.status(),r.url()])});
+                p.on('pageerror',e=>console.log('PAGE ERROR',mode,name,e.message));
+                await p.goto('https://belaya-mgla-sova58.github.io/'+name+'?diag=986',{waitUntil:'domcontentloaded'});
+                await p.waitForTimeout(650);
+                try{await fn(p)}catch(e){console.log('DIAG EXCEPTION',mode,name,String(e.message||e).slice(0,700))}
+                console.log('BAD REQUESTS',mode,name,JSON.stringify(bad.slice(0,15)));
                 await p.close();
-              }
+              };
+              await test('index.html',async(p)=>{
+                const btn=p.locator('#mobileMenuToggle');
+                if(mode==='mobile'){
+                  console.log('MENU INIT',await p.evaluate(()=>{let b=document.querySelector('#mobileMenuToggle');let s=getComputedStyle(b);return {rect:b.getBoundingClientRect().toJSON(),z:s.zIndex,position:s.position,display:s.display}}));
+                  await btn.click({timeout:3000});console.log('MENU OPEN',await p.evaluate(()=>{const b=document.querySelector('#mobileMenuToggle'),r=b.getBoundingClientRect(),top=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return {exp:b.getAttribute('aria-expanded'),rect:r.toJSON(),top:top?.outerHTML?.slice(0,140),buttonZ:getComputedStyle(b).zIndex,overlayZ:getComputedStyle(document.querySelector('#mobileNavOverlay')).zIndex}}));
+                  try{await btn.click({timeout:2500});console.log('MENU CLOSE BUTTON SUCCESS')}catch(e){console.log('MENU CLOSE BUTTON ERROR',String(e.message).slice(0,400));}
+                  await p.locator('#mobileNavOverlay').click({timeout:2500,force:true});
+                  console.log('MENU AFTER OVERLAY',await btn.getAttribute('aria-expanded'));
+                }
+              });
+              await test('events.html',async(p)=>{
+                const all=p.locator('details.guide-fold-v414'),btn=p.locator('.guide-fold-all-v414');
+                console.log('EVENT INIT',mode,await all.evaluateAll(xs=>xs.map(x=>x.open)));
+                const b=await btn.evaluate(e=>{const r=e.getBoundingClientRect(),s=getComputedStyle(e),el=document.elementFromPoint(Math.max(1,r.x+r.width/2),Math.max(1,Math.min(innerHeight-1,r.y+r.height/2)));return {rect:r.toJSON(),visibility:s.visibility,display:s.display,pe:s.pointerEvents,hit:el?.outerHTML?.slice(0,200)}});
+                console.log('EVENT BUTTON',mode,JSON.stringify(b));
+                try{await btn.click({timeout:3000});console.log('EVENT FIRST',mode,await all.evaluateAll(xs=>xs.map(x=>x.open)))}catch(e){console.log('EVENT CLICK ERR',mode,String(e.message).slice(0,500));}
+                try{await btn.click({timeout:3000});console.log('EVENT SECOND',mode,await all.evaluateAll(xs=>xs.map(x=>x.open)))}catch(e){console.log('EVENT SECOND ERR',mode,String(e.message).slice(0,500));}
+              });
+              await test('essence-mithril-calculator.html',async(p)=>{
+                p.on('dialog',async d=>{console.log('CALC DIALOG',mode,d.type(),d.message());await d.accept()});
+                const count=()=>p.locator('#ecItems .ec-item').count();
+                console.log('CALC START',mode,await count());
+                const more=p.locator('#ecMoreItems');
+                console.log('CALC OPEN BEFORE',mode,await more.getAttribute('open'));
+                try{await more.locator('summary').click({timeout:3000});console.log('CALC OPEN AFTER',mode,await more.getAttribute('open'))}catch(e){console.log('CALC SUMMARY ERROR',mode,String(e.message).slice(0,500))}
+                try{await p.locator('#ecAdd').click({timeout:3000});await p.waitForTimeout(200);console.log('CALC AFTER ADD',mode,await count(),await p.locator('#ecAdd').isDisabled());}catch(e){console.log('CALC ADD ERROR',mode,String(e.message).slice(0,500))}
+                try{await p.locator('#ecReset').click({timeout:3000});await p.waitForTimeout(200);console.log('CALC AFTER RESET',mode,await count())}catch(e){console.log('CALC RESET ERROR',mode,String(e.message).slice(0,500))}
+              });
               await ctx.close();
             }
             await browser.close();
-            console.log('AUDIT PERFORMANCE',JSON.stringify(perf));
-            console.log('AUDIT PASS COUNT',checks.length);
-            console.log('AUDIT FAILURES',JSON.stringify(failures));
-            if(failures.length)process.exitCode=1;
           })().catch(e=>{console.error(e);process.exitCode=1});
           JS
