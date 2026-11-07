@@ -17,13 +17,13 @@
         launcher.classList.remove("pc-owl-collapsed-v966");
         toggle.classList.remove("pc-owl-reopen-v966");
         toggle.textContent="×";
-        toggle.setAttribute("aria-label","Скрыть Мадам Угу");
+        toggle.setAttribute("aria-label","× Скрыть Мадам Угу");
         return;
       }
       launcher.classList.toggle("pc-owl-collapsed-v966",collapsed);
       toggle.classList.toggle("pc-owl-reopen-v966",collapsed);
       toggle.textContent=collapsed?"🦉 Сова":"×";
-      toggle.setAttribute("aria-label",collapsed?"Показать Мадам Угу":"Свернуть Мадам Угу");
+      toggle.setAttribute("aria-label",collapsed?"Сова: показать":"× Свернуть Сову");
       toggle.title=collapsed?"Показать Сову":"Свернуть Сову";
       toggle.setAttribute("aria-expanded",String(!collapsed));
     }
