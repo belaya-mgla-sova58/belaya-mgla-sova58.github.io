@@ -1,4 +1,4 @@
-name: Verify Canyon table responsive fix v988
+name: Reverify Canyon table after successful Pages publication
 on:
   push:
     paths: ['.github/workflows/ui-audit-v988.yml']
