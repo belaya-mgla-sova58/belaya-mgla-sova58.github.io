@@ -1,0 +1,46 @@
+name: SOVA58 quick homepage Lighthouse
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sova58-home-lighthouse
+  cancel-in-progress: false
+
+jobs:
+  home-performance:
+    name: Mobile and desktop Lighthouse scores
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out site scripts
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install Lighthouse and browser
+        run: npm install --no-save --no-audit --no-fund playwright lighthouse
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Measure the published homepage
+        env:
+          SOVA_LH_PAGES: index.html
+          SOVA_LH_MODES: mobile,desktop
+        run: node tests/lighthouse-audit.cjs
+
+      - name: Save scores, diagnostic JSON and recommendations
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sova58-home-lighthouse
+          path: visual-audit-results/
+          retention-days: 14
+          if-no-files-found: warn
