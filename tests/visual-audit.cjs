@@ -15,6 +15,8 @@ fs.mkdirSync(OUT, { recursive: true });
 const FULL_PAGE_ALL = process.env.AUDIT_FULL_PAGE === 'all';
 const AXE_MODE = process.env.AUDIT_AXE || 'desktop';
 const CONCURRENCY = 3;
+const CALCULATORS = new Set(['essence-mithril-calculator.html',
+  'furnace-calculator.html','fire-furnace-calculator.html','bear-helper.html']);
 const CORE = new Set([
   'index.html', 'heroes.html', 'hero-generations.html', 'pets.html',
   'experts.html', 'events.html', 'news.html', 'calculators.html',
@@ -159,7 +161,6 @@ async function accessibilityAudit(page) {
 }
 async function safeInteractions(page, file) {
   const checks=[];
-  if (!CORE.has(file)) return checks;
   try {
     const summary=page.locator('details:not([open]) > summary:visible').first();
     if (await summary.count()) {
@@ -169,6 +170,20 @@ async function safeInteractions(page, file) {
       checks.push({test:'expandable-section',ok:opened});
     }
   } catch(e) {checks.push({test:'expandable-section',ok:false,detail:String(e.message||e).slice(0,120)});}
+  if (CALCULATORS.has(file)) {
+    try {
+      const numeric=page.locator('input[type="number"]:visible').first();
+      if (await numeric.count()) {
+        const original=await numeric.inputValue();
+        await numeric.fill('1',{timeout:3500});
+        await numeric.dispatchEvent('change');
+        checks.push({test:'calculator-input-edit',ok:(await numeric.inputValue())==='1'});
+        await numeric.fill(original);
+        await numeric.dispatchEvent('change');
+      }
+    } catch(e) {checks.push({test:'calculator-input-edit',ok:false,detail:String(e.message||e).slice(0,120)});}
+  }
+  if (!CORE.has(file)) return checks;
   if (file==='index.html' || file==='heroes.html') {
     try {
       const search=page.locator('input.site-search-input-v426:visible').first();
@@ -251,6 +266,8 @@ async function run() {
               else if(row.accessibility.violationCount) row.warnings.push('Accessibility rules: '+row.accessibility.violationCount);
             }
             row.interactions=await safeInteractions(page,file);
+            // Screenshots always start at the top, even when an accordion was tested.
+            await page.evaluate(() => window.scrollTo({top:0,behavior:'instant'})).catch(()=>{});
             if (row.interactions.some(r=>!r.ok)) row.warnings.push('UI interaction did not pass');
           } catch(e){
             row.failures.push('Browser: '+String(e.message||e).slice(0,220));
