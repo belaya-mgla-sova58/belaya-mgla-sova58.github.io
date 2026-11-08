@@ -1,0 +1,155 @@
+/* WhiteFox News · Imperial Edition v7
+   CSS-only luxury. Preserves all original publication text, IDs, scripts, comment scopes. */
+body.news-top-whitefox{
+ --imperial-gold:#b99a56;--imperial-champagne:#f5e7c4;--imperial-navy:#101e35;
+ --imperial-parchment:#fffaf0;--imperial-ink:#263247;
+}
+body.news-top-whitefox .news-shell{
+ padding:clamp(12px,2vw,27px)!important;
+ background:linear-gradient(90deg,rgba(161,127,64,.16),transparent 6%,transparent 94%,rgba(161,127,64,.16)),
+ linear-gradient(180deg,#fffaf1,#f9f2e6)!important;
+ border:1px solid #bca374!important;
+ box-shadow:inset 0 0 0 5px rgba(255,252,244,.9),inset 0 0 0 6px rgba(173,137,77,.52),0 18px 35px rgba(1,16,36,.16)!important;
+ border-radius:2px!important;
+}
+body.news-top-whitefox :is(.whitefox-story-head,.wf-new-head,.whitefox-index-title){
+ background:
+  radial-gradient(ellipse at 50% -20%,rgba(223,185,113,.19),transparent 58%),
+  linear-gradient(118deg,#09172b 0%,#223855 52%,#0b1d34 100%)!important;
+ border:3px double #d3b677!important;
+ outline:1px solid #967645!important;
+ outline-offset:5px!important;
+ box-shadow:inset 0 0 0 5px #162941,inset 0 0 0 6px rgba(223,194,137,.47),0 12px 25px rgba(9,25,46,.28)!important;
+ padding:44px clamp(18px,4vw,45px) 48px!important;
+ position:relative!important;
+}
+body.news-top-whitefox :is(.whitefox-story-head,.wf-new-head,.whitefox-index-title)::before{
+ content:"❧  ♛  ❧"!important;
+ position:absolute!important;top:12px!important;right:20px!important;
+ font:29px/1 Georgia,serif!important;letter-spacing:6px!important;
+ color:#e0c58d!important;opacity:.86!important;text-shadow:0 1px 7px rgba(253,222,164,.28)!important;
+ background:none!important;height:auto!important;width:auto!important;
+}
+body.news-top-whitefox :is(.whitefox-story-head,.wf-new-head,.whitefox-index-title)::after{
+ content:""!important;bottom:15px!important;height:5px!important;
+ background:linear-gradient(to bottom,#c3a66a 0,#c3a66a 1px,transparent 1px,transparent 4px,#c3a66a 4px)!important;
+ opacity:.92!important;
+}
+body.news-top-whitefox :is(.whitefox-story-head,.wf-new-head,.whitefox-index-title) :is(h1,h2,h3){
+ color:#fff5de!important;-webkit-text-fill-color:#fff5de!important;
+ font-size:clamp(32px,4.2vw,55px)!important;
+ letter-spacing:.045em!important;
+ text-shadow:0 2px 10px rgba(0,0,0,.2)!important;
+}
+body.news-top-whitefox :is(.whitefox-story-head,.wf-new-head,.whitefox-index-title) :is(p,.whitefox-author,.whitefox-week,.wf-new-meta){
+ color:#f1e4ca!important;-webkit-text-fill-color:#f1e4ca!important;
+}
+body.news-top-whitefox :is(.whitefox-story-head,.wf-new-head) :is(.whitefox-kicker,.wf-new-kicker){
+ background:rgba(15,29,49,.7)!important;
+ border:1px solid #c3a977!important;
+ color:#f0d99f!important;-webkit-text-fill-color:#f0d99f!important;
+ border-radius:2px!important;
+}
+body.news-top-whitefox :is(.wf-new-story,.whitefox-story-block,.whitefox-mini-card){
+ border:1px solid #c9b58f!important;
+ border-top:4px double #ab8746!important;
+ background:
+   radial-gradient(circle at 100% 0,rgba(217,189,132,.10),transparent 35%),
+   linear-gradient(160deg,#fffdf8 0%,#faf5e9 100%)!important;
+ box-shadow:inset 0 0 0 3px rgba(255,255,255,.72),0 7px 14px rgba(56,44,26,.065)!important;
+ border-radius:1px!important;
+}
+body.news-top-whitefox :is(.wf-new-story,.whitefox-story-block)::after{
+ content:"❧"!important;color:#b59760!important;font-size:27px!important;
+ opacity:.61!important;top:12px!important;right:16px!important;
+}
+body.news-top-whitefox .wf-new-story>h3,
+body.news-top-whitefox .whitefox-section-title{
+ border-bottom:4px double #bba278!important;
+}
+body.news-top-whitefox :is(.wf-new-story,.whitefox-story-block) :is(h2,h3,h4){
+ color:#293b53!important;-webkit-text-fill-color:#293b53!important;
+}
+body.news-top-whitefox .wf-new-story>h3::before{
+ background:#f4e8cb!important;border:1px solid #b39866!important;
+ color:#665233!important;
+ box-shadow:inset 0 0 0 2px #fff9e8!important;
+}
+body.news-top-whitefox :is(.wf-new-story,.whitefox-story-block) :is(p,li,strong,em){
+ color:#354257!important;-webkit-text-fill-color:#354257!important;
+ opacity:1!important;text-shadow:none!important
+}
+body.news-top-whitefox .wf-new-nav{
+ background:linear-gradient(135deg,#eee3cf,#faf4e8)!important;
+ border:1px solid #c6ad80!important;
+ box-shadow:inset 0 0 0 3px rgba(255,255,255,.55)!important;
+}
+body.news-top-whitefox :is(.wf-new-nav a,.whitefox-week42-jump-v558 a){
+ background:#fffcf5!important;border:1px solid #bda278!important;
+ color:#3d516b!important;-webkit-text-fill-color:#3d516b!important;
+ border-radius:2px!important;font-weight:800!important;
+}
+body.news-top-whitefox :is(.wf-new-nav a,.whitefox-week42-jump-v558 a):hover{
+ background:#f7ead2!important;
+}
+body.news-top-whitefox .wf-new-sidepanel{
+ border:2px double #bda577!important;
+ background:linear-gradient(155deg,#fdf9ef,#f3e7d3)!important;
+ box-shadow:inset 0 0 0 3px rgba(255,255,255,.75),0 5px 12px rgba(39,34,26,.09)!important;
+}
+body.news-top-whitefox .wf-new-sidepanel h3{
+ color:#263c55!important;-webkit-text-fill-color:#263c55!important;
+ border-bottom:3px double #baa271!important;
+}
+body.news-top-whitefox .wf-new-sidepanel a{
+ background:#fffdf7!important;border-color:#cfb98e!important;
+}
+body.news-top-whitefox :is(.wf-new-questions,.whitefox-story-block.whitefox-questions-v557){
+ background:linear-gradient(145deg,#fcfcf8,#eef0ef)!important;
+ border-color:#b9c8cd!important;
+}
+body.news-top-whitefox :is(.wf-new-romance,.whitefox-story-block.whitefox-romance-v557){
+ background:linear-gradient(145deg,#fff9f3,#f7e7e7)!important;
+ border-color:#d6b7b2!important;
+}
+body.news-top-whitefox .anon-comments-v557{
+ border:2px double #c3ab7d!important;
+ border-radius:2px!important;
+ background:#fcf8ef!important;
+ box-shadow:inset 0 0 0 3px #fffdfa!important;
+}
+body.news-top-whitefox .anon-comments-v557 :is(h4,.anon-comment-text-v557,.anon-comment-meta-v557,.anon-comments-hint-v557,.anon-comments-empty-v557){
+ color:#31455b!important;-webkit-text-fill-color:#31455b!important;
+ opacity:1!important;visibility:visible!important;
+}
+body.news-top-whitefox .anon-comments-v557 textarea{
+ background:#fffefa!important;border:1px solid #bbaa8a!important;
+ color:#253b54!important;-webkit-text-fill-color:#253b54!important;
+}
+body.news-top-whitefox .whitefox-index .whitefox-publication-row{
+ border:2px double #b8a16f!important;border-radius:2px!important;
+ background:linear-gradient(145deg,#fffdf6,#f2e8d6)!important;
+ box-shadow:inset 0 0 0 3px rgba(255,255,255,.8),0 8px 15px rgba(35,33,29,.07)!important;
+}
+body.news-top-whitefox .whitefox-index .whitefox-elena-card-title{
+ color:#253850!important;-webkit-text-fill-color:#253850!important;
+}
+body.news-top-whitefox .whitefox-index .whitefox-elena-card-week{
+ color:#84643f!important;-webkit-text-fill-color:#84643f!important;
+}
+@media(max-width:680px){
+ body.news-top-whitefox .news-shell{
+  padding:10px!important;
+  box-shadow:inset 0 0 0 3px #fffaf0,inset 0 0 0 4px #bda06c!important;
+ }
+ body.news-top-whitefox :is(.whitefox-story-head,.wf-new-head,.whitefox-index-title){
+  padding:36px 15px 30px!important;outline-offset:3px!important;
+ }
+ body.news-top-whitefox :is(.whitefox-story-head,.wf-new-head,.whitefox-index-title)::before{
+  top:10px!important;right:10px!important;font-size:18px!important;letter-spacing:2px!important;
+ }
+ body.news-top-whitefox :is(.whitefox-story-head,.wf-new-head,.whitefox-index-title) :is(h1,h2,h3){
+  font-size:clamp(27px,7vw,36px)!important;
+ }
+ body.news-top-whitefox :is(.wf-new-story,.whitefox-story-block){padding:20px 14px!important}
+}
