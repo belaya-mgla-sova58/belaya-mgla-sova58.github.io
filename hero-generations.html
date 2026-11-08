@@ -254,6 +254,73 @@ body.is-heroes-route .hero-gens-page .gen-acc.epic-line .gen-title span{
  }
 }
 </style>
+
+<style id="hero-special-image-banners-v2">
+/* Uploaded branded banners include their own headings.
+   Avoid duplicate on-screen text while keeping semantic headings for screen readers. */
+body.is-heroes-route .hero-gens-page .gen-acc.rare-line > summary,
+body.is-heroes-route .hero-gens-page .gen-acc.epic-line > summary{
+  min-height:clamp(122px,12vw,182px)!important;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+  background-position:center center!important;
+  position:relative!important;
+}
+body.is-heroes-route .hero-gens-page .gen-acc.rare-line > summary,
+body.is-heroes-route .hero-gens-page .gen-acc.rare-line[open] > summary{
+  background-image:url("assets/hero-rare-header.webp")!important;
+}
+body.is-heroes-route .hero-gens-page .gen-acc.epic-line > summary,
+body.is-heroes-route .hero-gens-page .gen-acc.epic-line[open] > summary{
+  background-image:url("assets/hero-epic-header.webp")!important;
+}
+body.is-heroes-route .hero-gens-page .gen-acc.rare-line .gen-title strong,
+body.is-heroes-route .hero-gens-page .gen-acc.epic-line .gen-title strong{
+  position:absolute!important;
+  width:1px!important;height:1px!important;
+  padding:0!important;margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
+body.is-heroes-route .hero-gens-page .gen-acc.rare-line > summary .gen-title,
+body.is-heroes-route .hero-gens-page .gen-acc.epic-line > summary .gen-title{
+  position:static!important;
+}
+body.is-heroes-route .hero-gens-page .gen-acc.rare-line .gen-title span,
+body.is-heroes-route .hero-gens-page .gen-acc.epic-line .gen-title span{
+  position:absolute!important;
+  z-index:4!important;
+  left:16px!important;
+  bottom:10px!important;
+}
+body.is-heroes-route .hero-gens-page .gen-acc.rare-line .gen-chevron,
+body.is-heroes-route .hero-gens-page .gen-acc.epic-line .gen-chevron{
+  position:relative!important;
+  z-index:4!important;
+  margin-left:auto!important;
+}
+body.is-heroes-route .hero-gens-page .gen-acc.rare-line > summary::after,
+body.is-heroes-route .hero-gens-page .gen-acc.epic-line > summary::after{
+  content:none!important;
+}
+@media(max-width:720px){
+ body.is-heroes-route .hero-gens-page .gen-acc.rare-line > summary,
+ body.is-heroes-route .hero-gens-page .gen-acc.epic-line > summary{
+   min-height:108px!important;
+ }
+ body.is-heroes-route .hero-gens-page .gen-acc.rare-line .gen-title span,
+ body.is-heroes-route .hero-gens-page .gen-acc.epic-line .gen-title span{
+   display:inline-flex!important;
+   font-size:10px!important;
+   padding:3px 7px!important;
+   min-height:22px!important;
+   left:9px!important;
+   bottom:6px!important;
+ }
+}
+</style>
 </head><body class="is-heroes-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="heroes">
 <div aria-hidden="true" class="site-cosmic-background-v442"></div>
 <div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar"><button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button><div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div><a aria-label="На главную" href="index.html">⌂</a></div>
