@@ -48,7 +48,7 @@
   }
   function schedule(){if(!queued){queued=true;queueMicrotask(cleanup)}}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',schedule,{once:true});else schedule();
-  new MutationObserver(schedule).observe(document.documentElement,{childList:true,subtree:true});
+  setTimeout(schedule,800);
   var views=document.getElementById('ruHalloweenViewsV769');
   if(views)fetch('https://abacus.jasoncameron.dev/get/belaya-mgla-sova58/ru-halloween-2026',{cache:'no-store',mode:'cors'}).then(function(r){if(!r.ok)throw Error('views');return r.json()}).then(function(data){var count=Number(data&&data.value);views.textContent=Number.isFinite(count)?count.toLocaleString('ru-RU'):'—'}).catch(function(){views.textContent='—'});
 })();
