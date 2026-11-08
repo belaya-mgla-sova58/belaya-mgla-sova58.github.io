@@ -1,0 +1,88 @@
+/* PETS: winter cosmic generation headers v2, scoped to catalog generation bars.
+   Portraits, generation ordering, disclosure logic and pet card contents unchanged. */
+body.is-pets-route .pets-redesign .pet-stage{
+ border:1px solid color-mix(in srgb,var(--pet-accent) 56%,#95a9d4)!important;
+ border-radius:18px!important;
+ background:#0b1b32!important;
+ box-shadow:0 9px 27px rgba(0,10,35,.24),inset 0 1px 0 rgba(206,231,255,.07)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary,
+body.is-pets-route .pets-redesign .pet-stage[open]>summary,
+body.is-pets-route .pets-redesign .pet-stage>summary:hover,
+body.is-pets-route .pets-redesign .pet-stage>summary:focus-visible{
+ position:relative!important;isolation:isolate;overflow:hidden!important;
+ background:
+ radial-gradient(ellipse at 78% 20%,color-mix(in srgb,var(--pet-accent) 27%,transparent),transparent 42%),
+ radial-gradient(ellipse at 13% 100%,rgba(94,102,221,.24),transparent 55%),
+ linear-gradient(110deg,#0d2342 0%,#1b2950 52%,#0e233e 100%)!important;
+ color:#eef8ff!important;
+ border-bottom:1px solid rgba(158,206,251,.14)!important;
+ min-height:128px!important;
+ box-shadow:inset 0 1px 0 rgba(215,240,255,.13)!important;
+ transition:filter .16s,border-color .16s!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary:before{
+ content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;
+ background:
+ radial-gradient(circle at 66% 18%,rgba(234,249,255,.59) 0 1px,transparent 2px),
+ radial-gradient(circle at 88% 79%,rgba(202,215,255,.46) 0 1px,transparent 2px),
+ radial-gradient(circle at 30% 67%,rgba(184,226,255,.38) 0 1px,transparent 2px),
+ linear-gradient(95deg,transparent 0%,rgba(167,185,247,.05) 55%,transparent 100%);
+ opacity:.83;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary:after{
+ content:"";position:absolute;bottom:0;left:18px;right:18px;height:2px;pointer-events:none;
+ background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--pet-accent) 66%,#c1d9ff),transparent);
+ opacity:.68;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary:hover{
+ filter:brightness(1.08)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage-title strong{
+ color:#f6f9ff!important;-webkit-text-fill-color:#f6f9ff!important;
+ font-size:clamp(23px,2.8vw,33px)!important;
+ letter-spacing:.01em!important;text-shadow:0 2px 12px rgba(0,15,44,.45);
+}
+body.is-pets-route .pets-redesign .pet-stage-title small{
+ color:color-mix(in srgb,var(--pet-accent) 78%,white)!important;
+ -webkit-text-fill-color:color-mix(in srgb,var(--pet-accent) 78%,white)!important;
+ font-size:11px!important;letter-spacing:.15em!important;
+}
+body.is-pets-route .pets-redesign .pet-stage-title em{
+ color:#c9d9f4!important;-webkit-text-fill-color:#c9d9f4!important;
+ font-size:12px!important;line-height:1.5!important;
+}
+body.is-pets-route .pets-redesign .pet-stage-photo{
+ border:1px solid color-mix(in srgb,var(--pet-accent) 75%,white)!important;
+ border-radius:14px!important;
+ box-shadow:0 0 0 3px rgba(186,207,255,.09),0 7px 18px rgba(1,10,31,.3)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage-chevron{
+ border-color:rgba(170,202,252,.4)!important;background:rgba(30,55,101,.44)!important;
+ color:#e9f8ff!important;-webkit-text-fill-color:#e9f8ff!important;
+}
+body.is-pets-route .pets-redesign .pet-stage[open]>summary{
+ border-bottom-color:color-mix(in srgb,var(--pet-accent) 45%,transparent)!important;
+}
+@media(max-width:700px){
+ body.is-pets-route .pets-redesign .pet-stage>summary,
+ body.is-pets-route .pets-redesign .pet-stage[open]>summary{
+  min-height:104px!important;padding:14px 40px 14px 14px!important;
+ }
+ body.is-pets-route .pets-redesign .pet-stage-title{max-width:62%!important}
+ body.is-pets-route .pets-redesign .pet-stage-title strong{font-size:clamp(19px,5vw,26px)!important}
+ body.is-pets-route .pets-redesign .pet-stage-title small{font-size:9px!important}
+ body.is-pets-route .pets-redesign .pet-stage-title em{font-size:10px!important}
+ body.is-pets-route .pets-redesign .pet-stage-faces{right:40px!important;gap:3px!important}
+ body.is-pets-route .pets-redesign .pet-stage-photo{width:48px!important;height:48px!important;border-radius:10px!important}
+ body.is-pets-route .pets-redesign .pet-stage-chevron{right:8px!important;width:25px!important;height:25px!important}
+}
+@media(max-width:420px){
+ body.is-pets-route .pets-redesign .pet-stage-title{max-width:65%!important}
+ body.is-pets-route .pets-redesign .pet-stage-photo{width:37px!important;height:37px!important}
+ body.is-pets-route .pets-redesign .pet-stage-title strong{font-size:19px!important}
+ body.is-pets-route .pets-redesign .pet-stage-faces{right:36px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ body.is-pets-route .pets-redesign .pet-stage>summary{transition:none!important}
+}
