@@ -29,6 +29,8 @@ function ensureHomeHero(){
 }
 
 function loadTouchFeathers(){
+  // The feather burst creates 10 fixed animated nodes per touch. Keep it on desktop only.
+  if(window.matchMedia && window.matchMedia('(max-width: 980px), (hover: none), (pointer: coarse)').matches)return;
   if(document.querySelector('script[data-touch-feathers-v659]'))return;
   var s=document.createElement('script');
   s.src='touch-feathers-v659.js?v=659';
