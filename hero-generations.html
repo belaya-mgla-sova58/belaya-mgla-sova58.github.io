@@ -97,6 +97,56 @@ body.is-heroes-route .gen-acc.gen-night-17{--night-gen-image:url("assets/hero-ge
   }
 }
 </style>
+
+<style id="hero-epic-one-row-desktop-v1">
+/* Compact nine-portrait strip for epic heroes on desktop only.
+   Preserve the existing responsive layout for phones and tablets. */
+@media (min-width:1100px) and (hover:hover) and (pointer:fine){
+  body.is-heroes-route .hero-gens-page .gen-acc.epic-line .gen-panel{
+    padding:12px 14px!important;
+  }
+  body.is-heroes-route .hero-gens-page .gen-acc.epic-line .gen-grid.epic-grid{
+    display:grid!important;
+    grid-template-columns:repeat(9,minmax(0,1fr))!important;
+    gap:8px!important;
+    width:100%;
+    max-width:none!important;
+    align-items:start!important;
+    justify-content:stretch!important;
+  }
+  body.is-heroes-route .hero-gens-page .gen-acc.epic-line .gen-grid.epic-grid > .hero-mini{
+    width:100%!important;
+    min-width:0!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:2px!important;
+    border-width:2px!important;
+    border-radius:12px!important;
+  }
+  body.is-heroes-route .hero-gens-page .gen-acc.epic-line .gen-grid.epic-grid > .hero-mini::before{
+    border-radius:8px!important;
+    aspect-ratio:3/4!important;
+  }
+  body.is-heroes-route .hero-gens-page .gen-acc.epic-line .epic-grid .hero-mini-caption{
+    margin-top:2px;
+    padding:5px 2px 6px!important;
+    border-radius:7px!important;
+    text-align:center;
+  }
+  body.is-heroes-route .hero-gens-page .gen-acc.epic-line .epic-grid .hero-mini-caption strong{
+    font-size:clamp(10px,.85vw,13px)!important;
+    line-height:1.2;
+    overflow-wrap:anywhere;
+  }
+  body.is-heroes-route .hero-gens-page .gen-acc.epic-line .epic-grid .hero-mini-caption span{
+    font-size:clamp(8px,.68vw,10px)!important;
+    line-height:1.25;
+  }
+  body.is-heroes-route .hero-gens-page .gen-acc.epic-line .epic-grid .hero-mini::after{
+    top:-7px;font-size:12px;
+  }
+}
+</style>
 </head><body class="is-heroes-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="heroes">
 <div aria-hidden="true" class="site-cosmic-background-v442"></div>
 <div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar"><button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button><div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div><a aria-label="На главную" href="index.html">⌂</a></div>
