@@ -1,0 +1,134 @@
+/* Белая мгла · First cohesive editorial home treatment (v1005).
+   Actual site content and artwork retained. Scoped to the home route;
+   intentionally no navigation/JS/PWA changes. */
+body.is-home-route{
+  --bm-line:rgba(135,194,245,.25);
+  --bm-panel:linear-gradient(150deg,rgba(13,34,70,.95),rgba(6,20,46,.97));
+  --bm-soft-shadow:0 12px 32px rgba(0,7,30,.21);
+}
+body.is-home-route .modern-home-v424{
+  --bm-content-gap:clamp(14px,1.6vw,23px);
+}
+body.is-home-route .home-main-title-v571{
+  letter-spacing:.035em;
+  text-wrap:balance;
+}
+body.is-home-route .independent-brand-v624{
+  line-height:1.55;
+  text-wrap:pretty;
+}
+body.is-home-route .modern-home-hero-v424{
+  border-radius:clamp(14px,1.7vw,23px)!important;
+  box-shadow:0 18px 44px rgba(0,8,32,.32)!important;
+}
+body.is-home-route .modern-home-hero-v424 img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+body.is-home-route .modern-panel-v424{
+  background:var(--bm-panel)!important;
+  border:1px solid var(--bm-line)!important;
+  border-radius:20px!important;
+  box-shadow:var(--bm-soft-shadow)!important;
+  min-width:0;
+}
+body.is-home-route .modern-panel-head-v424{
+  min-width:0;
+  gap:12px;
+}
+body.is-home-route .modern-panel-head-v424 h2{
+  font-size:clamp(18px,1.7vw,24px);
+  line-height:1.25;
+  letter-spacing:.005em;
+  text-wrap:balance;
+}
+body.is-home-route .modern-panel-head-v424 a{
+  white-space:normal;
+  text-align:right;
+  font-weight:700;
+}
+body.is-home-route .modern-home-strip-v424,
+body.is-home-route .modern-card-grid-v424,
+body.is-home-route .modern-home-columns-v424{
+  gap:var(--bm-content-gap)!important;
+  min-width:0;
+}
+body.is-home-route .modern-home-strip-v424>a,
+body.is-home-route .modern-topic-card-v424,
+body.is-home-route .modern-list-v424>a,
+body.is-home-route .pc-shortcuts-v966>a{
+  box-sizing:border-box;
+  min-width:0;
+  border:1px solid rgba(137,202,255,.24)!important;
+  background:linear-gradient(155deg,rgba(26,62,105,.70),rgba(9,31,67,.87))!important;
+  border-radius:15px!important;
+}
+body.is-home-route .modern-home-strip-v424>a,
+body.is-home-route .modern-topic-card-v424,
+body.is-home-route .pc-shortcuts-v966>a{
+  transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease;
+}
+body.is-home-route .modern-home-strip-v424>a:hover,
+body.is-home-route .modern-topic-card-v424:hover,
+body.is-home-route .pc-shortcuts-v966>a:hover{
+  border-color:rgba(130,224,255,.67)!important;
+  box-shadow:0 8px 25px rgba(30,117,200,.18)!important;
+  transform:translateY(-2px);
+}
+body.is-home-route .modern-home-strip-v424 b,
+body.is-home-route .modern-topic-card-v424 b,
+body.is-home-route .modern-list-v424 b{
+  line-height:1.38;
+  overflow-wrap:break-word;
+}
+body.is-home-route .modern-home-strip-v424 small,
+body.is-home-route .modern-topic-card-v424 small,
+body.is-home-route .modern-list-v424 small,
+body.is-home-route .pc-shortcut-copy-v966 small{
+  line-height:1.5;
+  overflow-wrap:break-word;
+}
+body.is-home-route .home-news-card-v442{
+  border-radius:17px!important;
+  overflow:hidden;
+  border:1px solid rgba(125,199,251,.28)!important;
+}
+body.is-home-route .home-news-banner-copy-v449 b{
+  line-height:1.3;
+  text-wrap:balance;
+}
+body.is-home-route .home-news-banner-copy-v449 small{
+  line-height:1.45;
+}
+body.is-home-route .home-bear-calc-v780{
+  border-radius:20px!important;
+  border-color:rgba(125,204,249,.32)!important;
+  box-shadow:var(--bm-soft-shadow)!important;
+}
+body.is-home-route .home-bear-calc-v780 h2{
+  text-wrap:balance;
+}
+body.is-home-route .home-bear-calc-v780 p{
+  line-height:1.65;
+}
+body.is-home-route .modern-home-footer-v424{
+  opacity:.88;
+  line-height:1.7;
+  text-align:center;
+}
+@media(max-width:800px){
+  body.is-home-route .modern-panel-v424{border-radius:16px!important}
+  body.is-home-route .modern-home-v424{--bm-content-gap:12px}
+  body.is-home-route .modern-home-strip-v424>a,
+  body.is-home-route .modern-topic-card-v424,
+  body.is-home-route .modern-list-v424>a{border-radius:13px!important}
+  body.is-home-route .modern-panel-head-v424 h2{font-size:18px}
+  body.is-home-route .modern-home-strip-v424>a:hover,
+  body.is-home-route .modern-topic-card-v424:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  body.is-home-route .modern-home-strip-v424>a,
+  body.is-home-route .modern-topic-card-v424,
+  body.is-home-route .pc-shortcuts-v966>a{transition:none;transform:none!important}
+}
