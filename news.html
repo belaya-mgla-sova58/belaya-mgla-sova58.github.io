@@ -150,6 +150,70 @@ body.is-news-route .tv-feature-58__like:focus-visible{outline:3px solid #ffe5af;
  body.is-news-route .news-shell .tv-feature-58__views,
  body.is-news-route .news-shell .tv-feature-58__like{font-size:10px!important;padding:6px 5px!important}
 }
+</style><style id="tv-mic-onair-v1">
+/* Animated live microphone, confined to the 58TV headline card. No script. */
+body.is-news-route .tv-feature-58 .tv-mic-live-wrap{
+  position:relative;display:grid;place-items:center;isolation:isolate;
+  flex:0 0 105px;width:105px;height:112px;pointer-events:none;
+}
+body.is-news-route .tv-feature-58 .tv-mic-live-wrap::before,
+body.is-news-route .tv-feature-58 .tv-mic-live-wrap::after{
+  content:"";position:absolute;left:50%;top:47%;width:68px;height:68px;
+  border:2px solid rgba(255,222,164,.75);border-radius:50%;
+  transform:translate(-50%,-50%) scale(.66);opacity:0;z-index:0;
+  animation:tv-mic-signal-v1 2.4s ease-out infinite;
+  pointer-events:none;
+}
+body.is-news-route .tv-feature-58 .tv-mic-live-wrap::after{
+  animation-delay:1.2s;border-color:rgba(250,136,159,.7);
+}
+body.is-news-route .tv-feature-58 .tv-feature-58__mic{
+  position:relative;z-index:1;transform-origin:50% 80%;
+  animation:tv-mic-awake-v1 2.4s ease-in-out infinite;
+  filter:drop-shadow(0 0 9px rgba(255,193,129,.40));
+}
+body.is-news-route .tv-feature-58 .tv-mic-live-rec{
+  position:absolute;right:12px;top:11px;width:9px;height:9px;
+  border-radius:50%;z-index:3;background:#ff5e73;
+  box-shadow:0 0 0 3px rgba(255,94,115,.16),0 0 12px rgba(255,94,115,.75);
+  animation:tv-mic-rec-v1 1.2s ease-in-out infinite;
+}
+@keyframes tv-mic-awake-v1{
+  0%,100%{transform:rotate(-1deg) scale(1)}
+  50%{transform:rotate(1deg) scale(1.05)}
+}
+@keyframes tv-mic-signal-v1{
+  0%{opacity:.82;transform:translate(-50%,-50%) scale(.66)}
+  80%,100%{opacity:0;transform:translate(-50%,-50%) scale(1.8)}
+}
+@keyframes tv-mic-rec-v1{0%,100%{opacity:1}50%{opacity:.33}}
+@media(max-width:760px){
+  body.is-news-route .news-shell .tv-feature-58__stage{
+    opacity:.50!important;right:-7px!important;bottom:17px!important;
+    width:125px!important;height:128px!important;
+  }
+  body.is-news-route .news-shell .tv-mic-live-wrap{
+    width:74px!important;height:79px!important;flex-basis:74px!important;
+  }
+  body.is-news-route .news-shell .tv-feature-58__mic{
+    width:52px!important;height:65px!important;
+  }
+  body.is-news-route .news-shell .tv-mic-live-wrap::before,
+  body.is-news-route .news-shell .tv-mic-live-wrap::after{
+    width:48px!important;height:48px!important;
+  }
+  body.is-news-route .news-shell .tv-mic-live-rec{
+    right:5px!important;top:5px!important;width:8px!important;height:8px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  body.is-news-route .tv-feature-58 .tv-mic-live-wrap::before,
+  body.is-news-route .tv-feature-58 .tv-mic-live-wrap::after,
+  body.is-news-route .tv-feature-58 .tv-feature-58__mic,
+  body.is-news-route .tv-feature-58 .tv-mic-live-rec{animation:none!important}
+  body.is-news-route .tv-feature-58 .tv-mic-live-wrap::before,
+  body.is-news-route .tv-feature-58 .tv-mic-live-wrap::after{opacity:0!important}
+}
 </style></head><body class="is-news-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="news"><div aria-hidden="true" class="site-cosmic-background-v442"></div><div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
 <button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
 <div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Новости</small></div>
@@ -171,11 +235,11 @@ body.is-news-route .tv-feature-58__like:focus-visible{outline:3px solid #ffe5af;
       <span class="tv-feature-58__more">Читать спецвыпуск <span aria-hidden="true">↗</span></span>
     </span>
     <span class="tv-feature-58__stage" aria-hidden="true">
-      <svg class="tv-feature-58__mic" viewBox="0 0 140 170" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+      <span class="tv-mic-live-wrap" aria-hidden="true"><svg class="tv-feature-58__mic" viewBox="0 0 140 170" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
         <rect x="48" y="17" width="44" height="80" rx="22" fill="#eac68b" fill-opacity=".11" stroke="#ffe3ab" stroke-width="3"/>
         <path d="M36 70v8c0 20 15 36 34 36s34-16 34-36v-8M70 115v30M47 145h46" stroke="#ffe3ab" stroke-width="3.6" stroke-linecap="round"/>
         <path d="M49 46h16M75 46h16M49 61h16M75 61h16M49 76h16M75 76h16" stroke="#e7c1b6" stroke-width="2" stroke-linecap="round" opacity=".65"/>
-      </svg>
+      </svg><i class="tv-mic-live-rec"></i></span>
       <span class="tv-feature-58__stage-word">58 <small>ТВ</small></span>
     </span>
   </a>
