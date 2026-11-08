@@ -24,6 +24,26 @@ body.is-home-route .modern-home-hero-v424.home-stamped-hero-v441 .home-stamped-i
     contain-intrinsic-size:none!important;
   }
 }
+</style><style id="home-cosmos-replacement-v1000">
+/* Новый ночной космос только для главной. Старый файл временно служит запасным фоном. */
+body.is-home-route.cosmic-visible-v444{
+  background-color:#030919!important;
+  background-image:
+    linear-gradient(180deg,rgba(2,6,21,.16),rgba(2,6,21,.37)),
+    url("assets/belaya-mgla-cosmos-background.avif"),
+    url("assets/cosmic-nebula-visible-v444.webp")!important;
+  background-position:center top,center top,center top!important;
+  background-size:auto,cover,cover!important;
+  background-repeat:no-repeat,repeat-y,repeat-y!important;
+  background-attachment:scroll,fixed,fixed!important;
+}
+@media(max-width:900px),(hover:none) and (pointer:coarse){
+  body.is-home-route.cosmic-visible-v444{
+    background-size:auto,auto 100vh,auto 100vh!important;
+    background-repeat:no-repeat,repeat-y,repeat-y!important;
+    background-attachment:scroll,scroll,scroll!important;
+  }
+}
 </style></head><body class="is-home-route home-hq-v405 home-hq-v406 home-site-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="home"><div aria-hidden="true" class="site-cosmic-background-v442"></div>
 <div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
 <button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
