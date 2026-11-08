@@ -158,3 +158,101 @@ body.news-top-whitefox .wf-new-back{color:#bfdafa!important;-webkit-text-fill-co
  body.news-top-whitefox .wf-new-story>h3{font-size:19px!important}
  body.news-top-whitefox .whitefox-story-head:before,body.news-top-whitefox .wf-new-head:before{font-size:15px;letter-spacing:4px}
 }
+
+/* WhiteFox calmer magazine palette v4: quieter paper, less decoration */
+body.news-top-whitefox .whitefox-story-head,
+body.news-top-whitefox .wf-new-head,
+body.news-top-whitefox .whitefox-index-title{
+ background:linear-gradient(135deg,#f2f1ef,#edf1f5)!important;
+ border-color:#bfcbd6!important;
+ box-shadow:0 4px 13px rgba(8,24,47,.07)!important
+}
+body.news-top-whitefox .whitefox-story-head:before,
+body.news-top-whitefox .wf-new-head:before,
+body.news-top-whitefox .whitefox-index-title:before{
+ content:"✧";color:#9eacbc!important;letter-spacing:0!important;
+ font-size:20px!important;opacity:.45!important
+}
+body.news-top-whitefox .whitefox-story-head:after,
+body.news-top-whitefox .wf-new-head:after,
+body.news-top-whitefox .whitefox-index-title:after{
+ height:1px!important;background:#b4c1ce!important;opacity:.75!important
+}
+body.news-top-whitefox .whitefox-story-head .whitefox-kicker,
+body.news-top-whitefox .wf-new-head .wf-new-kicker{
+ background:#445873!important;border-radius:6px!important
+}
+body.news-top-whitefox .whitefox-story-head h2,
+body.news-top-whitefox .wf-new-head h2,
+body.news-top-whitefox .whitefox-index-title h2{
+ color:#2b3d52!important;-webkit-text-fill-color:#2b3d52!important
+}
+body.news-top-whitefox .whitefox-story-block,
+body.news-top-whitefox .wf-new-story,
+body.news-top-whitefox .whitefox-mini-card{
+ background:#f5f6f7!important;
+ border-color:#cdd4dc!important;
+ box-shadow:0 3px 11px rgba(12,30,57,.045)!important
+}
+body.news-top-whitefox .whitefox-story-block:before,
+body.news-top-whitefox .wf-new-story:before{
+ background:#aebcca!important;width:2px!important
+}
+body.news-top-whitefox .whitefox-story-block:after,
+body.news-top-whitefox .wf-new-story:after{content:none!important}
+body.news-top-whitefox .whitefox-story-block .whitefox-section-title,
+body.news-top-whitefox .wf-new-story>h3{border-color:#d6dce3!important}
+body.news-top-whitefox .wf-new-story>h3:before{
+ background:#edf0f3!important;border-color:#c8d1da!important;color:#52647a!important
+}
+body.news-top-whitefox .whitefox-story-block p,
+body.news-top-whitefox .whitefox-story-block li,
+body.news-top-whitefox .wf-new-story p,
+body.news-top-whitefox .wf-new-story li{
+ color:#3d4e63!important;-webkit-text-fill-color:#3d4e63!important
+}
+body.news-top-whitefox .wf-new-nav{
+ background:#e9edf2!important;border-color:#cbd5df!important
+}
+body.news-top-whitefox .wf-new-nav a,
+body.news-top-whitefox .whitefox-week42-jump-v558 a{
+ background:#f7f8fa!important;border-color:#cbd4de!important;
+ color:#3e566f!important;-webkit-text-fill-color:#3e566f!important
+}
+body.news-top-whitefox .wf-new-questions,
+body.news-top-whitefox .whitefox-story-block.whitefox-questions-v557{
+ background:#edf2f5!important;border-color:#c7d6e0!important
+}
+body.news-top-whitefox .wf-new-romance,
+body.news-top-whitefox .whitefox-story-block.whitefox-romance-v557{
+ background:#f5eef1!important;border-color:#dfced5!important
+}
+body.news-top-whitefox .wf-new-romance>h3,
+body.news-top-whitefox .whitefox-romance-v557 .whitefox-section-title h3{
+ color:#80566a!important;-webkit-text-fill-color:#80566a!important
+}
+body.news-top-whitefox .wf-new-sidepanel{
+ background:#eff1f4!important;border-color:#cbd3dc!important;
+ box-shadow:0 3px 12px rgba(12,30,57,.045)!important
+}
+body.news-top-whitefox .wf-new-sidepanel a{
+ background:#f7f8f9!important;border-color:#d4dbe2!important;color:#3c5570!important
+}
+body.news-top-whitefox .whitefox-index .whitefox-publication-row{
+ background:#f2f4f6!important;border-color:#cbd4de!important;
+ box-shadow:0 3px 12px rgba(12,30,57,.05)!important
+}
+body.news-top-whitefox .whitefox-index .whitefox-publication-row:before{content:none!important}
+body.news-top-whitefox .whitefox-index .whitefox-publication-row:hover{
+ transform:none!important;border-color:#aabccf!important;
+ box-shadow:0 5px 13px rgba(12,30,57,.07)!important
+}
+body.news-top-whitefox .whitefox-index .whitefox-elena-card-leaf{opacity:.14!important}
+body.news-top-whitefox .anon-comments-v557{
+ background:#f3f4f6!important;border-color:#ccd5df!important;
+ box-shadow:none!important
+}
+body.news-top-whitefox .anon-comments-form-v557 textarea,
+body.news-top-whitefox .anon-comment-v557{
+ background:#fafbfc!important;border-color:#d2d9e0!important
+}
