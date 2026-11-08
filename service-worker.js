@@ -1,8 +1,8 @@
-const CACHE_NAME = 'belaya-mgla-v999';
+const CACHE_NAME = 'belaya-mgla-v1004';
 const STATIC_CORE = [
   './site-v626.min.css?v=985',
   './site-desktop-v985.css?v=985',
-  './site-v629.min.js?v=986'
+  './site-v629.min.js?v=1004'
 ];
 
 self.addEventListener('install', event => {
@@ -37,8 +37,7 @@ function isVersionedCoreAsset(url){
   return /^[0-9]{3,4}$/.test(version) && (
     path.endsWith('/site-v626.min.css') ||
     path.endsWith('/site-home-v995.css') ||
-    path.endsWith('/site-desktop-v985.css') ||
-    path.endsWith('/site-v629.min.js')
+    path.endsWith('/site-desktop-v985.css')
   );
 }
 
