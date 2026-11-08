@@ -196,6 +196,64 @@ body.is-heroes-route .gen-acc.gen-night-17{--night-gen-image:url("assets/hero-ge
  }
 }
 </style>
+
+<style id="hero-special-headers-v1">
+/* Two distinctive header treatments, separate from numbered generations. */
+body.is-heroes-route .hero-gens-page .gen-acc.rare-line > summary,
+body.is-heroes-route .hero-gens-page .gen-acc.epic-line > summary{
+  position:relative;
+  border-width:2px!important;
+  border-style:solid!important;
+  background-size:cover!important;
+  background-position:center!important;
+  min-height:90px;
+  isolation:isolate;
+}
+body.is-heroes-route .hero-gens-page .gen-acc.rare-line > summary{
+  border-color:#62e5e7!important;
+  background-image:
+    linear-gradient(90deg,rgba(1,26,36,.93),rgba(3,38,52,.62) 50%,rgba(3,25,44,.21) 82%,rgba(2,19,35,.35)),
+    radial-gradient(ellipse at 80% 40%,rgba(59,231,228,.32),transparent 50%),
+    var(--gen-space)!important;
+  box-shadow:inset 0 0 0 1px rgba(189,255,255,.30),inset 5px 0 0 #67f0eb,0 9px 22px rgba(0,0,0,.23),0 0 19px rgba(38,209,219,.25)!important;
+}
+body.is-heroes-route .hero-gens-page .gen-acc.epic-line > summary{
+  border-color:#dcadff!important;
+  background-image:
+    linear-gradient(90deg,rgba(27,10,44,.94),rgba(39,16,66,.64) 50%,rgba(40,16,61,.22) 82%,rgba(22,8,37,.35)),
+    radial-gradient(ellipse at 80% 45%,rgba(230,151,255,.32),transparent 50%),
+    var(--gen-space)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,226,255,.29),inset 5px 0 0 #e5aaff,0 9px 22px rgba(0,0,0,.24),0 0 22px rgba(188,102,245,.26)!important;
+}
+body.is-heroes-route .hero-gens-page .gen-acc.rare-line[open] > summary{
+  border-color:#b5f7f8!important;
+  box-shadow:inset 0 0 0 1px rgba(189,255,255,.36),inset 5px 0 0 #67f0eb,0 0 27px rgba(53,224,230,.34)!important;
+}
+body.is-heroes-route .hero-gens-page .gen-acc.epic-line[open] > summary{
+  border-color:#f0c5ff!important;
+  box-shadow:inset 0 0 0 1px rgba(255,226,255,.36),inset 5px 0 0 #e5aaff,0 0 30px rgba(198,124,246,.35)!important;
+}
+body.is-heroes-route .hero-gens-page .gen-acc.rare-line .gen-title strong{
+  text-shadow:0 0 16px rgba(85,244,238,.60),0 2px 9px rgba(0,0,0,.94)!important;
+}
+body.is-heroes-route .hero-gens-page .gen-acc.epic-line .gen-title strong{
+  text-shadow:0 0 16px rgba(234,156,255,.59),0 2px 9px rgba(0,0,0,.94)!important;
+}
+body.is-heroes-route .hero-gens-page .gen-acc.rare-line .gen-title span{
+  border-color:rgba(133,250,247,.75)!important;
+  background:rgba(4,77,85,.84)!important;color:#e1ffff!important;
+}
+body.is-heroes-route .hero-gens-page .gen-acc.epic-line .gen-title span{
+  border-color:rgba(235,184,255,.75)!important;
+  background:rgba(81,37,106,.84)!important;color:#fff0ff!important;
+}
+@media(max-width:720px){
+ body.is-heroes-route .hero-gens-page .gen-acc.rare-line > summary,
+ body.is-heroes-route .hero-gens-page .gen-acc.epic-line > summary{
+   min-height:76px;
+ }
+}
+</style>
 </head><body class="is-heroes-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="heroes">
 <div aria-hidden="true" class="site-cosmic-background-v442"></div>
 <div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar"><button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button><div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div><a aria-label="На главную" href="index.html">⌂</a></div>
