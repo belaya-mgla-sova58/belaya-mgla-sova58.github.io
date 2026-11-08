@@ -1134,3 +1134,10 @@ body.site-hq-v407 .route-page>.guide-overview-v640 a.guide-overview-link-v640:ho
 body.site-hq-v407 .route-page>.guide-mini-nav a{background:rgba(12,56,94,.84)!important;color:#e7f7ff!important;border-color:rgba(108,202,250,.32)!important}
 body.site-hq-v407 .route-page>.section[id^="guide-start-"]{scroll-margin-top:82px}
 @media(max-width:600px){body.site-hq-v407 .route-page>details.guide-overview-v640>summary{padding:11px 13px!important;min-height:46px;font-size:14px!important}body.site-hq-v407 .route-page>.guide-overview-v640 .guide-overview-body-v640{padding:11px 13px 14px!important}}
+
+/* event-header-borderless-v1004 */
+/* Only event-guide image headers: hide their baked outer margins/borders by a small visual crop. Preserve original assets, no filters or animations. */
+body[data-static-route] main :is(section,div):has(> img[src*="-header-"]){overflow:hidden!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;}
+body[data-static-route] main :is(section,div):has(> img[src*="-header-"])::before,
+body[data-static-route] main :is(section,div):has(> img[src*="-header-"])::after{content:none!important;display:none!important;}
+body[data-static-route] main :is(section,div) > img[src*="-header-"]{display:block!important;width:100%!important;max-width:100%!important;height:auto!important;border:0!important;border-radius:0!important;box-shadow:none!important;transform:scale(1.075)!important;transform-origin:center center!important;filter:none!important;animation:none!important;}
