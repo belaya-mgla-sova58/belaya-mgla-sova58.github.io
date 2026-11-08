@@ -24,44 +24,47 @@ body.is-home-route .modern-home-hero-v424.home-stamped-hero-v441 .home-stamped-i
     contain-intrinsic-size:none!important;
   }
 }
-</style><style id="home-cosmos-replacement-v1001">
-/* Загруженный AVIF только для главной, один неподвижный слой без старого космоса. */
+</style><style id="home-cosmos-visible-v1002">
+/* Одно лёгкое изображение. Красивый космос виден за содержимым,
+   потому что рисунок нанесён на саму основную область, а не спрятан под ней. */
 html:has(body.is-home-route.cosmic-visible-v444),
 body.is-home-route.cosmic-visible-v444{
-  background-color:#020817!important;
-  background-image:none!important;
+ background-color:#050a1c!important;
+ background-image:url("assets/belaya-mgla-cosmos-background.avif")!important;
+ background-position:center top!important;
+ background-size:auto 100vh!important;
+ background-repeat:repeat-y!important;
 }
 body.is-home-route.cosmic-visible-v444 .site-cosmic-background-v442{
-  display:block!important;
-  content:normal!important;
-  position:fixed!important;
-  inset:0!important;
-  z-index:0!important;
-  pointer-events:none!important;
-  opacity:1!important;
-  transform:none!important;
-  background-color:#020817!important;
-  background-image:
-    linear-gradient(180deg,rgba(2,7,23,.20) 0%,rgba(3,8,27,.35) 100%),
-    url("assets/belaya-mgla-cosmos-background.avif")!important;
-  background-size:cover,cover!important;
-  background-position:center center,center center!important;
-  background-repeat:no-repeat,no-repeat!important;
-  background-attachment:scroll!important;
+ display:none!important;
 }
-body.is-home-route.cosmic-visible-v444 #appMain,
-body.is-home-route.cosmic-visible-v444 .modern-home-v424,
-body.is-home-route.cosmic-visible-v444 .route-page,
-body.is-home-route.cosmic-visible-v444 .route-page[data-route="home"],
-body.is-home-route.cosmic-visible-v444 main{
-  background-color:transparent!important;
-  background-image:none!important;
+body.is-home-route.cosmic-visible-v444 main#appMain,
+body.is-home-route.cosmic-visible-v444 #appMain{
+ background-color:#050a1c!important;
+ background-image:
+   linear-gradient(180deg,rgba(2,7,20,.04),rgba(3,8,23,.18)),
+   url("assets/belaya-mgla-cosmos-background.avif")!important;
+ background-position:center top,center top!important;
+ background-repeat:repeat-y,repeat-y!important;
+ background-size:auto 100vh,auto 100vh!important;
+ background-attachment:scroll!important;
+}
+body.is-home-route.cosmic-visible-v444 main#appMain>.route-page.active,
+body.is-home-route.cosmic-visible-v444 #appMain>.route-page.active,
+body.is-home-route.cosmic-visible-v444 main#appMain .route-page[data-route="home"],
+body.is-home-route.cosmic-visible-v444 main#appMain .modern-home-v424{
+ background:transparent!important;
+ background-image:none!important;
+}
+body.is-home-route.cosmic-visible-v444 .modern-panel-v424{
+ background:linear-gradient(145deg,rgba(7,25,61,.52),rgba(4,14,37,.48))!important;
 }
 @media(max-width:900px),(hover:none) and (pointer:coarse){
-  body.is-home-route.cosmic-visible-v444 .site-cosmic-background-v442{
-    background-size:cover,auto 100vh!important;
-    background-position:center center,center center!important;
-  }
+ body.is-home-route.cosmic-visible-v444 main#appMain,
+ body.is-home-route.cosmic-visible-v444 #appMain{
+   background-size:auto 100dvh,auto 100dvh!important;
+   background-repeat:repeat-y,repeat-y!important;
+ }
 }
 </style></head><body class="is-home-route home-hq-v405 home-hq-v406 home-site-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="home"><div aria-hidden="true" class="site-cosmic-background-v442"></div>
 <div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
