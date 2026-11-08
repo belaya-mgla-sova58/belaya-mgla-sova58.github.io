@@ -255,70 +255,118 @@ body.is-heroes-route .hero-gens-page .gen-acc.epic-line .gen-title span{
 }
 </style>
 
-<style id="hero-special-image-banners-v2">
-/* Uploaded branded banners include their own headings.
-   Avoid duplicate on-screen text while keeping semantic headings for screen readers. */
+<style id="hero-special-image-banners-v3">
+/* Compact banners: artwork is decorative, headings remain accessible live text. */
 body.is-heroes-route .hero-gens-page .gen-acc.rare-line > summary,
-body.is-heroes-route .hero-gens-page .gen-acc.epic-line > summary{
-  min-height:clamp(122px,12vw,182px)!important;
-  background-repeat:no-repeat!important;
-  background-size:cover!important;
-  background-position:center center!important;
+body.is-heroes-route .hero-gens-page .gen-acc.epic-line > summary,
+body.is-heroes-route .hero-gens-page .gen-acc.rare-line[open] > summary,
+body.is-heroes-route .hero-gens-page .gen-acc.epic-line[open] > summary{
+  min-height:86px!important;
+  padding:12px 20px!important;
   position:relative!important;
+  overflow:hidden!important;
+  isolation:isolate;
+  background-image:linear-gradient(100deg,#071628,#10233b)!important;
+  background-position:center!important;
+  background-size:cover!important;
 }
 body.is-heroes-route .hero-gens-page .gen-acc.rare-line > summary,
 body.is-heroes-route .hero-gens-page .gen-acc.rare-line[open] > summary{
-  background-image:url("assets/hero-rare-header.webp")!important;
+  background-image:linear-gradient(100deg,#061d2a,#103646)!important;
 }
 body.is-heroes-route .hero-gens-page .gen-acc.epic-line > summary,
 body.is-heroes-route .hero-gens-page .gen-acc.epic-line[open] > summary{
+  background-image:linear-gradient(100deg,#190f2e,#37204c)!important;
+}
+body.is-heroes-route .hero-gens-page .gen-acc.rare-line > summary::before,
+body.is-heroes-route .hero-gens-page .gen-acc.epic-line > summary::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  opacity:.20!important;
+  background-repeat:no-repeat!important;
+  background-size:auto 100%!important;
+  background-position:right center!important;
+}
+body.is-heroes-route .hero-gens-page .gen-acc.rare-line > summary::before{
+  background-image:url("assets/hero-rare-header.webp")!important;
+}
+body.is-heroes-route .hero-gens-page .gen-acc.epic-line > summary::before{
   background-image:url("assets/hero-epic-header.webp")!important;
-}
-body.is-heroes-route .hero-gens-page .gen-acc.rare-line .gen-title strong,
-body.is-heroes-route .hero-gens-page .gen-acc.epic-line .gen-title strong{
-  position:absolute!important;
-  width:1px!important;height:1px!important;
-  padding:0!important;margin:-1px!important;
-  overflow:hidden!important;
-  clip:rect(0,0,0,0)!important;
-  white-space:nowrap!important;
-  border:0!important;
-}
-body.is-heroes-route .hero-gens-page .gen-acc.rare-line > summary .gen-title,
-body.is-heroes-route .hero-gens-page .gen-acc.epic-line > summary .gen-title{
-  position:static!important;
-}
-body.is-heroes-route .hero-gens-page .gen-acc.rare-line .gen-title span,
-body.is-heroes-route .hero-gens-page .gen-acc.epic-line .gen-title span{
-  position:absolute!important;
-  z-index:4!important;
-  left:16px!important;
-  bottom:10px!important;
-}
-body.is-heroes-route .hero-gens-page .gen-acc.rare-line .gen-chevron,
-body.is-heroes-route .hero-gens-page .gen-acc.epic-line .gen-chevron{
-  position:relative!important;
-  z-index:4!important;
-  margin-left:auto!important;
 }
 body.is-heroes-route .hero-gens-page .gen-acc.rare-line > summary::after,
 body.is-heroes-route .hero-gens-page .gen-acc.epic-line > summary::after{
   content:none!important;
+  display:none!important;
+}
+body.is-heroes-route .hero-gens-page .gen-acc.rare-line > summary .gen-title,
+body.is-heroes-route .hero-gens-page .gen-acc.epic-line > summary .gen-title{
+  position:relative!important;
+  z-index:2!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:12px!important;
+  min-width:0;
+}
+body.is-heroes-route .hero-gens-page .gen-acc.rare-line .gen-title strong,
+body.is-heroes-route .hero-gens-page .gen-acc.epic-line .gen-title strong{
+  display:block!important;
+  position:static!important;
+  width:auto!important;
+  height:auto!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:visible!important;
+  clip:auto!important;
+  clip-path:none!important;
+  white-space:normal!important;
+  border:0!important;
+  font-size:clamp(21px,2vw,30px)!important;
+  line-height:1.12!important;
+}
+body.is-heroes-route .hero-gens-page .gen-acc.rare-line .gen-title span,
+body.is-heroes-route .hero-gens-page .gen-acc.epic-line .gen-title span{
+  display:inline-flex!important;
+  position:static!important;
+  z-index:2!important;
+  width:auto!important;
+  height:auto!important;
+  margin:0!important;
+  font-size:11px!important;
+  flex-shrink:0!important;
+}
+body.is-heroes-route .hero-gens-page .gen-acc.rare-line .gen-chevron,
+body.is-heroes-route .hero-gens-page .gen-acc.epic-line .gen-chevron{
+  position:relative!important;
+  z-index:3!important;
+  margin-left:auto!important;
+  flex-shrink:0!important;
 }
 @media(max-width:720px){
- body.is-heroes-route .hero-gens-page .gen-acc.rare-line > summary,
- body.is-heroes-route .hero-gens-page .gen-acc.epic-line > summary{
-   min-height:108px!important;
- }
- body.is-heroes-route .hero-gens-page .gen-acc.rare-line .gen-title span,
- body.is-heroes-route .hero-gens-page .gen-acc.epic-line .gen-title span{
-   display:inline-flex!important;
-   font-size:10px!important;
-   padding:3px 7px!important;
-   min-height:22px!important;
-   left:9px!important;
-   bottom:6px!important;
- }
+  body.is-heroes-route .hero-gens-page .gen-acc.rare-line > summary,
+  body.is-heroes-route .hero-gens-page .gen-acc.epic-line > summary,
+  body.is-heroes-route .hero-gens-page .gen-acc.rare-line[open] > summary,
+  body.is-heroes-route .hero-gens-page .gen-acc.epic-line[open] > summary{
+    min-height:76px!important;
+    padding:10px 12px!important;
+  }
+  body.is-heroes-route .hero-gens-page .gen-acc.rare-line .gen-title strong,
+  body.is-heroes-route .hero-gens-page .gen-acc.epic-line .gen-title strong{
+    font-size:clamp(17px,5vw,22px)!important;
+  }
+  body.is-heroes-route .hero-gens-page .gen-acc.rare-line .gen-title span,
+  body.is-heroes-route .hero-gens-page .gen-acc.epic-line .gen-title span{
+    display:inline-flex!important;
+    padding:3px 6px!important;
+    min-height:22px!important;
+    font-size:10px!important;
+  }
 }
 </style>
 </head><body class="is-heroes-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="heroes">
