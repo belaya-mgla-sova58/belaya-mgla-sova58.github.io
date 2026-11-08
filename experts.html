@@ -44,6 +44,53 @@
 .experts-note{margin-top:14px;padding:12px 14px;border:1px solid rgba(118,190,212,.13);border-radius:13px;background:rgba(86,155,180,.06);color:#aabec8;font-size:11px;line-height:1.45}
 @media(max-width:620px){.experts-clean{width:min(100% - 12px,1040px)}.experts-head{padding:15px}.wave>summary{min-height:86px;padding:10px 42px 10px 11px}.wave-copy{max-width:52%}.wave-copy span{display:none}.wave-faces{right:38px;gap:3px}.wave-faces img{width:48px;height:48px;border-radius:11px}.wave[data-count="1"] .wave-faces img{width:50px;height:50px}.wave-arrow{right:7px;width:26px;height:26px}.expert-row{grid-template-columns:1fr auto;gap:5px 8px}.expert-row span{grid-column:1/-1;grid-row:2}.expert-row strong{font-size:15px}}
 @media(max-width:390px){.wave-copy strong{font-size:17px}.wave-copy small{font-size:7px}.wave-faces img{width:43px;height:43px}.wave[data-count="1"] .wave-faces img{width:45px;height:45px}}
+
+/* Five minimalistic fantasy panorama headers, with dark gradient fallback
+   until optimized assets are uploaded into /assets. */
+body.is-experts-route .experts-clean .wave > summary{
+  background-position:center center!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+  color:#f3fbff!important;
+}
+body.is-experts-route .experts-clean .wave.wave1 > summary{
+  background-image:
+    linear-gradient(90deg,rgba(3,17,30,.96) 0%,rgba(4,23,39,.84) 43%,rgba(4,19,34,.38) 76%,rgba(3,14,28,.57) 100%),
+    url("assets/experts-wave-1-ice.webp"),
+    linear-gradient(110deg,#071c31,#114a66)!important;
+}
+body.is-experts-route .experts-clean .wave.wave2 > summary{
+  background-image:
+    linear-gradient(90deg,rgba(23,14,10,.95) 0%,rgba(34,20,12,.83) 43%,rgba(25,13,12,.36) 76%,rgba(20,11,12,.58) 100%),
+    url("assets/experts-wave-2-gold.webp"),
+    linear-gradient(110deg,#20130d,#5b3216)!important;
+}
+body.is-experts-route .experts-clean .wave.wave3 > summary{
+  background-image:
+    linear-gradient(90deg,rgba(27,9,21,.95) 0%,rgba(39,12,30,.82) 43%,rgba(25,8,23,.35) 76%,rgba(20,7,18,.57) 100%),
+    url("assets/experts-wave-3-ruby.webp"),
+    linear-gradient(110deg,#230d20,#53172e)!important;
+}
+body.is-experts-route .experts-clean .wave.wave4 > summary{
+  background-image:
+    linear-gradient(90deg,rgba(18,11,34,.95) 0%,rgba(30,15,51,.83) 43%,rgba(23,9,45,.33) 76%,rgba(16,8,30,.58) 100%),
+    url("assets/experts-wave-4-amethyst.webp"),
+    linear-gradient(110deg,#19112f,#4d2069)!important;
+}
+body.is-experts-route .experts-clean .wave.wave5 > summary{
+  background-image:
+    linear-gradient(90deg,rgba(27,16,9,.96) 0%,rgba(34,19,10,.83) 43%,rgba(27,15,10,.35) 76%,rgba(20,11,9,.57) 100%),
+    url("assets/experts-wave-5-amber.webp"),
+    linear-gradient(110deg,#211308,#593414)!important;
+}
+body.is-experts-route .experts-clean .wave .wave-copy small{color:var(--edge)!important;text-shadow:0 1px 6px #000}
+body.is-experts-route .experts-clean .wave .wave-copy strong{color:#fff!important;text-shadow:0 2px 10px #000b}
+body.is-experts-route .experts-clean .wave .wave-copy span{color:#d5e6ef!important;text-shadow:0 1px 7px #000c}
+body.is-experts-route .experts-clean .wave .wave-faces img{
+  box-shadow:0 4px 15px #000b,0 0 0 1px color-mix(in srgb,var(--edge) 40%,transparent);
+}
+@media(prefers-reduced-motion:reduce){body.is-experts-route .experts-clean .wave{transition:none}}
+
 </style>
 <link rel="stylesheet" href="site-desktop-v985.css?v=985" media="screen and (min-width:1100px) and (hover:hover) and (pointer:fine)" data-sova-desktop-v985/>
 </head>
