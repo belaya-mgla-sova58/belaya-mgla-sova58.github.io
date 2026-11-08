@@ -40,6 +40,63 @@ body.is-heroes-route .gen-acc.gen-night-15{--night-gen-image:url("assets/hero-ge
 body.is-heroes-route .gen-acc.gen-night-16{--night-gen-image:url("assets/hero-generation-night-16.webp")}
 body.is-heroes-route .gen-acc.gen-night-17{--night-gen-image:url("assets/hero-generation-night-17.webp")}
 </style>
+
+<style id="hero-generation-desktop-two-columns-v1">
+/* Desktop only: 1–8 on the left, 9–16 on the right, 17 across both columns. */
+@media (min-width:1100px) and (hover:hover) and (pointer:fine){
+  body.is-heroes-route .hero-gens-page .gen-stack{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    column-gap:14px!important;
+    row-gap:12px!important;
+    align-items:start;
+  }
+  body.is-heroes-route .hero-gens-page .gen-stack > .gen-acc{
+    min-width:0;
+    width:100%;
+    margin:0;
+  }
+  body.is-heroes-route .hero-gens-page .gen-stack > .gen-acc.rare-line{
+    grid-column:1 / -1;grid-row:1;
+  }
+  body.is-heroes-route .hero-gens-page .gen-stack > .gen-acc.epic-line{
+    grid-column:1 / -1;grid-row:2;
+  }
+  body.is-heroes-route .hero-gens-page .gen-stack > .gen-acc.gen-night-01{grid-column:1;grid-row:3}
+  body.is-heroes-route .hero-gens-page .gen-stack > .gen-acc.gen-night-02{grid-column:1;grid-row:4}
+  body.is-heroes-route .hero-gens-page .gen-stack > .gen-acc.gen-night-03{grid-column:1;grid-row:5}
+  body.is-heroes-route .hero-gens-page .gen-stack > .gen-acc.gen-night-04{grid-column:1;grid-row:6}
+  body.is-heroes-route .hero-gens-page .gen-stack > .gen-acc.gen-night-05{grid-column:1;grid-row:7}
+  body.is-heroes-route .hero-gens-page .gen-stack > .gen-acc.gen-night-06{grid-column:1;grid-row:8}
+  body.is-heroes-route .hero-gens-page .gen-stack > .gen-acc.gen-night-07{grid-column:1;grid-row:9}
+  body.is-heroes-route .hero-gens-page .gen-stack > .gen-acc.gen-night-08{grid-column:1;grid-row:10}
+  body.is-heroes-route .hero-gens-page .gen-stack > .gen-acc.gen-night-09{grid-column:2;grid-row:3}
+  body.is-heroes-route .hero-gens-page .gen-stack > .gen-acc.gen-night-10{grid-column:2;grid-row:4}
+  body.is-heroes-route .hero-gens-page .gen-stack > .gen-acc.gen-night-11{grid-column:2;grid-row:5}
+  body.is-heroes-route .hero-gens-page .gen-stack > .gen-acc.gen-night-12{grid-column:2;grid-row:6}
+  body.is-heroes-route .hero-gens-page .gen-stack > .gen-acc.gen-night-13{grid-column:2;grid-row:7}
+  body.is-heroes-route .hero-gens-page .gen-stack > .gen-acc.gen-night-14{grid-column:2;grid-row:8}
+  body.is-heroes-route .hero-gens-page .gen-stack > .gen-acc.gen-night-15{grid-column:2;grid-row:9}
+  body.is-heroes-route .hero-gens-page .gen-stack > .gen-acc.gen-night-16{grid-column:2;grid-row:10}
+  body.is-heroes-route .hero-gens-page .gen-stack > .gen-acc.gen-night-17{
+    grid-column:1 / -1;grid-row:11;
+  }
+  body.is-heroes-route .hero-gens-page .gen-acc[class*="gen-night-"] > summary{
+    min-height:84px;
+    padding:12px 17px;
+  }
+  body.is-heroes-route .hero-gens-page .gen-acc[class*="gen-night-"] .gen-title strong{
+    font-size:clamp(21px,1.8vw,26px);
+  }
+  body.is-heroes-route .hero-gens-page .gen-acc[class*="gen-night-"] .gen-title{
+    gap:10px;
+    min-width:0;
+  }
+  body.is-heroes-route .hero-gens-page .gen-acc[class*="gen-night-"] > summary{
+    background-position:center,center center!important;
+  }
+}
+</style>
 </head><body class="is-heroes-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="heroes">
 <div aria-hidden="true" class="site-cosmic-background-v442"></div>
 <div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar"><button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button><div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div><a aria-label="На главную" href="index.html">⌂</a></div>
