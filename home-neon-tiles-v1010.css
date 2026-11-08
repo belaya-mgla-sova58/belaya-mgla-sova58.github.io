@@ -77,3 +77,16 @@ body.is-home-route .home-neon-tiles-v1010 .home-neon-tile-v1010:focus-visible{
 @media(prefers-reduced-motion:reduce){
  body.is-home-route .home-neon-tiles-v1010 .home-neon-tile-v1010{transition:none!important;transform:none!important}
 }
+
+/* v1011: use detailed, coordinated game-art assets instead of glyphs. */
+body.is-home-route .home-neon-tiles-v1010 .home-neon-symbol-v1010 img{
+ display:block!important;width:39px!important;height:39px!important;
+ max-width:100%!important;max-height:100%!important;object-fit:contain!important;
+ opacity:1!important;visibility:visible!important;
+ filter:drop-shadow(0 2px 5px rgba(0,9,30,.45))!important;
+}
+@media(max-width:680px){
+ body.is-home-route .home-neon-tiles-v1010 .home-neon-symbol-v1010 img{
+  width:31px!important;height:31px!important;
+ }
+}
