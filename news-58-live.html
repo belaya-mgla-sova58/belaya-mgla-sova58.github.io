@@ -492,6 +492,22 @@ body.tv-broadcast-page .tv-special .tv-mini-live-mic{display:none}
   body.tv-broadcast-page .tv-special .tv-stage-logo::after,
   body.tv-broadcast-page .tv-special .tv-mini-live-mic::before{opacity:0!important}
 }
+</style><style id="tv-guide-wrap-fix-v1">
+/* Keep all seven program titles readable across desktop and mobile layouts. */
+body.tv-broadcast-page .tv-special .tv-stages a{min-width:0!important;max-width:100%;overflow:visible!important}
+body.tv-broadcast-page .tv-special .tv-stages a>span:last-child{display:block;flex:1 1 auto;min-width:0;width:auto;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;overflow-wrap:anywhere;word-break:normal;line-height:1.4}
+body.tv-broadcast-page .tv-special .tv-nav-num{flex-shrink:0}
+@media(min-width:881px){
+body.tv-broadcast-page .tv-special .tv-reading-layout{grid-template-columns:minmax(0,292px) minmax(0,1fr)}
+body.tv-broadcast-page .tv-special .tv-stages a{height:auto;min-height:54px;align-items:center;padding:10px 11px}
+}
+@media(max-width:880px) and (min-width:761px){
+body.tv-broadcast-page .tv-special .tv-stages a{height:auto;min-height:54px}
+}
+@media(max-width:760px){
+body.tv-broadcast-page .tv-special .tv-stages a{max-width:none!important;overflow:visible!important}
+body.tv-broadcast-page .tv-special .tv-stages a>span:last-child{overflow-wrap:break-word}
+}
 </style></head><body class="tv-broadcast-page is-news-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="news"><div aria-hidden="true" class="site-cosmic-background-v442"></div><div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
 <button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
 <div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Новости</small></div>
