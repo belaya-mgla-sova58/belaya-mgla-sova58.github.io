@@ -68,7 +68,185 @@ body.is-news-route .tv-special,body.is-news-route .tv-special *{box-sizing:borde
 @media(max-width:880px){.tv-special .tv-reading-layout{grid-template-columns:minmax(0,1fr)}.tv-special .tv-guide{position:static}.tv-special .tv-stages{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.tv-special .tv-hero-grid{grid-template-columns:minmax(0,1fr) 180px}.tv-special .tv-stage-art{min-height:180px}.tv-special .tv-stage-art::before{width:180px}.tv-special .tv-stage-logo svg{height:70px;width:55px}.tv-special .tv-stage-logo b{font-size:24px}}
 @media(max-width:610px){body.is-news-route .tv-special{padding:0 5px;margin-bottom:35px}.tv-special .tv-hero{border-radius:18px}.tv-special .tv-topline{padding:12px 16px}.tv-special .tv-station{font-size:19px}.tv-special .tv-station small{font-size:9px}.tv-special .tv-onair{font-size:9px;letter-spacing:0}.tv-special .tv-hero-grid{display:block;padding:28px 18px}.tv-special .tv-hero h1{font-size:clamp(28px,8vw,41px)}.tv-special .tv-stage-art{display:none}.tv-special .tv-strip{padding:11px 16px;gap:5px}.tv-special .tv-disclaimer{font-size:12px;margin:14px 0 17px}.tv-special .tv-stages{grid-template-columns:minmax(0,1fr)}.tv-special .tv-guide{padding:14px}.tv-special .tv-episode-top{padding:15px;gap:9px}.tv-special .tv-number{font-size:26px;min-width:38px}.tv-special .tv-chat{margin:12px 12px 16px}.tv-special .tv-quote{padding:14px}.tv-special .tv-quote p{line-height:1.72;font-size:14px}.tv-special .tv-chat-head{padding:9px 10px}.tv-special .tv-ending{padding:16px}}
 @media(prefers-reduced-motion:reduce){.tv-special .tv-stages a{transition:none}}
-</style></head><body class="is-news-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="news"><div aria-hidden="true" class="site-cosmic-background-v442"></div><div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
+</style>
+<style id="sova58-tv-theatre-v3">
+/* Editorial color system: a glamorous violet/burgundy broadcast studio rather than game-news blue. */
+body.tv-broadcast-page {
+  --tv-gold:#f1c67e;
+  --tv-gold-soft:#ffe5b2;
+  --tv-plum:#261128;
+  --tv-wine:#391528;
+  --tv-violet:#45213b;
+  --tv-mauve:#e4b9d8;
+  background:#170b20!important;
+}
+body.tv-broadcast-page .site-cosmic-background-v442{opacity:.12!important;filter:hue-rotate(68deg) saturate(.6)!important}
+body.tv-broadcast-page #appMain{
+  background:
+    radial-gradient(ellipse 67% 25% at 75% 0%,rgba(134,45,77,.31),transparent 72%),
+    radial-gradient(ellipse 59% 31% at 16% 58%,rgba(74,35,98,.27),transparent 72%),
+    linear-gradient(165deg,#160c25 0%,#221025 43%,#160e25 100%)!important;
+}
+body.tv-broadcast-page .route-page.news-page{background:transparent!important}
+body.tv-broadcast-page .tv-special{--tv-paper:#fff3ef;--tv-muted:#ccb7cd;--tv-line:rgba(235,170,170,.26);color:var(--tv-paper)}
+body.tv-broadcast-page .tv-special .tv-hero{
+  background:linear-gradient(121deg,#160c23 0%,#301125 48%,#48203b 80%,#2d1739 100%)!important;
+  border:1px solid rgba(246,195,128,.56)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,226,177,.10),0 20px 55px rgba(10,0,19,.48),0 0 37px rgba(180,70,106,.12)!important;
+}
+body.tv-broadcast-page .tv-special .tv-hero::before{
+  background:
+    linear-gradient(95deg,rgba(17,4,25,.57),transparent 35%,transparent 67%,rgba(17,4,25,.35)),
+    repeating-linear-gradient(98deg,rgba(196,52,99,.17) 0 9px,rgba(37,8,37,.11) 10px 19px,rgba(146,37,83,.18) 20px 29px) left center/16% 100% no-repeat,
+    repeating-linear-gradient(82deg,rgba(196,52,99,.15) 0 9px,rgba(37,8,37,.10) 10px 19px,rgba(146,37,83,.16) 20px 29px) right center/16% 100% no-repeat,
+    radial-gradient(ellipse 30% 85% at 22% 0%,rgba(254,201,132,.18),transparent 81%),
+    radial-gradient(ellipse 24% 80% at 86% 0%,rgba(255,180,137,.22),transparent 80%)!important;
+  opacity:1!important;
+}
+body.tv-broadcast-page .tv-special .tv-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;
+  background:
+    linear-gradient(110deg,transparent 6%,rgba(247,201,136,.18) 53%,transparent 86%) 0 0/36% 100% no-repeat,
+    linear-gradient(68deg,transparent 7%,rgba(247,201,136,.12) 54%,transparent 86%) 100% 0/38% 100% no-repeat;
+  opacity:.75;
+}
+body.tv-broadcast-page .tv-special .tv-topline{
+  background:rgba(23,7,26,.35)!important;
+  border-bottom-color:rgba(255,221,163,.20)!important;
+}
+body.tv-broadcast-page .tv-special .tv-station{color:#ffebc8!important}
+body.tv-broadcast-page .tv-special .tv-station small{color:#ebc0b4!important}
+body.tv-broadcast-page .tv-special .tv-onair{
+  background:rgba(126,29,55,.53)!important;
+  border-color:rgba(251,159,165,.53)!important;
+  color:#ffe5e6!important;
+}
+body.tv-broadcast-page .tv-special .tv-eyebrow{color:#ffd69a!important}
+body.tv-broadcast-page .tv-special .tv-hero h1{
+  color:#fff9f3!important;
+  text-shadow:0 5px 23px rgba(0,0,0,.55),0 0 29px rgba(251,151,171,.19)!important;
+}
+body.tv-broadcast-page .tv-special .tv-hero h1 span{color:#f7d3c2!important}
+body.tv-broadcast-page .tv-special .tv-hero-copy p{color:#e7ccd8!important}
+body.tv-broadcast-page .tv-special .tv-pills span{
+  background:rgba(28,8,32,.51)!important;
+  color:#ffe9e2!important;
+  border-color:rgba(244,190,170,.33)!important;
+}
+body.tv-broadcast-page .tv-special .tv-stage-art::before{
+  border-color:rgba(252,208,136,.30)!important;
+  box-shadow:0 0 0 19px rgba(250,170,122,.045),0 0 0 37px rgba(255,161,120,.025),inset 0 0 43px rgba(243,159,101,.18)!important;
+}
+body.tv-broadcast-page .tv-special .tv-stage-art::after{
+  background:conic-gradient(from 60deg,transparent 12%,rgba(246,213,141,.63) 24%,transparent 29%,transparent 61%,rgba(241,165,178,.43) 73%,transparent 78%)!important;
+}
+body.tv-broadcast-page .tv-special .tv-stage-logo svg{stroke:#ffe5b4!important}
+body.tv-broadcast-page .tv-special .tv-stage-logo b{color:#fff8e9!important}
+body.tv-broadcast-page .tv-special .tv-stage-logo small{color:#f5c29d!important}
+body.tv-broadcast-page .tv-special .tv-strip{
+  background:rgba(32,8,30,.62)!important;
+  border-top-color:rgba(254,208,139,.22)!important;
+  color:#ddb6c1!important;
+}
+body.tv-broadcast-page .tv-special .tv-strip strong{color:#ffe0a4!important}
+body.tv-broadcast-page .tv-special .tv-disclaimer{
+  background:linear-gradient(110deg,rgba(64,25,50,.84),rgba(37,22,47,.88))!important;
+  border:1px solid rgba(227,161,177,.32)!important;
+  border-left:3px solid #f0c17e!important;
+  color:#f1dce5!important;
+}
+body.tv-broadcast-page .tv-special .tv-guide{
+  background:linear-gradient(155deg,rgba(68,27,47,.97),rgba(33,16,44,.98))!important;
+  border-color:rgba(231,177,155,.40)!important;
+  box-shadow:0 12px 28px rgba(14,3,23,.3)!important;
+}
+body.tv-broadcast-page .tv-special .tv-guide-label{color:#f5cc8d!important}
+body.tv-broadcast-page .tv-special .tv-guide h2{color:#fff5e8!important}
+body.tv-broadcast-page .tv-special .tv-guide p{color:#d5b5c4!important}
+body.tv-broadcast-page .tv-special .tv-stages a{
+  background:rgba(37,13,34,.74)!important;
+  color:#f1e3ee!important;
+  border-color:rgba(228,170,163,.14)!important;
+}
+body.tv-broadcast-page .tv-special .tv-stages a:hover,
+body.tv-broadcast-page .tv-special .tv-stages a:focus-visible{
+  background:rgba(100,45,67,.69)!important;
+  border-color:rgba(250,207,152,.59)!important;
+}
+body.tv-broadcast-page .tv-special .tv-nav-num{
+  background:rgba(233,178,101,.13)!important;
+  color:#ffdaa0!important;
+}
+body.tv-broadcast-page .tv-special .tv-stages a:last-child .tv-nav-num{
+  background:rgba(220,127,182,.22)!important;
+  color:#ffd5ee!important;
+}
+body.tv-broadcast-page .tv-special .tv-episode{
+  position:relative!important;
+  background:linear-gradient(145deg,rgba(58,25,48,.97),rgba(29,20,45,.98) 75%,rgba(48,22,52,.98))!important;
+  border-color:rgba(231,172,164,.36)!important;
+  box-shadow:0 10px 29px rgba(9,2,20,.36)!important;
+}
+body.tv-broadcast-page .tv-special .tv-episode:nth-child(even){
+  background:linear-gradient(145deg,rgba(45,26,59,.98),rgba(55,22,48,.97) 80%,rgba(33,20,48,.99))!important;
+}
+body.tv-broadcast-page .tv-special .tv-episode::before{
+  content:"";position:absolute;inset:0 0 auto;height:3px;
+  background:linear-gradient(90deg,transparent 1%,rgba(252,198,114,.79) 23%,rgba(246,155,183,.52) 70%,transparent);
+  pointer-events:none;
+}
+body.tv-broadcast-page .tv-special .tv-episode-top{
+  border-bottom-color:rgba(253,201,163,.17)!important;
+}
+body.tv-broadcast-page .tv-special .tv-number,
+body.tv-broadcast-page .tv-special .tv-episode:nth-child(even) .tv-number{
+  color:#ffd48e!important;
+  text-shadow:0 0 19px rgba(255,187,100,.2)!important;
+}
+body.tv-broadcast-page .tv-special .tv-episode small{color:#c9a2b7!important}
+body.tv-broadcast-page .tv-special .tv-episode h2{color:#fff3e8!important}
+body.tv-broadcast-page .tv-special .tv-chat{
+  border-color:rgba(226,168,164,.30)!important;
+  background:rgba(21,9,30,.58)!important;
+}
+body.tv-broadcast-page .tv-special .tv-chat-head{
+  background:linear-gradient(90deg,rgba(114,43,70,.47),rgba(55,28,57,.15))!important;
+  border-bottom-color:rgba(255,203,166,.17)!important;
+}
+body.tv-broadcast-page .tv-special .tv-chat-avatar{
+  color:#3b162d!important;
+  background:linear-gradient(135deg,#ffe2a1,#e9a6bb)!important;
+}
+body.tv-broadcast-page .tv-special .tv-chat-author strong{color:#ffe7c5!important}
+body.tv-broadcast-page .tv-special .tv-chat-author span{color:#cfabbc!important}
+body.tv-broadcast-page .tv-special .tv-chat-wave{color:#f6ce9f!important}
+body.tv-broadcast-page .tv-special .tv-quote p{
+  color:#f9eefa!important;
+  line-height:1.78!important;
+}
+body.tv-broadcast-page .tv-special .tv-ending{
+  border-color:rgba(243,197,137,.41)!important;
+  background:linear-gradient(120deg,rgba(85,30,57,.97),rgba(42,21,56,.97))!important;
+}
+body.tv-broadcast-page .tv-special .tv-ending strong{color:#ffe1a9!important}
+body.tv-broadcast-page .tv-special .tv-ending p{color:#ead0d9!important}
+body.tv-broadcast-page .tv-special .tv-back{
+  background:#f5dcb2!important;
+  color:#3b1f36!important;
+  border-color:#f3cb8b!important;
+}
+body.tv-broadcast-page .tv-special .tv-back:hover{background:#ffe9bf!important}
+@media(max-width:610px){
+  body.tv-broadcast-page #appMain{
+    background:linear-gradient(165deg,#170d22,#2c132a 65%,#1a1229)!important;
+  }
+  body.tv-broadcast-page .tv-special .tv-hero::before{
+    background:radial-gradient(ellipse at 80% 0%,rgba(255,188,147,.20),transparent 70%),
+      linear-gradient(120deg,rgba(122,30,63,.15),transparent 70%)!important;
+  }
+  body.tv-broadcast-page .tv-special .tv-hero::after{display:none}
+}
+</style></head><body class="tv-broadcast-page is-news-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="news"><div aria-hidden="true" class="site-cosmic-background-v442"></div><div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
 <button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
 <div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Новости</small></div>
 <a aria-label="На главную" href="index.html">⌂</a>
