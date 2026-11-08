@@ -123,3 +123,30 @@ body.news-top-whitefox .wf-new-nav a:focus-visible{outline:3px solid #4c9dd3;out
   body.news-top-whitefox .whitefox-week42-jump-v558 a,
   body.news-top-whitefox .wf-new-nav a{transition:none!important;transform:none!important}
 }
+
+/* Readability hotfix v2: explicit dark ink on light surfaces.
+   Shared site styles sometimes force white text with !important. */
+body.news-top-whitefox .wf-new .wf-new-head h2,
+body.news-top-whitefox .wf-new .wf-new-story h3{
+  color:#243b5d!important;-webkit-text-fill-color:#243b5d!important;text-shadow:none!important;opacity:1!important;
+}
+body.news-top-whitefox .wf-new .wf-new-head p,
+body.news-top-whitefox .wf-new .wf-new-story p,
+body.news-top-whitefox .wf-new .wf-new-story li,
+body.news-top-whitefox .wf-new .wf-new-story strong,
+body.news-top-whitefox .wf-new .wf-new-story em,
+body.news-top-whitefox .wf-new .wf-new-story ul,
+body.news-top-whitefox .wf-new .wf-new-story ol{
+  color:#314b69!important;-webkit-text-fill-color:#314b69!important;text-shadow:none!important;opacity:1!important;
+}
+body.news-top-whitefox .wf-new .wf-new-meta{
+  color:#9e4e3c!important;-webkit-text-fill-color:#9e4e3c!important;opacity:1!important;
+}
+body.news-top-whitefox .wf-new .wf-new-kicker{
+  color:#fff!important;-webkit-text-fill-color:#fff!important;opacity:1!important;
+}
+body.news-top-whitefox .wf-new .wf-new-note{
+  color:#566b86!important;-webkit-text-fill-color:#566b86!important;opacity:1!important;
+}
+body.news-top-whitefox .wf-new .wf-new-romance h3{color:#773e68!important;-webkit-text-fill-color:#773e68!important}
+body.news-top-whitefox .wf-new .wf-new-questions h3{color:#244b73!important;-webkit-text-fill-color:#244b73!important}
