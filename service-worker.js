@@ -1,4 +1,4 @@
-const CACHE_NAME = 'belaya-mgla-v997';
+const CACHE_NAME = 'belaya-mgla-v998';
 const STATIC_CORE = [
   './site-v626.min.css?v=985',
   './site-desktop-v985.css?v=985',
