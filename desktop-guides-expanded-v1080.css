@@ -29,10 +29,9 @@
  }
  /* Remove inherited narrow-column ceilings on article and guide containers. */
  html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route) main#appMain>.route-page.active :is(
-  .guide-page-v69,.jero-page,.hero-gens-page,.gen-page,.gen-page-wrap,.pet-detail-page,
-  .kb-page-v415,.kb-clean-v920,.faq-wrap,.build-hub,.buildings-wrap,
+  .guide-page-v69,.kb-page-v415,.kb-clean-v920,.faq-wrap,.build-hub,.buildings-wrap,
   .canyon-wrap,.crazy-joe-guide,.fishing-guide-v690,.foundry-guide,.foundry-wrap,
-  .experts-clean,.pets-redesign,.calc-hub,.ag,.ag-page,.resource-page,.farm-wrap,
+  .resource-page,.farm-wrap,
   .endless-guide,.news-shell,.news-page,.content-wrap,.page-shell
  ){
   width:100%!important;
@@ -131,7 +130,7 @@
   overflow-wrap:break-word;
  }
  html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
- :is(.guide-fold-body-v414,.intro,.section,.jero-section,.canyon-wrap>.guide-section,.bear-card)
+ :is(.guide-fold-body-v414,.intro,.section,.canyon-wrap>.guide-section,.bear-card)
  > :is(p,ul,ol,blockquote){
   max-width:96ch!important;
   line-height:1.72!important;
@@ -166,16 +165,7 @@
    transform:translateY(-2px);
   }
  }
- /* Gallery catalogues and individual hero cards. Leave existing artwork intact. */
- html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
- .route-page.active .pets-redesign .pet-card-grid{
-  grid-template-columns:repeat(auto-fit,minmax(270px,1fr))!important;
-  gap:var(--guide-pc-gap)!important;
- }
- html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
- .route-page.active .jero-page :is(.jero-skill-grid,.jero-mode-grid){
-  gap:var(--guide-pc-gap)!important;
- }
+ /* Excludes all pet, hero and expert pages by design. */
  html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
  .route-page.active .faq-wrap .faq-grid.faq-accordion-grid{
   grid-template-columns:repeat(2,minmax(0,1fr))!important;
@@ -189,7 +179,7 @@
   scrollbar-width:thin;
  }
  html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
- .route-page.active :is(.guide-fold-body-v414,.section,.jero-section,.canyon-wrap>.guide-section) :is(figure,img){
+ .route-page.active :is(.guide-fold-body-v414,.section,.canyon-wrap>.guide-section) :is(figure,img){
   max-width:100%;
  }
  html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
