@@ -1,0 +1,136 @@
+/* SOVA58 Pet generations v14 | Expert-inspired winter header cards.
+   Only original pet portraits from pets.html are used. No oversized banner assets. */
+body.is-pets-route .pets-redesign .pet-stage{
+ --pet-edge:var(--pet-accent,#86cde6);
+ overflow:hidden!important;
+ border:1px solid color-mix(in srgb,var(--pet-edge) 43%,#25405f)!important;
+ border-radius:17px!important;
+ background:#08182a!important;
+ box-shadow:0 10px 25px rgba(0,4,20,.23)!important;
+ margin-bottom:12px!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary,
+body.is-pets-route .pets-redesign .pet-stage[open]>summary,
+body.is-pets-route .pets-redesign .pet-stage>summary:hover,
+body.is-pets-route .pets-redesign .pet-stage>summary:focus-visible{
+ position:relative!important;isolation:isolate!important;box-sizing:border-box!important;
+ display:flex!important;align-items:center!important;gap:12px!important;
+ min-height:110px!important;height:110px!important;max-height:110px!important;
+ padding:13px 56px 13px 21px!important;
+ overflow:hidden!important;border:0!important;border-radius:0!important;
+ transform:none!important;
+ background-color:#0a1a31!important;
+ background-image:
+  radial-gradient(ellipse at 78% 43%,color-mix(in srgb,var(--pet-edge) 18%,transparent),transparent 36%),
+  repeating-linear-gradient(118deg,transparent 0 33px,rgba(187,233,252,.034) 34px 35px,transparent 36px 72px),
+  linear-gradient(96deg,#07172d 0%,#0c2745 58%,#081d37 100%)!important;
+ box-shadow:inset 0 1px 0 rgba(227,245,255,.07)!important;
+ cursor:pointer!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary::before{
+ content:""!important;display:block!important;position:absolute!important;
+ inset:0 auto 0 0!important;width:4px!important;z-index:1!important;
+ background:linear-gradient(180deg,transparent 3%,var(--pet-edge) 48%,transparent 97%)!important;
+ opacity:.88!important;pointer-events:none!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary::after{
+ content:""!important;display:block!important;position:absolute!important;
+ top:0!important;left:0!important;right:0!important;bottom:auto!important;
+ width:auto!important;height:1px!important;z-index:1!important;
+ background:linear-gradient(90deg,transparent 15%,color-mix(in srgb,var(--pet-edge) 39%,transparent),transparent 96%)!important;
+ pointer-events:none!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title{
+ position:relative!important;display:flex!important;visibility:visible!important;
+ flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;
+ gap:4px!important;flex:1 1 auto!important;
+ width:auto!important;max-width:56%!important;min-width:0!important;
+ height:auto!important;margin:0!important;padding:0!important;
+ overflow:visible!important;clip:auto!important;white-space:normal!important;
+ text-align:left!important;z-index:3!important;transform:none!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title small{
+ display:block!important;color:var(--pet-edge)!important;-webkit-text-fill-color:var(--pet-edge)!important;
+ font-size:10px!important;font-weight:850!important;letter-spacing:.115em!important;
+ text-transform:uppercase!important;line-height:1.1!important;text-shadow:none!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title strong{
+ display:block!important;color:#f5fcff!important;-webkit-text-fill-color:#f5fcff!important;
+ font-size:clamp(23px,2.65vw,31px)!important;font-weight:850!important;
+ line-height:1.05!important;letter-spacing:.005em!important;
+ text-shadow:0 1px 9px rgba(20,95,160,.33)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title em{
+ display:block!important;margin-top:1px!important;
+ color:#b4c9d9!important;-webkit-text-fill-color:#b4c9d9!important;
+ font-size:11px!important;line-height:1.2!important;font-weight:500!important;
+ font-style:normal!important;text-shadow:none!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-faces{
+ position:absolute!important;display:flex!important;visibility:visible!important;opacity:1!important;
+ right:50px!important;top:50%!important;bottom:auto!important;left:auto!important;
+ width:auto!important;height:auto!important;max-width:50%!important;
+ align-items:center!important;justify-content:flex-end!important;
+ gap:7px!important;margin:0!important;padding:0!important;
+ overflow:visible!important;transform:translateY(-50%)!important;
+ z-index:2!important;pointer-events:none!important;
+ -webkit-mask-image:none!important;mask-image:none!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-faces::before,
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-faces::after{
+ display:none!important;content:none!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-photo,
+body.is-pets-route .pets-redesign .pet-stage>summary:hover .pet-stage-photo,
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-photo:nth-child(2){
+ position:static!important;display:block!important;visibility:visible!important;
+ width:72px!important;height:72px!important;min-width:72px!important;min-height:72px!important;
+ max-width:72px!important;max-height:72px!important;flex:0 0 72px!important;
+ margin:0!important;padding:0!important;opacity:1!important;
+ object-fit:contain!important;object-position:center!important;
+ border-radius:15px!important;
+ border:1px solid color-mix(in srgb,var(--pet-edge) 48%,#5680a6)!important;
+ background:linear-gradient(140deg,#153b55,#0b223e)!important;
+ box-shadow:0 6px 15px rgba(0,7,23,.42),inset 0 1px 0 rgba(255,255,255,.12)!important;
+ filter:contrast(1.04) saturate(1.05)!important;transform:none!important;
+ -webkit-mask-image:none!important;mask-image:none!important;
+ transition:none!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-chevron{
+ position:absolute!important;display:grid!important;visibility:visible!important;
+ right:12px!important;top:50%!important;z-index:5!important;
+ width:29px!important;height:29px!important;transform:translateY(-50%)!important;
+ border-radius:50%!important;border:1px solid color-mix(in srgb,var(--pet-edge) 45%,transparent)!important;
+ background:rgba(5,20,40,.84)!important;color:#ddf5ff!important;
+ box-shadow:0 2px 8px rgba(0,0,0,.25)!important;place-items:center!important;
+}
+body.is-pets-route .pets-redesign .pet-stage[open]>summary .pet-stage-chevron{
+ transform:translateY(-50%) rotate(180deg)!important;
+}
+@media(max-width:700px){
+ body.is-pets-route .pets-redesign .pet-stage{border-radius:13px!important;margin-bottom:9px!important}
+ body.is-pets-route .pets-redesign .pet-stage>summary,
+ body.is-pets-route .pets-redesign .pet-stage[open]>summary,
+ body.is-pets-route .pets-redesign .pet-stage>summary:hover{
+  height:91px!important;min-height:91px!important;max-height:91px!important;
+  padding:9px 33px 9px 13px!important;gap:5px!important;
+ }
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title{
+   max-width:57%!important;gap:3px!important;
+ }
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title small{font-size:9px!important}
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title strong{font-size:20px!important}
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title em{font-size:9px!important}
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-faces{
+   right:32px!important;gap:3px!important;max-width:49%!important;
+ }
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-photo,
+ body.is-pets-route .pets-redesign .pet-stage>summary:hover .pet-stage-photo,
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-photo:nth-child(2){
+   width:43px!important;height:43px!important;min-width:43px!important;min-height:43px!important;
+   max-width:43px!important;max-height:43px!important;flex-basis:43px!important;border-radius:10px!important;
+ }
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-chevron{
+  right:4px!important;width:23px!important;height:23px!important;
+ }
+}
