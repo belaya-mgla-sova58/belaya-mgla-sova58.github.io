@@ -151,7 +151,16 @@ function distribute(army,n,capacity,r,policy){
 }
 function realRatio(row){let total=sum(row);return total?row.map(x=>Math.round(x*1000/total)/10).join('/'):'0/0/0'}
 function calc(){
- let army=['inf','lan','mar'].map(id=>Math.max(0,Math.floor(Number($(id).value)||0))),n=+ $('mc').value,cap=Math.max(0,Math.floor(Number($('cap').value)||0)),total=sum(army);
+ const raw=['inf','lan','mar','cap'].map(id=>Number($(id).value));
+ const valid=raw.every(v=>Number.isFinite(v)&&Number.isInteger(v)&&v>=0&&v<=1000000000);
+ if(!valid){
+  $('out').classList.add('show');
+  $('all').textContent='—';$('used').textContent='—';$('leftover').textContent='—';$('scheme').textContent='—';
+  $('why').className='note calc-warning';
+  $('why').textContent='Проверьте ввод: нужны целые числа от 0 до 1 000 000 000. Слишком большие и дробные значения не поддерживаются.';
+  $('marches').innerHTML='';return;
+ }
+ let army=raw.slice(0,3),n=+ $('mc').value,cap=raw[3],total=sum(army);
  $('out').classList.add('show');
  if(!cap||!total){$('all').textContent=fmt(total);$('used').textContent='0';$('leftover').textContent=fmt(total);$('scheme').textContent='—';$('why').textContent='Введите войска и вместимость каждого марша.';$('marches').innerHTML='';return}
  let r=ratio==='auto'?autoR(army,n,cap):ratio.split(',').map(Number),policy=$('distribution').value;
