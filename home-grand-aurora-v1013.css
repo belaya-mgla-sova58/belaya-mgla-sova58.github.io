@@ -157,3 +157,20 @@ body.is-home-route .pwa-install-v540{
 @media(prefers-reduced-motion:reduce){
  body.is-home-route .home-neon-tiles-v1010 .home-neon-tile-v1010{transition:none!important}
 }
+
+/* v1013.1: Compact existing hero, no cropping and no change to embedded lettering. */
+body.is-home-route .modern-home-v424>.modern-home-hero-v424{
+ width:100%!important;
+ max-width:970px!important;
+ margin:0 auto 19px!important;
+ box-sizing:border-box!important;
+}
+body.is-home-route .modern-home-v424>.modern-home-hero-v424 img{
+ display:block!important;width:100%!important;height:auto!important;
+ max-height:none!important;object-fit:contain!important;object-position:center!important;
+}
+@media(max-width:650px){
+ body.is-home-route .modern-home-v424>.modern-home-hero-v424{
+  max-width:100%!important;margin:0 auto 13px!important;
+ }
+}
