@@ -11,12 +11,12 @@ body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10>summary:focus-v
  background-position:center 43%!important;border:1px solid rgba(140,212,255,.35)!important;
  border-radius:16px!important;box-shadow:0 10px 25px rgba(0,12,38,.20)!important;
 }
-body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="2"]{--pet-full-banner-image:url("assets/pets/generation-02.webp")}
-body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="3"]{--pet-full-banner-image:url("assets/pets/generation-03.webp")}
-body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="4"]{--pet-full-banner-image:url("assets/pets/generation-04.webp")}
-body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="5"]{--pet-full-banner-image:url("assets/pets/generation-05.webp")}
-body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="6"]{--pet-full-banner-image:url("assets/pets/generation-06.webp")}
-body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="7"]{--pet-full-banner-image:url("assets/pets/generation-07.webp")}
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="2"]{--pet-full-banner-image:url("assets/pets/generation-02.webp?v=14")}
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="3"]{--pet-full-banner-image:url("assets/pets/generation-03.webp?v=14")}
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="4"]{--pet-full-banner-image:url("assets/pets/generation-04.webp?v=14")}
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="5"]{--pet-full-banner-image:url("assets/pets/generation-05.webp?v=14")}
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="6"]{--pet-full-banner-image:url("assets/pets/generation-06.webp?v=14")}
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="7"]{--pet-full-banner-image:url("assets/pets/generation-07.webp?v=14")}
 body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10>summary .pet-stage-title,
 body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10>summary .pet-stage-faces {
  display:none!important;visibility:hidden!important;
@@ -97,4 +97,27 @@ body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]>summary .pet-s
 body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10>summary,
 body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[open]>summary{
  background-size:cover!important;background-position:center 43%!important;
+}
+
+/* Final seven-banner system: the approved first generation now uses its image too. */
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="1"]{
+ --pet-full-banner-image:url("assets/pets/generation-01.webp?v=14");
+}
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="1"]>summary,
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="1"][open]>summary,
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="1"]>summary:hover{
+ display:block!important;height:clamp(116px,12vw,160px)!important;max-height:160px!important;min-height:0!important;
+ padding:0!important;background-image:var(--pet-full-banner-image)!important;
+ background-position:center 43%!important;background-size:cover!important;background-repeat:no-repeat!important;
+ border-radius:16px!important;
+}
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="1"]>summary .pet-stage-title,
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="1"]>summary .pet-stage-faces{
+ display:none!important;visibility:hidden!important;
+}
+@media(max-width:650px){
+ body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="1"]>summary,
+ body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="1"][open]>summary {
+  height:clamp(86px,22vw,112px)!important;max-height:112px!important;padding:0!important;border-radius:10px!important;
+ }
 }
