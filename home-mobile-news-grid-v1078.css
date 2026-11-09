@@ -1,0 +1,128 @@
+/* Mobile homepage: four news banners in a compact 2 x 2 layout.
+   Intentionally overrides the old four-row mobile news layout. Desktop untouched.
+   The original four artwork assets and link destinations remain unchanged. */
+@media screen and (max-width:820px) {
+ html:not(.force-desktop-root) body.is-home-route .home-portal-v1016 .home-news-v442 .home-news-grid-v442.home-news-pair-v1022{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  grid-template-rows:repeat(2,clamp(86px,25vw,145px))!important;
+  grid-auto-flow:row!important;
+  grid-auto-rows:auto!important;
+  align-items:stretch!important;
+  justify-items:stretch!important;
+  gap:clamp(7px,1.9vw,12px)!important;
+  min-width:0!important;
+  width:100%!important;
+  height:auto!important;
+  max-height:none!important;
+  margin:0!important;
+  padding:0!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route .home-portal-v1016 .home-news-v442 .home-news-pair-v1022 > a.home-news-banner-v449,
+ html:not(.force-desktop-root) body.is-home-route .home-portal-v1016 .home-news-v442 .home-news-pair-v1022 > a.home-news-banner-v449:first-child{
+  display:block!important;
+  position:relative!important;
+  min-width:0!important;
+  max-width:100%!important;
+  width:100%!important;
+  min-height:0!important;
+  max-height:none!important;
+  height:100%!important;
+  margin:0!important;
+  grid-column:auto!important;
+  grid-row:auto!important;
+  overflow:hidden!important;
+  box-sizing:border-box!important;
+  border:1px solid rgba(226,194,125,.65)!important;
+  border-radius:10px!important;
+  box-shadow:0 5px 15px rgba(2,10,31,.35)!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route .home-portal-v1016 .home-news-v442 .home-news-pair-v1022 > a.home-news-banner-v449:nth-child(1){grid-column:1!important;grid-row:1!important;}
+ html:not(.force-desktop-root) body.is-home-route .home-portal-v1016 .home-news-v442 .home-news-pair-v1022 > a.home-news-banner-v449:nth-child(2){grid-column:2!important;grid-row:1!important;}
+ html:not(.force-desktop-root) body.is-home-route .home-portal-v1016 .home-news-v442 .home-news-pair-v1022 > a.home-news-banner-v449:nth-child(3){grid-column:1!important;grid-row:2!important;}
+ html:not(.force-desktop-root) body.is-home-route .home-portal-v1016 .home-news-v442 .home-news-pair-v1022 > a.home-news-banner-v449:nth-child(4){grid-column:2!important;grid-row:2!important;}
+ html:not(.force-desktop-root) body.is-home-route .home-news-pair-v1022 > a.home-news-banner-v449 .home-news-banner-media-v449{
+  position:absolute!important;
+  display:block!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  overflow:hidden!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route .home-news-pair-v1022 > a.home-news-banner-v449 .home-news-banner-media-v449 img{
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  min-width:0!important;
+  min-height:0!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  aspect-ratio:auto!important;
+  opacity:1!important;
+ }
+ /* Keep the owl visible in these naturally wide illustrations. */
+ html:not(.force-desktop-root) body.is-home-route .home-news-pair-v1022 > a.home-news-ru-banner-v1034 .home-news-banner-media-v449 img{object-position:72% center!important;}
+ html:not(.force-desktop-root) body.is-home-route .home-news-pair-v1022 > a.home-news-updates-banner-v1035 .home-news-banner-media-v449 img{object-position:82% center!important;}
+ html:not(.force-desktop-root) body.is-home-route .home-news-pair-v1022 > a.home-news-banner-v449 .home-news-banner-overlay-v449{
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:1!important;
+  background:linear-gradient(0deg,rgba(2,9,28,.93),rgba(2,9,28,.08) 66%)!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route .home-news-pair-v1022 > a.home-news-banner-v449 .home-news-banner-copy-v449{
+  position:absolute!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:end!important;
+  inset:auto 7px 8px 8px!important;
+  z-index:5!important;
+  width:auto!important;
+  min-width:0!important;
+  max-width:calc(100% - 15px)!important;
+  margin:0!important;
+  padding:0!important;
+  gap:0!important;
+  text-align:left!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route .home-news-pair-v1022 > a.home-news-banner-v449 .home-news-banner-copy-v449 b{
+  display:block!important;
+  min-width:0!important;
+  font:800 clamp(12px,3.05vw,17px)/1.15 Georgia,serif!important;
+  color:#fff3da!important;
+  -webkit-text-fill-color:#fff3da!important;
+  text-shadow:0 2px 5px rgba(0,0,0,.9)!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  hyphens:auto!important;
+  text-wrap:balance!important;
+ }
+ /* On narrow phones only the heading fits comfortably; preserve subtitles in HTML. */
+ html:not(.force-desktop-root) body.is-home-route .home-news-pair-v1022 > a.home-news-banner-v449 .home-news-banner-copy-v449 small{
+  display:none!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route .home-news-pair-v1022 > a.home-news-banner-v449 .home-news-banner-copy-v449 b>svg.bm-news-icon-v1076,
+ html:not(.force-desktop-root) body.is-home-route .home-news-pair-v1022 > a.home-news-banner-v449 > i{
+  display:none!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route .home-news-pair-v1022 > a.home-news-banner-v449 .home-news-banner-copy-v449 b:has(>svg.bm-news-icon-v1076){
+  display:block!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route .home-news-pair-v1022 > a.home-news-banner-v449::before,
+ html:not(.force-desktop-root) body.is-home-route .home-news-pair-v1022 > a.home-news-banner-v449::after{
+  pointer-events:none!important;
+ }
+}
+@media screen and (min-width:540px) and (max-width:820px){
+ html:not(.force-desktop-root) body.is-home-route .home-news-pair-v1022 > a.home-news-banner-v449 .home-news-banner-copy-v449 small{
+  display:block!important;
+  font:500 10px/1.22 system-ui,sans-serif!important;
+  color:#e7f3ff!important;
+  -webkit-text-fill-color:#e7f3ff!important;
+  margin-top:3px!important;
+ }
+}
