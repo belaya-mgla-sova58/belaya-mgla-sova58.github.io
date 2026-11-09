@@ -57,4 +57,50 @@ for(let step=1;step<=50;step++){
   checks++;
  }
 }
+
+/* Live gear formulas and independently documented Mithril milestones. */
+const gearText=read("essence-mithril-calculator.html");
+const gear=vm.runInNewContext(
+ section(gearText,"const gates=","const stageValues=")+
+ ";({gates,forgeCosts})"
+);
+const milestoneMithril=[10,20,30,40,50],milestoneMythic=[3,5,5,10,10];
+for(let i=0;i<5;i++){
+ assert.equal(gear.gates[i].level,(i+1)*20);
+ assert.equal(gear.gates[i].mithril,milestoneMithril[i]);
+ assert.equal(gear.gates[i].mythic,milestoneMythic[i]);
+ assert.equal(gear.gates[i].mastery,i+11);
+ checks++;
+}
+const allForging=gear.forgeCosts(0,0,20);
+assert.equal(allForging.reduce((n,r)=>n+r.essence,0),2100);
+assert.equal(allForging.reduce((n,r)=>n+r.mythic,0),55);
+checks+=2;
+for(let from=0;from<=20;from++){
+ for(let to=from;to<=20;to++){
+  const partials=(from>=4&&from<20)?4:0;
+  for(let progress=0;progress<=partials;progress++){
+   const actual=gear.forgeCosts(from,progress,to);
+   const full=Array.from({length:to-from},(_,i)=>gear.forgeCosts(from+i,0,from+i+1)).flat();
+   const expected=full.reduce((n,r)=>n+r.essence,0)-
+     (to>from?progress*2*(from+1):0);
+   assert.equal(actual.reduce((n,r)=>n+r.essence,0),expected,
+     "Mastery "+from+"."+progress+" -> "+to);
+   assert(actual.every(row=>row.essence>=0&&row.mythic>=0));
+   checks++;
+  }
+}
+const parserExprs=[
+ gearText.match(/const num=\(n,max=999999999\)=>\{[^}]+\};/)?.[0],
+ gearText.match(/const safeNum=\(v,max=999999999\)=>\{[^}]+\};/)?.[0]
+];
+assert(parserExprs.every(Boolean),"Gear inventory input guards missing");
+const gearParsers=vm.runInNewContext(parserExprs.join("\n")+"\n;({num,safeNum})");
+for(const parser of [gearParsers.num,gearParsers.safeNum]){
+ for(const invalid of [Infinity,-Infinity,NaN,"abc"]){
+  assert.equal(parser(invalid),0,"Invalid gear stock input must not count as resources");
+  checks++;
+ }
+}
+
 console.log("Калькуляторы: "+checks+" проверок пройдено.");
