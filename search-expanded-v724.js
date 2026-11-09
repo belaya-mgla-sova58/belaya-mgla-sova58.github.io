@@ -57,7 +57,7 @@ function fuzzy(a,b){if(!a||!b||a.length<4||b.length<4)return!1;const m=a.length>
 function variants(token){const out=[token];for(const group of SYNONYMS){if(group.includes(token)){for(const v of group)if(!out.includes(v))out.push(v);break}}return out}
 function phraseVariants(q){const out=[];for(const group of SYNONYMS){if(group.some(v=>q.includes(v))){for(const v of group)if(v!==q&&!out.includes(v))out.push(v)}}return out}
 function urlKey(u){try{return new URL(u,location.href).pathname.replace(/\/{2,}/g,"/").toLowerCase()}catch(e){return String(u||"").toLowerCase()}}
-async function loadIndex(){if(indexPromise)return indexPromise;indexPromise=(async()=>{try{const r=await fetch(INDEX_URL,{cache:"no-store"});if(!r.ok)throw 0;const data=await r.json();if(!data||!Array.isArray(data.items))throw 0;return data.items}catch(e){return[]}})();return indexPromise}
+async function loadIndex(){if(indexPromise)return indexPromise;indexPromise=(async()=>{try{const r=await fetch(INDEX_URL,{cache:"no-store"});if(!r.ok)throw 0;const data=await r.json();if(!data||!Array.isArray(data.items))throw 0;return data.items}catch(e){indexPromise=null;return[]}})();return indexPromise}
 function score(rec,query){const q=norm(query);if(!q)return 0;const title=norm(rec.title),desc=norm(rec.desc),path=norm(rec.url),hay=rec.text||norm(`${rec.title} ${rec.desc} ${rec.url}`);let s=0;
  if(title===q)s+=6000;else if(title.startsWith(q))s+=4200;else if(title.includes(q))s+=3000;
  if(path===q||path.replace(/ html$/," ").trim()===q)s+=2600;
