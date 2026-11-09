@@ -1,4 +1,4 @@
-/* SOVA58 v1031: unified illustrated fantasy emblems for the sidebar and homepage shortcuts. */
+/* SOVA58 v1040: minimalist neon rings for sidebar and homepage links. */
 (function(){
 'use strict';
 const designs={
@@ -17,17 +17,17 @@ const designs={
 };
 const style=document.createElement('style');
 style.id='sova-illustrated-icons-v1031';
-style.textContent='.nav-wrap nav>a.route-link>svg.sova-jewel-icon-v1031{display:block!important;flex:0 0 39px!important;width:39px!important;height:39px!important;min-width:39px!important;min-height:39px!important;margin:0!important;padding:0!important;overflow:visible!important;filter:drop-shadow(0 2px 5px rgba(0,0,0,.26))!important;transition:transform .18s,filter .18s!important}.nav-wrap nav>a.route-link:hover>svg.sova-jewel-icon-v1031,.nav-wrap nav>a.route-link.active>svg.sova-jewel-icon-v1031{transform:translateY(-1px) scale(1.045);filter:drop-shadow(0 0 7px rgba(131,215,255,.42))!important}.home-portal-v1016 .home-index-links-v1016>a>svg.sova-jewel-icon-v1031,.home-portal-v1016 .home-tools-grid-v1016>a>svg.sova-jewel-icon-v1031,.home-portal-v1016 .home-portal-links-v1016>a>svg.sova-jewel-icon-v1031,.home-portal-v1016 .home-quick-links-v1024>a>svg.sova-jewel-icon-v1031{display:block!important;flex:0 0 38px!important;width:38px!important;height:38px!important;min-width:38px!important;min-height:38px!important;margin:0!important;object-fit:contain!important;overflow:visible!important}@media(max-width:720px){.nav-wrap nav>a.route-link>svg.sova-jewel-icon-v1031{width:35px!important;height:35px!important;min-width:35px!important;min-height:35px!important;flex-basis:35px!important}}@media(prefers-reduced-motion:reduce){.nav-wrap nav>a.route-link>svg.sova-jewel-icon-v1031{transition:none!important}}';
+style.textContent='.nav-wrap nav>a.route-link>svg.sova-jewel-icon-v1031{display:block!important;flex:0 0 31px!important;width:31px!important;height:31px!important;min-width:31px!important;min-height:31px!important;margin:0!important;padding:0!important;overflow:visible!important;filter:drop-shadow(0 0 3px rgba(81,179,255,.30))!important;transition:transform .18s,filter .18s!important}.nav-wrap nav>a.route-link:hover>svg.sova-jewel-icon-v1031,.nav-wrap nav>a.route-link.active>svg.sova-jewel-icon-v1031{transform:scale(1.06);filter:drop-shadow(0 0 7px rgba(133,203,255,.67))!important}.home-portal-v1016 :is(.home-index-links-v1016,.home-tools-grid-v1016,.home-portal-links-v1016,.home-quick-links-v1024)>a>svg.sova-jewel-icon-v1031{display:block!important;flex:0 0 33px!important;width:33px!important;height:33px!important;min-width:33px!important;min-height:33px!important;overflow:visible!important;filter:drop-shadow(0 0 3px rgba(106,190,255,.33))!important}.home-more-visible-v1025 :is(.v445-topic-icon,.v424-list-icon){border-radius:50%!important;border:1px solid rgba(104,221,255,.78)!important;background:radial-gradient(circle at 34% 22%,rgba(55,113,197,.3),rgba(8,21,57,.98) 76%)!important;box-shadow:inset 0 0 8px rgba(46,139,245,.17),0 0 5px rgba(53,162,255,.38)!important}.home-more-visible-v1025 :is(.v445-topic-icon,.v424-list-icon) .home-winter-glyph-v1028{filter:drop-shadow(0 0 2px rgba(117,227,255,.65))!important}@media(max-width:720px){.nav-wrap nav>a.route-link>svg.sova-jewel-icon-v1031{width:29px!important;height:29px!important;min-width:29px!important;min-height:29px!important;flex-basis:29px!important}}@media(prefers-reduced-motion:reduce){.nav-wrap nav>a.route-link>svg.sova-jewel-icon-v1031{transition:none!important}}';
 function iconFor(key,index){
  const d=designs[key];if(!d)return null;
  const id='sova-gem-'+index;
  const xml='<svg xmlns="http://www.w3.org/2000/svg" class="sova-jewel-icon-v1031" viewBox="0 0 48 48" aria-hidden="true" focusable="false">'+
- '<defs><linearGradient id="'+id+'b" x1="0" y1="0" x2="1" y2="1"><stop stop-color="'+d.c[1]+'"/><stop offset=".62" stop-color="'+d.c[2]+'"/><stop offset="1" stop-color="#07172f"/></linearGradient><linearGradient id="'+id+'s" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff" stop-opacity=".82"/><stop offset=".45" stop-color="'+d.c[0]+'"/><stop offset="1" stop-color="'+d.c[1]+'"/></linearGradient></defs>'+
- '<rect x="2.5" y="2.5" width="43" height="43" rx="12" fill="url(#'+id+'b)" stroke="'+d.c[0]+'" stroke-opacity=".84" stroke-width="1.25"/>'+
- '<path d="M7 17Q8 7 22 6H35" stroke="#fff" stroke-opacity=".46" stroke-width="2.1" stroke-linecap="round" fill="none"/>'+
- '<rect x="5.9" y="5.9" width="36.2" height="36.2" rx="9.3" fill="none" stroke="#fff" stroke-opacity=".15"/>'+
- '<g fill="none" stroke="url(#'+id+'s)" stroke-width="2.15" stroke-linecap="round" stroke-linejoin="round">'+d.path+'</g>'+
- '<path d="m37 6 .7 2.3L40 9l-2.3.7L37 12l-.7-2.3L34 9l2.3-.7z" fill="#fff" opacity=".8"/>'+
+ '<defs><linearGradient id="'+id+'s" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7ffff"/><stop offset=".48" stop-color="'+d.c[0]+'"/><stop offset="1" stop-color="#be83ff"/></linearGradient></defs>'+
+ '<circle cx="24" cy="23" r="20.6" fill="#081a3b" fill-opacity=".64" stroke="#7fcaff" stroke-opacity=".22" stroke-width="2.7"/>'+
+ '<circle cx="24" cy="23" r="20.6" fill="none" stroke="url(#'+id+'s)" stroke-width="1.35"/>'+
+ '<path d="M8 13a20 20 0 0 1 27-6" fill="none" stroke="#b3edff" stroke-opacity=".72" stroke-width="1.3" stroke-linecap="round"/>'+
+ '<g fill="none" stroke="url(#'+id+'s)" stroke-width="2.35" stroke-linecap="round" stroke-linejoin="round">'+d.path+'</g>'+
+ '<path d="M24 42l3.4 3.4L24 48l-3.4-2.6z" fill="#7bd9ff" stroke="#b1d3ff" stroke-width=".45"/>'+
  '</svg>';
  try{return new DOMParser().parseFromString(xml,'image/svg+xml').documentElement}catch(_){return null}
 }
