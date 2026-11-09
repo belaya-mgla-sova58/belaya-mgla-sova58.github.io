@@ -127,3 +127,43 @@ body.is-pets-route .pets-redesign .pet-stage[open]>summary .pet-stage-chevron{
  right:4px!important;width:23px!important;height:23px!important;
  }
 }
+
+
+/* v17 | narrow-phone pet generations: three portraits must fit beside title.
+   Only adjusts sizing at phone widths; preserves all approved animal artwork. */
+@media screen and (max-width:420px){
+ html:not(.force-desktop-root) body.is-pets-route .pets-redesign .pet-stage>summary{
+   box-sizing:border-box!important;
+   min-width:0!important;
+   height:auto!important;
+   min-height:94px!important;
+   max-height:none!important;
+   padding:10px 34px 10px 11px!important;
+ }
+ html:not(.force-desktop-root) body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title{
+   min-width:0!important;
+   max-width:48%!important;
+   overflow-wrap:break-word;
+ }
+ html:not(.force-desktop-root) body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-faces{
+   right:29px!important;
+   width:auto!important;
+   max-width:45%!important;
+   min-width:0!important;
+   gap:2px!important;
+ }
+ html:not(.force-desktop-root) body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-photo,
+ html:not(.force-desktop-root) body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-photo:nth-child(2){
+   flex:0 1 36px!important;
+   width:36px!important;
+   height:36px!important;
+   min-width:0!important;
+   min-height:36px!important;
+   max-width:36px!important;
+   max-height:36px!important;
+   object-fit:contain!important;
+ }
+ html:not(.force-desktop-root) body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title strong{
+   font-size:clamp(16px,4.8vw,19px)!important;
+ }
+}
