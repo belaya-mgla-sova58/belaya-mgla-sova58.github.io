@@ -1,0 +1,63 @@
+/* Pet generation illustrated headers v6: remove miniature icons and show full-width winter scenes. */
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-faces{
+ display:none!important;visibility:hidden!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary,
+body.is-pets-route .pets-redesign .pet-stage[open]>summary,
+body.is-pets-route .pets-redesign .pet-stage>summary:hover,
+body.is-pets-route .pets-redesign .pet-stage>summary:focus-visible{
+ min-height:157px!important;
+ padding:22px 78px 22px 26px!important;
+ background-image:
+ linear-gradient(90deg,rgba(5,17,40,.75) 0%,rgba(6,21,48,.48) 41%,rgba(8,20,50,.05) 79%),
+ var(--pet-scene)!important;
+ background-position:center,center!important;
+ background-size:cover,cover!important;
+ background-repeat:no-repeat!important;
+ border:0!important;
+ box-shadow:inset 0 0 0 1px rgba(177,223,255,.09)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage:nth-of-type(1){--pet-scene:url("assets/pets/generation-cosmic-01-v6.svg")}
+body.is-pets-route .pets-redesign .pet-stage:nth-of-type(2){--pet-scene:url("assets/pets/generation-cosmic-02-v6.svg")}
+body.is-pets-route .pets-redesign .pet-stage:nth-of-type(3){--pet-scene:url("assets/pets/generation-cosmic-03-v6.svg")}
+body.is-pets-route .pets-redesign .pet-stage:nth-of-type(4){--pet-scene:url("assets/pets/generation-cosmic-04-v6.svg")}
+body.is-pets-route .pets-redesign .pet-stage:nth-of-type(5){--pet-scene:url("assets/pets/generation-cosmic-05-v6.svg")}
+body.is-pets-route .pets-redesign .pet-stage:nth-of-type(6){--pet-scene:url("assets/pets/generation-cosmic-06-v6.svg")}
+body.is-pets-route .pets-redesign .pet-stage:nth-of-type(7){--pet-scene:url("assets/pets/generation-cosmic-07-v6.svg")}
+/* nth-of-type above also counts other section elements in a few browser DOMs:
+   robust explicit index via catalog markup data attribute is added in pets.html. */
+body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]{--pet-scene:url("assets/pets/generation-cosmic-01-v6.svg")}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="2"]{--pet-scene:url("assets/pets/generation-cosmic-02-v6.svg")}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="3"]{--pet-scene:url("assets/pets/generation-cosmic-03-v6.svg")}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="4"]{--pet-scene:url("assets/pets/generation-cosmic-04-v6.svg")}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="5"]{--pet-scene:url("assets/pets/generation-cosmic-05-v6.svg")}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="6"]{--pet-scene:url("assets/pets/generation-cosmic-06-v6.svg")}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="7"]{--pet-scene:url("assets/pets/generation-cosmic-07-v6.svg")}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title{
+ width:auto!important;max-width:min(68%,640px)!important;
+ position:relative!important;z-index:3!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title strong{
+ color:#f8fbff!important;-webkit-text-fill-color:#f8fbff!important;
+ font-size:clamp(27px,2.5vw,37px)!important;
+ text-shadow:0 3px 13px rgba(0,10,35,.75)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title em{
+ color:#d7e8fd!important;-webkit-text-fill-color:#d7e8fd!important;
+ text-shadow:0 2px 9px #081530!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-chevron{
+ right:18px!important;z-index:4!important;
+}
+@media(max-width:680px){
+ body.is-pets-route .pets-redesign .pet-stage>summary,
+ body.is-pets-route .pets-redesign .pet-stage[open]>summary{
+  min-height:125px!important;padding:16px 45px 16px 15px!important;
+  background-position:center,right center!important;
+ }
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title{max-width:80%!important}
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title strong{
+  font-size:clamp(21px,5.5vw,27px)!important;
+ }
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-chevron{right:8px!important}
+}
