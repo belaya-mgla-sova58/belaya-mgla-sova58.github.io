@@ -1,0 +1,189 @@
+/* Белая Мгла — Royal Sapphire visual layer v1051
+   A reversible aesthetic-only overlay for the homepage.
+   Keeps all original artwork, navigation, content, click targets and functionality. */
+body.is-home-route .home-portal-v1016{
+ --royal-gold:#d6b776;--royal-light:#f4e3b7;--royal-ice:#bbebff;
+ --royal-line:rgba(217,181,112,.68);--royal-shadow:rgba(0,4,18,.4);
+}
+
+/* Rich sapphire mantle, existing cosmic picture remains behind it. */
+body.is-home-route.cosmic-visible-v444 main#appMain{
+ background-image:
+  radial-gradient(ellipse 75% 43% at 50% 0%,rgba(98,75,155,.18),transparent 76%),
+  linear-gradient(180deg,rgba(1,7,22,.18),rgba(3,9,29,.22) 42%,rgba(1,5,18,.35)),
+  url("assets/belaya-mgla-cosmos-background.avif")!important;
+ background-repeat:no-repeat,no-repeat,repeat-y!important;
+ background-size:auto,auto,auto 100vh!important;
+}
+body.is-home-route .home-portal-v1016 .home-portal-hero-v1016{
+ position:relative!important;isolation:isolate!important;
+ border:2px solid var(--royal-gold)!important;
+ border-radius:13px!important;
+ outline:1px solid rgba(181,221,252,.32)!important;
+ outline-offset:-6px!important;
+ box-shadow:0 0 0 3px rgba(8,16,43,.85),0 13px 36px rgba(0,5,25,.46),0 0 25px rgba(204,172,109,.16)!important;
+}
+body.is-home-route .home-portal-v1016 .home-portal-hero-v1016::after{
+ content:""!important;display:block!important;position:absolute!important;inset:9px!important;z-index:2!important;
+ border:1px solid rgba(244,219,159,.45)!important;border-radius:4px!important;
+ background:linear-gradient(90deg,rgba(238,201,124,.53),transparent 9%,transparent 91%,rgba(238,201,124,.53)) top/100% 1px no-repeat,
+ linear-gradient(90deg,rgba(238,201,124,.53),transparent 9%,transparent 91%,rgba(238,201,124,.53)) bottom/100% 1px no-repeat!important;
+ pointer-events:none!important;
+}
+body.is-home-route .home-portal-v1016 .home-portal-hero-v1016:before{
+ content:"✦"!important;display:block!important;position:absolute!important;z-index:3!important;top:5px!important;left:12px!important;
+ color:var(--royal-light)!important;font:17px Georgia,serif!important;
+ text-shadow:0 0 11px #b8daff!important;pointer-events:none!important;
+}
+
+/* Polished imperial panels without touching their grid geometry. */
+body.is-home-route .home-portal-v1016 :is(.home-news-v442,.home-portal-box-v1016,.home-index-v1016,.home-more-visible-v1025),
+body.is-home-route .modern-home-v424 .home-bottom-grid-v1025>.home-bear-calc-v780,
+body.is-home-route .modern-home-v424 .home-bottom-grid-v1025>.home-utility-v1025{
+ background:
+ radial-gradient(ellipse at 90% 0%,rgba(106,92,160,.23),transparent 47%),
+ linear-gradient(155deg,rgba(20,44,88,.97),rgba(8,19,48,.98) 68%,rgba(12,25,58,.98))!important;
+ border:1px solid var(--royal-line)!important;
+ border-radius:17px!important;
+ box-shadow:inset 0 1px 0 rgba(254,233,185,.2),inset 0 0 0 3px rgba(6,16,40,.4),0 13px 34px var(--royal-shadow),0 0 21px rgba(196,159,101,.07)!important;
+}
+body.is-home-route .home-portal-v1016 .home-news-v442,
+body.is-home-route .home-portal-v1016 .home-portal-box-v1016,
+body.is-home-route .modern-home-v424 .home-bottom-grid-v1025>.home-bear-calc-v780,
+body.is-home-route .modern-home-v424 .home-bottom-grid-v1025>.home-utility-v1025{position:relative!important;}
+
+/* Status typography and fine decorative rules. */
+body.is-home-route .home-portal-v1016 .home-news-v442 .modern-panel-head-v424 h2,
+body.is-home-route .home-portal-v1016 .home-portal-block-title-v1016,
+body.is-home-route .modern-home-v424 .home-more-title-v1025,
+body.is-home-route .modern-home-v424 .home-bear-calc-v780 h2,
+body.is-home-route .modern-home-v424 .home-utility-v1025 .home-quick-copy-v1024 h2{
+ color:#f7eac9!important;-webkit-text-fill-color:#f7eac9!important;
+ text-shadow:0 1px 0 rgba(0,0,0,.35),0 0 17px rgba(221,181,104,.19)!important;
+}
+body.is-home-route .home-portal-v1016 .home-portal-block-title-v1016:before{
+ color:#e9c681!important;text-shadow:0 0 8px rgba(219,177,92,.56)!important;
+}
+body.is-home-route .home-portal-v1016 .home-news-v442 .modern-panel-head-v424,
+body.is-home-route .home-portal-v1016 .home-portal-box-v1016 .home-portal-block-title-v1016,
+body.is-home-route .modern-home-v424 .home-more-title-v1025{
+ border-bottom:1px solid rgba(220,187,125,.39)!important;
+}
+body.is-home-route .home-portal-v1016 .modern-panel-head-v424>a{
+ color:#d5f0ff!important;-webkit-text-fill-color:#d5f0ff!important;
+}
+
+/* Editorial banners: always keep the actual approved image visible. */
+body.is-home-route .home-portal-v1016 .home-news-v442 .home-news-pair-v1022>a.home-news-banner-v449{
+ border:1px solid rgba(239,205,136,.79)!important;
+ border-radius:12px!important;
+ box-shadow:inset 0 0 0 2px rgba(5,16,43,.7),0 7px 20px rgba(0,5,25,.33),0 0 13px rgba(221,187,114,.13)!important;
+}
+body.is-home-route .home-portal-v1016 .home-news-v442 .home-news-pair-v1022>a.home-news-banner-v449 .home-news-banner-media-v449,
+body.is-home-route .home-portal-v1016 .home-news-v442 .home-news-pair-v1022>a.home-news-banner-v449 .home-news-banner-media-v449 img{
+ display:block!important;visibility:visible!important;opacity:1!important;
+}
+body.is-home-route .home-portal-v1016 .home-news-v442 .home-news-pair-v1022>a.home-news-banner-v449 .home-news-banner-overlay-v449{
+ background:linear-gradient(0deg,rgba(2,8,28,.88),rgba(7,19,44,.21) 60%,rgba(5,15,40,.1))!important;
+}
+body.is-home-route .home-portal-v1016 .home-news-v442 .home-news-pair-v1022>a.home-news-banner-v449 .home-news-banner-copy-v449 b{
+ color:#fff4d5!important;-webkit-text-fill-color:#fff4d5!important;
+ text-shadow:0 2px 9px rgba(0,0,0,.75)!important;
+}
+body.is-home-route .home-portal-v1016 .home-news-v442 .home-news-pair-v1022>a.home-news-banner-v449 .home-news-banner-copy-v449 small{
+ color:#dcefff!important;-webkit-text-fill-color:#dcefff!important;
+}
+body.is-home-route .home-portal-v1016 .home-news-v442 .home-news-pair-v1022>a.home-news-banner-v449:focus-visible{
+ outline:2px solid #fff2cb!important;outline-offset:3px!important;
+}
+
+/* Jewel-toned link tiles. All original icons remain unchanged. */
+body.is-home-route .home-portal-v1016 :is(.home-index-links-v1016,.home-tools-grid-v1016,.home-portal-links-v1016)>a,
+body.is-home-route .modern-home-v424 .home-utility-v1025 .home-quick-links-v1024>a{
+ background:linear-gradient(146deg,rgba(41,70,121,.96),rgba(13,30,68,.98))!important;
+ border:1px solid rgba(181,167,145,.55)!important;
+ border-radius:12px!important;
+ box-shadow:inset 0 1px 0 rgba(232,213,178,.12),0 6px 15px rgba(1,7,27,.22)!important;
+}
+body.is-home-route .home-portal-v1016 :is(.home-index-links-v1016,.home-tools-grid-v1016,.home-portal-links-v1016)>a:hover,
+body.is-home-route .modern-home-v424 .home-utility-v1025 .home-quick-links-v1024>a:hover{
+ border-color:#f5d898!important;
+ background:linear-gradient(145deg,#345a92,#152b59)!important;
+ box-shadow:inset 0 1px 0 rgba(255,233,181,.2),0 8px 22px rgba(1,8,32,.28),0 0 16px rgba(210,176,109,.18)!important;
+}
+body.is-home-route .home-portal-v1016 .home-index-links-v1016 b,
+body.is-home-route .home-portal-v1016 .home-portal-links-v1016 b,
+body.is-home-route .home-portal-v1016 .home-tools-grid-v1016 span{
+ color:#f8f4e9!important;-webkit-text-fill-color:#f8f4e9!important;
+}
+body.is-home-route .home-portal-v1016 :is(.home-index-links-v1016,.home-portal-links-v1016) small{
+ color:#d6e8fa!important;-webkit-text-fill-color:#d6e8fa!important;
+}
+
+/* Gold button, fine sparkling edges. */
+body.is-home-route .home-bear-calc-v780 .home-bear-calc-btn-v780{
+ border:1px solid #ffe5a9!important;
+ color:#26190d!important;
+ background:linear-gradient(180deg,#fff1bf 0%,#e4ba65 23%,#c98b33 78%,#8f5a21 100%)!important;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.56),0 8px 22px rgba(0,3,15,.32),0 0 20px rgba(222,165,69,.16)!important;
+}
+body.is-home-route .home-bear-calc-v780 .home-bear-calc-btn-v780:hover{
+ filter:brightness(1.09)!important;
+}
+
+/* Decorative detailing in side nav without covering buttons. */
+body.is-home-route .nav-wrap{
+ border-right:1px solid rgba(225,186,117,.6)!important;
+ box-shadow:inset -1px 0 0 rgba(249,222,156,.12),5px 0 26px rgba(0,3,20,.34)!important;
+}
+body.is-home-route .nav-wrap nav a.active,
+body.is-home-route .nav-wrap nav a[aria-current="page"]{
+ border-color:rgba(237,197,120,.83)!important;
+ box-shadow:inset 0 1px 0 rgba(255,232,176,.15),0 0 12px rgba(203,167,100,.19)!important;
+}
+body.is-home-route .mobile-topbar,
+body.is-home-route .mobile-bottom-v424{
+ border-color:rgba(218,181,114,.62)!important;
+ background:linear-gradient(145deg,#0b1a39,#193464)!important;
+}
+body.is-home-route .mobile-bottom-v424 a[aria-current="page"],
+body.is-home-route .mobile-bottom-v424 a.active{
+ color:#f7dfa5!important;
+}
+
+/* Related materials use the same quiet ceremonial trim. */
+body.is-home-route .home-more-visible-v1025 .modern-panel-v424{
+ border:1px solid rgba(216,180,112,.45)!important;
+ background:linear-gradient(145deg,rgba(18,37,75,.97),rgba(7,20,47,.98))!important;
+ border-radius:13px!important;
+ box-shadow:inset 0 1px 0 rgba(251,223,171,.08),0 7px 17px rgba(0,5,26,.19)!important;
+}
+body.is-home-route .modern-home-footer-v424{
+ color:#e3d0a8!important;border-top:1px solid rgba(221,178,104,.38)!important;
+}
+
+/* Mobile gets the same finish but not heavy effects or new layout. */
+@media screen and (max-width:820px){
+ html:not(.force-desktop-root) body.is-home-route .home-portal-v1016 .home-portal-hero-v1016{
+  border-width:1px!important;border-radius:14px!important;outline-offset:-5px!important;
+  box-shadow:0 7px 18px rgba(0,7,28,.29),0 0 0 2px rgba(197,160,96,.18)!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route .home-portal-v1016 .home-portal-hero-v1016:after{
+  inset:6px!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route .home-portal-v1016 :is(.home-news-v442,.home-portal-box-v1016,.home-index-v1016,.home-more-visible-v1025),
+ html:not(.force-desktop-root) body.is-home-route .modern-home-v424 .home-bottom-grid-v1025>.home-bear-calc-v780,
+ html:not(.force-desktop-root) body.is-home-route .modern-home-v424 .home-bottom-grid-v1025>.home-utility-v1025{
+  border-radius:13px!important;
+  box-shadow:inset 0 1px rgba(255,231,179,.15),0 6px 15px rgba(0,5,25,.21)!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route .home-news-v442 .home-news-pair-v1022>a.home-news-banner-v449{
+  box-shadow:0 3px 11px rgba(1,6,24,.23)!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route.cosmic-visible-v444 main#appMain{
+  background:transparent!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ body.is-home-route .home-portal-v1016 *{transition:none!important;animation:none!important;}
+}
