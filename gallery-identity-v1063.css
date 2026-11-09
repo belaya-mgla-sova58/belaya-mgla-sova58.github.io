@@ -71,3 +71,59 @@ body.is-calculators-route a.calc-hub-card{
  body:is(.is-events-route,.is-heroes-route,.is-pets-route,.is-experts-route,.is-other-route,.is-calculators-route)
  :is(a,button,summary){transition:none!important;}
 }
+
+
+/* v1064 | Crystal hall polish: restrained masthead framing and section rhythm.
+   Original banner art, crests, portraits and icons are left untouched. */
+body.modern-v424:not(.is-home-route) :is(.page-heading-v424.frost-header-v431,.gen-hub-hero,.gen-page-hero,.experts-head,.pets-redesign-head,.calc-hub-head){
+ border-radius:clamp(15px,1.6vw,22px)!important;
+ outline:1px solid rgba(224,243,255,.24);
+ outline-offset:3px;
+ margin-bottom:clamp(19px,2.4vw,33px)!important;
+}
+body.modern-v424:not(.is-home-route) :is(.page-heading-v424.frost-header-v431,.gen-hub-hero,.gen-page-hero,.experts-head,.pets-redesign-head,.calc-hub-head) h1{
+ line-height:1.15!important;
+ text-wrap:balance;
+}
+body.modern-v424:not(.is-home-route) :is(.page-heading-v424.frost-header-v431,.gen-hub-hero,.gen-page-hero,.experts-head,.pets-redesign-head,.calc-hub-head) p{
+ line-height:1.58!important;
+ text-wrap:pretty;
+}
+/* Repeating chapter boundaries with no floating ornamental elements. */
+body.is-events-route .event-group-v522 + .event-group-v522,
+body.is-pets-route .pet-redesign .pet-stage + .pet-stage,
+body.is-experts-route .experts-clean .wave + .wave,
+body.is-other-route .kb-clean-group-v920 + .kb-clean-group-v920,
+body.is-calculators-route .calc-hub-group + .calc-hub-group{
+ margin-top:clamp(15px,1.8vw,24px)!important;
+}
+body:is(.is-events-route,.is-heroes-route,.is-pets-route,.is-experts-route,.is-other-route,.is-calculators-route)
+ :is(.event-group-v522,.gen-acc,.pet-stage,.experts-clean .wave,.kb-clean-group-v920,.calc-hub-group){
+ scroll-margin-top:90px;
+}
+body:is(.is-events-route,.is-heroes-route,.is-pets-route,.is-experts-route,.is-other-route,.is-calculators-route)
+ :is(.event-group-head-v522,.pet-section-heading,.calc-hub-group>h2,.kb-clean-group-v920>h2){
+ letter-spacing:.015em;
+ text-wrap:balance;
+}
+/* Preserve image aspect ratios and natural sizing in illustrated banners. */
+body.modern-v424:not(.is-home-route) .route-page.active > section[class*="-image-header-"] > img{
+ max-width:100%;
+ height:auto;
+}
+/* Focus feedback is elegant and visible, also when no mouse is present. */
+body.modern-v424:not(.is-home-route) .route-page.active :is(a,button,summary):focus-visible{
+ outline:2px solid #ffe6b6!important;
+ outline-offset:3px!important;
+}
+@media screen and (max-width:820px){
+ html:not(.force-desktop-root) body.modern-v424:not(.is-home-route)
+ :is(.page-heading-v424.frost-header-v431,.gen-hub-hero,.gen-page-hero,.experts-head,.pets-redesign-head,.calc-hub-head){
+  outline-offset:1px;
+  margin-bottom:16px!important;
+ }
+ html:not(.force-desktop-root) body.modern-v424:not(.is-home-route)
+ :is(.page-heading-v424.frost-header-v431,.gen-hub-hero,.gen-page-hero,.experts-head,.pets-redesign-head,.calc-hub-head) h1{
+  overflow-wrap:break-word;
+ }
+}
