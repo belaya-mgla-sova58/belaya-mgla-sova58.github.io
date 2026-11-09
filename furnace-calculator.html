@@ -74,7 +74,7 @@
  const ids={'Посольство':'curEmbassy','Научный центр':'curResearch','Лагерь пехоты':'curInfantry','Лагерь стрелков':'curMarksman','Лагерь копейщиков':'curLancer'};
  const icon={'Посольство':'🏛️','Научный центр':'🔬','Лагерь пехоты':'🛡️','Лагерь стрелков':'🏹','Лагерь копейщиков':'⚔️','Топка':'🔥'};
  for(let n=20;n<=30;n++){from.add(new Option('Топка '+n,n));to.add(new Option('Топка '+n,n));}
- for(const [name,id] of Object.entries(ids)){const el=document.getElementById(id);for(let n=15;n<=29;n++)el.add(new Option('Ур. '+n,n));}
+ for(const [name,id] of Object.entries(ids)){const el=document.getElementById(id);const firstKnownLevel=name==='Посольство'?19:15;for(let n=firstKnownLevel;n<=29;n++)el.add(new Option('Ур. '+n,n));}
  from.value='20';to.value='25';
  const defaults={'curEmbassy':19,'curResearch':19,'curInfantry':19,'curMarksman':19,'curLancer':19};Object.entries(defaults).forEach(([id,v])=>document.getElementById(id).value=String(v));
  const add=(a,b)=>a.map((v,i)=>v+b[i]);
