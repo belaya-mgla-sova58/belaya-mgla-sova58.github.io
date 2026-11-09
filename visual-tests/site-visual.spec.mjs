@@ -30,12 +30,12 @@ for (const [name, path] of pages) {
 
     // Prevent an old homepage script from replacing the preloaded hero.
     if (path === 'index.html') {
-      const hero = page.locator('.home-stamped-hero-v441 img.home-stamped-img-v441');
+      const hero = page.locator('.home-portal-hero-v1016 img.home-stamped-img-v441');
       await expect(hero, 'На главной должен быть оригинальный утверждённый баннер').toHaveAttribute(
-        'src', 'assets/home-hero-polish-v447.webp'
+        'src', 'assets/home-mockup-owl-hero-v1016.webp'
       );
       // Stable, server-rendered Bear helper card replaces the old late DOM swap.
-      await expect(page.locator('.modern-home-v424 > .home-bear-calc-v780')).toHaveCount(1);
+      await expect(page.locator('.home-bottom-grid-v1025 > .home-bear-calc-v780')).toHaveCount(1);
       await expect(page.locator('style[data-home-bear-calc-v780]')).toHaveCount(0);
       await expect(page.locator('.home-today-v581')).toHaveCount(0);
     }
