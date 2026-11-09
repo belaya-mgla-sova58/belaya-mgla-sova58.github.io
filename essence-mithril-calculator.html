@@ -838,7 +838,7 @@ body.is-essence-mithril-calc-route #ecApp .ec-pair-head {
  const stageValues=[-1,0,20,40,60,80,100];
  const $=id=>document.getElementById(id);
  const fmt=n=>Math.max(0,Math.floor(Number(n)||0)).toLocaleString('ru-RU');
- const num=(n,max=999999999)=>Math.max(0,Math.min(max,Math.floor(Number(n)||0)));
+ const num=(n,max=999999999)=>{const v=Number(n);return Number.isFinite(v)?Math.max(0,Math.min(max,Math.floor(v))):0;};
  const defaultItem=()=>({gear:'inf-gloves',qty:1,masteryFrom:0,masteryProgress:0,masteryTo:0,mithrilFrom:-1,mithrilTo:-1});
  const defaultState=()=>({items:[defaultItem()],firstGateMythic:3,stock:{essence:0,mithril:0,mythic:0}});
  const requiredMastery=s=>s<0?0:s===0?10:(10+s/20);
@@ -1032,7 +1032,7 @@ body.is-essence-mithril-calc-route #ecApp .ec-pair-head {
 "use strict";
 const storageKey="sova58-gear-xp-v2",$=id=>document.getElementById(id);
 const fmt=n=>Math.round(Math.max(0,n)).toLocaleString("ru-RU");
-const safeNum=(v,max=999999999)=>Math.min(max,Math.max(0,Math.floor(Number(v)||0)));
+const safeNum=(v,max=999999999)=>{const n=Number(v);return Number.isFinite(n)?Math.min(max,Math.max(0,Math.floor(n))):0;};
 const regularXP=level=>{
 if(level<1||level>100)return 0;
 if(level<=29)return 10+5*(level-1);
