@@ -356,3 +356,21 @@ html:not(.force-desktop-root) body.is-home-route .home-news-pair-v1022>a{
  overflow:hidden!important;box-sizing:border-box!important;
 }
 }
+
+/* v1050: Lighthouse identified the dynamically inserted footer, not the news text. */
+@media screen and (max-width:820px){
+html:not(.force-desktop-root) body.is-home-route.modern-v424 > footer.site-footer-v256{
+ background:linear-gradient(120deg,#102749,#0c1e3d)!important;
+ border-color:rgba(147,203,247,.43)!important;
+}
+html:not(.force-desktop-root) body.is-home-route.modern-v424 > footer.site-footer-v256 .site-footer-copy strong{
+ color:#effaff!important;-webkit-text-fill-color:#effaff!important;
+}
+html:not(.force-desktop-root) body.is-home-route.modern-v424 > footer.site-footer-v256 .site-footer-copy span{
+ color:#cde7fa!important;-webkit-text-fill-color:#cde7fa!important;
+}
+html:not(.force-desktop-root) body.is-home-route.modern-v424 > footer.site-footer-v256 button.site-footer-top{
+ color:#f6fbff!important;-webkit-text-fill-color:#f6fbff!important;
+ background:#173e67!important;border-color:#93c6e6!important;
+}
+}
