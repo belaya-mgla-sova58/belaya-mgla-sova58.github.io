@@ -1181,3 +1181,41 @@ body.site-hq-v407 .route-page>.section[id^="guide-start-"]{scroll-margin-top:82p
 @media(prefers-reduced-motion:reduce){
  .nav-wrap nav>a.route-link>.sidebar-color-icon{transition:none!important}
 }
+
+
+/* v1032: clean original colorful game art without fake metallic square surrounds. */
+.nav-wrap nav>a.route-link>.sidebar-color-icon{
+ display:block!important;visibility:visible!important;opacity:1!important;
+ flex:0 0 33px!important;width:33px!important;height:33px!important;
+ min-width:33px!important;min-height:33px!important;
+ max-width:33px!important;max-height:33px!important;
+ margin:0!important;padding:2px!important;box-sizing:border-box!important;
+ background:none!important;border:0!important;border-radius:0!important;
+ outline:0!important;object-fit:contain!important;
+ box-shadow:none!important;
+ filter:drop-shadow(0 2px 2px rgba(2,7,24,.4)) drop-shadow(0 0 5px rgba(105,201,251,.17))!important;
+}
+.nav-wrap nav>a.route-link.active>.sidebar-color-icon,
+.nav-wrap nav>a.route-link:hover>.sidebar-color-icon{
+ background:none!important;border:0!important;box-shadow:none!important;
+ filter:drop-shadow(0 1px 2px rgba(1,8,23,.35)) drop-shadow(0 0 7px rgba(119,211,255,.42))!important;
+}
+.nav-wrap nav>a.route-link{gap:11px!important;}
+@media(max-width:740px){.nav-wrap nav>a.route-link>.sidebar-color-icon{
+ flex-basis:30px!important;width:30px!important;height:30px!important;
+ min-width:30px!important;min-height:30px!important;
+ max-width:30px!important;max-height:30px!important;
+}}
+body.is-home-route .home-portal-v1016 .home-index-links-v1016>a>img,
+body.is-home-route .home-portal-v1016 .home-tools-grid-v1016>a>img,
+body.is-home-route .home-portal-v1016 .home-portal-links-v1016>a>img,
+body.is-home-route .home-portal-v1016 .home-quick-links-v1024>a>img{
+ display:block!important;visibility:visible!important;opacity:1!important;
+ object-fit:contain!important;position:static!important;
+ width:36px!important;height:36px!important;min-width:36px!important;min-height:36px!important;
+ max-width:36px!important;max-height:36px!important;flex:0 0 36px!important;
+ padding:2px!important;box-sizing:border-box!important;
+ border:0!important;outline:0!important;border-radius:0!important;
+ background:none!important;box-shadow:none!important;
+ filter:drop-shadow(0 2px 2px rgba(0,8,33,.4)) drop-shadow(0 0 5px rgba(106,198,253,.2))!important;
+}
