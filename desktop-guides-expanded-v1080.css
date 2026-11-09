@@ -1,0 +1,199 @@
+/* Белая Мгла | Expansive desktop reading rooms v1080.
+   Shared across guides and directories, not homepage. Pure layout/paint changes:
+   no rewritten game data, no image swaps, no JS or mobile rules. */
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine) {
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route){
+  --guide-pc-gutter:clamp(17px,1.8vw,34px);
+  --guide-pc-gap:clamp(15px,1.35vw,24px);
+  --guide-pc-line:rgba(204,171,108,.38);
+  --guide-pc-glow:0 14px 36px rgba(1,10,31,.23);
+ }
+ /* Workspace follows available desktop space, keeping the site sidebar. */
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route) main#appMain{
+  box-sizing:border-box!important;
+  width:calc(100% - var(--desktop-sidebar,214px))!important;
+  max-width:none!important;
+  margin-left:var(--desktop-sidebar,214px)!important;
+  margin-right:0!important;
+  padding:clamp(16px,1.4vw,28px) var(--guide-pc-gutter) 70px!important;
+  min-width:0!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route) main#appMain>.route-page.active{
+  box-sizing:border-box!important;
+  display:block!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0 0 38px!important;
+ }
+ /* Remove inherited narrow-column ceilings on article and guide containers. */
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route) main#appMain>.route-page.active :is(
+  .guide-page-v69,.jero-page,.hero-gens-page,.gen-page,.gen-page-wrap,.pet-detail-page,
+  .kb-page-v415,.kb-clean-v920,.faq-wrap,.build-hub,.buildings-wrap,
+  .canyon-wrap,.crazy-joe-guide,.fishing-guide-v690,.foundry-guide,.foundry-wrap,
+  .experts-clean,.pets-redesign,.calc-hub,.ag,.ag-page,.resource-page,.farm-wrap,
+  .endless-guide,.news-shell,.news-page,.content-wrap,.page-shell
+ ){
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  box-sizing:border-box!important;
+ }
+ /* Hero images must never be stretched/cropped when the content widens. */
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+ main#appMain>.route-page.active>section[class*="-image-header-"]{
+  width:100%!important;max-width:100%!important;min-width:0!important;
+  margin:8px 0 18px!important;
+  padding:0!important;border:0!important;background:none!important;
+  box-shadow:none!important;overflow:visible!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+ main#appMain>.route-page.active>section[class*="-image-header-"]>img{
+  display:block!important;width:100%!important;max-width:100%!important;
+  height:auto!important;object-fit:contain!important;
+ }
+ /* Full-width magazine panels with predictable visual rhythm. */
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+ .route-page.active>:is(.page-heading-v424,.intro,.section,.guide-page-v69,.related-guides-v625){
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin-left:0!important;
+  margin-right:0!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+ .route-page.active>.page-heading-v424{
+  padding:clamp(26px,2.8vw,44px) clamp(28px,3vw,52px)!important;
+  margin-bottom:var(--guide-pc-gap)!important;
+  border:1px solid var(--guide-pc-line)!important;
+  border-radius:20px!important;
+  box-shadow:var(--guide-pc-glow)!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+ .route-page.active>.intro{
+  padding:clamp(23px,2.25vw,36px)!important;
+  margin:0 0 var(--guide-pc-gap)!important;
+  border-radius:20px!important;
+  border:1px solid var(--guide-pc-line)!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+ .route-page.active>.section{
+  box-sizing:border-box!important;
+  padding:clamp(23px,2.15vw,36px)!important;
+  margin:0 0 var(--guide-pc-gap)!important;
+  border-radius:19px!important;
+  border:1px solid rgba(160,196,231,.32)!important;
+  box-shadow:0 9px 24px rgba(2,12,39,.12)!important;
+ }
+ /* Generous expandable handbook: compact summaries side by side,
+    long expanded content uses both columns. */
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+ .route-page.active .guide-page-v69{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  align-items:start!important;
+  gap:var(--guide-pc-gap)!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+ .route-page.active .guide-page-v69>:not(details.guide-fold-v414){
+  grid-column:1/-1!important;
+  min-width:0!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+ .route-page.active .guide-page-v69>details.guide-fold-v414{
+  width:100%!important;min-width:0!important;
+  margin:0!important;grid-column:auto!important;
+  border:1px solid var(--guide-pc-line)!important;
+  border-radius:17px!important;
+  box-shadow:0 10px 27px rgba(0,7,30,.19)!important;
+  overflow:hidden!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+ .route-page.active .guide-page-v69>details.guide-fold-v414[open]{
+  grid-column:1/-1!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+ .guide-fold-v414>.guide-fold-summary-v414{
+  padding:clamp(16px,1.7vw,26px)!important;
+  gap:14px!important;
+  min-height:66px!important;
+  line-height:1.35!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+ .guide-fold-v414>.guide-fold-body-v414{
+  box-sizing:border-box!important;
+  padding:clamp(22px,2vw,33px)!important;
+  min-width:0!important;
+  overflow-wrap:break-word;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+ :is(.guide-fold-body-v414,.intro,.section,.jero-section,.canyon-wrap>.guide-section,.bear-card)
+ > :is(p,ul,ol,blockquote){
+  max-width:96ch!important;
+  line-height:1.72!important;
+ }
+ /* Contents and quick guides use the freed-up width without crowded tiles. */
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+ .route-page.active .page-toc-links-v409{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  align-items:start!important;
+  gap:9px 15px!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+ .route-page.active :is(.guide-nav-grid,.related-guides-grid-v625,.kb-clean-grid-v920,.build-stages){
+  display:grid!important;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))!important;
+  gap:var(--guide-pc-gap)!important;
+  align-items:stretch!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+ .route-page.active :is(.guide-nav-grid,.related-guides-grid-v625,.kb-clean-grid-v920,.build-stages)>*{
+  box-sizing:border-box!important;min-width:0!important;max-width:100%!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+ .route-page.active :is(.guide-nav-card,.related-guide-card-v625,.kb-clean-card-v920,.build-stage){
+  border-radius:16px!important;
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+ }
+ @media (prefers-reduced-motion:no-preference){
+  html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+  .route-page.active :is(.guide-nav-card,.related-guide-card-v625,.kb-clean-card-v920,.build-stage):hover{
+   transform:translateY(-2px);
+  }
+ }
+ /* Gallery catalogues and individual hero cards. Leave existing artwork intact. */
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+ .route-page.active .pets-redesign .pet-card-grid{
+  grid-template-columns:repeat(auto-fit,minmax(270px,1fr))!important;
+  gap:var(--guide-pc-gap)!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+ .route-page.active .jero-page :is(.jero-skill-grid,.jero-mode-grid){
+  gap:var(--guide-pc-gap)!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+ .route-page.active .faq-wrap .faq-grid.faq-accordion-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:var(--guide-pc-gap)!important;
+ }
+ /* Wide articles keep tables usable and images natural. */
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+ .route-page.active :is(.table-wrap,.ec-table-wrap,.position-table-wrap-v941,.table-responsive,.guide-table-wrap){
+  max-width:100%!important;
+  overflow-x:auto!important;
+  scrollbar-width:thin;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+ .route-page.active :is(.guide-fold-body-v414,.section,.jero-section,.canyon-wrap>.guide-section) :is(figure,img){
+  max-width:100%;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424:not(.is-home-route)
+ .route-page.active :is(a,button,summary):focus-visible{
+  outline:2px solid #f3d494!important;outline-offset:3px!important;
+ }
+}
