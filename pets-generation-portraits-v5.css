@@ -1,0 +1,108 @@
+/* SOVA58 pet generations: actual verified in-game animal portraits, enlarged into banners.
+   1: hyena/wolf/musk ox; 2: tapir/titan roc; 3: elk/snow leopard;
+   4: cave lion/snow ape; 5: iron rhino/saber-tooth; 6: mammoth/frost gorilla;
+   7: frost chameleon. No generated character artwork or HTML changes. */
+body.is-pets-route .pets-redesign .pet-stage > summary,
+body.is-pets-route .pets-redesign .pet-stage[open] > summary {
+  position:relative!important;
+  min-height:154px!important;
+  padding:20px 74px 20px 25px!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  background:
+    radial-gradient(ellipse at 81% 35%,color-mix(in srgb,var(--pet-accent) 24%,transparent),transparent 51%),
+    linear-gradient(90deg,#0c2042 0%,#142750 55%,#172a50 100%)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage > summary::after {
+  content:""!important;
+  position:absolute!important;left:18px!important;right:18px!important;bottom:0!important;top:auto!important;
+  display:block!important;height:2px!important;
+  background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--pet-accent) 75%,#cad9ff),transparent)!important;
+  opacity:.76!important;pointer-events:none!important;
+}
+body.is-pets-route .pets-redesign .pet-stage > summary .pet-stage-title {
+  position:relative!important;z-index:4!important;
+  width:45%!important;max-width:45%!important;
+  text-shadow:0 2px 12px rgba(0,8,27,.57)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage > summary .pet-stage-title strong{
+  font-size:clamp(25px,2.5vw,34px)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage > summary .pet-stage-faces {
+  position:absolute!important;
+  right:82px!important;top:50%!important;
+  display:flex!important;align-items:center!important;justify-content:flex-end!important;
+  transform:translateY(-50%)!important;
+  gap:10px!important;
+  height:132px!important;
+  z-index:2!important;
+  overflow:visible!important;
+}
+body.is-pets-route .pets-redesign .pet-stage > summary .pet-stage-photo {
+  display:block!important;
+  width:107px!important;height:107px!important;
+  flex:0 0 107px!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  margin:0!important;
+  border-radius:20px!important;
+  border:2px solid color-mix(in srgb,var(--pet-accent) 78%,#ecf8ff)!important;
+  background:#162c4a!important;
+  box-shadow:0 0 0 5px rgba(9,23,51,.35),
+    0 0 19px color-mix(in srgb,var(--pet-accent) 25%,transparent),
+    0 8px 17px rgba(0,7,25,.32)!important;
+  transform:none!important;
+  transition:transform .18s ease,box-shadow .18s ease!important;
+}
+body.is-pets-route .pets-redesign .pet-stage > summary:hover .pet-stage-photo,
+body.is-pets-route .pets-redesign .pet-stage > summary:hover .pet-stage-photo:first-child {
+  transform:translateY(-3px)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage > summary .pet-stage-chevron {
+  z-index:5!important;right:17px!important;
+}
+@media(max-width:950px){
+  body.is-pets-route .pets-redesign .pet-stage > summary .pet-stage-faces{gap:7px!important;right:65px!important}
+  body.is-pets-route .pets-redesign .pet-stage > summary .pet-stage-photo{
+    width:78px!important;height:78px!important;flex-basis:78px!important;border-radius:15px!important;
+  }
+  body.is-pets-route .pets-redesign .pet-stage > summary .pet-stage-title{
+    width:50%!important;max-width:50%!important;
+  }
+}
+@media(max-width:620px){
+  body.is-pets-route .pets-redesign .pet-stage > summary,
+  body.is-pets-route .pets-redesign .pet-stage[open] > summary{
+    min-height:113px!important;padding:14px 42px 14px 14px!important;
+  }
+  body.is-pets-route .pets-redesign .pet-stage > summary .pet-stage-title{
+    width:53%!important;max-width:53%!important;
+  }
+  body.is-pets-route .pets-redesign .pet-stage > summary .pet-stage-title strong{
+    font-size:clamp(19px,5vw,25px)!important;
+  }
+  body.is-pets-route .pets-redesign .pet-stage > summary .pet-stage-faces{
+    right:39px!important;gap:3px!important;height:78px!important;
+  }
+  body.is-pets-route .pets-redesign .pet-stage > summary .pet-stage-photo{
+    width:49px!important;height:49px!important;flex-basis:49px!important;
+    border-width:1px!important;border-radius:11px!important;
+    box-shadow:0 0 0 2px rgba(9,23,51,.35),0 3px 9px rgba(0,7,25,.25)!important;
+  }
+  body.is-pets-route .pets-redesign .pet-stage > summary .pet-stage-chevron{
+    right:7px!important;
+  }
+}
+@media(max-width:390px){
+  body.is-pets-route .pets-redesign .pet-stage > summary .pet-stage-photo{
+    width:39px!important;height:39px!important;flex-basis:39px!important;
+  }
+  body.is-pets-route .pets-redesign .pet-stage > summary .pet-stage-title{
+    width:55%!important;max-width:55%!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  body.is-pets-route .pets-redesign .pet-stage > summary .pet-stage-photo{
+    transition:none!important;transform:none!important;
+  }
+}
