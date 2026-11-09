@@ -2,11 +2,11 @@
 (function(){
 'use strict';
 const designs={
- 'index.html':{c:['#7eeaff','#257fbd','#0a285f'],path:'<path d="M10 24 24 12l14 12v14H10z"/><path d="M19 38V27h10v11"/><path d="M7 24 24 9l17 15"/>'},
+ 'index.html':{c:['#7eeaff','#257fbd','#0a285f'],path:'<path d="M9 39V19h5V12l5 4V9l5-5 5 5v7l5-4v7h5v20z"/><path d="M14 39V24h20v15M20 39v-8a4 4 0 0 1 8 0v8M19 22h2M27 22h2"/>'},
  'events.html':{c:['#8ceaff','#2689ae','#12376e'],path:'<rect x="10" y="14" width="28" height="25" rx="3"/><path d="M16 10v8M32 10v8M10 22h28"/><path d="m24 25 1.5 4.5L30 31l-4.5 1.5L24 37l-1.5-4.5L18 31l4.5-1.5z"/>'},
  'heroes.html':{c:['#edc5ff','#9953de','#39246f'],path:'<path d="M24 9 10 15v11c0 9 7 13 14 17 7-4 14-8 14-17V15z"/><path d="m24 17 2.6 5.3 5.8.9-4.2 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8-4.2-4.1 5.8-.9z"/>'},
  'gear.html':{c:['#d3f9ff','#4bb6d9','#1a4774'],path:'<path d="m17 11 7-3 7 3 9 8-6 6-4-4v19H18V21l-4 4-6-6z"/><path d="M18 12c3 5 9 5 12 0M20 34h8"/>'},
- 'experts.html':{c:['#ffcaff','#b05bc6','#4a286d'],path:'<path d="m8 19 16-9 16 9-16 9zM14 25v9c6 5 14 5 20 0v-9M40 19v14"/><path d="m40 33-2 5h4z"/>'},
+ 'experts.html':{c:['#ffcaff','#b05bc6','#4a286d'],path:'<path d="M24 13c-6-4-12-4-16-2v25c5-2 11-2 16 2 5-4 11-4 16-2V11c-4-2-10-2-16 2zM24 13v25M13 20h6M29 20h6M14 26h5M29 26h5"/><path d="m24 5 1.4 3.6L29 10l-3.6 1.4L24 15l-1.4-3.6L19 10l3.6-1.4z"/>'},
  'pets.html':{c:['#bcffeb','#39c8af','#0a655d'],path:'<path d="M16 28c-4 4-4 11 1 12 3 1 5-1 7-1s4 2 7 1c5-1 5-8 1-12-4-5-12-5-16 0z"/><ellipse cx="13" cy="21" rx="3" ry="4"/><ellipse cx="21" cy="15" rx="3" ry="4"/><ellipse cx="30" cy="15" rx="3" ry="4"/><ellipse cx="37" cy="21" rx="3" ry="4"/>'},
  'calculators.html':{c:['#ffe7ae','#e5a843','#81511d'],path:'<rect x="12" y="8" width="24" height="33" rx="4"/><rect x="17" y="14" width="14" height="8" rx="1"/><path d="M18 28h2M25 28h2M18 34h2M25 34h5"/>'},
  'other.html':{c:['#d4e9ff','#638fdc','#274070'],path:'<path d="M24 15c-5-4-10-4-16-2v25c7-3 12-1 16 3 4-4 9-6 16-3V13c-6-2-11-2-16 2z"/><path d="M24 15v26M13 21h6M13 27h6M29 21h6M29 27h6"/>'},
