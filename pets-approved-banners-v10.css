@@ -1,0 +1,43 @@
+/* SOVA58: approved standalone banners, generations 2–7. Applied only after the image loads. */
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10>summary,
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[open]>summary,
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10>summary:hover,
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10>summary:focus-visible {
+ position:relative!important;isolation:isolate!important;overflow:hidden!important;
+ display:block!important;min-height:0!important;aspect-ratio:3 / 1!important;
+ padding:0!important;
+ background-image:var(--pet-full-banner-image)!important;
+ background-repeat:no-repeat!important;background-size:100% 100%!important;
+ background-position:center!important;border:1px solid rgba(140,212,255,.35)!important;
+ border-radius:16px!important;box-shadow:0 10px 25px rgba(0,12,38,.20)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="2"]{--pet-full-banner-image:url("assets/pets/generation-02.webp")}
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="3"]{--pet-full-banner-image:url("assets/pets/generation-03.webp")}
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="4"]{--pet-full-banner-image:url("assets/pets/generation-04.webp")}
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="5"]{--pet-full-banner-image:url("assets/pets/generation-05.webp")}
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="6"]{--pet-full-banner-image:url("assets/pets/generation-06.webp")}
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="7"]{--pet-full-banner-image:url("assets/pets/generation-07.webp")}
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10>summary .pet-stage-title,
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10>summary .pet-stage-faces {
+ display:none!important;visibility:hidden!important;
+}
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10>summary .pet-stage-chevron {
+ position:absolute!important;display:grid!important;place-items:center!important;
+ right:12px!important;top:50%!important;transform:translateY(-50%)!important;
+ z-index:7!important;width:35px!important;height:35px!important;
+ color:#e9faff!important;border-radius:50%!important;
+ border:1px solid rgba(209,238,255,.6)!important;
+ background:rgba(8,25,57,.55)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10>summary:after {
+ display:none!important;
+}
+@media(max-width:650px) {
+ body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10>summary,
+ body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[open]>summary {
+  min-height:0!important;aspect-ratio:3/1!important;padding:0!important;border-radius:10px!important;
+ }
+ body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10>summary .pet-stage-chevron{
+  width:25px!important;height:25px!important;right:4px!important;
+ }
+}
