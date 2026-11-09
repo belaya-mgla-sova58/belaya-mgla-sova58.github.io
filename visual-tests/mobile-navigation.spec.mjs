@@ -67,8 +67,8 @@ test.describe('Мобильная навигация и калькуляторы
         page.waitForURL(new RegExp('/index[.]html$'), { waitUntil: 'domcontentloaded', timeout: 15000 }),
         homeLink.tap({ noWaitAfter: true, timeout: 10000 }),
       ]);
-      await expect(page.locator('.home-stamped-hero-v441 img.home-stamped-img-v441'))
-        .toHaveAttribute('src', 'assets/home-hero-polish-v447.webp');
+      await expect(page.locator('.home-portal-hero-v1016 img.home-stamped-img-v441'))
+        .toHaveAttribute('src', 'assets/home-mockup-owl-hero-v1016.webp');
     });
   }
   // Check every calculator destination separately to pinpoint broken links.
