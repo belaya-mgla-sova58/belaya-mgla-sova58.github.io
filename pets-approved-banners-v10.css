@@ -7,8 +7,8 @@ body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10>summary:focus-v
  display:block!important;min-height:0!important;height:clamp(125px,17vw,225px)!important;max-height:225px!important;aspect-ratio:auto!important;
  padding:0!important;
  background-image:var(--pet-full-banner-image)!important;
- background-repeat:no-repeat!important;background-size:100% 100%!important;
- background-position:center!important;border:1px solid rgba(140,212,255,.35)!important;
+ background-repeat:no-repeat!important;background-size:cover!important;
+ background-position:center 48%!important;border:1px solid rgba(140,212,255,.35)!important;
  border-radius:16px!important;box-shadow:0 10px 25px rgba(0,12,38,.20)!important;
 }
 body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="2"]{--pet-full-banner-image:url("assets/pets/generation-02.webp")}
@@ -40,4 +40,55 @@ body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10>summary:after {
  body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10>summary .pet-stage-chevron{
   width:25px!important;height:25px!important;right:4px!important;
  }
+}
+
+/* Generation 1: complete header consistent with rest of catalogue.
+   Uses the verified source portraits, preserving their original proportions. */
+body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]>summary,
+body.is-pets-route .pets-redesign .pet-stage[data-generation="1"][open]>summary,
+body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]>summary:hover {
+ position:relative!important;display:flex!important;align-items:center!important;
+ height:clamp(125px,17vw,225px)!important;max-height:225px!important;min-height:0!important;
+ padding:15px 55px 15px 28px!important;overflow:hidden!important;isolation:isolate!important;
+ border:1px solid rgba(140,212,255,.35)!important;border-radius:16px!important;
+ background-image:linear-gradient(90deg,rgba(4,18,53,.97) 0%,rgba(11,27,71,.79) 45%,rgba(3,14,44,.25) 100%),var(--pet-scene)!important;
+ background-size:cover!important;background-position:center!important;
+}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]>summary .pet-stage-title {
+ display:flex!important;visibility:visible!important;position:relative!important;z-index:5!important;
+ width:49%!important;max-width:49%!important;height:auto!important;margin:0!important;
+ padding:0!important;overflow:visible!important;clip:auto!important;white-space:normal!important;
+}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]>summary .pet-stage-title strong {
+ font-size:clamp(24px,3.1vw,43px)!important;color:#f4fbff!important;
+ text-shadow:0 0 14px rgba(52,164,255,.7),0 3px 15px #081334!important;
+}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]>summary .pet-stage-faces {
+ position:absolute!important;right:54px!important;top:0!important;bottom:0!important;
+ height:100%!important;width:50%!important;z-index:4!important;
+ display:flex!important;visibility:visible!important;align-items:center!important;justify-content:flex-end!important;
+ transform:none!important;gap:0!important;overflow:hidden!important;
+ -webkit-mask-image:linear-gradient(90deg,transparent,#000 22%,#000)!important;
+ mask-image:linear-gradient(90deg,transparent,#000 22%,#000)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]>summary .pet-stage-photo {
+ width:34%!important;min-width:0!important;flex:1 1 0!important;height:100%!important;
+ object-fit:cover!important;object-position:center!important;display:block!important;visibility:visible!important;
+ border:0!important;border-radius:0!important;box-shadow:none!important;margin:0!important;
+ transform:none!important;opacity:1!important;
+}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]>summary .pet-stage-chevron{
+ position:absolute!important;top:50%!important;right:12px!important;transform:translateY(-50%)!important;z-index:7!important;
+ display:grid!important;place-items:center!important;width:35px!important;height:35px!important;
+ background:rgba(8,25,57,.55)!important;border:1px solid rgba(209,238,255,.6)!important;border-radius:50%!important;
+}
+@media(max-width:650px){
+ body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]>summary,
+ body.is-pets-route .pets-redesign .pet-stage[data-generation="1"][open]>summary{
+ height:clamp(95px,25vw,145px)!important;max-height:145px!important;padding:10px 35px 10px 12px!important;border-radius:10px!important;
+ }
+ body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]>summary .pet-stage-title{width:58%!important;max-width:58%!important}
+ body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]>summary .pet-stage-title strong{font-size:clamp(20px,5vw,27px)!important}
+ body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]>summary .pet-stage-faces{right:30px!important;width:45%!important}
+ body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]>summary .pet-stage-chevron{right:4px!important;width:25px!important;height:25px!important}
 }
