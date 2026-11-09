@@ -221,3 +221,61 @@ body.modern-v424:not(.is-home-route) :is(.calc-hub-card,.kb-clean-card-v920,.her
   overflow-wrap:break-word;
  }
 }
+
+
+/* v1071 | Expert gallery: narrow-phone portraits and disclosure contents.
+   Keep all portraits and the native details/summary interaction. */
+@media screen and (max-width:420px){
+ html:not(.force-desktop-root) body.is-experts-route .experts-clean .wave>summary{
+  box-sizing:border-box!important;
+  min-width:0!important;
+  min-height:90px!important;
+  height:auto!important;
+  padding:10px 35px 10px 11px!important;
+ }
+ html:not(.force-desktop-root) body.is-experts-route .experts-clean .wave .wave-copy{
+  min-width:0!important;
+  max-width:48%!important;
+  overflow-wrap:break-word;
+ }
+ html:not(.force-desktop-root) body.is-experts-route .experts-clean .wave .wave-copy strong{
+  font-size:clamp(16px,4.7vw,19px)!important;
+  line-height:1.14!important;
+ }
+ html:not(.force-desktop-root) body.is-experts-route .experts-clean .wave .wave-faces{
+  right:34px!important;
+  max-width:45%!important;
+  min-width:0!important;
+  gap:2px!important;
+ }
+ html:not(.force-desktop-root) body.is-experts-route .experts-clean .wave .wave-faces img,
+ html:not(.force-desktop-root) body.is-experts-route .experts-clean .wave[data-count="1"] .wave-faces img{
+  flex:0 1 36px!important;
+  width:36px!important;
+  height:36px!important;
+  min-width:0!important;
+  max-width:36px!important;
+  object-fit:cover!important;
+ }
+ html:not(.force-desktop-root) body.is-experts-route .experts-clean .wave .wave-arrow{
+  right:5px!important;
+ }
+}
+@media screen and (max-width:600px){
+ html:not(.force-desktop-root) body.is-experts-route .experts-clean .expert-row{
+  min-width:0!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+ }
+ html:not(.force-desktop-root) body.is-experts-route .experts-clean .expert-row :is(strong,span,b){
+  min-width:0;
+  overflow-wrap:anywhere;
+ }
+ html:not(.force-desktop-root) body.is-experts-route .experts-clean .expert-row b{
+  white-space:normal!important;
+  text-align:right;
+ }
+ html:not(.force-desktop-root) body.is-pets-route .pets-redesign .pet-catalog-card .pet-card-portrait{
+  max-width:76px!important;
+  object-fit:contain!important;
+ }
+}
