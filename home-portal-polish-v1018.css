@@ -151,3 +151,62 @@ body.is-home-route .home-portal-v1016 .home-portal-extra-v1016>.pwa-install-v540
   height:138px!important;min-height:138px!important;max-height:138px!important;
  }
 }
+
+/* v1018.2: genuinely compact iconography and navigation tiles. */
+body.is-home-route .home-portal-v1016 .home-tools-grid-v1016{gap:7px!important}
+body.is-home-route .home-portal-v1016 .home-tools-grid-v1016>a{
+ min-height:72px!important;padding:8px 6px!important;gap:5px!important;
+ border-radius:10px!important;
+}
+body.is-home-route .home-portal-v1016 .home-tools-grid-v1016 img{
+ width:27px!important;height:27px!important;max-width:27px!important;max-height:27px!important;
+}
+body.is-home-route .home-portal-v1016 .home-tools-grid-v1016 span{
+ font-size:10px!important;line-height:1.2!important;font-weight:650!important;
+}
+body.is-home-route .home-portal-v1016 .home-portal-links-v1016{gap:7px!important}
+body.is-home-route .home-portal-v1016 .home-portal-links-v1016>a{
+ min-height:52px!important;padding:6px 10px!important;gap:9px!important;border-radius:9px!important;
+}
+body.is-home-route .home-portal-v1016 .home-portal-links-v1016>a img{
+ width:34px!important;height:34px!important;flex:0 0 34px!important;
+}
+body.is-home-route .home-portal-v1016 .home-portal-links-v1016 b{font-size:13px!important}
+body.is-home-route .home-portal-v1016 .home-portal-links-v1016 small{font-size:10px!important}
+body.is-home-route .home-portal-v1016 .home-index-links-v1016{gap:8px!important}
+body.is-home-route .home-portal-v1016 .home-index-links-v1016>a{
+ min-height:72px!important;padding:9px 10px!important;gap:8px!important;
+ border-radius:10px!important;
+}
+body.is-home-route .home-portal-v1016 .home-index-links-v1016>a img{
+ width:31px!important;height:31px!important;min-width:31px!important;flex:0 0 31px!important;
+}
+body.is-home-route .home-portal-v1016 .home-index-links-v1016 b{
+ font-size:15px!important;line-height:1.1!important;
+}
+body.is-home-route .home-portal-v1016 .home-index-links-v1016 small{
+ font-size:10px!important;line-height:1.2!important;
+}
+body.is-home-route .home-portal-v1016 .home-index-v1016{
+ padding:13px!important;margin-bottom:13px!important;
+}
+body.is-home-route .home-portal-v1016 .home-portal-block-title-v1016{
+ margin-bottom:10px!important;padding-bottom:7px!important;
+}
+body.is-home-route .home-portal-v1016 .home-portal-box-v1016{padding:12px!important}
+body.is-home-route .home-portal-v1016 .home-news-ledger-v1017 img{
+ width:52px!important;height:39px!important;flex:0 0 52px!important;
+}
+body.is-home-route .home-portal-v1016 .home-news-ledger-v1017>a{
+ min-height:52px!important;padding:6px 9px!important;gap:9px!important;
+}
+@media(max-width:760px){
+ body.is-home-route .home-portal-v1016 .home-index-links-v1016>a{
+  min-height:66px!important;padding:7px!important;
+ }
+ body.is-home-route .home-portal-v1016 .home-index-links-v1016>a img{
+  width:27px!important;height:27px!important;min-width:27px!important;flex-basis:27px!important;
+ }
+ body.is-home-route .home-portal-v1016 .home-index-links-v1016 b{font-size:13px!important}
+ body.is-home-route .home-portal-v1016 .home-tools-grid-v1016>a{min-height:66px!important}
+}
