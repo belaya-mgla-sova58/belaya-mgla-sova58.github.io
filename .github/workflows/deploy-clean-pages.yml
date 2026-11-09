@@ -83,8 +83,8 @@ jobs:
           assert (root / "index.html").is_file(), "Missing homepage"
           assert (root / "assets").is_dir(), "Missing site images"
           home = (root / "index.html").read_text(encoding="utf-8")
-          assert "home-hero-owl-cosmic-v1014.webp" in home, "Expected homepage image missing in HTML"
-          assert (root / "assets/home-hero-owl-cosmic-v1014.webp").is_file(), "Expected homepage image missing"
+          assert "home-mockup-owl-hero-v1016.webp" in home, "Expected homepage image missing in HTML"
+          assert (root / "assets/home-mockup-owl-hero-v1016.webp").is_file(), "Expected homepage image missing"
           files = [p for p in root.rglob("*") if p.is_file()]
           size = sum(p.stat().st_size for p in files)
           print(f"Clean website: {len(files)} files, {size/1048576:.2f} MiB")
@@ -117,10 +117,10 @@ jobs:
           import os, urllib.request, time
           base=os.environ["SITE_URL"].rstrip("/")
           checks=[
-              ("/", b"home-hero-owl-cosmic-v1014.webp"),
+              ("/", b"home-mockup-owl-hero-v1016.webp"),
               ("/pets.html", None),
               ("/essence-mithril-calculator.html", None),
-              ("/assets/home-hero-owl-cosmic-v1014.webp", None),
+              ("/assets/home-mockup-owl-hero-v1016.webp", None),
           ]
           report=[]
           failed=[]
