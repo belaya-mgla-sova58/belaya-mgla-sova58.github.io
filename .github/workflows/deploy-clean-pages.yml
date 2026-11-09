@@ -1,37 +1,9 @@
 name: Deploy cleaned site to GitHub Pages
 
+# The repository already publishes pushes through GitHub's native Pages workflow.
+# Keep this alternative cleaned-artifact deploy manual to prevent parallel deployments.
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - '**/*.html'
-      - '**/*.css'
-      - '**/*.js'
-      - '**/*.json'
-      - '**/*.webmanifest'
-      - '**/*.xml'
-      - '**/*.png'
-      - '**/*.jpg'
-      - '**/*.jpeg'
-      - '**/*.webp'
-      - '**/*.svg'
-      - '**/*.gif'
-      - '**/*.ico'
-      - '**/*.mp3'
-      - '**/*.mp4'
-      - '**/*.woff*'
-      - '**/*.ttf'
-      - '**/*.txt'
-      - '.nojekyll'
-      - '.github/workflows/deploy-clean-pages.yml'
-      - '!visual-tests/**'
-      - '!tests/**'
-      - '!scripts/**'
-      - '!node_modules/**'
-      - '!.github/workflows/asset-audit.yml'
-      - '!.github/workflows/optimize-png-lossless.yml'
 
 permissions:
   contents: read
