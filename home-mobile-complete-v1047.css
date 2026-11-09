@@ -311,3 +311,48 @@ html:not(.force-desktop-root) body.is-home-route .home-tools-grid-v1016>a>img{wi
 html:not(.force-desktop-root) body.is-home-route .home-tools-grid-v1016>a span{font-size:11px!important}
 html:not(.force-desktop-root) body.is-home-route .home-more-visible-v1025 .modern-card-grid-v424{grid-template-columns:1fr!important}
 }
+
+
+/* v1049: Stable blocks and higher-contrast secondary text on small screens.
+   Scoped to the homepage and mobile viewport; no desktop layout changes. */
+@media screen and (max-width:820px) {
+html:not(.force-desktop-root) body.is-home-route .home-portal-v1016 .home-news-v442 .modern-panel-head-v424{
+ min-height:40px!important;align-items:center!important;
+}
+html:not(.force-desktop-root) body.is-home-route .home-portal-v1016 .home-news-v442 .home-news-pair-v1022>a.home-news-banner-v449{
+ contain:layout paint!important;
+}
+html:not(.force-desktop-root) body.is-home-route .home-portal-v1016 .home-news-v442 .home-news-pair-v1022 .home-news-banner-media-v449 img{
+ display:block!important;width:100%!important;height:100%!important;
+ aspect-ratio:1280/427!important;object-fit:cover!important;
+}
+html:not(.force-desktop-root) body.is-home-route .home-portal-v1016 .home-index-links-v1016>a small,
+html:not(.force-desktop-root) body.is-home-route .home-portal-v1016 .home-portal-links-v1016 small,
+html:not(.force-desktop-root) body.is-home-route .home-utility-v1025 .home-quick-links-v1024 small,
+html:not(.force-desktop-root) body.is-home-route .home-more-visible-v1025 .modern-topic-card-v424 small,
+html:not(.force-desktop-root) body.is-home-route .home-more-visible-v1025 .modern-list-v424 small{
+ color:#d8ebff!important;-webkit-text-fill-color:#d8ebff!important;
+}
+html:not(.force-desktop-root) body.is-home-route .home-portal-v1016 .home-tools-grid-v1016>a span,
+html:not(.force-desktop-root) body.is-home-route .home-portal-v1016 .home-index-links-v1016>a b,
+html:not(.force-desktop-root) body.is-home-route .home-portal-v1016 .home-portal-links-v1016>a b{
+ color:#f7fcff!important;-webkit-text-fill-color:#f7fcff!important;
+}
+html:not(.force-desktop-root) body.is-home-route .home-bear-calc-v780 p,
+html:not(.force-desktop-root) body.is-home-route .home-utility-v1025 .home-quick-copy-v1024 p{
+ color:#e0efff!important;-webkit-text-fill-color:#e0efff!important;
+}
+html:not(.force-desktop-root) body.is-home-route .home-portal-v1016 .home-news-v442 .modern-panel-head-v424>a,
+html:not(.force-desktop-root) body.is-home-route .home-bear-calc-kicker-v780,
+html:not(.force-desktop-root) body.is-home-route .home-quick-kicker-v1024{
+ color:#bfeeff!important;-webkit-text-fill-color:#bfeeff!important;
+}
+html:not(.force-desktop-root) body.is-home-route .mobile-topbar-title small,
+html:not(.force-desktop-root) body.is-home-route .mobile-bottom-v424 b{
+ color:#e0efff!important;-webkit-text-fill-color:#e0efff!important;
+}
+html:not(.force-desktop-root) body.is-home-route .home-portal-hero-v1016,
+html:not(.force-desktop-root) body.is-home-route .home-news-pair-v1022>a{
+ overflow:hidden!important;box-sizing:border-box!important;
+}
+}
