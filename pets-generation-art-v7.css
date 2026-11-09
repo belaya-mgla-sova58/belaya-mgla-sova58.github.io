@@ -1,0 +1,73 @@
+/* Пет-шапки v7: художественная композиция из питомцев точного поколения.
+   Существующие изображения в HTML используются как арт, не как маленькие иконки. */
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-faces{
+ display:flex!important;visibility:visible!important;
+ position:absolute!important;
+ top:0!important;bottom:0!important;right:74px!important;
+ width:min(59%,720px)!important;height:100%!important;
+ transform:none!important;
+ gap:0!important;
+ justify-content:flex-end!important;align-items:stretch!important;
+ z-index:2!important;pointer-events:none!important;
+ overflow:hidden!important;
+ -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 17%,#000 100%);
+ mask-image:linear-gradient(90deg,transparent 0%,#000 17%,#000 100%);
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-faces::before{
+ content:"";position:absolute;inset:0;pointer-events:none;z-index:4;
+ background:linear-gradient(90deg,rgba(11,27,57,.38),transparent 35%,rgba(10,19,45,.18));
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-photo{
+ display:block!important;visibility:visible!important;
+ width:34%!important;min-width:0!important;height:100%!important;flex:1 1 0!important;
+ object-fit:cover!important;object-position:center 33%!important;
+ margin:0 -1% 0 0!important;
+ border:0!important;border-radius:0!important;
+ background:transparent!important;box-shadow:none!important;
+ filter:saturate(.72) contrast(1.12) brightness(.98)!important;
+ opacity:.93!important;
+ -webkit-mask-image:radial-gradient(ellipse 80% 90% at 50% 50%,black 53%,transparent 100%);
+ mask-image:radial-gradient(ellipse 80% 90% at 50% 50%,black 53%,transparent 100%);
+ transition:none!important;transform:none!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-photo:nth-child(2){
+ transform:translateY(-1px) scale(1.07)!important;z-index:1!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-photo:only-child{
+ flex:0 0 48%!important;width:48%!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary:hover .pet-stage-photo,
+body.is-pets-route .pets-redesign .pet-stage>summary:hover .pet-stage-photo:first-child{
+ transform:none!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary:hover .pet-stage-photo:nth-child(2){
+ transform:translateY(-1px) scale(1.07)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title{
+ max-width:49%!important;z-index:5!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary,
+body.is-pets-route .pets-redesign .pet-stage[open]>summary{
+ background-image:
+ linear-gradient(90deg,rgba(5,17,40,.76),rgba(5,17,40,.17) 72%,rgba(6,15,40,.15)),
+ var(--pet-scene)!important;
+}
+@media(max-width:760px){
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-faces{
+  width:54%!important;right:42px!important;
+ }
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title{
+  max-width:52%!important;
+ }
+}
+@media(max-width:460px){
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-faces{
+  width:54%!important;right:39px!important;
+ }
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-photo{
+  opacity:.78!important;
+ }
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title{
+  max-width:56%!important;
+ }
+}
