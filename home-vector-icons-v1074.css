@@ -1,0 +1,80 @@
+/* Белая Мгла • custom drawn SVG medallions on the homepage only.
+   No raster imagery or asset requests; icons are in index.html.
+   Keep published owl, banners, pet images and all other routes untouched. */
+body.is-home-route .bm-home-glyph-v1074{
+ display:block!important;
+ position:relative!important;
+ flex:0 0 auto!important;
+ width:42px!important;
+ height:42px!important;
+ min-width:0!important;
+ max-width:none!important;
+ max-height:none!important;
+ overflow:visible!important;
+ object-fit:contain!important;
+ background:none!important;
+ border:0!important;
+ border-radius:0!important;
+ box-shadow:none!important;
+ filter:drop-shadow(0 3px 6px rgba(0,8,29,.4))!important;
+ transform:translateZ(0);
+ transition:transform .2s ease,filter .2s ease!important;
+}
+body.is-home-route .home-index-links-v1016>a>.bm-home-glyph-v1074{
+ width:46px!important;height:46px!important;flex-basis:46px!important;
+}
+body.is-home-route .home-tools-grid-v1016>a>.bm-home-glyph-v1074{
+ width:47px!important;height:47px!important;flex-basis:auto!important;
+}
+body.is-home-route .home-portal-links-v1016>a>.bm-home-glyph-v1074{
+ width:49px!important;height:49px!important;flex-basis:49px!important;
+}
+body.is-home-route .home-quick-links-v1024>a>.bm-home-glyph-v1074{
+ width:39px!important;height:39px!important;flex-basis:39px!important;
+}
+body.is-home-route .home-bear-title-icon-v1046>.bm-home-glyph-v1074{
+ display:inline-block!important;vertical-align:middle!important;
+ width:56px!important;height:56px!important;flex-basis:56px!important;
+ margin-right:7px!important;
+}
+body.is-home-route .home-more-visible-v1025 .v445-topic-icon>.bm-home-glyph-v1074{
+ width:26px!important;height:26px!important;max-width:26px!important;
+ max-height:26px!important;flex-basis:auto!important;
+}
+body.is-home-route .home-more-visible-v1025 .v445-topic-icon{
+ background:transparent!important;
+}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+ body.is-home-route :is(.home-index-links-v1016,.home-tools-grid-v1016,.home-portal-links-v1016,.home-quick-links-v1024,.modern-card-grid-v424)>a:hover .bm-home-glyph-v1074{
+  transform:translateY(-2px) scale(1.045)!important;
+  filter:drop-shadow(0 4px 10px rgba(195,224,255,.36))!important;
+ }
+}
+@media(max-width:820px){
+ html:not(.force-desktop-root) body.is-home-route .home-index-links-v1016>a>.bm-home-glyph-v1074{
+  width:38px!important;height:38px!important;flex-basis:38px!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route .home-tools-grid-v1016>a>.bm-home-glyph-v1074{
+  width:42px!important;height:42px!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route .home-portal-links-v1016>a>.bm-home-glyph-v1074{
+  width:42px!important;height:42px!important;flex-basis:42px!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route .home-quick-links-v1024>a>.bm-home-glyph-v1074{
+  width:34px!important;height:34px!important;flex-basis:34px!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route .home-bear-title-icon-v1046>.bm-home-glyph-v1074{
+  width:45px!important;height:45px!important;flex-basis:45px!important;
+ }
+}
+@media(max-width:360px){
+ html:not(.force-desktop-root) body.is-home-route .home-index-links-v1016>a>.bm-home-glyph-v1074{
+  width:33px!important;height:33px!important;flex-basis:33px!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route .home-tools-grid-v1016>a>.bm-home-glyph-v1074{
+  width:37px!important;height:37px!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ body.is-home-route .bm-home-glyph-v1074{transition:none!important;transform:none!important}
+}
