@@ -86,3 +86,24 @@ body.is-pets-route .pets-redesign .pet-stage[open]>summary{
 @media(prefers-reduced-motion:reduce){
  body.is-pets-route .pets-redesign .pet-stage>summary{transition:none!important}
 }
+
+
+/* v3: remove the global summary marker at the LEFT of every generation header.
+   Keep the authored right-side chevron and native disclosure behavior. */
+body.is-pets-route .pets-redesign .pet-stage>summary::before,
+body.is-pets-route .pets-redesign .pet-stage[open]>summary::before{
+ content:none!important;display:none!important;
+ width:0!important;height:0!important;margin:0!important;padding:0!important;
+ border:0!important;box-shadow:none!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary{
+ padding-left:24px!important;
+}
+body.is-pets-route .pets-redesign .pet-stage-title{
+ display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;
+ gap:3px!important;min-width:0!important;
+}
+body.is-pets-route .pets-redesign .pet-stage-title strong{margin:1px 0!important}
+@media(max-width:700px){
+ body.is-pets-route .pets-redesign .pet-stage>summary{padding-left:16px!important}
+}
