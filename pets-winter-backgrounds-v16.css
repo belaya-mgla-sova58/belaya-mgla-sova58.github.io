@@ -1,0 +1,129 @@
+/* SOVA58 v16 | Winter minimalist backgrounds with real pet portraits.
+   Images are decorative: all titles, pet portraits and controls remain HTML. */
+body.is-pets-route .pets-redesign .pet-stage{
+ --winter-image:none;
+ overflow:hidden!important;
+ border:1px solid rgba(135,205,235,.40)!important;
+ border-radius:15px!important;
+ margin-bottom:11px!important;
+ box-shadow:0 8px 20px rgba(0,7,22,.22)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]{--winter-image:url("assets/pets/winter-minimal-bg-01-v16.webp")}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="2"]{--winter-image:url("assets/pets/winter-minimal-bg-02-v16.webp")}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="3"]{--winter-image:url("assets/pets/winter-minimal-bg-03-v16.webp")}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="4"]{--winter-image:url("assets/pets/winter-minimal-bg-04-v16.webp")}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="5"]{--winter-image:url("assets/pets/winter-minimal-bg-05-v16.webp")}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="6"]{--winter-image:url("assets/pets/winter-minimal-bg-06-v16.webp")}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="7"]{--winter-image:url("assets/pets/winter-minimal-bg-07-v16.webp")}
+
+body.is-pets-route .pets-redesign .pet-stage>summary,
+body.is-pets-route .pets-redesign .pet-stage[open]>summary,
+body.is-pets-route .pets-redesign .pet-stage>summary:hover,
+body.is-pets-route .pets-redesign .pet-stage>summary:focus-visible{
+ position:relative!important;isolation:isolate!important;
+ display:flex!important;align-items:center!important;box-sizing:border-box!important;
+ height:118px!important;min-height:118px!important;max-height:118px!important;
+ padding:12px 53px 12px 22px!important;gap:12px!important;overflow:hidden!important;
+ background-color:#122d4a!important;
+ background-image:
+   linear-gradient(90deg,rgba(5,19,42,.82),rgba(6,25,51,.61) 53%,rgba(6,23,48,.44)),
+   var(--winter-image)!important;
+ background-position:center,center!important;
+ background-size:cover,cover!important;
+ background-repeat:no-repeat!important;
+ border:0!important;border-radius:0!important;
+ transform:none!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary:before,
+body.is-pets-route .pets-redesign .pet-stage>summary:after{
+ display:none!important;content:none!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title{
+ display:flex!important;visibility:visible!important;position:relative!important;z-index:3!important;
+ flex-direction:column!important;justify-content:center!important;align-items:flex-start!important;
+ gap:5px!important;max-width:55%!important;min-width:0!important;width:auto!important;
+ height:auto!important;padding:0!important;margin:0!important;
+ overflow:visible!important;clip:auto!important;white-space:normal!important;
+ text-align:left!important;transform:none!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title small{
+ display:block!important;font-size:10px!important;letter-spacing:.12em!important;font-weight:800!important;
+ color:#91ddf4!important;-webkit-text-fill-color:#91ddf4!important;
+ text-shadow:0 1px 3px rgba(0,8,25,.6)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title strong{
+ display:block!important;font-size:clamp(24px,2.65vw,32px)!important;font-weight:850!important;
+ line-height:1.02!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+ text-shadow:0 2px 7px rgba(2,15,35,.8)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title em{
+ display:block!important;font-size:11px!important;font-style:normal!important;
+ color:#e0f2fc!important;-webkit-text-fill-color:#e0f2fc!important;
+ text-shadow:0 1px 4px rgba(0,12,30,.75)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-faces{
+ position:absolute!important;display:flex!important;visibility:visible!important;opacity:1!important;
+ right:48px!important;top:50%!important;bottom:auto!important;left:auto!important;
+ width:auto!important;height:auto!important;max-width:48%!important;
+ gap:6px!important;align-items:center!important;justify-content:flex-end!important;
+ padding:0!important;margin:0!important;overflow:visible!important;
+ transform:translateY(-50%)!important;
+ -webkit-mask-image:none!important;mask-image:none!important;
+ z-index:4!important;pointer-events:none!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-faces:before,
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-faces:after{
+ display:none!important;content:none!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-photo,
+body.is-pets-route .pets-redesign .pet-stage>summary:hover .pet-stage-photo,
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-photo:nth-child(2){
+ position:static!important;display:block!important;visibility:visible!important;
+ flex:0 0 68px!important;width:68px!important;height:68px!important;
+ min-width:68px!important;min-height:68px!important;
+ max-width:68px!important;max-height:68px!important;
+ margin:0!important;padding:0!important;opacity:1!important;
+ border-radius:14px!important;border:1px solid rgba(180,231,255,.58)!important;
+ background:rgba(8,36,62,.73)!important;box-shadow:0 5px 14px rgba(0,8,24,.43)!important;
+ object-fit:contain!important;object-position:center!important;
+ filter:none!important;transform:none!important;
+ -webkit-mask-image:none!important;mask-image:none!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-chevron{
+ position:absolute!important;right:11px!important;top:50%!important;z-index:8!important;
+ display:grid!important;place-items:center!important;
+ width:30px!important;height:30px!important;transform:translateY(-50%)!important;
+ border-radius:50%!important;
+ border:1px solid rgba(178,228,250,.52)!important;background:rgba(8,30,55,.74)!important;
+ color:#edfcff!important;box-shadow:0 2px 7px rgba(0,10,27,.29)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage[open]>summary .pet-stage-chevron{
+ transform:translateY(-50%) rotate(180deg)!important;
+}
+@media(max-width:700px){
+ body.is-pets-route .pets-redesign .pet-stage>summary,
+ body.is-pets-route .pets-redesign .pet-stage[open]>summary,
+ body.is-pets-route .pets-redesign .pet-stage>summary:hover{
+ height:94px!important;min-height:94px!important;max-height:94px!important;
+ padding:9px 33px 9px 12px!important;gap:5px!important;
+ }
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title{
+ max-width:54%!important;gap:3px!important;
+ }
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title strong{font-size:19px!important}
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title small{font-size:8px!important}
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title em{font-size:9px!important}
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-faces{
+ right:29px!important;max-width:46%!important;gap:3px!important;
+ }
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-photo,
+ body.is-pets-route .pets-redesign .pet-stage>summary:hover .pet-stage-photo,
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-photo:nth-child(2){
+ flex-basis:42px!important;width:42px!important;height:42px!important;
+ min-width:42px!important;min-height:42px!important;max-width:42px!important;max-height:42px!important;
+ border-radius:10px!important;
+ }
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-chevron{
+ right:4px!important;width:23px!important;height:23px!important;
+ }
+}
