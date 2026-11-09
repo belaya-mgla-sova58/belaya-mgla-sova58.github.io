@@ -142,7 +142,65 @@ body.is-home-route.cosmic-visible-v444 .modern-panel-v424{
 </style><link rel="stylesheet" href="home-imperial-cosmic-v1007.css?v=1007" data-home-imperial/>
 <link rel="stylesheet" href="home-winter-palace-v1008.css?v=1009" data-home-winter-palace/>
 <link rel="stylesheet" href="home-neon-tiles-v1010.css?v=1011"/>
-<link rel="stylesheet" href="home-aurora-editorial-v1012.css?v=1"/><link rel="stylesheet" href="home-grand-aurora-v1013.css?v=2"/><link rel="stylesheet" href="home-portal-reference-v1016.css?v=1"/><link rel="stylesheet" href="home-portal-layout-v1017.css?v=1"/><link rel="stylesheet" href="home-portal-polish-v1018.css?v=2"/><link rel="stylesheet" href="home-reference-faithful-v1020.css?v=2"/><link rel="stylesheet" href="home-organized-v1022.css?v=1"/><link rel="stylesheet" href="home-balanced-lower-v1024.css?v=1"/><link rel="stylesheet" href="home-lower-layout-v1025.css?v=1"/><link rel="stylesheet" href="home-compact-materials-v1026.css?v=1"/><link rel="stylesheet" href="home-material-icons-fix-v1027.css?v=1"/><link rel="stylesheet" href="home-winter-icons-v1028.css?v=1"/><link rel="stylesheet" href="home-gem-icons-v1029.css?v=1"/><link rel="stylesheet" href="home-news-creative-placement-v1033.css?v=4"/></head><body class="is-home-route home-hq-v405 home-hq-v406 home-site-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="home"><div aria-hidden="true" class="site-cosmic-background-v442"></div>
+<link rel="stylesheet" href="home-aurora-editorial-v1012.css?v=1"/><link rel="stylesheet" href="home-grand-aurora-v1013.css?v=2"/><link rel="stylesheet" href="home-portal-reference-v1016.css?v=1"/><link rel="stylesheet" href="home-portal-layout-v1017.css?v=1"/><link rel="stylesheet" href="home-portal-polish-v1018.css?v=2"/><link rel="stylesheet" href="home-reference-faithful-v1020.css?v=2"/><link rel="stylesheet" href="home-organized-v1022.css?v=1"/><link rel="stylesheet" href="home-balanced-lower-v1024.css?v=1"/><link rel="stylesheet" href="home-lower-layout-v1025.css?v=1"/><link rel="stylesheet" href="home-compact-materials-v1026.css?v=1"/><link rel="stylesheet" href="home-material-icons-fix-v1027.css?v=1"/><link rel="stylesheet" href="home-winter-icons-v1028.css?v=1"/><link rel="stylesheet" href="home-gem-icons-v1029.css?v=1"/><link rel="stylesheet" href="home-news-creative-placement-v1033.css?v=4"/><style id="home-compact-composition-v1038">
+/* Make the four news banners and primary sections one balanced editorial column. */
+body.is-home-route .home-portal-v1016 .home-portal-grid-v1016 {
+ align-items:start!important;
+ margin-bottom:14px!important;
+}
+body.is-home-route .home-portal-v1016 .home-news-v442{
+ display:flex!important;
+ flex-direction:column!important;
+ min-width:0!important;
+ margin:0!important;
+}
+body.is-home-route .home-portal-v1016 .home-news-v442 > .home-index-v1016{
+ width:100%!important;
+ min-width:0!important;
+ margin:14px 0 0!important;
+ padding:10px 0 0!important;
+ border-top:1px solid rgba(160,207,246,.24)!important;
+ background:none!important;
+ box-shadow:none!important;
+}
+body.is-home-route .home-portal-v1016 .home-news-v442 > .home-index-v1016 > h2{
+ margin:0 0 10px!important;
+ padding:0!important;
+ font-size:19px!important;
+ line-height:1.25!important;
+}
+body.is-home-route .home-portal-v1016 .home-news-v442 .home-index-links-v1016{
+ display:grid!important;
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:9px!important;
+}
+body.is-home-route .home-portal-v1016 .home-news-v442 .home-index-links-v1016>a{
+ min-height:57px!important;
+ padding:8px 11px!important;
+ border-radius:10px!important;
+}
+body.is-home-route .home-portal-v1016 .home-news-v442 .home-index-links-v1016>a img{
+ width:28px!important;
+ height:28px!important;
+ flex:0 0 28px!important;
+}
+body.is-home-route .home-portal-v1016 .home-news-v442 .home-index-links-v1016 b{
+ font-size:13px!important;
+}
+body.is-home-route .home-portal-v1016 .home-portal-aside-v1016{
+ align-self:start!important;
+}
+@media(max-width:760px){
+ body.is-home-route .home-portal-v1016 .home-news-v442 .home-index-links-v1016{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ }
+}
+@media(max-width:430px){
+ body.is-home-route .home-portal-v1016 .home-news-v442 .home-index-links-v1016{
+  grid-template-columns:minmax(0,1fr)!important;
+ }
+}
+</style></head><body class="is-home-route home-hq-v405 home-hq-v406 home-site-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="home"><div aria-hidden="true" class="site-cosmic-background-v442"></div>
 <div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
 <button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
 <div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div>
@@ -183,7 +241,17 @@ body.is-home-route.cosmic-visible-v444 .modern-panel-v424{
  <span class="home-news-banner-overlay-v449"></span>
  <span class="home-news-banner-copy-v449"><b>Обновления сайта</b><small>Новые функции и разделы</small></span><i aria-hidden="true">›</i>
 </a>
-</div></section>
+</div>
+<section class="home-index-v1016" aria-labelledby="home-index-title-v1016">
+ <h2 id="home-index-title-v1016" class="home-portal-block-title-v1016">Разделы сайта</h2>
+ <nav class="home-index-links-v1016" aria-label="Основные разделы">
+  <a href="other.html"><img src="assets/ui-knowledge-v534.webp" alt="" loading="lazy"/><span><b>Гайды</b><small>Инструкции и полезные советы</small></span></a>
+  <a href="gear.html"><img src="assets/ui-gear-v534.webp" alt="" loading="lazy"/><span><b>Снаряжение</b><small>Приоритеты и материалы</small></span></a>
+  <a href="pets.html"><img src="assets/ui-pets-v534.webp" alt="" loading="lazy"/><span><b>Питомцы</b><small>Поколения и прокачка</small></span></a>
+  <a href="events.html"><img src="assets/ui-events-v534.webp" alt="" loading="lazy"/><span><b>События</b><small>Правила и награды</small></span></a>
+ </nav>
+</section>
+ </section>
  <aside class="home-portal-aside-v1016" aria-label="Полезные материалы">
   <section class="home-portal-box-v1016" aria-labelledby="home-tools-v1016"><h2 id="home-tools-v1016" class="home-portal-block-title-v1016">Полезные инструменты</h2>
    <nav class="home-tools-grid-v1016" aria-label="Быстрые инструменты">
@@ -202,15 +270,7 @@ body.is-home-route.cosmic-visible-v444 .modern-panel-v424{
   </section>
  </aside>
 </div>
-<section class="home-index-v1016" aria-labelledby="home-index-title-v1016">
- <h2 id="home-index-title-v1016" class="home-portal-block-title-v1016">Разделы сайта</h2>
- <nav class="home-index-links-v1016" aria-label="Основные разделы">
-  <a href="other.html"><img src="assets/ui-knowledge-v534.webp" alt="" loading="lazy"/><span><b>Гайды</b><small>Инструкции и полезные советы</small></span></a>
-  <a href="gear.html"><img src="assets/ui-gear-v534.webp" alt="" loading="lazy"/><span><b>Снаряжение</b><small>Приоритеты и материалы</small></span></a>
-  <a href="pets.html"><img src="assets/ui-pets-v534.webp" alt="" loading="lazy"/><span><b>Питомцы</b><small>Поколения и прокачка</small></span></a>
-  <a href="events.html"><img src="assets/ui-events-v534.webp" alt="" loading="lazy"/><span><b>События</b><small>Правила и награды</small></span></a>
- </nav>
-</section>
+
 <div class="home-bottom-grid-v1025"><section class="home-bear-calc-v780" aria-label="Помощник для Мишки">
 <div class="home-bear-calc-copy-v780"><span class="home-bear-calc-kicker-v780">Калькулятор</span><h2>Помощник для Мишки</h2><p>Подбери героев, рассчитай войска по маршам и выбери подходящее соотношение.</p><div class="home-bear-calc-tags-v780"><span>Герои</span><span>Войска</span><span>Марши</span><span>Соотношение</span></div></div><a class="home-bear-calc-btn-v780" href="bear-helper.html"><span>Открыть калькулятор</span><b aria-hidden="true">›</b></a>
 </section><aside class="home-utility-v1025" aria-label="Быстрый доступ">
