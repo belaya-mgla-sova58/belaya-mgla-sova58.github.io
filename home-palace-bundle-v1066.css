@@ -802,3 +802,20 @@ body.is-home-route .home-portal-v1016 :is(.home-news-ledger-v1017>a,.home-index-
  }
 }
 /* END home-curated-portal-v1061.css */
+
+
+/* v1069 | Mobile paint-cost guard.
+   The deep sapphire opaque panels already provide separation, so disable
+   costly backdrop sampling on decorative containers only. Keep overlay
+   menus, popup controls, images and calculator logic unchanged. */
+@media screen and (max-width:820px){
+ html:not(.force-desktop-root) body.is-home-route
+ :is(.home-news-v442,.home-portal-box-v1016,.home-more-visible-v1025,.home-bear-calc-v780,.home-utility-v1025,.modern-panel-v424){
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route
+ :is(.home-news-v442,.home-portal-box-v1016,.home-more-visible-v1025,.home-bear-calc-v780,.home-utility-v1025,.modern-panel-v424){
+  background-attachment:scroll!important;
+ }
+}
