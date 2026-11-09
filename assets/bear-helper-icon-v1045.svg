@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Белый медведь">
+<defs>
+<linearGradient id="fur" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff" /><stop offset=".48" stop-color="#caefff"/><stop offset="1" stop-color="#769bd5"/></linearGradient>
+<linearGradient id="ear" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#4f7db5"/><stop offset="1" stop-color="#b79eea"/></linearGradient>
+<linearGradient id="muzzle" x1=".1" y1="0" x2=".9" y2="1"><stop stop-color="#fcffff"/><stop offset="1" stop-color="#c9e1ff"/></linearGradient>
+<linearGradient id="crystal" x1=".2" y1="0" x2=".8" y2="1"><stop stop-color="#ddfbff"/><stop offset=".5" stop-color="#56cdfd"/><stop offset="1" stop-color="#8e8ff4"/></linearGradient>
+<filter id="halo" x="-35%" y="-35%" width="170%" height="170%"><feGaussianBlur stdDeviation="3"/></filter>
+</defs>
+<g fill="#72dfff" opacity=".3" filter="url(#halo)"><ellipse cx="64" cy="66" rx="49" ry="54"/></g>
+<path d="M16 87 9 66l17 5 3-22 16 7 19-15 20 15 15-7 4 22 17-5-9 21-17 15-30 8-30-8Z" fill="url(#crystal)" opacity=".78" stroke="#9deeff" stroke-width="1.5" stroke-linejoin="round"/>
+<circle cx="36" cy="36" r="18" fill="url(#fur)" stroke="#effbff" stroke-width="3"/>
+<circle cx="92" cy="36" r="18" fill="url(#fur)" stroke="#effbff" stroke-width="3"/>
+<circle cx="36" cy="36" r="10" fill="url(#ear)" opacity=".9"/>
+<circle cx="92" cy="36" r="10" fill="url(#ear)" opacity=".9"/>
+<path d="M64 25C35 24 22 45 22 71c0 26 18 43 42 43s42-17 42-43C106 45 93 24 64 25Z" fill="url(#fur)" stroke="#f2fdff" stroke-width="3"/>
+<path d="M28 65 43 43l10-8-9 30-10 24Z" fill="#fff" opacity=".51"/>
+<path d="m99 64-15-21-10-8 9 30 10 24Z" fill="#8095d9" opacity=".33"/>
+<path d="M35 72c7-7 17-7 23-2M70 70c7-5 17-5 23 2" stroke="#233e78" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+<ellipse cx="46" cy="73" rx="4" ry="5" fill="#132e58"/><ellipse cx="82" cy="73" rx="4" ry="5" fill="#132e58"/>
+<circle cx="47" cy="71" r="1.4" fill="#efffff"/><circle cx="83" cy="71" r="1.4" fill="#efffff"/>
+<path d="M42 86c2-9 10-15 22-15s20 6 22 15c2 13-8 22-22 22s-24-9-22-22Z" fill="url(#muzzle)" stroke="#c9e6ff" stroke-width="2"/>
+<path d="M55 85q9-7 18 0l-9 9Z" fill="#233e6b"/>
+<path d="M64 94v5m0 0q-6 5-12-1m12 1q6 5 12-1" stroke="#334976" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+<g fill="#e7ffff" stroke="#83deff" stroke-width=".6"><path d="m14 30 2-7 2 7 7 2-7 2-2 7-2-7-7-2z"/><path d="m108 32 2-6 2 6 6 2-6 2-2 6-2-6-6-2z"/></g>
+</svg>
