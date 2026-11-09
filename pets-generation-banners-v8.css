@@ -1,0 +1,44 @@
+/* SOVA58: готовая адаптивная замена шапок поколений v8.
+   Активируется только когда все семь WebP загружены (проверка в pets.html).
+   До загрузки используется прежнее оформление, без пустых фонов. */
+body.is-pets-route.pets-banners-v8-ready .pets-redesign .pet-stage>summary,
+body.is-pets-route.pets-banners-v8-ready .pets-redesign .pet-stage[open]>summary,
+body.is-pets-route.pets-banners-v8-ready .pets-redesign .pet-stage>summary:hover{
+  position:relative!important;
+  min-height:0!important;
+  aspect-ratio:3/1;
+  padding:0 46px 0 0!important;
+  background-image:var(--banner-image-v8)!important;
+  background-size:100% 100%!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  border:1px solid rgba(149,211,255,.23)!important;
+  border-radius:16px!important;
+  overflow:hidden!important;
+}
+body.is-pets-route.pets-banners-v8-ready .pets-redesign .pet-stage[data-generation="1"]{--banner-image-v8:url("assets/pets/generation-01.webp")}
+body.is-pets-route.pets-banners-v8-ready .pets-redesign .pet-stage[data-generation="2"]{--banner-image-v8:url("assets/pets/generation-02.webp")}
+body.is-pets-route.pets-banners-v8-ready .pets-redesign .pet-stage[data-generation="3"]{--banner-image-v8:url("assets/pets/generation-03.webp")}
+body.is-pets-route.pets-banners-v8-ready .pets-redesign .pet-stage[data-generation="4"]{--banner-image-v8:url("assets/pets/generation-04.webp")}
+body.is-pets-route.pets-banners-v8-ready .pets-redesign .pet-stage[data-generation="5"]{--banner-image-v8:url("assets/pets/generation-05.webp")}
+body.is-pets-route.pets-banners-v8-ready .pets-redesign .pet-stage[data-generation="6"]{--banner-image-v8:url("assets/pets/generation-06.webp")}
+body.is-pets-route.pets-banners-v8-ready .pets-redesign .pet-stage[data-generation="7"]{--banner-image-v8:url("assets/pets/generation-07.webp")}
+body.is-pets-route.pets-banners-v8-ready .pets-redesign .pet-stage>summary .pet-stage-faces,
+body.is-pets-route.pets-banners-v8-ready .pets-redesign .pet-stage>summary .pet-stage-title{
+  position:absolute!important;width:1px!important;height:1px!important;
+  margin:-1px!important;padding:0!important;overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;white-space:nowrap!important;
+  border:0!important;
+}
+body.is-pets-route.pets-banners-v8-ready .pets-redesign .pet-stage>summary .pet-stage-chevron{
+  position:absolute!important;right:12px!important;top:50%!important;
+  transform:translateY(-50%)!important;z-index:6!important;
+  background:rgba(5,19,45,.6)!important;border-radius:50%!important;
+}
+@media(max-width:680px){
+ body.is-pets-route.pets-banners-v8-ready .pets-redesign .pet-stage>summary,
+ body.is-pets-route.pets-banners-v8-ready .pets-redesign .pet-stage[open]>summary{
+   aspect-ratio:3/1;min-height:0!important;padding:0 34px 0 0!important;border-radius:11px!important;
+ }
+ body.is-pets-route.pets-banners-v8-ready .pets-redesign .pet-stage>summary .pet-stage-chevron{right:6px!important}
+}
