@@ -4,11 +4,11 @@ body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[open]>summary,
 body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10>summary:hover,
 body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10>summary:focus-visible {
  position:relative!important;isolation:isolate!important;overflow:hidden!important;
- display:block!important;min-height:0!important;height:clamp(125px,17vw,225px)!important;max-height:225px!important;aspect-ratio:auto!important;
+ display:block!important;min-height:0!important;height:clamp(116px,12vw,160px)!important;max-height:160px!important;aspect-ratio:auto!important;
  padding:0!important;
  background-image:var(--pet-full-banner-image)!important;
  background-repeat:no-repeat!important;background-size:cover!important;
- background-position:center 48%!important;border:1px solid rgba(140,212,255,.35)!important;
+ background-position:center 43%!important;border:1px solid rgba(140,212,255,.35)!important;
  border-radius:16px!important;box-shadow:0 10px 25px rgba(0,12,38,.20)!important;
 }
 body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[data-generation="2"]{--pet-full-banner-image:url("assets/pets/generation-02.webp")}
@@ -35,7 +35,7 @@ body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10>summary:after {
 @media(max-width:650px) {
  body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10>summary,
  body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[open]>summary {
-  min-height:0!important;height:clamp(95px,25vw,145px)!important;max-height:145px!important;aspect-ratio:auto!important;padding:0!important;border-radius:10px!important;
+  min-height:0!important;height:clamp(86px,22vw,112px)!important;max-height:112px!important;aspect-ratio:auto!important;padding:0!important;border-radius:10px!important;
  }
  body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10>summary .pet-stage-chevron{
   width:25px!important;height:25px!important;right:4px!important;
@@ -48,7 +48,7 @@ body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]>summary,
 body.is-pets-route .pets-redesign .pet-stage[data-generation="1"][open]>summary,
 body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]>summary:hover {
  position:relative!important;display:flex!important;align-items:center!important;
- height:clamp(125px,17vw,225px)!important;max-height:225px!important;min-height:0!important;
+ height:clamp(116px,12vw,160px)!important;max-height:160px!important;min-height:0!important;
  padding:15px 55px 15px 28px!important;overflow:hidden!important;isolation:isolate!important;
  border:1px solid rgba(140,212,255,.35)!important;border-radius:16px!important;
  background-image:linear-gradient(90deg,rgba(4,18,53,.97) 0%,rgba(11,27,71,.79) 45%,rgba(3,14,44,.25) 100%),var(--pet-scene)!important;
@@ -85,10 +85,16 @@ body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]>summary .pet-s
 @media(max-width:650px){
  body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]>summary,
  body.is-pets-route .pets-redesign .pet-stage[data-generation="1"][open]>summary{
- height:clamp(95px,25vw,145px)!important;max-height:145px!important;padding:10px 35px 10px 12px!important;border-radius:10px!important;
+ height:clamp(86px,22vw,112px)!important;max-height:112px!important;padding:10px 35px 10px 12px!important;border-radius:10px!important;
  }
  body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]>summary .pet-stage-title{width:58%!important;max-width:58%!important}
  body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]>summary .pet-stage-title strong{font-size:clamp(20px,5vw,27px)!important}
  body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]>summary .pet-stage-faces{right:30px!important;width:45%!important}
  body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]>summary .pet-stage-chevron{right:4px!important;width:25px!important;height:25px!important}
+}
+
+/* Compact proportions: avoid distorting artwork. */
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10>summary,
+body.is-pets-route .pets-redesign .pet-stage.pet-full-banner-v10[open]>summary{
+ background-size:cover!important;background-position:center 43%!important;
 }
