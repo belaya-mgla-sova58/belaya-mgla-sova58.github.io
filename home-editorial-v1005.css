@@ -132,3 +132,47 @@ body.is-home-route .modern-home-footer-v424{
   body.is-home-route .modern-topic-card-v424,
   body.is-home-route .pc-shortcuts-v966>a{transition:none;transform:none!important}
 }
+
+
+/* v1033 · Quiet luxury refinement across editorial content pages.
+   Decorative only: no route, navigation, image or calculator behavior changes. */
+body.site-hq-v407 .route-page.active :is(.section,.guide-fold-body-v414,.news-shell,.news-page,.content-wrap,.page-shell) {
+  overflow-wrap:anywhere;
+}
+body.site-hq-v407 .route-page.active :is(.section,.guide-fold-body-v414,.news-shell,.news-page,.content-wrap,.page-shell) :is(p,li) {
+  line-height:1.65;
+}
+body.site-hq-v407 .route-page.active :is(.section,.guide-fold-body-v414,.news-shell,.news-page,.content-wrap,.page-shell) :is(h1,h2,h3) {
+  text-wrap:balance;
+}
+body.site-hq-v407 .route-page.active :is(.guide-nav-card,.related-guide-card-v625,.calc-hub-card,.pet-catalog-card) {
+  box-sizing:border-box;
+  min-width:0;
+  border-radius:clamp(14px,1.3vw,19px);
+  outline-offset:3px;
+}
+body.site-hq-v407 .route-page.active :is(.guide-nav-card,.related-guide-card-v625,.calc-hub-card,.pet-catalog-card):focus-within {
+  border-color:rgba(144,219,255,.72);
+  box-shadow:0 0 0 2px rgba(98,194,255,.16);
+}
+body.site-hq-v407 .route-page.active :is(a,button,summary,input,select,textarea):focus-visible {
+  outline:2px solid #b1e8ff;
+  outline-offset:3px;
+}
+@media (max-width:740px){
+  body.site-hq-v407 .route-page.active :is(.section,.guide-fold-body-v414,.news-shell,.news-page,.content-wrap,.page-shell) :is(p,li) {
+    line-height:1.58;
+  }
+  body.site-hq-v407 .route-page.active :is(.guide-nav-card,.related-guide-card-v625,.calc-hub-card,.pet-catalog-card) {
+    max-width:100%;
+    border-radius:14px;
+  }
+  body.site-hq-v407 .route-page.active :is(img,video,iframe) {
+    max-width:100%;
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  body.site-hq-v407 .route-page.active :is(.guide-nav-card,.related-guide-card-v625,.calc-hub-card,.pet-catalog-card) {
+    scroll-behavior:auto;
+  }
+}
