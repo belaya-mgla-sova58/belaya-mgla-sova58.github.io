@@ -188,3 +188,46 @@
   object-position:center top!important;
  }
 }
+
+
+/* v1095 | Four mobile news banners: remove the oversized empty caption area.
+   Keep the uncropped panorama; proportionate compact tiles with a readable title strip. */
+@media screen and (max-width:820px){
+ html:not(.force-desktop-root) body.is-home-route
+ .home-portal-v1016 .home-news-v442 .home-news-grid-v442.home-news-pair-v1022{
+  grid-template-rows:repeat(2,clamp(82px,22vw,108px))!important;
+  grid-auto-rows:clamp(82px,22vw,108px)!important;
+  align-content:start!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route
+ .home-portal-v1016 .home-news-v442 .home-news-pair-v1022>a.home-news-banner-v449,
+ html:not(.force-desktop-root) body.is-home-route
+ .home-portal-v1016 .home-news-v442 .home-news-pair-v1022>a.home-news-banner-v449:first-child{
+  height:100%!important;
+  min-height:0!important;
+  max-height:100%!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route
+ .home-portal-v1016 .home-news-v442 .home-news-pair-v1022>a.home-news-banner-v449
+ .home-news-banner-media-v449>img{
+  object-fit:contain!important;
+  object-position:center top!important;
+  aspect-ratio:auto!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route
+ .home-portal-v1016 .home-news-v442 .home-news-pair-v1022>a.home-news-banner-v449
+ .home-news-banner-copy-v449{
+  inset:auto 7px 5px 7px!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route
+ .home-portal-v1016 .home-news-v442 .home-news-pair-v1022>a.home-news-banner-v449
+ .home-news-banner-copy-v449 b{
+  font-size:clamp(11px,2.9vw,15px)!important;
+  line-height:1.13!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route
+ .home-portal-v1016 .home-news-v442 .home-news-pair-v1022>a.home-news-banner-v449
+ .home-news-banner-overlay-v449{
+  background:linear-gradient(to bottom,transparent 0%,transparent 48%,rgba(3,12,32,.72) 77%,rgba(3,10,29,.98) 100%)!important;
+ }
+}
