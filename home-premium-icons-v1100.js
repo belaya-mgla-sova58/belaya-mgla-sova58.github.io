@@ -4,23 +4,23 @@
 (function(){
 "use strict";
 var assets={
- "heroes.html":"assets/bm-heroes-v1100.svg?v=3",
- "state-positions.html":"assets/bm-state-v1100.svg?v=3",
- "svs-prep.html":"assets/bm-prep-v1100.svg?v=3",
- "svs.html":"assets/bm-svs-v1100.svg?v=3",
- "other.html":"assets/bm-guides-verified-v1106.svg?v=2",
- "gear.html":"assets/bm-gear-verified-v1106.svg?v=2",
- "pets.html":"assets/bm-pets-verified-v1106.svg?v=2",
- "experts.html":"assets/bm-experts-v1108.svg?v=1",
- "labyrinth.html":"assets/bm-labyrinth-v1108.svg?v=1",
- "events.html":"assets/bm-events-v1108.svg?v=1",
- "calculators.html":"assets/bm-calculators-v1109.svg?v=1",
- "bear-helper.html":"assets/bm-bear-helper-v1109.svg?v=1",
- "farm.html":"assets/bm-farm-v1109.svg?v=1",
- "beacon.html":"assets/bm-beacon-approved-v1110.svg?v=1",
- "mails.html":"assets/bm-mails-approved-v1110.svg?v=1",
- "state-58.html":"assets/bm-state58-approved-v1110.svg?v=1",
- "knowledge-card":"assets/bm-knowledge-approved-v1110.svg?v=1"
+ "heroes.html":"assets/bm-hq-heroes-v1117.svg?v=1",
+ "state-positions.html":"assets/bm-hq-positions-v1117.svg?v=1",
+ "svs-prep.html":"assets/bm-hq-prep-v1117.svg?v=1",
+ "svs.html":"assets/bm-hq-svs-v1117.svg?v=1",
+ "other.html":"assets/bm-hq-guides-v1117.svg?v=1",
+ "gear.html":"assets/bm-hq-gear-v1117.svg?v=1",
+ "pets.html":"assets/bm-hq-pets-v1117.svg?v=1",
+ "experts.html":"assets/bm-hq-experts-v1117.svg?v=1",
+ "labyrinth.html":"assets/bm-hq-labyrinth-v1117.svg?v=1",
+ "events.html":"assets/bm-hq-events-v1117.svg?v=1",
+ "calculators.html":"assets/bm-hq-calculators-v1117.svg?v=1",
+ "bear-helper.html":"assets/bm-hq-bear-helper-v1117.svg?v=1",
+ "farm.html":"assets/bm-hq-farm-v1117.svg?v=1",
+ "beacon.html":"assets/bm-hq-beacon-v1117.svg?v=1",
+ "mails.html":"assets/bm-hq-mails-v1117.svg?v=1",
+ "state-58.html":"assets/bm-hq-state58-v1117.svg?v=1",
+ "knowledge-card":"assets/bm-hq-knowledge-v1117.svg?v=1"
 };
 function locate(href){
  if(href==="knowledge-card")return document.querySelectorAll('.modern-home-v424 .modern-topic-card-v424[href="other.html"]');
