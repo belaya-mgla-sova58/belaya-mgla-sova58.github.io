@@ -1,124 +1,82 @@
-/* Белая мгла · v1111
-   Unified illustration sizing for homepage. Replaces conflicting v1100–1110
-   overrides. All artworks remain square and uncropped.
-   Desktop / mobile sizes:
-   compact tool tile 54 / 42
-   overview link & text tile 52 / 42
-   wide list 50 / 42
-   State 58 list 52 / 44
-*/
-body.is-home-route .modern-home-v424 img.bm-premium-icon-v1100{
- display:block!important;
+/* Belaya Mgla v1113. All approved illustrated icons use 64x64 on PC and mobile.
+   No stretching, clipping or per-icon zoom. Layout accommodates fixed icon size. */
+body.is-home-route .modern-home-v424 img.bm-premium-icon-v1100,
+body.is-home-route .modern-home-v424 .home-tools-grid-v1016>a>img.bm-premium-icon-v1100,
+body.is-home-route .modern-home-v424 .home-index-links-v1016>a>img.bm-premium-icon-v1100,
+body.is-home-route .modern-home-v424 .home-portal-links-v1016>a>img.bm-premium-icon-v1100,
+body.is-home-route .modern-home-v424 .home-quick-links-v1024>a>img.bm-premium-icon-v1100,
+body.is-home-route .modern-home-v424 .modern-topic-card-v424 img.bm-premium-icon-v1100,
+body.is-home-route .modern-home-v424 .modern-list-v424>a img.bm-premium-icon-v1100{
  box-sizing:border-box!important;
- width:50px!important;height:50px!important;
- min-width:50px!important;min-height:50px!important;
- max-width:50px!important;max-height:50px!important;
- flex:0 0 50px!important;
- aspect-ratio:1 / 1!important;
+ display:block!important;
+ width:64px!important;height:64px!important;
+ min-width:64px!important;min-height:64px!important;
+ max-width:64px!important;max-height:64px!important;
+ flex:0 0 64px!important;
+ aspect-ratio:1/1!important;
  object-fit:contain!important;object-position:center!important;
- margin:0!important;padding:0!important;
- background:transparent!important;border:0!important;border-radius:0!important;
- box-shadow:none!important;filter:none!important;transform:none!important;
+ padding:0!important;margin:0!important;
+ border:0!important;border-radius:0!important;
+ box-shadow:none!important;
+ background:transparent!important;
+ transform:none!important;filter:none!important;
  opacity:1!important;
 }
-/* Consistent art placement in wrappers, without duplicate neon frames. */
-body.is-home-route .modern-home-v424 a:has(>img.bm-premium-icon-v1100){
- min-width:0!important;
-}
-body.is-home-route .modern-home-v424 a:has(>span>img.bm-premium-icon-v1100)
- >span:is(.v445-topic-icon,.v424-list-icon){
+/* Icon wrapper is also 64px to avoid wasted empty space. */
+body.is-home-route .modern-home-v424 a:has(>span>img.bm-premium-icon-v1100)>span:is(.v445-topic-icon,.v424-list-icon),
+body.is-home-route .modern-home-v424 a.modern-topic-card-v424:has(img.bm-premium-icon-v1100)>span.v445-topic-icon,
+body.is-home-route .modern-home-v424 .modern-list-v424>a:has(img.bm-premium-icon-v1100)>span.v424-list-icon{
  box-sizing:border-box!important;
  display:grid!important;place-items:center!important;
- width:52px!important;height:52px!important;
- min-width:52px!important;min-height:52px!important;
- max-width:52px!important;max-height:52px!important;
- flex:0 0 52px!important;
- padding:0!important;margin:0 10px 0 0!important;
- border:0!important;border-radius:0!important;
- background:transparent!important;box-shadow:none!important;
+ width:64px!important;height:64px!important;
+ min-width:64px!important;min-height:64px!important;
+ max-width:64px!important;max-height:64px!important;
+ flex:0 0 64px!important;
+ margin:0!important;padding:0!important;
  overflow:visible!important;
+ background:transparent!important;
+ border:0!important;box-shadow:none!important;
 }
-/* Compact multi-column tiles: preserve space for labels. */
-body.is-home-route .modern-home-v424 .home-tools-grid-v1016>a>img.bm-premium-icon-v1100{
- width:54px!important;height:54px!important;
- min-width:54px!important;min-height:54px!important;
- max-width:54px!important;max-height:54px!important;
- flex:0 0 54px!important;
- margin:0 auto!important;
-}
-body.is-home-route .modern-home-v424 .home-index-links-v1016>a>img.bm-premium-icon-v1100,
-body.is-home-route .modern-home-v424 .home-portal-links-v1016>a>img.bm-premium-icon-v1100{
- width:52px!important;height:52px!important;
- min-width:52px!important;min-height:52px!important;
- max-width:52px!important;max-height:52px!important;
- flex:0 0 52px!important;
-}
-body.is-home-route .modern-home-v424 .home-quick-links-v1024>a>img.bm-premium-icon-v1100{
- width:46px!important;height:46px!important;
- min-width:46px!important;min-height:46px!important;
- max-width:46px!important;max-height:46px!important;
- flex:0 0 46px!important;
-}
-/* Two-column 'frequently opened' topic tiles. */
-body.is-home-route .modern-home-v424 a.modern-topic-card-v424 img.bm-premium-icon-v1100{
- width:48px!important;height:48px!important;
- min-width:48px!important;min-height:48px!important;
- max-width:48px!important;max-height:48px!important;
- flex:0 0 48px!important;
-}
-body.is-home-route .modern-home-v424 a.modern-topic-card-v424:has(img.bm-premium-icon-v1100)>span.v445-topic-icon{
- width:50px!important;height:50px!important;
- min-width:50px!important;min-height:50px!important;
- max-width:50px!important;max-height:50px!important;
- flex:0 0 50px!important;
-}
-/* Wide rows including changes, tools and State 58. */
-body.is-home-route .modern-home-v424 .modern-list-v424>a:has(img.bm-premium-icon-v1100){
+/* Small cards must grow to fit artwork without hiding text. */
+body.is-home-route .modern-home-v424 a.modern-topic-card-v424:has(img.bm-premium-icon-v1100){
+ min-height:82px!important;
+ box-sizing:border-box!important;
  display:flex!important;align-items:center!important;
- min-height:68px!important;
- gap:10px!important;
+ gap:9px!important;
 }
-body.is-home-route .modern-home-v424 .modern-list-v424>a:has(img.bm-premium-icon-v1100)>span.v424-list-icon{
- width:52px!important;height:52px!important;
- min-width:52px!important;min-height:52px!important;
- max-width:52px!important;max-height:52px!important;
- flex:0 0 52px!important;margin:0!important;
+body.is-home-route .modern-home-v424 .modern-list-v424>a:has(img.bm-premium-icon-v1100){
+ min-height:82px!important;
+ box-sizing:border-box!important;
+ display:flex!important;align-items:center!important;
+ gap:11px!important;
 }
-body.is-home-route .modern-home-v424 .modern-list-v424>a:has(img.bm-premium-icon-v1100)>div{
+body.is-home-route .modern-home-v424 .modern-list-v424>a:has(img.bm-premium-icon-v1100)>div,
+body.is-home-route .modern-home-v424 a.modern-topic-card-v424:has(img.bm-premium-icon-v1100)>div{
  min-width:0!important;flex:1 1 auto!important;
 }
-/* State 58 panel can hold three rows with the same frame size. */
-body.is-home-route .modern-home-v424 .modern-panel-v424:has(.modern-list-v424>a[href="state-positions.html"])
- .modern-list-v424>a:has(img.bm-premium-icon-v1100) img.bm-premium-icon-v1100{
- width:52px!important;height:52px!important;
- min-width:52px!important;min-height:52px!important;
- max-width:52px!important;max-height:52px!important;
- flex:0 0 52px!important;
+body.is-home-route .modern-home-v424 .home-tools-grid-v1016>a:has(img.bm-premium-icon-v1100),
+body.is-home-route .modern-home-v424 .home-index-links-v1016>a:has(img.bm-premium-icon-v1100){
+ box-sizing:border-box!important;
+ min-height:102px!important;
+ min-width:0!important;
+ overflow:visible!important;
 }
+body.is-home-route .modern-home-v424 .home-tools-grid-v1016>a>img.bm-premium-icon-v1100,
+body.is-home-route .modern-home-v424 .home-index-links-v1016>a>img.bm-premium-icon-v1100{
+ margin:0 auto!important;
+}
+body.is-home-route .modern-home-v424 .home-portal-links-v1016>a:has(img.bm-premium-icon-v1100){
+ min-height:82px!important;min-width:0!important;
+ display:flex!important;align-items:center!important;gap:9px!important;
+}
+/* Phone uses same 64x64 as PC. Cards may become taller, not narrower. */
 @media(max-width:820px){
- body.is-home-route .modern-home-v424 img.bm-premium-icon-v1100,
- body.is-home-route .modern-home-v424 .home-tools-grid-v1016>a>img.bm-premium-icon-v1100,
- body.is-home-route .modern-home-v424 .home-index-links-v1016>a>img.bm-premium-icon-v1100,
- body.is-home-route .modern-home-v424 .home-portal-links-v1016>a>img.bm-premium-icon-v1100,
- body.is-home-route .modern-home-v424 .home-quick-links-v1024>a>img.bm-premium-icon-v1100,
- body.is-home-route .modern-home-v424 a.modern-topic-card-v424 img.bm-premium-icon-v1100,
- body.is-home-route .modern-home-v424 .modern-panel-v424:has(.modern-list-v424>a[href="state-positions.html"])
-  .modern-list-v424>a:has(img.bm-premium-icon-v1100) img.bm-premium-icon-v1100{
-  width:42px!important;height:42px!important;
-  min-width:42px!important;min-height:42px!important;
-  max-width:42px!important;max-height:42px!important;
-  flex:0 0 42px!important;
- }
- body.is-home-route .modern-home-v424 a:has(>span>img.bm-premium-icon-v1100)
- >span:is(.v445-topic-icon,.v424-list-icon),
- body.is-home-route .modern-home-v424 a.modern-topic-card-v424:has(img.bm-premium-icon-v1100)>span.v445-topic-icon,
- body.is-home-route .modern-home-v424 .modern-list-v424>a:has(img.bm-premium-icon-v1100)>span.v424-list-icon{
-  width:44px!important;height:44px!important;
-  min-width:44px!important;min-height:44px!important;
-  max-width:44px!important;max-height:44px!important;
-  flex:0 0 44px!important;
- }
+ body.is-home-route .modern-home-v424 a.modern-topic-card-v424:has(img.bm-premium-icon-v1100),
  body.is-home-route .modern-home-v424 .modern-list-v424>a:has(img.bm-premium-icon-v1100){
-  min-height:60px!important;gap:8px!important;
+  min-height:78px!important;gap:8px!important;
+ }
+ body.is-home-route .modern-home-v424 .home-tools-grid-v1016>a:has(img.bm-premium-icon-v1100),
+ body.is-home-route .modern-home-v424 .home-index-links-v1016>a:has(img.bm-premium-icon-v1100){
+  min-height:104px!important;
  }
 }
