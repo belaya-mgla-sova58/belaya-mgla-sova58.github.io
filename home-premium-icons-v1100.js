@@ -75,7 +75,14 @@ function apply(){
      img.style.setProperty(prop,iconSize+'px','important');
    });
    img.style.setProperty('object-fit','contain','important');
-   img.style.setProperty('transform','none','important');
+   /* Optical correction for three approved icons with unusually wide internal margins.
+      Keep the CSS layout boxes 54px desktop / 42px mobile. */
+   var isPrepTool=a.matches('.home-tools-grid-v1016 > a[href="svs-prep.html"]');
+   var isPrepQuick=a.matches('.home-quick-links-v1024 > a[href="svs-prep.html"]');
+   var isHeroFocus=a.matches('.home-portal-links-v1016 > a[href="heroes.html"]');
+   var iconScale=isPrepTool?(compact?1.34:1.52):(isPrepQuick?(compact?1.28:1.38):(isHeroFocus?(compact?1.22:1.30):1));
+   img.style.setProperty('transform',iconScale===1?'none':'scale('+iconScale+')','important');
+   img.style.setProperty('transform-origin','center center','important');
    var tile=svg.parentNode;
    if(tile&&tile!==a){
      ['width','height','min-width','min-height','max-width','max-height','flex-basis'].forEach(function(prop){
