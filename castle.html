@@ -119,11 +119,13 @@ document.addEventListener('DOMContentLoaded',function(){
   document.body.appendChild(button);
   var existing=document.getElementById('backToTop');
   function sync(){
-   button.style.setProperty('display',query.matches?'grid':'none','important');
+   var show=query.matches && (window.scrollY||document.documentElement.scrollTop||0)>450;
+   button.style.setProperty('display',show?'grid':'none','important');
    if(existing){if(query.matches){existing.style.setProperty('display','none','important')}
     else{existing.style.removeProperty('display')}}
   }
   sync();
+  window.addEventListener('scroll',sync,{passive:true});
   if(query.addEventListener)query.addEventListener('change',sync);
   else if(query.addListener)query.addListener(sync);
  }
