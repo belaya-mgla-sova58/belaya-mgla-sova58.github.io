@@ -408,47 +408,59 @@ body.is-home-route .home-tools-grid-v1016>a[href="bear-helper.html"]>img{width:4
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
  else init();
 })();
-</script><script id="desktop-fullwidth-materials-v1126">
+</script><script id="desktop-fullwidth-materials-v1127">
 (function(){
  "use strict";
- var root,section,inner,cards;
- var cleanProps=['grid-column','grid-area','width','max-width','min-width','justify-self','align-self','box-sizing'];
- function apply(){
-  root=document.querySelector('body.is-home-route .modern-home-v424.home-portal-v1016');
+ function init(){
+  var root=document.querySelector('body.is-home-route .route-page[data-route="home"] > .modern-home-v424.home-portal-v1016');
   if(!root)return;
-  section=root.querySelector(':scope > .home-more-visible-v1025');
-  if(!section)return;
-  inner=section.querySelector(':scope > .home-portal-secondary-v1016');
-  cards=section.querySelectorAll('.modern-card-grid-v424');
-  if(window.matchMedia('(min-width:1100px)').matches){
-   /* Width is measured from the whole homepage, not the left grid track. */
-   var fullWidth=Math.round(root.getBoundingClientRect().width);
-   if(fullWidth<700)return;
-   section.style.setProperty('grid-column','1 / -1','important');
-   section.style.setProperty('grid-area','auto / 1 / auto / -1','important');
-   section.style.setProperty('width',fullWidth+'px','important');
-   section.style.setProperty('min-width',fullWidth+'px','important');
-   section.style.setProperty('max-width',fullWidth+'px','important');
-   section.style.setProperty('box-sizing','border-box','important');
-   section.style.setProperty('justify-self','start','important');
-   if(inner){
-    inner.style.setProperty('display','grid','important');
-    inner.style.setProperty('grid-template-columns','minmax(0,1.15fr) minmax(0,1fr)','important');
-    inner.style.setProperty('gap','16px','important');
-    inner.style.setProperty('width','100%','important');
-   }
-   cards.forEach(function(card){
-    card.style.setProperty('display','grid','important');
-    card.style.setProperty('grid-template-columns','repeat(3,minmax(0,1fr))','important');
-    card.style.setProperty('gap','10px','important');
-   });
-  }else{
-   cleanProps.forEach(function(p){section.style.removeProperty(p)});
-   if(inner)['display','grid-template-columns','gap','width'].forEach(function(p){inner.style.removeProperty(p)});
-   cards.forEach(function(card){['display','grid-template-columns','gap'].forEach(function(p){card.style.removeProperty(p)})});
+  var section=root.querySelector(':scope > .home-more-visible-v1025');
+  var footer=root.querySelector(':scope > .modern-home-footer-v424');
+  if(!section||!footer)return;
+  var parent=root.parentNode;
+  var originalSection=document.createComment('Restore desktop materials section here on mobile');
+  var originalFooter=document.createComment('Restore footer here on mobile');
+  root.insertBefore(originalSection,section);
+  root.insertBefore(originalFooter,footer);
+  var shell=document.createElement('div');
+  shell.className='modern-home-v424 desktop-materials-shell-v1127';
+  shell.style.setProperty('display','block','important');
+  shell.style.setProperty('box-sizing','border-box','important');
+  shell.style.setProperty('width','100%','important');
+  shell.style.setProperty('max-width','none','important');
+  shell.style.setProperty('min-width','0','important');
+  function arrange(){
+    var desktop=window.matchMedia('(min-width:1100px)').matches;
+    if(desktop){
+      if(shell.parentNode!==parent)parent.insertBefore(shell,root.nextSibling);
+      if(section.parentNode!==shell)shell.appendChild(section);
+      if(footer.parentNode!==shell)shell.appendChild(footer);
+      section.style.setProperty('width','100%','important');
+      section.style.setProperty('max-width','none','important');
+      section.style.setProperty('min-width','0','important');
+      section.style.setProperty('box-sizing','border-box','important');
+      var inner=section.querySelector(':scope > .home-portal-secondary-v1016');
+      if(inner){
+        inner.style.setProperty('display','grid','important');
+        inner.style.setProperty('grid-template-columns','minmax(0,1.15fr) minmax(0,1fr)','important');
+        inner.style.setProperty('gap','16px','important');
+      }
+      section.querySelectorAll('.modern-card-grid-v424').forEach(function(card){
+        card.style.setProperty('grid-template-columns','repeat(3,minmax(0,1fr))','important');
+      });
+    }else{
+      if(section.parentNode!==root)root.insertBefore(section,originalSection.nextSibling);
+      if(footer.parentNode!==root)root.insertBefore(footer,originalFooter.nextSibling);
+      if(shell.parentNode)shell.remove();
+      ['width','max-width','min-width','box-sizing'].forEach(function(p){section.style.removeProperty(p)});
+      var inner=section.querySelector(':scope > .home-portal-secondary-v1016');
+      if(inner)['display','grid-template-columns','gap'].forEach(function(p){inner.style.removeProperty(p)});
+      section.querySelectorAll('.modern-card-grid-v424').forEach(function(card){card.style.removeProperty('grid-template-columns')});
+    }
   }
+  arrange();
+  window.addEventListener('resize',arrange,{passive:true});
  }
- function init(){apply();window.addEventListener('resize',apply,{passive:true})}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
  else init();
 })();
