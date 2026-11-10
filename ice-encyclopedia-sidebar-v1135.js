@@ -13,8 +13,8 @@ function enable(){
   return n.nodeType===1 && n.matches('section.section, section.guide-section, .guide-page-v69');
  });
  if(!sections.length)return;
- var first=sections[0], marker=document.createComment('ice guide layout v1135 original insertion');
- page.insertBefore(marker,first);
+ var anchors=sections.map(function(n){var marker=document.createComment('original event guide position');page.insertBefore(marker,n);return {node:n,marker:marker}});
+ var first=sections[0], marker=anchors[0].marker;
  var grid=document.createElement('div');grid.className='ice-guide-layout-v1135';
  var article=document.createElement('div');article.className='ice-guide-body-v1135';
  var aside=document.createElement('aside');aside.className='ice-guide-sidebar-v1135';aside.setAttribute('aria-label','Содержание гайда и полезные ссылки');
@@ -44,8 +44,8 @@ function enable(){
  [['Все события','events.html'],['Подготовка к СВС','svs-prep.html'],['Битва за замок','castle.html']].forEach(function(v){if(location.pathname.endsWith('/'+v[1]))return;var a=document.createElement('a');a.href=v[1];a.textContent=v[0];links.appendChild(a)});
  page.classList.add('ice-guide-enabled-v1135');
  undo=function(){
-  sections.forEach(function(n){page.insertBefore(n,marker)});
-  grid.remove();marker.remove();page.classList.remove('ice-guide-enabled-v1135');
+  anchors.forEach(function(item){item.marker.parentNode.insertBefore(item.node,item.marker);item.marker.remove()});
+  grid.remove();page.classList.remove('ice-guide-enabled-v1135');
   undo=null;
  };
 }
