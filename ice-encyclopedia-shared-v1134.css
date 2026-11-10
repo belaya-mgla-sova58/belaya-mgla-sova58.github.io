@@ -1,0 +1,81 @@
+/* Белая Мгла | Ледяная энциклопедия, desktop shared v1134.
+   Opt-in only. Preserves mobile view, guide text and existing interactions. */
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine) {
+ body.bm-ice-encyclopedia-v1134 {
+  --ice-fg:#e8f2ff;--ice-gold:#ffe8b9;--ice-line:rgba(165,212,249,.49);
+ }
+ body.bm-ice-encyclopedia-v1134 main#appMain>.route-page.active {
+  max-width:none!important;width:100%!important;box-sizing:border-box!important;
+ }
+ body.bm-ice-encyclopedia-v1134 main#appMain>.route-page.active>.breadcrumbs-v409 {
+  margin-bottom:14px!important; font:600 14px/1.4 Arial,Helvetica,sans-serif!important;
+ }
+ body.bm-ice-encyclopedia-v1134 main#appMain>.route-page.active>section[class*="-image-header-"]{
+  box-sizing:border-box!important;width:100%!important;max-width:none!important;
+  margin:8px 0 17px!important;padding:0!important;overflow:hidden!important;
+  border:1px solid rgba(184,221,252,.58)!important;border-radius:20px!important;
+  background:#102c50!important;
+  box-shadow:0 14px 34px rgba(1,7,30,.39),inset 0 0 0 1px rgba(246,217,166,.11)!important;
+ }
+ body.bm-ice-encyclopedia-v1134 main#appMain>.route-page.active>section[class*="-image-header-"] img {
+  width:100%!important;max-width:100%!important;object-fit:contain!important;
+  display:block!important;
+ }
+ body.bm-ice-encyclopedia-v1134 main#appMain>.route-page.active>.intro,
+ body.bm-ice-encyclopedia-v1134 main#appMain>.route-page.active>.page-heading-v424{
+  box-sizing:border-box!important;width:100%!important;max-width:none!important;
+  margin:0 0 18px!important;padding:24px 30px!important;
+  border:1px solid rgba(173,215,249,.54)!important;border-radius:19px!important;
+  background:radial-gradient(ellipse at 90% 0,rgba(57,99,150,.22),transparent 60%),linear-gradient(130deg,rgba(17,49,89,.98),rgba(7,27,57,.98))!important;
+  box-shadow:inset 0 1px 0 rgba(240,249,255,.14),0 10px 28px rgba(0,6,31,.22)!important;
+ }
+ body.bm-ice-encyclopedia-v1134 .intro :is(h1,.owl-heading,.owl-title-text),
+ body.bm-ice-encyclopedia-v1134 .page-heading-v424 h1{
+  font-family:Georgia,"Times New Roman",serif!important;font-size:clamp(30px,2.6vw,43px)!important;
+  line-height:1.2!important;letter-spacing:0!important;color:var(--ice-gold)!important;
+  -webkit-text-fill-color:var(--ice-gold)!important;text-shadow:none!important;
+ }
+ body.bm-ice-encyclopedia-v1134 .intro p,
+ body.bm-ice-encyclopedia-v1134 .page-heading-v424 p{
+  font:400 16px/1.7 Arial,Helvetica,sans-serif!important;color:var(--ice-fg)!important;text-shadow:none!important;
+ }
+ body.bm-ice-encyclopedia-v1134 main#appMain .route-page.active>.section,
+ body.bm-ice-encyclopedia-v1134 main#appMain .route-page.active>.guide-page-v69{
+  box-sizing:border-box!important;width:100%!important;max-width:none!important;
+ }
+ body.bm-ice-encyclopedia-v1134 .bm-guide-topic-grid-v1092>.bm-guide-topic-card-v1092,
+ body.bm-ice-encyclopedia-v1134 main#appMain .route-page.active>.section:not(.bm-guide-topic-grid-v1092),
+ body.bm-ice-encyclopedia-v1134 main#appMain .route-page.active .guide-section{
+  border:1px solid var(--ice-line)!important;
+  border-radius:18px!important;
+  background:linear-gradient(145deg,rgba(21,54,93,.97),rgba(6,27,57,.98))!important;
+  box-shadow:0 12px 32px rgba(0,7,29,.24),inset 0 1px 0 rgba(229,242,255,.11)!important;
+ }
+ body.bm-ice-encyclopedia-v1134 .bm-guide-topic-grid-v1092>.bm-guide-topic-card-v1092{
+  padding:clamp(19px,1.8vw,30px)!important;
+ }
+ body.bm-ice-encyclopedia-v1134 .bm-guide-topic-grid-v1092>.bm-guide-topic-card-v1092> :is(h2,h3),
+ body.bm-ice-encyclopedia-v1134 main#appMain .route-page.active>.section :is(h2,h3),
+ body.bm-ice-encyclopedia-v1134 .guide-fold-title-v414 {
+  font-family:Georgia,"Times New Roman",serif!important;font-size:clamp(21px,1.65vw,28px)!important;
+  font-weight:700!important;line-height:1.3!important;letter-spacing:0!important;
+  color:var(--ice-gold)!important;-webkit-text-fill-color:var(--ice-gold)!important;
+  text-shadow:none!important;
+ }
+ body.bm-ice-encyclopedia-v1134 main#appMain .route-page.active :is(p,li,td,th,.castle-compact,.forts-short){
+  font-family:Arial,Helvetica,sans-serif!important;font-size:16px!important;
+  line-height:1.7!important;letter-spacing:0!important;text-shadow:none!important;
+ }
+ body.bm-ice-encyclopedia-v1134 main#appMain .route-page.active :is(p,li,td){color:#e4effe!important}
+ body.bm-ice-encyclopedia-v1134 main#appMain .route-page.active :is(b,strong){color:#fff7df!important}
+ body.bm-ice-encyclopedia-v1134 main#appMain .route-page.active :is(.guide-callout,.forts-short,.svs-note,.castle-flow){
+  border:1px solid rgba(230,198,137,.48)!important;border-radius:13px!important;
+  background:rgba(40,73,112,.47)!important;box-shadow:none!important;
+ }
+ body.bm-ice-encyclopedia-v1134 main#appMain .route-page.active :is(.related-guides-v625,.guide-nav-card){
+  border-color:rgba(160,207,246,.36)!important;
+ }
+}
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine) and (max-width:1330px){
+ body.bm-ice-encyclopedia-v1134 .bm-guide-topic-grid-v1092{grid-template-columns:minmax(0,1fr)!important}
+}
