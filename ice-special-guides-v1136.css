@@ -53,3 +53,13 @@ body.is-canyon-clash-route .ice-special-panel-v1136 li,body.is-bear-route .ice-s
 body.is-canyon-clash-route .canyon-wrap .ice-special-layout-v1136,body.is-bear-route .ice-special-layout-v1136{grid-template-columns:minmax(0,1fr) 260px!important}
 body.is-bear-route .ice-special-main-v1136 .bear-guide{grid-template-columns:minmax(0,1fr)!important}
 }
+
+/* Complex guide desktop readability and overflow pass v1138. */
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine){
+body.is-canyon-clash-route .ice-special-layout-v1136,body.is-bear-route .ice-special-layout-v1136{max-width:100%!important;min-width:0!important}
+body.is-canyon-clash-route .ice-special-main-v1136,body.is-bear-route .ice-special-main-v1136{overflow-wrap:break-word}
+body.is-canyon-clash-route .ice-special-panel-v1136 a,body.is-bear-route .ice-special-panel-v1136 a{overflow-wrap:anywhere}
+body.is-canyon-clash-route .ice-special-main-v1136 :is(img,video,iframe),body.is-bear-route .ice-special-main-v1136 :is(img,video,iframe){max-width:100%}
+body.is-canyon-clash-route .ice-special-main-v1136 :is(.media,.photo-grid,.grid2,.grid3,.timeline),body.is-bear-route .ice-special-main-v1136 :is(.bear-kpi,.bear-short,.bear-explain-body){min-width:0;max-width:100%}
+body.is-bear-route .ice-special-main-v1136 :is(.bear-table,table){max-width:100%}
+}
