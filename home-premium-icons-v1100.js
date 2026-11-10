@@ -75,14 +75,8 @@ function apply(){
      img.style.setProperty(prop,iconSize+'px','important');
    });
    img.style.setProperty('object-fit','contain','important');
-   /* Optical correction for three approved icons with unusually wide internal margins.
-      Keep the CSS layout boxes 54px desktop / 42px mobile. */
-   var isPrepTool=a.matches('.home-tools-grid-v1016 > a[href="svs-prep.html"]');
-   var isPrepQuick=a.matches('.home-quick-links-v1024 > a[href="svs-prep.html"]');
-   var isHeroFocus=a.matches('.home-portal-links-v1016 > a[href="heroes.html"]');
-   var iconScale=isPrepTool?(compact?1.34:1.52):(isPrepQuick?(compact?1.28:1.38):(isHeroFocus?(compact?1.22:1.30):1));
-   img.style.setProperty('transform',iconScale===1?'none':'scale('+iconScale+')','important');
-   img.style.setProperty('transform-origin','center center','important');
+   /* Cropping is performed in raster pixels, not CSS transforms. */
+   img.style.setProperty('transform','none','important');
    var tile=svg.parentNode;
    if(tile&&tile!==a){
      ['width','height','min-width','min-height','max-width','max-height','flex-basis'].forEach(function(prop){
@@ -107,7 +101,26 @@ function apply(){
     var m=xml.match(/href="(data:image\/webp;base64,[A-Za-z0-9+/=]+)"/);
     if(!m)throw Error("no valid webp embedded");
     var data=m[1],probe=new Image();
-    probe.onload=function(){img.src=data;img.style.visibility="visible";img.dataset.bmLoaded="true"};
+    probe.onload=function(){
+     var output=data;
+     var cropRatio=href==="svs-prep.html"?0.72:
+       (href==="heroes.html"&&!!a.closest('.home-portal-links-v1016')?0.82:1);
+     if(cropRatio<1){
+       try{
+         var canvas=document.createElement('canvas');
+         canvas.width=160;canvas.height=160;
+         var ctx=canvas.getContext('2d');
+         var sourceWidth=probe.naturalWidth,sourceHeight=probe.naturalHeight;
+         var side=Math.min(sourceWidth,sourceHeight)*cropRatio;
+         ctx.clearRect(0,0,160,160);
+         ctx.drawImage(probe,(sourceWidth-side)/2,(sourceHeight-side)/2,side,side,0,0,160,160);
+         output=canvas.toDataURL('image/png');
+       }catch(e){output=data}
+     }
+     img.src=output;
+     img.style.visibility="visible";
+     img.dataset.bmLoaded="true";
+    };
     probe.onerror=function(){throwBack()};
     probe.src=data;
    }).catch(throwBack);
