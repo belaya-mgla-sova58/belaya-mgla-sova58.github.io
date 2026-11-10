@@ -186,3 +186,45 @@ body.is-home-route .modern-panel-v424:has(>.modern-list-v424>a[href="state-posit
   max-width:54px!important;max-height:54px!important;flex:0 0 54px!important;
  }
 }
+
+/* v1103: Restore undistorted square artwork and balanced card geometry. */
+body.is-home-route img.bm-premium-icon-v1100{
+ object-fit:contain!important;
+ object-position:center!important;
+ aspect-ratio:1 / 1!important;
+}
+body.is-home-route .home-portal-v1016 .home-tools-grid-v1016>a[href="svs-prep.html"]>img.bm-premium-icon-v1100{
+ width:54px!important;height:54px!important;
+ min-width:54px!important;min-height:54px!important;
+ flex:0 0 54px!important;object-fit:contain!important;
+}
+body.is-home-route .home-portal-v1016 .home-portal-links-v1016>a[href="heroes.html"]>img.bm-premium-icon-v1100{
+ width:58px!important;height:58px!important;
+ min-width:58px!important;min-height:58px!important;
+ flex:0 0 58px!important;object-fit:contain!important;
+}
+body.is-home-route .modern-panel-v424:has(>.modern-list-v424>a[href="state-positions.html"]) .modern-list-v424>a[href]{
+ min-height:72px!important;gap:12px!important;
+}
+body.is-home-route .modern-panel-v424:has(>.modern-list-v424>a[href="state-positions.html"]) .modern-list-v424>a[href]>.v424-list-icon,
+body.is-home-route .modern-panel-v424:has(>.modern-list-v424>a[href="state-positions.html"]) .modern-list-v424>a[href]>.v424-list-icon>img.bm-premium-icon-v1100{
+ width:56px!important;height:56px!important;
+ min-width:56px!important;min-height:56px!important;
+ max-width:56px!important;max-height:56px!important;
+ flex:0 0 56px!important;object-fit:contain!important;
+}
+@media(max-width:820px){
+ body.is-home-route .home-portal-v1016 .home-tools-grid-v1016>a[href="svs-prep.html"]>img.bm-premium-icon-v1100{
+ width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;flex:0 0 44px!important;
+ }
+ body.is-home-route .home-portal-v1016 .home-portal-links-v1016>a[href="heroes.html"]>img.bm-premium-icon-v1100{
+ width:46px!important;height:46px!important;min-width:46px!important;min-height:46px!important;flex:0 0 46px!important;
+ }
+ body.is-home-route .modern-panel-v424:has(>.modern-list-v424>a[href="state-positions.html"]) .modern-list-v424>a[href]{
+ min-height:64px!important;gap:10px!important;
+ }
+ body.is-home-route .modern-panel-v424:has(>.modern-list-v424>a[href="state-positions.html"]) .modern-list-v424>a[href]>.v424-list-icon,
+ body.is-home-route .modern-panel-v424:has(>.modern-list-v424>a[href="state-positions.html"]) .modern-list-v424>a[href]>.v424-list-icon>img.bm-premium-icon-v1100{
+ width:46px!important;height:46px!important;min-width:46px!important;min-height:46px!important;max-width:46px!important;max-height:46px!important;flex:0 0 46px!important;
+ }
+}
