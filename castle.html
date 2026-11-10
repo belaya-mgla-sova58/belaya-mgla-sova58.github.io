@@ -41,7 +41,7 @@ body.is-castle-route .castle-image-header-v512 img{display:block;width:100%;heig
 <link rel="stylesheet" href="desktop-guides-expanded-v1080.css?v=1" media="screen and (min-width:1100px) and (hover:hover) and (pointer:fine)" data-desktop-guide-expansion/>
 <link rel="stylesheet" href="desktop-guide-editorial-v1092.css?v=2" media="all" data-guide-editorial-style/>
 <script defer src="desktop-guide-editorial-v1092.js?v=1" data-guide-editorial-script></script>
-<link rel="stylesheet" href="ice-encyclopedia-desktop-v1131.css?v=1" media="screen and (min-width:1100px) and (hover:hover) and (pointer:fine)"/>
+<link rel="stylesheet" href="ice-encyclopedia-desktop-v1131.css?v=2" media="screen and (min-width:1100px) and (hover:hover) and (pointer:fine)"/>
 <script defer src="ice-encyclopedia-desktop-v1131.js?v=1"></script>
 </head>
 <body class="is-castle-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="castle">
@@ -84,5 +84,14 @@ body.is-castle-route .castle-image-header-v512 img{display:block;width:100%;heig
 <button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button>
 <nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424"><a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" src="assets/ui-home-v534.webp"/></span><b>Главная</b></a><a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" src="assets/ui-events-v534.webp"/></span><b>События</b></a><a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" src="assets/ui-heroes-v534.webp"/></span><b>Герои</b></a><a data-v424-nav="calc" href="fire-furnace-calculator.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" src="assets/ui-calculator-v534.webp"/></span><b>Калькулятор</b></a><a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" src="assets/ui-knowledge-v534.webp"/></span><b>База знаний</b></a></nav>
 <script defer src="pwa-install.js?v=987"></script>
-</body>
+<script id="castle-back-top-desktop-v1132">
+document.addEventListener('DOMContentLoaded',function(){
+ var b=document.getElementById('backToTop');if(!b)return;
+ b.addEventListener('click',function(e){
+  if(!window.matchMedia('(min-width:1100px) and (hover:hover) and (pointer:fine)').matches)return;
+  e.preventDefault();
+  window.scrollTo({top:0,behavior:'smooth'});
+ });
+});
+</script></body>
 </html>
