@@ -398,6 +398,7 @@ html:not(.force-desktop-root) body.is-cheats-route .cheats-shell-v582 :is(button
 <div class="cheat-none-v641" id="cheatNoneV641" hidden>Ничего не найдено. Попробуй другое слово или выбери «Все».</div>
 <div class="cheats-footer-v582">Нужен более подробный ответ? Открой <a href="events.html">все игровые гайды</a> или <a href="faq.html">популярные вопросы</a>.</div>
 </div></div><section class="related-guides-v625" aria-label="Похожие гайды"><div class="related-guides-head-v625"><span>Ещё по теме</span><h2>Похожие гайды</h2></div><div class="related-guides-grid-v625"><a class="related-guide-card-v625" href="mails.html"><span>Письма</span><b>Открыть гайд ›</b></a></div></section></main>
+<button aria-label="Наверх" class="back-to-top" id="backToTop" type="button">↑</button>
 <nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424"><a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-home-v534.webp"/></span><b>Главная</b></a><a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-events-v534.webp"/></span><b>События</b></a><a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-heroes-v534.webp"/></span><b>Герои</b></a><a data-v424-nav="calc" href="calculators.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-calculator-v534.webp"/></span><b>Калькулятор</b></a><a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-knowledge-v534.webp"/></span><b>База знаний</b></a></nav>
 <script>
 (()=>{'use strict';
@@ -450,4 +451,29 @@ document.querySelectorAll('[data-cheat-copy]').forEach(button=>button.addEventLi
 update();
 })();
 </script>
-</body></html>
+<script id="cheats-mobile-backtop-v1154">
+(function(){function init(){
+ var b=document.getElementById('backToTop');if(!b)return;
+ var mobile=window.matchMedia('(max-width:820px)');
+ function update(){b.classList.toggle('show',mobile.matches&&(window.scrollY||document.documentElement.scrollTop)>420)}
+ b.addEventListener('click',function(){window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'})});
+ window.addEventListener('scroll',update,{passive:true});if(mobile.addEventListener)mobile.addEventListener('change',update);
+ update()
+ }if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init()
+})();
+</script>
+<style id="cheats-mobile-backtop-style-v1154">
+@media screen and (max-width:820px){
+html:not(.force-desktop-root) body.is-cheats-route #backToTop{
+ position:fixed!important;right:13px!important;
+ bottom:calc(89px + env(safe-area-inset-bottom,0px))!important;
+ z-index:110!important;width:43px!important;height:43px!important;
+ background:#143d70!important;color:#ffe7b9!important;
+ border:1px solid rgba(166,213,247,.6)!important;border-radius:50%!important;
+ box-shadow:0 4px 14px rgba(1,9,28,.3)!important;
+}
+}
+@media screen and (min-width:821px){
+body.is-cheats-route #backToTop{display:none!important}
+}
+</style></body></html>
