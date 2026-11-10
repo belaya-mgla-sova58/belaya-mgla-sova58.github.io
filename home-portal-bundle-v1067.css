@@ -1061,7 +1061,7 @@ body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-topic-card
  font-size:18px!important;
 }
 body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-topic-card-v424>span.v445-topic-icon img{
- width:23px!important;height:23px!important;max-width:23px!important;
+ width:54px!important;height:54px!important;max-width:54px!important;
  object-fit:contain!important;
 }
 body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-topic-card-v424>b{
@@ -1095,7 +1095,7 @@ body.is-home-route .modern-home-v424 .home-more-visible-v1025 .v424-list-icon{
  margin:0!important;border-radius:8px!important;
 }
 body.is-home-route .modern-home-v424 .home-more-visible-v1025 .v424-list-icon img{
- width:23px!important;height:23px!important;max-width:23px!important;
+ width:54px!important;height:54px!important;max-width:54px!important;
  object-fit:contain!important;
 }
 body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-list-v424 b{
@@ -1451,3 +1451,29 @@ body.is-home-route .home-portal-v1016 .home-news-v442 .home-news-updates-banner-
 }
 
 /* END home-news-creative-placement-v1033.css */
+
+
+/* v1116: eliminate miniature icon legacy limits directly in source bundle. */
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-topic-card-v424:has(img.bm-premium-icon-v1100){
+ grid-template-columns:54px minmax(0,1fr)!important;
+}
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-topic-card-v424:has(img.bm-premium-icon-v1100)>span.v445-topic-icon,
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-list-v424>a:has(img.bm-premium-icon-v1100)>span.v424-list-icon{
+ width:54px!important;height:54px!important;min-width:54px!important;min-height:54px!important;
+ max-width:54px!important;max-height:54px!important;
+ padding:0!important;margin:0!important;
+ background:transparent!important;border:0!important;box-shadow:none!important;
+}
+@media(max-width:820px){
+ body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-topic-card-v424:has(img.bm-premium-icon-v1100){
+  grid-template-columns:42px minmax(0,1fr)!important;
+ }
+ body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-topic-card-v424 .v445-topic-icon img.bm-premium-icon-v1100,
+ body.is-home-route .modern-home-v424 .home-more-visible-v1025 .v424-list-icon img.bm-premium-icon-v1100,
+ body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-topic-card-v424:has(img.bm-premium-icon-v1100)>span.v445-topic-icon,
+ body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-list-v424>a:has(img.bm-premium-icon-v1100)>span.v424-list-icon{
+  width:42px!important;height:42px!important;
+  min-width:42px!important;min-height:42px!important;
+  max-width:42px!important;max-height:42px!important;
+ }
+}
