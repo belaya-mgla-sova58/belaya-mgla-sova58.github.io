@@ -210,7 +210,7 @@ jobs:
 
       - name: Check desktop and mobile layouts
         working-directory: visual-tests
-        run: npx playwright test site-visual.spec.mjs mobile-navigation.spec.mjs
+        run: npx playwright test site-visual.spec.mjs mobile-navigation.spec.mjs desktop-guide-editorial.spec.mjs
 
       - name: Summarize Playwright tests and failures
         if: always()
