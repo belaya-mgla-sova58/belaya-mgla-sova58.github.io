@@ -179,3 +179,33 @@ html:not(.force-desktop-root) body.is-canyon-clash-route .canyon-wrap :is(.photo
  grid-template-columns:minmax(0,1fr)!important;
 }
 }
+
+/* v1146: smooth mobile scrolling for long guide articles.
+   Remove costly moving decorative layers and per-card animations, not game visuals. */
+@media screen and (max-width:820px){
+html:not(.force-desktop-root) body.site-hq-v407.bm-ice-encyclopedia-v1134 .site-cosmic-background-v442{
+ display:none!important;animation:none!important;
+}
+html:not(.force-desktop-root) body.site-hq-v407.bm-ice-encyclopedia-v1134{
+ background-attachment:scroll!important;
+}
+html:not(.force-desktop-root) body.site-hq-v407.bm-ice-encyclopedia-v1134 main#appMain{
+ background-attachment:scroll!important;
+}
+html:not(.force-desktop-root) body.site-hq-v407.bm-ice-encyclopedia-v1134 main#appMain :is(.section,.guide-section,.guide-fold-v414,.guide-nav-card,.mini-card,.bear-card,.canyon-wrap>.facts>.fact){
+ -webkit-backdrop-filter:none!important;
+ backdrop-filter:none!important;
+ background-attachment:scroll!important;
+ will-change:auto!important;
+}
+html:not(.force-desktop-root) body.site-hq-v407.bm-ice-encyclopedia-v1134 main#appMain :is(.section,.guide-section,.guide-fold-v414,.guide-nav-card,.mini-card,.bear-card){
+ transition-property:border-color,background-color!important;
+ transition-duration:.12s!important;
+}
+html:not(.force-desktop-root) body.site-hq-v407.bm-ice-encyclopedia-v1134 :is(.fx-snow,.fx-feathers,.snowflake,.feather){
+ animation:none!important;display:none!important;
+}
+html:not(.force-desktop-root) body.site-hq-v407.bm-ice-encyclopedia-v1134 main#appMain :is(.section,.guide-section,.guide-fold-body-v414,.bear-explain-body){
+ overflow-wrap:break-word;
+}
+}
