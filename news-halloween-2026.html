@@ -38,7 +38,34 @@
 <section class="section"><div class="wrap"><div class="kicker">Галерея источника</div><h2>Дополнительные материалы</h2><div class="gallery"><figure><img src="https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2026/03/%E5%A5%96%E5%8A%B11.png" alt="Дополнительная иллюстрация из источника"></figure><figure><img src="https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2026/10/763eec22a7776015dd28a1cf6f312bbf5be2dc8a.jpg" alt="Праздничная карточка"></figure><figure><img src="https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2026/10/34dcb4ecc32f6895cecd3e268f82ab11ee75f2cb.gif" alt="Праздничная анимация"></figure></div><div class="warning" style="margin-top:20px"><b>О времени:</b> основные события во внутриигровом письме указаны по МСК. Для дополнительных наборов Wiki использует UTC, поэтому у этих блоков оставлена исходная отметка.</div></div></section>
 <footer class="footer">Материалы события и изображения: <a href="https://www.whiteoutsurvival.wiki/sneak-peek/102514638en/" target="_blank" rel="noopener">Wiki Белой мглы</a> • Автор страницы — Sova</footer>
 </main>
+<nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424"><a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-home-v534.webp"/></span><b>Главная</b></a><a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-events-v534.webp"/></span><b>События</b></a><a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-heroes-v534.webp"/></span><b>Герои</b></a><a data-v424-nav="calc" href="calculators.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-calculator-v534.webp"/></span><b>Калькулятор</b></a><a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-knowledge-v534.webp"/></span><b>База знаний</b></a></nav>
+<button id="backToTop" class="back-to-top" type="button" aria-label="Наверх">↑</button>
 <script>
 (function(){const viewEl=document.getElementById('halloweenViewsV764'),ns='belaya-mgla-sova58',key='ru-halloween-2026',sk='bm-view-counted:'+key;let seen=false;try{seen=sessionStorage.getItem(sk)==='1'}catch(e){}fetch('https://abacus.jasoncameron.dev/'+(seen?'get':'hit')+'/'+ns+'/'+key,{cache:'no-store',mode:'cors'}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{const v=Number(d&&d.value);viewEl.textContent=Number.isFinite(v)?v.toLocaleString('ru-RU'):'—';if(!seen)try{sessionStorage.setItem(sk,'1')}catch(e){}}).catch(()=>viewEl.textContent='—');const btn=document.getElementById('halloweenLikeV764'),count=document.getElementById('halloweenLikesV764'),label=document.getElementById('halloweenLikeLabelV764'),lk='news-halloween-2026-v1',likedKey='belaya-mgla-firebase-liked-'+lk,url='https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/'+encodeURIComponent(lk)+'.json';function liked(){try{return localStorage.getItem(likedKey)==='1'}catch(e){return false}}function sync(){const on=liked();btn.classList.toggle('is-liked',on);btn.disabled=on;label.textContent=on?'Спасибо!':'Нравится'}function load(){fetch(url,{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(v=>count.textContent=(typeof v==='number'?v:0).toLocaleString('ru-RU')).catch(()=>count.textContent='—')}btn.addEventListener('click',async()=>{if(liked())return;const before=parseInt((count.textContent||'0').replace(/\s/g,''),10)||0;count.textContent=(before+1).toLocaleString('ru-RU');btn.disabled=true;try{const r=await fetch(url,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({'.sv':{increment:1}}),cache:'no-store'});if(!r.ok)throw 0;const v=await r.json();try{localStorage.setItem(likedKey,'1')}catch(e){}sync();count.textContent=(typeof v==='number'?v:before+1).toLocaleString('ru-RU')}catch(e){btn.disabled=false;count.textContent=before.toLocaleString('ru-RU')}});sync();load()})();
 </script><script defer src="pwa-install.js?v=987"></script>
-</body></html>
+<style id="halloween-mobile-navigation-v1150">
+@media screen and (max-width:820px){
+html:not(.force-desktop-root) body[data-static-route="news-halloween-2026"]{
+ padding-bottom:calc(85px + env(safe-area-inset-bottom,0px))!important;
+}
+html:not(.force-desktop-root) body[data-static-route="news-halloween-2026"] #backToTop{
+ position:fixed!important;right:12px!important;
+ bottom:calc(89px + env(safe-area-inset-bottom,0px))!important;
+ z-index:110!important;width:44px!important;height:44px!important;
+ border-radius:50%!important;border:1px solid rgba(240,198,129,.6)!important;
+ background:#352352!important;color:#ffe6ad!important;
+}
+}
+@media (min-width:821px){
+body[data-static-route="news-halloween-2026"] nav.mobile-bottom-v424,
+body[data-static-route="news-halloween-2026"] #backToTop{display:none!important}
+}
+</style>
+<script id="halloween-mobile-backtop-v1150">
+(function(){function init(){var b=document.getElementById('backToTop');if(!b)return;
+var mq=window.matchMedia('(max-width:820px)');
+function sync(){b.classList.toggle('show',mq.matches&&(window.scrollY||0)>420)}
+b.addEventListener('click',function(){window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'})});
+window.addEventListener('scroll',sync,{passive:true});if(mq.addEventListener)mq.addEventListener('change',sync);sync()}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init()})();
+</script></body></html>
