@@ -6,7 +6,7 @@ test.describe('Широкие гайды в версии ПК и компьют�
     await page.goto('/tundra-trade-route.html', { waitUntil: 'domcontentloaded' });
     await expect(page.locator('body.bm-guide-editorial-v1092')).toHaveCount(1);
     const cards = page.locator('.tundra-route-guide.bm-guide-topic-grid-v1092 > .bm-guide-topic-card-v1092');
-    await expect(cards).toHaveCount(18);
+    await expect(cards).toHaveCount(17);
     const metrics = await page.evaluate(() => {
       const route = document.querySelector('main#appMain > .route-page.active');
       const section = document.querySelector('.tundra-route-guide');
@@ -37,7 +37,7 @@ test.describe('Широкие гайды в версии ПК и компьют�
     await expect(page.locator('html.force-desktop-root')).toHaveCount(1);
     await expect(page.locator('body.bm-guide-editorial-v1092')).toHaveCount(1);
     const cards = page.locator('.tundra-route-guide.bm-guide-topic-grid-v1092 > .bm-guide-topic-card-v1092');
-    await expect(cards).toHaveCount(18);
+    await expect(cards).toHaveCount(17);
     const button = page.locator('.view-mode-side-v629');
     await expect(button).toBeVisible();
     await button.click();
