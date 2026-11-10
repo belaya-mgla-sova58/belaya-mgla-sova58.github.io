@@ -1,0 +1,78 @@
+/* Белая Мгла | Three distinct typographic identities v1098.
+   Home: modern editorial. Knowledge: literary. All other pages: futuristic.
+   SVG/icon-font glyphs and text embedded in images are untouched. */
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700;800;900&family=Golos+Text:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Prata&family=Russo+One&display=swap');
+
+body.is-home-route{
+ --bm-type-body:'Manrope','Segoe UI',Arial,sans-serif;
+ --bm-type-head:'Russo One','Trebuchet MS',Arial,sans-serif;
+}
+body.is-other-route{
+ --bm-type-body:'Golos Text','Segoe UI',Arial,sans-serif;
+ --bm-type-head:'Prata',Georgia,serif;
+}
+body:not(.is-home-route):not(.is-other-route){
+ --bm-type-body:'Exo 2','Segoe UI',Arial,sans-serif;
+ --bm-type-head:'Exo 2','Trebuchet MS',Arial,sans-serif;
+}
+body.site-hq-v407{
+ font-family:var(--bm-type-body)!important;
+ font-synthesis:weight;
+}
+body.site-hq-v407 :is(main,main p,main li,main td,main th,main small,main label,main input,main select,main textarea,main button,main summary,main .details-body,main .section,main .intro,
+ nav a,.nav-wrap,.mobile-topbar,.mobile-bottom-v424,.pc-topbar-title-v966,.site-search-box-v426,.site-search-input-v426){
+ font-family:var(--bm-type-body)!important;
+}
+body.site-hq-v407 :is(main h1,main h2,main h3,main h4,main h5,
+ main .page-heading-v424,main .page-heading-v424 *,
+ main .home-portal-block-title-v1016,main .modern-panel-head-v424 h2,
+ main .guide-fold-summary-v414,main .kb-clean-group-v920 h2){
+ font-family:var(--bm-type-head)!important;
+ font-synthesis:weight;
+}
+body.site-hq-v407 :is(.mobile-topbar-title strong,.pc-topbar-title-v966 strong){
+ font-family:var(--bm-type-head)!important;
+}
+/* Home: bold display headlines, compact elegant content tiles */
+body.is-home-route main :is(.home-index-links-v1016 b,.home-tools-grid-v1016 span,.home-portal-links-v1016 b,.home-news-banner-copy-v449 b,.modern-topic-card-v424 b,.home-quick-links-v1024 b,.home-bear-calc-copy-v780 h2){
+ font-family:var(--bm-type-head)!important;
+ letter-spacing:.005em!important;
+}
+body.is-home-route main :is(.home-index-links-v1016 small,.home-portal-links-v1016 small,.modern-topic-card-v424 small,.home-news-banner-copy-v449 small){
+ font-family:var(--bm-type-body)!important;
+}
+/* Knowledge: an unmistakable library-like atmosphere, readable cards */
+body.is-other-route main :is(.kb-clean-card-v920 b,.kb-clean-group-v920 h2,.page-heading-v424 h1,.kb-page-v415 h1){
+ font-family:var(--bm-type-head)!important;
+ font-weight:400!important;
+ letter-spacing:.005em!important;
+}
+body.is-other-route main :is(.kb-clean-card-v920 small,.kb-clean-group-v920 p,.kb-clean-card-v920 i){
+ font-family:var(--bm-type-body)!important;
+}
+/* Other pages: clear technical headers without narrow or overly condensed type */
+body:not(.is-home-route):not(.is-other-route) main :is(.guide-nav-card b,.related-guide-card-v625 b,.modern-topic-card-v424 b,.calc-hub-card b,.guide-fold-v414 summary,.bm-guide-topic-card-v1092>h2,.bm-guide-topic-card-v1092>h3){
+ font-family:var(--bm-type-head)!important;
+ font-weight:700!important;
+ letter-spacing:.005em!important;
+}
+@media(max-width:820px){
+ body.site-hq-v407 main :is(h1,h2,h3,h4){overflow-wrap:break-word;}
+ body.is-home-route main .home-portal-block-title-v1016{
+  font-size:clamp(17px,4.3vw,21px)!important;
+  line-height:1.22!important;
+ }
+ body.is-home-route main :is(.home-index-links-v1016 b,.home-portal-links-v1016 b,.home-tools-grid-v1016 span){
+  font-size:clamp(11px,2.7vw,14px)!important;
+  line-height:1.28!important;
+  overflow-wrap:break-word;
+ }
+ body.is-home-route main .home-news-banner-copy-v449 b{
+  font-size:clamp(10px,2.6vw,14px)!important;
+ }
+ body.is-other-route main .kb-clean-card-v920 b{
+  font-size:clamp(15px,3.9vw,19px)!important;
+  line-height:1.35!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){body.site-hq-v407{scroll-behavior:auto}}
