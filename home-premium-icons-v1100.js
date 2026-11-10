@@ -67,13 +67,27 @@ function apply(){
    img.__bmOriginalSvg=svg.cloneNode(true);
    img.__bmHost=svg.parentNode;
    /* v1113: one natural 64px scale on phone and desktop. CSS owns size. */
-   img.width=64;
-   img.height=64;
+   var compact=window.matchMedia&&window.matchMedia('(max-width:820px)').matches;
+   var iconSize=compact?42:54;
+   img.width=iconSize;
+   img.height=iconSize;
+   ['width','height','min-width','min-height','max-width','max-height','flex-basis'].forEach(function(prop){
+     img.style.setProperty(prop,iconSize+'px','important');
+   });
+   img.style.setProperty('object-fit','contain','important');
+   img.style.setProperty('transform','none','important');
    var tile=svg.parentNode;
    if(tile&&tile!==a){
+     ['width','height','min-width','min-height','max-width','max-height','flex-basis'].forEach(function(prop){
+       tile.style.setProperty(prop,iconSize+'px','important');
+     });
      tile.style.setProperty('overflow','visible','important');
      tile.style.setProperty('display','grid','important');
      tile.style.setProperty('place-items','center','important');
+     tile.style.setProperty('padding','0','important');
+   }
+   if(a.classList.contains('modern-topic-card-v424')){
+     a.style.setProperty('grid-template-columns',iconSize+'px minmax(0,1fr)','important');
    }
    /* Hide temporarily until decoded, preventing broken placeholder. */
    img.style.visibility="hidden";
