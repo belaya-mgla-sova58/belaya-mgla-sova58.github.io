@@ -71,4 +71,23 @@ test.describe('Широкие гайды в версии ПК и компьют�
     await expect(page.locator('.tundra-route-guide.bm-guide-topic-grid-v1092')).toHaveCount(0);
     await expect(page.locator('body.bm-guide-editorial-v1092')).toHaveCount(0);
   });
+  test('Обычный телефон: выдвижное меню стало компактнее', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'mobile');
+    await page.addInitScript(() => localStorage.setItem('sova58-view-mode-v622', 'mobile'));
+    await page.goto('/tundra-trade-route.html', { waitUntil: 'domcontentloaded' });
+    const toggle = page.locator('#mobileMenuToggle');
+    await expect(toggle).toBeVisible();
+    await toggle.click();
+    const nav = page.locator('.nav-wrap');
+    await expect(nav).toBeVisible();
+    const metrics = await page.evaluate(() => ({
+      nav: document.querySelector('.nav-wrap').getBoundingClientRect().width,
+      viewport: document.documentElement.clientWidth,
+      toggleLeft: document.getElementById('mobileMenuToggle').getBoundingClientRect().left,
+    }));
+    console.log('MOBILE-GUIDE-MENU', JSON.stringify(metrics));
+    expect(metrics.nav).toBeLessThanOrEqual(222);
+    expect(metrics.nav).toBeLessThan(metrics.viewport * .7);
+  });
+
 });
