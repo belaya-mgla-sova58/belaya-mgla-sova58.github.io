@@ -16,9 +16,14 @@ var assets={
  "events.html":"assets/bm-events-v1108.svg?v=1",
  "calculators.html":"assets/bm-calculators-v1109.svg?v=1",
  "bear-helper.html":"assets/bm-bear-helper-v1109.svg?v=1",
- "farm.html":"assets/bm-farm-v1109.svg?v=1"
+ "farm.html":"assets/bm-farm-v1109.svg?v=1",
+ "beacon.html":"assets/bm-beacon-approved-v1110.svg?v=1",
+ "mails.html":"assets/bm-mails-approved-v1110.svg?v=1",
+ "state-58.html":"assets/bm-state58-approved-v1110.svg?v=1",
+ "knowledge-card":"assets/bm-knowledge-approved-v1110.svg?v=1"
 };
 function locate(href){
+ if(href==="knowledge-card")return document.querySelectorAll('.modern-home-v424 .modern-topic-card-v424[href="other.html"]');
  if(href==="other.html")return document.querySelectorAll('.modern-home-v424 .home-index-links-v1016 a[href="other.html"]');
  return document.querySelectorAll('.modern-home-v424 a[href="'+href+'"]');
 }
