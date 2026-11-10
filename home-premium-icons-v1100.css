@@ -300,3 +300,51 @@ body.is-home-route .modern-home-v424 .modern-topic-card-v424:is([href="gear.html
   flex:0 0 38px!important;
  }
 }
+
+/* v1108: approved Expert / Labyrinth / Events images only.
+   Natural proportions, transparent outer corners and no black tile backdrop. */
+body.is-home-route .modern-home-v424 a:is([href="experts.html"],[href="labyrinth.html"],[href="events.html"]) img.bm-premium-icon-v1100{
+ display:block!important;
+ width:46px!important;height:46px!important;
+ min-width:46px!important;min-height:46px!important;
+ max-width:46px!important;max-height:46px!important;
+ flex:0 0 46px!important;
+ aspect-ratio:1 / 1!important;object-fit:contain!important;
+ padding:0!important;margin:0!important;
+ border:0!important;box-shadow:none!important;
+ background:transparent!important;filter:none!important;transform:none!important;
+}
+body.is-home-route .modern-home-v424 .modern-topic-card-v424:is([href="experts.html"],[href="events.html"])>span.v445-topic-icon,
+body.is-home-route .modern-home-v424 .modern-list-v424>a:is([href="experts.html"],[href="labyrinth.html"],[href="events.html"])>span.v424-list-icon{
+ display:grid!important;place-items:center!important;
+ width:48px!important;height:48px!important;
+ min-width:48px!important;max-width:48px!important;
+ min-height:48px!important;max-height:48px!important;
+ flex:0 0 48px!important;
+ background:transparent!important;
+ border:0!important;box-shadow:none!important;
+ padding:0!important;margin:0 8px 0 0!important;
+ overflow:visible!important;
+}
+body.is-home-route .home-portal-v1016 .home-index-links-v1016>a[href="events.html"]>img.bm-premium-icon-v1100{
+ width:58px!important;height:58px!important;
+ min-width:58px!important;min-height:58px!important;
+ max-width:58px!important;max-height:58px!important;flex:0 0 58px!important;
+}
+@media(max-width:820px){
+ body.is-home-route .modern-home-v424 a:is([href="experts.html"],[href="labyrinth.html"],[href="events.html"]) img.bm-premium-icon-v1100{
+  width:40px!important;height:40px!important;
+  min-width:40px!important;min-height:40px!important;
+  max-width:40px!important;max-height:40px!important;flex:0 0 40px!important;
+ }
+ body.is-home-route .modern-home-v424 .modern-topic-card-v424:is([href="experts.html"],[href="events.html"])>span.v445-topic-icon,
+ body.is-home-route .modern-home-v424 .modern-list-v424>a:is([href="experts.html"],[href="labyrinth.html"],[href="events.html"])>span.v424-list-icon{
+  width:42px!important;height:42px!important;min-width:42px!important;min-height:42px!important;
+  max-width:42px!important;max-height:42px!important;flex:0 0 42px!important;
+ }
+ body.is-home-route .home-portal-v1016 .home-index-links-v1016>a[href="events.html"]>img.bm-premium-icon-v1100{
+  width:46px!important;height:46px!important;
+  min-width:46px!important;min-height:46px!important;
+  max-width:46px!important;max-height:46px!important;flex:0 0 46px!important;
+ }
+}
