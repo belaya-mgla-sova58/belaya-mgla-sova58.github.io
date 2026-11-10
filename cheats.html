@@ -71,6 +71,39 @@ body.is-cheats-route .cheat-none-v641[hidden]{display:none!important}
 <link rel="stylesheet" href="desktop-guides-expanded-v1080.css?v=1" media="screen and (min-width:1100px) and (hover:hover) and (pointer:fine)" data-desktop-guide-expansion/>
 <link rel="stylesheet" href="desktop-guide-editorial-v1092.css?v=2" media="all" data-guide-editorial-style/>
 <script defer src="desktop-guide-editorial-v1092.js?v=1" data-guide-editorial-script></script>
+<link rel="stylesheet" href="mobile-ice-aurora-v1140.css?v=2" media="screen and (max-width:820px)"/>
+<style id="cheats-mobile-final-v1153">
+@media screen and (max-width:820px){
+html:not(.force-desktop-root) body.is-cheats-route main#appMain{
+ box-sizing:border-box!important;max-width:100%!important;min-width:0!important;
+ padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))!important;
+}
+html:not(.force-desktop-root) body.is-cheats-route :is(.cheats-shell-v582,.cheats-hero-v582,.cheat-finder-v641,.cheats-grid-v582){
+ box-sizing:border-box!important;width:100%!important;min-width:0!important;max-width:100%!important;
+}
+html:not(.force-desktop-root) body.is-cheats-route .cheats-grid-v582{
+ display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:11px!important;
+}
+html:not(.force-desktop-root) body.is-cheats-route .cheats-hero-v582{
+ padding:17px 14px!important;border-radius:16px!important;
+ border:1px solid rgba(161,211,250,.43)!important;
+ background:linear-gradient(140deg,#14365f,#081e3f)!important;
+}
+html:not(.force-desktop-root) body.is-cheats-route :is(.cheat-finder-v641,.cheats-filter-v582){
+ max-width:100%!important;min-width:0!important;box-sizing:border-box!important;
+}
+html:not(.force-desktop-root) body.is-cheats-route #cheatSearchV641{
+ width:100%!important;max-width:100%!important;min-height:44px!important;
+ box-sizing:border-box!important;font-size:16px!important;
+}
+html:not(.force-desktop-root) body.is-cheats-route .cheats-shell-v582 :is(button,a,summary){
+ touch-action:manipulation;
+}
+html:not(.force-desktop-root) body.is-cheats-route .cheats-shell-v582 :is(button,a,summary):focus-visible{
+ outline:2px solid #ffe9bc!important;outline-offset:2px!important;
+}
+}
+</style>
 </head><body class="is-cheats-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="cheats"><div aria-hidden="true" class="site-cosmic-background-v442"></div>
 <div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar"><button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button><div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Шпоры</small></div><a aria-label="На главную" href="index.html">⌂</a></div>
 <div aria-hidden="true" class="mobile-nav-overlay" id="mobileNavOverlay"></div>
@@ -365,6 +398,7 @@ body.is-cheats-route .cheat-none-v641[hidden]{display:none!important}
 <div class="cheat-none-v641" id="cheatNoneV641" hidden>Ничего не найдено. Попробуй другое слово или выбери «Все».</div>
 <div class="cheats-footer-v582">Нужен более подробный ответ? Открой <a href="events.html">все игровые гайды</a> или <a href="faq.html">популярные вопросы</a>.</div>
 </div></div><section class="related-guides-v625" aria-label="Похожие гайды"><div class="related-guides-head-v625"><span>Ещё по теме</span><h2>Похожие гайды</h2></div><div class="related-guides-grid-v625"><a class="related-guide-card-v625" href="mails.html"><span>Письма</span><b>Открыть гайд ›</b></a></div></section></main>
+<nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424"><a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-home-v534.webp"/></span><b>Главная</b></a><a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-events-v534.webp"/></span><b>События</b></a><a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-heroes-v534.webp"/></span><b>Герои</b></a><a data-v424-nav="calc" href="calculators.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-calculator-v534.webp"/></span><b>Калькулятор</b></a><a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-knowledge-v534.webp"/></span><b>База знаний</b></a></nav>
 <script>
 (()=>{'use strict';
 const filters=[...document.querySelectorAll('[data-cheat-filter]')];
