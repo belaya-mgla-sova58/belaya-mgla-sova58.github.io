@@ -6,9 +6,9 @@ var map={
  "state-positions.html":"assets/bm-state-v1100.svg?v=3",
  "svs-prep.html":"assets/bm-prep-v1100.svg?v=3",
  "svs.html":"assets/bm-svs-v1100.svg?v=3",
- "other.html":"assets/bm-guides-approved-v1105.svg?v=1",
- "gear.html":"assets/bm-gear-approved-v1105.svg?v=1",
- "pets.html":"assets/bm-pets-approved-v1105.svg?v=1"
+ "other.html":"assets/bm-guides-verified-v1106.svg?v=1",
+ "gear.html":"assets/bm-gear-verified-v1106.svg?v=1",
+ "pets.html":"assets/bm-pets-verified-v1106.svg?v=1"
 };
 function apply(){
  if(!document.body.classList.contains("is-home-route"))return;
