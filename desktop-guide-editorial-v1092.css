@@ -1,0 +1,274 @@
+/* Белая Мгла | Desktop guide editorial, v1092.
+   Narrower sidebar, a true full-width workspace and distinct guide topic cards.
+   Loaded ONLY by selected guides. Pets, hero generations and experts are excluded.
+   Does not affect the regular mobile layout. */
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine) {
+ body.site-hq-v407.bm-guide-editorial-v1092 {
+  --desktop-sidebar:184px;
+  --bm-guide-gap:clamp(14px,1.25vw,22px);
+  --bm-guide-ink:#eaf6ff;
+ }
+ body.site-hq-v407.bm-guide-editorial-v1092 .nav-wrap{
+  box-sizing:border-box!important;
+  width:184px!important;
+  max-width:184px!important;
+  padding-left:8px!important;
+  padding-right:8px!important;
+ }
+ body.site-hq-v407.bm-guide-editorial-v1092 main#appMain{
+  box-sizing:border-box!important;
+  width:calc(100% - 184px)!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin-left:184px!important;
+  margin-right:0!important;
+  padding:18px clamp(18px,2vw,36px) 70px!important;
+ }
+}
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine),
+       screen and (min-width:950px) and (hover:none) and (pointer:coarse) {
+ body.site-hq-v407.bm-guide-editorial-v1092 {
+  --bm-guide-gap:clamp(14px,1.35vw,24px);
+  --bm-guide-ink:#eaf6ff;
+ }
+ body.site-hq-v407.bm-guide-editorial-v1092 main#appMain>.route-page.active{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0 0 42px!important;
+  overflow:visible!important;
+ }
+ body.site-hq-v407.bm-guide-editorial-v1092 main#appMain>.route-page.active>
+ :is(.breadcrumbs-v409,.intro,.section,.guide-page-v69,.bear-guide,.endless-guide,
+     .page-heading-v424,.related-guides-v625){
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin-left:0!important;
+  margin-right:0!important;
+ }
+ body.site-hq-v407.bm-guide-editorial-v1092 main#appMain>.route-page.active>
+ section[class*="-image-header-"]{
+  width:100%!important;
+  max-width:100%!important;
+  margin:0 0 var(--bm-guide-gap)!important;
+  padding:0!important;
+  overflow:visible!important;
+  background:none!important;
+  border:0!important;
+  box-shadow:none!important;
+ }
+ body.site-hq-v407.bm-guide-editorial-v1092 main#appMain>.route-page.active>
+ section[class*="-image-header-"]>img{
+  width:100%!important;
+  max-width:100%!important;
+  height:auto!important;
+  object-fit:contain!important;
+  display:block!important;
+ }
+ body.site-hq-v407.bm-guide-editorial-v1092 main#appMain>.route-page.active>.intro{
+  border:1px solid rgba(122,190,246,.33)!important;
+  border-radius:18px!important;
+  margin:0 0 var(--bm-guide-gap)!important;
+  padding:clamp(20px,2vw,34px)!important;
+  background:linear-gradient(135deg,rgba(15,48,92,.96),rgba(9,29,65,.98))!important;
+  color:#ecf7ff!important;
+  box-shadow:0 10px 25px rgba(0,8,31,.20)!important;
+ }
+ body.site-hq-v407.bm-guide-editorial-v1092 main#appMain>.route-page.active>.intro p {
+  max-width:90ch!important;
+  line-height:1.7!important;
+ }
+ /* Sectioned guide: convert a single text column to independent article cards. */
+ body.site-hq-v407.bm-guide-editorial-v1092
+ main#appMain>.route-page.active>.section.bm-guide-topic-grid-v1092 {
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:var(--bm-guide-gap)!important;
+  align-items:start!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  padding:0!important;
+  margin:0 0 var(--bm-guide-gap)!important;
+  background:transparent!important;
+  background-image:none!important;
+  border:none!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+ }
+ body.site-hq-v407.bm-guide-editorial-v1092
+ .bm-guide-topic-grid-v1092>.bm-guide-topic-card-v1092{
+  position:relative!important;
+  isolation:isolate;
+  box-sizing:border-box!important;
+  display:block!important;
+  min-width:0!important;
+  width:100%!important;
+  max-width:none!important;
+  height:auto!important;
+  margin:0!important;
+  padding:clamp(18px,1.7vw,28px)!important;
+  overflow:hidden!important;
+  background:radial-gradient(ellipse at 100% 0%,rgba(81,106,194,.15),transparent 55%),
+    linear-gradient(150deg,rgba(16,51,94,.98),rgba(7,27,62,.99))!important;
+  border:1px solid rgba(155,204,247,.38)!important;
+  border-radius:18px!important;
+  box-shadow:0 9px 24px rgba(1,9,33,.20),inset 0 1px 0 rgba(230,245,255,.06)!important;
+  color:var(--bm-guide-ink)!important;
+ }
+ body.site-hq-v407.bm-guide-editorial-v1092
+ .bm-guide-topic-grid-v1092>.bm-guide-topic-card-v1092::before{
+  content:""!important;
+  position:absolute!important;
+  top:0!important;left:18px!important;right:18px!important;
+  height:2px!important;
+  border-radius:2px!important;
+  background:linear-gradient(90deg,transparent,rgba(113,216,251,.72),rgba(245,204,140,.72),transparent)!important;
+  pointer-events:none!important;
+ }
+ body.site-hq-v407.bm-guide-editorial-v1092
+ .bm-guide-topic-grid-v1092>.bm-guide-topic-card-v1092.bm-guide-card-wide-v1092{
+  grid-column:1/-1!important;
+ }
+ body.site-hq-v407.bm-guide-editorial-v1092
+ .bm-guide-topic-grid-v1092>.bm-guide-topic-card-v1092>h2,
+ body.site-hq-v407.bm-guide-editorial-v1092
+ .bm-guide-topic-grid-v1092>.bm-guide-topic-card-v1092>h3{
+  color:#fff0c7!important;
+  -webkit-text-fill-color:#fff0c7!important;
+  font:800 clamp(19px,1.55vw,25px)/1.28 system-ui,"Segoe UI",sans-serif!important;
+  letter-spacing:0!important;
+  margin:0 0 13px!important;
+  padding:0 0 10px!important;
+  border-bottom:1px solid rgba(176,222,255,.22)!important;
+  text-shadow:0 2px 8px rgba(0,8,30,.35)!important;
+ }
+ body.site-hq-v407.bm-guide-editorial-v1092
+ .bm-guide-topic-card-v1092> :is(p,ul,ol,blockquote){
+  box-sizing:border-box!important;
+  max-width:94ch!important;
+  margin:10px 0!important;
+  font-size:clamp(15px,1.05vw,17px)!important;
+  line-height:1.72!important;
+  color:#e3f2ff!important;
+  -webkit-text-fill-color:inherit;
+ }
+ body.site-hq-v407.bm-guide-editorial-v1092
+ .bm-guide-topic-card-v1092> :is(ul,ol){
+  padding-inline-start:clamp(19px,2vw,29px)!important;
+ }
+ body.site-hq-v407.bm-guide-editorial-v1092
+ .bm-guide-topic-card-v1092 :is(li,p)+:is(li,p) {
+  margin-top:8px!important;
+ }
+ body.site-hq-v407.bm-guide-editorial-v1092
+ .bm-guide-topic-card-v1092 :is(.tundra-box,.tundra-flow,.guide-callout){
+  box-sizing:border-box!important;
+  max-width:100%!important;
+  background:rgba(45,78,123,.34)!important;
+  border:1px solid rgba(147,210,250,.30)!important;
+  border-radius:13px!important;
+  margin:12px 0!important;
+  padding:clamp(13px,1.2vw,22px)!important;
+ }
+ body.site-hq-v407.bm-guide-editorial-v1092
+ .bm-guide-topic-grid-v1092> :not(.bm-guide-topic-card-v1092){
+  grid-column:1/-1!important;
+  max-width:none!important;
+  min-width:0!important;
+ }
+ /* Existing expandable handbook is wide, but still reads like compact cards. */
+ body.site-hq-v407.bm-guide-editorial-v1092
+ main#appMain .route-page.active>.guide-page-v69{
+  width:100%!important;
+  max-width:100%!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:var(--bm-guide-gap)!important;
+ }
+ body.site-hq-v407.bm-guide-editorial-v1092
+ main#appMain .route-page.active>.guide-page-v69>details.guide-fold-v414[open]{
+  grid-column:1/-1!important;
+ }
+ body.site-hq-v407.bm-guide-editorial-v1092
+ main#appMain .route-page.active>.section:not(.bm-guide-topic-grid-v1092){
+  width:100%!important;max-width:none!important;min-width:0!important;
+  padding:clamp(18px,1.7vw,30px)!important;
+  border:1px solid rgba(137,194,241,.27)!important;
+  border-radius:18px!important;
+ }
+ body.site-hq-v407.bm-guide-editorial-v1092
+ main#appMain .route-page.active :is(.related-guides-grid-v625,.guide-nav-grid){
+  gap:var(--bm-guide-gap)!important;
+ }
+ body.site-hq-v407.bm-guide-editorial-v1092
+ main#appMain .route-page.active :is(.table-wrap,.table-responsive,.position-table-wrap-v941){
+  width:100%!important;max-width:100%!important;overflow-x:auto!important;
+ }
+}
+@media screen and (min-width:950px) and (hover:none) and (pointer:coarse){
+ /* "Computer view" selected inside the site on a touch device. */
+ html.force-desktop-root body.site-hq-v407.bm-guide-editorial-v1092 {
+  --desktop-sidebar:0px;
+  overflow-x:hidden!important;
+ }
+ html.force-desktop-root body.site-hq-v407.bm-guide-editorial-v1092 main#appMain{
+  box-sizing:border-box!important;
+  display:block!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:12px clamp(15px,2vw,30px) 60px!important;
+ }
+ html.force-desktop-root body.site-hq-v407.bm-guide-editorial-v1092
+ main#appMain>.route-page.active{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0 0 46px!important;
+ }
+ html.force-desktop-root body.site-hq-v407.bm-guide-editorial-v1092
+ .view-mode-side-v629 {
+  width:55px!important;
+  height:130px!important;
+  padding:8px 4px!important;
+  border-radius:0 17px 17px 0!important;
+  font-size:13px!important;
+ }
+ html.force-desktop-root body.site-hq-v407.bm-guide-editorial-v1092
+ .view-mode-side-v629 .ico{font-size:23px!important;}
+ html.force-desktop-root body.site-hq-v407.bm-guide-editorial-v1092
+ .view-mode-side-v629 .txt{font-size:12px!important;letter-spacing:.5px!important;}
+ html.force-desktop-root body.site-hq-v407.bm-guide-editorial-v1092
+ .nav-wrap{
+  box-sizing:border-box!important;
+  padding:48px 8px 24px!important;
+ }
+ html.force-desktop-root body.site-hq-v407.bm-guide-editorial-v1092
+ .nav-wrap>.sidebar-exact-logo{
+  max-width:140px!important;
+  top:5px!important;
+ }
+ html.force-desktop-root body.site-hq-v407.bm-guide-editorial-v1092
+ .nav-wrap>nav>a{
+  min-height:40px!important;
+  gap:7px!important;
+  padding:7px!important;
+ }
+ html.force-desktop-root body.site-hq-v407.bm-guide-editorial-v1092
+ .nav-wrap>nav>a .sidebar-color-icon{
+  width:23px!important;height:23px!important;min-width:23px!important;
+ }
+ html.force-desktop-root body.site-hq-v407.bm-guide-editorial-v1092
+ nav.mobile-bottom-v424{display:none!important;}
+}
+@media (prefers-reduced-motion:reduce){
+ body.bm-guide-editorial-v1092 .bm-guide-topic-card-v1092{transition:none!important;}
+}
