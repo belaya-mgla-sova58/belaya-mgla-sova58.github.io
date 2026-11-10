@@ -13,7 +13,10 @@ var assets={
  "pets.html":"assets/bm-pets-verified-v1106.svg?v=2",
  "experts.html":"assets/bm-experts-v1108.svg?v=1",
  "labyrinth.html":"assets/bm-labyrinth-v1108.svg?v=1",
- "events.html":"assets/bm-events-v1108.svg?v=1"
+ "events.html":"assets/bm-events-v1108.svg?v=1",
+ "calculators.html":"assets/bm-calculators-v1109.svg?v=1",
+ "bear-helper.html":"assets/bm-bear-helper-v1109.svg?v=1",
+ "farm.html":"assets/bm-farm-v1109.svg?v=1"
 };
 function locate(href){
  if(href==="other.html")return document.querySelectorAll('.modern-home-v424 .home-index-links-v1016 a[href="other.html"]');
