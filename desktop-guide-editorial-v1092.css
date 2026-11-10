@@ -272,3 +272,57 @@
 @media (prefers-reduced-motion:reduce){
  body.bm-guide-editorial-v1092 .bm-guide-topic-card-v1092{transition:none!important;}
 }
+
+
+/* v1093: Compact the REGULAR mobile drawer as well as the computer-view drawer.
+   Opt-in guide pages only. Default phone layouts, images and content remain intact. */
+@media screen and (max-width:820px){
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424 .nav-wrap{
+  box-sizing:border-box!important;
+  width:min(66vw,216px)!important;
+  max-width:min(66vw,216px)!important;
+  padding:60px 9px 22px!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424 .nav-wrap>nav{
+  gap:3px!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424 .nav-wrap>nav>a,
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424 .nav-wrap nav a.route-link{
+  box-sizing:border-box!important;
+  min-height:43px!important;
+  padding:7px 8px!important;
+  gap:7px!important;
+  font-size:13px!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424
+ .nav-wrap nav a .sidebar-color-icon{
+  width:25px!important;height:25px!important;min-width:25px!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424
+ .view-mode-v622{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin:9px 0!important;
+  padding:9px!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424
+ .view-mode-v622-buttons{
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:5px!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424
+ .view-mode-v622 button{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-height:37px!important;
+  padding:6px 7px!important;
+  font-size:12px!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424.mobile-menu-open #mobileMenuToggle,
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424.mobile-nav-open #mobileMenuToggle{
+  left:min(calc(66vw - 6px),210px)!important;
+ }
+}
