@@ -1,0 +1,55 @@
+/* Desktop-only ice encyclopedia for bespoke Canyon/Bear guides. */
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine){
+body.is-canyon-clash-route .canyon-wrap{box-sizing:border-box!important;max-width:none!important;width:100%!important;padding:0 0 48px!important}
+body.is-canyon-clash-route .canyon-hero{border:1px solid rgba(169,211,246,.55)!important;border-radius:19px!important;box-shadow:0 14px 36px rgba(0,9,31,.38)!important}
+body.is-canyon-clash-route .canyon-hero h1{color:#ffe9bf!important;text-shadow:none!important}
+body.is-canyon-clash-route .fact,body.is-canyon-clash-route .guide-section,body.is-bear-route .bear-guide details.bear-card.bear-explain-section{
+ border:1px solid rgba(164,211,246,.54)!important;border-radius:17px!important;
+ background:linear-gradient(145deg,rgba(21,55,94,.97),rgba(7,27,56,.98))!important;
+ box-shadow:inset 0 1px rgba(237,245,255,.11),0 11px 29px rgba(0,7,29,.22)!important;
+}
+body.is-canyon-clash-route .guide-section h2{color:#ffe8b8!important}
+body.is-canyon-clash-route .guide-section :is(p,li),body.is-bear-route .bear-explain-body :is(p,li){font-family:Arial,Helvetica,sans-serif!important;font-size:16px!important;line-height:1.7!important;text-shadow:none!important}
+body.is-canyon-clash-route .canyon-wrap .ice-special-layout-v1136,
+body.is-bear-route .ice-special-layout-v1136{
+ display:grid!important;grid-template-columns:minmax(0,1fr) minmax(260px,300px)!important;
+ gap:clamp(17px,1.6vw,25px)!important;align-items:start!important;min-width:0!important;
+}
+body.is-canyon-clash-route .ice-special-main-v1136,body.is-bear-route .ice-special-main-v1136{min-width:0!important}
+body.is-canyon-clash-route .ice-special-main-v1136 .guide-section{margin:0 0 16px!important;padding:clamp(18px,1.8vw,28px)!important}
+body.is-canyon-clash-route .ice-special-main-v1136 .guide-section[id]{scroll-margin-top:22px}
+body.is-bear-route .ice-special-main-v1136 .bear-guide{max-width:none!important;width:100%!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important;padding:0!important;background:none!important;border:0!important;box-shadow:none!important}
+body.is-bear-route .bear-guide>.bear-kpi,
+body.is-bear-route .bear-guide>.bear-short,
+body.is-bear-route .bear-guide>.bear-expand-help{grid-column:1/-1!important}
+body.is-bear-route .bear-guide details.bear-card.bear-explain-section{min-width:0!important;scroll-margin-top:20px}
+body.is-bear-route .bear-guide details.bear-card.bear-explain-section[open]{grid-column:1/-1!important}
+body.is-bear-route .bear-guide details.bear-card.bear-explain-section>summary{
+ font:700 18px/1.4 Arial,Helvetica,sans-serif!important;color:#ffe7b9!important;
+ background:rgba(13,43,80,.78)!important;text-shadow:none!important;
+}
+body.is-bear-route .bear-guide details.bear-card.bear-explain-section>.bear-explain-body{font-size:16px!important;line-height:1.7!important}
+body.is-canyon-clash-route .ice-special-side-v1136,body.is-bear-route .ice-special-side-v1136{
+ position:sticky!important;top:14px!important;max-height:calc(100vh - 28px)!important;
+ overflow-y:auto!important;scrollbar-width:thin;display:grid;gap:13px;min-width:0!important;
+}
+body.is-canyon-clash-route .ice-special-panel-v1136,body.is-bear-route .ice-special-panel-v1136{
+ background:linear-gradient(155deg,#193d69,#081f42);border:1px solid rgba(167,215,252,.55);
+ border-radius:17px;padding:18px;box-shadow:inset 0 1px rgba(243,249,255,.16),0 10px 27px rgba(0,7,29,.25);
+}
+body.is-canyon-clash-route .ice-special-panel-v1136 h2,body.is-bear-route .ice-special-panel-v1136 h2{
+ font:700 21px/1.3 Georgia,serif!important;color:#ffe7ba!important;
+ padding:0 0 10px!important;margin:0 0 11px!important;border-bottom:1px solid rgba(174,209,240,.3);
+}
+body.is-canyon-clash-route .ice-special-panel-v1136 a,body.is-bear-route .ice-special-panel-v1136 a{
+ display:block;padding:9px 10px;margin:6px 0;background:rgba(16,47,89,.72);border:1px solid rgba(143,195,244,.25);border-radius:9px;
+ color:#e9f4ff!important;text-decoration:none!important;font:600 14px/1.45 Arial,Helvetica,sans-serif!important;
+}
+body.is-canyon-clash-route .ice-special-panel-v1136 a:hover,body.is-bear-route .ice-special-panel-v1136 a:hover{border-color:#ffe6b4;background:#28517e}
+body.is-canyon-clash-route .ice-special-panel-v1136 ul,body.is-bear-route .ice-special-panel-v1136 ul{margin:0;padding-left:19px}
+body.is-canyon-clash-route .ice-special-panel-v1136 li,body.is-bear-route .ice-special-panel-v1136 li{font:400 14px/1.6 Arial,sans-serif;color:#e2efff;margin:8px 0}
+}
+@media screen and (min-width:1100px) and (max-width:1320px) and (hover:hover) and (pointer:fine){
+body.is-canyon-clash-route .canyon-wrap .ice-special-layout-v1136,body.is-bear-route .ice-special-layout-v1136{grid-template-columns:minmax(0,1fr) 260px!important}
+body.is-bear-route .ice-special-main-v1136 .bear-guide{grid-template-columns:minmax(0,1fr)!important}
+}
