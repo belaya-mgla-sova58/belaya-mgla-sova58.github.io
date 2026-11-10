@@ -1,33 +1,80 @@
-/* Belaya Mgla: install selected generated premium icons on homepage only. */
+/* White Mist v1107: native image decoding for approved three icons.
+   Their WEBP image bytes are stored inside same-origin SVG wrappers; external SVG
+   image contexts can block nested raster sources. Extract to direct WEBP data URL. */
 (function(){
 "use strict";
-var map={
+var assets={
  "heroes.html":"assets/bm-heroes-v1100.svg?v=3",
  "state-positions.html":"assets/bm-state-v1100.svg?v=3",
  "svs-prep.html":"assets/bm-prep-v1100.svg?v=3",
  "svs.html":"assets/bm-svs-v1100.svg?v=3",
- "other.html":"assets/bm-guides-verified-v1106.svg?v=1",
- "gear.html":"assets/bm-gear-verified-v1106.svg?v=1",
- "pets.html":"assets/bm-pets-verified-v1106.svg?v=1"
+ "other.html":"assets/bm-guides-verified-v1106.svg?v=2",
+ "gear.html":"assets/bm-gear-verified-v1106.svg?v=2",
+ "pets.html":"assets/bm-pets-verified-v1106.svg?v=2"
 };
-function apply(){
- if(!document.body.classList.contains("is-home-route"))return;
- Object.keys(map).forEach(function(href){
-   document.querySelectorAll(href==='other.html'?'.modern-home-v424 .home-index-links-v1016 a[href="other.html"]':'.modern-home-v424 a[href="'+href+'"]').forEach(function(a){
-      var svg=a.querySelector('svg.bm-home-glyph-v1074');
-      if(!svg || a.querySelector('img.bm-premium-icon-v1100'))return;
-      var img=document.createElement("img");
-      img.className="bm-premium-icon-v1100";
-      img.alt="";
-      img.setAttribute("aria-hidden","true");
-      img.decoding="async";
-      img.width=80;
-      img.height=80;
-      img.src=map[href];
-      svg.replaceWith(img);
-   });
+function locate(href){
+ if(href==="other.html")return document.querySelectorAll('.modern-home-v424 .home-index-links-v1016 a[href="other.html"]');
+ return document.querySelectorAll('.modern-home-v424 a[href="'+href+'"]');
+}
+function nativeImageFromWrapper(img,url){
+ fetch(url,{cache:"no-store"}).then(function(r){
+  if(!r.ok)throw Error("Icon asset missing: "+r.status);
+  return r.text();
+ }).then(function(xml){
+  var m=xml.match(/href="(data:image\/webp;base64,[A-Za-z0-9+/=]+)"/);
+  if(!m)throw Error("Icon payload missing");
+  var data=m[1];
+  return new Promise(function(resolve,reject){
+   var probe=new Image();
+   probe.onload=function(){resolve(data)};
+   probe.onerror=reject;
+   probe.src=data;
+  });
+ }).then(function(data){
+  img.src=data;
+  img.dataset.bmLoaded="true";
+ }).catch(function(){
+  /* Never leave a broken image; original inline SVG stays as fallback. */
+  if(img.parentNode)img.remove();
+  var original=img.__bmOriginalSvg;
+  if(original&&img.__bmHost&&!img.__bmHost.querySelector('svg.bm-home-glyph-v1074'))img.__bmHost.insertBefore(original,img.__bmHost.firstChild);
  });
 }
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});
-else apply();
+function apply(){
+ if(!document.body||!document.body.classList.contains("is-home-route"))return;
+ Object.keys(assets).forEach(function(href){
+  Array.prototype.forEach.call(locate(href),function(a){
+   if(a.querySelector('img.bm-premium-icon-v1100'))return;
+   var svg=a.querySelector('svg.bm-home-glyph-v1074');
+   if(!svg)return;
+   var img=document.createElement("img");
+   img.className="bm-premium-icon-v1100";
+   img.alt="";
+   img.setAttribute("aria-hidden","true");
+   img.decoding="async";
+   img.width=80;img.height=80;
+   img.__bmOriginalSvg=svg.cloneNode(true);
+   img.__bmHost=svg.parentNode;
+   /* Hide temporarily until decoded, preventing broken placeholder. */
+   img.style.visibility="hidden";
+   var host=svg.parentNode;
+   svg.replaceWith(img);
+   fetch(assets[href],{cache:"no-store"}).then(function(r){
+    if(!r.ok)throw Error("fetch failed");
+    return r.text();
+   }).then(function(xml){
+    var m=xml.match(/href="(data:image\/webp;base64,[A-Za-z0-9+/=]+)"/);
+    if(!m)throw Error("no valid webp embedded");
+    var data=m[1],probe=new Image();
+    probe.onload=function(){img.src=data;img.style.visibility="visible";img.dataset.bmLoaded="true"};
+    probe.onerror=function(){throwBack()};
+    probe.src=data;
+   }).catch(throwBack);
+   function throwBack(){
+    if(img.parentNode){img.replaceWith(img.__bmOriginalSvg)}
+   }
+  });
+ });
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
 })();
