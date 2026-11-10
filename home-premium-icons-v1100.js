@@ -104,7 +104,8 @@ function apply(){
     probe.onload=function(){
      var output=data;
      var cropRatio=href==="svs-prep.html"?0.72:
-       (href==="heroes.html"&&!!a.closest('.home-portal-links-v1016')?0.82:1);
+       (href==="heroes.html"&&a.classList.contains('modern-topic-card-v424')?0.73:
+       (href==="heroes.html"&&!!a.closest('.home-portal-links-v1016')?0.82:1));
      if(cropRatio<1){
        try{
          var canvas=document.createElement('canvas');
