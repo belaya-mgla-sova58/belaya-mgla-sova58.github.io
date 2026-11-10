@@ -66,20 +66,12 @@ function apply(){
    img.width=80;img.height=80;
    img.__bmOriginalSvg=svg.cloneNode(true);
    img.__bmHost=svg.parentNode;
-   /* v1112: generated illustrations have significant transparent interior margins.
-      Scale visible art per card family, never crop the actual image or distort it. */
-   var inFrequent=!!a.closest('.modern-topic-card-v424');
-   var inRecent=!!a.closest('.modern-list-v424') && !a.closest('.modern-panel-v424:has(a[href="state-positions.html"])');
-   var inState=!!a.closest('.modern-panel-v424:has(a[href="state-positions.html"])');
-   var inSmallPortal=!!a.closest('.home-index-links-v1016');
-   var scale=inFrequent?1.42:(inRecent?1.52:(inState?1.0:(inSmallPortal?1.18:1.0)));
-   img.style.setProperty('transform','scale('+scale+')','important');
-   img.style.setProperty('transform-origin','center center','important');
-   img.style.setProperty('object-fit','contain','important');
+   /* v1113: one natural 64px scale on phone and desktop. CSS owns size. */
+   img.width=64;
+   img.height=64;
    var tile=svg.parentNode;
    if(tile&&tile!==a){
      tile.style.setProperty('overflow','visible','important');
-     tile.style.setProperty('background','transparent','important');
      tile.style.setProperty('display','grid','important');
      tile.style.setProperty('place-items','center','important');
    }
