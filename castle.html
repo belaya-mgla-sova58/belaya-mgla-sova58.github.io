@@ -93,5 +93,41 @@ document.addEventListener('DOMContentLoaded',function(){
   window.scrollTo({top:0,behavior:'smooth'});
  });
 });
+</script><script id="castle-back-to-top-fixed-v1133">
+(function(){
+ "use strict";
+ function ready(){
+  var query=window.matchMedia('(min-width:1100px) and (hover:hover) and (pointer:fine)');
+  var button=document.createElement('button');
+  button.id='castleBackToTopV1133';
+  button.type='button';
+  button.textContent='↑';
+  button.setAttribute('aria-label','Вернуться наверх страницы');
+  button.title='Наверх';
+  var values={
+   position:'fixed',right:'26px',bottom:'25px',top:'auto',left:'auto',
+   width:'58px',height:'58px',display:'grid',placeItems:'center',
+   zIndex:'2147483000',opacity:'1',visibility:'visible',
+   pointerEvents:'auto',transform:'none',cursor:'pointer',
+   border:'2px solid #b9e3ff',borderRadius:'50%',
+   background:'linear-gradient(145deg,#306fab,#0a254c)',
+   color:'#fff0ce',font:'bold 31px Arial, sans-serif',
+   boxShadow:'0 0 0 3px rgba(74,158,238,.26),0 8px 28px rgba(0,8,35,.75)'
+  };
+  Object.keys(values).forEach(function(key){button.style.setProperty(key.replace(/[A-Z]/g,function(c){return '-'+c.toLowerCase()}),values[key],'important')});
+  button.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+  document.body.appendChild(button);
+  var existing=document.getElementById('backToTop');
+  function sync(){
+   button.style.setProperty('display',query.matches?'grid':'none','important');
+   if(existing){if(query.matches){existing.style.setProperty('display','none','important')}
+    else{existing.style.removeProperty('display')}}
+  }
+  sync();
+  if(query.addEventListener)query.addEventListener('change',sync);
+  else if(query.addListener)query.addListener(sync);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready,{once:true});else ready();
+})();
 </script></body>
 </html>
