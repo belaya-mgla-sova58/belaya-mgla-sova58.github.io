@@ -326,3 +326,48 @@
   left:min(calc(66vw - 6px),210px)!important;
  }
 }
+
+
+/* v1094: Readability and overflow guardrails for the 50 opt-in guides.
+   Does not alter page sections, game calculations, banners or excluded routes. */
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine),
+       screen and (min-width:950px) and (hover:none) and (pointer:coarse){
+ body.bm-guide-editorial-v1092 .bm-guide-topic-card-v1092 :is(img,video,svg,canvas){
+  max-width:100%!important;
+  height:auto;
+ }
+ body.bm-guide-editorial-v1092 .bm-guide-topic-card-v1092 :is(pre,table){
+  max-width:100%!important;
+ }
+ body.bm-guide-editorial-v1092 .bm-guide-topic-card-v1092 pre{
+  box-sizing:border-box!important;
+  overflow-x:auto!important;
+  white-space:pre!important;
+  border-radius:12px;
+ }
+ body.bm-guide-editorial-v1092 .bm-guide-topic-card-v1092 :is(p,li,td,th){
+  overflow-wrap:break-word;
+ }
+ body.bm-guide-editorial-v1092 .bm-guide-topic-card-v1092 :is(a,button,summary):focus-visible{
+  outline:2px solid #9ee7ff!important;
+  outline-offset:3px!important;
+  border-radius:4px;
+ }
+ body.bm-guide-editorial-v1092 .bm-guide-topic-card-v1092 :is(blockquote,.guide-callout){
+  border-left:3px solid rgba(244,202,128,.85)!important;
+ }
+}
+@media screen and (max-width:820px){
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424 .route-page.active .section :is(img,video){
+  max-width:100%!important;
+  height:auto;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424 .route-page.active :is(.section,.guide-page-v69) :is(pre,code){
+  overflow-wrap:anywhere;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407.modern-v424 .route-page.active :is(.section,.guide-page-v69) :is(.table-wrap,.table-responsive){
+  max-width:100%!important;
+  overflow-x:auto!important;
+  -webkit-overflow-scrolling:touch;
+ }
+}
