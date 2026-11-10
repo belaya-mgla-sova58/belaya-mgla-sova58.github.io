@@ -2,10 +2,10 @@
 (function(){
 "use strict";
 var map={
- "heroes.html":"assets/bm-heroes-v1100.svg?v=2",
- "state-positions.html":"assets/bm-state-v1100.svg?v=2",
- "svs-prep.html":"assets/bm-prep-v1100.svg?v=2",
- "svs.html":"assets/bm-svs-v1100.svg?v=2"
+ "heroes.html":"assets/bm-heroes-v1100.svg?v=3",
+ "state-positions.html":"assets/bm-state-v1100.svg?v=3",
+ "svs-prep.html":"assets/bm-prep-v1100.svg?v=3",
+ "svs.html":"assets/bm-svs-v1100.svg?v=3"
 };
 function apply(){
  if(!document.body.classList.contains("is-home-route"))return;
