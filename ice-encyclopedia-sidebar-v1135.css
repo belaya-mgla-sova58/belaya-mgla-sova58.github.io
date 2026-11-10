@@ -55,3 +55,13 @@
  body.bm-ice-encyclopedia-v1134 .ice-guide-layout-v1135{grid-template-columns:minmax(0,1fr) 255px!important}
  body.bm-ice-encyclopedia-v1134 .ice-guide-body-v1135>section.section.bm-guide-topic-grid-v1092{grid-template-columns:minmax(0,1fr)!important}
 }
+
+
+/* Guide sidebar safety at narrow desktop widths v1138. */
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine){
+body.bm-ice-encyclopedia-v1134 .ice-guide-layout-v1135{min-width:0!important;max-width:100%!important}
+body.bm-ice-encyclopedia-v1134 .ice-guide-body-v1135{overflow-wrap:break-word}
+body.bm-ice-encyclopedia-v1134 .ice-guide-side-panel-v1135 a{overflow-wrap:anywhere;word-break:normal}
+body.bm-ice-encyclopedia-v1134 .ice-guide-body-v1135 :is(table,pre){max-width:100%;overflow-x:auto}
+body.bm-ice-encyclopedia-v1134 .ice-guide-body-v1135 :is(img,video,iframe){max-width:100%}
+}
