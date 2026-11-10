@@ -1,0 +1,57 @@
+/* Companion sidebar for the selected ice encyclopedia design. Desktop ONLY. */
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine){
+ body.bm-ice-encyclopedia-v1134 .ice-guide-layout-v1135{
+  display:grid!important;grid-template-columns:minmax(0,1fr) minmax(255px,295px)!important;
+  gap:clamp(16px,1.5vw,24px)!important;align-items:start!important;
+  width:100%!important;max-width:none!important;min-width:0!important;margin:0 0 20px!important;
+ }
+ body.bm-ice-encyclopedia-v1134 .ice-guide-body-v1135{min-width:0!important;display:grid;gap:16px}
+ body.bm-ice-encyclopedia-v1134 .ice-guide-body-v1135>section.section,
+ body.bm-ice-encyclopedia-v1134 .ice-guide-body-v1135>.guide-page-v69{
+  box-sizing:border-box!important;min-width:0!important;width:100%!important;max-width:none!important;margin:0!important;
+ }
+ body.bm-ice-encyclopedia-v1134 .ice-guide-body-v1135>section.section.bm-guide-topic-grid-v1092{
+  display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  padding:0!important;background:none!important;border:none!important;box-shadow:none!important;
+ }
+ body.bm-ice-encyclopedia-v1134 .ice-guide-body-v1135>section.section:not(.bm-guide-topic-grid-v1092){
+  padding:clamp(18px,1.7vw,28px)!important;
+ }
+ body.bm-ice-encyclopedia-v1134 .ice-guide-body-v1135 :is(.svs-guide,.ws-guide,.foundry-guide,.crazy-joe-guide,.fishing-guide-v690,.frostfire-guide,.gina-guide,.ac-guide){
+  max-width:none!important;width:100%!important;
+ }
+ body.bm-ice-encyclopedia-v1134 .ice-guide-sidebar-v1135{
+  display:grid;gap:14px;position:sticky;top:16px;max-height:calc(100vh - 32px);
+  overflow-y:auto;scrollbar-width:thin;min-width:0;align-self:start;
+ }
+ body.bm-ice-encyclopedia-v1134 .ice-guide-side-panel-v1135{
+  padding:18px;border-radius:17px;border:1px solid rgba(171,216,251,.54);
+  background:linear-gradient(155deg,rgba(24,61,103,.98),rgba(6,27,56,.98));
+  box-shadow:inset 0 1px 0 rgba(248,251,255,.15),0 12px 25px rgba(0,6,29,.24);
+ }
+ body.bm-ice-encyclopedia-v1134 .ice-guide-side-panel-v1135 h2{
+  font:700 22px/1.3 Georgia,serif!important;color:#ffe7b7!important;
+  border-bottom:1px solid rgba(175,215,243,.3);padding-bottom:10px;margin:0 0 12px!important;
+ }
+ body.bm-ice-encyclopedia-v1134 .ice-guide-side-panel-v1135 a{
+  display:block;margin:6px 0;padding:9px 10px;border-radius:9px;
+  border:1px solid rgba(146,199,245,.25);background:rgba(17,50,91,.65);
+  color:#eaf5ff!important;text-decoration:none!important;
+  font:600 14px/1.4 Arial,Helvetica,sans-serif!important;
+ }
+ body.bm-ice-encyclopedia-v1134 .ice-guide-side-panel-v1135 a:hover,
+ body.bm-ice-encyclopedia-v1134 .ice-guide-side-panel-v1135 a:focus-visible{
+  border-color:#ffdf9e;background:rgba(48,85,126,.8);
+ }
+ body.bm-ice-encyclopedia-v1134 .ice-guide-side-panel-v1135 ul{margin:0;padding:0 0 0 18px}
+ body.bm-ice-encyclopedia-v1134 .ice-guide-side-panel-v1135 li{
+  margin:7px 0!important;color:#e4f1ff!important;font:400 14px/1.6 Arial,Helvetica,sans-serif!important;
+ }
+ body.bm-ice-encyclopedia-v1134 .ice-guide-body-v1135 :is(h2,h3)[id^="ice-guide-part-v1135-"]{
+  scroll-margin-top:24px;
+ }
+}
+@media screen and (min-width:1100px) and (max-width:1370px) and (hover:hover) and (pointer:fine){
+ body.bm-ice-encyclopedia-v1134 .ice-guide-layout-v1135{grid-template-columns:minmax(0,1fr) 255px!important}
+ body.bm-ice-encyclopedia-v1134 .ice-guide-body-v1135>section.section.bm-guide-topic-grid-v1092{grid-template-columns:minmax(0,1fr)!important}
+}
