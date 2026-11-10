@@ -24,3 +24,13 @@ body.bm-ice-encyclopedia-v1134 .ice-knowledge-main-v1137 [id^="ice-knowledge-hea
 @media screen and (min-width:1100px) and (max-width:1320px) and (hover:hover) and (pointer:fine){
 body.bm-ice-encyclopedia-v1134 .ice-knowledge-layout-v1137{grid-template-columns:minmax(0,1fr) 255px!important}
 }
+
+
+/* Knowledge guide sidebar, card and table safety pass v1138. */
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine){
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-layout-v1137{min-width:0!important;max-width:100%!important}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-panel-v1137 a{overflow-wrap:anywhere;word-break:normal}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-main-v1137 :is(.guide-fold-body-v414,.building-grid,.troop-grid,.mini-grid){min-width:0!important;max-width:100%!important}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-main-v1137 :is(img,video,iframe,table){max-width:100%}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-main-v1137 :is(.table-wrap,.table-responsive){overflow-x:auto;max-width:100%}
+}
