@@ -408,4 +408,48 @@ body.is-home-route .home-tools-grid-v1016>a[href="bear-helper.html"]>img{width:4
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
  else init();
 })();
+</script><script id="desktop-fullwidth-materials-v1125">
+(function(){
+ "use strict";
+ var section, inner, cards;
+ var props=['grid-column','grid-column-start','grid-column-end','grid-row','grid-area','width','max-width','min-width','justify-self','align-self','margin','box-sizing'];
+ function apply(){
+  if(!section){
+   var root=document.querySelector('body.is-home-route .modern-home-v424.home-portal-v1016');
+   if(!root)return;
+   section=root.querySelector(':scope > .home-more-visible-v1025');
+   if(!section)return;
+   inner=section.querySelector(':scope > .home-portal-secondary-v1016');
+   cards=section.querySelectorAll('.modern-card-grid-v424');
+  }
+  var desktop=window.matchMedia('(min-width:1100px)').matches;
+  if(desktop){
+   section.style.setProperty('grid-area','auto / 1 / auto / -1','important');
+   section.style.setProperty('grid-column','1 / -1','important');
+   section.style.setProperty('width','100%','important');
+   section.style.setProperty('max-width','none','important');
+   section.style.setProperty('min-width','0','important');
+   section.style.setProperty('justify-self','stretch','important');
+   section.style.setProperty('box-sizing','border-box','important');
+   if(inner){
+    inner.style.setProperty('display','grid','important');
+    inner.style.setProperty('grid-template-columns','minmax(0,1.15fr) minmax(0,1fr)','important');
+    inner.style.setProperty('gap','16px','important');
+    inner.style.setProperty('width','100%','important');
+   }
+   cards.forEach(function(card){
+    card.style.setProperty('display','grid','important');
+    card.style.setProperty('grid-template-columns','repeat(3,minmax(0,1fr))','important');
+    card.style.setProperty('gap','10px','important');
+   });
+  }else{
+   props.forEach(function(p){section.style.removeProperty(p)});
+   if(inner)['display','grid-template-columns','gap','width'].forEach(function(p){inner.style.removeProperty(p)});
+   cards.forEach(function(card){['display','grid-template-columns','gap'].forEach(function(p){card.style.removeProperty(p)})});
+  }
+ }
+ function start(){apply();window.addEventListener('resize',apply,{passive:true})}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});
+ else start();
+})();
 </script></body></html>
