@@ -1,0 +1,26 @@
+/* Белая Мгла: knowledge articles in ice-encyclopedia desktop format v1137. */
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine){
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-layout-v1137{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(255px,295px)!important;gap:clamp(17px,1.5vw,24px)!important;align-items:start!important;min-width:0!important;max-width:none!important;width:100%!important}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-main-v1137{min-width:0!important}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-main-v1137>.guide-page-v69,
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-main-v1137> :is(.troops-wrap,.f130-wrap,.fc15-wrap,.fc510-wrap,.build-hub),
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-main-v1137>.section{box-sizing:border-box!important;width:100%!important;max-width:none!important;min-width:0!important;margin-left:0!important;margin-right:0!important}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-side-v1137{display:grid;gap:14px;position:sticky;top:16px;max-height:calc(100vh - 32px);overflow-y:auto;scrollbar-width:thin;min-width:0}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-panel-v1137{padding:18px;border-radius:17px;border:1px solid rgba(170,212,249,.58);background:linear-gradient(155deg,#1a3c66,#082043);box-shadow:inset 0 1px rgba(255,255,255,.15),0 12px 29px rgba(1,7,30,.26)}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-panel-v1137 h2{font:700 21px/1.3 Georgia,serif!important;color:#ffe9bd!important;margin:0 0 11px!important;padding:0 0 11px!important;border-bottom:1px solid rgba(179,210,240,.29)}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-panel-v1137 a{display:block;color:#e7f4ff!important;font:600 14px/1.45 Arial,Helvetica,sans-serif!important;text-decoration:none!important;border:1px solid rgba(142,201,245,.28);border-radius:9px;padding:9px 10px;margin:6px 0;background:rgba(12,42,82,.6)}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-panel-v1137 a:hover,body.bm-ice-encyclopedia-v1134 .ice-knowledge-panel-v1137 a:focus-visible{border-color:#ffe5a8;background:rgba(51,90,135,.83)}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-panel-v1137 li{font:400 14px/1.6 Arial,Helvetica,sans-serif!important;color:#e9f3ff!important;margin:7px 0}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-panel-v1137 ul{padding-left:20px;margin:0}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-main-v1137 .guide-page-v69>details.guide-section{border:1px solid rgba(168,210,248,.5)!important;border-radius:16px!important;background:linear-gradient(145deg,rgba(22,56,98,.97),rgba(7,26,55,.98))!important;box-shadow:0 10px 24px rgba(0,7,27,.23)!important}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-main-v1137 .guide-page-v69>details.guide-section summary{color:#ffe8b9!important}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-main-v1137 :is(.troop-group,.building-group,.build-stage){border:1px solid rgba(168,212,248,.55)!important;border-radius:17px!important;background:linear-gradient(145deg,rgba(22,56,96,.97),rgba(7,27,55,.98))!important;box-shadow:inset 0 1px rgba(240,248,255,.11),0 10px 25px rgba(0,7,28,.2)!important}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-main-v1137 :is(.troop-group,.building-group){padding:clamp(18px,1.6vw,27px)!important;margin-bottom:15px!important}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-main-v1137 :is(.troop-group,.building-group)>h2{font:700 clamp(21px,1.6vw,27px)/1.3 Georgia,serif!important;color:#ffebc2!important;margin:0 0 15px!important}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-main-v1137 :is(.troop-card,.building-card,.mini-card){border:1px solid rgba(159,209,247,.36)!important;border-radius:13px!important;background:rgba(11,41,79,.76)!important;box-shadow:none!important}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-main-v1137 :is(.building-grid,.troop-grid,.mini-grid){gap:14px!important}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-main-v1137 [id^="ice-knowledge-heading-v1137-"]{scroll-margin-top:25px}
+}
+@media screen and (min-width:1100px) and (max-width:1320px) and (hover:hover) and (pointer:fine){
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-layout-v1137{grid-template-columns:minmax(0,1fr) 255px!important}
+}
