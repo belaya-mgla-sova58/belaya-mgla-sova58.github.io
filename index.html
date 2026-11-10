@@ -204,6 +204,45 @@ body.is-home-route .home-tools-grid-v1016>a[href="bear-helper.html"]>img{width:4
   min-width:0!important;overflow-wrap:anywhere!important;word-break:normal!important;
  }
 }
+
+/* v1124 Desktop: restore full-width Other Materials after split-layout changes. */
+@media screen and (min-width:1100px) {
+ body.is-home-route .modern-home-v424.home-portal-v1016 > .home-more-visible-v1025 {
+  display:block!important;
+  grid-column:1 / -1!important;
+  grid-row:auto!important;
+  justify-self:stretch!important;
+  align-self:start!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  margin:0!important;
+ }
+ body.is-home-route .modern-home-v424.home-portal-v1016 > .home-more-visible-v1025 > .home-portal-secondary-v1016 {
+  display:grid!important;
+  grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)!important;
+  gap:16px!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  align-items:start!important;
+ }
+ body.is-home-route .modern-home-v424.home-portal-v1016 .home-more-visible-v1025 .modern-home-columns-v424,
+ body.is-home-route .modern-home-v424.home-portal-v1016 .home-more-visible-v1025 .modern-panel-v424 {
+  min-width:0!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+ }
+ body.is-home-route .modern-home-v424.home-portal-v1016 .home-more-visible-v1025 .modern-card-grid-v424{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:10px!important;
+ }
+ body.is-home-route .modern-home-v424.home-portal-v1016 .home-more-visible-v1025 .modern-topic-card-v424{
+  min-width:0!important;
+ }
+}
 </style></head><body class="is-home-route home-hq-v405 home-hq-v406 home-site-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="home"><div aria-hidden="true" class="site-cosmic-background-v442"></div>
 <div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
 <button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
