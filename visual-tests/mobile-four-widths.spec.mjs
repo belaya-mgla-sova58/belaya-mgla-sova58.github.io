@@ -25,6 +25,11 @@ test.describe('Мобильная вёрстка 320–430px', () => {
         const response = await page.goto(item.url, { waitUntil: 'domcontentloaded' });
         expect(response?.status(), `${item.label}: HTTP status`).toBe(200);
         await expect(page.locator('main#appMain')).toBeVisible();
+        await page.evaluate(() => document.fonts.ready);
+        await testInfo.attach(`${item.url.slice(1, -5)}-${width}px.png`, {
+          body: await page.screenshot({ fullPage: true, animations: 'disabled' }),
+          contentType: 'image/png',
+        });
 
         const metrics = await page.evaluate(() => {
           const nav = document.querySelector('nav.mobile-bottom-v424');
@@ -58,6 +63,9 @@ test.describe('Мобильная вёрстка 320–430px', () => {
         if (item.url === '/index.html') {
           const header = page.locator('img.home-stamped-img-v441').first();
           await expect(header).toHaveAttribute('src', 'belaya_mgla_new_header_2048.webp');
+          await expect.poll(() => header.evaluate(el => el.complete && el.naturalWidth > 0), {
+            message: 'Homepage banner must finish loading',
+          }).toBe(true);
           const size = await header.evaluate(el => ({
             naturalWidth: el.naturalWidth,
             naturalHeight: el.naturalHeight,
