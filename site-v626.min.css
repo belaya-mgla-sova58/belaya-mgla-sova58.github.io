@@ -1514,3 +1514,12 @@ body.modern-v424:not(.is-home-route) .site-footer-v256{
   object-position:center!important;
  }
 }
+
+/* v1149: Dreams uses the shared CSS without the aurora mobile sheet. */
+@media screen and (max-width:430px){
+ html:not(.force-desktop-root) body.is-dreams-route nav.mobile-bottom-v424>a b{
+  font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif!important;
+  font-size:11px!important;line-height:1.2!important;
+  letter-spacing:0!important;overflow-wrap:anywhere!important;
+ }
+}
