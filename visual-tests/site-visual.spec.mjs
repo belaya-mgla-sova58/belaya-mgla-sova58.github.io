@@ -32,7 +32,7 @@ for (const [name, path] of pages) {
     if (path === 'index.html') {
       const hero = page.locator('.home-portal-hero-v1016 img.home-stamped-img-v441');
       await expect(hero, 'На главной должен быть оригинальный утверждённый баннер').toHaveAttribute(
-        'src', 'assets/home-mockup-owl-hero-v1016.webp'
+        'src', 'belaya_mgla_new_header_2048.webp'
       );
       // Stable, server-rendered Bear helper card replaces the old late DOM swap.
       await expect(page.locator('.home-bottom-grid-v1025 > .home-bear-calc-v780')).toHaveCount(1);
