@@ -370,7 +370,7 @@ html:not(.force-desktop-root) body:is(.site-hq-v407,.is-home-route,[data-static-
 }
 
 /* v1149: readable mobile tabs on all event guide routes. */
-@media screen and (max-width:360px){
+@media screen and (max-width:430px){
  html:not(.force-desktop-root) body.site-hq-v407[data-static-route]:not(.is-pets-route):not(.is-experts-route):not(.is-hero-generations-route) nav.mobile-bottom-v424>a b{
   font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif!important;
   font-size:11px!important;
