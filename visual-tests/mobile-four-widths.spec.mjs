@@ -52,6 +52,17 @@ test.describe('Мобильная вёрстка 320–430px', () => {
           expect(typography.lineHeight, 'Межстрочный интервал для чтения').toBeGreaterThanOrEqual(24);
         }
 
+        if (['/bear.html', '/canyon-clash.html', '/research.html'].includes(item.url)) {
+          await page.evaluate(() => window.scrollTo({ top: 800, behavior: 'instant' }));
+          await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(550);
+          const backToTop = page.locator('#backToTop');
+          await expect(backToTop, 'Кнопка наверх появляется после прокрутки').toHaveClass(/show/);
+          await backToTop.click();
+          await expect.poll(() => page.evaluate(() => window.scrollY), {
+            message: 'Кнопка наверх возвращает к началу страницы',
+          }).toBeLessThan(8);
+        }
+
         // Preserve visual evidence independently for every mobile page.
         await testInfo.attach('mobile-full-page.png', {
           body: await page.screenshot({ fullPage: true, animations: 'disabled' }),
