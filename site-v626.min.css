@@ -1448,3 +1448,8 @@ body.modern-v424:not(.is-home-route) .site-footer-v256{
 @media(prefers-reduced-motion:reduce){
  body.modern-v424:not(.is-home-route) :is(a.kb-clean-card-v920,a.calc-hub-card,a.hero-category-link-v708){transition:none!important}
 }
+
+/* Mobile touch navigation: avoid long forced smooth-scroll animations on guide pages. */
+@media screen and (max-width:980px) and (pointer:coarse){
+ html:not(.force-desktop-root){scroll-behavior:auto!important}
+}
