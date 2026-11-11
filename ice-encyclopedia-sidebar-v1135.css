@@ -65,3 +65,27 @@ body.bm-ice-encyclopedia-v1134 .ice-guide-side-panel-v1135 a{overflow-wrap:anywh
 body.bm-ice-encyclopedia-v1134 .ice-guide-body-v1135 :is(table,pre){max-width:100%;overflow-x:auto}
 body.bm-ice-encyclopedia-v1134 .ice-guide-body-v1135 :is(img,video,iframe){max-width:100%}
 }
+
+/* v1155: Tundra Trade uses the full desktop reading width; keep side panels below. */
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine){
+ body.site-hq-v407.is-tundra-trade-route.bm-ice-encyclopedia-v1134 main#appMain .route-page.active .ice-guide-layout-v1135{
+  grid-template-columns:minmax(0,1fr)!important;
+  max-width:100%!important;
+  min-width:0!important;
+ }
+ body.site-hq-v407.is-tundra-trade-route.bm-ice-encyclopedia-v1134 main#appMain .route-page.active .ice-guide-layout-v1135>.ice-guide-body-v1135{
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+ }
+ body.site-hq-v407.is-tundra-trade-route.bm-ice-encyclopedia-v1134 main#appMain .route-page.active .ice-guide-layout-v1135>.ice-guide-sidebar-v1135{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:16px!important;
+  position:static!important;
+ }
+}
