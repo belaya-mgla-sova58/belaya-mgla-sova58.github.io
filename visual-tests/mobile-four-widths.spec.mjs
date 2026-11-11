@@ -247,3 +247,44 @@ test.describe('Остальные шапки событий', () => {
     }
   }
 });
+
+// Mobile calculator form smoke checks v1150.
+test.describe('Калькуляторы: мобильные поля и ширина', () => {
+  test.skip(({ isMobile }) => !isMobile, 'Мобильный Chromium');
+  for (const width of [320, 390]) {
+    for (const [title, path, selector] of [
+      ['Каталог калькуляторов', '/calculators.html', '.calc-hub-card'],
+      ['Огненная Топка', '/fire-furnace-calculator.html', '.calc-select-v378 select'],
+      ['Эссенция и Мифрил', '/essence-mithril-calculator.html', '.ec-stock-grid input'],
+    ]) {
+      test(`${title}: форма ${width}px`, async ({ page }, testInfo) => {
+        await page.setViewportSize({ width, height: 844 });
+        const response = await page.goto(path, { waitUntil: 'domcontentloaded' });
+        expect(response?.status(), title).toBe(200);
+        const target = page.locator(selector).first();
+        await expect(target).toBeVisible();
+        const metrics = await target.evaluate(element => {
+          const rect = element.getBoundingClientRect();
+          const style = getComputedStyle(element);
+          return {
+            left: rect.left, right: rect.right, width: rect.width,
+            height: rect.height, fontSize: Number.parseFloat(style.fontSize),
+            viewport: document.documentElement.clientWidth,
+            documentWidth: document.documentElement.scrollWidth,
+          };
+        });
+        await testInfo.attach('calculator-mobile-controls.json', {
+          body: JSON.stringify({ path, width, ...metrics }, null, 2),
+          contentType: 'application/json',
+        });
+        expect(metrics.left).toBeGreaterThanOrEqual(-2);
+        expect(metrics.right).toBeLessThanOrEqual(width + 2);
+        expect(metrics.documentWidth - metrics.viewport).toBeLessThanOrEqual(16);
+        if (path !== '/calculators.html') {
+          expect(metrics.height, 'Поле должно быть удобно нажимать').toBeGreaterThanOrEqual(44);
+          expect(metrics.fontSize, 'Поле без автоувеличения текста в iOS').toBeGreaterThanOrEqual(16);
+        }
+      });
+    }
+  }
+});
