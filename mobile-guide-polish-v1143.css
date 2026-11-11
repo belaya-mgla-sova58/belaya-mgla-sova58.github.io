@@ -254,3 +254,51 @@ html:not(.force-desktop-root) body.site-hq-v407.bm-ice-encyclopedia-v1134 main#a
   overflow-wrap:break-word!important;
  }
 }
+
+/* v1148: remaining event banners and Gina's standalone cover. */
+@media screen and (max-width:820px){
+ html:not(.force-desktop-root) body:is(
+  .is-alliance-mobilization-route,.is-frostfire-mine-route,.is-tundra-trade-route,
+  .is-brothers-in-arms-route,.is-forts-route,.is-castle-route,
+  .is-mercenary-prestige-route,.is-endless-trial-route,.is-fishing-route,
+  .is-snowplow-route,.is-state-power-route,.is-svs-prep-route,.is-svs-route
+ ) main#appMain .route-page.active>section[class*="-image-header-"]{
+  box-sizing:border-box!important;width:100%!important;max-width:100%!important;
+  min-width:0!important;height:auto!important;min-height:0!important;
+  padding:0!important;margin:0 0 12px!important;overflow:hidden!important;
+ }
+ html:not(.force-desktop-root) body:is(
+  .is-alliance-mobilization-route,.is-frostfire-mine-route,.is-tundra-trade-route,
+  .is-brothers-in-arms-route,.is-forts-route,.is-castle-route,
+  .is-mercenary-prestige-route,.is-endless-trial-route,.is-fishing-route,
+  .is-snowplow-route,.is-state-power-route,.is-svs-prep-route,.is-svs-route
+ ) main#appMain .route-page.active>section[class*="-image-header-"]>img{
+  display:block!important;position:static!important;
+  box-sizing:border-box!important;width:100%!important;min-width:0!important;
+  max-width:100%!important;height:auto!important;max-height:none!important;
+  aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important;
+ }
+ html:not(.force-desktop-root) body:is(
+  .is-alliance-mobilization-route,.is-frostfire-mine-route,.is-tundra-trade-route,
+  .is-brothers-in-arms-route,.is-forts-route,.is-castle-route,
+  .is-mercenary-prestige-route,.is-endless-trial-route,.is-fishing-route,
+  .is-snowplow-route,.is-state-power-route,.is-svs-prep-route,.is-svs-route
+ ) main#appMain .route-page.active>section.intro{
+  box-sizing:border-box!important;max-width:100%!important;min-width:0!important;
+  padding:15px!important;margin:0 0 12px!important;
+ }
+ html:not(.force-desktop-root) body:is(
+  .is-alliance-mobilization-route,.is-frostfire-mine-route,.is-tundra-trade-route,
+  .is-brothers-in-arms-route,.is-forts-route,.is-castle-route,
+  .is-mercenary-prestige-route,.is-endless-trial-route,.is-fishing-route,
+  .is-snowplow-route,.is-state-power-route,.is-svs-prep-route,.is-svs-route
+ ) main#appMain .route-page.active>section.intro :is(h1,p){
+  overflow-wrap:break-word!important;
+ }
+ html:not(.force-desktop-root) body.is-ginas-revenge-route main#appMain .route-page.active img.gina-cover{
+  display:block!important;width:100%!important;max-width:100%!important;
+  height:auto!important;max-height:none!important;aspect-ratio:auto!important;
+  object-fit:contain!important;object-position:center!important;
+  box-sizing:border-box!important;margin:0 auto 12px!important;
+ }
+}
