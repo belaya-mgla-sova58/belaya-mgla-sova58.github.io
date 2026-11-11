@@ -63,6 +63,32 @@ test.describe('Мобильная вёрстка 320–430px', () => {
           }).toBeLessThan(8);
         }
 
+        if (item.url === '/events.html') {
+          const eventDetails = page.locator('details:has(.event-group-grid-v522)').first();
+          await eventDetails.evaluate(element => { element.open = true; });
+          const eventGrid = page.locator('.event-group-grid-v522').first();
+          await expect(eventGrid).toBeVisible();
+          const eventLayout = await eventGrid.evaluate(element => {
+            const gridStyle = getComputedStyle(element);
+            const image = element.querySelector('.guide-nav-card img');
+            const imageStyle = image && getComputedStyle(image);
+            const description = element.closest('.event-group-v522')?.querySelector('.event-group-copy-v522 p');
+            const descStyle = description && getComputedStyle(description);
+            return {
+              columns: gridStyle.gridTemplateColumns,
+              gridWidth: element.getBoundingClientRect().width,
+              cardWidth: element.querySelector('.guide-nav-card')?.getBoundingClientRect().width,
+              imageFit: imageStyle?.objectFit,
+              descriptionDisplay: descStyle?.display,
+              descriptionFont: descStyle ? Number.parseFloat(descStyle.fontSize) : 0,
+            };
+          });
+          expect(eventLayout.descriptionDisplay, 'Описание группы событий не скрыто').not.toBe('none');
+          expect(eventLayout.descriptionFont, 'Описание группы событий читаемо').toBeGreaterThanOrEqual(12);
+          expect(eventLayout.cardWidth, 'Карточка события должна занимать доступную ширину').toBeGreaterThan(width * 0.65);
+          expect(eventLayout.imageFit, 'Изображение события без обрезки').toBe('contain');
+        }
+
         // Preserve visual evidence independently for every mobile page.
         await testInfo.attach('mobile-full-page.png', {
           body: await page.screenshot({ fullPage: true, animations: 'disabled' }),
