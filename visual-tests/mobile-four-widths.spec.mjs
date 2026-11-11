@@ -176,6 +176,8 @@ test.describe('Шапки событий на узких экранах', () => 
         expect(metrics.left).toBeGreaterThanOrEqual(-2);
         expect(metrics.right).toBeLessThanOrEqual(width + 2);
         expect(metrics.objectFit).toBe('contain');
+        expect(Math.abs(metrics.width / metrics.height - metrics.naturalWidth / metrics.naturalHeight),
+          'Пропорции шапки не должны искажаться').toBeLessThan(0.035);
         expect(metrics.heading?.length).toBeGreaterThan(3);
       });
     }
@@ -236,6 +238,11 @@ test.describe('Остальные шапки событий', () => {
         expect(bounds.left).toBeGreaterThanOrEqual(-2);
         expect(bounds.right).toBeLessThanOrEqual(width + 2);
         expect(bounds.fit, 'Без обрезки шапки').toBe('contain');
+        expect(Math.abs(bounds.width / bounds.height - bounds.naturalWidth / bounds.naturalHeight),
+          'Пропорции изображения сохраняются').toBeLessThan(0.035);
+        const navFont = await page.locator('nav.mobile-bottom-v424 a b').first()
+          .evaluate(el => Number.parseFloat(getComputedStyle(el).fontSize));
+        expect(navFont, 'Нижнее меню читаемо на странице события').toBeGreaterThanOrEqual(11);
       });
     }
   }
