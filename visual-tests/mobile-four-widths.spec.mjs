@@ -181,3 +181,62 @@ test.describe('Шапки событий на узких экранах', () => 
     }
   }
 });
+
+// Remaining event banner regression v1148.
+test.describe('Остальные шапки событий', () => {
+  test.skip(({ isMobile }) => !isMobile, 'Мобильный Chromium');
+  const pages = [
+    ['Мобилизация альянса', '/alliance-mobilization.html'],
+    ['Рудник', '/frostfire-mine.html'],
+    ['Торговый путь', '/tundra-trade-route.html'],
+    ['Братья по оружию', '/brothers-in-arms.html'],
+    ['Форт', '/forts.html'],
+    ['Замок', '/castle.html'],
+    ['Месть Джины', '/ginas-revenge.html'],
+    ['Престиж наёмника', '/mercenary-prestige.html'],
+    ['Бесконечное испытание', '/endless-trial.html'],
+    ['Рыболовный турнир', '/fishing.html'],
+    ['Снегоуборщики', '/snowplow.html'],
+    ['Воспоминания о грёзах', '/dreams.html'],
+    ['Мощь государства', '/state-power.html'],
+    ['Подготовка СВС', '/svs-prep.html'],
+    ['Боевая фаза СВС', '/svs.html'],
+  ];
+  for (const width of [320, 390]) {
+    for (const [title, url] of pages) {
+      test(`${title}: ${width}px`, async ({ page }, testInfo) => {
+        await page.setViewportSize({ width, height: 844 });
+        const response = await page.goto(url, { waitUntil: 'domcontentloaded' });
+        expect(response?.status(), title).toBe(200);
+        const hero = page.locator(
+          url === '/ginas-revenge.html'
+            ? 'main#appMain .route-page.active img.gina-cover'
+            : 'main#appMain .route-page.active>section[class*="-image-header-"]>img'
+        ).first();
+        await expect(hero, title + ': изображение шапки').toBeVisible();
+        await expect.poll(() => hero.evaluate(img => img.complete && img.naturalWidth > 0), {
+          message: title + ': изображение должно загрузиться',
+        }).toBe(true);
+        const bounds = await hero.evaluate(img => {
+          const b = img.getBoundingClientRect();
+          const style = getComputedStyle(img);
+          return {
+            left: b.left, right: b.right, width: b.width,
+            naturalWidth: img.naturalWidth, naturalHeight: img.naturalHeight,
+            fit: style.objectFit, height: b.height,
+            documentWidth: document.documentElement.scrollWidth,
+          };
+        });
+        await testInfo.attach('event-header-metrics.json', {
+          body: JSON.stringify({ url, width, ...bounds }, null, 2),
+          contentType: 'application/json',
+        });
+        expect(bounds.width).toBeGreaterThan(0);
+        expect(bounds.height).toBeGreaterThan(0);
+        expect(bounds.left).toBeGreaterThanOrEqual(-2);
+        expect(bounds.right).toBeLessThanOrEqual(width + 2);
+        expect(bounds.fit, 'Без обрезки шапки').toBe('contain');
+      });
+    }
+  }
+});
