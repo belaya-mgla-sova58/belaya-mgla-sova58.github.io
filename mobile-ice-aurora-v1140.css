@@ -317,3 +317,43 @@ html:not(.force-desktop-root) body:is(.site-hq-v407,.is-home-route,[data-static-
  font-size:9px!important;line-height:1.15!important;letter-spacing:-.02em!important;
 }
 }
+
+/* Mobile event gallery legibility and full-width cards v1141. */
+@media screen and (max-width:430px){
+ html:not(.force-desktop-root) body.is-events-route.site-hq-v407 main#appMain .route-page.active .event-group-grid-v522{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:12px!important;
+  width:100%!important;
+  min-width:0!important;
+ }
+ html:not(.force-desktop-root) body.is-events-route.site-hq-v407 main#appMain .route-page.active .event-group-grid-v522>.guide-nav-card{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+ }
+ html:not(.force-desktop-root) body.is-events-route.site-hq-v407 main#appMain .route-page.active .event-group-grid-v522>.guide-nav-card>img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  max-width:100%!important;
+  object-fit:contain!important;
+ }
+ html:not(.force-desktop-root) body.is-events-route.site-hq-v407 main#appMain .route-page.active .event-group-copy-v522 p{
+  display:block!important;
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif!important;
+  font-size:12px!important;
+  line-height:1.45!important;
+  margin-top:4px!important;
+  overflow-wrap:break-word!important;
+ }
+ html:not(.force-desktop-root) body.is-events-route.site-hq-v407 main#appMain .route-page.active .event-group-copy-v522 h3{
+  font-size:17px!important;
+  line-height:1.3!important;
+ }
+}
