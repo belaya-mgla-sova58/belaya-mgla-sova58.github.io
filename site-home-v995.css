@@ -1224,3 +1224,18 @@ body.is-home-route .home-portal-v1016 .home-quick-links-v1024>a>img{
 @media screen and (max-width:980px) and (pointer:coarse){
  html:not(.force-desktop-root){scroll-behavior:auto!important}
 }
+
+/* Mobile navigation readability 2026-11-11: scoped to active guides, events and calculators. */
+@media screen and (max-width:560px){
+ html:not(.force-desktop-root) body.modern-v424:is([data-static-route="home"],[data-static-route="events"],[data-static-route="news"],[data-static-route="bear"],[data-static-route="canyon-clash"],[data-static-route="research"],[data-static-route="fire-furnace-calculator"],[data-static-route="essence-mithril-calculator"]) .mobile-bottom-v424 a b{
+  font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif!important;
+  font-size:11px!important;
+  font-weight:650!important;
+  line-height:1.3!important;
+  letter-spacing:0!important;
+ }
+ html:not(.force-desktop-root) body.modern-v424:is([data-static-route="home"],[data-static-route="events"],[data-static-route="news"],[data-static-route="bear"],[data-static-route="canyon-clash"],[data-static-route="research"],[data-static-route="fire-furnace-calculator"],[data-static-route="essence-mithril-calculator"]) .mobile-bottom-v424 a:focus-visible{
+  outline:2px solid #b7e7ff!important;
+  outline-offset:-3px!important;
+ }
+}
