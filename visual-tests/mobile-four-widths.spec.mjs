@@ -288,3 +288,28 @@ test.describe('Калькуляторы: мобильные поля и шири
     }
   }
 });
+
+// Expandable guide sections touch interaction v1150.
+test.describe('Раскрывающиеся гайды: нажатия на телефоне', () => {
+  test.skip(({ isMobile }) => !isMobile, 'Только сенсорный Chromium');
+  for (const [name, url, selector] of [
+    ['Медведь', '/bear.html', 'details.bear-explain-section'],
+    ['Исследования', '/research.html', 'details.guide-fold-v414'],
+  ]) {
+    for (const width of [320, 390]) {
+      test(`${name}: раскрыть и закрыть при ${width}px`, async ({ page }) => {
+        await page.setViewportSize({ width, height: 844 });
+        const response = await page.goto(url, { waitUntil: 'domcontentloaded' });
+        expect(response?.status()).toBe(200);
+        const detail = page.locator(selector).first();
+        const summary = detail.locator('summary').first();
+        await expect(summary).toBeVisible();
+        const initiallyOpen = await detail.evaluate(el => el.open);
+        await summary.tap();
+        await expect.poll(() => detail.evaluate(el => el.open)).toBe(!initiallyOpen);
+        await summary.tap();
+        await expect.poll(() => detail.evaluate(el => el.open)).toBe(initiallyOpen);
+      });
+    }
+  }
+});
