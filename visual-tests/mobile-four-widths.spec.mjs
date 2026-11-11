@@ -135,3 +135,49 @@ test.describe('Мобильная вёрстка 320–430px', () => {
     }
   }
 });
+
+// Additional event header image checks v1147.
+test.describe('Шапки событий на узких экранах', () => {
+  test.skip(({ isMobile }) => !isMobile, 'Проверяем мобильный Chromium');
+  const headers = [
+    ['Безумная Джо', '/crazy-joe.html'],
+    ['Сражение альянсов', '/alliance-showdown.html'],
+    ['Чемпионат альянса', '/alliance-championship.html'],
+    ['Зимняя осада', '/winter-siege.html'],
+    ['Литейная', '/foundry.html'],
+    ['Медведь', '/bear.html'],
+  ];
+  for (const width of [320, 390]) {
+    for (const [label, url] of headers) {
+      test(`${label}: шапка ${width}px`, async ({ page }, testInfo) => {
+        await page.setViewportSize({ width, height: 844 });
+        const response = await page.goto(url, { waitUntil: 'domcontentloaded' });
+        expect(response?.status()).toBe(200);
+        const hero = page.locator('main#appMain .route-page.active>section[class*="-image-header-"]>img').first();
+        await expect(hero).toBeVisible();
+        await expect.poll(() => hero.evaluate(img => img.complete && img.naturalWidth > 0), {
+          message: 'Шапка должна загрузиться',
+        }).toBe(true);
+        const metrics = await hero.evaluate(img => {
+          const rect = img.getBoundingClientRect();
+          const style = getComputedStyle(img);
+          return {
+            left: rect.left, right: rect.right, width: rect.width, height: rect.height,
+            naturalWidth: img.naturalWidth, naturalHeight: img.naturalHeight,
+            objectFit: style.objectFit,
+            heading: document.querySelector('.route-page.active>section.intro h1')?.innerText.trim(),
+          };
+        });
+        await testInfo.attach('header-layout.json', {
+          body: JSON.stringify({ label, width, ...metrics }, null, 2),
+          contentType: 'application/json',
+        });
+        expect(metrics.width).toBeGreaterThan(0);
+        expect(metrics.left).toBeGreaterThanOrEqual(-2);
+        expect(metrics.right).toBeLessThanOrEqual(width + 2);
+        expect(metrics.objectFit).toBe('contain');
+        expect(metrics.heading?.length).toBeGreaterThan(3);
+      });
+    }
+  }
+});
