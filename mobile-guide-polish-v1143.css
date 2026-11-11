@@ -302,3 +302,26 @@ html:not(.force-desktop-root) body.site-hq-v407.bm-ice-encyclopedia-v1134 main#a
   box-sizing:border-box!important;margin:0 auto 12px!important;
  }
 }
+
+/* v1153: keep event cover inside viewport on narrow phones. */
+@media screen and (max-width:430px){
+ html:not(.force-desktop-root) body:is(
+  .is-crazy-joe-route,.is-alliance-showdown-route,.is-alliance-championship-route,
+  .is-winter-siege-route,.is-foundry-route,.is-bear-route,
+  .is-alliance-mobilization-route,.is-frostfire-mine-route,.is-tundra-trade-route,
+  .is-brothers-in-arms-route,.is-forts-route,.is-castle-route,
+  .is-mercenary-prestige-route,.is-endless-trial-route,.is-fishing-route,
+  .is-snowplow-route,.is-state-power-route,.is-svs-prep-route,.is-svs-route
+ ) main#appMain .route-page.active>section[class*="-image-header-"]{
+  width:calc(100% - 24px)!important;
+  max-width:calc(100vw - 24px)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+ }
+ html:not(.force-desktop-root) body.is-ginas-revenge-route main#appMain .route-page.active img.gina-cover{
+  width:calc(100% - 24px)!important;
+  max-width:calc(100vw - 24px)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+ }
+}
