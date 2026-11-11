@@ -1468,3 +1468,33 @@ body.modern-v424:not(.is-home-route) .site-footer-v256{
   outline-offset:-3px!important;
  }
 }
+
+/* Mobile editorial readability: bear, canyon and research guides (2026-11-11). */
+@media screen and (max-width:560px){
+ html:not(.force-desktop-root) body.modern-v424:is(.is-bear-route,.is-canyon-clash-route,.is-research-route) :is(.bear-explain-body,.canyon-wrap .guide-section,.guide-fold-body-v414) :is(p,li){
+  font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif!important;
+  font-size:15px!important;
+  line-height:1.65!important;
+  overflow-wrap:break-word;
+ }
+ html:not(.force-desktop-root) body.modern-v424.is-bear-route .bear-card > summary,
+ html:not(.force-desktop-root) body.modern-v424.is-research-route .guide-fold-summary-v414{
+  min-height:48px!important;
+  padding:12px!important;
+ }
+ html:not(.force-desktop-root) body.modern-v424:is(.is-bear-route,.is-canyon-clash-route,.is-research-route) :is(.bear-explain-body,.canyon-wrap .guide-section,.guide-fold-body-v414) img{
+  max-width:100%!important;
+  height:auto;
+ }
+ html:not(.force-desktop-root) body.modern-v424.is-bear-route .bear-table-wrap{
+  max-width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+ }
+ html:not(.force-desktop-root) body.modern-v424.is-canyon-clash-route .canyon-wrap .canyon-scores-table-v988{
+  display:block;
+  max-width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+ }
+}
