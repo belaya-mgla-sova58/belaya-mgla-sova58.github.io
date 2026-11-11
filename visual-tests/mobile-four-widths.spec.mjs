@@ -37,6 +37,21 @@ test.describe('Мобильная вёрстка 320–430px', () => {
           expect(box?.width, 'Шапка не выходит за экран').toBeLessThanOrEqual(width + 2);
         }
 
+        if (['/bear.html', '/canyon-clash.html', '/research.html'].includes(item.url)) {
+          const sample = page.locator(
+            item.url === '/bear.html' ? '.bear-explain-body p' :
+            item.url === '/canyon-clash.html' ? '.canyon-wrap .guide-section p' :
+            '.guide-fold-body-v414 p'
+          ).first();
+          await expect(sample, 'В гайде должен быть текст для чтения').toBeVisible();
+          const typography = await sample.evaluate(element => ({
+            fontSize: Number.parseFloat(getComputedStyle(element).fontSize),
+            lineHeight: Number.parseFloat(getComputedStyle(element).lineHeight),
+          }));
+          expect(typography.fontSize, 'Текст мобильного гайда не меньше 15px').toBeGreaterThanOrEqual(15);
+          expect(typography.lineHeight, 'Межстрочный интервал для чтения').toBeGreaterThanOrEqual(24);
+        }
+
         // Preserve visual evidence independently for every mobile page.
         await testInfo.attach('mobile-full-page.png', {
           body: await page.screenshot({ fullPage: true, animations: 'disabled' }),
