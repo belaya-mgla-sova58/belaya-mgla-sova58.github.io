@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-// Regression suite for the real mobile Chromium browser served from the checked-out site.
-// No forms are submitted and no like, view or comment buttons are pressed.
+// Mobile browser regression: each page and width gets its own independent result.
+// Tests never submit forms or touch comments, likes, views or game data.
 const widths = [320, 375, 390, 430];
 const pages = [
   { url: '/index.html', label: 'Главная' },
@@ -18,15 +18,27 @@ test.describe('Мобильная вёрстка 320–430px', () => {
   test.skip(({ isMobile }) => !isMobile, 'Запускаем только в мобильном Chromium');
 
   for (const width of widths) {
-    test(`Основные страницы без горизонтального переполнения при ${width}px`, async ({ page }, testInfo) => {
-      await page.setViewportSize({ width, height: 844 });
-
-      for (const item of pages) {
+    for (const item of pages) {
+      test(`${item.label}: экран ${width}px`, async ({ page }, testInfo) => {
+        await page.setViewportSize({ width, height: 844 });
         const response = await page.goto(item.url, { waitUntil: 'domcontentloaded' });
         expect(response?.status(), `${item.label}: HTTP status`).toBe(200);
         await expect(page.locator('main#appMain')).toBeVisible();
         await page.evaluate(() => document.fonts.ready);
-        await testInfo.attach(`${item.url.slice(1, -5)}-${width}px.png`, {
+
+        if (item.url === '/index.html') {
+          const header = page.locator('img.home-stamped-img-v441').first();
+          await expect(header).toHaveAttribute('src', 'belaya_mgla_new_header_2048.webp');
+          await expect.poll(
+            () => header.evaluate(el => el.complete && el.naturalWidth > 0),
+            { message: 'Главная шапка должна загрузиться' }
+          ).toBe(true);
+          const box = await header.boundingBox();
+          expect(box?.width, 'Шапка не выходит за экран').toBeLessThanOrEqual(width + 2);
+        }
+
+        // Preserve visual evidence independently for every mobile page.
+        await testInfo.attach('mobile-full-page.png', {
           body: await page.screenshot({ fullPage: true, animations: 'disabled' }),
           contentType: 'image/png',
         });
@@ -34,52 +46,36 @@ test.describe('Мобильная вёрстка 320–430px', () => {
         const metrics = await page.evaluate(() => {
           const nav = document.querySelector('nav.mobile-bottom-v424');
           const links = nav ? [...nav.querySelectorAll(':scope > a')] : [];
-          const bar = nav?.getBoundingClientRect();
+          const rect = nav?.getBoundingClientRect();
+          const visible = Boolean(nav && getComputedStyle(nav).display !== 'none');
           return {
             viewport: document.documentElement.clientWidth,
             docWidth: document.documentElement.scrollWidth,
             bodyWidth: document.body.scrollWidth,
             navLinks: links.length,
-            navBox: bar ? { left: bar.left, right: bar.right, height: bar.height } : null,
-            navVisible: Boolean(nav && getComputedStyle(nav).display !== 'none'),
+            navVisible: visible,
+            navBox: rect ? { left: rect.left, right: rect.right } : null,
             linksInViewport: links.every(a => {
               const b = a.getBoundingClientRect();
               return b.width >= 30 && b.left >= -2 && b.right <= innerWidth + 2;
             }),
           };
         });
+        await testInfo.attach('mobile-layout-diagnostics.json', {
+          body: JSON.stringify({ page: item.url, width, ...metrics }, null, 2),
+          contentType: 'application/json',
+        });
 
-        expect(metrics.docWidth - metrics.viewport,
-          `${item.label} (${width}px): document overflow, metrics=${JSON.stringify(metrics)}`)
+        expect(metrics.docWidth - metrics.viewport, `Горизонтальная прокрутка: ${item.label} ${width}px`)
           .toBeLessThanOrEqual(16);
-        expect(metrics.bodyWidth - metrics.viewport,
-          `${item.label} (${width}px): body overflow`).toBeLessThanOrEqual(16);
-        expect(metrics.navLinks, `${item.label}: number of mobile tabs`).toBe(5);
-        expect(metrics.navVisible, `${item.label}: bottom nav visible`).toBe(true);
-        expect(metrics.linksInViewport, `${item.label}: tab links inside screen`).toBe(true);
-        expect(metrics.navBox?.left, `${item.label}: nav left edge`).toBeGreaterThanOrEqual(-2);
-        expect(metrics.navBox?.right, `${item.label}: nav right edge`).toBeLessThanOrEqual(width + 2);
-
-        if (item.url === '/index.html') {
-          const header = page.locator('img.home-stamped-img-v441').first();
-          await expect(header).toHaveAttribute('src', 'belaya_mgla_new_header_2048.webp');
-          await expect.poll(() => header.evaluate(el => el.complete && el.naturalWidth > 0), {
-            message: 'Homepage banner must finish loading',
-          }).toBe(true);
-          const size = await header.evaluate(el => ({
-            naturalWidth: el.naturalWidth,
-            naturalHeight: el.naturalHeight,
-            rect: el.getBoundingClientRect().toJSON(),
-          }));
-          expect(size.naturalWidth, 'Homepage banner must load').toBeGreaterThan(0);
-          expect(size.naturalHeight, 'Homepage banner must load').toBeGreaterThan(0);
-          expect(size.rect.width, 'Homepage banner stays within screen').toBeLessThanOrEqual(width + 2);
-        }
-      }
-      await testInfo.attach(`mobile-${width}-passed.txt`, {
-        body: `Verified ${pages.map(x => x.label).join(', ')} at ${width}px`,
-        contentType: 'text/plain',
+        expect(metrics.bodyWidth - metrics.viewport, `Переполнение body: ${item.label} ${width}px`)
+          .toBeLessThanOrEqual(16);
+        expect(metrics.navLinks, 'В нижнем меню должно быть пять ссылок').toBe(5);
+        expect(metrics.navVisible, 'Нижнее меню должно быть видно').toBe(true);
+        expect(metrics.linksInViewport, 'Все кнопки меню должны помещаться').toBe(true);
+        expect(metrics.navBox?.left, 'Левый край меню').toBeGreaterThanOrEqual(-2);
+        expect(metrics.navBox?.right, 'Правый край меню').toBeLessThanOrEqual(width + 2);
       });
-    });
+    }
   }
 });
