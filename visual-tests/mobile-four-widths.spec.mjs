@@ -2,6 +2,14 @@ import { test, expect } from '@playwright/test';
 
 // Mobile browser regression: each page and width gets its own independent result.
 // Tests never submit forms or touch comments, likes, views or game data.
+// Respect the site's analytics consent during automated navigation checks.
+// Declining analytics prevents the consent dialog from blocking the back-to-top button.
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => {
+    try { window.localStorage.setItem('sova58-metrika-consent-v1', 'declined'); } catch (_) {}
+  });
+});
+
 const widths = [320, 375, 390, 430];
 const pages = [
   { url: '/index.html', label: 'Главная' },
