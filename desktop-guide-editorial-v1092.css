@@ -371,3 +371,18 @@
   -webkit-overflow-scrolling:touch;
  }
 }
+
+/* v1154: let Tundra guide fill the desktop article workspace. */
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine){
+ body.site-hq-v407.bm-guide-editorial-v1092.is-tundra-trade-route
+ main#appMain>.route-page.active>.section.tundra-route-guide.bm-guide-topic-grid-v1092{
+  box-sizing:border-box!important;
+  display:grid!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ }
+}
