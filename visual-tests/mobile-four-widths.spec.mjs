@@ -49,6 +49,7 @@ test.describe('Мобильная вёрстка 320–430px', () => {
           const rect = nav?.getBoundingClientRect();
           const visible = Boolean(nav && getComputedStyle(nav).display !== 'none');
           return {
+            scrollBehavior: getComputedStyle(document.documentElement).scrollBehavior,
             viewport: document.documentElement.clientWidth,
             docWidth: document.documentElement.scrollWidth,
             bodyWidth: document.body.scrollWidth,
@@ -66,6 +67,7 @@ test.describe('Мобильная вёрстка 320–430px', () => {
           contentType: 'application/json',
         });
 
+        expect(metrics.scrollBehavior, 'На телефоне прокрутка не должна быть принудительно плавной').toBe('auto');
         expect(metrics.docWidth - metrics.viewport, `Горизонтальная прокрутка: ${item.label} ${width}px`)
           .toBeLessThanOrEqual(16);
         expect(metrics.bodyWidth - metrics.viewport, `Переполнение body: ${item.label} ${width}px`)
