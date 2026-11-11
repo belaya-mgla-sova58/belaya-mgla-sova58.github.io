@@ -1219,3 +1219,8 @@ body.is-home-route .home-portal-v1016 .home-quick-links-v1024>a>img{
  background:none!important;box-shadow:none!important;
  filter:drop-shadow(0 2px 2px rgba(0,8,33,.4)) drop-shadow(0 0 5px rgba(106,198,253,.2))!important;
 }
+
+/* Mobile touch navigation: avoid long forced smooth-scroll animations on guide pages. */
+@media screen and (max-width:980px) and (pointer:coarse){
+ html:not(.force-desktop-root){scroll-behavior:auto!important}
+}
