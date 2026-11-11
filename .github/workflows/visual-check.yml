@@ -153,7 +153,12 @@ jobs:
           grep -Fq 'Ковка 19→20' /tmp/sova58-playwright-list.txt
           grep -Fq 'Красное +0→+100' /tmp/sova58-playwright-list.txt
           grep -Fq 'Калькуляторы: ссылки, нажатия' /tmp/sova58-playwright-list.txt
-          echo 'Calculator, mastery, and mobile-navigation test suites discovered.'
+          grep -Fq 'Главная: экран 320px' /tmp/sova58-playwright-list.txt
+          grep -Fq 'Главная: экран 430px' /tmp/sova58-playwright-list.txt
+          grep -Fq 'Месть Джины: 320px' /tmp/sova58-playwright-list.txt
+          grep -Fq 'Эссенция и Мифрил: форма 390px' /tmp/sova58-playwright-list.txt
+          grep -Fq 'Исследования: раскрыть и закрыть при 320px' /tmp/sova58-playwright-list.txt
+          echo 'Calculator, mastery, 4-width mobile, event-banner, and accordion tests discovered.'
           tail -n 4 /tmp/sova58-playwright-list.txt
 
       - name: Prepare previous version for visual comparison
