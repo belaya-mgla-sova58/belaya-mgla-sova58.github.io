@@ -54,6 +54,7 @@ test.describe('Мобильная вёрстка 320–430px', () => {
             docWidth: document.documentElement.scrollWidth,
             bodyWidth: document.body.scrollWidth,
             navLinks: links.length,
+            navLabelSizes: links.map(a => Number.parseFloat(getComputedStyle(a.querySelector('b') || a).fontSize)),
             navVisible: visible,
             navBox: rect ? { left: rect.left, right: rect.right } : null,
             linksInViewport: links.every(a => {
@@ -73,6 +74,7 @@ test.describe('Мобильная вёрстка 320–430px', () => {
         expect(metrics.bodyWidth - metrics.viewport, `Переполнение body: ${item.label} ${width}px`)
           .toBeLessThanOrEqual(16);
         expect(metrics.navLinks, 'В нижнем меню должно быть пять ссылок').toBe(5);
+        expect(metrics.navLabelSizes.every(size => size >= 11), 'Подписи нижнего меню должны быть не меньше 11px').toBe(true);
         expect(metrics.navVisible, 'Нижнее меню должно быть видно').toBe(true);
         expect(metrics.linksInViewport, 'Все кнопки меню должны помещаться').toBe(true);
         expect(metrics.navBox?.left, 'Левый край меню').toBeGreaterThanOrEqual(-2);
