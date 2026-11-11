@@ -1523,3 +1523,14 @@ body.modern-v424:not(.is-home-route) .site-footer-v256{
   letter-spacing:0!important;overflow-wrap:anywhere!important;
  }
 }
+
+/* v1153: align Dreams standalone mobile cover within viewport. */
+@media screen and (max-width:430px){
+ html:not(.force-desktop-root) body.is-dreams-route main#appMain .route-page.active .dreams-image-header-v508{
+  box-sizing:border-box!important;
+  width:calc(100% - 24px)!important;
+  max-width:calc(100vw - 24px)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+ }
+}
