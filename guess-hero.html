@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#081a35">
+<meta name="description" content="Угадай героя: викторина с настоящими портретами героев Белой мглы. 10 раундов, подсказки и очки.">
+<title>Угадай героя • Белая мгла</title>
+<link rel="icon" href="favicon.ico">
+<style>
+:root{color-scheme:dark;--bg:#061126;--panel:#0e2544;--line:#507ca76b;--white:#f3f8ff;--muted:#b4c9e5;--gold:#f6d78f;--aqua:#8ce7ff;--green:#94f1c3;--red:#ffb0b0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;font:16px/1.55 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--white);background:radial-gradient(ellipse 850px 540px at 50% -170px,#214977 0,transparent 79%),radial-gradient(ellipse 600px 440px at 98% 90%,#112b58 0,transparent 90%),var(--bg);overflow-x:hidden}
+body:before{content:"";pointer-events:none;position:fixed;inset:0;opacity:.1;background-image:radial-gradient(#e0efff 1px,transparent 1px);background-size:53px 53px}
+button,a{touch-action:manipulation}a{color:inherit}.wrap{position:relative;width:min(1020px,calc(100% - 30px));margin:auto}
+.header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 0}.back{display:inline-flex;align-items:center;gap:7px;text-decoration:none;background:#10294d;border:1px solid var(--line);padding:10px 15px;border-radius:30px;font-size:14px;font-weight:700}.brand{font-weight:900;letter-spacing:.07em;color:#d4f2ff;font-size:14px;text-align:right}
+.intro{text-align:center;padding:20px 0 25px}.eyebrow{font-size:12px;letter-spacing:.2em;font-weight:850;color:var(--aqua);text-transform:uppercase}.intro h1{font-family:Georgia,"Times New Roman",serif;color:#ffe9b4;font-size:clamp(39px,7.5vw,67px);line-height:1.12;margin:8px 0 14px;text-shadow:0 5px 30px #e8b85d50}.intro p{max-width:580px;margin:0 auto;color:var(--muted)}
+.panel{position:relative;overflow:hidden;border:1px solid #d3af6877;border-radius:24px;background:linear-gradient(140deg,#132e54ed,#0a1a33f5 70%);box-shadow:0 26px 85px #0008}.panel:before{content:"";height:4px;position:absolute;top:0;left:0;right:0;background:linear-gradient(90deg,transparent,#e0b76b,#91e7ff,#e0b76b,transparent)}
+.metrics{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;padding:22px 26px 14px}.metric{display:flex;gap:6px;align-items:center;background:#061a35b0;border:1px solid var(--line);border-radius:25px;padding:7px 14px;color:var(--muted);font-size:13px}.metric strong{color:#ffebbf;font-size:16px}.meter{height:7px;background:#153759;border-radius:10px;margin:0 26px 12px;overflow:hidden}.meter span{display:block;height:100%;width:0;background:linear-gradient(90deg,#5ac8f2,#ffdb91);border-radius:10px;transition:width .35s}
+.game{display:grid;grid-template-columns:minmax(240px,.83fr) minmax(320px,1.17fr);gap:28px;padding:18px 26px 32px;align-items:center}
+.portrait-side{text-align:center}.frame{position:relative;isolation:isolate;max-width:340px;aspect-ratio:3/4;overflow:hidden;margin:0 auto;border:3px solid #dfbf77;border-radius:20px;background:radial-gradient(circle at 50% 37%,#426a9a,#08182d 72%);box-shadow:0 0 0 5px #304e7466,0 16px 38px #0008}.frame:after{position:absolute;content:"";inset:0;pointer-events:none;box-shadow:inset 0 0 42px #030f20;z-index:2}
+.frame img{width:100%;height:100%;display:block;object-fit:cover;object-position:top center;transform:scale(1.75);filter:brightness(.2) blur(8px) saturate(.25);transition:transform .55s ease,filter .55s ease}
+.frame.hint img{transform:scale(1.25);filter:brightness(.7) blur(3px) saturate(.8)}.frame.revealed img{transform:scale(1);filter:none}.frame.revealed{border-color:#a6ecfb}
+.portrait-label{margin:13px auto 0;display:inline-block;border:1px solid #9ecbf17a;background:#0a2847;border-radius:20px;padding:5px 14px;color:#d7e8ff;font-size:13px;font-weight:800}
+.game h2{font-size:clamp(24px,3.5vw,33px);line-height:1.2;margin:3px 0 12px}.question-prompt{color:var(--muted);margin:0 0 22px}.difficulty{letter-spacing:.13em;font-size:12px;text-transform:uppercase;color:var(--gold);font-weight:850;margin-bottom:7px}
+.answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.answer{font:inherit;font-weight:750;font-size:16px;min-height:64px;border:1px solid #6b92bb8c;border-radius:13px;background:#18395c;color:white;padding:13px 9px;text-align:center;cursor:pointer;transition:background .2s,transform .2s,border-color .2s}.answer:hover:not(:disabled),.answer:focus-visible{transform:translateY(-2px);background:#224e77;border-color:#b4e5ff;outline:none}.answer:disabled{cursor:default;opacity:.8}.answer.correct{background:#175647;border-color:#95f7c8;color:#e4fff1;opacity:1}.answer.incorrect{background:#743947;border-color:#ffacb5;color:#fff0ef;opacity:1}
+.actions{display:flex;gap:11px;align-items:center;flex-wrap:wrap;margin-top:18px}.button{font:inherit;font-weight:850;border-radius:13px;padding:12px 19px;cursor:pointer;min-height:48px}.hint-button{background:#102a4b;border:1px solid #78add0;color:#ddf3ff}.hint-button:hover{background:#22456f}.next-button,.replay{background:linear-gradient(120deg,#ffebac,#d9a652);border:1px solid #ffe7ac;color:#2d2633;box-shadow:0 8px 25px #f5c25b29}.button:disabled{opacity:.4;cursor:default}.hint-text{color:#ffdf9c;margin:11px 0 0;font-size:14px}.feedback{margin-top:17px;padding:12px 14px;border-radius:12px;background:#112a47;border:1px solid #7faac54e;color:#e9f8ff}.feedback strong{color:#ffdf9c}
+.end{padding:26px 24px 36px;text-align:center}.end-emoji{font-size:76px;display:block;line-height:1.25}.end h2{font-size:31px;margin:14px 0}.end p{color:var(--muted)}.end .final-score{font-size:40px;color:var(--gold);font-weight:900;margin:5px}.end .replay{margin-top:13px}.hide{display:none!important}
+.bottom{text-align:center;color:#9cb5d2;font-size:13px;padding:25px 15px 46px}.bottom a{color:#c3e7ff}
+@media(max-width:740px){.game{grid-template-columns:1fr;gap:22px;padding:14px 18px 25px}.frame{width:min(265px,78vw);aspect-ratio:3/3.5}.metrics{padding:18px 18px 12px}.meter{margin:0 18px 13px}.game h2{text-align:center}.question-prompt{text-align:center}.difficulty{text-align:center}.intro{padding:12px 0 24px}.header{padding:13px 0}}
+@media(max-width:420px){.answers{gap:8px}.answer{font-size:14px;min-height:60px}.metric{padding:5px 10px}.metric strong{font-size:14px}.brand{font-size:11px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="header"><a class="back" href="heroes.html">← К героям</a><a class="brand" href="index.html" style="text-decoration:none">БЕЛАЯ МГЛА · 58</a></header>
+<main>
+<div class="intro"><div class="eyebrow">Игровая викторина</div><h1>🎭 Угадай героя</h1><p>Узнай героя по скрытому портрету! Десять раундов, подсказки и очки за правильные ответы. Сможешь узнать всех?</p></div>
+<section class="panel" aria-label="Игра Угадай героя">
+<div class="metrics"><div class="metric">🎯 Раунд <strong id="round">1 / 10</strong></div><div class="metric">✨ Очки <strong id="score">0</strong></div><div class="metric">🏆 Рекорд <strong id="best">0</strong></div></div>
+<div class="meter" aria-hidden="true"><span id="progress"></span></div>
+<div class="game" id="game">
+<div class="portrait-side"><div class="frame" id="frame"><img id="portrait" alt="Скрытый портрет героя" width="340" height="440"></div><div class="portrait-label" id="portraitLabel">Кто скрывается в тени?</div></div>
+<div class="challenge">
+<div class="difficulty" id="difficulty">Разминка</div>
+<h2 id="questionTitle">Кто этот герой?</h2><p class="question-prompt">Выбери имя. За ответ без подсказки получишь 100 очков, с подсказкой 50.</p>
+<div class="answers" id="answers" aria-label="Варианты ответа"></div>
+<div class="actions"><button id="hint" class="button hint-button" type="button">💡 Подсказка</button><button id="next" class="button next-button hide" type="button">Следующий герой →</button></div>
+<p class="hint-text hide" id="hintText"></p><div id="feedback" class="feedback hide" role="status" aria-live="polite"></div>
+</div></div>
+<div class="end hide" id="end" role="status" aria-live="polite"><span class="end-emoji" id="endEmoji">🏆</span><h2 id="endTitle">Отличная игра!</h2><div class="final-score" id="endScore">0 очков</div><p id="endDescription"></p><button type="button" class="button replay" id="replay">Сыграть ещё ↻</button></div>
+</section>
+<p class="bottom">Никакой регистрации и игровых покупок. Очки существуют только на этой странице. <a href="hero-generations.html">Посмотреть все поколения героев</a></p>
+</main>
+</div>
+<script>
+(function(){
+'use strict';
+var heroes=[
+{name:'Джина',img:'assets/heroes/epic/gina/portrait.webp',hint:'Эпический герой · стрелки',level:1},
+{name:'Джесси',img:'assets/heroes/epic/jessie/portrait.webp',hint:'Эпический герой · копейщики',level:1},
+{name:'Сергей',img:'assets/heroes/epic/sergey/portrait.webp',hint:'Эпический герой · пехота',level:1},
+{name:'Бахити',img:'assets/heroes/epic/bahiti/portrait.webp',hint:'Эпический герой · стрелки',level:1},
+{name:'Джассер',img:'assets/heroes/epic/jasser/portrait.webp',hint:'Эпический герой · стрелки',level:1},
+{name:'Патрик',img:'assets/heroes/epic/patrick/portrait.webp',hint:'Эпический герой · копейщики',level:1},
+{name:'Со-Юн',img:'assets/heroes/epic/seo-yoon/portrait.webp',hint:'Эпический герой · стрелки',level:1},
+{name:'Молли',img:'assets/heroes/gen-01/molly/portrait.webp',hint:'Мифический герой · 1 поколение · копейщики',level:2},
+{name:'Джеронимо',img:'assets/heroes/gen-01/jeronimo/portrait.webp',hint:'Мифический герой · 1 поколение · пехота',level:2},
+{name:'Наталия',img:'assets/heroes/gen-01/natalia/portrait.webp',hint:'Мифический герой · 1 поколение · пехота',level:2},
+{name:'Зинман',img:'assets/heroes/gen-01/zinman/portrait.webp',hint:'Мифический герой · 1 поколение · стрелки',level:2},
+{name:'Флинт',img:'assets/heroes/gen-02/flint/portrait.webp',hint:'Мифический герой · 2 поколение · пехота',level:3},
+{name:'Алонсо',img:'assets/heroes/gen-02/alonso/portrait.webp',hint:'Мифический герой · 2 поколение · стрелки',level:3},
+{name:'Миа',img:'assets/heroes/gen-03/mia/portrait.webp',hint:'Мифический герой · 3 поколение · копейщики',level:3},
+{name:'Грег',img:'assets/heroes/gen-03/greg/portrait.webp',hint:'Мифический герой · 3 поколение · стрелки',level:3},
+{name:'Логан',img:'assets/heroes/gen-03/logan/portrait.webp',hint:'Мифический герой · 3 поколение · пехота',level:3}
+];
+var $=function(id){return document.getElementById(id)};
+var rounds=[],current=0,score=0,right=0,usedHint=false,locked=false,best=0;
+try{best=Math.max(0,Number(localStorage.getItem('bm-guess-hero-best-v1'))||0)}catch(e){}
+$('best').textContent=best;
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function makeRounds(){return shuffle(heroes.filter(function(x){return x.level===1})).slice(0,4).concat(shuffle(heroes.filter(function(x){return x.level===2})).slice(0,3),shuffle(heroes.filter(function(x){return x.level===3})).slice(0,3))}
+function render(){
+var hero=rounds[current];usedHint=false;locked=false;
+$('round').textContent=(current+1)+' / '+rounds.length;$('score').textContent=score;$('progress').style.width=(current/rounds.length*100)+'%';
+$('frame').className='frame';$('portrait').alt='Скрытый портрет героя';$('portrait').src=hero.img;
+$('portraitLabel').textContent='Кто скрывается в тени?';
+$('difficulty').textContent=hero.level===1?'Разминка · Эпические герои':hero.level===2?'Испытание · 1 поколение':'Знаток · 2–3 поколения';
+$('hint').disabled=false;$('hint').classList.remove('hide');$('next').classList.add('hide');
+$('hintText').classList.add('hide');$('feedback').classList.add('hide');
+var wrong=shuffle(heroes.filter(function(h){return h.name!==hero.name})).slice(0,3);
+var choices=shuffle([hero].concat(wrong));$('answers').replaceChildren();
+choices.forEach(function(c){var b=document.createElement('button');b.type='button';b.className='answer';b.textContent=c.name;b.addEventListener('click',function(){choose(c.name)});$('answers').appendChild(b)})
+}
+function choose(name){
+if(locked)return;locked=true;var hero=rounds[current],correct=name===hero.name;
+if(correct){right++;score+=usedHint?50:100}
+$('score').textContent=score;
+$('frame').className='frame revealed';$('portrait').alt='Герой '+hero.name;$('portraitLabel').textContent=hero.name;
+Array.from($('answers').children).forEach(function(btn){btn.disabled=true;if(btn.textContent===hero.name)btn.classList.add('correct');else if(btn.textContent===name)btn.classList.add('incorrect')});
+$('hint').classList.add('hide');$('hintText').classList.add('hide');
+$('feedback').classList.remove('hide');$('feedback').replaceChildren();
+var strong=document.createElement('strong');strong.textContent=correct?'Правильно! '+(usedHint?'+50':'+100')+' очков.':'Не угадали. Это '+hero.name+'.';
+$('feedback').append(strong);
+$('next').textContent=current===rounds.length-1?'Посмотреть результат →':'Следующий герой →';$('next').classList.remove('hide');
+}
+$('hint').addEventListener('click',function(){if(locked||usedHint)return;usedHint=true;$('frame').classList.add('hint');$('hintText').textContent='Подсказка: '+rounds[current].hint+'.';$('hintText').classList.remove('hide');$('hint').disabled=true});
+$('next').addEventListener('click',function(){if(!locked)return;current++;if(current===rounds.length){end()}else render()});
+function end(){
+$('game').classList.add('hide');$('end').classList.remove('hide');$('round').textContent='10 / 10';$('progress').style.width='100%';
+if(score>best){best=score;try{localStorage.setItem('bm-guess-hero-best-v1',String(best))}catch(e){}}
+$('best').textContent=best;$('endScore').textContent=score+' из 1000 очков';
+$('endTitle').textContent=right===10?'Легенда среди героев!':right>=7?'Отличный результат!':right>=4?'Ты на верном пути!':'Есть кого ещё узнать!';
+$('endEmoji').textContent=right>=7?'🏆':right>=4?'✨':'💙';
+$('endDescription').textContent='Угадано героев: '+right+' из 10. '+(score===best?'Это твой лучший результат!':'Твой рекорд: '+best+' очков.');
+}
+function restart(){rounds=makeRounds();current=0;score=0;right=0;$('game').classList.remove('hide');$('end').classList.add('hide');render()}
+$('replay').addEventListener('click',restart);
+$('portrait').addEventListener('error',function(){if(locked)return;$('portraitLabel').textContent='Портрет пока недоступен. Можно пропустить этот раунд.';$('frame').style.background='radial-gradient(circle at center,#274c73,#101b2f)';});
+restart();
+})();
+</script>
+</body>
+</html>
