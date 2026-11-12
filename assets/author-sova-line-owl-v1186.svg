@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 620" width="500" height="620" role="img" aria-labelledby="t d">
+<title id="t">SOVA58 — золотая сова</title>
+<desc id="d">Изящная сова, созданная только тонкими золотыми линиями герба, с сапфировыми глазами, хрустальным сердцем и короной</desc>
+<defs>
+ <linearGradient id="gold" x1=".07" y1="0" x2=".91" y2="1"><stop stop-color="#aa742e"/><stop offset=".22" stop-color="#f9df9a"/><stop offset=".43" stop-color="#c29349"/><stop offset=".62" stop-color="#fff4cd"/><stop offset=".78" stop-color="#bd8640"/><stop offset="1" stop-color="#e7c47b"/></linearGradient>
+ <linearGradient id="pale" x1="0" y1="0" x2=".9" y2="1"><stop stop-color="#fff6d5"/><stop offset=".48" stop-color="#e2ba6e"/><stop offset="1" stop-color="#a97339"/></linearGradient>
+ <linearGradient id="shield" x1=".15" y1="0" x2=".88" y2="1"><stop stop-color="#254878"/><stop offset=".42" stop-color="#102d52"/><stop offset=".83" stop-color="#081832"/><stop offset="1" stop-color="#060c20"/></linearGradient>
+ <linearGradient id="sapphire" x1=".05" y1="0" x2=".88" y2="1"><stop stop-color="#f1ffff"/><stop offset=".2" stop-color="#9aecff"/><stop offset=".43" stop-color="#2ab4f8"/><stop offset=".68" stop-color="#1b51b4"/><stop offset=".94" stop-color="#252f86"/><stop offset="1" stop-color="#7885cf"/></linearGradient>
+ <radialGradient id="eye"><stop stop-color="#09245a"/><stop offset=".35" stop-color="#0668b9"/><stop offset=".76" stop-color="#53dfff"/><stop offset="1" stop-color="#cbffff"/></radialGradient>
+ <radialGradient id="halo"><stop stop-color="#6fcaff" stop-opacity=".29"/><stop offset=".48" stop-color="#657bdc" stop-opacity=".1"/><stop offset="1" stop-color="#06122b" stop-opacity="0"/></radialGradient>
+ <filter id="gemGlow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="9"/></filter>
+ <g id="wing">
+  <path d="M199 355C149 344 111 309 77 247C80 287 98 329 139 355C95 337 72 312 50 276C48 339 79 390 142 407C103 407 81 407 47 387C71 442 118 460 176 444C139 458 112 473 92 494C151 484 190 464 218 425" stroke-width="3.7"/>
+  <path d="M197 363C146 343 108 309 89 277M184 382C136 362 104 337 81 309M168 410C130 401 103 387 77 366M170 440C141 444 115 453 103 470" stroke-width="1.75" opacity=".94"/>
+  <path d="M187 373C153 358 132 342 117 318M165 402C132 386 113 369 100 353M161 430C130 425 106 417 86 404" stroke-width="1.2" opacity=".78"/>
+  <path d="M210 377C179 369 156 361 136 345M207 403C172 402 154 396 137 386M209 424C183 437 164 438 144 441" stroke-width="2.2"/>
+  <path d="M66 286Q76 312 94 321M51 387Q66 407 87 409M93 494Q107 475 127 467" stroke-width="1.4" opacity=".9"/>
+ </g>
+ <g id="facehalf">
+  <path d="M250 239C226 212 201 202 169 184C172 214 157 248 157 271C159 314 192 354 250 372" stroke-width="3.4"/>
+  <path d="M250 249C224 226 196 211 179 202C180 228 166 253 170 282C175 319 206 345 250 359" stroke-width="1.65" opacity=".88"/>
+  <path d="M244 261C221 244 195 244 177 263C168 275 171 299 185 318C197 333 217 344 233 332C243 325 248 313 250 302" stroke-width="2.45"/>
+  <path d="M238 273C215 251 193 255 182 273C182 293 197 311 215 315" stroke-width="1.45" opacity=".83"/>
+  <path d="M172 258Q205 229 247 278" stroke-width="3.4"/>
+  <path d="M179 249Q201 235 224 248" stroke-width="1.25" opacity=".85"/>
+  <path d="M185 286Q209 268 238 289Q212 305 185 286Z" stroke-width="2.9"/>
+  <path d="M188 313Q205 329 224 332M193 328Q214 348 236 350" stroke-width="1.55" opacity=".89"/>
+  <path d="M195 341Q215 362 241 368" stroke-width="1.3" opacity=".73"/>
+ </g>
+</defs>
+<!-- Polished heraldic shape, original design language. -->
+<ellipse cx="250" cy="322" rx="232" ry="275" fill="url(#halo)"/>
+<path d="M250 574C157 540 101 463 91 391L91 218L250 126L409 218L409 391C399 463 343 540 250 574Z" fill="#091936" stroke="url(#pale)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M250 556C173 524 120 457 113 389V233L250 150L387 233V389C380 457 327 524 250 556Z" fill="url(#shield)" stroke="url(#gold)" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M250 565C166 528 111 460 103 388V225L250 139L397 225V388C389 460 334 528 250 565Z" fill="none" stroke="#ffdf9d" stroke-opacity=".41" stroke-width="1.25"/>
+<ellipse cx="250" cy="321" rx="144" ry="192" fill="url(#halo)"/>
+<!-- Discreet celestial ornaments in the background. -->
+<g fill="#a9eaff" opacity=".88"><circle cx="141" cy="254" r="1.5"/><circle cx="350" cy="242" r="1.7"/><circle cx="334" cy="410" r="1.5"/><circle cx="167" cy="414" r="1.4"/><circle cx="251" cy="201" r="1.8"/></g>
+<g stroke="#b0ecff" stroke-linecap="round" stroke-width="1.4" opacity=".8"><path d="M141 246V262M133 254H149M350 234V250M342 242H358M250 194V206M244 200H256"/></g>
+<!-- Crown: airy and delicate rather than bulky. -->
+<g fill="none" stroke="url(#gold)" stroke-linejoin="round" stroke-linecap="round">
+ <path stroke-width="5" d="M137 161L115 78L174 113L207 32L250 86L293 32L326 113L385 78L363 161Z"/>
+ <path stroke-width="1.6" d="M146 154L130 97L180 130L210 55L250 104L290 55L320 130L370 97L354 154"/>
+ <path stroke-width="3" d="M141 157Q250 148 359 157"/>
+ <path stroke-width="1.35" d="M162 161Q250 171 338 161"/>
+</g>
+<path d="M250 66L267 96L250 122L233 96Z" fill="url(#sapphire)" stroke="url(#pale)" stroke-width="2.6"/>
+<path d="M250 67V122M233 96H267" stroke="#e8fbff" stroke-width="1.4" fill="none" opacity=".78"/>
+<circle cx="250" cy="25" r="4.4" fill="#fff1bd"/>
+<circle cx="207" cy="33" r="3" fill="#f2d29a"/>
+<circle cx="293" cy="33" r="3" fill="#f2d29a"/>
+<!-- A single, graceful pair of wings, composed solely of the same thin gold lines. -->
+<g fill="none" stroke="url(#gold)" stroke-linecap="round" stroke-linejoin="round">
+ <use href="#wing"/>
+ <use href="#wing" transform="translate(500 0) scale(-1 1)"/>
+</g>
+<!-- Owl's expressive paired facial loops and characteristic ear tufts. -->
+<g fill="none" stroke="url(#pale)" stroke-linecap="round" stroke-linejoin="round">
+ <use href="#facehalf"/>
+ <use href="#facehalf" transform="translate(500 0) scale(-1 1)"/>
+ <path d="M178 220Q202 221 224 242M322 220Q298 221 276 242" stroke-width="2.2"/>
+ <!-- perfectly mirrored contours of the body -->
+ <path d="M211 353C208 390 209 452 250 522C291 452 292 390 289 353" stroke-width="3.4"/>
+ <path d="M223 362C219 409 232 470 250 505C268 470 281 409 277 362" stroke-width="1.85"/>
+ <path d="M195 370Q194 423 218 466M305 370Q306 423 282 466" stroke-width="1.6"/>
+ <path d="M204 445Q219 490 250 537Q281 490 296 445" stroke-width="1.75"/>
+ <path d="M250 374V387M250 507V534" stroke-width="1.25" opacity=".85"/>
+</g>
+<!-- Blue eyes, each a tiny cut sapphire in an entirely gold-line owl. -->
+<g>
+ <ellipse cx="212" cy="287" rx="9.2" ry="10.7" fill="url(#eye)" stroke="url(#gold)" stroke-width="2"/>
+ <ellipse cx="288" cy="287" rx="9.2" ry="10.7" fill="url(#eye)" stroke="url(#gold)" stroke-width="2"/>
+ <ellipse cx="212" cy="289" rx="3.4" ry="7.2" fill="#061a40"/>
+ <ellipse cx="288" cy="289" rx="3.4" ry="7.2" fill="#061a40"/>
+ <circle cx="209" cy="283" r="2.4" fill="#f1ffff"/>
+ <circle cx="285" cy="283" r="2.4" fill="#f1ffff"/>
+</g>
+<!-- Delicate gold beak, star-like frown and cheeks. -->
+<path d="M243 310L250 314L257 310L250 330Z" fill="url(#gold)" stroke="#fbe5ad" stroke-width="1.1"/>
+<g fill="none" stroke="url(#gold)" stroke-linecap="round">
+ <path d="M232 345Q242 352 250 356Q258 352 268 345" stroke-width="1.7"/>
+ <path d="M250 332V345" stroke-width="1.25"/>
+</g>
+<!-- Sapphire crystal as the owl's heart, retained from the original abstract symbol. -->
+<ellipse cx="250" cy="411" rx="62" ry="77" fill="#60c9ff" opacity=".3" filter="url(#gemGlow)"/>
+<path d="M250 358L297 400L283 461L250 502L217 461L203 400Z" fill="#0a244c" stroke="url(#pale)" stroke-width="3.7"/>
+<path d="M250 365L289 402L276 456L250 491L224 456L211 402Z" fill="url(#sapphire)" stroke="#0d3268" stroke-width="1.1"/>
+<path d="M250 365V491M211 402H289M224 456H276M211 402L250 456L289 402M250 365L224 456M250 365L276 456" fill="none" stroke="#e3fcff" stroke-width="1.6" opacity=".87"/>
+<path d="M250 366L239 402L250 455L261 402Z" fill="#fff" opacity=".14"/>
+<!-- Gold-jewel setting visually anchors the wing lines to the crystal. -->
+<g stroke="url(#gold)" fill="none" stroke-linecap="round">
+ <path stroke-width="2.7" d="M209 389Q232 371 250 356Q268 371 291 389"/>
+ <path stroke-width="2.4" d="M219 466Q234 486 250 502Q266 486 281 466"/>
+ <path stroke-width="1.4" d="M191 390Q194 422 218 442M309 390Q306 422 282 442"/>
+</g>
+<path d="M250 340L258 353L250 366L242 353Z" fill="url(#sapphire)" stroke="url(#gold)" stroke-width="1.8"/>
+<!-- Final decorative taper. -->
+<g stroke="url(#pale)" stroke-linecap="round" fill="none">
+ <path d="M250 531V551M241 544H259" stroke-width="1.4"/>
+ <path d="M159 499Q210 536 250 581Q290 536 341 499" stroke-width="1.7" opacity=".64"/>
+</g>
+<path d="M250 567L257 578L250 591L243 578Z" fill="url(#sapphire)" stroke="url(#gold)" stroke-width="1.6"/>
+<g fill="#ffedb4"><circle cx="250" cy="605" r="3.3"/><circle cx="84" cy="220" r="2.7"/><circle cx="416" cy="220" r="2.7"/></g>
+</svg>
