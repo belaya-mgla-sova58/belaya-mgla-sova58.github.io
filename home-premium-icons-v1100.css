@@ -174,3 +174,32 @@ body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-topic-card
  }
 }
 /* v1119: per-icon visual corrections are performed on full-quality raster pixels in JS, not with CSS transform. */
+
+
+/* v1155: the five mobile shortcut pictures are now the SAME WebP art as the desktop sidebar. */
+body.is-home-route nav.mobile-bottom-v424 a > .mobile-nav-icon-v429 > img.bm-mobile-parity-icon-v1155{
+ box-sizing:border-box!important;
+ display:block!important;
+ position:static!important;
+ visibility:visible!important;
+ opacity:1!important;
+ width:32px!important;height:32px!important;
+ min-width:32px!important;min-height:32px!important;
+ max-width:32px!important;max-height:32px!important;
+ object-fit:contain!important;
+ object-position:center!important;
+ padding:0!important;margin:0 auto!important;
+ border:0!important;border-radius:0!important;
+ background:transparent!important;
+ box-shadow:none!important;filter:none!important;
+ transform:none!important;
+}
+/* Keep the desktop artwork on narrow devices as well: same files, smaller presentation. */
+@media screen and (max-width:820px){
+ html:not(.force-desktop-root) body.is-home-route .modern-home-v424 img.bm-premium-icon-v1100{
+  object-fit:contain!important;
+  object-position:center!important;
+  image-rendering:auto!important;
+  filter:none!important;
+ }
+}
