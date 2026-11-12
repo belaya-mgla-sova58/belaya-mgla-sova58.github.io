@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 620" width="500" height="620" role="img" aria-labelledby="title desc">
+<title id="title">Герб SOVA58: белая сова в золотом щите</title>
+<desc id="desc">Изящная белоснежная сова с сапфировыми глазами, золотой короной, хрустальным сердцем и распахнутыми крыльями на тёмно-синем щите</desc>
+<defs>
+ <linearGradient id="gold" x1="0" y1="0" x2=".85" y2="1">
+  <stop offset="0" stop-color="#81552a"/><stop offset=".13" stop-color="#fae4ac"/>
+  <stop offset=".31" stop-color="#c18c3b"/><stop offset=".53" stop-color="#fff4c9"/>
+  <stop offset=".72" stop-color="#b37c33"/><stop offset=".88" stop-color="#f9da92"/>
+  <stop offset="1" stop-color="#87531b"/>
+ </linearGradient>
+ <linearGradient id="edge" x1="0" y1=".2" x2="1" y2="1">
+  <stop offset="0" stop-color="#fff5cf"/><stop offset=".34" stop-color="#cda35d"/>
+  <stop offset=".62" stop-color="#785327"/><stop offset="1" stop-color="#fce0a0"/>
+ </linearGradient>
+ <linearGradient id="shield" x1="0" y1="0" x2="1" y2="1">
+  <stop stop-color="#263b70"/><stop offset=".32" stop-color="#102b54"/>
+  <stop offset=".72" stop-color="#081b3b"/><stop offset="1" stop-color="#060f29"/>
+ </linearGradient>
+ <radialGradient id="nebula">
+  <stop stop-color="#76bfff" stop-opacity=".28"/><stop offset=".53" stop-color="#706cc6" stop-opacity=".13"/>
+  <stop offset="1" stop-color="#15223e" stop-opacity="0"/>
+ </radialGradient>
+ <linearGradient id="white" x1=".12" y1="0" x2=".86" y2="1">
+  <stop stop-color="#fffdf1"/><stop offset=".32" stop-color="#f5faff"/>
+  <stop offset=".66" stop-color="#bfd9ee"/><stop offset="1" stop-color="#7eaacb"/>
+ </linearGradient>
+ <linearGradient id="face" x1=".15" y1="0" x2=".79" y2="1">
+  <stop stop-color="#fffdf5"/><stop offset=".5" stop-color="#ecf7ff"/><stop offset="1" stop-color="#bdd7eb"/>
+ </linearGradient>
+ <linearGradient id="feather" x1="0" y1="0" x2="1" y2="1">
+  <stop stop-color="#f6faff"/><stop offset=".48" stop-color="#b9d4eb"/><stop offset="1" stop-color="#5788bc"/>
+ </linearGradient>
+ <linearGradient id="wingBlue" x1="0" y1="0" x2=".85" y2="1">
+  <stop stop-color="#c9f6ff"/><stop offset=".33" stop-color="#72cced"/>
+  <stop offset=".62" stop-color="#365c9c"/><stop offset="1" stop-color="#18254b"/>
+ </linearGradient>
+ <linearGradient id="gem" x1=".1" y1="0" x2=".95" y2="1">
+  <stop stop-color="#f7ffff"/><stop offset=".19" stop-color="#b9f4ff"/><stop offset=".39" stop-color="#3eaaf7"/>
+  <stop offset=".65" stop-color="#2459be"/><stop offset=".87" stop-color="#122f76"/><stop offset="1" stop-color="#7c7fce"/>
+ </linearGradient>
+ <radialGradient id="iris">
+  <stop stop-color="#071a3e"/><stop offset=".27" stop-color="#092e71"/>
+  <stop offset=".57" stop-color="#079bdc"/><stop offset=".82" stop-color="#93f1ff"/><stop offset="1" stop-color="#0b407d"/>
+ </radialGradient>
+ <linearGradient id="beak" x1="0" y1="0" x2="1" y2=".9">
+  <stop stop-color="#fff2b6"/><stop offset=".4" stop-color="#d7ad62"/><stop offset="1" stop-color="#7a4621"/>
+ </linearGradient>
+ <radialGradient id="glow"><stop stop-color="#a6ddff" stop-opacity=".48"/><stop offset="1" stop-color="#5c71d2" stop-opacity="0"/></radialGradient>
+ <filter id="shine" x="-60%" y="-60%" width="220%" height="220%">
+  <feGaussianBlur stdDeviation="5"/>
+ </filter>
+ <filter id="gemGlow" x="-80%" y="-80%" width="260%" height="260%">
+  <feGaussianBlur stdDeviation="9"/>
+ </filter>
+ <path id="wing" d="M217 341C175 328 135 301 94 237C97 290 112 319 145 345C111 328 82 305 57 262C58 321 77 360 121 385C92 372 64 367 35 346C51 411 90 434 151 431C112 439 94 448 77 469C138 483 187 455 230 399Z"/>
+ <path id="wingInner" d="M225 355C176 357 142 331 102 297C117 343 147 361 181 373C140 365 119 355 92 344C116 393 154 406 194 407C164 410 150 420 134 437C177 434 208 417 235 384Z"/>
+ <path id="ear" d="M250 225C224 203 197 196 174 200C177 228 186 248 198 256Z"/>
+ <path id="mask" d="M250 245C224 225 196 227 181 245C180 274 194 308 227 312C237 309 244 301 250 294Z"/>
+ <path id="bodyFeather" d="M250 342C242 385 230 416 219 442C233 445 243 437 250 418Z"/>
+</defs>
+<!-- Inner light and the gilded heraldic escutcheon -->
+<ellipse cx="250" cy="323" rx="228" ry="270" fill="url(#glow)"/>
+<path d="M250 582C164 544 110 478 92 399L91 217L250 122L409 217L408 399C390 478 336 544 250 582Z" fill="#08152e" stroke="url(#edge)" stroke-width="6"/>
+<path d="M250 560C174 529 130 467 113 393L112 228L250 147L388 228L387 393C370 467 326 529 250 560Z" fill="url(#shield)" stroke="url(#gold)" stroke-width="3"/>
+<path d="M250 572C170 536 118 473 102 395L101 220L250 134L399 220L398 395C382 473 330 536 250 572Z" fill="none" stroke="#f2dea0" stroke-opacity=".53" stroke-width="1.25"/>
+<ellipse cx="250" cy="318" rx="142" ry="200" fill="url(#nebula)"/>
+<!-- stars and sparkling constellations -->
+<g fill="#ccefff" opacity=".93">
+ <circle cx="153" cy="242" r="1.5"/><circle cx="329" cy="256" r="1.3"/><circle cx="183" cy="393" r="1.4"/>
+ <circle cx="329" cy="397" r="1.5"/><circle cx="304" cy="203" r="1.4"/><circle cx="215" cy="192" r="1"/>
+</g>
+<g stroke="#dbfaff" stroke-width="1.7" stroke-linecap="round" opacity=".88">
+ <path d="M156 256v-15m-7 7.5h14M341 319v-17m-8.5 8.5h17"/>
+ <path d="M251 186v-12m-6 6h12"/>
+</g>
+<!-- compact crown, resembling the old emblem -->
+<g fill="none" stroke="url(#gold)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+ <path d="M135 161L116 74L174 109L209 31L250 78L291 31L326 109L384 74L365 161Z"/>
+ <path d="M144 166Q250 146 356 166"/>
+ <path d="M188 95L211 122M312 95L289 122"/>
+</g>
+<path d="M250 74L267 96L250 123L233 96Z" fill="url(#gem)" stroke="url(#edge)" stroke-width="3"/>
+<path d="M250 74V123M233 96H267" fill="none" stroke="#e8ffff" stroke-width="1.8" opacity=".75"/>
+<circle cx="250" cy="21" r="4.5" fill="#fff2c8"/>
+<circle cx="116" cy="73" r="3.2" fill="#f5d78e"/>
+<circle cx="384" cy="73" r="3.2" fill="#f5d78e"/>
+<!-- outer gilded laurel that echoes the original shield -->
+<g fill="none" stroke="url(#edge)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+ <path d="M117 474C52 428 36 374 55 290C56 347 85 394 126 414"/>
+ <path d="M383 474C448 428 464 374 445 290C444 347 415 394 374 414"/>
+ <path d="M119 461C75 448 52 426 45 391M381 461C425 448 448 426 455 391"/>
+ <path d="M110 381C70 345 58 304 64 261M390 381C430 345 442 304 436 261"/>
+</g>
+<!-- owl wings with sapphire flight feathers; clipped to shield feel -->
+<use href="#wing" fill="url(#wingBlue)" stroke="url(#gold)" stroke-width="3.5" stroke-linejoin="round"/>
+<use href="#wing" transform="translate(500 0) scale(-1 1)" fill="url(#wingBlue)" stroke="url(#gold)" stroke-width="3.5" stroke-linejoin="round"/>
+<use href="#wingInner" fill="url(#feather)" stroke="#f3dca4" stroke-width="1.7"/>
+<use href="#wingInner" transform="translate(500 0) scale(-1 1)" fill="url(#feather)" stroke="#f3dca4" stroke-width="1.7"/>
+<!-- fine feather panels -->
+<g fill="none" stroke="#e3f9ff" stroke-opacity=".85" stroke-width="2" stroke-linecap="round">
+ <path d="M99 279Q143 338 188 365M80 319Q122 377 176 385M69 376Q114 423 171 416"/>
+ <path d="M401 279Q357 338 312 365M420 319Q378 377 324 385M431 376Q386 423 329 416"/>
+</g>
+<g fill="none" stroke="#eecf8c" stroke-width="2.4" stroke-linecap="round">
+ <path d="M121 321Q158 368 211 384M379 321Q342 368 289 384"/>
+ <path d="M108 383Q152 414 204 410M392 383Q348 414 296 410"/>
+</g>
+<!-- white owl body, exquisite central silhouette -->
+<path d="M250 337C218 328 194 342 179 370C164 404 183 453 214 476C226 487 240 501 250 514C260 501 274 487 286 476C317 453 336 404 321 370C306 342 282 328 250 337Z" fill="url(#white)" stroke="url(#gold)" stroke-width="2.5"/>
+<g fill="#eaf7ff" stroke="#87abc7" stroke-width="1" opacity=".9">
+ <use href="#bodyFeather"/><use href="#bodyFeather" transform="translate(500 0) scale(-1 1)"/>
+ <path d="M230 355Q209 389 205 424Q227 415 238 394Z"/>
+ <path d="M270 355Q291 389 295 424Q273 415 262 394Z"/>
+ <path d="M250 393Q235 432 236 470L250 495L264 470Q265 432 250 393Z"/>
+</g>
+<!-- ear tufts and head -->
+<use href="#ear" fill="url(#face)" stroke="url(#gold)" stroke-width="2.6"/>
+<use href="#ear" transform="translate(500 0) scale(-1 1)" fill="url(#face)" stroke="url(#gold)" stroke-width="2.6"/>
+<path d="M250 211C235 204 217 202 198 210C170 224 157 255 167 298C177 333 201 358 250 370C299 358 323 333 333 298C343 255 330 224 302 210C283 202 265 204 250 211Z" fill="url(#white)" stroke="url(#edge)" stroke-width="3"/>
+<!-- subtle crown feathers that read as elegant white owl rather than aggressive mascot -->
+<g fill="url(#face)" stroke="#9abbd4" stroke-width="1.4">
+ <path d="M250 222C228 206 198 203 175 217C190 218 209 228 220 246C231 243 242 241 250 245Z"/>
+ <path d="M250 222C272 206 302 203 325 217C310 218 291 228 280 246C269 243 258 241 250 245Z"/>
+</g>
+<!-- softly scalloped owl facial discs -->
+<use href="#mask" fill="url(#face)" stroke="#b4cbdc" stroke-width="1.6"/>
+<use href="#mask" transform="translate(500 0) scale(-1 1)" fill="url(#face)" stroke="#b4cbdc" stroke-width="1.6"/>
+<!-- upper feather lines / eyebrow arcs -->
+<g stroke="url(#gold)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+ <path d="M171 246Q204 221 244 255L250 270Q251 255 256 255Q296 221 329 246" stroke-width="5"/>
+ <path d="M175 236Q202 219 230 231M325 236Q298 219 270 231" stroke-width="2"/>
+</g>
+<!-- luminous eyes and gentle expression -->
+<g>
+ <path d="M182 267Q212 244 242 264Q214 289 187 279Z" fill="#0d2445" stroke="#c3a36a" stroke-width="2.3"/>
+ <path d="M318 267Q288 244 258 264Q286 289 313 279Z" fill="#0d2445" stroke="#c3a36a" stroke-width="2.3"/>
+ <ellipse cx="215" cy="267" rx="14" ry="16" fill="url(#iris)"/>
+ <ellipse cx="285" cy="267" rx="14" ry="16" fill="url(#iris)"/>
+ <ellipse cx="215" cy="268" rx="6.4" ry="11.5" fill="#07122c"/>
+ <ellipse cx="285" cy="268" rx="6.4" ry="11.5" fill="#07122c"/>
+ <circle cx="211" cy="261" r="4.4" fill="#f4fdff"/>
+ <circle cx="281" cy="261" r="4.4" fill="#f4fdff"/>
+ <circle cx="222" cy="274" r="1.8" fill="#b4fcff"/>
+ <circle cx="292" cy="274" r="1.8" fill="#b4fcff"/>
+</g>
+<!-- narrow gold beak and white chest fan -->
+<path d="M242 277L250 281L258 277L250 300Z" fill="url(#beak)" stroke="#74522c" stroke-width="1.4"/>
+<g fill="none" stroke="#9bbdd3" stroke-opacity=".82" stroke-width="1.9" stroke-linecap="round">
+ <path d="M190 311Q209 332 229 333M310 311Q291 332 271 333"/>
+ <path d="M203 333Q226 356 250 359M297 333Q274 356 250 359"/>
+ <path d="M222 361Q234 379 250 384M278 361Q266 379 250 384"/>
+</g>
+<!-- jewel replaces the old giant crystal, now worn on the owl's breast -->
+<ellipse cx="250" cy="402" rx="62" ry="76" fill="#40afff" opacity=".3" filter="url(#gemGlow)"/>
+<path d="M250 341L297 388L282 444L250 491L218 444L203 388Z" fill="url(#gold)" stroke="#fff1c0" stroke-width="2"/>
+<path d="M250 352L287 390L274 438L250 478L226 438L213 390Z" fill="url(#gem)" stroke="#153367" stroke-width="1.7"/>
+<path d="M250 352L250 478M213 390H287M226 438H274M213 390L250 438L287 390M250 438L226 438M250 438L274 438" fill="none" stroke="#e9fcff" stroke-width="1.75" opacity=".83"/>
+<path d="M250 353L233 388L250 438L267 388Z" fill="#b1f6ff" opacity=".28"/>
+<path d="M250 353V390L239 376Z" fill="#fff" opacity=".52"/>
+<!-- gold chest clasp, tiny ice diamonds -->
+<path d="M205 386Q230 354 250 340Q270 354 295 386" fill="none" stroke="url(#edge)" stroke-width="4.6" stroke-linecap="round"/>
+<path d="M250 328L259 341L250 353L241 341Z" fill="url(#gem)" stroke="url(#gold)" stroke-width="2"/>
+<path d="M250 493L258 505L250 517L242 505Z" fill="url(#gem)" stroke="url(#gold)" stroke-width="1.8"/>
+<!-- feather tips and bottom escutcheon sparkle -->
+<g stroke="url(#gold)" stroke-linecap="round" fill="none">
+ <path d="M196 474Q223 494 250 533Q277 494 304 474" stroke-width="2.5"/>
+ <path d="M221 498Q237 521 250 548Q263 521 279 498" stroke-width="1.6"/>
+ <path d="M250 557V577M239 568H261" stroke-width="1.4"/>
+</g>
+<g fill="#ffecb9">
+ <circle cx="250" cy="597" r="3.5"/>
+ <circle cx="95" cy="193" r="2.5"/>
+ <circle cx="405" cy="193" r="2.5"/>
+</g>
+<g stroke="#f8e0ae" stroke-width="1.6" stroke-linecap="round">
+ <path d="M95 183v-12m-6 6h12M405 183v-12m-6 6h12"/>
+</g>
+</svg>
