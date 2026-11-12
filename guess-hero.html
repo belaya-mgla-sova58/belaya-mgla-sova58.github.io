@@ -45,7 +45,7 @@ button,a{touch-action:manipulation}a{color:inherit}.wrap{position:relative;width
 <div class="difficulty" id="difficulty">Разминка</div>
 <h2 id="questionTitle">Кто этот герой?</h2><p class="question-prompt">Выбери имя. За ответ без подсказки получишь 100 очков, с подсказкой 50.</p>
 <div class="answers" id="answers" aria-label="Варианты ответа"></div>
-<div class="actions"><button id="hint" class="button hint-button" type="button">💡 Подсказка</button><button id="next" class="button next-button hide" type="button">Следующий герой →</button></div>
+<div class="actions"><button id="hint" class="button hint-button" type="button">💡 Подсказка</button><button id="skip" class="button hint-button" type="button">Пропустить</button><button id="next" class="button next-button hide" type="button">Следующий герой →</button></div>
 <p class="hint-text hide" id="hintText"></p><div id="feedback" class="feedback hide" role="status" aria-live="polite"></div>
 </div></div>
 <div class="end hide" id="end" role="status" aria-live="polite"><span class="end-emoji" id="endEmoji">🏆</span><h2 id="endTitle">Отличная игра!</h2><div class="final-score" id="endScore">0 очков</div><p id="endDescription"></p><button type="button" class="button replay" id="replay">Сыграть ещё ↻</button></div>
@@ -83,10 +83,10 @@ function makeRounds(){return shuffle(heroes.filter(function(x){return x.level===
 function render(){
 var hero=rounds[current];usedHint=false;locked=false;
 $('round').textContent=(current+1)+' / '+rounds.length;$('score').textContent=score;$('progress').style.width=(current/rounds.length*100)+'%';
-$('frame').className='frame';$('portrait').alt='Скрытый портрет героя';$('portrait').src=hero.img;
+$('frame').className='frame';$('frame').style.background='';$('portrait').alt='Скрытый портрет героя';$('portrait').src=hero.img;
 $('portraitLabel').textContent='Кто скрывается в тени?';
 $('difficulty').textContent=hero.level===1?'Разминка · Эпические герои':hero.level===2?'Испытание · 1 поколение':'Знаток · 2–3 поколения';
-$('hint').disabled=false;$('hint').classList.remove('hide');$('next').classList.add('hide');
+$('hint').disabled=false;$('hint').classList.remove('hide');$('skip').classList.remove('hide');$('next').classList.add('hide');
 $('hintText').classList.add('hide');$('feedback').classList.add('hide');
 var wrong=shuffle(heroes.filter(function(h){return h.name!==hero.name})).slice(0,3);
 var choices=shuffle([hero].concat(wrong));$('answers').replaceChildren();
@@ -98,13 +98,14 @@ if(correct){right++;score+=usedHint?50:100}
 $('score').textContent=score;
 $('frame').className='frame revealed';$('portrait').alt='Герой '+hero.name;$('portraitLabel').textContent=hero.name;
 Array.from($('answers').children).forEach(function(btn){btn.disabled=true;if(btn.textContent===hero.name)btn.classList.add('correct');else if(btn.textContent===name)btn.classList.add('incorrect')});
-$('hint').classList.add('hide');$('hintText').classList.add('hide');
+$('hint').classList.add('hide');$('skip').classList.add('hide');$('hintText').classList.add('hide');
 $('feedback').classList.remove('hide');$('feedback').replaceChildren();
-var strong=document.createElement('strong');strong.textContent=correct?'Правильно! '+(usedHint?'+50':'+100')+' очков.':'Не угадали. Это '+hero.name+'.';
+var strong=document.createElement('strong');strong.textContent=correct?'Правильно! '+(usedHint?'+50':'+100')+' очков.':name===null?'Раунд пропущен. Это '+hero.name+'.':'Не угадали. Это '+hero.name+'.';
 $('feedback').append(strong);
 $('next').textContent=current===rounds.length-1?'Посмотреть результат →':'Следующий герой →';$('next').classList.remove('hide');
 }
 $('hint').addEventListener('click',function(){if(locked||usedHint)return;usedHint=true;$('frame').classList.add('hint');$('hintText').textContent='Подсказка: '+rounds[current].hint+'.';$('hintText').classList.remove('hide');$('hint').disabled=true});
+$('skip').addEventListener('click',function(){choose(null)});
 $('next').addEventListener('click',function(){if(!locked)return;current++;if(current===rounds.length){end()}else render()});
 function end(){
 $('game').classList.add('hide');$('end').classList.remove('hide');$('round').textContent='10 / 10';$('progress').style.width='100%';
