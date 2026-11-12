@@ -18,8 +18,8 @@ button,a{touch-action:manipulation}a{color:inherit}.wrap{position:relative;width
 .metrics{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;padding:22px 26px 14px}.metric{display:flex;gap:6px;align-items:center;background:#061a35b0;border:1px solid var(--line);border-radius:25px;padding:7px 14px;color:var(--muted);font-size:13px}.metric strong{color:#ffebbf;font-size:16px}.meter{height:7px;background:#153759;border-radius:10px;margin:0 26px 12px;overflow:hidden}.meter span{display:block;height:100%;width:0;background:linear-gradient(90deg,#5ac8f2,#ffdb91);border-radius:10px;transition:width .35s}
 .game{display:grid;grid-template-columns:minmax(240px,.83fr) minmax(320px,1.17fr);gap:28px;padding:18px 26px 32px;align-items:center}
 .portrait-side{text-align:center}.frame{position:relative;isolation:isolate;max-width:340px;aspect-ratio:3/4;overflow:hidden;margin:0 auto;border:3px solid #dfbf77;border-radius:20px;background:radial-gradient(circle at 50% 37%,#426a9a,#08182d 72%);box-shadow:0 0 0 5px #304e7466,0 16px 38px #0008}.frame:after{position:absolute;content:"";inset:0;pointer-events:none;box-shadow:inset 0 0 42px #030f20;z-index:2}
-.frame img{width:100%;height:100%;display:block;object-fit:cover;object-position:top center;transform:scale(1.75);filter:brightness(.2) blur(8px) saturate(.25);transition:transform .55s ease,filter .55s ease}
-.frame.hint img{transform:scale(1.25);filter:brightness(.7) blur(3px) saturate(.8)}.frame.revealed img{transform:scale(1);filter:none}.frame.revealed{border-color:#a6ecfb}
+.frame img{width:100%;height:100%;display:block;object-fit:cover;object-position:top center;transform:scale(1.06);filter:brightness(.95) blur(1.1px) saturate(.9);transition:transform .55s ease,filter .55s ease}
+.frame.hint img{transform:scale(1);filter:none}.frame.revealed img{transform:scale(1);filter:none}.frame.revealed{border-color:#a6ecfb}
 .portrait-label{margin:13px auto 0;display:inline-block;border:1px solid #9ecbf17a;background:#0a2847;border-radius:20px;padding:5px 14px;color:#d7e8ff;font-size:13px;font-weight:800}
 .game h2{font-size:clamp(24px,3.5vw,33px);line-height:1.2;margin:3px 0 12px}.question-prompt{color:var(--muted);margin:0 0 22px}.difficulty{letter-spacing:.13em;font-size:12px;text-transform:uppercase;color:var(--gold);font-weight:850;margin-bottom:7px}
 .answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.answer{font:inherit;font-weight:750;font-size:16px;min-height:64px;border:1px solid #6b92bb8c;border-radius:13px;background:#18395c;color:white;padding:13px 9px;text-align:center;cursor:pointer;transition:background .2s,transform .2s,border-color .2s}.answer:hover:not(:disabled),.answer:focus-visible{transform:translateY(-2px);background:#224e77;border-color:#b4e5ff;outline:none}.answer:disabled{cursor:default;opacity:.8}.answer.correct{background:#175647;border-color:#95f7c8;color:#e4fff1;opacity:1}.answer.incorrect{background:#743947;border-color:#ffacb5;color:#fff0ef;opacity:1}
@@ -35,7 +35,7 @@ button,a{touch-action:manipulation}a{color:inherit}.wrap{position:relative;width
 <div class="wrap">
 <header class="header"><a class="back" href="heroes.html">← К героям</a><a class="brand" href="index.html" style="text-decoration:none">БЕЛАЯ МГЛА · 58</a></header>
 <main>
-<div class="intro"><div class="eyebrow">Игровая викторина</div><h1>🎭 Угадай героя</h1><p>Узнай героя по скрытому портрету! Десять раундов, подсказки и очки за правильные ответы. Сможешь узнать всех?</p></div>
+<div class="intro"><div class="eyebrow">Игровая викторина</div><h1>🎭 Угадай героя</h1><p>Узнай героя по портрету! 10 раундов, знакомые персонажи и подсказка, если сомневаешься.</p></div>
 <section class="panel" aria-label="Игра Угадай героя">
 <div class="metrics"><div class="metric">🎯 Раунд <strong id="round">1 / 10</strong></div><div class="metric">✨ Очки <strong id="score">0</strong></div><div class="metric">🏆 Рекорд <strong id="best">0</strong></div></div>
 <div class="meter" aria-hidden="true"><span id="progress"></span></div>
@@ -43,9 +43,9 @@ button,a{touch-action:manipulation}a{color:inherit}.wrap{position:relative;width
 <div class="portrait-side"><div class="frame" id="frame"><img id="portrait" alt="Скрытый портрет героя" width="340" height="440"></div><div class="portrait-label" id="portraitLabel">Кто скрывается в тени?</div></div>
 <div class="challenge">
 <div class="difficulty" id="difficulty">Разминка</div>
-<h2 id="questionTitle">Кто этот герой?</h2><p class="question-prompt">Выбери имя. За ответ без подсказки получишь 100 очков, с подсказкой 50.</p>
+<h2 id="questionTitle">Кто этот герой?</h2><p class="question-prompt">Рассмотри лицо и выбери имя. Если сложно, подсказка покажет портрет полностью и даст информацию о герое.</p>
 <div class="answers" id="answers" aria-label="Варианты ответа"></div>
-<div class="actions"><button id="hint" class="button hint-button" type="button">💡 Подсказка</button><button id="skip" class="button hint-button" type="button">Пропустить</button><button id="next" class="button next-button hide" type="button">Следующий герой →</button></div>
+<div class="actions"><button id="hint" class="button hint-button" type="button">👀 Показать портрет</button><button id="skip" class="button hint-button" type="button">Пропустить</button><button id="next" class="button next-button hide" type="button">Следующий герой →</button></div>
 <p class="hint-text hide" id="hintText"></p><div id="feedback" class="feedback hide" role="status" aria-live="polite"></div>
 </div></div>
 <div class="end hide" id="end" role="status" aria-live="polite"><span class="end-emoji" id="endEmoji">🏆</span><h2 id="endTitle">Отличная игра!</h2><div class="final-score" id="endScore">0 очков</div><p id="endDescription"></p><button type="button" class="button replay" id="replay">Сыграть ещё ↻</button></div>
@@ -84,11 +84,13 @@ function render(){
 var hero=rounds[current];usedHint=false;locked=false;
 $('round').textContent=(current+1)+' / '+rounds.length;$('score').textContent=score;$('progress').style.width=(current/rounds.length*100)+'%';
 $('frame').className='frame';$('frame').style.background='';$('portrait').alt='Скрытый портрет героя';$('portrait').src=hero.img;
-$('portraitLabel').textContent='Кто скрывается в тени?';
+$('portraitLabel').textContent='Узнаёшь героя?';
 $('difficulty').textContent=hero.level===1?'Разминка · Эпические герои':hero.level===2?'Испытание · 1 поколение':'Знаток · 2–3 поколения';
 $('hint').disabled=false;$('hint').classList.remove('hide');$('skip').classList.remove('hide');$('next').classList.add('hide');
 $('hintText').classList.add('hide');$('feedback').classList.add('hide');
-var wrong=shuffle(heroes.filter(function(h){return h.name!==hero.name})).slice(0,3);
+var sameLevel=shuffle(heroes.filter(function(h){return h.name!==hero.name&&h.level===hero.level}));
+var wrong=sameLevel.slice(0,3);
+if(wrong.length<3)wrong=wrong.concat(shuffle(heroes.filter(function(h){return h.name!==hero.name&&h.level!==hero.level})).slice(0,3-wrong.length));
 var choices=shuffle([hero].concat(wrong));$('answers').replaceChildren();
 choices.forEach(function(c){var b=document.createElement('button');b.type='button';b.className='answer';b.textContent=c.name;b.addEventListener('click',function(){choose(c.name)});$('answers').appendChild(b)})
 }
@@ -104,7 +106,7 @@ var strong=document.createElement('strong');strong.textContent=correct?'Прав
 $('feedback').append(strong);
 $('next').textContent=current===rounds.length-1?'Посмотреть результат →':'Следующий герой →';$('next').classList.remove('hide');
 }
-$('hint').addEventListener('click',function(){if(locked||usedHint)return;usedHint=true;$('frame').classList.add('hint');$('hintText').textContent='Подсказка: '+rounds[current].hint+'.';$('hintText').classList.remove('hide');$('hint').disabled=true});
+$('hint').addEventListener('click',function(){if(locked||usedHint)return;usedHint=true;$('frame').classList.add('hint');$('hintText').textContent='Подсказка: '+rounds[current].hint+'. За правильный ответ теперь 50 очков.';$('hintText').classList.remove('hide');$('hint').disabled=true});
 $('skip').addEventListener('click',function(){choose(null)});
 $('next').addEventListener('click',function(){if(!locked)return;current++;if(current===rounds.length){end()}else render()});
 function end(){
