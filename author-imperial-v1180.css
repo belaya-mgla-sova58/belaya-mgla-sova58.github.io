@@ -625,3 +625,78 @@ body.author-royal-route-v1180 .breadcrumbs-v409 [aria-current="page"]{color:var(
  .author-page-v1171 *:before,
  .author-page-v1171 *:after{animation:none!important;transition:none!important}
 }
+
+
+/* author-name-spacing-fix-v1189: keep author text clear of the new tall owl emblem. */
+@media(min-width:761px){
+ .author-page-v1171 .author-identity-v1171 .author-royal-crest-v1180{
+   width:min(94%,205px)!important;
+   height:auto!important;
+   aspect-ratio:500 / 620;
+   margin:0 auto 15px!important;
+   flex:0 0 auto;
+ }
+ .author-page-v1171 .author-identity-v1171 .author-royal-crest-v1180 img{
+   display:block!important;
+   width:100%!important;
+   height:auto!important;
+   aspect-ratio:500 / 620;
+   max-width:100%;
+   object-fit:contain!important;
+ }
+ .author-page-v1171 .author-identity-v1171 .eyecaption{
+   display:block!important;
+   position:relative;
+   width:100%;
+   margin:4px auto 0!important;
+   padding:14px 0 0!important;
+   border-top:1px solid rgba(227,190,117,.44);
+   text-align:center!important;
+   font-size:10px!important;
+   line-height:1.6!important;
+   letter-spacing:.15em!important;
+ }
+ .author-page-v1171 .author-identity-v1171 > strong{
+   display:block!important;
+   margin:1px 0 3px!important;
+   line-height:1.22!important;
+   text-align:center!important;
+ }
+}
+@media(max-width:760px){
+ .author-page-v1171 .author-identity-v1171 .author-royal-crest-v1180{
+   width:108px!important;
+   height:auto!important;
+   aspect-ratio:500 / 620;
+   margin:0!important;
+   align-self:center!important;
+ }
+ .author-page-v1171 .author-identity-v1171 .author-royal-crest-v1180 img{
+   width:100%!important;
+   height:auto!important;
+   aspect-ratio:500 / 620;
+   object-fit:contain!important;
+ }
+ .author-page-v1171 .author-identity-v1171 .eyecaption{
+   position:relative;
+   width:100%;
+   min-width:0;
+   margin:0!important;
+   padding:0 0 4px!important;
+   line-height:1.5!important;
+   font-size:9px!important;
+   letter-spacing:.08em!important;
+   border:0!important;
+   text-align:left!important;
+ }
+ .author-page-v1171 .author-identity-v1171 > strong{
+   margin:0!important;
+   font-size:clamp(20px,5vw,27px)!important;
+   line-height:1.25!important;
+   overflow-wrap:anywhere;
+   text-align:left!important;
+ }
+}
+@media(max-width:360px){
+ .author-page-v1171 .author-identity-v1171 .author-royal-crest-v1180{width:92px!important}
+}
