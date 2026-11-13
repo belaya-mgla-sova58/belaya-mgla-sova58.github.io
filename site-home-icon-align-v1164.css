@@ -1,0 +1,64 @@
+/* v1164: consistent home navigation icons and row alignment, scoped to homepage only */
+body.is-home-route .modern-home-v424 .home-index-links-v1016>a,
+body.is-home-route .modern-home-v424 .home-tools-grid-v1016>a,
+body.is-home-route .modern-home-v424 .home-portal-links-v1016>a{
+ box-sizing:border-box!important;min-width:0!important;
+ align-items:center!important;
+}
+body.is-home-route .modern-home-v424 .home-index-links-v1016>a,
+body.is-home-route .modern-home-v424 .home-portal-links-v1016>a{
+ display:grid!important;
+ grid-template-columns:44px minmax(0,1fr)!important;
+ column-gap:12px!important;
+ min-height:72px!important;
+ padding:12px 14px!important;
+}
+body.is-home-route .modern-home-v424 .home-portal-links-v1016>a{
+ grid-template-columns:44px minmax(0,1fr) 12px!important;
+}
+body.is-home-route .modern-home-v424 .home-tools-grid-v1016>a{
+ display:flex!important;gap:10px!important;
+ min-height:62px!important;padding:10px 12px!important;
+}
+body.is-home-route .modern-home-v424
+ :is(.home-index-links-v1016,.home-portal-links-v1016)>a>img.bm-premium-icon-v1100{
+ display:block!important;position:static!important;
+ width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;
+ max-width:44px!important;max-height:44px!important;
+ flex:0 0 44px!important;object-fit:contain!important;
+ padding:0!important;margin:0!important;box-sizing:border-box!important;
+ align-self:center!important;justify-self:center!important;
+}
+body.is-home-route .modern-home-v424 .home-tools-grid-v1016>a>img.bm-premium-icon-v1100{
+ display:block!important;position:static!important;
+ width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;
+ max-width:40px!important;max-height:40px!important;
+ flex:0 0 40px!important;object-fit:contain!important;
+ padding:0!important;margin:0!important;box-sizing:border-box!important;
+}
+body.is-home-route .modern-home-v424
+ :is(.home-index-links-v1016,.home-portal-links-v1016,.home-tools-grid-v1016)>a>span{
+ min-width:0!important;overflow-wrap:break-word!important;line-height:1.36!important;
+}
+body.is-home-route .modern-home-v424 .home-portal-links-v1016>a>span,
+body.is-home-route .modern-home-v424 .home-index-links-v1016>a>span{
+ display:flex!important;flex-direction:column!important;justify-content:center!important;gap:3px!important;
+}
+body.is-home-route .modern-home-v424 .home-portal-links-v1016>a>i{
+ align-self:center!important;justify-self:end!important;margin:0!important;
+}
+@media(max-width:520px){
+ body.is-home-route .modern-home-v424
+ :is(.home-index-links-v1016,.home-portal-links-v1016)>a{
+  grid-template-columns:40px minmax(0,1fr)!important;
+  gap:10px!important;min-height:66px!important;padding:10px 12px!important;
+ }
+ body.is-home-route .modern-home-v424 .home-portal-links-v1016>a{
+  grid-template-columns:40px minmax(0,1fr) 10px!important;
+ }
+ body.is-home-route .modern-home-v424
+ :is(.home-index-links-v1016,.home-portal-links-v1016)>a>img.bm-premium-icon-v1100{
+  width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;
+  max-width:40px!important;max-height:40px!important;
+ }
+}
