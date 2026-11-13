@@ -1,4 +1,4 @@
-name: Preview optimized homepage news banners
+name: Optimize and publish homepage news banners
 on:
   push:
     branches: [main]
@@ -7,13 +7,15 @@ on:
       - '.github/workflows/preview-home-news-webp.yml'
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
   preview:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -28,3 +30,56 @@ jobs:
           path: optimized-preview/
           if-no-files-found: error
           retention-days: 14
+      - name: Publish verified optimized assets (retain originals)
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import json, shutil
+          root=Path('.')
+          reports=json.loads((root/'optimized-preview/report.json').read_text(encoding='utf-8'))
+          index=root/'index.html'
+          html=index.read_text(encoding='utf-8')
+          source_to_destination={
+            'assets/news-ru-selected.jpg': ('assets/news-ru-selected-optimized.webp','news-ru-selected-optimized.webp'),
+            'assets/creative-corner-header-v447.webp': ('assets/creative-corner-header-optimized.webp','creative-corner-header-optimized.webp'),
+          }
+          published=0
+          for item in reports:
+            if 'webp_bytes' not in item:
+              print('Skipped', item['source'], item.get('result'))
+              continue
+            source=item['source']
+            destination,expected=source_to_destination[source]
+            if item['result'] != expected:
+              raise SystemExit('Unexpected output filename')
+            original=root/source
+            candidate=root/'optimized-preview'/expected
+            if candidate.stat().st_size != item['webp_bytes']:
+              raise SystemExit('File size changed unexpectedly')
+            from PIL import Image
+            with Image.open(original) as a, Image.open(candidate) as b:
+              if a.size != b.size:
+                raise SystemExit('Banner dimensions changed')
+              b.verify()
+            if html.count('src="'+source+'"') != 1:
+              raise SystemExit('Expected exactly one original banner reference: '+source)
+            shutil.copyfile(candidate,root/destination)
+            html=html.replace('src="'+source+'"','src="'+destination+'"')
+            published+=1
+            print('Prepared:',source,'->',destination)
+          if published:
+            index.write_text(html,encoding='utf-8')
+          print('Approved banners:',published)
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html assets/news-ru-selected-optimized.webp assets/creative-corner-header-optimized.webp 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No approved banner changes to publish."
+            exit 0
+          fi
+          git commit -m "Publish quality-checked WebP news banners"
+          git pull --rebase origin main
+          git push origin HEAD:main
