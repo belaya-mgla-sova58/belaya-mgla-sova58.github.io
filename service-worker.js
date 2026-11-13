@@ -1,4 +1,4 @@
-const CACHE_NAME = 'belaya-mgla-v1005';
+const CACHE_NAME = 'belaya-mgla-v1006';
 // On first visit, never download desktop-only CSS in the background on a phone.
 // Versioned styles are cached on first actual use by the fetch handler.
 const STATIC_CORE = [];
