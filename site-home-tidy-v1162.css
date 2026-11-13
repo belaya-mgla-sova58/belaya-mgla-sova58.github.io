@@ -77,3 +77,40 @@ body.is-home-route .modern-home-v424 .home-quick-links-v1024>a>i{
   max-width:44px!important;max-height:44px!important;
  }
 }
+
+/* Quick access cards: identical icon slots and optical balance, v1163. */
+body.is-home-route .home-portal-v1016 .home-quick-links-v1024{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:stretch;
+}
+body.is-home-route .home-portal-v1016 .home-quick-links-v1024>a{
+ display:flex;align-items:center;gap:12px;min-width:0;min-height:82px;
+ padding:12px 15px;box-sizing:border-box;
+}
+body.is-home-route .home-portal-v1016 .home-quick-links-v1024>a>img.bm-premium-icon-v1100{
+ display:block!important;width:48px!important;height:48px!important;
+ min-width:48px!important;min-height:48px!important;
+ max-width:48px!important;max-height:48px!important;
+ flex:0 0 48px!important;object-fit:contain!important;
+ object-position:center!important;padding:0!important;margin:0!important;
+ transform-origin:center;transform:none!important;
+}
+body.is-home-route .home-portal-v1016 .home-quick-links-v1024>a:nth-child(2)>img.bm-premium-icon-v1100{
+ transform:scale(.84)!important;
+}
+body.is-home-route .home-portal-v1016 .home-quick-links-v1024>a>span{
+ display:flex;flex:1 1 auto;min-width:0;flex-direction:column;justify-content:center;
+}
+body.is-home-route .home-portal-v1016 .home-quick-links-v1024>a>span>b{
+ line-height:1.25;overflow-wrap:anywhere;
+}
+body.is-home-route .home-portal-v1016 .home-quick-links-v1024>a>span>small{
+ line-height:1.4;overflow-wrap:anywhere;
+}
+body.is-home-route .home-portal-v1016 .home-quick-links-v1024>a>i{
+ margin-left:auto;flex:0 0 auto;
+}
+@media(max-width:600px){
+ body.is-home-route .home-portal-v1016 .home-quick-links-v1024{
+  grid-template-columns:minmax(0,1fr)
+ }
+}
