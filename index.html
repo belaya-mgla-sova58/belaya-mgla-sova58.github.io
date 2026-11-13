@@ -441,7 +441,51 @@ body.is-home-route .modern-home-v424 :is(
 </style>
 <link rel="stylesheet" href="home-mobile-editorial-v1142.css?v=1" media="screen and (max-width:820px)"/>
 <meta name="copyright" content="© 2026 SOVA58. Права на оригинальные материалы проекта; права на сторонние игровые материалы принадлежат их правообладателям."/>
-</head><body class="is-home-route home-hq-v405 home-hq-v406 home-site-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="home"><div aria-hidden="true" class="site-cosmic-background-v442"></div>
+
+<style id="home-layout-polish-v1">
+/* Keep primary navigation and artwork untouched; lower duplicate directory
+   becomes an optional extension only on small screens. */
+body.is-home-route .home-more-visible-v1025{min-width:0!important}
+body.is-home-route .home-more-visible-v1025 > .home-more-title-v1025{margin-bottom:12px!important}
+body.is-home-route .home-more-visible-v1025 .modern-panel-v424{
+  border-radius:19px!important;
+  border-color:rgba(133,199,246,.26)!important;
+}
+body.is-home-route .home-more-visible-v1025 .modern-panel-head-v424{
+  margin-bottom:10px!important;
+}
+body.is-home-route .home-extra-toggle-v1{display:none!important}
+@media screen and (max-width:820px){
+ html:not(.force-desktop-root) body.is-home-route .home-extra-toggle-v1{
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  gap:14px!important;width:100%!important;min-height:48px!important;
+  padding:12px 15px!important;margin:0 0 8px!important;
+  border:1px solid rgba(137,209,255,.44)!important;border-radius:14px!important;
+  background:linear-gradient(135deg,rgba(12,49,91,.95),rgba(12,31,65,.96))!important;
+  color:#e6f5ff!important;font:700 14px/1.4 system-ui,Arial,sans-serif!important;
+  text-align:left!important;cursor:pointer!important;
+  box-shadow:0 5px 14px rgba(0,10,30,.13)!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route .home-extra-toggle-v1 span{
+  display:inline-block!important;font-size:21px!important;transition:transform .16s ease;
+ }
+ html:not(.force-desktop-root) body.is-home-route .home-more-visible-v1025.is-open > .home-extra-toggle-v1 span{
+  transform:rotate(180deg);
+ }
+ html:not(.force-desktop-root) body.is-home-route .home-more-visible-v1025:not(.is-open) > .home-portal-secondary-v1016{
+  display:none!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route .home-more-visible-v1025.is-open > .home-portal-secondary-v1016{
+  margin-top:10px!important;
+ }
+}
+body.is-home-route .home-extra-toggle-v1:focus-visible{
+  outline:3px solid #ffdc8e!important;outline-offset:3px!important
+}
+@media(prefers-reduced-motion:reduce){
+ body.is-home-route .home-extra-toggle-v1 span{transition:none!important}
+}
+</style></head><body class="is-home-route home-hq-v405 home-hq-v406 home-site-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="home"><div aria-hidden="true" class="site-cosmic-background-v442"></div>
 <div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
 <button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
 <div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div>
@@ -547,7 +591,8 @@ body.is-home-route .modern-home-v424 :is(
 </section>
 </aside></div>
 <section class="home-more-visible-v1025"><h2 class="home-more-title-v1025"><svg class="bm-heading-icon-v1076" data-bm-icon="archive" data-neon="violet" viewBox="0 0 64 64" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="bm-neon-bg-23" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#172050"/><stop offset=".46" stop-color="#2a2058"/><stop offset="1" stop-color="#070c26"/></linearGradient></defs><rect x="2.4" y="2.4" width="59.2" height="59.2" rx="15" fill="url(#bm-neon-bg-23)" stroke="#bb87ff" stroke-width="2"/><path d="M9 12q11-8 27-4M53 49q-12 8-25 6" fill="none" stroke="#bb87ff" stroke-width="1.2" opacity=".38"/><path d="M10 44v3m-1.5-1.5h3M51 13v4m-2-2h4" stroke="#bb87ff" stroke-width="1" opacity=".6"/><g fill="none" stroke="#f5e7ff" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15 23h34v29H15zM11 14h42v9H11z"/><path d="M25 14V9h14v5M24 33h16M28 40h8"/><path d="m29 33 3 5 3-5"/></g></svg>Другие материалы и разделы</h2>
-<div class="home-portal-secondary-v1016"><div class="modern-home-columns-v424">
+<button type="button" class="home-extra-toggle-v1" aria-expanded="false" aria-controls="home-extra-content-v1">Показать все дополнительные разделы <span aria-hidden="true">⌄</span></button>
+<div class="home-portal-secondary-v1016" id="home-extra-content-v1"><div class="modern-home-columns-v424">
 <section class="modern-panel-v424 modern-panel-wide-v424">
 <div class="modern-panel-head-v424">
 <div><span class="v424-head-icon bm-heading-medallion-v1076"><svg class="bm-heading-icon-v1076" data-bm-icon="popular" data-neon="gold" viewBox="0 0 64 64" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="bm-neon-bg-24" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#172050"/><stop offset=".46" stop-color="#4a331c"/><stop offset="1" stop-color="#070c26"/></linearGradient></defs><rect x="2.4" y="2.4" width="59.2" height="59.2" rx="15" fill="url(#bm-neon-bg-24)" stroke="#ffd37a" stroke-width="2"/><path d="M9 12q11-8 27-4M53 49q-12 8-25 6" fill="none" stroke="#ffd37a" stroke-width="1.2" opacity=".38"/><path d="M10 44v3m-1.5-1.5h3M51 13v4m-2-2h4" stroke="#ffd37a" stroke-width="1" opacity=".6"/><g fill="none" stroke="#fff5d5" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"><path d="M23 15h18v12q0 14-9 20-9-6-9-20z"/><path d="M23 20H13v6q0 10 12 11M41 20h10v6q0 10-12 11M32 47v6M23 53h18"/><path d="m32 23 2 4 5 .7-3.5 3.5.7 5-4.2-2-4.2 2 .7-5-3.5-3.5 5-.7z" fill="#ffd37a"/></g></svg></span><h2>Часто открывают</h2></div>
@@ -708,5 +753,21 @@ body.is-home-route .modern-home-v424 :is(
   });
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
+</script>
+<script id="home-layout-polish-script-v1">
+(function(){
+ function init(){
+  var section=document.querySelector('.home-more-visible-v1025');
+  var button=section&&section.querySelector('.home-extra-toggle-v1');
+  if(!section||!button)return;
+  button.addEventListener('click',function(){
+   var expanded=section.classList.toggle('is-open');
+   button.setAttribute('aria-expanded',String(expanded));
+   button.firstChild.textContent=expanded?'Скрыть дополнительные разделы ':'Показать все дополнительные разделы ';
+  });
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
+ else init();
 })();
 </script></body></html>

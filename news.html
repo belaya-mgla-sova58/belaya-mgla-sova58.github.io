@@ -719,6 +719,72 @@ body.is-news-route .news-shell .news-category-grid>.news-category-card.elena{
 body.is-news-route .news-shell .news-category-grid>.news-category-card.creative-corner-fast-v1{
  background:linear-gradient(180deg,rgba(4,10,35,.07) 0,rgba(4,10,35,.17) 48%,rgba(4,10,35,.65) 100%),url("assets/creative-corner-card-v1.webp") center center/cover no-repeat!important;
 }
+</style>
+<style id="news-editorial-polish-v1">
+/* Even rhythm between independent featured editions and the category directory. */
+body.is-news-route .news-shell .news-page-heading{margin-bottom:17px!important;padding-bottom:14px!important}
+body.is-news-route .news-shell .news-page-heading h2{
+  font-size:clamp(23px,3.1vw,33px)!important;line-height:1.17!important;
+  letter-spacing:.006em!important;
+}
+body.is-news-route .news-shell .news-feature-pair-v4{gap:clamp(12px,1.5vw,18px)!important;margin-bottom:19px!important}
+body.is-news-route .news-shell .news-categories-heading-v1{
+  display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;
+  gap:5px 18px;margin:4px 0 13px;padding:0 2px 10px;
+  border-bottom:1px solid rgba(136,202,251,.24);
+}
+body.is-news-route .news-shell .news-categories-heading-v1 h3{
+  margin:0;color:#e9f7ff;font:800 clamp(18px,2.1vw,23px)/1.23 system-ui,Arial,sans-serif;
+}
+body.is-news-route .news-shell .news-categories-heading-v1 p{
+  margin:0;color:#adcce3;font:500 13px/1.45 system-ui,Arial,sans-serif;
+}
+body.is-news-route .news-shell .news-category-grid{
+  gap:clamp(12px,1.7vw,18px)!important;align-items:stretch!important
+}
+body.is-news-route .news-shell .news-category-grid > .news-category-card{
+  position:relative!important;isolation:isolate!important;min-height:152px!important;
+  border-radius:17px!important;border:1px solid rgba(168,218,255,.4)!important;
+  box-shadow:0 7px 19px rgba(0,10,35,.17)!important;overflow:hidden!important;
+}
+body.is-news-route .news-shell .news-category-grid > .news-category-card .news-category-link{
+  min-width:0!important;display:flex!important;align-items:flex-end!important;
+  line-height:1.32!important;overflow-wrap:anywhere!important;
+  padding:20px 82px 21px 20px!important;
+}
+body.is-news-route .news-shell .news-category-grid > .news-category-card:has(.news-card-like) .news-category-link{
+  padding-bottom:62px!important;
+}
+body.is-news-route .news-shell .news-category-grid > .news-category-card .news-category-link:focus-visible{
+  outline:3px solid #ffe49c!important;outline-offset:-5px!important;
+}
+body.is-news-route .news-shell .news-category-grid > .news-category-card .news-card-like{
+  min-height:40px!important;
+}
+@media(max-width:760px){
+ html:not(.force-desktop-root) body.is-news-route .news-shell .news-categories-heading-v1{
+  display:block!important;margin-bottom:11px!important;padding-bottom:9px!important
+ }
+ html:not(.force-desktop-root) body.is-news-route .news-shell .news-categories-heading-v1 p{
+  margin-top:3px!important;font-size:12px!important
+ }
+ html:not(.force-desktop-root) body.is-news-route .news-shell .news-category-grid{
+  grid-template-columns:minmax(0,1fr)!important;gap:12px!important
+ }
+ html:not(.force-desktop-root) body.is-news-route .news-shell .news-category-grid > .news-category-card{
+  min-height:128px!important;border-radius:15px!important
+ }
+ html:not(.force-desktop-root) body.is-news-route .news-shell .news-category-grid > .news-category-card .news-category-link{
+  min-height:126px!important;font-size:clamp(18px,5vw,22px)!important;
+  padding:17px 74px 20px 17px!important;
+ }
+ html:not(.force-desktop-root) body.is-news-route .news-shell .news-category-grid > .news-category-card:has(.news-card-like) .news-category-link{
+  padding-bottom:57px!important
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ body.is-news-route .news-shell .news-category-grid > .news-category-card{transition:none!important}
+}
 </style></head><body class="is-news-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="news"><div aria-hidden="true" class="site-cosmic-background-v442"></div><div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
 <button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
 <div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Новости</small></div>
@@ -731,7 +797,7 @@ body.is-news-route .news-shell .news-category-grid>.news-category-card.creative-
 <button aria-label="Очистить поиск" class="site-search-clear-v426" type="button">×</button>
 </div>
 <div aria-label="Результаты поиска" class="site-search-results-v426" role="listbox"></div>
-</div><div class="route-page active news-page" data-route="news"><nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><span aria-current="page">Новости</span></nav><section class="page-heading-v424 frost-header-v431"><h1>Новости</h1><p>Новости и обновления «Белой Мглы».</p></section><section class="news-shell"><div class="news-page-heading"><span class="news-kicker">НОВОСТИ</span><div class="news-title-row"><img alt="" aria-hidden="true" class="news-title-icon" src="assets/news-owl-icon-v446.webp"/><h2>Новости</h2></div></div><div class="news-feature-pair-v4"><div class="tv-feature-58" aria-label="Спецвыпуск 58-го государства">
+</div><div class="route-page active news-page" data-route="news"><nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><span aria-current="page">Новости</span></nav><section class="page-heading-v424 frost-header-v431"><h1>Новости</h1><p>Новости и обновления «Белой Мглы».</p></section><section class="news-shell"><div class="news-page-heading"><span class="news-kicker">НОВОСТИ</span><div class="news-title-row"><img alt="" aria-hidden="true" class="news-title-icon" src="assets/news-owl-icon-v446.webp"/><h2>Истории и рубрики</h2></div></div><div class="news-feature-pair-v4"><div class="tv-feature-58" aria-label="Спецвыпуск 58-го государства">
   <a class="tv-feature-58__link" href="news-58-live.html">
     <span class="tv-feature-58__content">
       <span class="tv-feature-58__eyebrow"><span class="tv-feature-58__live-dot" aria-hidden="true"></span> 58 · ТВ <span class="tv-feature-58__divider" aria-hidden="true">|</span> ВЕЧЕРНИЙ ЭФИР</span>
@@ -752,6 +818,6 @@ body.is-news-route .news-shell .news-category-grid>.news-category-card.creative-
     <span class="tv-feature-58__views" aria-label="Просмотры спецвыпуска">👁 <b data-tvs-views>…</b> просмотров</span>
     <button class="tv-feature-58__like" type="button" data-tvs-like aria-label="Поставить лайк" aria-pressed="false"><span aria-hidden="true">♥</span><span data-tvs-like-label>Нравится</span><b data-tvs-like-count>…</b></button>
   </div>
-</div><div class="ogonek-news-feature"><a class="ogonek-feature-link" href="k-vam-na-ogonek.html" aria-label="К вам на огонек. Наш гость [VgB]Бараш. Открыть интервью"><img src="assets/k-vam-ogonek-banner-1280.webp" srcset="assets/k-vam-ogonek-banner-768.webp 768w, assets/k-vam-ogonek-banner-1280.webp 1280w, assets/k-vam-ogonek-banner-v1.webp 2048w" sizes="(max-width:740px) calc(100vw - 26px), (max-width:1550px) calc((100vw - 280px)/2), 680px" alt="К вам на огонек: белая сова, чашка чая, микрофон и зимний вечер" width="2048" height="680" loading="eager" fetchpriority="high" decoding="async"><span class="ogonek-news-caption"><span><strong>Наш гость: [VgB]Бараш</strong><small>Шесть вопросов о героях, СВС и жизни 58-го государства</small></span><span class="ogonek-news-arrow" aria-hidden="true">↗</span></span></a><div class="ogonek-feature-stats" aria-label="Оценки и просмотры интервью"><span class="ogonek-feature-views" aria-label="Просмотры интервью">👁 <b data-ogonek-views>…</b> просмотров</span><button class="ogonek-feature-like" data-ogonek-like type="button" aria-label="Поставить лайк интервью" aria-pressed="false"><span aria-hidden="true">♥</span><span data-ogonek-like-label>Нравится</span><b data-ogonek-like-count>…</b></button></div></div></div><div class="news-category-grid"><div class="news-category-card ru"><a class="news-category-link" href="news-eu.html"><span>EU / Global</span></a></div><div class="news-category-card creative"><a class="news-category-link" href="news-halloween-2026.html"><span>Хэллоуин 2026</span></a></div><div class="news-category-card elena">
+</div><div class="ogonek-news-feature"><a class="ogonek-feature-link" href="k-vam-na-ogonek.html" aria-label="К вам на огонек. Наш гость [VgB]Бараш. Открыть интервью"><img src="assets/k-vam-ogonek-banner-1280.webp" srcset="assets/k-vam-ogonek-banner-768.webp 768w, assets/k-vam-ogonek-banner-1280.webp 1280w, assets/k-vam-ogonek-banner-v1.webp 2048w" sizes="(max-width:740px) calc(100vw - 26px), (max-width:1550px) calc((100vw - 280px)/2), 680px" alt="К вам на огонек: белая сова, чашка чая, микрофон и зимний вечер" width="2048" height="680" loading="eager" fetchpriority="high" decoding="async"><span class="ogonek-news-caption"><span><strong>Наш гость: [VgB]Бараш</strong><small>Шесть вопросов о героях, СВС и жизни 58-го государства</small></span><span class="ogonek-news-arrow" aria-hidden="true">↗</span></span></a><div class="ogonek-feature-stats" aria-label="Оценки и просмотры интервью"><span class="ogonek-feature-views" aria-label="Просмотры интервью">👁 <b data-ogonek-views>…</b> просмотров</span><button class="ogonek-feature-like" data-ogonek-like type="button" aria-label="Поставить лайк интервью" aria-pressed="false"><span aria-hidden="true">♥</span><span data-ogonek-like-label>Нравится</span><b data-ogonek-like-count>…</b></button></div></div></div><div class="news-categories-heading-v1"><h3>Ещё почитать</h3><p>Новости, творчество и материалы нашего сайта</p></div><div class="news-category-grid"><div class="news-category-card ru"><a class="news-category-link" href="news-eu.html"><span>EU / Global</span></a></div><div class="news-category-card creative"><a class="news-category-link" href="news-halloween-2026.html"><span>Хэллоуин 2026</span></a></div><div class="news-category-card elena">
 <a class="news-category-link" href="news-elena.html"><span>WhiteFox News</span></a><button aria-label="Поставить лайк" class="news-like-button news-card-like" data-like-key="news-elena-v2" style="position:absolute;right:12px;bottom:12px;z-index:999;display:flex!important;align-items:center;justify-content:center;gap:6px;min-width:58px;height:40px;padding:6px 10px;border:1px solid #ffd0d7;border-radius:999px;background:#ffffff;color:#5b3552;box-shadow:0 6px 15px rgba(36,24,70,.18);visibility:visible!important;opacity:1!important;pointer-events:auto!important;touch-action:manipulation;" type="button"><span aria-hidden="true" class="news-like-heart" style="display:inline-block!important;color:#e43145!important;font-size:24px!important;line-height:1!important;">♥</span><span aria-live="polite" class="news-like-count" style="display:inline-block!important;color:#5b3552!important;font-size:14px!important;font-weight:900!important;min-width:12px!important;">0</span></button></div><div class="news-category-card creative creative-corner-fast-v1"><a class="news-category-link" href="creative-corner.html"><span>Творческий уголок</span></a><button aria-label="Поставить лайк" class="news-like-button news-card-like" data-like-key="creative-corner-v2" style="position:absolute;right:12px;bottom:12px;z-index:999;display:flex!important;align-items:center;justify-content:center;gap:6px;min-width:58px;height:40px;padding:6px 10px;border:1px solid #ffd0d7;border-radius:999px;background:#ffffff;color:#5b3552;box-shadow:0 6px 15px rgba(36,24,70,.18);visibility:visible!important;opacity:1!important;pointer-events:auto!important;touch-action:manipulation;" type="button"><span aria-hidden="true" class="news-like-heart" style="display:inline-block!important;color:#e43145!important;font-size:24px!important;line-height:1!important;">♥</span><span aria-live="polite" class="news-like-count" style="display:inline-block!important;color:#5b3552!important;font-size:14px!important;font-weight:900!important;min-width:12px!important;">0</span></button></div></div></section><div class="footer news-footer">Белая Мгла • Автор - Sova</div></div></main><button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button>
 <nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424"><a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-home-v534.webp"/></span><b>Главная</b></a><a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-events-v534.webp"/></span><b>События</b></a><a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-heroes-v534.webp"/></span><b>Герои</b></a><a data-v424-nav="calc" href="fire-furnace-calculator.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-calculator-v534.webp"/></span><b>Калькулятор</b></a><a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-knowledge-v534.webp"/></span><b>База знаний</b></a></nav><script defer="" src="pwa-install.js?v=1033"></script><script defer src="tv-special-stats-v2.js?v=2"></script><script defer src="ogonek-stats-v1.js?v=1"></script></body></html>
