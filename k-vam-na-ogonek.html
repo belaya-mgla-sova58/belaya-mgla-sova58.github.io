@@ -364,6 +364,67 @@ a{color:inherit;text-decoration:none}
   }
   .chat-view .ogonek-progress-dot{transition:none!important}
 }
+</style><style id="ogonek-glass-messages-v1">
+/* Subtle mirrored-glass panels. The message text itself is never mirrored.
+   Preserve high text contrast, the original winter background and smooth mobile scrolling. */
+.chat-view .chat-scroll .message{
+  color:#f8fcff!important;
+  background:
+    linear-gradient(113deg,
+      rgba(205,234,255,.17) 0%,
+      rgba(205,234,255,.055) 13%,
+      transparent 35%,
+      rgba(167,221,255,.055) 78%,
+      transparent 100%),
+    linear-gradient(145deg,rgba(6,26,53,.88),rgba(17,41,73,.86))!important;
+  border:1px solid rgba(159,219,255,.78)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(241,249,255,.29),
+    inset 1px 0 0 rgba(219,243,255,.08),
+    0 8px 24px rgba(0,0,0,.38),
+    0 0 17px rgba(90,174,248,.16)!important;
+  -webkit-backdrop-filter:blur(7px) saturate(1.13);
+  backdrop-filter:blur(7px) saturate(1.13);
+  text-shadow:0 1px 1px rgba(0,0,0,.18)!important;
+}
+.chat-view .chat-scroll .message.answer{
+  color:#fff8eb!important;
+  background:
+    linear-gradient(113deg,
+      rgba(255,237,217,.16) 0%,
+      rgba(255,236,210,.055) 13%,
+      transparent 39%,
+      rgba(255,206,149,.045) 78%,
+      transparent 100%),
+    linear-gradient(145deg,rgba(45,30,41,.89),rgba(44,34,49,.85))!important;
+  border-color:rgba(254,210,146,.84)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,242,218,.30),
+    inset 1px 0 0 rgba(255,232,204,.08),
+    0 8px 24px rgba(0,0,0,.39),
+    0 0 16px rgba(241,176,104,.15)!important;
+}
+@media(max-width:700px){
+  .chat-view .chat-scroll .message{
+    background:
+      linear-gradient(115deg,rgba(210,235,255,.12),transparent 46%),
+      linear-gradient(145deg,rgba(7,29,56,.93),rgba(17,39,70,.91))!important;
+    -webkit-backdrop-filter:blur(3px) saturate(1.05)!important;
+    backdrop-filter:blur(3px) saturate(1.05)!important;
+  }
+  .chat-view .chat-scroll .message.answer{
+    background:
+      linear-gradient(115deg,rgba(255,238,212,.12),transparent 46%),
+      linear-gradient(145deg,rgba(46,30,42,.93),rgba(44,33,46,.91))!important;
+  }
+}
+@media(prefers-reduced-transparency:reduce){
+  .chat-view .chat-scroll .message,
+  .chat-view .chat-scroll .message.answer{
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+  }
+}
 </style></head><body><main aria-label="Интервью с Барашем" class="page chat-view" id="chat-view" data-ogonek-article><div class="backbar"><a class="backbutton" href="news.html">← Вернуться в новости</a></div><header class="guest-head"><p class="eyebrow">К вам на огонек · интервью</p><div class="guest-card"><span class="guest-spark">✦</span><p class="guestline">Наш гость: <strong>[VgB]Бараш</strong></p><div class="hostline">Ведущий: [VgB]HiTmaN74</div><span class="guest-spark">✦</span></div></header>
 <section aria-label="Интервью с [VgB]Барашем" class="chat">
 <picture><source media="(max-width:650px)" srcset="assets/k-vam-ogonek-mobile-v1.webp"/><img alt="" aria-hidden="true" class="scenery" src="assets/k-vam-ogonek-desktop-v1.webp"/></picture>
