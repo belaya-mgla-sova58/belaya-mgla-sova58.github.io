@@ -165,11 +165,219 @@ a{color:inherit;text-decoration:none}
  .chat-view .chat-toolbar{position:relative!important;z-index:4!important}
  .chat-view .foot{position:relative!important;z-index:4!important}
 }
+</style><style id="ogonek-enchanted-chat-v1">
+/* “К вам на огонек”: ornamental styling only, preserve the actual interview
+   text and the two original background photographs. */
+.chat-view .chat{
+  position:relative!important;
+  border-color:rgba(250,210,143,.86)!important;
+  box-shadow:0 18px 65px rgba(0,0,0,.48),
+    0 0 0 4px rgba(8,22,44,.95),
+    0 0 0 5px rgba(242,195,116,.32),
+    0 0 38px rgba(104,176,255,.23),
+    inset 0 0 28px rgba(255,179,88,.06)!important;
+}
+.chat-view .chat::after{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 37% 41% at 49% 57%,rgba(255,157,75,.22),transparent 80%),
+    radial-gradient(ellipse 44% 65% at 97% 88%,rgba(83,159,250,.15),transparent 86%),
+    radial-gradient(ellipse 40% 36% at 8% 15%,rgba(124,194,255,.09),transparent 86%);
+  opacity:.72;animation:ogonek-fire-glow 7s ease-in-out infinite alternate;
+}
+@keyframes ogonek-fire-glow{
+  from{opacity:.42}
+  to{opacity:.85}
+}
+.chat-view .chat-toolbar{z-index:4!important}
+.chat-view .status .flame{
+  color:#ffd18c!important;
+  text-shadow:0 0 9px rgba(255,177,75,.95),0 0 19px rgba(102,188,255,.70);
+  filter:none!important;
+  animation:ogonek-torch 4s ease-in-out infinite alternate;
+}
+@keyframes ogonek-torch{
+  0%{opacity:.75;transform:scale(.94)}
+  100%{opacity:1;transform:scale(1.10)}
+}
+.chat-view .chat-scroll{z-index:3!important;padding-right:clamp(62px,7%,92px)!important}
+.chat-view .exchange{position:relative!important;scroll-margin-top:15px}
+.chat-view .exchange+.exchange{
+  border-top:0!important;
+  padding-top:38px!important;
+}
+.chat-view .exchange+.exchange::before{
+  content:"❄";position:absolute;top:-11px;left:50%;z-index:1;
+  transform:translateX(-50%);
+  display:grid;place-items:center;width:29px;height:23px;
+  background:rgba(7,23,44,.89);border:1px solid rgba(241,197,125,.60);
+  border-radius:999px;
+  color:#c4eaff;font-size:16px;line-height:1;
+  text-shadow:0 0 8px rgba(106,210,255,.8),0 0 11px rgba(255,215,155,.45);
+}
+.chat-view .exchange+.exchange::after{
+  content:"";position:absolute;left:4%;right:4%;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(152,214,255,.6) 30%,rgba(252,204,137,.80) 50%,rgba(152,214,255,.6) 70%,transparent);
+}
+.chat-view .message{
+  position:relative!important;isolation:isolate;
+  border-radius:19px 19px 19px 6px!important;
+  border-color:rgba(137,215,252,.84)!important;
+  background:linear-gradient(145deg,rgba(9,34,66,.98),rgba(16,43,76,.97))!important;
+  box-shadow:inset 0 1px 0 rgba(202,235,255,.20),0 8px 26px rgba(0,0,0,.43),0 0 17px rgba(78,176,255,.12)!important;
+}
+.chat-view .message.answer{
+  border-radius:19px 19px 6px 19px!important;
+  border-color:rgba(251,204,135,.92)!important;
+  background:linear-gradient(142deg,rgba(51,35,45,.98),rgba(48,36,49,.97))!important;
+  box-shadow:inset 0 1px 0 rgba(255,229,192,.20),0 8px 26px rgba(0,0,0,.43),0 0 16px rgba(245,175,82,.14)!important;
+}
+.chat-view .message::before{
+  content:"";position:absolute;pointer-events:none;
+  top:7px;right:10px;width:32px;height:10px;
+  border-top:1px solid rgba(190,230,255,.26);
+  border-right:1px solid rgba(190,230,255,.22);
+  border-top-right-radius:12px;
+}
+.chat-view .message.answer::before{
+  border-color:rgba(254,211,150,.30);
+}
+.chat-view .sender .mark{
+  box-shadow:0 0 0 2px rgba(6,22,46,.8),0 0 15px rgba(104,188,255,.32);
+}
+.chat-view .answer-row .sender .mark{
+  box-shadow:0 0 0 2px rgba(29,23,36,.8),0 0 15px rgba(247,192,109,.36);
+}
+.chat-view .ogonek-progress{
+  position:absolute;top:52%;right:10px;transform:translateY(-50%);
+  z-index:6;display:flex;flex-direction:column;align-items:center;
+  gap:7px;padding:10px 6px;
+  border:1px solid rgba(246,203,142,.45);
+  border-radius:24px;background:rgba(4,17,37,.87);
+  box-shadow:0 4px 19px rgba(0,0,0,.45),0 0 20px rgba(108,174,241,.14);
+}
+.chat-view .ogonek-progress::before{
+  content:"";position:absolute;z-index:0;
+  left:50%;top:33px;bottom:19px;width:1px;transform:translateX(-50%);
+  background:linear-gradient(180deg,rgba(115,198,255,.38),rgba(255,218,159,.70),rgba(115,198,255,.38));
+  pointer-events:none;
+}
+.chat-view .ogonek-progress-title{
+  position:relative;z-index:1;display:block;color:#e8d1a8;
+  font:800 8px/1.2 system-ui,sans-serif;letter-spacing:.06em;
+}
+.chat-view .ogonek-progress-dot{
+  display:grid;place-items:center;position:relative;z-index:1;
+  width:32px;height:32px;min-width:32px;min-height:32px;
+  padding:0;margin:0;cursor:pointer;
+  border:1px solid rgba(150,202,247,.58);
+  border-radius:50%;background:rgba(14,39,65,.96);
+  color:#b9dcf6;
+  box-shadow:0 2px 10px rgba(0,0,0,.32);
+  transition:background .16s ease,border-color .16s ease,box-shadow .16s ease,transform .16s ease;
+}
+.chat-view .ogonek-progress-dot>span:first-child{
+  position:absolute;font-size:19px;line-height:1;opacity:.24;
+}
+.chat-view .ogonek-progress-dot .ogonek-step-number{
+  position:relative;font:800 12px/1 system-ui,sans-serif;
+  text-shadow:0 1px 2px #001527;
+}
+.chat-view .ogonek-progress-dot:is(:hover,:focus-visible){
+  border-color:#ffe0a5;background:#244d71;
+  transform:scale(1.06);
+}
+.chat-view .ogonek-progress-dot:focus-visible{
+  outline:2px solid #fff0bd;outline-offset:2px;
+}
+.chat-view .ogonek-progress-dot.is-active{
+  color:#fff0cf;border-color:#ffe1a5;
+  background:linear-gradient(145deg,#a26e32,#55416d);
+  box-shadow:0 0 13px rgba(255,197,109,.53),inset 0 0 0 1px rgba(255,244,215,.22);
+}
+.chat-view .ogonek-progress-dot.is-active>span:first-child{opacity:.70;color:#d0f0ff}
+.chat-view .ogonek-farewell{
+  position:relative;margin:14px auto 3px;
+  max-width:600px;padding:17px 6px 12px;
+  text-align:center;
+}
+.chat-view .ogonek-farewell-line{
+  display:block;height:1px;width:100%;
+  background:linear-gradient(90deg,transparent,#c5e7ff 29%,#f4c98a 50%,#c5e7ff 71%,transparent);
+}
+.chat-view .ogonek-farewell-crystal{
+  display:block;width:28px;margin:-14px auto 3px;
+  background:rgba(7,23,44,.91);border:1px solid rgba(244,200,136,.60);
+  border-radius:50%;font-size:18px;color:#d1efff;
+  text-shadow:0 0 9px rgba(126,203,251,.8);
+}
+.chat-view .ogonek-farewell p{
+  margin:7px 0 0;padding:8px 12px;
+  color:#ffe6b5;font:600 clamp(17px,2.1vw,22px)/1.4 Georgia,serif;
+  letter-spacing:.02em;
+  text-shadow:0 2px 11px #061125,0 0 12px rgba(255,182,100,.30);
+}
+@media(min-width:701px){
+  .chat-view .exchange.is-newly-visible .message{
+    animation:ogonek-message-arrive .46s ease-out both;
+  }
+  .chat-view .exchange.is-newly-visible .answer{
+    animation-delay:.07s;
+  }
+  @keyframes ogonek-message-arrive{
+    from{opacity:.76;transform:translateY(7px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+}
+@media(max-width:700px){
+  .chat-view .chat-scroll{padding-right:12px!important}
+  .chat-view .ogonek-progress{
+    position:relative;top:auto;right:auto;transform:none;
+    flex:0 0 42px;flex-direction:row;justify-content:center;
+    box-sizing:border-box;width:100%;min-height:42px;
+    gap:clamp(4px,1.5vw,8px);padding:5px 6px;
+    border:0;border-bottom:1px solid rgba(235,196,130,.36);
+    border-radius:0;background:rgba(5,18,39,.91);
+    box-shadow:none;
+  }
+  .chat-view .ogonek-progress::before{
+    left:24%;right:10%;top:50%;bottom:auto;width:auto;height:1px;transform:none;
+    background:linear-gradient(90deg,transparent,rgba(246,209,151,.75),transparent);
+  }
+  .chat-view .ogonek-progress-title{font-size:8px;letter-spacing:.02em;margin-right:3px}
+  .chat-view .ogonek-progress-dot{
+    width:31px;height:31px;min-width:31px;min-height:31px;
+  }
+  .chat-view .exchange+.exchange{padding-top:29px!important}
+  .chat-view .exchange+.exchange::before{top:-11px}
+  .chat-view .message{border-radius:15px 15px 15px 5px!important;backdrop-filter:none!important}
+  .chat-view .message.answer{border-radius:15px 15px 5px 15px!important}
+  .chat-view .chat::after{animation:none;opacity:.52}
+  .chat-view .status .flame{animation:none}
+  .chat-view .ogonek-farewell p{font-size:17px}
+  .chat-view .exchange.is-newly-visible .message{animation:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .chat-view .chat::after,.chat-view .status .flame,
+  .chat-view .exchange.is-newly-visible .message{
+    animation:none!important;
+  }
+  .chat-view .ogonek-progress-dot{transition:none!important}
+}
 </style></head><body><main aria-label="Интервью с Барашем" class="page chat-view" id="chat-view" data-ogonek-article><div class="backbar"><a class="backbutton" href="news.html">← Вернуться в новости</a></div><header class="guest-head"><p class="eyebrow">К вам на огонек · интервью</p><div class="guest-card"><span class="guest-spark">✦</span><p class="guestline">Наш гость: <strong>[VgB]Бараш</strong></p><div class="hostline">Ведущий: [VgB]HiTmaN74</div><span class="guest-spark">✦</span></div></header>
 <section aria-label="Интервью с [VgB]Барашем" class="chat">
 <picture><source media="(max-width:650px)" srcset="assets/k-vam-ogonek-mobile-v1.webp"/><img alt="" aria-hidden="true" class="scenery" src="assets/k-vam-ogonek-desktop-v1.webp"/></picture>
 <div aria-hidden="true" class="overlay"></div>
 <div class="chat-toolbar"><div class="status"><span aria-hidden="true" class="flame">✧</span><span>Беседа у огонька</span></div><div class="chapters">6 вопросов · 6 ответов</div></div>
+<nav class="ogonek-progress" aria-label="Быстрый переход к вопросам">
+<span class="ogonek-progress-title" aria-hidden="true">ВОПРОСЫ</span>
+<button type="button" class="ogonek-progress-dot is-active" data-ogonek-step="1" aria-label="Перейти к вопросу 1" aria-current="step"><span aria-hidden="true">✦</span><span class="ogonek-step-number">1</span></button>
+<button type="button" class="ogonek-progress-dot" data-ogonek-step="2" aria-label="Перейти к вопросу 2"><span aria-hidden="true">✦</span><span class="ogonek-step-number">2</span></button>
+<button type="button" class="ogonek-progress-dot" data-ogonek-step="3" aria-label="Перейти к вопросу 3"><span aria-hidden="true">✦</span><span class="ogonek-step-number">3</span></button>
+<button type="button" class="ogonek-progress-dot" data-ogonek-step="4" aria-label="Перейти к вопросу 4"><span aria-hidden="true">✦</span><span class="ogonek-step-number">4</span></button>
+<button type="button" class="ogonek-progress-dot" data-ogonek-step="5" aria-label="Перейти к вопросу 5"><span aria-hidden="true">✦</span><span class="ogonek-step-number">5</span></button>
+<button type="button" class="ogonek-progress-dot" data-ogonek-step="6" aria-label="Перейти к вопросу 6"><span aria-hidden="true">✦</span><span class="ogonek-step-number">6</span></button>
+</nav>
 <div aria-label="Прокручиваемая переписка" class="chat-scroll" id="scroll" role="region" tabindex="0">
 <section aria-label="Вопрос 1" class="exchange" id="q1">
 <div class="question-row"><div class="sender"><span class="mark mark-host">H</span><span>[VgB]HiTmaN74</span><span class="meta">вопрос 01</span></div>
@@ -207,6 +415,7 @@ a{color:inherit;text-decoration:none}
 <div class="answer-row"><div class="sender"><span class="meta">ответ 06</span><span>[VgB]Бараш</span><span class="mark mark-guest">Б</span></div>
 <div class="message answer">В вере и надежде, что Роман вернётся к нам и предоставит отчёты за столь долгое время отсутствия.</div></div>
 </section>
+<div class="ogonek-farewell"><span class="ogonek-farewell-line" aria-hidden="true"></span><span class="ogonek-farewell-crystal" aria-hidden="true">❄</span><p>До новых встреч у огонька <span aria-hidden="true">✦</span></p></div>
 </div>
 <div class="foot"><span class="hint">↕ Листайте переписку</span><nav aria-label="Навигация по вопросам" class="navigation"><button aria-label="Предыдущий вопрос" class="nav" id="back" type="button">↑</button><span class="counter" id="count">1 / 6</span><button aria-label="Следующий вопрос" class="nav" id="forward" type="button">↓</button></nav></div>
 </section><p class="under">✦ История 58-го пишется его игроками ✦</p></main>
@@ -248,5 +457,54 @@ a{color:inherit;text-decoration:none}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',reset,{once:true});
  else reset();
  window.addEventListener('pageshow',e=>{if(e.persisted)reset()});
+})();
+</script><script id="ogonek-progress-behavior-v1">
+(function(){
+  'use strict';
+  const scroll=document.getElementById('scroll');
+  const rail=document.querySelector('.ogonek-progress');
+  if(!scroll||!rail)return;
+  const questions=[...scroll.querySelectorAll('.exchange')];
+  const dots=[...rail.querySelectorAll('[data-ogonek-step]')];
+  if(questions.length!==dots.length)return;
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+  const topOf=node=>node.getBoundingClientRect().top-scroll.getBoundingClientRect().top+scroll.scrollTop;
+  let frame=0;
+  function refreshProgress(){
+    frame=0;
+    const pos=scroll.scrollTop+Math.min(95,scroll.clientHeight*.20);
+    let active=0;
+    questions.forEach((q,i)=>{if(topOf(q)<=pos)active=i});
+    if(scroll.scrollTop>0&&scroll.scrollTop+scroll.clientHeight>=scroll.scrollHeight-6)active=questions.length-1;
+    dots.forEach((dot,i)=>{
+      const on=i===active;
+      dot.classList.toggle('is-active',on);
+      if(on)dot.setAttribute('aria-current','step');
+      else dot.removeAttribute('aria-current');
+    });
+  }
+  const schedule=()=>{if(!frame)frame=requestAnimationFrame(refreshProgress)};
+  dots.forEach((dot,i)=>{
+    dot.addEventListener('click',()=>{
+      scroll.scrollTo({top:topOf(questions[i]),behavior:reduced.matches?'auto':'smooth'});
+      scroll.focus({preventScroll:true});
+    });
+  });
+  scroll.addEventListener('scroll',schedule,{passive:true});
+  window.addEventListener('resize',schedule,{passive:true});
+  window.addEventListener('pageshow',schedule);
+  // Only animate visible messages once. No content is hidden before observation.
+  if('IntersectionObserver' in window&&!reduced.matches&&window.innerWidth>700){
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-newly-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },{root:scroll,threshold:.10});
+    questions.forEach(q=>observer.observe(q));
+  }
+  refreshProgress();
 })();
 </script><script defer src="ogonek-stats-v1.js?v=1"></script></body></html>
