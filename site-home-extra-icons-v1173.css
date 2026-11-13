@@ -68,3 +68,20 @@ body.is-home-route .modern-home-v424 .home-extra-unique-v1162 > a.modern-topic-c
   max-width:48px!important;max-height:48px!important;
  }
 }
+
+/* v1174: actual artwork is visually inset inside 54px WebP assets.
+   Enlarge painted pixels, not merely the surrounding tile. */
+body.is-home-route .modern-home-v424 .home-extra-unique-v1162 > a.modern-topic-card-v424 > .v445-topic-icon{
+ overflow:hidden!important;
+}
+body.is-home-route .modern-home-v424 .home-extra-unique-v1162 > a.modern-topic-card-v424 > .v445-topic-icon > img.bm-premium-icon-v1100{
+ transform:scale(1.76)!important;
+ transform-origin:center center!important;
+ position:relative!important;
+ z-index:1!important;
+}
+@media(max-width:520px){
+ html:not(.force-desktop-root) body.is-home-route .modern-home-v424 .home-extra-unique-v1162 > a.modern-topic-card-v424 > .v445-topic-icon > img.bm-premium-icon-v1100{
+  transform:scale(1.68)!important;
+ }
+}
