@@ -1,0 +1,45 @@
+/* Белая мгла v1170: единый стиль иллюстраций внутри гайдов.
+   Не затрагивает игровые баннеры, иконки, каталоги и карточки событий. */
+body.bm-guide-photos-v1170 .route-page.active figure.site-photo-card{
+ display:flex!important;flex-direction:column;
+ width:min(100%,760px)!important;max-width:760px!important;
+ min-width:0;box-sizing:border-box;
+ margin:clamp(17px,2.2vw,29px) auto!important;
+ padding:9px!important;
+ overflow:hidden;
+ border:1px solid rgba(145,216,255,.42)!important;
+ border-radius:18px!important;
+ background:linear-gradient(155deg,rgba(20,43,76,.95),rgba(13,23,52,.96))!important;
+ box-shadow:inset 0 1px 0 rgba(236,248,255,.08),0 12px 28px rgba(2,9,30,.25)!important;
+}
+body.bm-guide-photos-v1170 .route-page.active figure.site-photo-card>img{
+ display:block!important;width:auto!important;max-width:100%!important;
+ height:auto!important;max-height:none!important;min-width:0;
+ margin:auto!important;padding:0!important;
+ object-fit:contain!important;object-position:center;
+ border:0!important;border-radius:11px!important;
+ background:rgba(5,14,31,.45);
+ box-shadow:none!important;
+}
+body.bm-guide-photos-v1170 .route-page.active figure.site-photo-card>figcaption{
+ box-sizing:border-box;align-self:stretch;width:100%;
+ padding:12px 13px 6px!important;margin:0!important;
+ color:#d7eaf6!important;font:500 13px/1.58 system-ui,Arial,sans-serif!important;
+ text-align:center;overflow-wrap:break-word;
+}
+body.bm-guide-photos-v1170 .route-page.active figure.site-photo-card>figcaption::before{
+ content:"";display:block;height:1px;
+ margin:0 5px 10px;
+ background:linear-gradient(90deg,transparent,rgba(150,216,250,.34),transparent);
+}
+@media(max-width:700px){
+ html:not(.force-desktop-root) body.bm-guide-photos-v1170 .route-page.active figure.site-photo-card{
+  padding:6px!important;border-radius:14px!important;margin:16px auto!important;
+ }
+ html:not(.force-desktop-root) body.bm-guide-photos-v1170 .route-page.active figure.site-photo-card>img{
+  border-radius:9px!important;
+ }
+ html:not(.force-desktop-root) body.bm-guide-photos-v1170 .route-page.active figure.site-photo-card>figcaption{
+  font-size:12px!important;line-height:1.5!important;padding:10px 9px 5px!important;
+ }
+}
