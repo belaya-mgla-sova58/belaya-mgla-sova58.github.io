@@ -1,0 +1,443 @@
+/* === site-polish-v1161.css === */
+/* Белая Мгла: точечная доводка карточек и чтения, 13.11.2026.
+   Не затрагивает питомцев, экспертов, поколения героев и расчёты. */
+:root{--bm-polish-edge:rgba(124,202,242,.27);--bm-polish-light:rgba(148,225,255,.75);--bm-polish-shadow:0 14px 32px rgba(2,9,29,.24)}
+body.is-home-route .modern-home-v424 :is(.home-index-links-v1016,.modern-card-grid-v424,.modern-list-v424,.home-tools-grid-v1016,.home-portal-links-v1016) a{
+ position:relative;isolation:isolate;overflow:hidden;
+ border:1px solid var(--bm-polish-edge)!important;
+ border-radius:16px!important;
+ box-shadow:inset 0 1px 0 rgba(218,245,255,.08),0 7px 20px rgba(1,8,30,.16)!important;
+ transition:border-color .2s ease,box-shadow .2s ease,transform .2s ease!important;
+}
+body.is-home-route .modern-home-v424 :is(.home-index-links-v1016,.modern-card-grid-v424,.modern-list-v424,.home-tools-grid-v1016,.home-portal-links-v1016) a:hover{
+ border-color:var(--bm-polish-light)!important;
+ box-shadow:inset 0 1px 0 rgba(228,248,255,.14),var(--bm-polish-shadow)!important;
+ transform:translateY(-2px);
+}
+body.is-home-route .modern-home-v424 :is(.home-index-links-v1016,.modern-card-grid-v424,.modern-list-v424,.home-tools-grid-v1016,.home-portal-links-v1016) a :is(b,small){
+ overflow-wrap:break-word;
+}
+body.is-home-route .modern-home-v424 :is(.home-index-links-v1016,.modern-card-grid-v424,.modern-list-v424,.home-tools-grid-v1016,.home-portal-links-v1016) a small{
+ line-height:1.48!important;opacity:.93;
+}
+body.is-home-route .modern-home-v424 :is(.home-index-links-v1016,.modern-card-grid-v424,.modern-list-v424,.home-tools-grid-v1016,.home-portal-links-v1016) a:focus-visible,
+body.is-news-route .news-shell a:focus-visible,
+body.is-events-route .guide-page-v69 a:focus-visible,
+body.is-other-route .kb-clean-grid-v920 a:focus-visible{
+ outline:3px solid #a7e9ff!important;outline-offset:3px!important;
+}
+/* Новости: карточки в единой системе, без изменений содержания. */
+body.is-news-route .news-shell :is(.news-category-card,.ogonek-news-feature){
+ overflow:hidden;border:1px solid var(--bm-polish-edge);
+ border-radius:20px;
+ box-shadow:inset 0 1px 0 rgba(222,245,255,.08),0 10px 28px rgba(2,8,27,.2);
+}
+body.is-news-route .news-shell .news-category-card{
+ transition:border-color .2s ease,box-shadow .2s ease,transform .2s ease;
+}
+body.is-news-route .news-shell .news-category-card:hover{
+ border-color:var(--bm-polish-light);box-shadow:var(--bm-polish-shadow);transform:translateY(-2px);
+}
+body.is-news-route .news-shell :is(.news-category-card,.ogonek-news-feature) :is(h2,h3,p){
+ overflow-wrap:break-word;
+}
+body.is-news-route .news-shell .news-category-grid{gap:clamp(12px,1.5vw,22px)}
+/* Гайды и база знаний: читаемые карточки и воздух между смысловыми блоками. */
+body.is-events-route .guide-page-v69 :is(.guide-nav-card,.mini-card),
+body.is-other-route .kb-clean-grid-v920 .kb-clean-card-v920{
+ border:1px solid var(--bm-polish-edge)!important;
+ border-radius:17px!important;
+ box-shadow:inset 0 1px 0 rgba(228,247,255,.07),0 8px 22px rgba(2,9,30,.16);
+ transition:border-color .2s ease,box-shadow .2s ease,transform .2s ease;
+}
+body.is-events-route .guide-page-v69 :is(.guide-nav-card,.mini-card):hover,
+body.is-other-route .kb-clean-grid-v920 .kb-clean-card-v920:hover{
+ border-color:var(--bm-polish-light)!important;
+ box-shadow:var(--bm-polish-shadow);
+ transform:translateY(-2px);
+}
+body.is-events-route .guide-page-v69 .guide-fold-body-v414 :is(p,li){line-height:1.7}
+body.is-events-route .guide-page-v69 .guide-fold-body-v414 p+p{margin-top:.8em}
+@media(max-width:820px){
+ body.is-home-route .modern-home-v424 :is(.home-index-links-v1016,.modern-card-grid-v424,.modern-list-v424,.home-tools-grid-v1016,.home-portal-links-v1016) a,
+ body.is-news-route .news-shell :is(.news-category-card,.ogonek-news-feature){border-radius:14px!important}
+ body.is-events-route .guide-page-v69 :is(.guide-nav-card,.mini-card),
+ body.is-other-route .kb-clean-grid-v920 .kb-clean-card-v920{border-radius:14px!important}
+ body.is-home-route .modern-home-v424 :is(.home-index-links-v1016,.modern-card-grid-v424,.modern-list-v424,.home-tools-grid-v1016,.home-portal-links-v1016) a:hover,
+ body.is-news-route .news-shell .news-category-card:hover,
+ body.is-events-route .guide-page-v69 :is(.guide-nav-card,.mini-card):hover,
+ body.is-other-route .kb-clean-grid-v920 .kb-clean-card-v920:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+ body.is-home-route .modern-home-v424 :is(.home-index-links-v1016,.modern-card-grid-v424,.modern-list-v424,.home-tools-grid-v1016,.home-portal-links-v1016) a,
+ body.is-news-route .news-shell .news-category-card,
+ body.is-events-route .guide-page-v69 :is(.guide-nav-card,.mini-card),
+ body.is-other-route .kb-clean-grid-v920 .kb-clean-card-v920{transition:none!important;transform:none!important}
+}
+
+
+/* === site-home-tidy-v1162.css === */
+/* Home navigation cleanup v1162: secondary materials only; no changes to game content. */
+body.is-home-route .modern-home-v424 .home-extra-unique-v1162{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,1.25vw,18px)
+}
+body.is-home-route .modern-home-v424 .home-extra-unique-v1162 .modern-topic-card-v424{
+ min-width:0;display:flex;flex-direction:column;align-items:flex-start;
+ gap:7px;padding:clamp(13px,1.3vw,19px);text-decoration:none;
+}
+body.is-home-route .modern-home-v424 .home-extra-unique-v1162 .modern-topic-card-v424 b{
+ font-size:clamp(14px,1.1vw,17px);line-height:1.3
+}
+body.is-home-route .modern-home-v424 .home-extra-unique-v1162 .modern-topic-card-v424 small{
+ font-size:13px;line-height:1.5
+}
+body.is-home-route .modern-home-v424 :is(.home-portal-block-title-v1016,.modern-panel-head-v424 h2,.home-more-title-v1025){
+ line-height:1.25;letter-spacing:.008em;text-wrap:balance;
+}
+body.is-home-route .modern-home-v424 .modern-panel-head-v424{gap:12px;align-items:center}
+body.is-home-route .modern-home-v424 .modern-panel-head-v424 a{white-space:nowrap}
+@media(max-width:950px){body.is-home-route .modern-home-v424 .home-extra-unique-v1162{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){
+ body.is-home-route .modern-home-v424 .home-extra-unique-v1162{grid-template-columns:minmax(0,1fr)}
+ body.is-home-route .modern-home-v424 .home-extra-unique-v1162 .modern-topic-card-v424{padding:12px 14px}
+}
+
+/* v1163: equal optical icon size and alignment for quick-access cards.
+   Original images remain unchanged; isolated to these two home cards. */
+body.is-home-route .modern-home-v424 .home-quick-links-v1024{
+ align-items:stretch!important;
+}
+body.is-home-route .modern-home-v424 .home-quick-links-v1024>a{
+ display:grid!important;
+ grid-template-columns:48px minmax(0,1fr) 12px!important;
+ align-items:center!important;
+ column-gap:12px!important;
+ min-height:78px!important;
+ box-sizing:border-box!important;
+ padding:12px 15px!important;
+}
+body.is-home-route .modern-home-v424 .home-quick-links-v1024>a>img.bm-premium-icon-v1100{
+ display:block!important;
+ width:48px!important;height:48px!important;
+ min-width:48px!important;min-height:48px!important;
+ max-width:48px!important;max-height:48px!important;
+ box-sizing:border-box!important;
+ padding:0!important;margin:0!important;
+ object-fit:contain!important;
+ justify-self:center!important;align-self:center!important;
+ transform:scale(1)!important;
+ transform-origin:center center!important;
+}
+body.is-home-route .modern-home-v424 .home-quick-links-v1024>a[href="events.html"]>img.bm-premium-icon-v1100{
+ transform:scale(.8)!important;
+}
+body.is-home-route .modern-home-v424 .home-quick-links-v1024>a>span{
+ display:flex!important;flex-direction:column!important;
+ justify-content:center!important;min-width:0!important;
+ gap:3px!important;text-align:left!important;
+}
+body.is-home-route .modern-home-v424 .home-quick-links-v1024>a>span b,
+body.is-home-route .modern-home-v424 .home-quick-links-v1024>a>span small{
+ display:block!important;line-height:1.3!important;
+}
+body.is-home-route .modern-home-v424 .home-quick-links-v1024>a>i{
+ justify-self:end!important;align-self:center!important;
+ margin:0!important;
+}
+@media(max-width:520px){
+ body.is-home-route .modern-home-v424 .home-quick-links-v1024>a{
+  grid-template-columns:44px minmax(0,1fr) 10px!important;
+  column-gap:10px!important;min-height:70px!important;
+  padding:10px 12px!important;
+ }
+ body.is-home-route .modern-home-v424 .home-quick-links-v1024>a>img.bm-premium-icon-v1100{
+  width:44px!important;height:44px!important;
+  min-width:44px!important;min-height:44px!important;
+  max-width:44px!important;max-height:44px!important;
+ }
+}
+
+/* Quick access cards: identical icon slots and optical balance, v1163. */
+body.is-home-route .home-portal-v1016 .home-quick-links-v1024{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:stretch;
+}
+body.is-home-route .home-portal-v1016 .home-quick-links-v1024>a{
+ display:flex;align-items:center;gap:12px;min-width:0;min-height:82px;
+ padding:12px 15px;box-sizing:border-box;
+}
+body.is-home-route .home-portal-v1016 .home-quick-links-v1024>a>img.bm-premium-icon-v1100{
+ display:block!important;width:48px!important;height:48px!important;
+ min-width:48px!important;min-height:48px!important;
+ max-width:48px!important;max-height:48px!important;
+ flex:0 0 48px!important;object-fit:contain!important;
+ object-position:center!important;padding:0!important;margin:0!important;
+ transform-origin:center;transform:none!important;
+}
+body.is-home-route .home-portal-v1016 .home-quick-links-v1024>a:nth-child(2)>img.bm-premium-icon-v1100{
+ transform:scale(.84)!important;
+}
+body.is-home-route .home-portal-v1016 .home-quick-links-v1024>a>span{
+ display:flex;flex:1 1 auto;min-width:0;flex-direction:column;justify-content:center;
+}
+body.is-home-route .home-portal-v1016 .home-quick-links-v1024>a>span>b{
+ line-height:1.25;overflow-wrap:anywhere;
+}
+body.is-home-route .home-portal-v1016 .home-quick-links-v1024>a>span>small{
+ line-height:1.4;overflow-wrap:anywhere;
+}
+body.is-home-route .home-portal-v1016 .home-quick-links-v1024>a>i{
+ margin-left:auto;flex:0 0 auto;
+}
+@media(max-width:600px){
+ body.is-home-route .home-portal-v1016 .home-quick-links-v1024{
+  grid-template-columns:minmax(0,1fr)
+ }
+}
+
+
+/* === site-home-icon-align-v1164.css === */
+/* v1164: consistent home navigation icons and row alignment, scoped to homepage only */
+body.is-home-route .modern-home-v424 .home-index-links-v1016>a,
+body.is-home-route .modern-home-v424 .home-tools-grid-v1016>a,
+body.is-home-route .modern-home-v424 .home-portal-links-v1016>a{
+ box-sizing:border-box!important;min-width:0!important;
+ align-items:center!important;
+}
+body.is-home-route .modern-home-v424 .home-index-links-v1016>a,
+body.is-home-route .modern-home-v424 .home-portal-links-v1016>a{
+ display:grid!important;
+ grid-template-columns:44px minmax(0,1fr)!important;
+ column-gap:12px!important;
+ min-height:72px!important;
+ padding:12px 14px!important;
+}
+body.is-home-route .modern-home-v424 .home-portal-links-v1016>a{
+ grid-template-columns:44px minmax(0,1fr) 12px!important;
+}
+body.is-home-route .modern-home-v424 .home-tools-grid-v1016>a{
+ display:flex!important;gap:10px!important;
+ min-height:62px!important;padding:10px 12px!important;
+}
+body.is-home-route .modern-home-v424
+ :is(.home-index-links-v1016,.home-portal-links-v1016)>a>img.bm-premium-icon-v1100{
+ display:block!important;position:static!important;
+ width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;
+ max-width:44px!important;max-height:44px!important;
+ flex:0 0 44px!important;object-fit:contain!important;
+ padding:0!important;margin:0!important;box-sizing:border-box!important;
+ align-self:center!important;justify-self:center!important;
+}
+body.is-home-route .modern-home-v424 .home-tools-grid-v1016>a>img.bm-premium-icon-v1100{
+ display:block!important;position:static!important;
+ width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;
+ max-width:40px!important;max-height:40px!important;
+ flex:0 0 40px!important;object-fit:contain!important;
+ padding:0!important;margin:0!important;box-sizing:border-box!important;
+}
+body.is-home-route .modern-home-v424
+ :is(.home-index-links-v1016,.home-portal-links-v1016,.home-tools-grid-v1016)>a>span{
+ min-width:0!important;overflow-wrap:break-word!important;line-height:1.36!important;
+}
+body.is-home-route .modern-home-v424 .home-portal-links-v1016>a>span,
+body.is-home-route .modern-home-v424 .home-index-links-v1016>a>span{
+ display:flex!important;flex-direction:column!important;justify-content:center!important;gap:3px!important;
+}
+body.is-home-route .modern-home-v424 .home-portal-links-v1016>a>i{
+ align-self:center!important;justify-self:end!important;margin:0!important;
+}
+@media(max-width:520px){
+ body.is-home-route .modern-home-v424
+ :is(.home-index-links-v1016,.home-portal-links-v1016)>a{
+  grid-template-columns:40px minmax(0,1fr)!important;
+  gap:10px!important;min-height:66px!important;padding:10px 12px!important;
+ }
+ body.is-home-route .modern-home-v424 .home-portal-links-v1016>a{
+  grid-template-columns:40px minmax(0,1fr) 10px!important;
+ }
+ body.is-home-route .modern-home-v424
+ :is(.home-index-links-v1016,.home-portal-links-v1016)>a>img.bm-premium-icon-v1100{
+  width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;
+  max-width:40px!important;max-height:40px!important;
+ }
+}
+
+
+/* === site-home-quick-relocate-v1178.css === */
+/* v1178: desktop-only placement of the existing Quick Access panel
+   into the spare right column of More Useful Materials. */
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine){
+ body.is-home-route .modern-home-v424.home-portal-v1016
+ .home-more-visible-v1025 > .home-portal-secondary-v1016 > .home-utility-v1025{
+  display:block!important;
+  grid-column:2!important;
+  grid-row:1!important;
+  align-self:start!important;
+  justify-self:stretch!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  height:auto!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:18px 20px!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+ }
+ body.is-home-route .modern-home-v424.home-portal-v1016
+ .home-more-visible-v1025 > .home-portal-secondary-v1016 > .home-utility-v1025 .home-quick-links-v1024{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:10px!important;
+  align-items:stretch!important;
+ }
+ body.is-home-route .modern-home-v424.home-portal-v1016
+ .home-more-visible-v1025 > .home-portal-secondary-v1016 > .home-utility-v1025 .home-quick-links-v1024>a{
+  min-width:0!important;min-height:78px!important;
+ }
+}
+
+
+/* === site-home-icon-geometry-v1180.css === */
+/* v1181: identical modest icons in both lower homepage card groups. No scaling. */
+body.is-home-route.modern-v424 .modern-home-v424 .home-extra-unique-v1162>a.modern-topic-card-v424{
+ display:grid!important;grid-template-columns:46px minmax(0,1fr)!important;
+ grid-template-rows:auto auto!important;column-gap:12px!important;row-gap:3px!important;
+ min-height:74px!important;align-items:center!important;padding:10px 12px!important;
+}
+body.is-home-route.modern-v424 .modern-home-v424 .home-extra-unique-v1162>a.modern-topic-card-v424>.v445-topic-icon{
+ grid-column:1!important;grid-row:1/span 2!important;
+ display:grid!important;place-items:center!important;
+ width:46px!important;height:46px!important;
+ min-width:46px!important;min-height:46px!important;
+ max-width:46px!important;max-height:46px!important;
+ padding:2px!important;margin:0!important;box-sizing:border-box!important;
+ overflow:hidden!important;
+}
+body.is-home-route.modern-v424 .modern-home-v424 .home-extra-unique-v1162>a.modern-topic-card-v424>b{
+ grid-column:2!important;grid-row:1!important;align-self:end!important;min-width:0!important;
+}
+body.is-home-route.modern-v424 .modern-home-v424 .home-extra-unique-v1162>a.modern-topic-card-v424>small{
+ grid-column:2!important;grid-row:2!important;align-self:start!important;min-width:0!important;
+}
+body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424>a{
+ display:grid!important;grid-template-columns:46px minmax(0,1fr) 12px!important;
+ column-gap:12px!important;align-items:center!important;
+ min-height:70px!important;padding:9px 12px!important;box-sizing:border-box!important;
+}
+body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424>a>.v424-list-icon{
+ grid-column:1!important;grid-row:1/span 2!important;
+ display:grid!important;place-items:center!important;
+ width:46px!important;height:46px!important;
+ min-width:46px!important;min-height:46px!important;
+ max-width:46px!important;max-height:46px!important;
+ padding:2px!important;margin:0!important;box-sizing:border-box!important;
+ overflow:hidden!important;
+}
+body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424>a>div{
+ grid-column:2!important;grid-row:1/span 2!important;min-width:0!important;
+}
+body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424>a>i{
+ grid-column:3!important;grid-row:1/span 2!important;align-self:center!important;
+}
+/* One exact optical size for both sets of original artwork. */
+body.is-home-route.modern-v424 .modern-home-v424 .home-extra-unique-v1162>a.modern-topic-card-v424>.v445-topic-icon>img.bm-premium-icon-v1100,
+body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424>a>.v424-list-icon>img.bm-premium-icon-v1100{
+ display:block!important;position:static!important;
+ width:42px!important;height:42px!important;
+ min-width:42px!important;min-height:42px!important;
+ max-width:42px!important;max-height:42px!important;
+ margin:0!important;padding:0!important;
+ object-fit:contain!important;object-position:center!important;
+ box-sizing:border-box!important;transform:none!important;
+ filter:none!important;
+}
+@media(max-width:600px){
+ html:not(.force-desktop-root) body.is-home-route.modern-v424 .modern-home-v424 .home-extra-unique-v1162>a.modern-topic-card-v424{
+  grid-template-columns:44px minmax(0,1fr)!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424>a{
+  grid-template-columns:44px minmax(0,1fr) 10px!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route.modern-v424 .modern-home-v424 .home-extra-unique-v1162>a.modern-topic-card-v424>.v445-topic-icon,
+ html:not(.force-desktop-root) body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424>a>.v424-list-icon{
+  width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;
+  max-width:44px!important;max-height:44px!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route.modern-v424 .modern-home-v424 .home-extra-unique-v1162>a.modern-topic-card-v424>.v445-topic-icon>img.bm-premium-icon-v1100,
+ html:not(.force-desktop-root) body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424>a>.v424-list-icon>img.bm-premium-icon-v1100{
+  width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;
+  max-width:40px!important;max-height:40px!important;
+ }
+}
+
+/* v1182: make 'Latest changes' a compact two-column card collection. */
+@media (min-width:760px){
+ body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  align-items:stretch!important;
+  gap:10px!important;
+ }
+}
+body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424>a{
+ width:100%!important;min-width:0!important;
+ min-height:74px!important;
+ border-radius:12px!important;
+ grid-template-columns:46px minmax(0,1fr) 10px!important;
+ column-gap:10px!important;row-gap:2px!important;
+ padding:10px 12px!important;
+ box-sizing:border-box!important;
+}
+body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424>a>div{
+ display:flex!important;flex-direction:column!important;justify-content:center!important;gap:3px!important;
+}
+body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424>a>div>b,
+body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424>a>div>small{
+ display:block!important;min-width:0!important;line-height:1.3!important;
+ overflow-wrap:break-word!important;
+}
+@media(max-width:759px){
+ body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424{
+  display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:9px!important;
+ }
+}
+
+/* v1183: remove secondary square tile frames around icon artwork.
+   Keep only the outer card borders; preserve 42px icon sizing. */
+body.is-home-route.modern-v424 .modern-home-v424 .home-extra-unique-v1162>a.modern-topic-card-v424>.v445-topic-icon,
+body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424>a>.v424-list-icon{
+ background:none!important;background-image:none!important;
+ border:0!important;border-radius:0!important;
+ outline:0!important;box-shadow:none!important;
+ padding:2px!important;
+ overflow:visible!important;
+ filter:none!important;
+}
+body.is-home-route.modern-v424 .modern-home-v424 .home-extra-unique-v1162>a.modern-topic-card-v424>.v445-topic-icon::before,
+body.is-home-route.modern-v424 .modern-home-v424 .home-extra-unique-v1162>a.modern-topic-card-v424>.v445-topic-icon::after,
+body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424>a>.v424-list-icon::before,
+body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424>a>.v424-list-icon::after{
+ content:none!important;display:none!important;
+}
+
+
+/* === site-skip-navigation-v1184.css === */
+/* Белая мгла: keyboard-accessible content jump.
+   Invisible during normal browsing, visible on keyboard focus. */
+.bm-skip-to-content-v1184{
+ position:fixed!important;left:16px!important;top:10px!important;
+ z-index:100000!important;display:inline-flex!important;align-items:center!important;
+ min-height:44px!important;box-sizing:border-box!important;
+ padding:10px 18px!important;border:2px solid #a7e7ff!important;
+ border-radius:12px!important;background:#0b2445!important;color:#fff!important;
+ font:700 15px/1.35 system-ui,Arial,sans-serif!important;
+ text-decoration:none!important;box-shadow:0 8px 24px rgba(0,8,29,.35)!important;
+ transform:translateY(-160%)!important;opacity:0!important;
+ pointer-events:none!important;
+}
+.bm-skip-to-content-v1184:focus,
+.bm-skip-to-content-v1184:focus-visible{
+ transform:none!important;opacity:1!important;pointer-events:auto!important;
+ outline:3px solid #e8f7ff!important;outline-offset:3px!important;
+}
+
