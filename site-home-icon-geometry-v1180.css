@@ -69,3 +69,35 @@ body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .m
   max-width:40px!important;max-height:40px!important;
  }
 }
+
+/* v1182: make 'Latest changes' a compact two-column card collection. */
+@media (min-width:760px){
+ body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  align-items:stretch!important;
+  gap:10px!important;
+ }
+}
+body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424>a{
+ width:100%!important;min-width:0!important;
+ min-height:74px!important;
+ border-radius:12px!important;
+ grid-template-columns:46px minmax(0,1fr) 10px!important;
+ column-gap:10px!important;row-gap:2px!important;
+ padding:10px 12px!important;
+ box-sizing:border-box!important;
+}
+body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424>a>div{
+ display:flex!important;flex-direction:column!important;justify-content:center!important;gap:3px!important;
+}
+body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424>a>div>b,
+body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424>a>div>small{
+ display:block!important;min-width:0!important;line-height:1.3!important;
+ overflow-wrap:break-word!important;
+}
+@media(max-width:759px){
+ body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424{
+  display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:9px!important;
+ }
+}
