@@ -75,7 +75,10 @@ jobs:
           PY
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html assets/news-ru-selected-optimized.webp assets/creative-corner-header-optimized.webp 2>/dev/null || true
+          git add index.html
+          for asset in assets/news-ru-selected-optimized.webp assets/creative-corner-header-optimized.webp; do
+            if [ -f "$asset" ]; then git add "$asset"; fi
+          done
           if git diff --cached --quiet; then
             echo "No approved banner changes to publish."
             exit 0
