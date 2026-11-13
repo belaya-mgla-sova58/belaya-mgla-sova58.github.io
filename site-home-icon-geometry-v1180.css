@@ -101,3 +101,21 @@ body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .m
   display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:9px!important;
  }
 }
+
+/* v1183: remove secondary square tile frames around icon artwork.
+   Keep only the outer card borders; preserve 42px icon sizing. */
+body.is-home-route.modern-v424 .modern-home-v424 .home-extra-unique-v1162>a.modern-topic-card-v424>.v445-topic-icon,
+body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424>a>.v424-list-icon{
+ background:none!important;background-image:none!important;
+ border:0!important;border-radius:0!important;
+ outline:0!important;box-shadow:none!important;
+ padding:2px!important;
+ overflow:visible!important;
+ filter:none!important;
+}
+body.is-home-route.modern-v424 .modern-home-v424 .home-extra-unique-v1162>a.modern-topic-card-v424>.v445-topic-icon::before,
+body.is-home-route.modern-v424 .modern-home-v424 .home-extra-unique-v1162>a.modern-topic-card-v424>.v445-topic-icon::after,
+body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424>a>.v424-list-icon::before,
+body.is-home-route.modern-v424 .modern-home-v424 .home-portal-secondary-v1016 .modern-panel-side-v424 .modern-list-v424>a>.v424-list-icon::after{
+ content:none!important;display:none!important;
+}
