@@ -295,6 +295,91 @@ body.is-news-route .news-shell .ogonek-news-arrow{width:29px!important;height:29
   body.is-news-route .news-shell .ogonek-news-caption small{font-size:9px!important;line-height:1.25!important}
   body.is-news-route .news-shell .ogonek-news-arrow{width:26px!important;height:26px!important;font-size:15px!important}
 }
+</style><style id="news-feature-equal-fullimage-v3">
+/* Единый компактный формат двух новостных шапок.
+   Исходное изображение «К вам на огонек» показываем ЦЕЛИКОМ. */
+body.is-news-route .news-shell .tv-feature-58,
+body.is-news-route .news-shell .ogonek-news-feature{
+  box-sizing:border-box!important;
+  width:100%!important;
+  height:244px!important;
+  min-height:0!important;
+  margin:0 0 14px!important;
+  border-radius:16px!important;
+}
+body.is-news-route .news-shell .tv-feature-58{
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:space-between!important;
+}
+body.is-news-route .news-shell .tv-feature-58__link{
+  box-sizing:border-box!important;
+  flex:1 1 auto!important;
+  min-height:0!important;
+  padding:13px 21px 4px!important;
+}
+body.is-news-route .news-shell .tv-feature-58__stats{
+  flex:0 0 auto!important;
+  padding:6px 21px 10px!important;
+}
+body.is-news-route .news-shell .ogonek-news-feature{
+  display:flex!important;
+  flex-direction:column!important;
+  isolation:isolate;
+  background:
+    radial-gradient(ellipse at 50% 36%,rgba(63,117,182,.37),transparent 68%),
+    linear-gradient(90deg,#09192c,#1c3052 50%,#09192c)!important;
+}
+body.is-news-route .news-shell .ogonek-news-feature>img{
+  position:relative!important;
+  z-index:1!important;
+  box-sizing:border-box!important;
+  display:block!important;
+  flex:1 1 auto!important;
+  width:100%!important;
+  height:0!important;
+  min-height:0!important;
+  max-height:none!important;
+  padding:3px 0!important;
+  aspect-ratio:auto!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+}
+body.is-news-route .news-shell .ogonek-news-caption{
+  position:relative!important;
+  z-index:2!important;
+  flex:0 0 auto!important;
+  padding:7px 12px 8px!important;
+}
+@media(max-width:760px){
+  body.is-news-route .news-shell .tv-feature-58,
+  body.is-news-route .news-shell .ogonek-news-feature{
+    height:221px!important;
+    margin-bottom:11px!important;
+    border-radius:12px!important;
+  }
+  body.is-news-route .news-shell .tv-feature-58__link{
+    flex:1 1 auto!important;
+    min-height:0!important;
+    height:auto!important;
+    padding:13px 14px 4px!important;
+  }
+  body.is-news-route .news-shell .tv-feature-58__stats{
+    flex:0 0 auto!important;
+    padding:5px 12px 9px!important;
+  }
+  body.is-news-route .news-shell .ogonek-news-feature>img{
+    height:0!important;
+    min-height:0!important;
+    padding:3px 0!important;
+    aspect-ratio:auto!important;
+    object-fit:contain!important;
+    object-position:center center!important;
+  }
+  body.is-news-route .news-shell .ogonek-news-caption{
+    padding:7px 10px 8px!important;
+  }
+}
 </style></head><body class="is-news-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="news"><div aria-hidden="true" class="site-cosmic-background-v442"></div><div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
 <button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
 <div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Новости</small></div>
