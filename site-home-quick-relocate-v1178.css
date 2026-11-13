@@ -1,0 +1,32 @@
+/* v1178: desktop-only placement of the existing Quick Access panel
+   into the spare right column of More Useful Materials. */
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine){
+ body.is-home-route .modern-home-v424.home-portal-v1016
+ .home-more-visible-v1025 > .home-portal-secondary-v1016 > .home-utility-v1025{
+  display:block!important;
+  grid-column:2!important;
+  grid-row:1!important;
+  align-self:start!important;
+  justify-self:stretch!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  height:auto!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:18px 20px!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+ }
+ body.is-home-route .modern-home-v424.home-portal-v1016
+ .home-more-visible-v1025 > .home-portal-secondary-v1016 > .home-utility-v1025 .home-quick-links-v1024{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:10px!important;
+  align-items:stretch!important;
+ }
+ body.is-home-route .modern-home-v424.home-portal-v1016
+ .home-more-visible-v1025 > .home-portal-secondary-v1016 > .home-utility-v1025 .home-quick-links-v1024>a{
+  min-width:0!important;min-height:78px!important;
+ }
+}
