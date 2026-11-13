@@ -63,12 +63,17 @@ jobs:
               if a.size != b.size:
                 raise SystemExit('Banner dimensions changed')
               b.verify()
-            if html.count('src="'+source+'"') != 1:
-              raise SystemExit('Expected exactly one original banner reference: '+source)
+            original_ref='src="'+source+'"'
+            optimized_ref='src="'+destination+'"'
+            if html.count(original_ref)==1 and html.count(optimized_ref)==0:
+              html=html.replace(original_ref,optimized_ref)
+            elif html.count(original_ref)==0 and html.count(optimized_ref)==1:
+              print('Already linked:',destination)
+            else:
+              raise SystemExit('Unexpected banner references: '+source)
             shutil.copyfile(candidate,root/destination)
-            html=html.replace('src="'+source+'"','src="'+destination+'"')
             published+=1
-            print('Prepared:',source,'->',destination)
+            print('Verified:',source,'->',destination)
           if published:
             index.write_text(html,encoding='utf-8')
           print('Approved banners:',published)
