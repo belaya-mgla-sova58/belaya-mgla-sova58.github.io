@@ -503,6 +503,7 @@ body.is-home-route .home-portal-v1016 .home-portal-links-v1016 > a[href="heroes.
 <link rel="stylesheet" href="site-home-tidy-v1162.css?v=1163"/>
 <link rel="stylesheet" href="site-home-icon-align-v1164.css?v=1164"/>
 <link rel="stylesheet" href="site-home-extra-icons-v1173.css?v=1177"/>
+<link rel="stylesheet" href="site-home-quick-relocate-v1178.css?v=1178"/>
 </head><body class="is-home-route home-hq-v405 home-hq-v406 home-site-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="home"><div aria-hidden="true" class="site-cosmic-background-v442"></div>
 <div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
 <button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
@@ -761,6 +762,28 @@ body.is-home-route .home-portal-v1016 .home-portal-links-v1016 > a[href="heroes.
    button.setAttribute('aria-expanded',String(expanded));
    button.firstChild.textContent=expanded?'Скрыть дополнительные разделы ':'Показать все дополнительные разделы ';
   });
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
+ else init();
+})();
+</script><script id="home-quick-relocate-v1178">
+(function(){
+ function init(){
+  var source=document.querySelector('.home-bottom-grid-v1025');
+  var destination=document.querySelector('.home-more-visible-v1025 > .home-portal-secondary-v1016');
+  var panel=source&&source.querySelector('.home-utility-v1025');
+  if(!source||!destination||!panel)return;
+  var mq=window.matchMedia('(min-width:1100px) and (hover:hover) and (pointer:fine)');
+  function place(){
+   if(mq.matches){
+    if(panel.parentElement!==destination)destination.appendChild(panel);
+   }else{
+    if(panel.parentElement!==source)source.appendChild(panel);
+   }
+  }
+  place();
+  if(mq.addEventListener)mq.addEventListener('change',place);
+  else if(mq.addListener)mq.addListener(place);
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
  else init();
