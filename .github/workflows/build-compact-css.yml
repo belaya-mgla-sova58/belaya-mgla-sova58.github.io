@@ -1,0 +1,58 @@
+name: Build conservative compact CSS bundles
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/build-compact-css.yml"
+      - "site-home-v995.css"
+      - "site-v626.min.css"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: build-compact-css
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Install conservative CSS compressor
+        run: npm install --no-save --no-audit --no-fund clean-css@5.3.3
+      - name: Minify whitespace and safe CSS syntax, preserving cascade order
+        run: |
+          node <<'JS'
+          const fs=require('node:fs');
+          const CleanCSS=require('clean-css');
+          const files=[
+            ['site-home-v995.css','site-home-compact-v1.css'],
+            ['site-v626.min.css','site-common-compact-v1.css']
+          ];
+          for(const [src,dst] of files){
+            const original=fs.readFileSync(src,'utf8');
+            const result=new CleanCSS({level:1,rebase:false,format:false}).minify(original);
+            if(result.errors.length||!result.styles||result.styles.length>=original.length*0.95){
+              throw Error('Unsafe or ineffective CSS minification of '+src+': '+result.errors.join(', '));
+            }
+            const output='/* Source: '+src+'; conservative clean-css level 1; cascade order retained. */\n'+result.styles;
+            fs.writeFileSync(dst,output+'\n');
+            console.log(src+' '+Buffer.byteLength(original)+' bytes -> '+dst+' '+Buffer.byteLength(output)+' bytes');
+          }
+          JS
+      - name: Commit derived CSS without touching canonical stylesheet
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add site-home-compact-v1.css site-common-compact-v1.css
+          if git diff --cached --quiet; then
+            echo 'Compact CSS bundles are current.'
+            exit 0
+          fi
+          git commit -m 'Generate conservative compact CSS from canonical site stylesheets'
+          git pull --rebase origin main
+          git push origin HEAD:main
