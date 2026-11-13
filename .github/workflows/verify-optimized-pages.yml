@@ -1,0 +1,35 @@
+name: Verify optimized high-traffic pages
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/verify-optimized-pages.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Lighthouse browser
+        run: |
+          npm install --no-save --no-audit --no-fund playwright lighthouse
+          npx playwright install --with-deps chromium
+      - name: Compare current news, events and homepage
+        env:
+          SOVA_LH_PAGES: index.html,news.html,news-ru.html,events.html
+          SOVA_LH_MODES: mobile,desktop
+        run: node tests/lighthouse-audit.cjs
+      - name: Save optimization report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sova58-optimized-pages-report
+          path: visual-audit-results/
+          if-no-files-found: warn
+          retention-days: 14
