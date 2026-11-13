@@ -1,0 +1,58 @@
+name: Audit resource requests and horizontal overflow
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/browser-resource-audit.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install browser
+        run: |
+          npm install --no-save --no-audit --no-fund playwright
+          npx playwright install --with-deps chromium
+      - name: Check six routes on narrow phones and desktop
+        shell: bash
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/site.log 2>&1 &
+          node <<'JS'
+          const {chromium}=require('playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            const routes=['index.html','news.html','news-ru.html','events.html','other.html','k-vam-na-ogonek.html'];
+            for (const mode of [{name:'mobile',w:390,h:844},{name:'desktop',w:1440,h:900}]){
+              const ctx=await browser.newContext({viewport:{width:mode.w,height:mode.h},deviceScaleFactor:mode.name==='mobile'?2:1,isMobile:mode.name==='mobile',hasTouch:mode.name==='mobile'});
+              for(const route of routes){
+                const page=await ctx.newPage();
+                const requests=[],errors=[];
+                page.on('request',req=>{try{const u=new URL(req.url());if(u.origin==='http://127.0.0.1:4173') requests.push(u.pathname+u.search)}catch(e){}});
+                page.on('pageerror',e=>errors.push(e.message));
+                try{
+                  await page.goto('http://127.0.0.1:4173/'+route,{waitUntil:'domcontentloaded',timeout:30000});
+                  await page.waitForTimeout(1100);
+                  const metrics=await page.evaluate(()=>({
+                    overflow:Math.max(0,document.documentElement.scrollWidth-document.documentElement.clientWidth),
+                    height:document.documentElement.scrollHeight,
+                    firstTitle:document.title
+                  }));
+                  const css=requests.filter(x=>x.endsWith('.css')||x.includes('.css?'));
+                  const dup=Object.entries(css.reduce((o,x)=>{const key=x.split('?')[0];o[key]=(o[key]||0)+1;return o},{})).filter(([k,v])=>v>1);
+                  const images=requests.filter(x=>/\.(webp|png|jpg)(?:\?|$)/i.test(x));
+                  const hero=images.filter(x=>x.includes('belaya_mgla_new_header'));
+                  console.log(JSON.stringify({mode:mode.name,route,overflow:metrics.overflow,
+                    requests:requests.length,css:css.length,duplicateCss:dup,
+                    images:images.length,hero,jsErrors:errors.slice(0,3)}));
+                }catch(e){console.log(JSON.stringify({mode:mode.name,route,error:String(e.message).slice(0,240)}))}
+                finally{await page.close()}
+              }
+              await ctx.close();
+            }
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          JS
