@@ -55,6 +55,44 @@ function firstSelectorCharacter(css, start, end) {
   return i;
 }
 
+// Remove only comments and whitespace that cannot affect selector/value semantics.
+// Preserve spaces inside strings, functions (including calc/url), and selector chains.
+function compact(css) {
+  let out = '', quote = '', escaped = false, comment = false, parens = 0;
+  for (let i = 0; i < css.length; i++) {
+    const ch = css[i], next = css[i + 1];
+    if (comment) {
+      if (ch === '*' && next === '/') { comment = false; i++; }
+      continue;
+    }
+    if (quote) {
+      out += ch;
+      if (escaped) escaped = false;
+      else if (ch === '\\') escaped = true;
+      else if (ch === quote) quote = '';
+      continue;
+    }
+    if (ch === '/' && next === '*') { comment = true; i++; continue; }
+    if (ch === '"' || ch === "'") { quote = ch; out += ch; continue; }
+    if (ch === '(') parens++;
+    else if (ch === ')') parens = Math.max(0, parens - 1);
+    if (/\\s/.test(ch) && parens === 0) {
+      let j = i + 1;
+      while (j < css.length && /\\s/.test(css[j])) j++;
+      const previous = out.slice(-1), following = css[j] || '';
+      if (!previous || !following || previous === '{' || previous === '}' ||
+          previous === ';' || following === '{' || following === '}' ||
+          following === ';') { i = j - 1; continue; }
+      out += ' ';
+      i = j - 1;
+      continue;
+    }
+    out += ch;
+  }
+  if (quote || comment || parens) throw Error('Cannot safely compact unterminated CSS');
+  return out;
+}
+
 function build(css) {
   const stack = [], blocks = [];
   let start = 0, quoted = '', comment = false, parens = 0, brackets = 0;
@@ -120,7 +158,7 @@ function build(css) {
   let out=css;
   for (const rule of removals.slice().reverse())
     out=out.slice(0, rule.start)+out.slice(rule.end);
-  return { content: HEADER + out, removedRules: removals.length, removedBytes };
+  return { content: HEADER + compact(out), removedRules: removals.length, removedBytes };
 }
 
 const css = fs.readFileSync(INPUT, 'utf8');
