@@ -31,22 +31,39 @@ jobs:
               for(const route of routes){
                 const page=await ctx.newPage();
                 const requests=[],errors=[];
+                await page.addInitScript(() => {
+                  window.__sovaShifts=[];
+                  try {
+                    new PerformanceObserver(list=>{
+                      for(const shift of list.getEntries()){
+                        if(shift.hadRecentInput)continue;
+                        const entries=(shift.sources||[]).slice(0,3).map(x=>({
+                          element:x.node?.tagName?.toLowerCase()+'.'+String(x.node?.className||'').slice(0,90),
+                          prev:x.previousRect?.y, next:x.currentRect?.y
+                        }));
+                        window.__sovaShifts.push({value:+shift.value.toFixed(4),sources:entries});
+                      }
+                    }).observe({type:'layout-shift',buffered:true});
+                  }catch(e){}
+                });
                 page.on('request',req=>{try{const u=new URL(req.url());if(u.origin==='http://127.0.0.1:4173') requests.push(u.pathname+u.search)}catch(e){}});
                 page.on('pageerror',e=>errors.push(e.message));
                 try{
                   await page.goto('http://127.0.0.1:4173/'+route,{waitUntil:'domcontentloaded',timeout:30000});
-                  await page.waitForTimeout(1100);
+                  await page.waitForTimeout(1900);
                   const metrics=await page.evaluate(()=>({
                     overflow:Math.max(0,document.documentElement.scrollWidth-document.documentElement.clientWidth),
                     height:document.documentElement.scrollHeight,
-                    firstTitle:document.title
+                    firstTitle:document.title,
+                    cls:+(window.__sovaShifts||[]).reduce((s,x)=>s+x.value,0).toFixed(3),
+                    topShifts:(window.__sovaShifts||[]).sort((a,b)=>b.value-a.value).slice(0,5)
                   }));
                   const css=requests.filter(x=>x.endsWith('.css')||x.includes('.css?'));
                   const dup=Object.entries(css.reduce((o,x)=>{const key=x.split('?')[0];o[key]=(o[key]||0)+1;return o},{})).filter(([k,v])=>v>1);
                   const images=requests.filter(x=>/\.(webp|png|jpg)(?:\?|$)/i.test(x));
                   const hero=images.filter(x=>x.includes('belaya_mgla_new_header'));
                   console.log(JSON.stringify({mode:mode.name,route,overflow:metrics.overflow,
-                    requests:requests.length,css:css.length,duplicateCss:dup,
+                    requests:requests.length,css:css.length,duplicateCss:dup,cls:metrics.cls,topShifts:metrics.topShifts,
                     images:images.length,hero,jsErrors:errors.slice(0,3)}));
                 }catch(e){console.log(JSON.stringify({mode:mode.name,route,error:String(e.message).slice(0,240)}))}
                 finally{await page.close()}
