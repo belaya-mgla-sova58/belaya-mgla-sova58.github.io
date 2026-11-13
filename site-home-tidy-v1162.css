@@ -1,0 +1,24 @@
+/* Home navigation cleanup v1162: secondary materials only; no changes to game content. */
+body.is-home-route .modern-home-v424 .home-extra-unique-v1162{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,1.25vw,18px)
+}
+body.is-home-route .modern-home-v424 .home-extra-unique-v1162 .modern-topic-card-v424{
+ min-width:0;display:flex;flex-direction:column;align-items:flex-start;
+ gap:7px;padding:clamp(13px,1.3vw,19px);text-decoration:none;
+}
+body.is-home-route .modern-home-v424 .home-extra-unique-v1162 .modern-topic-card-v424 b{
+ font-size:clamp(14px,1.1vw,17px);line-height:1.3
+}
+body.is-home-route .modern-home-v424 .home-extra-unique-v1162 .modern-topic-card-v424 small{
+ font-size:13px;line-height:1.5
+}
+body.is-home-route .modern-home-v424 :is(.home-portal-block-title-v1016,.modern-panel-head-v424 h2,.home-more-title-v1025){
+ line-height:1.25;letter-spacing:.008em;text-wrap:balance;
+}
+body.is-home-route .modern-home-v424 .modern-panel-head-v424{gap:12px;align-items:center}
+body.is-home-route .modern-home-v424 .modern-panel-head-v424 a{white-space:nowrap}
+@media(max-width:950px){body.is-home-route .modern-home-v424 .home-extra-unique-v1162{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){
+ body.is-home-route .modern-home-v424 .home-extra-unique-v1162{grid-template-columns:minmax(0,1fr)}
+ body.is-home-route .modern-home-v424 .home-extra-unique-v1162 .modern-topic-card-v424{padding:12px 14px}
+}
