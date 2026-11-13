@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html lang="ru"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Наш гость: [VgB]Бараш · К вам на огонек | Белая Мгла</title>
+<meta content="#0a1323" name="theme-color"/>
+<style>
+:root{color-scheme:dark;--gold:#f5d59b;--ice:#a9d7ff;--muted:#bbcae1;--edge:rgba(240,198,125,.7)}
+*{box-sizing:border-box}html,body{margin:0}body{font:16px/1.6 system-ui,'Segoe UI',Arial,sans-serif;color:#f7f5f0;background:radial-gradient(ellipse at 50% 0,#223453 0%,#0b1526 52%,#090f1b 100%);min-height:100vh}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(#d0dcfd 0.6px,transparent 1px);background-size:72px 79px;opacity:.14}
+.page{position:relative;max-width:1310px;margin:0 auto;padding:25px 30px 42px}
+.head{text-align:center;margin-bottom:19px}.mini{font:700 10px/1.5 system-ui,sans-serif;color:#dec5a0;letter-spacing:.4em;text-transform:uppercase}
+h1{margin:4px 0;font:normal clamp(39px,5vw,65px)/1.1 Georgia,'Times New Roman',serif;color:#f5e4c1;text-shadow:0 0 23px #f6b75c45}
+.guestline{margin:10px 0 2px;font-size:16px;color:#f8f1e8}.guestline strong{color:#ffe1a5;font-weight:700}.hostline{font-size:12px;color:#b5cadf;letter-spacing:.04em}
+.chat{position:relative;isolation:isolate;overflow:hidden;height:min(750px,calc(100dvh - 200px));min-height:550px;border-radius:23px;border:2px solid rgba(245,203,136,.75);box-shadow:0 18px 65px #0009,0 0 0 4px rgba(15,24,41,.95),0 0 0 5px rgba(244,198,125,.27),0 0 32px #6ca5ff19;display:flex;flex-direction:column;background:#1b2537}
+.chat:before{position:absolute;content:"";z-index:1;pointer-events:none;inset:6px;border:1px solid rgba(255,227,182,.34);border-radius:17px}
+.scenery{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:center 51%}
+.overlay{position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,rgba(8,17,35,.27),rgba(8,17,35,.25) 40%,rgba(8,17,35,.30)),linear-gradient(180deg,rgba(6,11,21,.49),transparent 19%,transparent 78%,rgba(4,9,18,.61));}
+.chat-toolbar{position:relative;z-index:2;min-height:60px;flex:0 0 60px;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 25px;background:linear-gradient(90deg,rgba(5,14,29,.88),rgba(19,30,52,.76));border-bottom:1px solid rgba(255,214,156,.35);backdrop-filter:blur(10px)}
+.status{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;color:#fbe5c2;letter-spacing:.01em}.flame{font-size:24px;filter:drop-shadow(0 0 9px #ffb05d);line-height:1}.chapters{font-size:12px;color:#e0d3c5;white-space:nowrap}
+.chat-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;touch-action:pan-y;padding:30px max(5%,calc((100% - 790px)/2)) 58px;scrollbar-width:thin;scrollbar-color:#e4ba7b6f #1015257f;scroll-behavior:smooth}
+.chat-scroll::-webkit-scrollbar{width:8px}.chat-scroll::-webkit-scrollbar-thumb{background:#d6bb8b9c;border-radius:10px}.exchange{padding:4px 0 22px;scroll-margin-top:8px}.exchange+.exchange{border-top:1px solid rgba(247,214,159,.34);padding-top:23px}
+.question-row,.answer-row{display:flex;flex-direction:column;min-width:0}.answer-row{align-items:flex-end;margin-top:21px}.sender{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;text-shadow:0 1px 5px #07101b;line-height:1.4;margin:0 0 7px;color:#d0efff}.answer-row .sender{color:#ffe0aa}.mark{width:27px;height:27px;display:grid;place-items:center;border-radius:50%;font:700 14px Georgia,serif;background:#244769;border:1px solid #81bbed;box-shadow:0 0 15px #51b9f750;color:#e8f7ff}.mark-guest{background:#734d2e;border-color:#f2c377;color:#fff0cc;box-shadow:0 0 14px #f2aa5150}.meta{color:#d0d8e4b3;font-size:10px;font-weight:500;letter-spacing:.04em}
+.message{font-size:16px;line-height:1.64;padding:18px 21px;max-width:85%;overflow-wrap:anywhere;border:1px solid rgba(181,215,246,.7);border-radius:17px 17px 17px 5px;background:linear-gradient(135deg,rgba(10,33,64,.91),rgba(20,41,69,.84));backdrop-filter:blur(10px);box-shadow:0 8px 28px #0007,0 1px 16px #70baff26;color:#f5faff;text-shadow:0 1px 1px #0005}
+.message.answer{border-color:rgba(255,204,130,.8);border-radius:17px 17px 5px 17px;background:linear-gradient(135deg,rgba(53,37,42,.93),rgba(37,32,47,.88));box-shadow:0 8px 28px #0008,0 1px 15px #ffa84b28;color:#fff7e8}
+.foot{z-index:2;flex:0 0 62px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 24px;background:linear-gradient(90deg,rgba(7,16,33,.92),rgba(24,31,52,.89));border-top:1px solid rgba(251,216,161,.38);backdrop-filter:blur(12px)}.hint{font-size:12px;color:#e3d5c6}.navigation{display:flex;align-items:center;gap:10px}.counter{min-width:51px;text-align:center;color:#f6dab1;font-size:13px;font-variant-numeric:tabular-nums}
+.nav{border:1px solid #d7ba83;color:#ffe3b0;background:#26334dbb;border-radius:50%;width:37px;height:37px;display:grid;place-items:center;font-size:21px;cursor:pointer;line-height:1}.nav:hover:not(:disabled){background:#395072}.nav:disabled{opacity:.35;cursor:default}.nav:focus-visible,.chat-scroll:focus-visible{outline:2px solid #fce2ad;outline-offset:-2px}
+.under{text-align:center;font-size:11px;letter-spacing:.11em;color:#b2c0d3;margin:19px 0 0}
+@media(min-width:900px){.chat-scroll{padding-left:calc((100% - 720px)/2);padding-right:calc((100% - 720px)/2)}.message{max-width:92%}}
+@media(max-width:650px){.page{padding:12px 10px 30px}.head{margin-bottom:14px}.mini{font-size:9px;letter-spacing:.25em}h1{font-size:42px}.guestline{margin-top:7px;font-size:14px}.hostline{font-size:11px}.chat{height:min(735px,calc(100dvh - 150px));min-height:485px;border-radius:16px}.chat:before{inset:4px;border-radius:11px}.chat-toolbar{padding:0 15px;min-height:49px;flex-basis:49px}.status{font-size:12px;gap:6px}.flame{font-size:19px}.chapters{font-size:10px}.overlay{background:linear-gradient(90deg,rgba(6,12,23,.27),rgba(7,13,26,.29)),linear-gradient(180deg,rgba(5,10,21,.40),transparent 21%,transparent 65%,rgba(4,9,21,.44))}.scenery{object-position:center 48%}.chat-scroll{padding:18px 12px 36px}.exchange{padding-bottom:17px}.exchange+.exchange{padding-top:20px}.message{font-size:14px;line-height:1.55;max-width:91%;padding:13px 14px;border-radius:14px 14px 14px 4px}.message.answer{border-radius:14px 14px 4px 14px}.sender{font-size:11px;margin-bottom:5px}.mark{width:24px;height:24px;font-size:13px}.meta{font-size:9px}.answer-row{margin-top:15px}.foot{padding:7px 13px;flex-basis:55px}.hint{font-size:11px}.nav{width:32px;height:32px;font-size:18px}.under{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.chat-scroll{scroll-behavior:auto}}
+
+/* Выбранная шапка рубрики: оригинал пользователя, без перерисовки */
+.page{max-width:1370px}
+.head{margin-bottom:17px}
+.banner{overflow:hidden;border:1px solid rgba(255,211,139,.69);border-radius:19px;box-shadow:0 0 0 4px rgba(4,17,39,.85),0 0 38px rgba(92,161,237,.19),0 21px 35px rgba(0,0,0,.35);background:#101f36}
+.banner img{display:block;width:100%;height:auto;object-fit:contain}
+.guest-card{margin:18px auto 3px;max-width:750px;display:flex;gap:20px;align-items:center;justify-content:center;padding:12px 16px;border-radius:15px;border:1px solid rgba(220,173,106,.37);background:linear-gradient(100deg,rgba(18,32,60,.65),rgba(39,32,48,.7),rgba(18,32,60,.65));box-shadow:0 7px 21px rgba(0,0,0,.23)}
+.guest-card .guestline{margin:0 12px 0 0;font-size:16px}
+.guest-card .hostline{font-size:12px;white-space:nowrap}
+.guest-spark{color:#eec791;text-shadow:0 0 12px #e9c77e}
+.chat{height:min(700px,calc(100dvh - 130px));min-height:470px}
+@media(max-width:650px){
+ .page{padding:10px 9px 28px}
+ .banner{border-radius:11px}
+ .guest-card{margin-top:12px;padding:11px 8px;display:flex;flex-wrap:wrap;gap:0 8px}
+ .guest-card .guestline{font-size:14px;margin:0;flex:0 0 100%}
+ .guest-card .hostline{font-size:11px;flex:0 0 100%}
+ .guest-spark{display:none}
+ .chat{height:min(670px,calc(100dvh - 220px));min-height:470px}
+}
+
+/* Новостная шапка и интервью находятся на разных экранах */
+[hidden]{display:none !important}
+body{background:radial-gradient(ellipse at 50% 0%,#253d63 0,#0c182b 46%,#090f1b 100%)}
+a{color:inherit;text-decoration:none}
+.news-view{position:relative;max-width:1350px;margin:0 auto;padding:37px 26px 55px;min-height:100dvh}
+.news-header{text-align:center;margin-bottom:30px}
+.brand{font-size:11px;font-weight:750;letter-spacing:.3em;color:#eacb9a}
+.news-header h1{font-size:clamp(38px,5.5vw,63px);margin:12px 0 5px}
+.news-header p{margin:0;font-size:14px;color:#bfcee4}
+.news-grid{max-width:1230px;margin:0 auto}
+.news-card{display:block;border:1px solid rgba(233,196,134,.63);background:linear-gradient(150deg,rgba(25,40,66,.92),rgba(12,23,44,.94));border-radius:19px;overflow:hidden;box-shadow:0 16px 50px #0008,0 0 34px #76b6ff20;transition:transform .22s,box-shadow .22s}
+.news-card:hover{transform:translateY(-3px);box-shadow:0 23px 65px #0009,0 0 40px #83bfff44}
+.news-card:focus-visible,.backbutton:focus-visible{outline:3px solid #fbe0ac;outline-offset:5px}
+.banner-in-news{border:0;box-shadow:none;border-radius:0;overflow:hidden;background:#101f36}
+.banner-in-news img{width:100%;display:block;height:auto;aspect-ratio:3/1;object-fit:cover}
+.news-caption{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:17px 25px 23px}
+.news-category{font-size:12px;color:#eaca97;margin:0 0 4px;letter-spacing:.05em}
+.news-info h2{font:normal clamp(21px,2.4vw,30px)/1.25 Georgia,serif;color:#ffe1a9;margin:0 0 5px}
+.news-info p:last-child{font-size:14px;color:#d4deee;margin:0}
+.open-arrow{display:grid;place-items:center;width:41px;height:41px;flex-shrink:0;border-radius:50%;border:1px solid rgba(236,199,147,.62);font-size:23px;color:#ffe2ae;background:#283b56}
+.news-note{text-align:center;margin:20px 0 0;color:#b6c8e2;font-size:12px;letter-spacing:.04em}
+.chat-view{max-width:1320px;padding-top:15px}
+.backbar{margin:3px 0 14px}
+.backbutton{display:inline-flex;align-items:center;gap:8px;color:#e4ca9d;padding:7px 13px;border-radius:12px;border:1px solid #c5a36a80;background:#14243dca;font-size:13px;transition:background .2s}
+.backbutton:hover{background:#263954}
+.guest-head{text-align:center;margin-bottom:15px}
+.eyebrow{font-size:12px;text-transform:uppercase;color:#bbcee6;letter-spacing:.16em;margin:1px 0 9px}
+.guest-card{margin:0 auto;max-width:760px}
+.chat-view .chat{height:min(740px,calc(100dvh - 173px));min-height:490px}
+@media(max-width:650px){
+.news-view{padding:23px 11px 45px}
+.news-header{margin-bottom:24px}.news-header h1{font-size:44px}.news-header p{font-size:12px}
+.news-card{border-radius:14px}.banner-in-news img{aspect-ratio:3/1}
+.news-caption{padding:14px 13px 17px}
+.news-category{font-size:10px}.news-info h2{font-size:21px}.news-info p:last-child{font-size:12px}
+.open-arrow{height:34px;width:34px;font-size:18px}
+.chat-view{padding:8px 9px 20px}.backbar{margin:0 0 8px}.backbutton{font-size:11px;padding:5px 9px}
+.eyebrow{font-size:10px;margin:0 0 5px}.guest-head{margin-bottom:9px}
+.chat-view .chat{height:min(760px,calc(100dvh - 132px));min-height:470px}
+}
+</style><link rel="canonical" href="https://belaya-mgla-sova58.github.io/k-vam-na-ogonek.html"/><meta name="description" content="К вам на огонек. Наш гость [VgB]Бараш: шесть вопросов о героях, СВС и 58-м государстве."/></head><body><main aria-label="Интервью с Барашем" class="page chat-view" id="chat-view"><div class="backbar"><a class="backbutton" href="news.html">← Вернуться в новости</a></div><header class="guest-head"><p class="eyebrow">К вам на огонек · интервью</p><div class="guest-card"><span class="guest-spark">✦</span><p class="guestline">Наш гость: <strong>[VgB]Бараш</strong></p><div class="hostline">Ведущий: [VgB]HiTmaN74</div><span class="guest-spark">✦</span></div></header>
+<section aria-label="Интервью с [VgB]Барашем" class="chat">
+<picture><source media="(max-width:650px)" srcset="assets/k-vam-ogonek-mobile-v1.webp"/><img alt="" aria-hidden="true" class="scenery" src="assets/k-vam-ogonek-desktop-v1.webp"/></picture>
+<div aria-hidden="true" class="overlay"></div>
+<div class="chat-toolbar"><div class="status"><span aria-hidden="true" class="flame">✧</span><span>Беседа у огонька</span></div><div class="chapters">6 вопросов · 6 ответов</div></div>
+<div aria-label="Прокручиваемая переписка" class="chat-scroll" id="scroll" role="region" tabindex="0">
+<section aria-label="Вопрос 1" class="exchange" id="q1">
+<div class="question-row"><div class="sender"><span class="mark mark-host">H</span><span>[VgB]HiTmaN74</span><span class="meta">вопрос 01</span></div>
+<div class="message question">Самый недооценённый персонаж в игре (на момент текущего поколения), по твоему мнению? Почему на него стоит обратить внимание?</div></div>
+<div class="answer-row"><div class="sender"><span class="meta">ответ 01</span><span>[VgB]Бараш</span><span class="mark mark-guest">Б</span></div>
+<div class="message answer">Лумак Бокан. Его навык снижает «урон врага». По идее, он должен работать лучше, чем навыки Сергея и Бахити, так как снижает 20% изначального урона (на последнем уровне). Сергей и Бахити снижают уже получаемый урон (после вычета процента защиты и т. д.). Но это лишь предположения и выводы, не 100%.</div></div>
+</section>
+<section aria-label="Вопрос 2" class="exchange" id="q2">
+<div class="question-row"><div class="sender"><span class="mark mark-host">H</span><span>[VgB]HiTmaN74</span><span class="meta">вопрос 02</span></div>
+<div class="message question">Есть вражеский альянс, с которым всегда в кайф подраться за форт или крепость?</div></div>
+<div class="answer-row"><div class="sender"><span class="meta">ответ 02</span><span>[VgB]Бараш</span><span class="mark mark-guest">Б</span></div>
+<div class="message answer">Как таковых вражеских альянсов нет. Негатив покинул нас недавно. Сейчас нет смысла конфликтовать. Пора уже мирно, дружно победить на СВС и забрать чужой замок.</div></div>
+</section>
+<section aria-label="Вопрос 3" class="exchange" id="q3">
+<div class="question-row"><div class="sender"><span class="mark mark-host">H</span><span>[VgB]HiTmaN74</span><span class="meta">вопрос 03</span></div>
+<div class="message question">Какую фишку хотел бы видеть или изменить в игре?</div></div>
+<div class="answer-row"><div class="sender"><span class="meta">ответ 03</span><span>[VgB]Бараш</span><span class="mark mark-guest">Б</span></div>
+<div class="message answer">На данном этапе игры хотелось бы больше вариантов реакций на сообщения. И чуть более качественного расчёта баланса в ивентах по типу Литейной (что Карен, что Анзор против нас уже попадались 😅).</div></div>
+</section>
+<section aria-label="Вопрос 4" class="exchange" id="q4">
+<div class="question-row"><div class="sender"><span class="mark mark-host">H</span><span>[VgB]HiTmaN74</span><span class="meta">вопрос 04</span></div>
+<div class="message question">Вопрос, который беспокоит многих игроков, и меня в том числе: как правильно качать талисманы и шмот губернатора? На что определённо стоит делать упор? Особенно игрокам, которые не донатят, ведь у них все материалы для прокачки на вес золота.</div></div>
+<div class="answer-row"><div class="sender"><span class="meta">ответ 04</span><span>[VgB]Бараш</span><span class="mark mark-guest">Б</span></div>
+<div class="message answer">Ну, в эти вопросы я не углублялся, но… Прокачка губернатора для бесплатного игрока выгодна плюс-минус равномерная, так как «мета» со временем поменяется. С талисманами, по моему мнению, выгодно всё качать до 5–6 уровня, а дальше прокачивать один талисман (в идеале пехоты) до максимума, чтобы открыть обмен руководств талисманов на чертежи. Чертежей чаще всего мало.</div></div>
+</section>
+<section aria-label="Вопрос 5" class="exchange" id="q5">
+<div class="question-row"><div class="sender"><span class="mark mark-host">H</span><span>[VgB]HiTmaN74</span><span class="meta">вопрос 05</span></div>
+<div class="message question">Как считаешь, были шансы отстоять свой замок в последнем СВС? Что помешало?</div></div>
+<div class="answer-row"><div class="sender"><span class="meta">ответ 05</span><span>[VgB]Бараш</span><span class="mark mark-guest">Б</span></div>
+<div class="message answer">Шансы есть всегда, но определённо «киты» у них были сильнее. Как минимум, мы были близки к победе в подготовке, и это уже хорошо.</div></div>
+</section>
+<section aria-label="Вопрос 6" class="exchange" id="q6">
+<div class="question-row"><div class="sender"><span class="mark mark-host">H</span><span>[VgB]HiTmaN74</span><span class="meta">вопрос 06</span></div>
+<div class="message question">В чём сила 58-го госа?</div></div>
+<div class="answer-row"><div class="sender"><span class="meta">ответ 06</span><span>[VgB]Бараш</span><span class="mark mark-guest">Б</span></div>
+<div class="message answer">В вере и надежде, что Роман вернётся к нам и предоставит отчёты за столь долгое время отсутствия.</div></div>
+</section>
+</div>
+<div class="foot"><span class="hint">↕ Листайте переписку</span><nav aria-label="Навигация по вопросам" class="navigation"><button aria-label="Предыдущий вопрос" class="nav" id="back" type="button">↑</button><span class="counter" id="count">1 / 6</span><button aria-label="Следующий вопрос" class="nav" id="forward" type="button">↓</button></nav></div>
+</section><p class="under">✦ История 58-го пишется его игроками ✦</p></main>
+
+<script>
+(()=>{
+ const scroll=document.getElementById('scroll');
+ const parts=[...scroll.querySelectorAll('.exchange')];
+ const count=document.getElementById('count');
+ const back=document.getElementById('back');
+ const forward=document.getElementById('forward');
+ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+ let current=0;
+ const topOf=i=>parts[i].getBoundingClientRect().top-scroll.getBoundingClientRect().top+scroll.scrollTop;
+ function refresh(){
+   if(!scroll.clientHeight)return;
+   let at=scroll.scrollTop+Math.min(100,scroll.clientHeight*.20);
+   current=0;
+   parts.forEach((part,i)=>{if(topOf(i)<=at) current=i});
+   if(scroll.scrollTop>0&&scroll.scrollTop+scroll.clientHeight>=scroll.scrollHeight-7)current=parts.length-1;
+   count.textContent=`${current+1} / ${parts.length}`;
+   back.disabled=current===0&&scroll.scrollTop<10;
+   forward.disabled=current===parts.length-1;
+ }
+ function go(i){i=Math.max(0,Math.min(parts.length-1,i));scroll.scrollTo({top:topOf(i),behavior:reduced.matches?'auto':'smooth'});}
+ back.onclick=()=>go(current-1);
+ forward.onclick=()=>go(current+1);
+ scroll.addEventListener('scroll',refresh,{passive:true});
+ scroll.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();go(current+1)}if(e.key==='ArrowLeft'){e.preventDefault();go(current-1)}});
+ window.addEventListener('resize',refresh);
+ window.refreshInterview=refresh;
+})();
+</script></body></html>
