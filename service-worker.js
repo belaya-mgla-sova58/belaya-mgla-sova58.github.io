@@ -1,9 +1,7 @@
-const CACHE_NAME = 'belaya-mgla-v1004';
-const STATIC_CORE = [
-  './site-v626.min.css?v=985',
-  './site-desktop-v985.css?v=985',
-  './site-v629.min.js?v=1004'
-];
+const CACHE_NAME = 'belaya-mgla-v1005';
+// On first visit, never download desktop-only CSS in the background on a phone.
+// Versioned styles are cached on first actual use by the fetch handler.
+const STATIC_CORE = [];
 
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(STATIC_CORE.map(path => new Request(path,{cache:'reload'})))).catch(()=>{}));
