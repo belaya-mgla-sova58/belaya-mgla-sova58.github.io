@@ -6,7 +6,7 @@
 
   var COUNTER_ID = 114074471;
   var GOOGLE_MEASUREMENT_ID = "G-28QY51SL5D";
-  var STORAGE_KEY = "sova58-analytics-consent-v2";
+  var STORAGE_KEY = "sova58-analytics-consent-v3";
   var started = false;
 
   function preference() {
@@ -15,7 +15,8 @@
       if (saved === "accepted" || saved === "declined") return saved;
       // Старое согласие касалось только Яндекс Метрики: для Google запрашиваем новое.
       // Старый отказ продолжаем уважать.
-      if (window.localStorage.getItem("sova58-metrika-consent-v1") === "declined") return "declined";
+      if (window.localStorage.getItem("sova58-analytics-consent-v2") === "declined" ||
+          window.localStorage.getItem("sova58-metrika-consent-v1") === "declined") return "declined";
       return null;
     } catch (e) { return null; }
   }
@@ -42,8 +43,8 @@
     window.ym(COUNTER_ID, "init", {
       accurateTrackBounce: true,
       webvisor: false,
-      clickmap: false,
-      trackLinks: false,
+      clickmap: true,
+      trackLinks: true,
       ecommerce: false
     });
 
@@ -84,7 +85,7 @@
     dialog.innerHTML =
       '<strong>Сова немного любопытствует! 🦉</strong>' +
       '<p>Ей интересно, сколько гостей заглядывает на сайт и какие новости и гайды читают чаще всего. ' +
-      'Помоги Сове это узнать: разреши Яндекс Метрике и Google Analytics учитывать посещения с помощью cookie. ' +
+      'Помоги Сове это узнать: разреши Яндекс Метрике и Google Analytics учитывать посещения и клики по ссылкам с помощью cookie. ' +
       'Сова не спрашивает имён и игровых ников, ей нужна только статистика.</p>' +
       '<div id="sova-metrika-actions">' +
       '<button type="button" id="sova-metrika-accept">Разрешить</button>' +
