@@ -76,9 +76,9 @@ function compact(css) {
     if (ch === '"' || ch === "'") { quote = ch; out += ch; continue; }
     if (ch === '(') parens++;
     else if (ch === ')') parens = Math.max(0, parens - 1);
-    if (/\\s/.test(ch) && parens === 0) {
+    if (/\s/.test(ch) && parens === 0) {
       let j = i + 1;
-      while (j < css.length && /\\s/.test(css[j])) j++;
+      while (j < css.length && /\s/.test(css[j])) j++;
       const previous = out.slice(-1), following = css[j] || '';
       if (!previous || !following || previous === '{' || previous === '}' ||
           previous === ';' || following === '{' || following === '}' ||
