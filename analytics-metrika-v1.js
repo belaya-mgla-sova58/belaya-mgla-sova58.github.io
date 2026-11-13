@@ -1,22 +1,29 @@
-/* Анонимная аналитика «Белая мгла». Счётчик загружается только после согласия. */
+/* Аналитика «Белая мгла»: Яндекс Метрика и Google Analytics 4. Загрузка только после явного согласия. */
 (function () {
   "use strict";
   if (window.__sovaMetrikaConsentV1) return;
   window.__sovaMetrikaConsentV1 = true;
 
   var COUNTER_ID = 114074471;
-  var STORAGE_KEY = "sova58-metrika-consent-v1";
+  var GOOGLE_MEASUREMENT_ID = "G-28QY51SL5D";
+  var STORAGE_KEY = "sova58-analytics-consent-v2";
   var started = false;
 
   function preference() {
-    try { return window.localStorage.getItem(STORAGE_KEY); }
-    catch (e) { return null; }
+    try {
+      var saved = window.localStorage.getItem(STORAGE_KEY);
+      if (saved === "accepted" || saved === "declined") return saved;
+      // Старое согласие касалось только Яндекс Метрики: для Google запрашиваем новое.
+      // Старый отказ продолжаем уважать.
+      if (window.localStorage.getItem("sova58-metrika-consent-v1") === "declined") return "declined";
+      return null;
+    } catch (e) { return null; }
   }
   function savePreference(value) {
     try { window.localStorage.setItem(STORAGE_KEY, value); }
     catch (e) { /* Даже при блокировке хранилища решение действует на текущей странице. */ }
   }
-  function startMetrika() {
+  function startAnalytics() {
     if (started) return;
     started = true;
     (function (m, e, t, r, i, k, a) {
@@ -39,6 +46,19 @@
       trackLinks: false,
       ecommerce: false
     });
+
+    // Google Analytics 4 и его cookies включаются только после согласия.
+    if (!window.__sovaGoogleAnalyticsLoaded) {
+      window.__sovaGoogleAnalyticsLoaded = true;
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+      window.gtag("js", new Date());
+      window.gtag("config", GOOGLE_MEASUREMENT_ID);
+      var googleScript = document.createElement("script");
+      googleScript.async = true;
+      googleScript.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(GOOGLE_MEASUREMENT_ID);
+      document.head.appendChild(googleScript);
+    }
   }
   function buildControls() {
     if (document.getElementById("sova-metrika-consent")) return;
@@ -64,7 +84,7 @@
     dialog.innerHTML =
       '<strong>Сова немного любопытствует! 🦉</strong>' +
       '<p>Ей интересно, сколько гостей заглядывает на сайт и какие новости и гайды читают чаще всего. ' +
-      'Помоги Сове это узнать: разреши Яндекс Метрике учитывать посещения с помощью cookie. ' +
+      'Помоги Сове это узнать: разреши Яндекс Метрике и Google Analytics учитывать посещения с помощью cookie. ' +
       'Сова не спрашивает имён и игровых ников, ей нужна только статистика.</p>' +
       '<div id="sova-metrika-actions">' +
       '<button type="button" id="sova-metrika-accept">Разрешить</button>' +
@@ -91,7 +111,7 @@
     dialog.querySelector("#sova-metrika-accept").addEventListener("click", function () {
       savePreference("accepted");
       hideDialog();
-      startMetrika();
+      startAnalytics();
     });
     dialog.querySelector("#sova-metrika-decline").addEventListener("click", function () {
       var wasStarted = started;
@@ -107,7 +127,7 @@
     var saved = preference();
     if (saved === "accepted") {
       hideDialog();
-      startMetrika();
+      startAnalytics();
     } else if (saved === "declined") {
       hideDialog();
     } else {
