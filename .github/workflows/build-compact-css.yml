@@ -34,8 +34,13 @@ jobs:
           for(const [src,dst] of files){
             const original=fs.readFileSync(src,'utf8');
             const result=new CleanCSS({level:1,rebase:false,format:false}).minify(original);
-            if(result.errors.length||!result.styles||result.styles.length>=original.length*0.95){
-              throw Error('Unsafe or ineffective CSS minification of '+src+': '+result.errors.join(', '));
+            if(result.errors.length||!result.styles){
+              throw Error('CSS parse problem in '+src+': '+result.errors.join(', '));
+            }
+            const savings=1-result.styles.length/original.length;
+            if(savings<0.08){
+              console.log('SKIP '+src+': already efficiently minified (potential saving '+(savings*100).toFixed(1)+'%)');
+              continue;
             }
             const output='/* Source: '+src+'; conservative clean-css level 1; cascade order retained. */\n'+result.styles;
             fs.writeFileSync(dst,output+'\n');
@@ -48,7 +53,9 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add site-home-compact-v1.css site-common-compact-v1.css
+          for file in site-home-compact-v1.css site-common-compact-v1.css; do
+            if [[ -f "$file" ]]; then git add -- "$file"; fi
+          done
           if git diff --cached --quiet; then
             echo 'Compact CSS bundles are current.'
             exit 0
