@@ -6,16 +6,18 @@
 
   var COUNTER_ID = 114074471;
   var GOOGLE_MEASUREMENT_ID = "G-28QY51SL5D";
-  var STORAGE_KEY = "sova58-analytics-consent-v3";
+  var STORAGE_KEY = "sova58-analytics-consent-v4";
   var started = false;
 
   function preference() {
     try {
       var saved = window.localStorage.getItem(STORAGE_KEY);
       if (saved === "accepted" || saved === "declined") return saved;
-      // Старое согласие касалось только Яндекс Метрики: для Google запрашиваем новое.
-      // Старый отказ продолжаем уважать.
-      if (window.localStorage.getItem("sova58-analytics-consent-v2") === "declined" ||
+      // Вебвизор записывает действия на странице, поэтому прежнее согласие
+      // на простую аналитику нельзя использовать для записи визитов.
+      // Отказы предыдущих версий по-прежнему учитываем.
+      if (window.localStorage.getItem("sova58-analytics-consent-v3") === "declined" ||
+          window.localStorage.getItem("sova58-analytics-consent-v2") === "declined" ||
           window.localStorage.getItem("sova58-metrika-consent-v1") === "declined") return "declined";
       return null;
     } catch (e) { return null; }
@@ -24,9 +26,35 @@
     try { window.localStorage.setItem(STORAGE_KEY, value); }
     catch (e) { /* Даже при блокировке хранилища решение действует на текущей странице. */ }
   }
+  // Не записываем тексты поисковых строк, сообщений и любых полей ввода.
+  // Вебвизор видит структуру поля и действия, но скрывает введённые символы.
+  function protectFormFields() {
+    function mask(root) {
+      if (root.nodeType !== 1) return;
+      if (root.matches("input, textarea")) root.classList.add("ym-disable-keys");
+      if (root.matches('[contenteditable="true"], [contenteditable=""]')) root.classList.add("ym-hide-content");
+      root.querySelectorAll('input, textarea').forEach(function (field) {
+        field.classList.add("ym-disable-keys");
+      });
+      root.querySelectorAll('[contenteditable="true"], [contenteditable=""]').forEach(function (field) {
+        field.classList.add("ym-hide-content");
+      });
+    }
+    mask(document.documentElement);
+    if (window.MutationObserver) {
+      var observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          mutation.addedNodes.forEach(mask);
+        });
+      });
+      observer.observe(document.documentElement, { childList: true, subtree: true });
+    }
+  }
+
   function startAnalytics() {
     if (started) return;
     started = true;
+    protectFormFields();
     (function (m, e, t, r, i, k, a) {
       m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
       m[i].l = +new Date();
@@ -42,7 +70,7 @@
 
     window.ym(COUNTER_ID, "init", {
       accurateTrackBounce: true,
-      webvisor: false,
+      webvisor: true,
       clickmap: true,
       trackLinks: true,
       ecommerce: false
@@ -85,8 +113,10 @@
     dialog.innerHTML =
       '<strong>Сова немного любопытствует! 🦉</strong>' +
       '<p>Ей интересно, сколько гостей заглядывает на сайт и какие новости и гайды читают чаще всего. ' +
-      'Помоги Сове это узнать: разреши Яндекс Метрике и Google Analytics учитывать посещения и клики по ссылкам с помощью cookie. ' +
-      'Сова не спрашивает имён и игровых ников, ей нужна только статистика.</p>' +
+      'С разрешения посетителя Яндекс Метрика и Google Analytics учитывают посещения и используют cookie. ' +
+      'Вебвизор записывает движения мыши, клики, прокрутку и переходы по страницам для улучшения сайта. ' +
+      'Введённый текст в полях скрывается. Имена и игровые ники не запрашиваются. ' +
+      'Аналитика и запись действий запускаются только после нажатия «Разрешить».</p>' +
       '<div id="sova-metrika-actions">' +
       '<button type="button" id="sova-metrika-accept">Разрешить</button>' +
       '<button type="button" id="sova-metrika-decline">Нет, спасибо</button>' +
