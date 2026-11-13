@@ -1,0 +1,30 @@
+name: Preview optimized homepage news banners
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/optimize-news-banners.py'
+      - '.github/workflows/preview-home-news-webp.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Pillow
+        run: python -m pip install Pillow
+      - name: Encode and compare news banners
+        run: python scripts/optimize-news-banners.py
+      - name: Upload preview images and compression report
+        uses: actions/upload-artifact@v4
+        with:
+          name: homepage-news-webp-preview
+          path: optimized-preview/
+          if-no-files-found: error
+          retention-days: 14
