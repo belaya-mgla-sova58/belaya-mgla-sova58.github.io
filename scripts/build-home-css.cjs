@@ -168,7 +168,20 @@ if (!body.split(/\s+/).includes('is-home-route') ||
     body.split(/\s+/).some(token => /^is-(?!home-route$)[\w-]+-route$/.test(token)))
   throw Error('Homepage body route changed: review generated CSS assumptions');
 const output = build(css);
-if (process.argv.includes('--check')) {
+// Guard against accidental loss of route pruning as the shared stylesheet grows.
+// This budget does not change any CSS declaration or selector in production.
+const sourceBytes = Buffer.byteLength(css, 'utf8');
+const homeBytes = Buffer.byteLength(output.content, 'utf8');
+const reduction = sourceBytes - homeBytes;
+if (reduction < 40000 || homeBytes >= sourceBytes * 0.96)
+  throw Error('Home CSS size regression: inspect route pruning before release');
+if (process.argv.includes('--stats')) {
+  console.log(JSON.stringify({
+    sourceBytes, homeBytes, savedBytes: reduction,
+    savedPercent: Number((100 * reduction / sourceBytes).toFixed(2)),
+    removedRules: output.removedRules,
+  }, null, 2));
+} else if (process.argv.includes('--check')) {
   if (!fs.existsSync(OUTPUT) || fs.readFileSync(OUTPUT, 'utf8') !== output.content)
     throw Error('site-home-v995.css is stale: run node scripts/build-home-css.cjs');
   console.log('Home CSS up-to-date:',output.removedRules,'rules,',output.removedBytes,'bytes omitted');
