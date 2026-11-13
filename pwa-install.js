@@ -1,7 +1,7 @@
 (function(){
   'use strict';
   if('serviceWorker' in navigator){
-    window.addEventListener('load',function(){navigator.serviceWorker.register('./service-worker.js?v=1005',{updateViaCache:'none'}).catch(function(){});},{once:true});
+    window.addEventListener('load',function(){navigator.serviceWorker.register('./service-worker.js?v=1006',{updateViaCache:'none'}).catch(function(){});},{once:true});
   }
   if(document.body&&document.body.classList.contains('is-experts-route')&&!document.querySelector('.expert-category-v781')&&!location.pathname.endsWith('/expert-generations.html')&&!location.pathname.endsWith('expert-generations.html')){
     var heading=document.querySelector('.page-heading-v424');
