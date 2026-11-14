@@ -46,6 +46,11 @@ a {color:inherit}
 .like:hover:not(:disabled) {background:#2e4a6c}
 .like:disabled {opacity:.77;cursor:default}
 .heart {color:#ff8297;font-size:18px}
+.guest-invite {position:relative;overflow:hidden;margin:29px 0 10px;padding:clamp(20px,4vw,30px);border:1px solid rgba(247,209,148,.77);border-radius:20px;text-align:center;background:linear-gradient(120deg,rgba(33,54,84,.92),rgba(62,44,70,.88));box-shadow:0 12px 30px rgba(0,0,0,.23)}
+.guest-invite::before {content:"✧";position:absolute;left:18px;top:6px;color:rgba(244,205,145,.22);font-size:55px;pointer-events:none}
+.guest-invite h2 {margin:0 0 9px;color:#ffebc8;font:700 clamp(21px,3.5vw,29px)/1.25 Georgia,"Times New Roman",serif}
+.guest-invite p {margin:0 auto;max-width:640px;color:#d7e5f3;font-size:clamp(14px,2vw,16px);line-height:1.65}
+.guest-invite strong {display:inline-block;margin-top:9px;padding:5px 13px;color:#18253c;background:#f5d6a4;border-radius:999px;white-space:nowrap;font-size:clamp(14px,2vw,17px);font-weight:800;letter-spacing:.02em}
 .endnote {text-align:center;margin:28px auto 0;color:#aebed1;font-size:13px}
 .footer {margin-top:45px;border-top:1px solid rgba(215,232,250,.14);padding-top:22px;text-align:center;color:#95abc4;font-size:12px}
 @media(max-width:600px) {
@@ -91,6 +96,11 @@ a {color:inherit}
     </button>
    </div>
   </article>
+  <aside class="guest-invite" aria-labelledby="guest-invite-title">
+   <h2 id="guest-invite-title">✦ Хотите стать нашим гостем?</h2>
+   <p>Есть желание поучаствовать в интервью «К вам на огонёк»? Напишите в игре</p>
+   <strong>[VgB]HiTmaN74</strong>
+  </aside>
   <p class="endnote">Новые гости и новые разговоры появятся здесь.</p>
  </main>
  <footer class="footer">Белая мгла · Государство 58</footer>
