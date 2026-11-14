@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>К вам на огонёк · Интервью с игроками | Белая мгла</title>
+<meta name="description" content="К вам на огонёк — беседы и интервью с игроками Белой мглы. Первый выпуск: наш гость [VgB]Бараш, ведущий [VgB]HiTmaN74.">
+<meta name="theme-color" content="#0a1730">
+<link rel="canonical" href="https://belaya-mgla-sova58.github.io/ogonek.html">
+<style>
+:root {color-scheme:dark;--ink:#f8f1e8;--gold:#f3d6a2;--muted:#b8cce2}
+* {box-sizing:border-box}
+html {scroll-behavior:smooth}
+body {margin:0;min-height:100vh;font:16px/1.55 system-ui,"Segoe UI",Arial,sans-serif;color:var(--ink);background:radial-gradient(ellipse at 82% 5%,#233b62 0%,transparent 43%),radial-gradient(ellipse at 6% 100%,#213053 0%,transparent 38%),#071326}
+body::before {content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(rgba(190,223,255,.3) .6px,transparent 1px);background-size:55px 62px;opacity:.28}
+a {color:inherit}
+.skip-link {position:absolute;left:-1000px;top:10px;padding:10px;background:#f6dda7;color:#142137;z-index:10}
+.skip-link:focus {left:10px}
+.wrap {max-width:1130px;margin:0 auto;padding:20px clamp(15px,4vw,35px) 65px}
+.topbar {display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+.brand {color:#f0dcae;font:700 18px Georgia,"Times New Roman",serif;text-decoration:none;letter-spacing:.04em}
+.back {display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:1px solid rgba(247,217,164,.45);border-radius:11px;text-decoration:none;background:rgba(7,21,43,.65);font-weight:650;font-size:13px}
+.back:hover,.back:focus-visible {background:#263e5f;outline-color:#ffe1a3}
+.intro {text-align:center;padding:35px 15px 25px;position:relative}
+.intro .eyebrow {display:block;color:#ebc994;text-transform:uppercase;letter-spacing:.25em;font-size:11px;font-weight:800}
+.intro h1 {font:700 clamp(35px,6.5vw,66px)/1.05 Georgia,"Times New Roman",serif;color:#fae4bd;margin:13px 0 14px;text-shadow:0 3px 25px rgba(255,194,107,.17)}
+.intro p {max-width:620px;margin:0 auto;color:#c9d8e8;font-size:clamp(14px,2vw,17px);line-height:1.7}
+.ornament {display:flex;align-items:center;gap:15px;justify-content:center;color:#f2c88d;margin:25px 0 0}
+.ornament::before,.ornament::after {content:"";height:1px;width:min(25vw,95px);background:linear-gradient(90deg,transparent,#b88754)}
+.ornament::after {transform:scaleX(-1)}
+.section-label {margin:10px 0 17px;color:#d6e5f5;font-size:13px;font-weight:750;letter-spacing:.09em;text-transform:uppercase}
+.interview-card {position:relative;isolation:isolate;overflow:hidden;border-radius:23px;border:1px solid rgba(241,202,141,.74);background:radial-gradient(ellipse at 84% 18%,rgba(192,116,69,.22),transparent 36%),radial-gradient(ellipse at 14% 95%,rgba(64,118,183,.24),transparent 48%),linear-gradient(120deg,#0e2443 4%,#1c2545 55%,#33233b 100%);box-shadow:0 19px 50px rgba(0,0,0,.33),inset 0 0 0 4px rgba(7,18,41,.5)}
+.interview-card::before {content:"";position:absolute;inset:8px;border:1px solid rgba(247,217,165,.24);border-radius:17px;pointer-events:none}
+.interview-card::after {content:"✦";position:absolute;right:clamp(14px,3vw,37px);top:clamp(12px,3vw,24px);font-size:clamp(32px,5vw,64px);color:rgba(255,218,150,.22);pointer-events:none}
+.interview-link {position:relative;display:block;padding:clamp(23px,5vw,55px);text-decoration:none;z-index:1}
+.interview-link:focus-visible {outline:3px solid #ffe1a3;outline-offset:-8px;border-radius:22px}
+.edition {color:#f1cd91;font-size:clamp(11px,1.5vw,13px);font-weight:800;letter-spacing:.17em;text-transform:uppercase}
+.interview-card h2 {font:700 clamp(31px,5.4vw,57px)/1.1 Georgia,"Times New Roman",serif;letter-spacing:-.02em;color:#fff0d5;margin:18px 0 16px;max-width:780px;overflow-wrap:anywhere}
+.interview-card .description {font-size:clamp(14px,1.75vw,18px);color:#cfdff1;max-width:660px;line-height:1.65;margin:0 0 24px}
+.host {font-size:13px;color:#dfc9a6;margin:0 0 24px}
+.open {display:inline-flex;align-items:center;gap:9px;padding:11px 20px;border-radius:999px;border:1px solid rgba(244,214,165,.74);background:#f0c993;color:#1a263a;font-size:14px;font-weight:800;box-shadow:0 5px 20px rgba(5,11,26,.15)}
+.interview-link:hover .open {background:#ffe1ac;transform:translateY(-1px)}
+.stats {display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding:13px clamp(23px,5vw,55px);background:rgba(5,14,29,.56);border-top:1px solid rgba(238,207,154,.23);font-size:13px;color:#d0e0ee}
+.stats b {font-variant-numeric:tabular-nums}
+.like {cursor:pointer;display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:7px 13px;border:1px solid rgba(245,209,147,.56);border-radius:99px;background:#1e3453;color:#ffeed5;font-size:13px;font-weight:750}
+.like:hover:not(:disabled) {background:#2e4a6c}
+.like:disabled {opacity:.77;cursor:default}
+.heart {color:#ff8297;font-size:18px}
+.endnote {text-align:center;margin:28px auto 0;color:#aebed1;font-size:13px}
+.footer {margin-top:45px;border-top:1px solid rgba(215,232,250,.14);padding-top:22px;text-align:center;color:#95abc4;font-size:12px}
+@media(max-width:600px) {
+ .wrap {padding-top:13px}
+ .topbar {margin-bottom:12px}
+ .intro {padding:23px 4px 19px}
+ .interview-card {border-radius:17px}
+ .interview-card::before {inset:6px;border-radius:12px}
+ .interview-card h2 {margin-top:12px}
+ .interview-link {padding:27px 23px}
+ .stats {padding:12px 23px}
+}
+@media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto}.interview-link:hover .open {transform:none}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#interviews">Перейти к интервью</a>
+<div class="wrap">
+ <nav class="topbar" aria-label="Навигация">
+  <a class="brand" href="index.html">Белая мгла</a>
+  <a class="back" href="index.html">← На главную</a>
+ </nav>
+ <header class="intro">
+  <span class="eyebrow">Истории и беседы игроков</span>
+  <h1>К вам на огонёк</h1>
+  <p>За каждым игровым ником скрывается своя история. Здесь мы встречаем гостей, задаём вопросы и узнаём друг друга ближе.</p>
+  <div class="ornament" aria-hidden="true">✦</div>
+ </header>
+ <main id="interviews">
+  <h2 class="section-label">Наши интервью</h2>
+  <article class="interview-card" aria-labelledby="barash-title">
+   <a class="interview-link" href="k-vam-na-ogonek.html" aria-label="Читать интервью с [VgB]Барашем">
+    <span class="edition">Выпуск № 01 · Беседа у огонька</span>
+    <h2 id="barash-title">Наш гость: [VgB]Бараш</h2>
+    <p class="description">Шесть вопросов о героях, СВС и жизни 58-го государства. Разговор, в котором есть место и серьёзному, и улыбке.</p>
+    <p class="host">Ведущий: [VgB]HiTmaN74</p>
+    <span class="open">Читать интервью <span aria-hidden="true">↗</span></span>
+   </a>
+   <div class="stats" aria-label="Оценки и просмотры интервью">
+    <span aria-label="Просмотры интервью">👁 <b data-ogonek-views>…</b> просмотров</span>
+    <button type="button" class="like" data-ogonek-like aria-label="Поставить лайк интервью" aria-pressed="false">
+     <span class="heart" aria-hidden="true">♥</span><span data-ogonek-like-label>Нравится</span><b data-ogonek-like-count>…</b>
+    </button>
+   </div>
+  </article>
+  <p class="endnote">Новые гости и новые разговоры появятся здесь.</p>
+ </main>
+ <footer class="footer">Белая мгла · Государство 58</footer>
+</div>
+<script defer src="ogonek-stats-v1.js?v=1"></script>
+</body>
+</html>
