@@ -1,0 +1,79 @@
+name: Import approved Tundra Trade Route header once
+on:
+  push:
+    paths:
+      - '.github/workflows/sova58-import-tundra-header-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import-image:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Install exact approved image and update event and guide only
+        env:
+          IMAGE_URL: 'https://at.adobe.com/paY0WZZoqjqxPykU'
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from hashlib import sha256
+          from urllib.request import urlopen, Request
+          import struct
+          import os
+          expected='8652eeecabe57c660e9340236954cce59b16c75a7b9bf7664899a30ff6ef0bd0'
+          with urlopen(Request(os.environ['IMAGE_URL'],headers={'User-Agent':'Mozilla/5.0'}), timeout=60) as r:
+              data=r.read(10_000_000)
+          actual=sha256(data).hexdigest()
+          if actual != expected:
+              raise RuntimeError('Downloaded image differs from approved artwork: '+actual)
+          if data[:8]!=b'\x89PNG\r\n\x1a\n' or struct.unpack('>II',data[16:24])!=(2172,724):
+              raise RuntimeError('Artwork must be PNG at exactly 2172 x 724 pixels')
+          old='assets/tundra-trade-route-cosmic-v1201.jpg'
+          new='assets/tundra-trade-route-approved-2172x724.png'
+          for filename in ('events.html','tundra-trade-route.html'):
+              path=Path(filename)
+              html=path.read_text(encoding='utf-8')
+              count=html.count(old)
+              if count < 1:
+                  raise RuntimeError(f'Reference to old event image missing in {filename}')
+              path.write_text(html.replace(old,new),encoding='utf-8')
+              print(f'Updated {filename}: {count} image references')
+          Path(new).write_bytes(data)
+          remaining=[]
+          for p in Path('.').rglob('*'):
+              if not p.is_file() or '.git' in p.parts or '.github' in p.parts:
+                  continue
+              if p.suffix.lower() in {'.html','.css','.js','.json','.xml','.webmanifest','.md','.txt','.svg'}:
+                  try:
+                      if old in p.read_text(encoding='utf-8'):
+                          remaining.append(str(p))
+                  except (UnicodeError,OSError):
+                      pass
+          if remaining:
+              print('Retaining older asset due to other references:',remaining)
+          else:
+              Path(old).unlink(missing_ok=False)
+              print('Removed unused old header asset')
+          print('Image SHA-256:',actual,'size:',len(data),'dimensions: 2172 x 724')
+          PY
+      - name: Commit and publish image + targeted references
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- events.html tundra-trade-route.html assets/tundra-trade-route-approved-2172x724.png assets/tundra-trade-route-cosmic-v1201.jpg
+          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo 'No changes necessary'
+            exit 0
+          fi
+          git commit -m 'Replace Tundra Trade Route event and guide banner'
+          git push origin HEAD:main
