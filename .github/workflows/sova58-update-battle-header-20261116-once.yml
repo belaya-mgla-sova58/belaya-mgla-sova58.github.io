@@ -1,0 +1,111 @@
+name: Install new approved SvS battle phase header once
+on:
+  push:
+    paths:
+      - '.github/workflows/sova58-update-battle-header-20261116-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout current main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Pillow for high-quality WebP
+        run: python -m pip install --disable-pip-version-check --quiet 'Pillow>=10,<13'
+      - name: Verify approved image and update only Battle Phase references
+        env:
+          ART_URL: 'https://at.adobe.com/kVFBWBwkOpNbkgFN'
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from urllib.request import Request, urlopen
+          from io import BytesIO
+          from hashlib import sha256
+          from PIL import Image
+          import os
+
+          approved_sha = '6c6c7fb9959161887f34b950f56c77acfe9d21b071f1f5aa737f11d8e0f733c8'
+          with urlopen(Request(os.environ['ART_URL'],headers={'User-Agent':'Mozilla/5.0'}), timeout=90) as response:
+              source = response.read(12_000_000)
+          actual_sha = sha256(source).hexdigest()
+          if actual_sha != approved_sha:
+              raise RuntimeError('Image is not the user-approved artwork: '+actual_sha)
+          if source[:8] != b'\x89PNG\r\n\x1a\n':
+              raise RuntimeError('Expected source PNG')
+          with Image.open(BytesIO(source)) as im:
+              if im.size != (2172,724):
+                  raise RuntimeError('Unexpected dimensions: '+str(im.size))
+              image = im.convert('RGB')
+          
+          old_card='assets/svs-battle-card-v514.webp'
+          old_header='assets/svs-battle-header-v514.webp'
+          new='assets/svs-battle-siege-approved-2172x724.webp'
+          events_path=Path('events.html')
+          guide_path=Path('svs.html')
+          events=events_path.read_text(encoding='utf-8')
+          guide=guide_path.read_text(encoding='utf-8')
+          if events.count(old_card)!=1 or guide.count(old_header)<3:
+              raise RuntimeError('Unexpected Battle Phase card or guide image markup')
+          if 'assets/svs-prep-approved-2172x724.webp' not in events:
+              raise RuntimeError('Preparation card changed unexpectedly; not modifying anything')
+          events=events.replace(old_card,new)
+          old_size='src="'+new+'" width="1024" height="341"'
+          if events.count(old_size)!=1:
+              raise RuntimeError('Battle Phase card size markup changed')
+          events=events.replace(old_size,'src="'+new+'" width="2172" height="724"')
+          guide=guide.replace(old_header,new)
+          
+          # Keep markup and page content otherwise untouched.
+          events_path.write_text(events,encoding='utf-8')
+          guide_path.write_text(guide,encoding='utf-8')
+          image.save(new,format='WEBP',quality=96,method=6)
+          with Image.open(new) as checked:
+              if checked.size!=(2172,724):
+                  raise RuntimeError('Output WebP dimensions differ')
+          print('Installed approved image:', new, 'bytes:',Path(new).stat().st_size)
+          print('Updated references: events',events.count(new),'guide',guide.count(new))
+          
+          # Delete each old image only if there are no references anywhere in the site.
+          for old in (old_card,old_header):
+              found=[]
+              for p in Path('.').rglob('*'):
+                  if not p.is_file() or '.git' in p.parts or '.github' in p.parts:
+                      continue
+                  if p.suffix.lower() in {'.html','.js','.css','.json','.xml','.webmanifest','.md','.txt','.svg','.yml','.yaml'}:
+                      try:
+                          text=p.read_text(encoding='utf-8')
+                          if old in text or Path(old).name in text:
+                              found.append(str(p))
+                      except (UnicodeError,OSError):
+                          pass
+              if found:
+                  print('Retaining old image because it is still referenced:',old,found)
+              else:
+                  Path(old).unlink(missing_ok=False)
+                  print('Removed unused image:',old)
+          PY
+      - name: Commit only the Battle Phase image replacement
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- events.html svs.html assets/svs-battle-siege-approved-2172x724.webp assets/svs-battle-card-v514.webp assets/svs-battle-header-v514.webp
+          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo 'No updates necessary'
+            exit 0
+          fi
+          git commit -m 'Update SvS Battle Phase card and guide with approved siege banner'
+          git push origin HEAD:main
