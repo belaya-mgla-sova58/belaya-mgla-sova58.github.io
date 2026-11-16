@@ -1,0 +1,106 @@
+name: Install approved Snowplow image once
+on:
+  push:
+    paths:
+      - '.github/workflows/sova58-install-snowplow-header-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out current main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Prepare Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Pillow for high quality image compression
+        run: python -m pip install --disable-pip-version-check --quiet 'Pillow>=10,<13'
+      - name: Validate approved artwork and update only Snowplow references
+        shell: bash
+        env:
+          IMAGE_URL: 'https://at.adobe.com/J82XSilwS5gfOdeW'
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from hashlib import sha256
+          from urllib.request import urlopen, Request
+          from PIL import Image
+          from io import BytesIO
+          import os
+          expected='25b899a76b8a6406baff4f08f15aa18a45b081dec1921278fd1fd89a3ede7ffb'
+          request=Request(os.environ['IMAGE_URL'],headers={'User-Agent':'Mozilla/5.0'})
+          with urlopen(request, timeout=90) as r:
+              data=r.read(12_000_000)
+          actual=sha256(data).hexdigest()
+          if actual != expected:
+              raise RuntimeError('Artwork checksum mismatch. Got '+actual)
+          if data[:8] != b'\x89PNG\r\n\x1a\n':
+              raise RuntimeError('Not the approved PNG')
+          with Image.open(BytesIO(data)) as source:
+              if source.size != (2172,724):
+                  raise RuntimeError('Unexpected image size: '+str(source.size))
+              image=source.convert('RGB')
+
+          old_card='assets/snowplow-card-v507.webp'
+          old_header='assets/snowplow-header-v507.webp'
+          new='assets/snowplow-approved-2172x724.webp'
+
+          events_file=Path('events.html')
+          guide_file=Path('snowplow.html')
+          events=events_file.read_text(encoding='utf-8')
+          guide=guide_file.read_text(encoding='utf-8')
+          if events.count(old_card)!=1 or guide.count(old_header)<2:
+              raise RuntimeError('Unexpected old Snowplow image references')
+          events=events.replace(old_card,new)
+          old_dims='src="'+new+'" width="1024" height="341"'
+          if events.count(old_dims)!=1:
+              raise RuntimeError('Unexpected Snowplow card dimension markup')
+          events=events.replace(old_dims,'src="'+new+'" width="2172" height="724"')
+          guide=guide.replace(old_header,new)
+          events_file.write_text(events,encoding='utf-8')
+          guide_file.write_text(guide,encoding='utf-8')
+
+          image.save(new,format='WEBP',quality=96,method=6)
+          with Image.open(new) as final:
+              assert final.size == (2172,724)
+          print('Verified new image 2172x724, bytes:',Path(new).stat().st_size)
+          print('Replaced refs: events=1, guide=',guide.count(new))
+
+          for old in (old_card,old_header):
+              remaining=[]
+              for f in Path('.').rglob('*'):
+                  if not f.is_file() or '.git' in f.parts or '.github' in f.parts:
+                      continue
+                  if f.suffix.lower() in {'.html','.css','.js','.json','.xml','.webmanifest','.md','.txt','.svg'}:
+                      try:
+                          if old in f.read_text(encoding='utf-8'):
+                              remaining.append(str(f))
+                      except (OSError,UnicodeError):
+                          pass
+              if remaining:
+                  print('Retained still referenced image:',old,remaining)
+              else:
+                  Path(old).unlink(missing_ok=False)
+                  print('Removed unused image:',old)
+          PY
+      - name: Commit precisely scoped Snowplow changes
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- events.html snowplow.html assets/snowplow-approved-2172x724.webp assets/snowplow-card-v507.webp assets/snowplow-header-v507.webp
+          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo 'Already up to date'
+            exit 0
+          fi
+          git commit -m 'Replace Snowplow event card and guide header'
+          git push origin HEAD:main
