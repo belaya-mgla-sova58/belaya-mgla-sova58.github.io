@@ -1,0 +1,144 @@
+name: Remove visual headers from event guides once
+on:
+  push:
+    paths:
+      - '.github/workflows/sova58-remove-event-guide-banners-once.yml'
+permissions:
+  contents: write
+jobs:
+  remove-guide-images:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out site
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Remove event guide banners, preserve event card art and all guide copy
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import re
+          import subprocess
+          from pathlib import Path
+
+          event_guides = [
+              'bear.html',
+              'crazy-joe.html',
+              'alliance-showdown.html',
+              'alliance-championship.html',
+              'alliance-mobilization.html',
+              'frostfire-mine.html',
+              'tundra-trade-route.html',
+              'brothers-in-arms.html',
+              'foundry.html',
+              'forts.html',
+              'castle.html',
+              'winter-siege.html',
+              'canyon-clash.html',
+              'ginas-revenge.html',
+              'mercenary-prestige.html',
+              'endless-trial.html',
+              'fishing.html',
+              'snowplow.html',
+              'dreams.html',
+              'state-power.html',
+              'svs-prep.html',
+              'svs.html',
+          ]
+          if len(event_guides)!=22 or len(set(event_guides))!=22:
+              raise RuntimeError('Unexpected list of event guides')
+
+          # Discover card art and guide destinations from events.html.
+          events = Path('events.html').read_text(encoding='utf-8')
+          card_pattern = re.compile(
+              r'<a\b[^>]*class="[^"]*\bguide-nav-card\b[^"]*"[^>]*href="([^"]+)"[^>]*>'
+              r'\s*<img\b[^>]*src="([^"]+)"[^>]*>', re.S | re.I
+          )
+          cards = {href:asset for href,asset in card_pattern.findall(events)}
+          if len(cards)!=22 or set(cards)!=set(event_guides):
+              raise RuntimeError('Event guide list differs from current events.html; refusing to change unrelated pages')
+
+          normal_banner = re.compile(
+              r'<section\b(?=[^>]*\bclass="[^"]*image-header[^"]*")[^>]*>'
+              r'\s*<img\b[^>]*?\bsrc="([^"]+)"[^>]*>'
+              r'\s*</section>', re.I | re.S
+          )
+          canyon_banner = re.compile(
+              r'(<section\b[^>]*\bclass="canyon-hero"[^>]*>)\s*'
+              r'<img\b[^>]*?\bsrc="([^"]+)"[^>]*>', re.I | re.S
+          )
+          gina_banner = re.compile(
+              r'<img\b[^>]*\bclass="gina-cover"[^>]*\bsrc="([^"]+)"[^>]*\/?>',
+              re.I | re.S
+          )
+          link_re = re.compile(r'<link\b[^>]*>', re.I | re.S)
+          attrs_re = re.compile(r'([\w:-]+)\s*=\s*["\x27]([^"\x27]*)["\x27]')
+
+          updated=[]
+          for filename in event_guides:
+              path=Path(filename)
+              original=path.read_text(encoding='utf-8')
+              expected_image=cards[filename]
+              if filename=='canyon-clash.html':
+                  matches=list(canyon_banner.finditer(original))
+                  if len(matches)!=1 or matches[0].group(2)!=expected_image:
+                      raise RuntimeError('Canyon image/markup differs from events card')
+                  # Keep the text introduction and heading inside .hero-copy.
+                  new=canyon_banner.sub(lambda m:m.group(1),original,count=1)
+              elif filename=='ginas-revenge.html':
+                  matches=list(gina_banner.finditer(original))
+                  if len(matches)!=1 or matches[0].group(1)!=expected_image:
+                      raise RuntimeError('Gina cover image/markup differs from events card')
+                  new=gina_banner.sub('',original,count=1)
+              else:
+                  matches=list(normal_banner.finditer(original))
+                  if len(matches)!=1 or matches[0].group(1)!=expected_image:
+                      raise RuntimeError(filename+': expected one standalone image-header matching the events card, got '+str([(m.group(1)) for m in matches]))
+                  new=normal_banner.sub('',original,count=1)
+
+              # Remove the image preload, so the guide doesn't download an image it doesn't display.
+              removed_preloads=[0]
+              def strip_preload(match):
+                  attrs={k.lower():v for k,v in attrs_re.findall(match.group(0))}
+                  if attrs.get('as')=='image' and attrs.get('rel')=='preload' and attrs.get('href')==expected_image:
+                      removed_preloads[0]+=1
+                      return ''
+                  return match.group(0)
+              new=link_re.sub(strip_preload,new)
+              if removed_preloads[0]>1:
+                  raise RuntimeError(filename+': unexpected multiple image preloads')
+              if len(re.findall(r'<h1\b', original,re.I)) != len(re.findall(r'<h1\b',new,re.I)):
+                  raise RuntimeError(filename+': a guide title may have been removed')
+              if len(re.findall(r'<section\b[^>]*\bclass="intro\b',original,re.I)) != len(re.findall(r'<section\b[^>]*\bclass="intro\b',new,re.I)):
+                  raise RuntimeError(filename+': an introduction may have been removed')
+              if re.search(r'<img\b[^>]*\bsrc="'+re.escape(expected_image)+r'"',new,re.I):
+                  raise RuntimeError(filename+': visual event banner still present')
+              if new==original:
+                  raise RuntimeError(filename+': banner was not changed')
+              path.write_text(new,encoding='utf-8')
+              updated.append(filename)
+              print(filename+': removed visual banner; preloads='+str(removed_preloads[0]))
+
+          if Path('events.html').read_text(encoding='utf-8') != events:
+              raise RuntimeError('Event cards unexpectedly modified')
+
+          changed = subprocess.check_output(['git','diff','--name-only'],text=True).splitlines()
+          if set(changed)!=set(updated):
+              raise RuntimeError('Unexpected set of changed files: '+str(changed))
+          print('Success: 22 event guides updated; events.html and all shared assets preserved')
+          PY
+      - name: Commit only the 22 event guides
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- bear.html crazy-joe.html alliance-showdown.html alliance-championship.html alliance-mobilization.html frostfire-mine.html tundra-trade-route.html brothers-in-arms.html foundry.html forts.html castle.html winter-siege.html canyon-clash.html ginas-revenge.html mercenary-prestige.html endless-trial.html fishing.html snowplow.html dreams.html state-power.html svs-prep.html svs.html
+          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo 'No guide banner changes required'
+            exit 0
+          fi
+          git commit -m 'Remove visual banners from all 22 event guides, keep event cards'
+          git push origin HEAD:main
