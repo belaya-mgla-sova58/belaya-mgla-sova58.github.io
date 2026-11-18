@@ -1721,3 +1721,48 @@ body.site-hq-v407:is([data-static-route="bear"],[data-static-route="crazy-joe"],
 @media(max-width:820px){
  body.site-hq-v407:is([data-static-route="bear"],[data-static-route="crazy-joe"],[data-static-route="alliance-showdown"],[data-static-route="alliance-championship"],[data-static-route="alliance-mobilization"],[data-static-route="frostfire-mine"],[data-static-route="tundra-trade-route"],[data-static-route="brothers-in-arms"],[data-static-route="foundry"],[data-static-route="forts"],[data-static-route="castle"],[data-static-route="winter-siege"],[data-static-route="canyon-clash"],[data-static-route="ginas-revenge"],[data-static-route="mercenary-prestige"],[data-static-route="endless-trial"],[data-static-route="fishing"],[data-static-route="snowplow"],[data-static-route="dreams"],[data-static-route="state-power"],[data-static-route="svs-prep"],[data-static-route="svs"]){background-attachment:scroll!important}
 }
+
+/* siege-approved-background-v1192: copied from the approved saved Winter Siege HTML design */
+body.site-hq-v407.cosmic-visible-v444:is([data-static-route="bear"],[data-static-route="crazy-joe"],[data-static-route="alliance-showdown"],[data-static-route="alliance-championship"],[data-static-route="alliance-mobilization"],[data-static-route="frostfire-mine"],[data-static-route="tundra-trade-route"],[data-static-route="brothers-in-arms"],[data-static-route="foundry"],[data-static-route="forts"],[data-static-route="castle"],[data-static-route="winter-siege"],[data-static-route="canyon-clash"],[data-static-route="ginas-revenge"],[data-static-route="mercenary-prestige"],[data-static-route="endless-trial"],[data-static-route="fishing"],[data-static-route="snowplow"],[data-static-route="dreams"],[data-static-route="state-power"],[data-static-route="svs-prep"],[data-static-route="svs"]){
+ background:
+   radial-gradient(circle at 18% 12%,rgba(63,127,255,.25),transparent 22%),
+   radial-gradient(circle at 82% 9%,rgba(109,58,209,.22),transparent 24%),
+   radial-gradient(circle at 50% 0%,rgba(76,180,224,.12),transparent 28%),
+   linear-gradient(160deg,#04070f 0%,#07101f 42%,#080d1c 100%)!important;
+ background-attachment:fixed!important;
+ min-height:100vh!important;overflow-x:hidden;
+}
+body.site-hq-v407.cosmic-visible-v444:is([data-static-route="bear"],[data-static-route="crazy-joe"],[data-static-route="alliance-showdown"],[data-static-route="alliance-championship"],[data-static-route="alliance-mobilization"],[data-static-route="frostfire-mine"],[data-static-route="tundra-trade-route"],[data-static-route="brothers-in-arms"],[data-static-route="foundry"],[data-static-route="forts"],[data-static-route="castle"],[data-static-route="winter-siege"],[data-static-route="canyon-clash"],[data-static-route="ginas-revenge"],[data-static-route="mercenary-prestige"],[data-static-route="endless-trial"],[data-static-route="fishing"],[data-static-route="snowplow"],[data-static-route="dreams"],[data-static-route="state-power"],[data-static-route="svs-prep"],[data-static-route="svs"])::before,body.site-hq-v407.cosmic-visible-v444:is([data-static-route="bear"],[data-static-route="crazy-joe"],[data-static-route="alliance-showdown"],[data-static-route="alliance-championship"],[data-static-route="alliance-mobilization"],[data-static-route="frostfire-mine"],[data-static-route="tundra-trade-route"],[data-static-route="brothers-in-arms"],[data-static-route="foundry"],[data-static-route="forts"],[data-static-route="castle"],[data-static-route="winter-siege"],[data-static-route="canyon-clash"],[data-static-route="ginas-revenge"],[data-static-route="mercenary-prestige"],[data-static-route="endless-trial"],[data-static-route="fishing"],[data-static-route="snowplow"],[data-static-route="dreams"],[data-static-route="state-power"],[data-static-route="svs-prep"],[data-static-route="svs"])::after{
+ display:block!important;content:""!important;position:fixed!important;inset:-10%!important;
+ pointer-events:none!important;z-index:0!important;
+}
+body.site-hq-v407.cosmic-visible-v444:is([data-static-route="bear"],[data-static-route="crazy-joe"],[data-static-route="alliance-showdown"],[data-static-route="alliance-championship"],[data-static-route="alliance-mobilization"],[data-static-route="frostfire-mine"],[data-static-route="tundra-trade-route"],[data-static-route="brothers-in-arms"],[data-static-route="foundry"],[data-static-route="forts"],[data-static-route="castle"],[data-static-route="winter-siege"],[data-static-route="canyon-clash"],[data-static-route="ginas-revenge"],[data-static-route="mercenary-prestige"],[data-static-route="endless-trial"],[data-static-route="fishing"],[data-static-route="snowplow"],[data-static-route="dreams"],[data-static-route="state-power"],[data-static-route="svs-prep"],[data-static-route="svs"])::before{
+ background:
+ radial-gradient(1.2px 1.2px at 5% 22%,rgba(255,255,255,.95) 98%,transparent),
+ radial-gradient(1px 1px at 16% 80%,rgba(255,255,255,.8) 98%,transparent),
+ radial-gradient(1.5px 1.5px at 28% 44%,rgba(132,232,255,.9) 98%,transparent),
+ radial-gradient(1px 1px at 44% 16%,rgba(255,255,255,.9) 98%,transparent),
+ radial-gradient(1.1px 1.1px at 58% 68%,rgba(255,255,255,.85) 98%,transparent),
+ radial-gradient(1.8px 1.8px at 71% 27%,rgba(132,232,255,.95) 98%,transparent),
+ radial-gradient(1px 1px at 84% 55%,rgba(255,255,255,.9) 98%,transparent),
+ radial-gradient(1.4px 1.4px at 95% 14%,rgba(255,255,255,.78) 98%,transparent)!important;
+ background-size:320px 240px!important;opacity:.7!important;
+ animation:bm-siege-twinkle-v1192 16s linear infinite!important;
+}
+body.site-hq-v407.cosmic-visible-v444:is([data-static-route="bear"],[data-static-route="crazy-joe"],[data-static-route="alliance-showdown"],[data-static-route="alliance-championship"],[data-static-route="alliance-mobilization"],[data-static-route="frostfire-mine"],[data-static-route="tundra-trade-route"],[data-static-route="brothers-in-arms"],[data-static-route="foundry"],[data-static-route="forts"],[data-static-route="castle"],[data-static-route="winter-siege"],[data-static-route="canyon-clash"],[data-static-route="ginas-revenge"],[data-static-route="mercenary-prestige"],[data-static-route="endless-trial"],[data-static-route="fishing"],[data-static-route="snowplow"],[data-static-route="dreams"],[data-static-route="state-power"],[data-static-route="svs-prep"],[data-static-route="svs"])::after{
+ background:
+ radial-gradient(ellipse at 20% 10%,rgba(58,109,255,.15),transparent 38%),
+ radial-gradient(ellipse at 70% 25%,rgba(121,62,255,.14),transparent 42%),
+ linear-gradient(115deg,transparent 0 18%,rgba(105,228,210,.12) 24%,transparent 35%,transparent 58%,rgba(138,117,255,.08) 66%,transparent 78%)!important;
+ filter:blur(22px)!important;opacity:.95!important;
+ animation:bm-siege-aurora-v1192 20s ease-in-out infinite alternate!important;
+}
+@keyframes bm-siege-twinkle-v1192{
+ 0%{transform:translateY(0);opacity:.66}50%{transform:translateY(10px);opacity:.9}100%{transform:translateY(0);opacity:.66}
+}
+@keyframes bm-siege-aurora-v1192{
+ from{transform:translate3d(-2%,0,0) rotate(-2deg)}to{transform:translate3d(2%,2%,0) rotate(2deg)}
+}
+@media(prefers-reduced-motion:reduce){
+ body.site-hq-v407.cosmic-visible-v444:is([data-static-route="bear"],[data-static-route="crazy-joe"],[data-static-route="alliance-showdown"],[data-static-route="alliance-championship"],[data-static-route="alliance-mobilization"],[data-static-route="frostfire-mine"],[data-static-route="tundra-trade-route"],[data-static-route="brothers-in-arms"],[data-static-route="foundry"],[data-static-route="forts"],[data-static-route="castle"],[data-static-route="winter-siege"],[data-static-route="canyon-clash"],[data-static-route="ginas-revenge"],[data-static-route="mercenary-prestige"],[data-static-route="endless-trial"],[data-static-route="fishing"],[data-static-route="snowplow"],[data-static-route="dreams"],[data-static-route="state-power"],[data-static-route="svs-prep"],[data-static-route="svs"])::before,body.site-hq-v407.cosmic-visible-v444:is([data-static-route="bear"],[data-static-route="crazy-joe"],[data-static-route="alliance-showdown"],[data-static-route="alliance-championship"],[data-static-route="alliance-mobilization"],[data-static-route="frostfire-mine"],[data-static-route="tundra-trade-route"],[data-static-route="brothers-in-arms"],[data-static-route="foundry"],[data-static-route="forts"],[data-static-route="castle"],[data-static-route="winter-siege"],[data-static-route="canyon-clash"],[data-static-route="ginas-revenge"],[data-static-route="mercenary-prestige"],[data-static-route="endless-trial"],[data-static-route="fishing"],[data-static-route="snowplow"],[data-static-route="dreams"],[data-static-route="state-power"],[data-static-route="svs-prep"],[data-static-route="svs"])::after{animation:none!important}
+}
