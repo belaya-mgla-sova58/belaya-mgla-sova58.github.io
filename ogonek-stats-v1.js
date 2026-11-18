@@ -62,7 +62,7 @@
         if(saved!==null&&Number.isSafeInteger(Number(saved))&&Number(saved)>=0)cachedViews=Math.max(cachedViews??0,Number(saved));
       }catch(e){}
       if(viewsEl&&cachedViews!==null){
-        viewsEl.textContent=format(cachedViews)+'+';
+        viewsEl.textContent=format(cachedViews);
         viewsEl.title='Последнее подтверждённое число просмотров';
       }
 
