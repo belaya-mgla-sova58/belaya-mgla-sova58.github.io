@@ -55,17 +55,22 @@
       try{seen=sessionStorage.getItem(seenKey)==='1'}catch(e){}
       var action=isArticle&&!seen?'hit':'get';
       var counterPath='/belaya-mgla-sova58/'+encodeURIComponent(viewKey);
-      var cachedViews=null;
+      var initialViews=viewsEl&&viewsEl.getAttribute('data-last-confirmed');
+      var cachedViews=initialViews===null?null:Number(initialViews);
       try{
         var saved=localStorage.getItem(cachedViewsKey);
-        if(saved!==null&&Number.isSafeInteger(Number(saved))&&Number(saved)>=0)cachedViews=Number(saved);
+        if(saved!==null&&Number.isSafeInteger(Number(saved))&&Number(saved)>=0)cachedViews=Math.max(cachedViews??0,Number(saved));
       }catch(e){}
-      if(cachedViews!==null)display(viewsEl,cachedViews);
+      if(viewsEl&&cachedViews!==null){
+        viewsEl.textContent=format(cachedViews)+'+';
+        viewsEl.title='Последнее подтверждённое число просмотров';
+      }
 
       function updateViews(response){
         var value=response&&response.value;
         if(!Number.isSafeInteger(value)||value<0)throw Error('Invalid view count');
         display(viewsEl,value);
+        if(viewsEl)viewsEl.removeAttribute('title');
         try{localStorage.setItem(cachedViewsKey,String(value))}catch(e){}
       }
 
