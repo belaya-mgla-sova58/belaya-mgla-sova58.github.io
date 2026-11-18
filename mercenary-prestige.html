@@ -4,13 +4,13 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Белая Мгла • Престиж наёмника</title>
-<link href="site-v626.min.css?v=1190" rel="stylesheet"/>
+<link href="site-v626.min.css?v=983" rel="stylesheet"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-
-<script defer src="site-v629.min.js?v=1190"></script>
+<link as="image" fetchpriority="high" href="assets/prestige-header-v501.webp" rel="preload"/>
+<script defer src="site-v629.min.js?v=629"></script>
 <script defer src="notifications-v630.js?v=630"></script>
 <meta name="description" content="Престиж наёмника в Белой мгле: 25 этапов, выносливость, Джина, помощь альянса, капитаны Фаэтона и реальные советы игроков."/>
 <meta name="theme-color" content="#031426"/>
@@ -19,7 +19,7 @@
 <meta property="og:title" content="Белая Мгла • Престиж наёмника"/>
 <meta property="og:description" content="Короткий гайд по Престижу наёмника: как экономить выносливость, проходить 25 этапов и правильно бить капитанов Фаэтона."/>
 <meta property="og:url" content="https://belaya-mgla-sova58.github.io/mercenary-prestige.html"/>
-<meta property="og:image" content="https://belaya-mgla-sova58.github.io/assets/mercenary-prestige-cosmic-v1210.jpg"/>
+<meta property="og:image" content="https://belaya-mgla-sova58.github.io/assets/prestige-header-v501.webp"/>
 <link rel="canonical" href="https://belaya-mgla-sova58.github.io/mercenary-prestige.html"/>
 <link href="manifest-v541.webmanifest" rel="manifest"/>
 <meta name="mobile-web-app-capable" content="yes"/>
@@ -35,44 +35,9 @@ body.is-mercenary-prestige-route .prestige-image-header-v501 img{display:block;w
 .prestige-player{border-color:rgba(116,218,255,.34);background:linear-gradient(145deg,rgba(11,48,78,.92),rgba(6,30,53,.92))}
 .prestige-flow{font-weight:800;color:#e7f8ff}
 @media(max-width:720px){.prestige-guide{font-size:14.5px;line-height:1.52}.prestige-card{padding:12px 13px;border-radius:14px}.prestige-card h2{font-size:18px}.prestige-short{padding:11px 12px}}
-
-/* Desktop guide polish v988: all cards use the available workspace. */
-@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine) {
-  html:not(.force-desktop-root) body.is-mercenary-prestige-route .prestige-guide {
-    box-sizing:border-box!important;
-    width:100%!important;max-width:none!important;min-width:0!important;
-    margin:0!important;
-    grid-template-columns:repeat(2,minmax(0,1fr))!important;
-    gap:clamp(14px,1.4vw,22px)!important;
-    align-items:start!important;
-    font-size:16px!important;line-height:1.68!important;
-  }
-  html:not(.force-desktop-root) body.is-mercenary-prestige-route
-    .prestige-guide>.prestige-short {
-    grid-column:1/-1!important;
-  }
-  html:not(.force-desktop-root) body.is-mercenary-prestige-route
-    .prestige-guide>.prestige-card {
-    box-sizing:border-box;min-width:0;
-    padding:clamp(17px,1.65vw,25px)!important;
-  }
-  html:not(.force-desktop-root) body.is-mercenary-prestige-route
-    .prestige-card h2 {
-    font-size:21px!important;line-height:1.35!important;
-  }
-}
 </style>
-<link rel="stylesheet" href="site-desktop-v985.css?v=985" media="screen and (min-width:1100px) and (hover:hover) and (pointer:fine)" data-sova-desktop-v985/>
-<link rel="stylesheet" href="desktop-guides-expanded-v1080.css?v=1" media="screen and (min-width:1100px) and (hover:hover) and (pointer:fine)" data-desktop-guide-expansion/>
-<link rel="stylesheet" href="desktop-guide-editorial-v1092.css?v=2" media="all" data-guide-editorial-style/>
-<script defer src="desktop-guide-editorial-v1092.js?v=1" data-guide-editorial-script></script>
-<link rel="stylesheet" href="ice-encyclopedia-shared-v1134.css?v=2" media="screen and (min-width:1100px) and (hover:hover) and (pointer:fine)"/>
-<link rel="stylesheet" href="ice-encyclopedia-sidebar-v1135.css?v=2" media="screen and (min-width:1100px) and (hover:hover) and (pointer:fine)"/>
-<script defer src="ice-encyclopedia-sidebar-v1135.js?v=2"></script>
-<link rel="stylesheet" href="mobile-ice-aurora-v1140.css?v=1152" media="screen and (max-width:820px)"/>
-<link rel="stylesheet" href="mobile-guide-polish-v1143.css?v=1152" media="screen and (max-width:820px)"/>
-<link rel="stylesheet" href="site-skip-navigation-v1184.css?v=1184"/></head>
-<body class="is-mercenary-prestige-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444 bm-ice-encyclopedia-v1134" data-static-route="mercenary-prestige"><a class="bm-skip-to-content-v1184" href="#appMain">Перейти к содержимому</a>
+</head>
+<body class="is-mercenary-prestige-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="mercenary-prestige">
 <div aria-hidden="true" class="site-cosmic-background-v442"></div>
 <div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar"><button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button><div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div><a aria-label="На главную" href="index.html">⌂</a></div>
 <div aria-hidden="true" class="mobile-nav-overlay" id="mobileNavOverlay"></div>
@@ -81,24 +46,27 @@ body.is-mercenary-prestige-route .prestige-image-header-v501 img{display:block;w
 <div class="site-search-v426" data-site-search=""><div class="site-search-box-v426"><span aria-hidden="true" class="site-search-icon-v426">⌕</span><input aria-expanded="false" aria-label="Поиск по сайту" autocomplete="off" class="site-search-input-v426" inputmode="search" placeholder="Поиск по сайту..." spellcheck="false" type="search"/><button aria-label="Очистить поиск" class="site-search-clear-v426" type="button">×</button></div><div aria-label="Результаты поиска" class="site-search-results-v426" role="listbox"></div></div>
 <div class="route-page active" data-route="mercenary-prestige">
 <nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><a href="events.html">События</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><span aria-current="page">Престиж наёмника</span></nav>
-
-<section class="intro" id="mercenary-prestige"><span class="eyebrow">Гайд для новичков и опытных игроков</span><div class="owl-page-title"><h1 class="owl-heading"><span class="owl-title-text">Престиж наёмника</span></h1></div><p><b>Автор: SOVA58</b></p><p>Как пройти 25 этапов, сэкономить выносливость и помочь альянсу.</p></section><section class="section prestige-guide"><div class="prestige-short"><p>⚡ Главный ресурс: выносливость. 🎯 Сначала пробуем одиночную атаку. 🤝 Помощь бережём для сложных этапов.</p></div><div class="prestige-card"><h2>❄️ Что это за событие?</h2><p>«Престиж наёмника» — событие, в котором игроки сражаются с наёмниками Фаэтона и получают награды за прохождение этапов.</p><p>Оно состоит из двух частей:</p><ul><li><b>Личное испытание:</b> 25 последовательных этапов с наёмниками.</li><li><b>Альянсовое испытание:</b> совместные сражения с капитанами Фаэтона.</li></ul><p>Главный ресурс события — <b>выносливость</b>. Чем разумнее её расходовать, тем больше этапов получится пройти без дополнительных затрат.</p></div>
-<div class="prestige-card"><h2>🎯 Как начать прохождение?</h2><ol><li>Открой событие «Престиж наёмника».</li><li>Выбери подходящую сложность.</li><li>Нажми «Разведать», чтобы обнаружить наёмника на карте.</li><li>Попробуй победить его одиночной атакой.</li><li>После победы переходи к следующему этапу.</li><li>Если противник слишком силён, используй помощь альянса или совместный сбор.</li></ol><p><b>Важно:</b> выбирай сложность с учётом своей армии. Более высокая сложность даёт ценные награды, но слишком сильные противники могут остановить прохождение.</p></div>
-<div class="prestige-card"><h2>⚡ Сколько нужно выносливости?</h2><p>На обычных условиях:</p><table><thead><tr><th>Действие</th><th>Выносливость</th></tr></thead><tbody><tr><td>Разведка наёмника</td><td>15</td></tr><tr><td>Одиночная атака</td><td>10</td></tr><tr><td>Совместный сбор</td><td>25</td></tr><tr><td>Одиночная атака с Джиной (4★)</td><td>8</td></tr><tr><td>Сбор с Джиной (4★)</td><td>20</td></tr></tbody></table><p>Стоимость разведки не уменьшается навыком Джины.</p><p>Если проходить все 25 этапов одиночными атаками без скидок, потребуется <b>625 выносливости</b>.</p><p>Это не значит, что нужно сразу использовать банки. Выносливость постепенно восстанавливается, и событие можно проходить в течение нескольких дней.</p></div>
-<div class="prestige-card"><h2>🦸 Зачем нужна Джина?</h2><p>Джина особенно полезна для экономии выносливости.</p><p>Её навык уменьшает затраты на подходящие атаки и сборы против целей на карте. При четырёх звёздах скидка достигает 20%.</p><p>Если наёмника можно победить с Джиной в отряде, такой вариант обычно выгоднее по расходу выносливости.</p><p><b>Но если из-за Джины отряд проигрывает, лучше выбрать более сильного героя.</b> Проигрышная атака не поможет сэкономить ресурс.</p></div>
-<div class="prestige-card"><h2>🤝 Как работает помощь альянса?</h2><p>В личном испытании можно попросить помощи у союзников, используя специальные возможности события.</p><p>Лучше сохранять помощь на трудные этапы, а не расходовать её на первых слабых противников.</p><p>Помощь особенно полезна, когда одиночная атака уже не справляется.</p><p>Учитывай ограничения количества обращений за помощью, указанные в событии.</p><p>🦉 <b>Совет Совы:</b> заранее договоритесь в альянсе, кто кому помогает. Так больше игроков смогут пройти сложные этапы.</p></div>
-<div class="prestige-card"><h2>⚔️ Когда создавать сбор?</h2><p>Не каждый сильный наёмник требует совместной атаки.</p><p>Если предыдущая цель была побеждена с большим запасом войск, следующую можно сначала оценить по силе и боевому отчёту.</p><p>Когда одиночная атака уже не справляется, попроси союзников присоединиться к сбору.</p><p><b>Не трать 25 выносливости на совместный сбор там, где достаточно обычной атаки за 10.</b></p><p>При этом избегай повторных заведомо проигрышных попыток. Если противник явно сильнее, лучше сразу обратиться за помощью.</p></div>
-<div class="prestige-card"><h2>📅 Как распределить прохождение?</h2><p>Необязательно завершать все 25 этапов в первый день.</p><p><b>Первый день:</b> пройти доступные простые этапы, используя естественное восстановление выносливости.</p><p><b>Второй день:</b> продолжить цепочку, применить помощь альянса на сложных противниках.</p><p><b>Последний день:</b> завершить оставшиеся этапы, используя накопленные банки выносливости, если они действительно нужны.</p><p>Пока идёт Престиж, желательно сократить необязательные расходы выносливости на обычную охоту и Полярный ужас.</p></div>
-<div class="prestige-card"><h2>👹 Что такое капитаны Фаэтона?</h2><p>Капитаны Фаэтона — сильные противники альянсовой части события.</p><p>Они становятся доступны по мере прохождения личных испытаний участниками. Их появление и запуск координируют R4/R5.</p><p>В отличие от обычных наёмников, капитана атакуют многие игроки альянса, постепенно уменьшая его здоровье.</p><p>За участие предусмотрены награды.</p></div>
-<div class="prestige-card"><h2>🪖 Как правильно атаковать капитана?</h2><p>Чтобы как можно больше игроков получили возможность участвовать:</p><ol><li>Дождись объявления руководства.</li><li>Отправь небольшой отряд, чтобы нанести первый удар.</li><li>Дай остальным участникам сделать то же самое.</li><li>После команды R4/R5 отправляй сильные марши для завершения боя.</li></ol><p><b>Не стоит сразу отправлять самый сильный отряд</b>, если другие участники ещё не успели вступить в бой.</p><p>Один сильный игрок может слишком быстро победить капитана, и остальные не успеют получить награду за участие.</p><div class="prestige-short"><p>🦉 <b>Совет Совы:</b> сначала даём всем отметиться, потом добиваем капитана вместе!</p></div></div>
-<div class="prestige-card"><h2>🎁 Как получить награды и сберечь выносливость?</h2><p>Старайся использовать бесплатные источники выносливости и естественное восстановление.</p><ul><li>✅ Выбирай посильную сложность.</li><li>✅ Используй Джину там, где можешь победить.</li><li>✅ Обычных наёмников по возможности проходи одиночными атаками.</li><li>✅ Сохраняй помощь для трудных этапов.</li><li>✅ Не расходуй банки в самом начале события.</li><li>✅ Участвуй в альянсовых сражениях с капитанами.</li></ul><p>Главная цель — получить доступные награды, не опустошая запас выносливости перед следующими событиями.</p></div>
-<div class="prestige-card"><h2>❌ Частые ошибки</h2><p><b>Выбирать слишком высокую сложность.</b> Из-за сильных противников можно не завершить цепочку.</p><p><b>Пытаться пройти всё за несколько часов.</b> Приходится тратить много банок выносливости.</p><p><b>Создавать сбор на лёгкого наёмника.</b> Расходуется больше выносливости, чем при одиночной атаке.</p><p><b>Забывать использовать Джину.</b> Упускается возможность сэкономить ресурс.</p><p><b>Тратить помощь на первые этапы.</b> На сложных противниках её может уже не хватить.</p><p><b>Сразу добивать капитана.</b> Другие участники не успевают получить награды.</p></div>
-<div class="prestige-card"><h2>🦉 Советы Совы</h2><p>✅ Проходи 25 этапов постепенно.</p><p>✅ Береги выносливость и используй бесплатное восстановление.</p><p>✅ Проверяй боевые отчёты, прежде чем выбирать сбор.</p><p>✅ Сохраняй помощь альянса для сложных целей.</p><p>✅ Не трать все банки выносливости заранее.</p><p>✅ На капитанах сначала отправляй маленький отряд.</p><p>✅ Добивай капитана только по общей команде.</p><div class="prestige-short"><p><b>Главное правило Престижа наёмника: трать выносливость с умом, помогай союзникам и не торопись добивать капитанов. Тогда хорошие награды получит не один игрок, а весь альянс! 🦉</b></p></div></div></section><div class="footer">Белая Мгла • Автор: SOVA58</div>
+<section class="prestige-image-header-v501" aria-label="Престиж наёмника"><img alt="Престиж наёмника" decoding="async" fetchpriority="high" src="assets/prestige-header-v501.webp"/></section>
+<section class="intro" id="mercenary-prestige"><span class="eyebrow">Отдельный гайд события</span><div class="owl-page-title"><h1 class="owl-heading"><span class="owl-title-text">Престиж наёмника</span></h1></div><p><b>Автор: SOVA58</b></p><p>PvE-событие с личной цепочкой наёмников Фаэтона и общей альянсовой частью. Сейчас нужно пройти <b>25 этапов</b>.</p></section>
+<section class="section prestige-guide">
+<div class="prestige-short"><p>⚡ Главный ресурс события: выносливость.</p><p>🎯 Сначала пробуем пройти цель самостоятельно.</p><p>🤝 Помощь и рейды оставляем на сложные этапы.</p><p>👹 После личной цепочки открываются капитаны Фаэтона.</p></div>
+<div class="prestige-card"><h2>🎯 Как проходить</h2><p>Каждый этап: находим наёмника, пробуем победить самостоятельно и переходим дальше.</p><p>Если обычной атаки уже не хватает, используем помощь альянса или рейд.</p></div>
+<div class="prestige-card"><h2>⚡ Выносливость</h2><p>Не обязательно закрывать всё событие в первый день.</p><ul><li>используем естественное восстановление;</li><li>забираем ежедневную выносливость;</li><li>банки оставляем на конец;</li><li>не тратим 25 выносливости на рейд, если цель проходится обычной атакой.</li></ul></div>
+<div class="prestige-card"><h2>🦸 Джина</h2><p>Джина полезна здесь благодаря снижению расхода выносливости на подходящие действия в тундре.</p><p>Пока цель проходится соло, выгоднее использовать Джину и обычную атаку, чем лишний рейд.</p></div>
+<div class="prestige-card"><h2>🤝 Помощь альянса</h2><p>Помощь лучше сохранять на этапы, где самостоятельно уже тяжело.</p><p>Игроки часто договариваются помогать друг другу по очереди, чтобы оба получили дополнительную пользу от механики помощи.</p></div>
+<div class="prestige-card"><h2>🔥 Когда нужен рейд</h2><p>Предупреждение о высокой силе цели не всегда означает гарантированное поражение.</p><p>Смотрите предыдущий боевой отчёт. Если прошлый этап прошли с большим запасом, следующий тоже стоит сначала проверить соло.</p></div>
+<div class="prestige-card"><h2>👹 Альянсовые боссы</h2><p>После достаточного прогресса участников открываются капитаны Фаэтона.</p><p>Не спешим сразу наносить максимальный урон. Сначала даём всем желающим отметиться небольшим маршем, после команды R4/R5 начинаем добивать босса.</p></div>
+<div class="prestige-card prestige-player"><h2>💬 Опыт игроков</h2><ul><li><b>Не закрывайте всё за несколько часов.</b> Игроки часто растягивают событие на 2–3 дня и экономят банки выносливости.</li><li><b>На время события сокращают обычные рейды на Полярный ужас.</b> Выносливость выгоднее оставить на личную цепочку.</li><li><b>Банки выносливости используют в конце.</b> Сначала тратят естественное восстановление и бесплатные источники.</li><li><b>Не верят предупреждению о силе вслепую.</b> Если прошлый бой прошёл уверенно, следующий этап сначала пробуют соло.</li><li><b>Помощью обмениваются.</b> Один игрок помогает другому, потом получают помощь в ответ.</li><li><b>На капитане сначала отправляют минимальный марш.</b> Цель первого удара: зафиксировать участие как можно большего числа игроков.</li><li><b>Добивают только после команды.</b> Иначе сильный игрок может снести босса раньше, чем остальные успеют получить участие.</li></ul></div>
+<div class="prestige-card"><h2>🚫 Частые ошибки</h2><ul><li>закрывать всё в первый день;</li><li>тратить банки сразу;</li><li>открывать рейд на лёгкой цели;</li><li>расходовать помощь на простые этапы;</li><li>не смотреть боевые отчёты;</li><li>сразу отправлять сильный марш на капитана;</li><li>добивать босса до команды R4/R5.</li></ul></div>
+<div class="prestige-card"><h2>✅ Быстрая схема</h2><p class="prestige-flow">⚡ копим выносливость → 🔍 находим цель → ⚔️ пробуем соло → 🤝 сложный этап закрываем помощью → 🔥 при необходимости рейдом → ✅ доходим до 25-го → 👹 капитан → 🪖 сначала маленький марш → 📢 команда → 💥 добиваем</p></div>
+<div class="prestige-card prestige-player"><h2>🏆 Главное</h2><p><b>Не сжигаем выносливость там, где можно пройти дешевле.</b></p><p>А на капитанах сначала даём игрокам отметиться, и только потом начинаем полноценную атаку.</p></div>
+</section>
+<div class="footer">Белая Мгла • Автор: SOVA58</div>
 </div>
 <section class="related-guides-v625" aria-label="Похожие гайды"><div class="related-guides-head-v625"><span>Ещё по теме</span><h2>Похожие гайды</h2></div><div class="related-guides-grid-v625"><a class="related-guide-card-v625" href="ginas-revenge.html"><span>Месть Джины</span><b>Открыть гайд ›</b></a><a class="related-guide-card-v625" href="endless-trial.html"><span>Бесконечное испытание</span><b>Открыть гайд ›</b></a><a class="related-guide-card-v625" href="bear.html"><span>Охота на медведя</span><b>Открыть гайд ›</b></a></div></section>
 </main>
 <button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button>
 <nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424"><a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" src="assets/ui-home-v534.webp"/></span><b>Главная</b></a><a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" src="assets/ui-events-v534.webp"/></span><b>События</b></a><a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" src="assets/ui-heroes-v534.webp"/></span><b>Герои</b></a><a data-v424-nav="calc" href="fire-furnace-calculator.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" src="assets/ui-calculator-v534.webp"/></span><b>Калькулятор</b></a><a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" src="assets/ui-knowledge-v534.webp"/></span><b>База знаний</b></a></nav>
-<script defer src="pwa-install.js?v=1193"></script>
+<script defer src="pwa-install.js?v=586"></script>
 </body>
 </html>
