@@ -9,6 +9,7 @@
   var viewUrl='https://abacus.jasoncameron.dev/';
   var likedKey='belaya-mgla-firebase-liked-'+likeKey;
   var seenKey='bm-view-counted:'+viewKey;
+  var cachedViewsKey='bm-view-last:'+viewKey;
   var isArticle=!!document.querySelector('[data-ogonek-article]');
   var button=document.querySelector('[data-ogonek-like]');
   var likeEl=document.querySelector('[data-ogonek-like-count]');
@@ -28,9 +29,9 @@
     var label=button.querySelector('[data-ogonek-like-label]');
     if(label)label.textContent=isLiked?'Спасибо!':'Нравится';
   }
-  function request(url,options){
+  function request(url,options,timeout){
     var ctrl=typeof AbortController==='function'?new AbortController():null;
-    var timer=ctrl?setTimeout(function(){ctrl.abort()},4500):null;
+    var timer=ctrl?setTimeout(function(){ctrl.abort()},timeout||4500):null;
     var opts=Object.assign({cache:'no-store'},options||{});
     if(ctrl)opts.signal=ctrl.signal;
     return fetch(url,opts).then(function(res){if(!res.ok)throw Error('Stats unavailable');return res.json()})
@@ -53,14 +54,34 @@
       var seen=false;
       try{seen=sessionStorage.getItem(seenKey)==='1'}catch(e){}
       var action=isArticle&&!seen?'hit':'get';
-      request(viewUrl+action+'/belaya-mgla-sova58/'+encodeURIComponent(viewKey))
-        .then(function(v){
-          display(viewsEl,typeof(v&&v.value)==='number'?v.value:null);
+      var counterPath='/belaya-mgla-sova58/'+encodeURIComponent(viewKey);
+      var cachedViews=null;
+      try{
+        var saved=localStorage.getItem(cachedViewsKey);
+        if(saved!==null&&Number.isSafeInteger(Number(saved))&&Number(saved)>=0)cachedViews=Number(saved);
+      }catch(e){}
+      if(cachedViews!==null)display(viewsEl,cachedViews);
+
+      function updateViews(response){
+        var value=response&&response.value;
+        if(!Number.isSafeInteger(value)||value<0)throw Error('Invalid view count');
+        display(viewsEl,value);
+        try{localStorage.setItem(cachedViewsKey,String(value))}catch(e){}
+      }
+
+      request(viewUrl+action+counterPath,undefined,12000)
+        .then(function(response){
           if(action==='hit')try{sessionStorage.setItem(seenKey,'1')}catch(e){}
+          updateViews(response);
         })
-        .catch(function(){display(viewsEl,null)});
+        .catch(function(){
+          // Retry the read only. A timed-out hit may already have been counted.
+          return new Promise(function(resolve){setTimeout(resolve,1000)})
+            .then(function(){return request(viewUrl+'get'+counterPath,undefined,12000)})
+            .then(updateViews)
+            .catch(function(){if(cachedViews===null)display(viewsEl,null)});
+        });
     }
   }
-  if(document.readyState==='complete')setTimeout(load,600);
-  else window.addEventListener('load',function(){setTimeout(load,600)},{once:true});
+  load();
 })();
