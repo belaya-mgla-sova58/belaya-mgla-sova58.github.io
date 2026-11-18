@@ -27,6 +27,21 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.58;ba
 @keyframes owlFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}@keyframes spin{to{transform:rotate(360deg)}}@keyframes spinReverse{to{transform:rotate(-360deg)}}@keyframes ballTurn{to{transform:rotate(360deg)}}@keyframes ballBreathe{0%,100%{filter:brightness(1) saturate(1)}50%{filter:brightness(1.12) saturate(1.12)}}@keyframes haloPulse{0%,100%{transform:scale(.94) rotate(0deg);opacity:.66}50%{transform:scale(1.06) rotate(180deg);opacity:1}}@keyframes flash{0%{opacity:0;transform:scale(.72)}25%{opacity:1}100%{opacity:0;transform:scale(1.3)}}
 @media(max-width:640px){.page{padding-top:12px}.stage{width:100%;grid-template-columns:116px minmax(230px,1fr);gap:-4px}.owl{width:132px}.owl-wrap{margin-right:-18px;margin-bottom:18px}.ball-button{width:min(74vw,360px)}.reading{margin-top:2px;min-height:112px}.title{font-size:29px}.sub{font-size:13px}}
 @media(max-width:390px){.stage{grid-template-columns:96px minmax(220px,1fr)}.owl{width:112px}.owl-wrap{margin-right:-16px}.ball-button{width:min(76vw,330px)}}
+/* v991: Recover damaged active-owl asset using the existing approved owl poster. */
+.owl.active{
+  aspect-ratio:1/1;object-fit:cover;object-position:50% 50%;border-radius:50%;
+  -webkit-mask-image:radial-gradient(ellipse at center,#000 57%,transparent 78%);
+  mask-image:radial-gradient(ellipse at center,#000 57%,transparent 78%);
+}
+/* v991: Mobile stage must fit inside its real available width. */
+@media(max-width:640px){
+  .page{min-width:0;padding-left:12px;padding-right:12px}
+  .stage{box-sizing:border-box;width:100%;max-width:100%;min-width:0;
+    grid-template-columns:minmax(0,28%) minmax(0,72%);column-gap:0}
+  .owl-wrap{min-width:0;margin-right:-5px}
+  .owl{width:100%;max-width:132px}
+  .ball-button{width:min(100%,360px);max-width:100%;min-width:0}
+}
 @media(prefers-reduced-motion:reduce){.owl-wrap,.ball,.ball-halo,.ball-ring{animation:none!important}}
 </style>
 <script defer src="/analytics-metrika-v1.js?v=3"></script>
@@ -41,7 +56,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.58;ba
   <section>
     <div class="stage" aria-label="Сова и магический шар">
       <div class="owl-wrap" id="owlWrap">
-        <img class="owl active" src="assets/owl-fortune-active-v930.webp" alt="Сова-предсказательница">
+        <img class="owl active" src="assets/owl-fortune-poster.webp" alt="Сова-предсказательница">
         <img class="owl sleep" src="assets/owl-fortune-sleep-v930.webp" alt="Спящая сова">
       </div>
       <button class="ball-button" id="ballButton" type="button" aria-label="Получить предсказание">

@@ -1,0 +1,61 @@
+/* Белая мгла v1171: смысловые акценты в гайдах без лишних цветных плашек.
+   Изолировано от каталога, питомцев, героев, экспертов и калькуляторов. */
+body.bm-guide-callouts-v1171 .route-page.active{
+ --bm-note-line:rgba(133,208,246,.40);
+ --bm-note-bg:rgba(14,37,68,.50);
+}
+body.bm-guide-callouts-v1171 .route-page.active :is(.guide-callout,.guide-note,.rule,.forts-important){
+ position:relative;box-sizing:border-box;min-width:0;
+ margin-block:clamp(13px,1.6vw,20px)!important;
+ padding:clamp(14px,1.4vw,19px) clamp(15px,1.65vw,23px)!important;
+ border:1px solid var(--bm-note-line)!important;
+ border-left:3px solid #83d8f5!important;
+ border-radius:13px!important;
+ background:var(--bm-note-bg)!important;
+ box-shadow:inset 0 1px 0 rgba(236,249,255,.05),0 5px 16px rgba(2,9,29,.13)!important;
+ color:inherit;overflow-wrap:break-word;
+}
+body.bm-guide-callouts-v1171 .route-page.active :is(.guide-callout,.guide-note,.rule,.forts-important):is(.warn,.warning){
+ border-left-color:#f1bd75!important;
+ border-color:rgba(232,192,126,.44)!important;
+ background:rgba(75,50,29,.23)!important;
+}
+body.bm-guide-callouts-v1171 .route-page.active :is(.guide-callout,.guide-note,.rule,.forts-important):is(.tip,.good){
+ border-left-color:#7fdec8!important;
+}
+body.bm-guide-callouts-v1171 .route-page.active :is(.guide-callout,.guide-note,.rule,.forts-important)>:is(b,strong):first-child{
+ display:inline-block;margin-bottom:4px;
+ font-weight:800;line-height:1.35;
+}
+body.bm-guide-callouts-v1171 .route-page.active :is(.guide-callout,.guide-note,.rule,.forts-important) :is(p,li){
+ line-height:1.62!important;overflow-wrap:break-word;
+}
+body.bm-guide-callouts-v1171 .route-page.active :is(.guide-callout,.guide-note,.rule,.forts-important) p{
+ margin:6px 0!important;
+}
+body.bm-guide-callouts-v1171 .route-page.active :is(.guide-callout,.guide-note,.rule,.forts-important) p:last-child{
+ margin-bottom:0!important;
+}
+body.bm-guide-callouts-v1171 .route-page.active .guide-callout:has(>.copy-block-v409){
+ padding-right:clamp(15px,1.65vw,23px)!important;
+}
+body.bm-guide-callouts-v1171 .route-page.active .guide-callout>.copy-block-v409{
+ position:relative;float:right;
+ margin:0 0 8px 10px;
+ max-width:46%;min-height:32px;
+}
+body.bm-guide-callouts-v1171 .route-page.active .guide-callout::after{
+ content:"";display:table;clear:both;
+}
+body.bm-guide-callouts-v1171 .route-page.active .guide-callout>.copy-block-v409:focus-visible{
+ outline:3px solid #a9ebff!important;outline-offset:3px!important;
+}
+/* Compact rules in event guides do not stretch their image banners. */
+@media(max-width:700px){
+ html:not(.force-desktop-root) body.bm-guide-callouts-v1171 .route-page.active :is(.guide-callout,.guide-note,.rule,.forts-important){
+  padding:12px 14px!important;border-radius:11px!important;
+ }
+ html:not(.force-desktop-root) body.bm-guide-callouts-v1171 .route-page.active .guide-callout>.copy-block-v409{
+  max-width:45%;font-size:12px;
+ }
+}

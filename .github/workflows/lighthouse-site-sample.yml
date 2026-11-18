@@ -1,0 +1,40 @@
+name: Site-wide Lighthouse sample (desktop and mobile)
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/lighthouse-site-sample.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: sova58-full-performance-sample
+  cancel-in-progress: false
+jobs:
+  audit:
+    name: 10 core routes, two viewports
+    runs-on: ubuntu-latest
+    timeout-minutes: 24
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install browser and Lighthouse
+        run: |
+          npm install --no-save --no-audit --no-fund playwright lighthouse
+          npx playwright install --with-deps chromium
+      - name: Audit live pages, mobile and desktop
+        env:
+          SOVA_LH_PAGES: index.html,news.html,news-ru.html,events.html,other.html,bear.html,calculators.html,k-vam-na-ogonek.html,pets.html,experts.html
+          SOVA_LH_MODES: mobile,desktop
+        run: node tests/lighthouse-audit.cjs
+      - name: Save diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sova58-site-wide-lighthouse
+          path: visual-audit-results/
+          if-no-files-found: warn
+          retention-days: 14

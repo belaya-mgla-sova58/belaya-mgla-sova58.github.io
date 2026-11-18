@@ -1,0 +1,120 @@
+/* SOVA58 PETS | Northern Lights editorial headers v15
+   The decoration is drawn in CSS; only genuine catalogue pet portraits appear. */
+body.is-pets-route .pets-redesign .pet-stage{
+ --aurora:var(--pet-accent,#8dd5e8);
+ margin-bottom:13px!important;border-radius:17px!important;
+ border:1px solid color-mix(in srgb,var(--aurora) 50%,#54799a)!important;
+ box-shadow:0 12px 25px rgba(0,7,28,.28),inset 0 0 0 1px rgba(220,248,255,.06)!important;
+ overflow:hidden!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary,
+body.is-pets-route .pets-redesign .pet-stage[open]>summary,
+body.is-pets-route .pets-redesign .pet-stage>summary:hover,
+body.is-pets-route .pets-redesign .pet-stage>summary:focus-visible{
+ display:flex!important;align-items:center!important;
+ height:128px!important;max-height:128px!important;min-height:128px!important;
+ padding:16px 58px 16px 28px!important;isolation:isolate!important;
+ background-color:#081a3a!important;
+ background-image:
+   radial-gradient(ellipse 46% 85% at 72% 58%,color-mix(in srgb,var(--aurora) 31%,transparent),transparent 86%),
+   radial-gradient(ellipse 40% 80% at 85% -12%,rgba(116,72,223,.36),transparent 80%),
+   linear-gradient(164deg,transparent 41%,rgba(99,201,255,.13) 48%,transparent 61%),
+   linear-gradient(171deg,transparent 45%,rgba(91,162,240,.09) 53%,transparent 64%),
+   repeating-linear-gradient(111deg,transparent 0 52px,rgba(197,240,255,.024) 53px 54px,transparent 55px 102px),
+   linear-gradient(100deg,#08152f 0%,#10234c 54%,#11376b 100%)!important;
+ border:0!important;border-radius:0!important;overflow:hidden!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary::before{
+ display:block!important;content:"✦   ❄   ✧"!important;
+ position:absolute!important;z-index:1!important;
+ left:auto!important;right:30%!important;top:10px!important;bottom:auto!important;
+ width:auto!important;height:auto!important;
+ font-size:19px!important;letter-spacing:18px!important;color:rgba(192,236,255,.29)!important;
+ opacity:.85!important;background:none!important;pointer-events:none!important;
+ transform:rotate(-9deg)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary::after{
+ display:block!important;content:""!important;position:absolute!important;z-index:1!important;
+ left:23px!important;right:23px!important;bottom:7px!important;top:auto!important;
+ width:auto!important;height:2px!important;
+ background:linear-gradient(90deg,var(--aurora),rgba(144,216,255,.21) 48%,transparent 95%)!important;
+ opacity:.8!important;pointer-events:none!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title{
+ z-index:3!important;max-width:55%!important;gap:6px!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title small{
+ color:#91cde7!important;-webkit-text-fill-color:#91cde7!important;
+ font-size:10px!important;letter-spacing:.22em!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title strong{
+ font-size:clamp(26px,2.9vw,37px)!important;
+ font-weight:850!important;letter-spacing:-.02em!important;
+ color:#f8fcff!important;-webkit-text-fill-color:#f8fcff!important;
+ text-shadow:0 2px 14px rgba(75,185,251,.37),0 2px 1px rgba(0,8,32,.7)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title em{
+ font-size:11px!important;color:#afcfe7!important;-webkit-text-fill-color:#afcfe7!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-faces{
+ top:50%!important;right:54px!important;height:110px!important;max-width:50%!important;
+ gap:0!important;align-items:center!important;overflow:visible!important;
+ transform:translateY(-50%)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-faces::before{
+ display:block!important;content:""!important;position:absolute!important;
+ width:270px!important;height:140px!important;
+ right:9px!important;top:-15px!important;z-index:-1!important;
+ border-radius:50%!important;
+ background:radial-gradient(ellipse,rgba(123,221,255,.20),rgba(140,104,225,.11) 47%,transparent 76%)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-photo,
+body.is-pets-route .pets-redesign .pet-stage>summary:hover .pet-stage-photo,
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-photo:nth-child(2){
+ width:88px!important;height:88px!important;min-width:88px!important;min-height:88px!important;
+ max-width:88px!important;max-height:88px!important;flex:0 0 88px!important;
+ border:2px solid rgba(210,244,255,.63)!important;
+ border-radius:21px!important;
+ background:linear-gradient(140deg,#215278,#112646)!important;
+ box-shadow:0 9px 18px rgba(0,5,25,.5),0 0 18px rgba(123,217,255,.14),inset 0 1px rgba(255,255,255,.16)!important;
+ object-fit:contain!important;
+ margin-left:-8px!important;
+ filter:contrast(1.04) saturate(1.08)!important;
+ transform:rotate(3deg)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-photo:first-child{
+ transform:rotate(-5deg)!important;z-index:3!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-photo:nth-child(2){
+ transform:rotate(4deg) translateY(-5px)!important;z-index:2!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-photo:nth-child(3){
+ transform:rotate(-3deg) translateY(4px)!important;z-index:1!important;
+}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-chevron{
+ right:13px!important;top:50%!important;width:33px!important;height:33px!important;
+ border:1px solid rgba(202,239,255,.55)!important;background:rgba(6,23,52,.65)!important;
+}
+@media(max-width:700px){
+ body.is-pets-route .pets-redesign .pet-stage>summary,
+ body.is-pets-route .pets-redesign .pet-stage[open]>summary,
+ body.is-pets-route .pets-redesign .pet-stage>summary:hover{
+  height:102px!important;max-height:102px!important;min-height:102px!important;
+  padding:10px 35px 10px 15px!important;
+ }
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title{max-width:59%!important;gap:3px!important}
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title strong{font-size:21px!important}
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title small{font-size:8px!important}
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title em{font-size:9px!important}
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-faces{right:27px!important;height:76px!important;max-width:44%!important}
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-photo,
+ body.is-pets-route .pets-redesign .pet-stage>summary:hover .pet-stage-photo,
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-photo:nth-child(2){
+  width:52px!important;height:52px!important;min-width:52px!important;min-height:52px!important;
+  max-width:52px!important;max-height:52px!important;flex-basis:52px!important;
+  border-radius:13px!important;margin-left:-5px!important;
+ }
+ body.is-pets-route .pets-redesign .pet-stage>summary::before{right:26%!important;font-size:12px!important;letter-spacing:7px!important}
+ body.is-pets-route .pets-redesign .pet-stage>summary::after{left:13px!important}
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-chevron{right:3px!important;width:24px!important;height:24px!important}
+}

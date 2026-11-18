@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#06152d">
+<meta name="description" content="Сундук дня: ежедневная игровая викторина по Белой мгле для игроков государства 58.">
+<title>Сундук дня • Белая мгла</title>
+<style>
+:root{color-scheme:dark;--ink:#f4f3ee;--sub:#b6c8e2;--gold:#f3d18b;--cyan:#64dafa;--border:rgba(161,198,240,.25)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -15%,#284974 0,transparent 46%),radial-gradient(ellipse at 90% 85%,#122e59 0,transparent 50%),#061023;color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;overflow-x:hidden}
+body:before{content:"";pointer-events:none;position:fixed;inset:0;background-image:radial-gradient(#e3efff 1px,transparent 1px);background-size:49px 49px;opacity:.12}
+a{color:inherit}.wrap{width:min(960px,calc(100% - 32px));margin:auto;position:relative}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0}.brand{font-weight:900;letter-spacing:.06em;color:#e5f7ff;text-transform:uppercase;text-shadow:0 0 16px #4fa9ff70}.back{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:999px;padding:9px 15px;text-decoration:none;background:#0a1b36}
+main{padding:22px 0 70px}.intro{text-align:center;margin:6px auto 25px;max-width:720px}.eyebrow{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:900}.intro h1{font-family:Georgia,serif;font-size:clamp(38px,7vw,72px);line-height:1.08;margin:12px 0;color:#fff1ce;text-shadow:0 2px 24px #eca95238}.intro p{color:var(--sub);margin:0 auto;max-width:590px}
+.panel{border:1px solid rgba(243,209,139,.38);border-radius:26px;background:linear-gradient(145deg,#12294aee,#081a34ee 70%);box-shadow:0 30px 90px #0007,0 0 55px #4cb9ff0c;overflow:hidden;position:relative}.panel:before{content:"";display:block;height:4px;background:linear-gradient(90deg,transparent,#e6c37a,#76d5f6,#e6c37a,transparent)}
+.inner{padding:clamp(20px,4vw,42px)}.status{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--sub)}.day{border:1px solid #d2b57465;border-radius:99px;padding:6px 12px;color:var(--gold);font-weight:800}.stage{text-align:center;padding:15px 0 8px}
+.chest{display:block;margin:0 auto;font-size:clamp(95px,20vw,160px);line-height:1.35;filter:drop-shadow(0 12px 18px #0009) drop-shadow(0 0 24px #e5b85745);transform-origin:center;transition:transform .4s ease,filter .4s ease}.chest.open{animation:pop .55s both}@keyframes pop{40%{transform:scale(1.14) rotate(-4deg)}100%{transform:scale(1)}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+.stage h2{font-size:clamp(22px,3.5vw,30px);line-height:1.2;margin:6px 0 10px}.stage p{color:var(--sub);margin:0 auto 16px;max-width:540px}.question{text-align:left;margin:18px auto;max-width:640px}.question-title{font-size:clamp(18px,3vw,24px);font-weight:850;line-height:1.35;margin-bottom:18px}.choices{display:grid;gap:10px}.answer{width:100%;text-align:left;background:#112e50;border:1px solid #6586ad77;color:white;border-radius:14px;padding:15px 17px;font:inherit;font-weight:650;cursor:pointer;transition:background .2s,border-color .2s,transform .2s}.answer:hover:not(:disabled),.answer:focus-visible{background:#1e446f;border-color:#9dd7f5;outline:2px solid transparent;transform:translateY(-1px)}.answer:disabled{cursor:default;opacity:.85}.answer.correct{border-color:#86e9b9;background:#114d47;color:#e4fff0}.answer.wrong{border-color:#f4aaaa;background:#602e43}.btn{border:1px solid #ffe0a0;border-radius:15px;padding:13px 23px;background:linear-gradient(125deg,#f5d998,#bd873d);color:#19223b;font-size:16px;font-weight:900;cursor:pointer;box-shadow:0 8px 25px #e8af4b35}.btn:hover{filter:brightness(1.08)}.reward{font-size:54px;margin:10px 0 0}.result{margin:12px auto;max-width:580px}.result strong{color:var(--gold)}.note{font-size:13px;color:#aebfdb;text-align:center;line-height:1.55;margin:18px 0 0}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}.stat{border:1px solid var(--border);border-radius:16px;padding:15px;background:#102744ab;text-align:center}.stat strong{font-size:25px;color:var(--gold);display:block}.stat span{font-size:12px;color:var(--sub)}
+.fine{max-width:730px;margin:22px auto 0;text-align:center;color:#a9bddb;font-size:13px}.hide{display:none!important}footer{text-align:center;color:#8298b6;font-size:12px;padding:0 0 26px}
+@media(max-width:520px){.top{padding:16px 0}.brand{font-size:13px}.back{font-size:12px;padding:8px 11px}.inner{padding:19px 16px 25px}.stats{gap:7px}.stat{padding:12px 5px}.stat strong{font-size:21px}.stat span{font-size:11px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><a class="back" href="index.html">← На главную</a><span class="brand">Белая мгла · 58</span></header>
+<main>
+<div class="intro"><div class="eyebrow">Ежедневное испытание</div><h1>🎁 Сундук дня</h1><p>Один день, один вопрос и одна попытка. Проверь свои знания и собери коллекцию побед!</p></div>
+<section class="panel" aria-labelledby="game-title"><div class="inner">
+<div class="status"><span class="day" id="date-label">Сегодня</span><span>Новое испытание каждый день в 00:00 по Москве</span></div>
+<div class="stage">
+<span class="chest" id="chest" role="img" aria-label="Закрытый сундук">🧰</span>
+<h2 id="game-title">Твой сундук уже ждёт!</h2>
+<p id="intro-text">Нажми на кнопку и ответь на вопрос. Правильный ответ принесёт виртуальную золотую звезду.</p>
+<button class="btn" id="start" type="button">✨ Открыть сундук</button>
+<div id="quiz" class="question hide">
+<div class="question-title" id="question"></div>
+<div class="choices" id="choices"></div>
+</div>
+<div id="result" class="result hide" aria-live="polite"></div>
+</div>
+<p class="note">Звёзды и достижения существуют только на сайте. Это не игровые предметы и не награды внутри игры.</p>
+</div></section>
+<div class="stats" aria-label="Твои достижения"><div class="stat"><strong id="wins">0</strong><span>Золотых звёзд</span></div><div class="stat"><strong id="played">0</strong><span>Открыто сундуков</span></div><div class="stat"><strong id="streak">0</strong><span>Побед подряд</span></div></div>
+<p class="fine">Прогресс сохраняется в этом браузере на твоём устройстве. Если очистить данные браузера или открыть страницу на другом устройстве, он может не сохраниться.</p>
+</main><footer>Белая мгла · Государство 58</footer></div>
+<script>
+(function(){
+'use strict';
+var questions=[
+{q:'Что лучше сохранить до дня подготовки СВС, когда начисляют очки за обучение войск?',a:['Ускорения обучения войск','Рамки аватара','Смайлики чата'],right:0,why:'Ускорения обучения помогают заработать очки в подходящий день подготовки.'},
+{q:'Как безопаснее атаковать сильную цель вместе с альянсом?',a:['По одному без согласования','Организованным сбором','Без героев'],right:1,why:'Совместные сборы позволяют объединить войска и действовать согласованно.'},
+{q:'Что важно проверить перед отправкой отряда на событие?',a:['Состав героев и войск','Цвет оформления чата','Количество сообщений в мире'],right:0,why:'Правильный состав отряда влияет на результат сражения.'},
+{q:'Для чего используют щит мира?',a:['Для мгновенного лечения войск','Для защиты города от атак на время действия','Для увеличения скорости исследований'],right:1,why:'Щит защищает город от обычных атак, пока действует, если соблюдаются условия игры.'},
+{q:'Что полезно делать до начала подготовки к СВС?',a:['Тратить все ускорения сразу','Копить ресурсы и предметы для нужных дней','Снимать все войска с обучения'],right:1,why:'Запасы позволяют распределить усиления по этапам и получить больше пользы.'},
+{q:'Зачем игрокам объединяться в альянс?',a:['Ради совместных событий и взаимопомощи','Чтобы нельзя было лечить войска','Чтобы исчезли исследования'],right:0,why:'Альянс помогает участвовать в общих событиях, обороне и развитии.'},
+{q:'Что из перечисленного относится к обычным ресурсам города?',a:['Мясо, дерево, уголь и железо','Лайки, звёзды и сообщения','Аватары, рамки и титулы'],right:0,why:'Эти четыре ресурса используются для развития города.'},
+{q:'Для чего нужен маяк?',a:['Для разведывательных заданий и наград','Для изменения названия государства','Для отправки сообщений в мировой чат'],right:0,why:'В маяке появляются задания, за которые можно получать награды.'},
+{q:'Что лучше сделать перед серьёзной битвой?',a:['Проверить состав маршей и план команды','Случайно сменить всех героев','Отправить войска без командования'],right:0,why:'Подготовленные марши и согласованные действия повышают шансы команды.'},
+{q:'Как поступать с предметами, которые дают очки в определённый день СВС?',a:['Использовать сразу при получении','Свериться с заданиями дня и сохранить до нужного этапа','Выбрасывать из сумки'],right:1,why:'На разных этапах подготовки могут учитываться разные действия и предметы.'},
+{q:'Что происходит с ранеными войсками, которые помещаются в медпункт?',a:['Их можно лечить','Они сразу становятся героями','Они превращаются в ресурсы'],right:0,why:'В медпункте лечат раненых бойцов.'},
+{q:'Что важнее всего при участии в общих событиях альянса?',a:['Соблюдать договорённости и время сбора','Всегда действовать в одиночку','Игнорировать указания руководства'],right:0,why:'Командная координация помогает альянсу действовать эффективнее.'}
+];
+function moscowDate(){var p=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Moscow',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());var o={};p.forEach(function(x){o[x.type]=x.value});return o.year+'-'+o.month+'-'+o.day}
+function hashDate(s){var h=0;for(var i=0;i<s.length;i++)h=(Math.imul(31,h)+s.charCodeAt(i))|0;return Math.abs(h)}
+var key='bm-daily-chest-v1',date=moscowDate(),dayQuestion=questions[hashDate(date)%questions.length],data={history:{}};
+try{var saved=JSON.parse(localStorage.getItem(key));if(saved&&typeof saved==='object'&&saved.history&&typeof saved.history==='object')data=saved}catch(e){}
+function el(id){return document.getElementById(id)}
+function save(){try{localStorage.setItem(key,JSON.stringify(data))}catch(e){}}
+function history(){return Object.keys(data.history).sort()}
+function countStreak(){var dates=history().filter(function(d){return data.history[d]&&data.history[d].correct});if(!dates.length)return 0;var count=0,latest=new Date(date+'T12:00:00Z');for(var i=0;i<366;i++){var k=latest.toISOString().slice(0,10);if(dates.indexOf(k)<0){if(i===0){latest.setUTCDate(latest.getUTCDate()-1);continue}break}count++;latest.setUTCDate(latest.getUTCDate()-1)}return count}
+function stats(){var h=history();el('played').textContent=h.length;el('wins').textContent=h.filter(function(d){return data.history[d]&&data.history[d].correct}).length;el('streak').textContent=countStreak()}
+function finish(right,choice){data.history[date]={correct:right,choice:choice};save();renderResult()}
+function renderResult(){var rec=data.history[date];el('start').classList.add('hide');el('quiz').classList.add('hide');el('result').classList.remove('hide');el('chest').classList.add('open');el('chest').textContent=rec.correct?'🏆':'📦';el('chest').setAttribute('aria-label',rec.correct?'Награда открыта':'Сундук открыт');el('game-title').textContent=rec.correct?'Сундук открыт!':'Сундук открыт';el('intro-text').textContent='Новое испытание появится после полуночи по Москве.';el('result').replaceChildren();
+var badge=document.createElement('div');badge.className='reward';badge.textContent=rec.correct?'⭐':'💙';
+var msg=document.createElement('p');msg.innerHTML=rec.correct?'<strong>Верно! Ты получаешь золотую звезду.</strong>':'Сегодня без золотой звезды, но знания стали крепче.';
+var expl=document.createElement('p');expl.textContent=dayQuestion.why;el('result').append(badge,msg,expl);stats()}
+function showQuiz(){el('start').classList.add('hide');el('quiz').classList.remove('hide');el('game-title').textContent='Вопрос дня';el('intro-text').textContent='Выбери один ответ. Повторной попытки сегодня не будет.';el('question').textContent=dayQuestion.q;el('choices').replaceChildren();dayQuestion.a.forEach(function(answer,i){var btn=document.createElement('button');btn.type='button';btn.className='answer';btn.textContent=answer;btn.onclick=function(){if(data.history[date])return;finish(i===dayQuestion.right,i)};el('choices').appendChild(btn)})}
+var parts=date.split('-');el('date-label').textContent=parts[2]+'.'+parts[1]+'.'+parts[0];el('start').addEventListener('click',showQuiz);if(data.history[date])renderResult();stats();
+})();
+</script>
+</body></html>

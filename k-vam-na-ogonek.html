@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+
+<html lang="ru"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Наш гость: [VgB]Бараш · К вам на огонек | Белая Мгла</title>
+<meta content="#0a1323" name="theme-color"/>
+<style>
+:root{color-scheme:dark;--gold:#f5d59b;--ice:#a9d7ff;--muted:#bbcae1;--edge:rgba(240,198,125,.7)}
+*{box-sizing:border-box}html,body{margin:0}body{font:16px/1.6 system-ui,'Segoe UI',Arial,sans-serif;color:#f7f5f0;background:radial-gradient(ellipse at 50% 0,#223453 0%,#0b1526 52%,#090f1b 100%);min-height:100vh}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(#d0dcfd 0.6px,transparent 1px);background-size:72px 79px;opacity:.14}
+.page{position:relative;max-width:1310px;margin:0 auto;padding:25px 30px 42px}
+.head{text-align:center;margin-bottom:19px}.mini{font:700 10px/1.5 system-ui,sans-serif;color:#dec5a0;letter-spacing:.4em;text-transform:uppercase}
+h1{margin:4px 0;font:normal clamp(39px,5vw,65px)/1.1 Georgia,'Times New Roman',serif;color:#f5e4c1;text-shadow:0 0 23px #f6b75c45}
+.guestline{margin:10px 0 2px;font-size:16px;color:#f8f1e8}.guestline strong{color:#ffe1a5;font-weight:700}.hostline{font-size:12px;color:#b5cadf;letter-spacing:.04em}
+.chat{position:relative;isolation:isolate;overflow:hidden;height:min(750px,calc(100dvh - 200px));min-height:550px;border-radius:23px;border:2px solid rgba(245,203,136,.75);box-shadow:0 18px 65px #0009,0 0 0 4px rgba(15,24,41,.95),0 0 0 5px rgba(244,198,125,.27),0 0 32px #6ca5ff19;display:flex;flex-direction:column;background:#1b2537}
+.chat:before{position:absolute;content:"";z-index:1;pointer-events:none;inset:6px;border:1px solid rgba(255,227,182,.34);border-radius:17px}
+.scenery{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:center 51%}
+.overlay{position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,rgba(8,17,35,.27),rgba(8,17,35,.25) 40%,rgba(8,17,35,.30)),linear-gradient(180deg,rgba(6,11,21,.49),transparent 19%,transparent 78%,rgba(4,9,18,.61));}
+.chat-toolbar{position:relative;z-index:2;min-height:60px;flex:0 0 60px;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 25px;background:linear-gradient(90deg,rgba(5,14,29,.88),rgba(19,30,52,.76));border-bottom:1px solid rgba(255,214,156,.35);backdrop-filter:blur(10px)}
+.status{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;color:#fbe5c2;letter-spacing:.01em}.flame{font-size:24px;filter:drop-shadow(0 0 9px #ffb05d);line-height:1}.chapters{font-size:12px;color:#e0d3c5;white-space:nowrap}
+.chat-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;touch-action:pan-y;padding:30px max(5%,calc((100% - 790px)/2)) 58px;scrollbar-width:thin;scrollbar-color:#e4ba7b6f #1015257f;scroll-behavior:smooth}
+.chat-scroll::-webkit-scrollbar{width:8px}.chat-scroll::-webkit-scrollbar-thumb{background:#d6bb8b9c;border-radius:10px}.exchange{padding:4px 0 22px;scroll-margin-top:8px}.exchange+.exchange{border-top:1px solid rgba(247,214,159,.34);padding-top:23px}
+.question-row,.answer-row{display:flex;flex-direction:column;min-width:0}.answer-row{align-items:flex-end;margin-top:21px}.sender{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;text-shadow:0 1px 5px #07101b;line-height:1.4;margin:0 0 7px;color:#d0efff}.answer-row .sender{color:#ffe0aa}.mark{width:27px;height:27px;display:grid;place-items:center;border-radius:50%;font:700 14px Georgia,serif;background:#244769;border:1px solid #81bbed;box-shadow:0 0 15px #51b9f750;color:#e8f7ff}.mark-guest{background:#734d2e;border-color:#f2c377;color:#fff0cc;box-shadow:0 0 14px #f2aa5150}.meta{color:#d0d8e4b3;font-size:10px;font-weight:500;letter-spacing:.04em}
+.message{font-size:16px;line-height:1.64;padding:18px 21px;max-width:85%;overflow-wrap:anywhere;border:1px solid rgba(181,215,246,.7);border-radius:17px 17px 17px 5px;background:linear-gradient(135deg,rgba(10,33,64,.91),rgba(20,41,69,.84));backdrop-filter:blur(10px);box-shadow:0 8px 28px #0007,0 1px 16px #70baff26;color:#f5faff;text-shadow:0 1px 1px #0005}
+.message.answer{border-color:rgba(255,204,130,.8);border-radius:17px 17px 5px 17px;background:linear-gradient(135deg,rgba(53,37,42,.93),rgba(37,32,47,.88));box-shadow:0 8px 28px #0008,0 1px 15px #ffa84b28;color:#fff7e8}
+.foot{z-index:2;flex:0 0 62px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 24px;background:linear-gradient(90deg,rgba(7,16,33,.92),rgba(24,31,52,.89));border-top:1px solid rgba(251,216,161,.38);backdrop-filter:blur(12px)}.hint{font-size:12px;color:#e3d5c6}.navigation{display:flex;align-items:center;gap:10px}.counter{min-width:51px;text-align:center;color:#f6dab1;font-size:13px;font-variant-numeric:tabular-nums}
+.nav{border:1px solid #d7ba83;color:#ffe3b0;background:#26334dbb;border-radius:50%;width:37px;height:37px;display:grid;place-items:center;font-size:21px;cursor:pointer;line-height:1}.nav:hover:not(:disabled){background:#395072}.nav:disabled{opacity:.35;cursor:default}.nav:focus-visible,.chat-scroll:focus-visible{outline:2px solid #fce2ad;outline-offset:-2px}
+.under{text-align:center;font-size:11px;letter-spacing:.11em;color:#b2c0d3;margin:19px 0 0}
+@media(min-width:900px){.chat-scroll{padding-left:calc((100% - 720px)/2);padding-right:calc((100% - 720px)/2)}.message{max-width:92%}}
+@media(max-width:650px){.page{padding:12px 10px 30px}.head{margin-bottom:14px}.mini{font-size:9px;letter-spacing:.25em}h1{font-size:42px}.guestline{margin-top:7px;font-size:14px}.hostline{font-size:11px}.chat{height:min(735px,calc(100dvh - 150px));min-height:485px;border-radius:16px}.chat:before{inset:4px;border-radius:11px}.chat-toolbar{padding:0 15px;min-height:49px;flex-basis:49px}.status{font-size:12px;gap:6px}.flame{font-size:19px}.chapters{font-size:10px}.overlay{background:linear-gradient(90deg,rgba(6,12,23,.27),rgba(7,13,26,.29)),linear-gradient(180deg,rgba(5,10,21,.40),transparent 21%,transparent 65%,rgba(4,9,21,.44))}.scenery{object-position:center 48%}.chat-scroll{padding:18px 12px 36px}.exchange{padding-bottom:17px}.exchange+.exchange{padding-top:20px}.message{font-size:14px;line-height:1.55;max-width:91%;padding:13px 14px;border-radius:14px 14px 14px 4px}.message.answer{border-radius:14px 14px 4px 14px}.sender{font-size:11px;margin-bottom:5px}.mark{width:24px;height:24px;font-size:13px}.meta{font-size:9px}.answer-row{margin-top:15px}.foot{padding:7px 13px;flex-basis:55px}.hint{font-size:11px}.nav{width:32px;height:32px;font-size:18px}.under{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.chat-scroll{scroll-behavior:auto}}
+
+/* Выбранная шапка рубрики: оригинал пользователя, без перерисовки */
+.page{max-width:1370px}
+.head{margin-bottom:17px}
+.banner{overflow:hidden;border:1px solid rgba(255,211,139,.69);border-radius:19px;box-shadow:0 0 0 4px rgba(4,17,39,.85),0 0 38px rgba(92,161,237,.19),0 21px 35px rgba(0,0,0,.35);background:#101f36}
+.banner img{display:block;width:100%;height:auto;object-fit:contain}
+.guest-card{margin:18px auto 3px;max-width:750px;display:flex;gap:20px;align-items:center;justify-content:center;padding:12px 16px;border-radius:15px;border:1px solid rgba(220,173,106,.37);background:linear-gradient(100deg,rgba(18,32,60,.65),rgba(39,32,48,.7),rgba(18,32,60,.65));box-shadow:0 7px 21px rgba(0,0,0,.23)}
+.guest-card .guestline{margin:0 12px 0 0;font-size:16px}
+.guest-card .hostline{font-size:12px;white-space:nowrap}
+.guest-spark{color:#eec791;text-shadow:0 0 12px #e9c77e}
+.chat{height:min(700px,calc(100dvh - 130px));min-height:470px}
+@media(max-width:650px){
+ .page{padding:10px 9px 28px}
+ .banner{border-radius:11px}
+ .guest-card{margin-top:12px;padding:11px 8px;display:flex;flex-wrap:wrap;gap:0 8px}
+ .guest-card .guestline{font-size:14px;margin:0;flex:0 0 100%}
+ .guest-card .hostline{font-size:11px;flex:0 0 100%}
+ .guest-spark{display:none}
+ .chat{height:min(670px,calc(100dvh - 220px));min-height:470px}
+}
+
+/* Новостная шапка и интервью находятся на разных экранах */
+[hidden]{display:none !important}
+body{background:radial-gradient(ellipse at 50% 0%,#253d63 0,#0c182b 46%,#090f1b 100%)}
+a{color:inherit;text-decoration:none}
+.news-view{position:relative;max-width:1350px;margin:0 auto;padding:37px 26px 55px;min-height:100dvh}
+.news-header{text-align:center;margin-bottom:30px}
+.brand{font-size:11px;font-weight:750;letter-spacing:.3em;color:#eacb9a}
+.news-header h1{font-size:clamp(38px,5.5vw,63px);margin:12px 0 5px}
+.news-header p{margin:0;font-size:14px;color:#bfcee4}
+.news-grid{max-width:1230px;margin:0 auto}
+.news-card{display:block;border:1px solid rgba(233,196,134,.63);background:linear-gradient(150deg,rgba(25,40,66,.92),rgba(12,23,44,.94));border-radius:19px;overflow:hidden;box-shadow:0 16px 50px #0008,0 0 34px #76b6ff20;transition:transform .22s,box-shadow .22s}
+.news-card:hover{transform:translateY(-3px);box-shadow:0 23px 65px #0009,0 0 40px #83bfff44}
+.news-card:focus-visible,.backbutton:focus-visible{outline:3px solid #fbe0ac;outline-offset:5px}
+.banner-in-news{border:0;box-shadow:none;border-radius:0;overflow:hidden;background:#101f36}
+.banner-in-news img{width:100%;display:block;height:auto;aspect-ratio:3/1;object-fit:cover}
+.news-caption{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:17px 25px 23px}
+.news-category{font-size:12px;color:#eaca97;margin:0 0 4px;letter-spacing:.05em}
+.news-info h2{font:normal clamp(21px,2.4vw,30px)/1.25 Georgia,serif;color:#ffe1a9;margin:0 0 5px}
+.news-info p:last-child{font-size:14px;color:#d4deee;margin:0}
+.open-arrow{display:grid;place-items:center;width:41px;height:41px;flex-shrink:0;border-radius:50%;border:1px solid rgba(236,199,147,.62);font-size:23px;color:#ffe2ae;background:#283b56}
+.news-note{text-align:center;margin:20px 0 0;color:#b6c8e2;font-size:12px;letter-spacing:.04em}
+.chat-view{max-width:1320px;padding-top:15px}
+.backbar{margin:3px 0 14px}
+.backbutton{display:inline-flex;align-items:center;gap:8px;color:#e4ca9d;padding:7px 13px;border-radius:12px;border:1px solid #c5a36a80;background:#14243dca;font-size:13px;transition:background .2s}
+.backbutton:hover{background:#263954}
+.guest-head{text-align:center;margin-bottom:15px}
+.eyebrow{font-size:12px;text-transform:uppercase;color:#bbcee6;letter-spacing:.16em;margin:1px 0 9px}
+.guest-card{margin:0 auto;max-width:760px}
+.chat-view .chat{height:min(740px,calc(100dvh - 173px));min-height:490px}
+@media(max-width:650px){
+.news-view{padding:23px 11px 45px}
+.news-header{margin-bottom:24px}.news-header h1{font-size:44px}.news-header p{font-size:12px}
+.news-card{border-radius:14px}.banner-in-news img{aspect-ratio:3/1}
+.news-caption{padding:14px 13px 17px}
+.news-category{font-size:10px}.news-info h2{font-size:21px}.news-info p:last-child{font-size:12px}
+.open-arrow{height:34px;width:34px;font-size:18px}
+.chat-view{padding:8px 9px 20px}.backbar{margin:0 0 8px}.backbutton{font-size:11px;padding:5px 9px}
+.eyebrow{font-size:10px;margin:0 0 5px}.guest-head{margin-bottom:9px}
+.chat-view .chat{height:min(760px,calc(100dvh - 132px));min-height:470px}
+}
+</style><link rel="canonical" href="https://belaya-mgla-sova58.github.io/k-vam-na-ogonek.html"/><meta name="description" content="К вам на огонек. Наш гость [VgB]Бараш: шесть вопросов о героях, СВС и 58-м государстве."/><style id="ogonek-chat-readable-v2">
+/* Keep all interview messages in readable, foreground cards. */
+.chat-view .chat{isolation:isolate}
+.chat-view .chat-scroll{
+ position:relative!important;z-index:3!important;
+ width:100%!important;max-width:100%!important;min-width:0!important;
+ flex:1 1 auto!important;
+ overflow-x:hidden!important;overflow-y:auto!important;
+ padding:17px clamp(16px,4%,46px) 46px!important;
+ scroll-padding-top:12px;
+ overscroll-behavior-y:contain;
+}
+.chat-view .exchange{
+ box-sizing:border-box!important;
+ width:100%!important;max-width:890px!important;
+ margin:0 auto!important;
+ padding:14px 0 23px!important;
+ display:flex!important;flex-direction:column!important;gap:12px!important;
+}
+.chat-view .exchange+.exchange{
+ border-top:1px solid rgba(244,206,148,.4)!important;
+ padding-top:24px!important;
+}
+.chat-view .question-row,
+.chat-view .answer-row{
+ display:flex!important;flex-direction:column!important;
+ box-sizing:border-box!important;
+ width:100%!important;max-width:100%!important;min-width:0!important;
+ margin:0!important;gap:6px!important;
+}
+.chat-view .question-row{align-items:flex-start!important}
+.chat-view .answer-row{align-items:flex-end!important}
+.chat-view .sender{
+ max-width:100%!important;min-width:0!important;
+ display:flex!important;flex-wrap:wrap!important;align-items:center!important;
+ margin:0!important;gap:6px!important;
+ font-size:12px!important;line-height:1.4!important;
+ overflow-wrap:anywhere!important;
+}
+.chat-view .message{
+ display:block!important;
+ box-sizing:border-box!important;
+ width:fit-content!important;min-width:0!important;
+ max-width:min(92%,760px)!important;
+ margin:0!important;
+ padding:15px 19px!important;
+ font-size:16px!important;line-height:1.58!important;
+ white-space:normal!important;overflow-wrap:break-word!important;
+ word-break:normal!important;hyphens:auto;
+ color:#f8fcff!important;
+ background:linear-gradient(145deg,rgba(7,27,54,.98),rgba(17,40,70,.97))!important;
+ border:1px solid rgba(159,213,252,.82)!important;
+ text-shadow:none!important;
+ backdrop-filter:blur(5px);
+ box-shadow:0 5px 22px rgba(0,0,0,.48)!important;
+}
+.chat-view .message.answer{
+ color:#fff7eb!important;
+ background:linear-gradient(145deg,rgba(43,28,42,.98),rgba(44,34,47,.97))!important;
+ border-color:rgba(253,208,139,.86)!important;
+}
+@media(max-width:700px){
+ .chat-view .chat-scroll{padding:13px 12px 40px!important}
+ .chat-view .exchange{padding:10px 0 20px!important;gap:10px!important}
+ .chat-view .exchange+.exchange{padding-top:19px!important}
+ .chat-view .message{
+  width:100%!important;max-width:100%!important;
+  padding:13px 14px!important;
+  font-size:15px!important;line-height:1.52!important;
+  border-radius:14px 14px 14px 4px!important;
+ }
+ .chat-view .message.answer{border-radius:14px 14px 4px 14px!important}
+ .chat-view .sender{font-size:11px!important}
+ .chat-view .chat-toolbar{position:relative!important;z-index:4!important}
+ .chat-view .foot{position:relative!important;z-index:4!important}
+}
+</style><style id="ogonek-enchanted-chat-v1">
+/* “К вам на огонек”: ornamental styling only, preserve the actual interview
+   text and the two original background photographs. */
+.chat-view .chat{
+  position:relative!important;
+  border-color:rgba(250,210,143,.86)!important;
+  box-shadow:0 18px 65px rgba(0,0,0,.48),
+    0 0 0 4px rgba(8,22,44,.95),
+    0 0 0 5px rgba(242,195,116,.32),
+    0 0 38px rgba(104,176,255,.23),
+    inset 0 0 28px rgba(255,179,88,.06)!important;
+}
+.chat-view .chat::after{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 37% 41% at 49% 57%,rgba(255,157,75,.22),transparent 80%),
+    radial-gradient(ellipse 44% 65% at 97% 88%,rgba(83,159,250,.15),transparent 86%),
+    radial-gradient(ellipse 40% 36% at 8% 15%,rgba(124,194,255,.09),transparent 86%);
+  opacity:.72;animation:ogonek-fire-glow 7s ease-in-out infinite alternate;
+}
+@keyframes ogonek-fire-glow{
+  from{opacity:.42}
+  to{opacity:.85}
+}
+.chat-view .chat-toolbar{z-index:4!important}
+.chat-view .status .flame{
+  color:#ffd18c!important;
+  text-shadow:0 0 9px rgba(255,177,75,.95),0 0 19px rgba(102,188,255,.70);
+  filter:none!important;
+  animation:ogonek-torch 4s ease-in-out infinite alternate;
+}
+@keyframes ogonek-torch{
+  0%{opacity:.75;transform:scale(.94)}
+  100%{opacity:1;transform:scale(1.10)}
+}
+.chat-view .chat-scroll{z-index:3!important;padding-right:clamp(62px,7%,92px)!important}
+.chat-view .exchange{position:relative!important;scroll-margin-top:15px}
+.chat-view .exchange+.exchange{
+  border-top:0!important;
+  padding-top:38px!important;
+}
+.chat-view .exchange+.exchange::before{
+  content:"❄";position:absolute;top:-11px;left:50%;z-index:1;
+  transform:translateX(-50%);
+  display:grid;place-items:center;width:29px;height:23px;
+  background:rgba(7,23,44,.89);border:1px solid rgba(241,197,125,.60);
+  border-radius:999px;
+  color:#c4eaff;font-size:16px;line-height:1;
+  text-shadow:0 0 8px rgba(106,210,255,.8),0 0 11px rgba(255,215,155,.45);
+}
+.chat-view .exchange+.exchange::after{
+  content:"";position:absolute;left:4%;right:4%;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(152,214,255,.6) 30%,rgba(252,204,137,.80) 50%,rgba(152,214,255,.6) 70%,transparent);
+}
+.chat-view .message{
+  position:relative!important;isolation:isolate;
+  border-radius:19px 19px 19px 6px!important;
+  border-color:rgba(137,215,252,.84)!important;
+  background:linear-gradient(145deg,rgba(9,34,66,.98),rgba(16,43,76,.97))!important;
+  box-shadow:inset 0 1px 0 rgba(202,235,255,.20),0 8px 26px rgba(0,0,0,.43),0 0 17px rgba(78,176,255,.12)!important;
+}
+.chat-view .message.answer{
+  border-radius:19px 19px 6px 19px!important;
+  border-color:rgba(251,204,135,.92)!important;
+  background:linear-gradient(142deg,rgba(51,35,45,.98),rgba(48,36,49,.97))!important;
+  box-shadow:inset 0 1px 0 rgba(255,229,192,.20),0 8px 26px rgba(0,0,0,.43),0 0 16px rgba(245,175,82,.14)!important;
+}
+.chat-view .message::before{
+  content:"";position:absolute;pointer-events:none;
+  top:7px;right:10px;width:32px;height:10px;
+  border-top:1px solid rgba(190,230,255,.26);
+  border-right:1px solid rgba(190,230,255,.22);
+  border-top-right-radius:12px;
+}
+.chat-view .message.answer::before{
+  border-color:rgba(254,211,150,.30);
+}
+.chat-view .sender .mark{
+  box-shadow:0 0 0 2px rgba(6,22,46,.8),0 0 15px rgba(104,188,255,.32);
+}
+.chat-view .answer-row .sender .mark{
+  box-shadow:0 0 0 2px rgba(29,23,36,.8),0 0 15px rgba(247,192,109,.36);
+}
+.chat-view .ogonek-progress{
+  position:absolute;top:52%;right:10px;transform:translateY(-50%);
+  z-index:6;display:flex;flex-direction:column;align-items:center;
+  gap:7px;padding:10px 6px;
+  border:1px solid rgba(246,203,142,.45);
+  border-radius:24px;background:rgba(4,17,37,.87);
+  box-shadow:0 4px 19px rgba(0,0,0,.45),0 0 20px rgba(108,174,241,.14);
+}
+.chat-view .ogonek-progress::before{
+  content:"";position:absolute;z-index:0;
+  left:50%;top:33px;bottom:19px;width:1px;transform:translateX(-50%);
+  background:linear-gradient(180deg,rgba(115,198,255,.38),rgba(255,218,159,.70),rgba(115,198,255,.38));
+  pointer-events:none;
+}
+.chat-view .ogonek-progress-title{
+  position:relative;z-index:1;display:block;color:#e8d1a8;
+  font:800 8px/1.2 system-ui,sans-serif;letter-spacing:.06em;
+}
+.chat-view .ogonek-progress-dot{
+  display:grid;place-items:center;position:relative;z-index:1;
+  width:32px;height:32px;min-width:32px;min-height:32px;
+  padding:0;margin:0;cursor:pointer;
+  border:1px solid rgba(150,202,247,.58);
+  border-radius:50%;background:rgba(14,39,65,.96);
+  color:#b9dcf6;
+  box-shadow:0 2px 10px rgba(0,0,0,.32);
+  transition:background .16s ease,border-color .16s ease,box-shadow .16s ease,transform .16s ease;
+}
+.chat-view .ogonek-progress-dot>span:first-child{
+  position:absolute;font-size:19px;line-height:1;opacity:.24;
+}
+.chat-view .ogonek-progress-dot .ogonek-step-number{
+  position:relative;font:800 12px/1 system-ui,sans-serif;
+  text-shadow:0 1px 2px #001527;
+}
+.chat-view .ogonek-progress-dot:is(:hover,:focus-visible){
+  border-color:#ffe0a5;background:#244d71;
+  transform:scale(1.06);
+}
+.chat-view .ogonek-progress-dot:focus-visible{
+  outline:2px solid #fff0bd;outline-offset:2px;
+}
+.chat-view .ogonek-progress-dot.is-active{
+  color:#fff0cf;border-color:#ffe1a5;
+  background:linear-gradient(145deg,#a26e32,#55416d);
+  box-shadow:0 0 13px rgba(255,197,109,.53),inset 0 0 0 1px rgba(255,244,215,.22);
+}
+.chat-view .ogonek-progress-dot.is-active>span:first-child{opacity:.70;color:#d0f0ff}
+.chat-view .ogonek-farewell{
+  position:relative;margin:14px auto 3px;
+  max-width:600px;padding:17px 6px 12px;
+  text-align:center;
+}
+.chat-view .ogonek-farewell-line{
+  display:block;height:1px;width:100%;
+  background:linear-gradient(90deg,transparent,#c5e7ff 29%,#f4c98a 50%,#c5e7ff 71%,transparent);
+}
+.chat-view .ogonek-farewell-crystal{
+  display:block;width:28px;margin:-14px auto 3px;
+  background:rgba(7,23,44,.91);border:1px solid rgba(244,200,136,.60);
+  border-radius:50%;font-size:18px;color:#d1efff;
+  text-shadow:0 0 9px rgba(126,203,251,.8);
+}
+.chat-view .ogonek-farewell p{
+  margin:7px 0 0;padding:8px 12px;
+  color:#ffe6b5;font:600 clamp(17px,2.1vw,22px)/1.4 Georgia,serif;
+  letter-spacing:.02em;
+  text-shadow:0 2px 11px #061125,0 0 12px rgba(255,182,100,.30);
+}
+@media(min-width:701px){
+  .chat-view .exchange.is-newly-visible .message{
+    animation:ogonek-message-arrive .46s ease-out both;
+  }
+  .chat-view .exchange.is-newly-visible .answer{
+    animation-delay:.07s;
+  }
+  @keyframes ogonek-message-arrive{
+    from{opacity:.76;transform:translateY(7px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+}
+@media(max-width:700px){
+  .chat-view .chat-scroll{padding-right:12px!important}
+  .chat-view .ogonek-progress{
+    position:relative;top:auto;right:auto;transform:none;
+    flex:0 0 42px;flex-direction:row;justify-content:center;
+    box-sizing:border-box;width:100%;min-height:42px;
+    gap:clamp(4px,1.5vw,8px);padding:5px 6px;
+    border:0;border-bottom:1px solid rgba(235,196,130,.36);
+    border-radius:0;background:rgba(5,18,39,.91);
+    box-shadow:none;
+  }
+  .chat-view .ogonek-progress::before{
+    left:24%;right:10%;top:50%;bottom:auto;width:auto;height:1px;transform:none;
+    background:linear-gradient(90deg,transparent,rgba(246,209,151,.75),transparent);
+  }
+  .chat-view .ogonek-progress-title{font-size:8px;letter-spacing:.02em;margin-right:3px}
+  .chat-view .ogonek-progress-dot{
+    width:31px;height:31px;min-width:31px;min-height:31px;
+  }
+  .chat-view .exchange+.exchange{padding-top:29px!important}
+  .chat-view .exchange+.exchange::before{top:-11px}
+  .chat-view .message{border-radius:15px 15px 15px 5px!important;backdrop-filter:none!important}
+  .chat-view .message.answer{border-radius:15px 15px 5px 15px!important}
+  .chat-view .chat::after{animation:none;opacity:.52}
+  .chat-view .status .flame{animation:none}
+  .chat-view .ogonek-farewell p{font-size:17px}
+  .chat-view .exchange.is-newly-visible .message{animation:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .chat-view .chat::after,.chat-view .status .flame,
+  .chat-view .exchange.is-newly-visible .message{
+    animation:none!important;
+  }
+  .chat-view .ogonek-progress-dot{transition:none!important}
+}
+</style><style id="ogonek-glass-messages-v1">
+/* Subtle mirrored-glass panels. The message text itself is never mirrored.
+   Preserve high text contrast, the original winter background and smooth mobile scrolling. */
+.chat-view .chat-scroll .message{
+  color:#f8fcff!important;
+  background:
+    linear-gradient(113deg,
+      rgba(205,234,255,.17) 0%,
+      rgba(205,234,255,.055) 13%,
+      transparent 35%,
+      rgba(167,221,255,.055) 78%,
+      transparent 100%),
+    linear-gradient(145deg,rgba(6,26,53,.88),rgba(17,41,73,.86))!important;
+  border:1px solid rgba(159,219,255,.78)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(241,249,255,.29),
+    inset 1px 0 0 rgba(219,243,255,.08),
+    0 8px 24px rgba(0,0,0,.38),
+    0 0 17px rgba(90,174,248,.16)!important;
+  -webkit-backdrop-filter:blur(7px) saturate(1.13);
+  backdrop-filter:blur(7px) saturate(1.13);
+  text-shadow:0 1px 1px rgba(0,0,0,.18)!important;
+}
+.chat-view .chat-scroll .message.answer{
+  color:#fff8eb!important;
+  background:
+    linear-gradient(113deg,
+      rgba(255,237,217,.16) 0%,
+      rgba(255,236,210,.055) 13%,
+      transparent 39%,
+      rgba(255,206,149,.045) 78%,
+      transparent 100%),
+    linear-gradient(145deg,rgba(45,30,41,.89),rgba(44,34,49,.85))!important;
+  border-color:rgba(254,210,146,.84)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,242,218,.30),
+    inset 1px 0 0 rgba(255,232,204,.08),
+    0 8px 24px rgba(0,0,0,.39),
+    0 0 16px rgba(241,176,104,.15)!important;
+}
+@media(max-width:700px){
+  .chat-view .chat-scroll .message{
+    background:
+      linear-gradient(115deg,rgba(210,235,255,.12),transparent 46%),
+      linear-gradient(145deg,rgba(7,29,56,.93),rgba(17,39,70,.91))!important;
+    -webkit-backdrop-filter:blur(3px) saturate(1.05)!important;
+    backdrop-filter:blur(3px) saturate(1.05)!important;
+  }
+  .chat-view .chat-scroll .message.answer{
+    background:
+      linear-gradient(115deg,rgba(255,238,212,.12),transparent 46%),
+      linear-gradient(145deg,rgba(46,30,42,.93),rgba(44,33,46,.91))!important;
+  }
+}
+@media(prefers-reduced-transparency:reduce){
+  .chat-view .chat-scroll .message,
+  .chat-view .chat-scroll .message.answer{
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+  }
+}
+</style><style id="ogonek-desktop-jewelry-v1">
+/* PC-only winter jewelry, behind text and away from controls.
+   The original photo, interview text, and all mobile styles remain unchanged. */
+.ogonek-desktop-jewelry{display:none;pointer-events:none}
+@media screen and (min-width:1000px){
+ .chat-view .guest-card{
+   position:relative!important;
+   isolation:isolate;
+   border:1px solid rgba(241,203,138,.72)!important;
+   border-radius:17px!important;
+   padding:15px 30px!important;
+   background:linear-gradient(115deg,rgba(17,35,64,.96),rgba(26,36,62,.94),rgba(28,34,52,.96))!important;
+   box-shadow:0 8px 25px rgba(2,8,23,.32),
+              inset 0 1px rgba(245,224,183,.15),
+              0 0 24px rgba(116,188,250,.12)!important;
+ }
+ .chat-view .guest-card::before{
+   content:"";position:absolute;inset:5px;border-radius:12px;pointer-events:none;
+   border-top:1px solid rgba(255,223,165,.24);
+   border-bottom:1px solid rgba(124,206,251,.24);
+ }
+ .chat-view .guest-card::after{
+   content:"◆";position:absolute;top:-17px;left:50%;transform:translateX(-50%);
+   display:grid;place-items:center;width:29px;height:29px;border-radius:50%;
+   border:1px solid rgba(239,208,154,.70);
+   background:radial-gradient(circle at 40% 24%,#245b86,#101a35 78%);
+   color:#bfefff;font-size:13px;
+   text-shadow:0 0 10px rgba(99,209,255,.87);
+   box-shadow:0 0 16px rgba(105,184,255,.33),0 0 0 3px rgba(11,27,51,.85);
+   pointer-events:none;
+ }
+ .chat-view .guest-card .guest-spark{
+   color:#f4d9a8!important;font-size:19px;
+   text-shadow:0 0 11px rgba(255,200,112,.55),0 0 17px rgba(107,201,255,.26);
+ }
+ .chat-view .ogonek-desktop-jewelry{
+   display:block!important;position:absolute;inset:0;
+   z-index:5!important;pointer-events:none!important;overflow:hidden;
+ }
+ .chat-view .ogonek-desktop-jewelry .oj-corner{
+   position:absolute;width:104px;height:93px;
+   border-color:rgba(252,204,129,.73);border-style:solid;border-width:0;
+   filter:drop-shadow(0 0 5px rgba(252,205,139,.27));
+   opacity:.80;
+ }
+ .chat-view .ogonek-desktop-jewelry .oj-corner::before{
+   content:"❦";position:absolute;left:4px;top:4px;
+   color:#f6d9a3;font:26px/1 Georgia,serif;
+   text-shadow:0 0 8px rgba(255,207,133,.50);
+ }
+ .chat-view .ogonek-desktop-jewelry .oj-tl{top:68px;left:11px;border-top-width:1px;border-left-width:1px;border-top-left-radius:14px}
+ .chat-view .ogonek-desktop-jewelry .oj-tr{top:68px;right:11px;transform:scaleX(-1);border-top-width:1px;border-left-width:1px;border-top-left-radius:14px}
+ .chat-view .ogonek-desktop-jewelry .oj-bl{bottom:75px;left:11px;transform:scaleY(-1);border-top-width:1px;border-left-width:1px;border-top-left-radius:14px}
+ .chat-view .ogonek-desktop-jewelry .oj-br{bottom:75px;right:11px;transform:scale(-1,-1);border-top-width:1px;border-left-width:1px;border-top-left-radius:14px}
+ .chat-view .ogonek-desktop-jewelry .oj-frost{
+   position:absolute;display:grid;place-items:center;
+   width:31px;height:72px;
+   border-radius:14px;
+   color:rgba(192,238,255,.76);
+   font-size:24px;font-weight:400;
+   text-shadow:0 0 11px rgba(114,215,255,.52);
+   opacity:.72;
+ }
+ .chat-view .ogonek-desktop-jewelry .oj-frost::before,
+ .chat-view .ogonek-desktop-jewelry .oj-frost::after{
+   content:"";position:absolute;left:50%;transform:translateX(-50%);
+   width:1px;height:19px;
+   background:linear-gradient(180deg,transparent,rgba(154,222,255,.60),transparent);
+ }
+ .chat-view .ogonek-desktop-jewelry .oj-frost::before{top:0}
+ .chat-view .ogonek-desktop-jewelry .oj-frost::after{bottom:0}
+ .chat-view .ogonek-desktop-jewelry .oj-frost-left{left:12px;top:45%}
+ .chat-view .ogonek-desktop-jewelry .oj-frost-right{right:12px;top:45%}
+ .chat-view .ogonek-desktop-jewelry .oj-spark{
+   position:absolute;width:5px;height:5px;border-radius:50%;
+   background:radial-gradient(circle,#ffefc7 0%,#f0b971 56%,rgba(228,172,107,.25) 100%);
+   box-shadow:0 0 9px rgba(255,206,131,.65),0 0 17px rgba(145,216,255,.28);
+   opacity:.75;will-change:opacity,transform;
+   animation:oj-glimmer 5.8s ease-in-out infinite alternate;
+ }
+ .chat-view .ogonek-desktop-jewelry .oj-spark-a{top:100px;left:16%;animation-delay:-.9s}
+ .chat-view .ogonek-desktop-jewelry .oj-spark-b{top:98px;right:16%;animation-delay:-3.1s}
+ .chat-view .ogonek-desktop-jewelry .oj-spark-c{bottom:109px;left:12%;animation-delay:-4.4s}
+ .chat-view .ogonek-desktop-jewelry .oj-spark-d{bottom:110px;right:13%;animation-delay:-1.8s}
+ .chat-view .chat-toolbar{
+   box-shadow:inset 0 -1px 0 rgba(249,212,155,.25),0 6px 19px rgba(1,7,22,.28);
+ }
+ .chat-view .chat-toolbar::after{
+   content:"";position:absolute;bottom:0;left:14%;right:14%;height:1px;
+   background:linear-gradient(90deg,transparent,rgba(163,225,255,.42),rgba(255,216,153,.60),rgba(163,225,255,.42),transparent);
+   pointer-events:none;
+ }
+}
+@keyframes oj-glimmer{
+  0%{opacity:.27;transform:translateY(0) scale(.85)}
+  55%{opacity:.83;transform:translateY(-7px) scale(1.08)}
+  100%{opacity:.49;transform:translateY(-12px) scale(.86)}
+}
+@media(prefers-reduced-motion:reduce){
+ .chat-view .ogonek-desktop-jewelry .oj-spark{animation:none!important;will-change:auto!important}
+}
+</style><style id="ogonek-mobile-text-visibility-v3">
+/* Mobile reading fix: always let messages grow to the size of their full text;
+   keep scrolling inside the chat, away from its fixed toolbar and footer. */
+@media screen and (max-width:700px){
+ html,body{overflow-x:hidden!important}
+ .chat-view{padding:6px 8px 12px!important}
+ .chat-view .backbar{margin:0 0 6px!important}
+ .chat-view .backbutton{padding:5px 8px!important;min-height:30px!important}
+ .chat-view .guest-head{margin-bottom:8px!important}
+ .chat-view .eyebrow{margin:0 0 3px!important;font-size:9px!important;line-height:1.3!important}
+ .chat-view .guest-card{padding:7px 9px!important;gap:1px!important}
+ .chat-view .guest-card .guestline{margin:0!important;font-size:14px!important;line-height:1.35!important}
+ .chat-view .guest-card .hostline{font-size:11px!important;line-height:1.35!important}
+ .chat-view .chat{
+   display:flex!important;flex-direction:column!important;
+   height:calc(100dvh - 119px)!important;
+   min-height:520px!important;max-height:none!important;
+   overflow:hidden!important;
+ }
+ .chat-view .chat-toolbar{
+   display:flex!important;flex:0 0 45px!important;min-height:45px!important;
+   padding:0 12px!important;
+ }
+ .chat-view .ogonek-progress{
+   position:relative!important;flex:0 0 38px!important;
+   min-height:38px!important;max-height:38px!important;
+   padding:3px 5px!important;
+ }
+ .chat-view .ogonek-progress-dot{width:28px!important;height:28px!important;min-width:28px!important;min-height:28px!important}
+ .chat-view .chat-scroll{
+   position:relative!important;z-index:3!important;
+   display:block!important;flex:1 1 auto!important;
+   box-sizing:border-box!important;
+   width:100%!important;height:auto!important;min-height:0!important;
+   overflow-x:hidden!important;overflow-y:auto!important;
+   -webkit-overflow-scrolling:touch;
+   overscroll-behavior-y:contain!important;
+   scroll-padding-top:19px!important;
+   scroll-padding-bottom:24px!important;
+   padding:16px 12px 90px!important;
+   overflow-anchor:none!important;
+   scroll-snap-type:y proximity;
+ }
+ .chat-view .chat-scroll .exchange{
+   display:flex!important;flex-direction:column!important;
+   width:100%!important;max-width:100%!important;
+   height:auto!important;max-height:none!important;min-height:0!important;
+   overflow:visible!important;clip-path:none!important;
+   opacity:1!important;visibility:visible!important;
+   transform:none!important;contain:none!important;
+   padding:10px 0 21px!important;gap:11px!important;
+ }
+ .chat-view .chat-scroll .exchange+.exchange{padding-top:32px!important}
+ .chat-view .chat-scroll .question-row,
+ .chat-view .chat-scroll .answer-row{
+   box-sizing:border-box!important;display:flex!important;flex-direction:column!important;
+   flex:0 0 auto!important;
+   width:100%!important;max-width:100%!important;
+   height:auto!important;min-height:0!important;max-height:none!important;
+   overflow:visible!important;clip-path:none!important;
+   opacity:1!important;visibility:visible!important;
+   scroll-snap-align:start;scroll-margin-top:19px!important;
+ }
+ .chat-view .chat-scroll .message,
+ .chat-view .chat-scroll .message.answer{
+   position:relative!important;
+   display:block!important;flex:0 0 auto!important;
+   box-sizing:border-box!important;
+   width:100%!important;max-width:100%!important;
+   height:auto!important;min-height:0!important;max-height:none!important;
+   overflow:visible!important;clip-path:none!important;
+   -webkit-line-clamp:unset!important;line-clamp:unset!important;
+   white-space:normal!important;word-break:normal!important;overflow-wrap:break-word!important;
+   hyphens:none!important;
+   padding:13px 14px!important;
+   font-size:15px!important;line-height:1.6!important;
+   color:#ffffff!important;
+   text-shadow:none!important;
+   opacity:1!important;visibility:visible!important;
+   animation:none!important;transition:none!important;
+   -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+ }
+ .chat-view .chat-scroll .message{
+   background:linear-gradient(145deg,rgba(7,28,56,.98),rgba(15,39,73,.97))!important;
+   box-shadow:inset 0 1px rgba(205,238,255,.22),0 5px 20px rgba(0,0,0,.39)!important;
+ }
+ .chat-view .chat-scroll .message.answer{
+   background:linear-gradient(145deg,rgba(47,32,45,.98),rgba(43,30,46,.97))!important;
+   color:#fff9f0!important;
+   box-shadow:inset 0 1px rgba(255,230,188,.23),0 5px 20px rgba(0,0,0,.40)!important;
+ }
+ .chat-view .foot{
+   position:relative!important;z-index:4!important;
+   display:flex!important;flex:0 0 49px!important;min-height:49px!important;
+   padding:5px 11px!important;
+ }
+ .chat-view .foot .hint{font-size:10px!important}
+ .chat-view .foot .nav{width:31px!important;height:31px!important}
+}
+</style><style id="ogonek-final-like-style-v1">
+/* Last-message like uses the same data hooks, Firebase key and localStorage key
+   as the banner in News. There is only one button per page. */
+.chat-view .ogonek-farewell-actions{
+ display:flex;flex-direction:column;align-items:center;
+ justify-content:center;gap:9px;
+ margin:13px auto 6px;padding:6px 10px 12px;
+}
+.chat-view .ogonek-farewell-prompt{
+ color:#e5ecf9;
+ font:600 13px/1.4 system-ui,'Segoe UI',sans-serif;
+ letter-spacing:.02em;text-shadow:0 2px 6px rgba(0,0,0,.6);
+}
+.chat-view .ogonek-final-like{
+ display:inline-flex;align-items:center;justify-content:center;gap:10px;
+ box-sizing:border-box;min-width:148px;min-height:42px;
+ padding:9px 17px;
+ border-radius:999px;border:1px solid rgba(255,223,170,.83);
+ background:linear-gradient(130deg,rgba(39,32,61,.98),rgba(77,45,74,.97));
+ color:#fff1de;
+ box-shadow:inset 0 1px rgba(255,236,198,.21),0 6px 17px rgba(2,8,27,.40),0 0 17px rgba(235,169,116,.23);
+ cursor:pointer;
+ font:750 14px/1.25 system-ui,'Segoe UI',sans-serif;
+ font-variant-numeric:tabular-nums;
+ text-shadow:none;
+ transition:transform .18s ease,background .18s ease,box-shadow .18s ease;
+ touch-action:manipulation;
+}
+.chat-view .ogonek-final-heart{
+ color:#ff759b;font-size:21px;line-height:1;
+ text-shadow:0 0 8px rgba(247,85,130,.32);
+}
+.chat-view .ogonek-final-like b{font-weight:850;color:#ffe2bd}
+.chat-view .ogonek-final-like:hover:not(:disabled){
+ transform:translateY(-1px);
+ background:linear-gradient(130deg,rgba(58,39,75,.99),rgba(104,55,94,.98));
+ box-shadow:inset 0 1px rgba(255,236,198,.26),0 8px 21px rgba(2,8,27,.45),0 0 18px rgba(253,178,111,.32);
+}
+.chat-view .ogonek-final-like.is-liked{
+ border-color:rgba(255,197,193,.8);
+ background:linear-gradient(130deg,rgba(82,44,70,.98),rgba(101,45,74,.98));
+}
+.chat-view .ogonek-final-like:disabled{cursor:default;opacity:1}
+.chat-view .ogonek-final-like:focus-visible{
+ outline:2px solid #ffe7bd;outline-offset:4px;
+}
+@media(max-width:700px){
+ .chat-view .ogonek-farewell-actions{margin-top:9px;padding-bottom:10px;gap:8px}
+ .chat-view .ogonek-farewell-prompt{font-size:12px}
+ .chat-view .ogonek-final-like{min-height:44px;min-width:160px;padding:10px 16px;font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){.chat-view .ogonek-final-like{transition:none!important}}
+</style><link rel="stylesheet" href="site-skip-navigation-v1184.css?v=1184"/></head><body><a class="bm-skip-to-content-v1184" href="#chat-view">Перейти к содержимому</a><main aria-label="Интервью с Барашем" class="page chat-view" id="chat-view" data-ogonek-article><h1 style="position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;">Наш гость: [VgB]Бараш</h1><div class="backbar"><a class="backbutton" href="ogonek.html">← Ко всем интервью</a></div><header class="guest-head"><p class="eyebrow">К вам на огонек · интервью</p><div class="guest-card"><span class="guest-spark">✦</span><p class="guestline">Наш гость: <strong>[VgB]Бараш</strong></p><div class="hostline">Ведущий: [VgB]HiTmaN74</div><span class="guest-spark">✦</span></div></header>
+<section aria-label="Интервью с [VgB]Барашем" class="chat">
+<div class="ogonek-desktop-jewelry" aria-hidden="true">
+  <span class="oj-corner oj-tl"></span>
+  <span class="oj-corner oj-tr"></span>
+  <span class="oj-corner oj-bl"></span>
+  <span class="oj-corner oj-br"></span>
+  <span class="oj-frost oj-frost-left">❄</span>
+  <span class="oj-frost oj-frost-right">❄</span>
+  <span class="oj-spark oj-spark-a"></span>
+  <span class="oj-spark oj-spark-b"></span>
+  <span class="oj-spark oj-spark-c"></span>
+  <span class="oj-spark oj-spark-d"></span>
+</div>
+<picture><source media="(max-width:650px)" srcset="assets/k-vam-ogonek-mobile-v1.webp"/><img alt="" aria-hidden="true" class="scenery" src="assets/k-vam-ogonek-desktop-v1.webp"/></picture>
+<div aria-hidden="true" class="overlay"></div>
+<div class="chat-toolbar"><div class="status"><span aria-hidden="true" class="flame">✧</span><span>Беседа у огонька</span></div><div class="chapters">6 вопросов · 6 ответов</div></div>
+<nav class="ogonek-progress" aria-label="Быстрый переход к вопросам">
+<span class="ogonek-progress-title" aria-hidden="true">ВОПРОСЫ</span>
+<button type="button" class="ogonek-progress-dot is-active" data-ogonek-step="1" aria-label="Перейти к вопросу 1" aria-current="step"><span aria-hidden="true">✦</span><span class="ogonek-step-number">1</span></button>
+<button type="button" class="ogonek-progress-dot" data-ogonek-step="2" aria-label="Перейти к вопросу 2"><span aria-hidden="true">✦</span><span class="ogonek-step-number">2</span></button>
+<button type="button" class="ogonek-progress-dot" data-ogonek-step="3" aria-label="Перейти к вопросу 3"><span aria-hidden="true">✦</span><span class="ogonek-step-number">3</span></button>
+<button type="button" class="ogonek-progress-dot" data-ogonek-step="4" aria-label="Перейти к вопросу 4"><span aria-hidden="true">✦</span><span class="ogonek-step-number">4</span></button>
+<button type="button" class="ogonek-progress-dot" data-ogonek-step="5" aria-label="Перейти к вопросу 5"><span aria-hidden="true">✦</span><span class="ogonek-step-number">5</span></button>
+<button type="button" class="ogonek-progress-dot" data-ogonek-step="6" aria-label="Перейти к вопросу 6"><span aria-hidden="true">✦</span><span class="ogonek-step-number">6</span></button>
+</nav>
+<div aria-label="Прокручиваемая переписка" class="chat-scroll" id="scroll" role="region" tabindex="0">
+<section aria-label="Вопрос 1" class="exchange" id="q1">
+<div class="question-row"><div class="sender"><span class="mark mark-host">H</span><span>[VgB]HiTmaN74</span><span class="meta">вопрос 01</span></div>
+<div class="message question">Самый недооценённый персонаж в игре (на момент текущего поколения), по твоему мнению? Почему на него стоит обратить внимание?</div></div>
+<div class="answer-row"><div class="sender"><span class="meta">ответ 01</span><span>[VgB]Бараш</span><span class="mark mark-guest">Б</span></div>
+<div class="message answer">Лумак Бокан. Его навык снижает «урон врага». По идее, он должен работать лучше, чем навыки Сергея и Бахити, так как снижает 20% изначального урона (на последнем уровне). Сергей и Бахити снижают уже получаемый урон (после вычета процента защиты и т. д.). Но это лишь предположения и выводы, не 100%.</div></div>
+</section>
+<section aria-label="Вопрос 2" class="exchange" id="q2">
+<div class="question-row"><div class="sender"><span class="mark mark-host">H</span><span>[VgB]HiTmaN74</span><span class="meta">вопрос 02</span></div>
+<div class="message question">Есть вражеский альянс, с которым всегда в кайф подраться за форт или крепость?</div></div>
+<div class="answer-row"><div class="sender"><span class="meta">ответ 02</span><span>[VgB]Бараш</span><span class="mark mark-guest">Б</span></div>
+<div class="message answer">Как таковых вражеских альянсов нет. Негатив покинул нас недавно. Сейчас нет смысла конфликтовать. Пора уже мирно, дружно победить на СВС и забрать чужой замок.</div></div>
+</section>
+<section aria-label="Вопрос 3" class="exchange" id="q3">
+<div class="question-row"><div class="sender"><span class="mark mark-host">H</span><span>[VgB]HiTmaN74</span><span class="meta">вопрос 03</span></div>
+<div class="message question">Какую фишку хотел бы видеть или изменить в игре?</div></div>
+<div class="answer-row"><div class="sender"><span class="meta">ответ 03</span><span>[VgB]Бараш</span><span class="mark mark-guest">Б</span></div>
+<div class="message answer">На данном этапе игры хотелось бы больше вариантов реакций на сообщения. И чуть более качественного расчёта баланса в ивентах по типу Литейной (что Карен, что Анзор против нас уже попадались 😅).</div></div>
+</section>
+<section aria-label="Вопрос 4" class="exchange" id="q4">
+<div class="question-row"><div class="sender"><span class="mark mark-host">H</span><span>[VgB]HiTmaN74</span><span class="meta">вопрос 04</span></div>
+<div class="message question">Вопрос, который беспокоит многих игроков, и меня в том числе: как правильно качать талисманы и шмот губернатора? На что определённо стоит делать упор? Особенно игрокам, которые не донатят, ведь у них все материалы для прокачки на вес золота.</div></div>
+<div class="answer-row"><div class="sender"><span class="meta">ответ 04</span><span>[VgB]Бараш</span><span class="mark mark-guest">Б</span></div>
+<div class="message answer">Ну, в эти вопросы я не углублялся, но… Прокачка губернатора для бесплатного игрока выгодна плюс-минус равномерная, так как «мета» со временем поменяется. С талисманами, по моему мнению, выгодно всё качать до 5–6 уровня, а дальше прокачивать один талисман (в идеале пехоты) до максимума, чтобы открыть обмен руководств талисманов на чертежи. Чертежей чаще всего мало.</div></div>
+</section>
+<section aria-label="Вопрос 5" class="exchange" id="q5">
+<div class="question-row"><div class="sender"><span class="mark mark-host">H</span><span>[VgB]HiTmaN74</span><span class="meta">вопрос 05</span></div>
+<div class="message question">Как считаешь, были шансы отстоять свой замок в последнем СВС? Что помешало?</div></div>
+<div class="answer-row"><div class="sender"><span class="meta">ответ 05</span><span>[VgB]Бараш</span><span class="mark mark-guest">Б</span></div>
+<div class="message answer">Шансы есть всегда, но определённо «киты» у них были сильнее. Как минимум, мы были близки к победе в подготовке, и это уже хорошо.</div></div>
+</section>
+<section aria-label="Вопрос 6" class="exchange" id="q6">
+<div class="question-row"><div class="sender"><span class="mark mark-host">H</span><span>[VgB]HiTmaN74</span><span class="meta">вопрос 06</span></div>
+<div class="message question">В чём сила 58-го госа?</div></div>
+<div class="answer-row"><div class="sender"><span class="meta">ответ 06</span><span>[VgB]Бараш</span><span class="mark mark-guest">Б</span></div>
+<div class="message answer">В вере и надежде, что Роман вернётся к нам и предоставит отчёты за столь долгое время отсутствия.</div></div>
+</section>
+<div class="ogonek-farewell"><span class="ogonek-farewell-line" aria-hidden="true"></span><span class="ogonek-farewell-crystal" aria-hidden="true">❄</span><p>До новых встреч у огонька <span aria-hidden="true">✦</span></p><div class="ogonek-farewell-actions"><span class="ogonek-farewell-prompt">Понравилась беседа?</span><button class="ogonek-final-like" type="button" data-ogonek-like aria-label="Поставить лайк интервью" aria-pressed="false"><span class="ogonek-final-heart" aria-hidden="true">♥</span><span data-ogonek-like-label>Нравится</span><b data-ogonek-like-count aria-live="polite">…</b></button></div></div>
+</div>
+<div class="foot"><span class="hint">↕ Листайте переписку</span><nav aria-label="Навигация по вопросам" class="navigation"><button aria-label="Предыдущий вопрос" class="nav" id="back" type="button">↑</button><span class="counter" id="count">1 / 6</span><button aria-label="Следующий вопрос" class="nav" id="forward" type="button">↓</button></nav></div>
+</section><p class="under">✦ История 58-го пишется его игроками ✦</p></main>
+
+<script>
+(()=>{
+ const scroll=document.getElementById('scroll');
+ const parts=[...scroll.querySelectorAll('.exchange')];
+ const count=document.getElementById('count');
+ const back=document.getElementById('back');
+ const forward=document.getElementById('forward');
+ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+ let current=0;
+ const topOf=i=>Math.max(0,parts[i].getBoundingClientRect().top-scroll.getBoundingClientRect().top+scroll.scrollTop-16);
+ function refresh(){
+   if(!scroll.clientHeight)return;
+   let at=scroll.scrollTop+Math.min(135,scroll.clientHeight*.32);
+   current=0;
+   parts.forEach((part,i)=>{if(topOf(i)<=at) current=i});
+   if(scroll.scrollTop>0&&scroll.scrollTop+scroll.clientHeight>=scroll.scrollHeight-7)current=parts.length-1;
+   count.textContent=`${current+1} / ${parts.length}`;
+   back.disabled=current===0&&scroll.scrollTop<10;
+   forward.disabled=current===parts.length-1;
+ }
+ function go(i){i=Math.max(0,Math.min(parts.length-1,i));scroll.scrollTo({top:topOf(i),behavior:(reduced.matches||window.matchMedia('(max-width:700px)').matches)?'auto':'smooth'});}
+ back.onclick=()=>go(current-1);
+ forward.onclick=()=>go(current+1);
+ scroll.addEventListener('scroll',refresh,{passive:true});
+ scroll.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();go(current+1)}if(e.key==='ArrowLeft'){e.preventDefault();go(current-1)}});
+ window.addEventListener('resize',refresh);
+ window.refreshInterview=refresh;
+})();
+</script><script id="ogonek-start-first-question-v2">
+(function(){
+ const reset=()=>{
+  const el=document.getElementById('scroll');
+  if(el){el.scrollTop=0; const count=document.getElementById('count');if(count)count.textContent='1 / 6';}
+ };
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',reset,{once:true});
+ else reset();
+ window.addEventListener('pageshow',e=>{if(e.persisted)reset()});
+})();
+</script><script id="ogonek-progress-behavior-v1">
+(function(){
+  'use strict';
+  const scroll=document.getElementById('scroll');
+  const rail=document.querySelector('.ogonek-progress');
+  if(!scroll||!rail)return;
+  const questions=[...scroll.querySelectorAll('.exchange')];
+  const dots=[...rail.querySelectorAll('[data-ogonek-step]')];
+  if(questions.length!==dots.length)return;
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+  const topOf=node=>Math.max(0,node.getBoundingClientRect().top-scroll.getBoundingClientRect().top+scroll.scrollTop-16);
+  let frame=0;
+  function refreshProgress(){
+    frame=0;
+    const pos=scroll.scrollTop+Math.min(135,scroll.clientHeight*.32);
+    let active=0;
+    questions.forEach((q,i)=>{if(topOf(q)<=pos)active=i});
+    if(scroll.scrollTop>0&&scroll.scrollTop+scroll.clientHeight>=scroll.scrollHeight-6)active=questions.length-1;
+    dots.forEach((dot,i)=>{
+      const on=i===active;
+      dot.classList.toggle('is-active',on);
+      if(on)dot.setAttribute('aria-current','step');
+      else dot.removeAttribute('aria-current');
+    });
+  }
+  const schedule=()=>{if(!frame)frame=requestAnimationFrame(refreshProgress)};
+  dots.forEach((dot,i)=>{
+    dot.addEventListener('click',()=>{
+      scroll.scrollTo({top:topOf(questions[i]),behavior:(reduced.matches||window.matchMedia('(max-width:700px)').matches)?'auto':'smooth'});
+      scroll.focus({preventScroll:true});
+    });
+  });
+  scroll.addEventListener('scroll',schedule,{passive:true});
+  window.addEventListener('resize',schedule,{passive:true});
+  window.addEventListener('pageshow',schedule);
+  // Only animate visible messages once. No content is hidden before observation.
+  if('IntersectionObserver' in window&&!reduced.matches&&window.innerWidth>700){
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-newly-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },{root:scroll,threshold:.10});
+    questions.forEach(q=>observer.observe(q));
+  }
+  refreshProgress();
+})();
+</script><script defer src="ogonek-stats-v1.js?v=1"></script></body></html>

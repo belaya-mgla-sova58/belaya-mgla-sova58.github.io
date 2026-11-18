@@ -1,0 +1,82 @@
+/* Белая Мгла | Calculator Mobile Finish v1147.
+   Visual corrections ONLY: never alter calculated data, JS, field names or desktop. */
+@media screen and (max-width:820px){
+html:not(.force-desktop-root) body:is(.is-essence-mithril-calc-route,.is-fire-furnace-calc-route) main#appMain{
+ width:100%!important;min-width:0!important;max-width:100%!important;
+ box-sizing:border-box!important;
+}
+html:not(.force-desktop-root) body:is(.is-essence-mithril-calc-route,.is-fire-furnace-calc-route) main#appMain>.route-page.active{
+ min-width:0!important;max-width:100%!important;box-sizing:border-box!important;
+}
+html:not(.force-desktop-root) body.is-essence-mithril-calc-route #ecApp{
+ box-sizing:border-box!important;width:100%!important;min-width:0!important;
+ max-width:100%!important;padding:0 4px 85px!important;
+}
+html:not(.force-desktop-root) body.is-essence-mithril-calc-route #ecApp :is(.ec-hero,.ec-panel,.ec-item,.ec-knowledge,.ec-result){
+ box-sizing:border-box!important;min-width:0!important;max-width:100%!important;
+}
+html:not(.force-desktop-root) body.is-essence-mithril-calc-route #ecApp .ec-hero{
+ padding:18px 15px!important;border-radius:16px!important;
+ border-color:rgba(167,215,249,.5)!important;
+ background:linear-gradient(140deg,#163d69,#082445)!important;
+ box-shadow:0 5px 15px rgba(2,9,29,.25)!important;
+}
+html:not(.force-desktop-root) body.is-essence-mithril-calc-route #ecApp .ec-hero h1{
+ font:700 clamp(23px,6vw,30px)/1.2 Georgia,serif!important;
+ color:#ffe9bd!important;-webkit-text-fill-color:#ffe9bd!important;
+ overflow-wrap:break-word!important;
+}
+html:not(.force-desktop-root) body.is-essence-mithril-calc-route #ecApp .ec-panel{
+ padding:clamp(12px,3.6vw,18px)!important;border-radius:16px!important;
+ border-color:rgba(157,211,250,.43)!important;
+ box-shadow:0 4px 12px rgba(2,9,30,.22)!important;
+}
+html:not(.force-desktop-root) body.is-essence-mithril-calc-route #ecApp :is(.ec-panel,.ec-item,.ec-result) :is(h2,h3){
+ overflow-wrap:break-word!important;
+}
+html:not(.force-desktop-root) body.is-essence-mithril-calc-route #ecApp :is(input,select,textarea){
+ box-sizing:border-box!important;max-width:100%!important;min-width:0!important;
+ min-height:44px!important;font-size:16px!important;
+ color:#f3faff!important;-webkit-text-fill-color:#f3faff!important;
+}
+html:not(.force-desktop-root) body.is-essence-mithril-calc-route #ecApp :is(.ec-stock-grid,.ec-item-grid,.ec-extra-grid,.ec-result-grid){
+ max-width:100%!important;min-width:0!important;
+}
+html:not(.force-desktop-root) body.is-essence-mithril-calc-route #ecApp .ec-table-wrap{
+ display:block!important;width:100%!important;max-width:100%!important;
+ overflow-x:auto!important;-webkit-overflow-scrolling:touch;
+ overscroll-behavior-x:contain;border-radius:12px!important;
+}
+html:not(.force-desktop-root) body.is-essence-mithril-calc-route #ecApp .ec-table{
+ width:max-content!important;min-width:100%!important;max-width:none!important;
+}
+html:not(.force-desktop-root) body.is-essence-mithril-calc-route #ecApp :is(button,.ec-primary,.ec-secondary){
+ min-height:44px!important;box-sizing:border-box!important;max-width:100%;
+}
+html:not(.force-desktop-root) body.is-fire-furnace-calc-route .furnace-calc-v379,
+html:not(.force-desktop-root) body.is-fire-furnace-calc-route .calc-route-v378{
+ box-sizing:border-box!important;max-width:100%!important;min-width:0!important;
+}
+html:not(.force-desktop-root) body.is-fire-furnace-calc-route :is(.calc-building-grid-v379,.calc-res-grid-v378,.calc-refining-grid-v1,.calc-refining-controls-v1){
+ min-width:0!important;max-width:100%!important;
+}
+html:not(.force-desktop-root) body.is-fire-furnace-calc-route :is(.calc-refining-controls-v1,.calc-refining-inner-v1) :is(input,select){
+ box-sizing:border-box!important;max-width:100%!important;min-width:0!important;
+ min-height:44px!important;font-size:16px!important;
+}
+html:not(.force-desktop-root) body.is-fire-furnace-calc-route .calc-route-v378 :is(h2,h3,p),
+html:not(.force-desktop-root) body.is-fire-furnace-calc-route .furnace-calc-v379 :is(h2,h3,p){
+ overflow-wrap:break-word!important;
+}
+html:not(.force-desktop-root) body:is(.is-essence-mithril-calc-route,.is-fire-furnace-calc-route) main#appMain :is(button,input,select,textarea,summary):focus-visible{
+ outline:2px solid #ffe7aa!important;outline-offset:2px!important;
+}
+}
+@media screen and (max-width:360px){
+html:not(.force-desktop-root) body.is-essence-mithril-calc-route #ecApp .ec-panel{
+ padding:11px!important;
+}
+html:not(.force-desktop-root) body.is-essence-mithril-calc-route #ecApp :is(.ec-item-grid,.ec-stock-grid){
+ min-width:0!important;
+}
+}

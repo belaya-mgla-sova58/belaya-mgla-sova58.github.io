@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 620" width="500" height="620" role="img" aria-labelledby="title desc">
+<title id="title">SOVA58 — нежная сова из золотых линий</title>
+<desc id="desc">Изящная добрая сова, нарисованная плавными тонкими золотыми линиями, с круглыми сапфировыми глазами, короной и небольшим сияющим кристаллом</desc>
+<defs>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2=".8"><stop stop-color="#af7b38"/><stop offset=".18" stop-color="#fbe5ab"/><stop offset=".44" stop-color="#ca9653"/><stop offset=".66" stop-color="#fff3cb"/><stop offset=".85" stop-color="#c18a40"/><stop offset="1" stop-color="#f8d48c"/></linearGradient>
+ <linearGradient id="lightgold" x1=".05" y1="0" x2=".89" y2=".91"><stop stop-color="#fff8dc"/><stop offset=".42" stop-color="#f6dba0"/><stop offset="1" stop-color="#b98541"/></linearGradient>
+ <linearGradient id="navy" x1=".1" y1="0" x2=".9" y2="1"><stop stop-color="#284a79"/><stop offset=".43" stop-color="#122c50"/><stop offset=".85" stop-color="#091832"/><stop offset="1" stop-color="#071127"/></linearGradient>
+ <radialGradient id="halo"><stop stop-color="#68bbff" stop-opacity=".26"/><stop offset=".67" stop-color="#637fc4" stop-opacity=".1"/><stop offset="1" stop-color="#12284c" stop-opacity="0"/></radialGradient>
+ <radialGradient id="iris"><stop stop-color="#216aad"/><stop offset=".6" stop-color="#48cefa"/><stop offset=".9" stop-color="#b5f6ff"/><stop offset="1" stop-color="#2f76a2"/></radialGradient>
+ <linearGradient id="gem" x1=".1" y1="0" x2=".95" y2=".98"><stop stop-color="#f3ffff"/><stop offset=".22" stop-color="#9feaff"/><stop offset=".45" stop-color="#38a8e6"/><stop offset=".77" stop-color="#284ca2"/><stop offset="1" stop-color="#7663b0"/></linearGradient>
+ <filter id="soft" x="-75%" y="-75%" width="250%" height="250%"><feGaussianBlur stdDeviation="8"/></filter>
+ <g id="wing">
+   <path d="M217 375C164 366 119 331 80 283C88 325 112 358 151 380C121 373 90 356 64 337C81 388 112 414 160 423C132 429 108 443 92 461C144 465 179 443 216 407" stroke-width="3.2"/>
+   <path d="M191 379C148 365 115 336 96 306M167 396C127 386 104 366 85 352M160 421C129 419 111 409 94 395" stroke-width="1.65" opacity=".85"/>
+   <path d="M183 381Q156 368 139 352M175 407Q147 400 133 389M179 427Q148 447 122 449" stroke-width="1.3" opacity=".78"/>
+ </g>
+ <g id="facehalf">
+   <path d="M250 241C219 221 190 224 169 247C152 267 147 300 159 326C170 353 189 370 219 379C231 382 241 385 250 393" stroke-width="3"/>
+   <path d="M176 252Q167 233 173 218Q190 235 210 239" stroke-width="2.5"/>
+   <path d="M250 297C232 269 201 265 183 281C166 295 170 324 188 341C205 357 233 355 250 329" stroke-width="2.4"/>
+   <path d="M246 300C225 277 201 275 185 291" stroke-width="1.5" opacity=".88"/>
+   <path d="M184 312Q188 339 217 345" stroke-width="1.25" opacity=".88"/>
+   <path d="M186 289Q211 271 239 293" stroke-width="2.4"/>
+   <path d="M187 291Q210 276 236 295Q211 313 187 291Z" stroke-width="1.8"/>
+   <path d="M197 347Q213 365 235 370" stroke-width="1.25" opacity=".8"/>
+ </g>
+</defs>
+<!-- A restrained gold frame from the original shield, softer and less imposing. -->
+<ellipse cx="250" cy="323" rx="220" ry="261" fill="url(#halo)"/>
+<path d="M250 565Q141 516 101 414Q91 385 91 340V224L250 132L409 224V340Q409 385 399 414Q359 516 250 565Z" fill="url(#navy)" stroke="url(#gold)" stroke-width="4.5" stroke-linejoin="round"/>
+<path d="M250 545Q158 501 120 408Q112 378 112 338V237L250 155L388 237V338Q388 378 380 408Q342 501 250 545Z" fill="none" stroke="url(#lightgold)" stroke-width="1.6" stroke-opacity=".82"/>
+<path d="M250 555Q150 506 111 411V230L250 143L389 230V411Q350 506 250 555Z" fill="none" stroke="#f8d7a2" stroke-width="1" stroke-opacity=".4"/>
+<ellipse cx="250" cy="325" rx="136" ry="192" fill="url(#halo)"/>
+<!-- A delicate little crown. -->
+<g stroke="url(#gold)" fill="none" stroke-linejoin="round" stroke-linecap="round">
+ <path d="M155 169L135 93L184 121L210 51L250 101L290 51L316 121L365 93L345 169" stroke-width="4.3"/>
+ <path d="M161 165Q250 151 339 165" stroke-width="2.5"/>
+ <path d="M172 157Q250 174 328 157" stroke-width="1.3" opacity=".7"/>
+</g>
+<path d="M250 80L265 102L250 126L235 102Z" fill="url(#gem)" stroke="url(#lightgold)" stroke-width="2"/>
+<path d="M250 80V126M235 102H265" stroke="#e6fbff" stroke-width="1.2" opacity=".75"/>
+<circle cx="210" cy="48" r="3" fill="#ffe6b0"/><circle cx="290" cy="48" r="3" fill="#ffe6b0"/>
+<!-- Fine golden feather lines only: no pictorial owl body or painted feather texture. -->
+<g fill="none" stroke="url(#gold)" stroke-linecap="round" stroke-linejoin="round">
+ <use href="#wing"/>
+ <use href="#wing" transform="translate(500 0) scale(-1 1)"/>
+</g>
+<g fill="none" stroke="url(#lightgold)" stroke-linecap="round" stroke-linejoin="round">
+ <use href="#facehalf"/>
+ <use href="#facehalf" transform="translate(500 0) scale(-1 1)"/>
+ <!-- A soft heart-shaped contour under the round face. -->
+ <path d="M200 365Q222 388 250 387Q278 388 300 365" stroke-width="1.8"/>
+ <path d="M214 374Q206 418 225 470Q234 494 250 518Q266 494 275 470Q294 418 286 374" stroke-width="2.8"/>
+ <path d="M227 388Q223 443 250 493Q277 443 273 388" stroke-width="1.5"/>
+ <path d="M202 408Q209 458 239 503M298 408Q291 458 261 503" stroke-width="1.2" opacity=".76"/>
+ <path d="M221 487Q232 509 250 531Q268 509 279 487" stroke-width="1.4"/>
+ <path d="M250 523V542" stroke-width="1.2"/>
+</g>
+<!-- Large, friendly round eyes with tiny highlights. -->
+<g>
+ <circle cx="210" cy="294" r="11" fill="url(#iris)" stroke="url(#lightgold)" stroke-width="1.8"/>
+ <circle cx="290" cy="294" r="11" fill="url(#iris)" stroke="url(#lightgold)" stroke-width="1.8"/>
+ <circle cx="210" cy="296" r="4.2" fill="#15366c"/>
+ <circle cx="290" cy="296" r="4.2" fill="#15366c"/>
+ <circle cx="207" cy="290" r="3.2" fill="#f2ffff"/>
+ <circle cx="287" cy="290" r="3.2" fill="#f2ffff"/>
+</g>
+<!-- Tiny beak, no angry brows. -->
+<path d="M244 313L250 318L256 313L250 328Z" fill="url(#gold)" stroke="#f5dfb3" stroke-width=".9"/>
+<path d="M238 339Q250 347 262 339" fill="none" stroke="url(#lightgold)" stroke-width="1.3" stroke-linecap="round"/>
+<!-- Smaller faceted breast sapphire with soft glow. -->
+<ellipse cx="250" cy="421" rx="46" ry="61" fill="#5ebffc" opacity=".26" filter="url(#soft)"/>
+<path d="M250 374L282 407L271 451L250 482L229 451L218 407Z" fill="#102e57" stroke="url(#lightgold)" stroke-width="3"/>
+<path d="M250 382L273 408L264 448L250 468L236 448L227 408Z" fill="url(#gem)"/>
+<path d="M250 382V468M227 408H273M236 448H264M227 408L250 448L273 408" fill="none" stroke="#e5ffff" stroke-width="1.25" opacity=".83"/>
+<path d="M220 394Q237 379 250 371Q263 379 280 394" fill="none" stroke="url(#gold)" stroke-width="2" stroke-linecap="round"/>
+<!-- A few delicate stars, no crowded embellishments. -->
+<g fill="#dcf9ff" opacity=".8"><circle cx="141" cy="253" r="1.4"/><circle cx="359" cy="253" r="1.4"/><circle cx="175" cy="437" r="1.2"/><circle cx="325" cy="437" r="1.2"/></g>
+<g stroke="#e7d19f" stroke-width="1.3" stroke-linecap="round" opacity=".85"><path d="M144 242v12m-6-6h12M356 242v12m-6-6h12M250 571v15m-7.5-7.5h15"/></g>
+<circle cx="250" cy="599" r="3" fill="#e9d198"/>
+</svg>

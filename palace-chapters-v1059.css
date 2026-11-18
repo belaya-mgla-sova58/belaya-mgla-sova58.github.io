@@ -1,0 +1,178 @@
+/* Белая Мгла • Palace Chapters v1059.
+   Editorial hierarchy and category-specific visual identities.
+   Static CSS; preserves approved art, links, image sizes and all calculations. */
+
+/* 01 The main homepage receives visual chapter organization. */
+body.is-home-route .home-portal-v1016 .home-portal-grid-v1016{
+ position:relative!important;
+}
+body.is-home-route .home-portal-v1016 .home-news-v442,
+body.is-home-route .home-portal-v1016 .home-portal-aside-v1016>.home-portal-box-v1016{
+ position:relative!important;
+}
+body.is-home-route .home-portal-v1016 .home-news-v442{
+ background:
+ linear-gradient(112deg,rgba(238,189,106,.045),transparent 38%),
+ radial-gradient(ellipse at 90% 6%,rgba(123,143,223,.17),transparent 49%),
+ linear-gradient(145deg,#152e5e,#061a3d 77%)!important;
+}
+body.is-home-route .home-portal-v1016 .home-news-v442 .modern-panel-head-v424 h2,
+body.is-home-route .home-portal-v1016 .home-portal-box-v1016 .home-portal-block-title-v1016{
+ font-family:Georgia,"Times New Roman",serif!important;
+ font-variant:small-caps!important;
+ letter-spacing:.045em!important;
+ color:#fff1cc!important;-webkit-text-fill-color:#fff1cc!important;
+}
+body.is-home-route .home-portal-v1016 .home-news-pair-v1022>a.home-news-banner-v449{
+ isolation:isolate!important;
+}
+body.is-home-route .home-portal-v1016 .home-news-pair-v1022>a.home-news-banner-v449 .home-news-banner-copy-v449{
+ z-index:5!important;
+}
+body.is-home-route .home-portal-v1016 .home-portal-aside-v1016>.home-portal-box-v1016:first-child{
+ background:
+ radial-gradient(circle at 95% 9%,rgba(119,185,237,.24),transparent 59%),
+ linear-gradient(149deg,#1a3a66,#071c40 76%)!important;
+}
+body.is-home-route .home-portal-v1016 .home-portal-aside-v1016>.home-portal-box-v1016:nth-child(2){
+ background:
+ radial-gradient(circle at 91% 8%,rgba(220,160,88,.17),transparent 60%),
+ linear-gradient(149deg,#25345b,#081d42 76%)!important;
+}
+body.is-home-route .home-portal-v1016 .home-tools-grid-v1016>a,
+body.is-home-route .home-portal-v1016 .home-index-links-v1016>a,
+body.is-home-route .home-portal-v1016 .home-portal-links-v1016>a{
+ transition:border-color .16s ease,box-shadow .16s ease!important;
+}
+body.is-home-route .home-bottom-grid-v1025{
+ position:relative!important;
+}
+body.is-home-route .home-bottom-grid-v1025 .home-bear-calc-v780{
+ border:2px solid rgba(224,187,123,.78)!important;
+ background:
+ radial-gradient(ellipse at 93% 10%,rgba(78,157,217,.27),transparent 50%),
+ linear-gradient(145deg,#1d4579,#071a3b)!important;
+ box-shadow:inset 0 0 0 4px rgba(5,16,43,.5),0 15px 32px rgba(0,3,21,.31)!important;
+}
+body.is-home-route .home-bottom-grid-v1025 .home-utility-v1025{
+ border:2px solid rgba(224,187,123,.78)!important;
+ background:
+ radial-gradient(ellipse at 90% 12%,rgba(188,119,174,.18),transparent 55%),
+ linear-gradient(145deg,#273768,#071a3b)!important;
+ box-shadow:inset 0 0 0 4px rgba(5,16,43,.5),0 15px 32px rgba(0,3,21,.31)!important;
+}
+
+/* 02 Five event halls, each with its own subtle gemstone hue.
+   All original event artworks remain visible. */
+body.is-events-route .events-groups-v522{
+ counter-reset:imperial-hall!important;
+}
+body.is-events-route .event-group-v522{
+ --hall-glow:rgba(135,179,244,.19);
+ counter-increment:imperial-hall!important;
+ background:
+ radial-gradient(ellipse at 93% 0%,var(--hall-glow),transparent 64%),
+ linear-gradient(143deg,#1c3b70,#071d42 77%)!important;
+}
+body.is-events-route .event-group-alliance-v522{--hall-glow:rgba(95,181,218,.26)}
+body.is-events-route .event-group-pvp-v522{--hall-glow:rgba(220,119,137,.19)}
+body.is-events-route .event-group-pve-v522{--hall-glow:rgba(133,188,115,.19)}
+body.is-events-route .event-group-mini-v522{--hall-glow:rgba(181,135,225,.22)}
+body.is-events-route .event-group-svs-v522{--hall-glow:rgba(245,188,95,.23)}
+body.is-events-route .event-group-v522 .event-group-head-v522{
+ position:relative!important;
+}
+body.is-events-route .event-group-v522 .event-group-head-v522::after{
+ content:"0" counter(imperial-hall)!important;
+ display:block!important;
+ position:absolute!important;right:14px!important;top:50%!important;
+ transform:translateY(-50%)!important;
+ color:rgba(255,235,184,.21)!important;
+ font-family:Georgia,serif!important;
+ font-weight:bold!important;font-size:clamp(34px,4vw,59px)!important;
+ line-height:1!important;pointer-events:none!important;
+}
+body.is-events-route .event-group-v522 .event-group-copy-v522{
+ position:relative!important;z-index:2!important;
+}
+body.is-events-route .event-group-v522 .event-group-copy-v522 h3{
+ font-family:Georgia,"Times New Roman",serif!important;
+ letter-spacing:.025em!important;
+ color:#ffeac1!important;-webkit-text-fill-color:#ffeac1!important;
+}
+body.is-events-route .event-group-v522 .event-group-grid-v522{
+ border-top:1px solid rgba(255,231,180,.12)!important;
+}
+
+/* 03 Library-like expert and pet collections.
+   Avoid background replacement on portrait and generation image areas. */
+body.is-pets-route .pet-redesign .pet-stage-list,
+body.is-experts-route .experts-clean .wave-stack{
+ position:relative!important;
+}
+body.is-pets-route .pet-redesign .pet-section-heading h2,
+body.is-experts-route .experts-clean .wave-copy strong{
+ font-family:Georgia,"Times New Roman",serif!important;
+ letter-spacing:.01em!important;
+ color:#fff0c7!important;-webkit-text-fill-color:#fff0c7!important;
+ text-shadow:0 2px 5px rgba(0,0,0,.5),0 0 14px rgba(239,184,97,.18)!important;
+}
+body.is-pets-route .pet-redesign .pet-stage,
+body.is-experts-route .experts-clean .wave{
+ border-color:rgba(245,204,139,.76)!important;
+ box-shadow:inset 0 1px 0 rgba(249,237,205,.25),
+ 0 13px 25px rgba(0,4,23,.33),0 0 12px rgba(211,173,109,.08)!important;
+}
+body.is-pets-route .pet-redesign .pet-stage[open],
+body.is-experts-route .experts-clean .wave[open]{
+ border-color:#fbe1a3!important;
+ box-shadow:inset 0 1px 0 rgba(255,243,208,.3),
+ 0 17px 32px rgba(0,4,23,.38),0 0 19px rgba(222,184,107,.17)!important;
+}
+body.is-pets-route .pet-redesign .pet-stage .pet-card-portrait,
+body.is-experts-route .experts-clean .wave-faces img{
+ filter:drop-shadow(0 5px 8px rgba(0,7,30,.44))!important;
+}
+
+/* 04 Knowledge gallery + calculators: clearer hierarchy, less identical surfaces. */
+body.is-other-route:not(.is-calculators-route) .kb-clean-group-v920:nth-child(2n){
+ background:linear-gradient(145deg,#242e62,#0c1c41 76%)!important;
+}
+body.is-other-route:not(.is-calculators-route) .kb-clean-group-v920:nth-child(2n+1){
+ background:linear-gradient(145deg,#173c71,#091e43 76%)!important;
+}
+body.is-calculators-route .calc-hub-group:nth-of-type(even){
+ background:linear-gradient(145deg,#21376e,#091d43 76%)!important;
+}
+body.is-calculators-route .calc-hub-group:nth-of-type(odd){
+ background:linear-gradient(145deg,#173e73,#091d43 76%)!important;
+}
+body.is-other-route .kb-clean-group-v920>h2,
+body.is-calculators-route .calc-hub-group>h2{
+ font-family:Georgia,"Times New Roman",serif!important;
+ letter-spacing:.024em!important;
+ color:#ffedc4!important;-webkit-text-fill-color:#ffedc4!important;
+}
+body.is-other-route .kb-clean-group-v920 a.kb-clean-card-v920,
+body.is-calculators-route a.calc-hub-card{
+ transition:border-color .16s ease,box-shadow .16s ease!important;
+}
+body.modern-v424 :is(a,button,summary):focus-visible{
+ outline:2px solid #ffebb8!important;
+ outline-offset:3px!important;
+}
+@media(max-width:820px){
+ html:not(.force-desktop-root) body.is-events-route .event-group-v522 .event-group-head-v522::after{
+  right:6px!important;font-size:29px!important;opacity:.75!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route .home-portal-v1016 .home-news-v442 .modern-panel-head-v424 h2,
+ html:not(.force-desktop-root) body.is-home-route .home-portal-v1016 .home-portal-box-v1016 .home-portal-block-title-v1016{
+  letter-spacing:.02em!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route .home-bottom-grid-v1025 :is(.home-bear-calc-v780,.home-utility-v1025){
+  box-shadow:inset 0 0 0 3px rgba(5,16,43,.4),0 7px 16px rgba(0,3,21,.25)!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ body.modern-v424 :is(a,button){transition:none!important}
+}

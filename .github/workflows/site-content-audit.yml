@@ -1,0 +1,114 @@
+name: Audit all website pages and local assets
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '**/*.html'
+      - '**/*.css'
+      - '**/*.js'
+      - '**/*.json'
+      - '**/*.svg'
+      - '**/*.webp'
+      - '**/*.png'
+      - '**/*.jpg'
+      - '.github/workflows/site-content-audit.yml'
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Scan every HTML page and reachable navigation route
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from html.parser import HTMLParser
+          from urllib.parse import urlsplit, unquote
+          from collections import deque
+          import json, os
+          ROOT=Path('.')
+          pages=sorted(ROOT.glob('*.html'))
+          ignore_dirs={'.git','.github','visual-tests','tests','scripts','node_modules','_site','test-results'}
+          class P(HTMLParser):
+              def __init__(self):
+                  super().__init__(convert_charrefs=True)
+                  self.links=[]
+                  self.images=0
+                  self.has_viewport=False
+                  self.has_title=False
+                  self.has_h1=False
+              def handle_starttag(self,tag,attrs):
+                  d=dict(attrs)
+                  if tag=='img':self.images+=1
+                  if tag=='meta' and d.get('name','').lower()=='viewport':self.has_viewport=True
+                  if tag=='title':self.has_title=True
+                  if tag=='h1':self.has_h1=True
+                  for key in ('href','src','poster'):
+                      if d.get(key):self.links.append((tag,key,d[key]))
+                  if tag=='source':
+                      for v in d.get('srcset','').split(','):
+                          if v.strip():self.links.append((tag,'srcset',v.strip().split()[0]))
+          info={}
+          missing=[]
+          for p in pages:
+              html=p.read_text('utf-8',errors='replace')
+              parser=P()
+              try:parser.feed(html)
+              except Exception as e: missing.append({'page':str(p),'reference':'HTML parse error','detail':str(e)})
+              children=[]
+              for tag,key,value in parser.links:
+                  if value.startswith(('#','//','data:','mailto:','tel:','javascript:','blob:')):continue
+                  try:
+                      u=urlsplit(value)
+                      if u.scheme or u.netloc:continue
+                      target=unquote(u.path)
+                  except Exception:continue
+                  if not target or '{' in target or '}' in target:continue
+                  candidate=Path(target.lstrip('/')) if target.startswith('/') else p.parent/target
+                  if candidate.is_dir():candidate=candidate/'index.html'
+                  if candidate.exists():
+                      if candidate.suffix.lower()=='.html':children.append(candidate.as_posix().removeprefix('./'))
+                  else:
+                      missing.append({'page':p.as_posix(),'reference':value,'tag':tag,'attribute':key})
+              info[p.as_posix()]={'images':parser.images,'links':len(parser.links),'viewport':parser.has_viewport,'title':parser.has_title,'h1':parser.has_h1,'children':children}
+          seen=set()
+          queue=deque(['index.html'])
+          while queue:
+              p=queue.popleft()
+              if p in seen:continue
+              seen.add(p)
+              queue.extend(c for c in info.get(p,{}).get('children',[]) if c not in seen)
+          referenced=[x for x in missing if x['page'] in seen]
+          lacks=[p for p,d in info.items() if not d['viewport']]
+          result={'html_pages':len(info),'reachable_pages':len(seen),'orphan_or_unlinked_pages':sorted(set(info)-seen),'missing_all':missing,'missing_reachable':referenced,'missing_viewport':lacks,'files_scanned':sum(1 for p in ROOT.rglob('*') if p.is_file() and not set(p.parts).intersection(ignore_dirs))}
+          Path('site-audit-report.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
+          summary=[
+            '## Full static website audit',
+            f"- HTML pages scanned: **{len(info)}**",
+            f"- Pages reachable by links from the homepage: **{len(seen)}**",
+            f"- Missing local references on reachable pages: **{len(referenced)}**",
+            f"- Missing local references across all HTML: **{len(missing)}**",
+            f"- Pages without a mobile viewport meta tag: **{len(lacks)}**",
+            '',
+            '### Missing references on reachable pages'
+          ]
+          summary.extend('- '+x['page']+' → '+x['reference'] for x in referenced[:80])
+          if not referenced:summary.append('None')
+          summary+=['','### Remaining unlinked pages',', '.join(sorted(set(info)-seen)[:45]) or 'None']
+          output='\n'.join(summary)+'\n'
+          print(output)
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a',encoding='utf-8') as out:out.write(output)
+          # Report findings as annotations, but leave audit completed so the full report is uploaded.
+          for x in referenced[:25]:
+              print('::warning file='+x['page']+'::Missing local reference '+x['reference'])
+          PY
+      - name: Upload complete reference report
+        uses: actions/upload-artifact@v4
+        with:
+          name: complete-site-reference-audit
+          path: site-audit-report.json
+          retention-days: 14

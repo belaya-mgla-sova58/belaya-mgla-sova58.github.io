@@ -1,0 +1,75 @@
+name: Optimize published news image variants
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/optimized-news-variants.yml"
+      - "assets/elena-autumn-maple-banner.png"
+      - "assets/creative-corner-art-v330.jpg"
+      - "assets/halloween-header-2026-hq.webp"
+      - "assets/k-vam-ogonek-banner-v1.webp"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: optimized-news-variants
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Install Pillow
+        run: python3 -m pip install --user Pillow
+      - name: Encode smaller faithful versions for actual display dimensions
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          jobs=[
+            ('assets/elena-autumn-maple-banner.png', 'assets/elena-autumn-maple-banner-card-v1.webp', 1280),
+            ('assets/creative-corner-art-v330.jpg', 'assets/creative-corner-card-v1.webp', 1280),
+            ('assets/halloween-header-2026-hq.webp', 'assets/halloween-header-2026-768.webp', 768),
+            ('assets/halloween-header-2026-hq.webp', 'assets/halloween-header-2026-1280.webp', 1280),
+            ('assets/k-vam-ogonek-banner-v1.webp', 'assets/k-vam-ogonek-banner-768.webp', 768),
+            ('assets/k-vam-ogonek-banner-v1.webp', 'assets/k-vam-ogonek-banner-1280.webp', 1280)
+          ]
+          for source,out,width in jobs:
+            src=Path(source)
+            dst=Path(out)
+            with Image.open(src) as im:
+              im.load()
+              if getattr(im,'is_animated',False):raise SystemExit('Animated image requires manual handling: '+source)
+              target_width=min(width, im.width)
+              target_height=round(im.height*target_width/im.width)
+              picture=im.convert('RGBA' if 'A' in im.getbands() else 'RGB')
+              if picture.size!=(target_width,target_height):
+                picture=picture.resize((target_width,target_height),Image.Resampling.LANCZOS)
+              params={}
+              if im.info.get('icc_profile'):params['icc_profile']=im.info['icc_profile']
+              picture.save(dst,'WEBP',quality=89,method=6,**params)
+              with Image.open(dst) as check:
+                check.verify()
+              b=src.stat().st_size
+              a=dst.stat().st_size
+              if a>=b:raise SystemExit(f'Output is not smaller: {out}')
+              print(f'{source} -> {out}: {b} -> {a} bytes, {target_width}x{target_height}')
+          PY
+      - name: Commit optimized copies, keep original images
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/elena-autumn-maple-banner-card-v1.webp assets/creative-corner-card-v1.webp assets/halloween-header-2026-768.webp assets/halloween-header-2026-1280.webp assets/k-vam-ogonek-banner-768.webp assets/k-vam-ogonek-banner-1280.webp
+          if git diff --cached --quiet; then
+            echo 'All optimized variants already current.'
+            exit 0
+          fi
+          git commit -m 'Generate responsive news artwork from approved originals'
+          git pull --rebase origin main
+          git push origin HEAD:main

@@ -1,0 +1,182 @@
+/* WhiteFox News — Royal Gazette v6. Decorative-only extension to v5.
+   Author's words, headings, order, counters and comment IDs remain unchanged. */
+body.news-top-whitefox{
+  --wfr-gold:#a48a5c;--wfr-gold-soft:#d5c3a0;
+  --wfr-ink:#263549;--wfr-paper:#fcf9f1;
+}
+body.news-top-whitefox :is(.wf-new,.whitefox-story,.whitefox-index){
+  font-family:Georgia,"Times New Roman",serif!important;
+  color:var(--wfr-ink)!important;
+}
+body.news-top-whitefox :is(.whitefox-story-head,.wf-new-head,.whitefox-index-title){
+  border:3px double #a89267!important;
+  outline:1px solid rgba(180,153,106,.52)!important;
+  outline-offset:5px!important;
+  border-radius:3px!important;
+  padding:35px 32px 37px!important;
+  background:linear-gradient(110deg,#14253d 0%,#243c59 54%,#192d46 100%)!important;
+  box-shadow:0 7px 20px rgba(13,30,48,.17)!important;
+  margin:9px 6px 25px!important;
+}
+body.news-top-whitefox :is(.whitefox-story-head,.wf-new-head,.whitefox-index-title)::before{
+  content:"❧  ✦  ❧"!important;
+  top:13px!important;right:19px!important;
+  color:#d8c69c!important;opacity:.72!important;
+  font:23px/1 Georgia,serif!important;letter-spacing:4px!important;
+}
+body.news-top-whitefox :is(.whitefox-story-head,.wf-new-head,.whitefox-index-title)::after{
+  content:""!important;bottom:15px!important;left:23px!important;right:23px!important;height:3px!important;
+  background:linear-gradient(to bottom,#b9a278 0,#b9a278 1px,transparent 1px,transparent 2px,#b9a278 2px)!important;
+  opacity:.92!important;
+}
+body.news-top-whitefox :is(.whitefox-story-head,.wf-new-head,.whitefox-index-title) :is(h1,h2,h3){
+  color:#fbf3e4!important;-webkit-text-fill-color:#fbf3e4!important;
+  font:700 clamp(33px,4vw,49px)/1.15 Georgia,"Times New Roman",serif!important;
+  letter-spacing:.035em!important;text-shadow:0 1px 0 rgba(0,0,0,.12)!important;
+}
+body.news-top-whitefox :is(.whitefox-story-head,.wf-new-head,.whitefox-index-title) :is(.wf-new-meta,.whitefox-week,.whitefox-author,p){
+  color:#e9dfcf!important;-webkit-text-fill-color:#e9dfcf!important;
+  line-height:1.6!important
+}
+body.news-top-whitefox :is(.whitefox-story-head,.wf-new-head) :is(.whitefox-kicker,.wf-new-kicker){
+  border:1px solid #ae986e!important;
+  background:rgba(22,40,62,.50)!important;
+  color:#eeddb8!important;-webkit-text-fill-color:#eeddb8!important;
+  letter-spacing:.14em!important;
+}
+/* The text is printed directly onto paper rather than glowing tiles. */
+body.news-top-whitefox :is(.whitefox-story-block,.wf-new-story,.whitefox-mini-card){
+  background:linear-gradient(155deg,#fffdf8,#f8f4eb)!important;
+  border:1px solid #d2c5ad!important;
+  border-top:3px double #a89573!important;
+  border-radius:2px!important;
+  box-shadow:0 2px 7px rgba(39,47,58,.045)!important;
+  padding:28px 27px 25px!important;
+  margin:16px 0 20px!important;
+}
+body.news-top-whitefox :is(.whitefox-story-block,.wf-new-story)::before{
+  background:none!important;width:0!important;
+}
+body.news-top-whitefox :is(.whitefox-story-block,.wf-new-story)::after{
+  content:"❦"!important;color:#ad9570!important;font-size:24px!important;
+  right:17px!important;top:12px!important;opacity:.52!important;
+}
+body.news-top-whitefox :is(.whitefox-story-block,.wf-new-story) :is(h2,h3,h4,.whitefox-section-title h3){
+  color:#263c52!important;-webkit-text-fill-color:#263c52!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+  text-shadow:none!important;
+}
+body.news-top-whitefox :is(.whitefox-story-block,.wf-new-story) :is(p,li,strong,em,blockquote){
+  color:#344455!important;-webkit-text-fill-color:#344455!important;
+  opacity:1!important;visibility:visible!important;
+  text-shadow:none!important;
+}
+body.news-top-whitefox :is(.whitefox-story-block,.wf-new-story) p{
+  font-size:15.5px!important;line-height:1.82!important;
+}
+body.news-top-whitefox .wf-new-story>h3{
+  border-bottom:3px double #bda98a!important;padding-bottom:13px!important;
+}
+body.news-top-whitefox .wf-new-story>h3::before{
+  border:1px solid #b8a482!important;background:#f5eee2!important;
+  color:#685942!important;border-radius:0!important;
+  font-weight:700!important;
+}
+body.news-top-whitefox .whitefox-story-block .whitefox-section-title{
+  border-bottom:3px double #bea989!important;
+}
+body.news-top-whitefox .whitefox-story-block .whitefox-section-title span{
+  background:#f6f0e6!important;border-color:#d3c2a7!important
+}
+body.news-top-whitefox .wf-new-nav{
+  background:#f2ecdf!important;border:1px solid #d1bfa2!important;
+  border-radius:2px!important;padding:12px!important;
+}
+body.news-top-whitefox :is(.wf-new-nav a,.whitefox-week42-jump-v558 a){
+  border:1px solid #cebda1!important;background:#fffaf0!important;
+  border-radius:2px!important;
+  color:#4a5260!important;-webkit-text-fill-color:#4a5260!important;
+}
+body.news-top-whitefox .wf-new-sidepanel{
+  background:linear-gradient(160deg,#f9f3e7,#f1ebdf)!important;
+  border:1px solid #cabca7!important;border-top:3px double #a99572!important;
+  border-radius:2px!important;box-shadow:0 2px 9px rgba(33,43,59,.05)!important;
+}
+body.news-top-whitefox .wf-new-sidepanel h3{
+  color:#253b52!important;-webkit-text-fill-color:#253b52!important;
+  border-bottom:3px double #b9a586!important;
+}
+body.news-top-whitefox .wf-new-sidepanel :is(p,li,strong){
+  color:#445365!important;-webkit-text-fill-color:#445365!important
+}
+body.news-top-whitefox .wf-new-sidepanel a{
+  background:#fffcf5!important;border-color:#d5c6b0!important;border-radius:2px!important;
+  color:#394f66!important;-webkit-text-fill-color:#394f66!important
+}
+body.news-top-whitefox :is(.wf-new-questions,.whitefox-story-block.whitefox-questions-v557){
+  background:linear-gradient(155deg,#f7f7f2,#eef1f0)!important;
+  border-color:#bfcac9!important
+}
+body.news-top-whitefox :is(.wf-new-romance,.whitefox-story-block.whitefox-romance-v557){
+  background:linear-gradient(155deg,#fff9f4,#f6ebeb)!important;
+  border-color:#d8bcba!important;
+}
+body.news-top-whitefox :is(.wf-new-romance,.whitefox-story-block.whitefox-romance-v557) h3{
+  color:#785060!important;-webkit-text-fill-color:#785060!important
+}
+/* Readers' letters: legible parchment, same working form and reactions. */
+body.news-top-whitefox .anon-comments-v557{
+  background:#faf7ef!important;border:1px solid #c9bca7!important;
+  border-radius:2px!important;
+  box-shadow:0 2px 9px rgba(26,42,63,.06)!important
+}
+body.news-top-whitefox .anon-comments-v557 :is(h4,.anon-comment-text-v557,.anon-comment-meta-v557,.anon-comments-hint-v557,.anon-comments-empty-v557){
+  color:#34495e!important;-webkit-text-fill-color:#34495e!important;
+  opacity:1!important
+}
+body.news-top-whitefox .anon-comments-v557 textarea{
+  background:#fffdfa!important;color:#2b4057!important;
+  -webkit-text-fill-color:#2b4057!important;border-color:#c9c3b9!important
+}
+body.news-top-whitefox .anon-comment-v557{
+  background:#fffdfa!important;border-color:#dbd2c3!important;border-radius:2px!important
+}
+/* Archive as small newspaper editions. */
+body.news-top-whitefox .whitefox-index .whitefox-publication-row{
+  background:linear-gradient(130deg,#fffcf5,#f6efe1)!important;
+  border:1px solid #cabb9f!important;border-top:3px double #a68c62!important;
+  border-radius:2px!important;
+  box-shadow:0 2px 9px rgba(33,40,52,.06)!important;
+}
+body.news-top-whitefox .whitefox-index .whitefox-elena-card-title{
+  color:#253b53!important;-webkit-text-fill-color:#253b53!important;
+  font:700 clamp(22px,2.4vw,30px) Georgia,serif!important
+}
+body.news-top-whitefox .whitefox-index .whitefox-elena-card-week{
+  color:#8b6650!important;-webkit-text-fill-color:#8b6650!important
+}
+body.news-top-whitefox .whitefox-index .whitefox-elena-card-hint{
+  color:#4b5e72!important;-webkit-text-fill-color:#4b5e72!important
+}
+/* Strong final contrast guard against old site global !important colors. */
+body.news-top-whitefox .wf-new .wf-new-story p,
+body.news-top-whitefox .wf-new .wf-new-story li,
+body.news-top-whitefox .whitefox-story .whitefox-story-block p,
+body.news-top-whitefox .whitefox-story .whitefox-story-block li{
+  color:#344455!important;-webkit-text-fill-color:#344455!important
+}
+@media(max-width:670px){
+  body.news-top-whitefox :is(.whitefox-story-head,.wf-new-head,.whitefox-index-title){
+    padding:30px 15px 26px!important;margin:7px 4px 24px!important;
+  }
+  body.news-top-whitefox :is(.whitefox-story-head,.wf-new-head,.whitefox-index-title)::before{
+    font-size:15px!important;letter-spacing:2px!important;
+  }
+  body.news-top-whitefox :is(.whitefox-story-block,.wf-new-story){
+    padding:21px 15px!important;margin:14px 0!important
+  }
+  body.news-top-whitefox .wf-new-story>h3{font-size:20px!important}
+  body.news-top-whitefox .wf-new-story>h3::before{
+    width:29px!important;height:29px!important;margin-right:8px!important
+  }
+}

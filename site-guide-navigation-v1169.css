@@ -1,0 +1,73 @@
+/* Белая мгла v1169: consistent guide navigation and readable titles.
+   Scoped to ordinary guides only; artwork and feature layouts unchanged. */
+body.bm-guide-navigation-v1169 .route-page.active>.page-heading-v424{
+ position:relative;min-width:0;
+}
+body.bm-guide-navigation-v1169 .route-page.active>.page-heading-v424 h1{
+ line-height:1.2!important;overflow-wrap:break-word;text-wrap:balance;
+}
+body.bm-guide-navigation-v1169 .route-page.active>.page-heading-v424 p{
+ line-height:1.55!important;max-width:78ch;
+}
+body.bm-guide-navigation-v1169 .route-page.active>.breadcrumbs-v409{
+ display:flex;align-items:center;flex-wrap:wrap;gap:5px 8px;
+ line-height:1.5!important;min-width:0;
+}
+body.bm-guide-navigation-v1169 .route-page.active>.breadcrumbs-v409 a{
+ text-underline-offset:3px;
+}
+body.bm-guide-navigation-v1169 .route-page.active .related-guides-v625{
+ margin-block:clamp(24px,3vw,42px) clamp(15px,2vw,27px)!important;
+ min-width:0;
+}
+body.bm-guide-navigation-v1169 .route-page.active .related-guides-head-v625 h2{
+ text-wrap:balance;line-height:1.25!important;overflow-wrap:break-word;
+}
+body.bm-guide-navigation-v1169 .route-page.active .related-guides-grid-v625{
+ display:grid!important;gap:clamp(12px,1.4vw,19px)!important;
+ grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ align-items:stretch;
+}
+body.bm-guide-navigation-v1169 .route-page.active .related-guide-card-v625{
+ display:flex!important;flex-direction:column!important;
+ justify-content:space-between!important;gap:12px!important;
+ min-width:0!important;min-height:110px!important;
+ box-sizing:border-box!important;padding:clamp(15px,1.5vw,22px)!important;
+ border:1px solid rgba(139,213,251,.34)!important;
+ border-radius:17px!important;
+ box-shadow:inset 0 1px 0 rgba(235,248,255,.08),0 9px 24px rgba(1,9,27,.15);
+ transition:border-color .17s ease,box-shadow .17s ease,transform .17s ease;
+}
+body.bm-guide-navigation-v1169 .route-page.active .related-guide-card-v625 span{
+ overflow-wrap:break-word;line-height:1.32!important;text-wrap:balance;
+}
+body.bm-guide-navigation-v1169 .route-page.active .related-guide-card-v625 b{
+ margin-top:auto;line-height:1.3!important;
+}
+body.bm-guide-navigation-v1169 .route-page.active .related-guide-card-v625:hover{
+ border-color:rgba(175,233,255,.9)!important;
+ box-shadow:inset 0 1px 0 rgba(235,248,255,.12),0 12px 30px rgba(1,9,27,.22);
+ transform:translateY(-2px);
+}
+body.bm-guide-navigation-v1169 .route-page.active .related-guide-card-v625:focus-visible{
+ outline:3px solid #abeaff!important;outline-offset:3px!important;
+}
+@media(max-width:950px){
+ body.bm-guide-navigation-v1169 .route-page.active .related-guides-grid-v625{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ }
+}
+@media(max-width:600px){
+ html:not(.force-desktop-root) body.bm-guide-navigation-v1169 .route-page.active .related-guides-grid-v625{
+  grid-template-columns:minmax(0,1fr)!important;
+ }
+ html:not(.force-desktop-root) body.bm-guide-navigation-v1169 .route-page.active .related-guide-card-v625{
+  min-height:80px!important;padding:13px 15px!important;border-radius:14px!important;gap:7px!important;
+ }
+ html:not(.force-desktop-root) body.bm-guide-navigation-v1169 .route-page.active .related-guide-card-v625:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+ body.bm-guide-navigation-v1169 .route-page.active .related-guide-card-v625{
+ transition:none!important;transform:none!important;
+ }
+}
