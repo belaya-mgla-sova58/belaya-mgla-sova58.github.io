@@ -892,82 +892,70 @@ body.luxury-chronicle::after{
 .bm-guide-nav a{display:block;padding:10px 12px;text-decoration:none;color:#dbe9f8;border-radius:10px;border:1px solid transparent;font-size:14px;transition:background .2s,border-color .2s}
 .bm-guide-nav a:hover,.bm-guide-nav a[aria-current]{background:rgba(242,211,138,.1);border-color:rgba(242,211,138,.16);color:#fff}
 
-/* SOVA58 neon lines: exact extended left/top corner silhouette */
-.section-frame{--neon-line:#12aaff;--neon-halo:rgba(18,170,255,.64)}
+/* SOVA58 corner lines matched to approved screenshot */
+.section-frame{--neon-line:#00baff;--neon-halo:rgba(0,186,255,.62)}
 .section-frame::before,.section-frame::after{
-  content:"";position:absolute;pointer-events:none;z-index:2;opacity:1;
-  width:155px;height:265px;border:0;border-radius:0;
-  filter:drop-shadow(0 0 7px var(--neon-halo)) drop-shadow(0 0 16px var(--neon-halo)) drop-shadow(0 0 24px var(--neon-halo));
+ content:"";position:absolute;z-index:2;pointer-events:none;opacity:1;
+ box-sizing:border-box; width:230px;height:min(205px,90%);
+ filter:drop-shadow(0 0 3px var(--neon-halo)) drop-shadow(0 0 8px var(--neon-halo));
 }
 .section-frame::before{
-  inset:0 auto auto 0;
-  border-top:4px solid var(--neon-line);border-left:4px solid var(--neon-line);
-  border-top-left-radius:24px;
-  -webkit-mask-image:linear-gradient(to right,black 0 67%,transparent 100%),linear-gradient(to bottom,black 0 70%,transparent 100%);
-  mask-image:linear-gradient(to right,black 0 67%,transparent 100%),linear-gradient(to bottom,black 0 70%,transparent 100%);
-  -webkit-mask-composite:source-in;mask-composite:intersect;
-}
-.section-frame::after{
-  inset:auto 0 0 auto;
-  border-right:4px solid var(--neon-line);border-bottom:4px solid var(--neon-line);
-  border-bottom-right-radius:24px;
-  -webkit-mask-image:linear-gradient(to left,black 0 67%,transparent 100%),linear-gradient(to top,black 0 70%,transparent 100%);
-  mask-image:linear-gradient(to left,black 0 67%,transparent 100%),linear-gradient(to top,black 0 70%,transparent 100%);
-  -webkit-mask-composite:source-in;mask-composite:intersect;
-}
-.section-frame .section-icon{display:none!important}
-.section-frame:is(#s1,#s8){--neon-line:#16b8ff;--neon-halo:rgba(22,184,255,.85)}
-.section-frame:is(#s2,#s9){--neon-line:#a77bff;--neon-halo:rgba(167,123,255,.85)}
-.section-frame:is(#s3,#s10){--neon-line:#fc70d9;--neon-halo:rgba(252,112,217,.85)}
-.section-frame:is(#s4,#s11){--neon-line:#20e3bd;--neon-halo:rgba(32,227,189,.85)}
-.section-frame:is(#s5,#s12){--neon-line:#ffc65c;--neon-halo:rgba(255,198,92,.85)}
-.section-frame:is(#s6,#s13){--neon-line:#ff8585;--neon-halo:rgba(255,133,133,.85)}
-.section-frame:is(#s7,#s14){--neon-line:#7daaff;--neon-halo:rgba(125,170,255,.85)}
-@media(max-width:680px){.section-frame::before,.section-frame::after{width:110px;height:185px;border-width:3px}}
-
-/* Matching lower-left neon angle; lower-right is the existing ::after */
-.section-frame>.neon-bottom-left{
- position:absolute;left:0;bottom:0;z-index:2;pointer-events:none;
- display:block;width:155px;height:min(265px,85%);box-sizing:border-box;
- border-left:4px solid var(--neon-line);border-bottom:4px solid var(--neon-line);
- border-bottom-left-radius:24px;
- filter:drop-shadow(0 0 7px var(--neon-halo)) drop-shadow(0 0 16px var(--neon-halo)) drop-shadow(0 0 24px var(--neon-halo));
- -webkit-mask-image:linear-gradient(to right,black 0 67%,transparent 100%),linear-gradient(to top,black 0 70%,transparent 100%);
- mask-image:linear-gradient(to right,black 0 67%,transparent 100%),linear-gradient(to top,black 0 70%,transparent 100%);
+ top:0;left:0;
+ border-top:4px solid var(--neon-line);
+ border-left:4px solid var(--neon-line);
+ border-top-left-radius:23px;
+ -webkit-mask-image:linear-gradient(to right,#000 0 74%,transparent 100%),linear-gradient(to bottom,#000 0 77%,transparent 100%);
+ mask-image:linear-gradient(to right,#000 0 74%,transparent 100%),linear-gradient(to bottom,#000 0 77%,transparent 100%);
  -webkit-mask-composite:source-in;mask-composite:intersect;
 }
-@media(max-width:680px){.section-frame>.neon-bottom-left{width:110px;height:min(185px,85%);border-width:3px}}
+.section-frame::after{
+ bottom:0;right:0;
+ border-right:4px solid #008fff;
+ border-bottom:4px solid #008fff;
+ border-bottom-right-radius:23px;
+ -webkit-mask-image:linear-gradient(to left,#000 0 74%,transparent 100%),linear-gradient(to top,#000 0 77%,transparent 100%);
+ mask-image:linear-gradient(to left,#000 0 74%,transparent 100%),linear-gradient(to top,#000 0 77%,transparent 100%);
+ -webkit-mask-composite:source-in;mask-composite:intersect;
+}
+.section-frame>.neon-bottom-left{display:none!important}
+.section-frame .section-icon{display:none!important}
+.section-frame:is(#s1,#s8){--neon-line:#0cbdff;--neon-halo:rgba(12,189,255,.68)}
+.section-frame:is(#s2,#s9){--neon-line:#9b71ff;--neon-halo:rgba(155,113,255,.65)}
+.section-frame:is(#s3,#s10){--neon-line:#f96cdb;--neon-halo:rgba(249,108,219,.58)}
+.section-frame:is(#s4,#s11){--neon-line:#26dbb6;--neon-halo:rgba(38,219,182,.6)}
+.section-frame:is(#s5,#s12){--neon-line:#f9c56c;--neon-halo:rgba(249,197,108,.6)}
+.section-frame:is(#s6,#s13){--neon-line:#fa838d;--neon-halo:rgba(250,131,141,.6)}
+.section-frame:is(#s7,#s14){--neon-line:#8ba7ff;--neon-halo:rgba(139,167,255,.62)}
+@media(max-width:680px){
+ .section-frame::before,.section-frame::after{width:132px;height:min(155px,85%)}
+ .section-frame::before{border-top-width:3px;border-left-width:3px}
+ .section-frame::after{border-bottom-width:3px;border-right-width:3px}
+}
 </style>
 <meta content="Зимняя осада в Белой Мгле: правила, звёзды, сердца, боевой дух, хранители и советы по боям." name="description"/><link href="https://belaya-mgla-sova58.github.io/winter-siege.html" rel="canonical"/><style id="gina-exact-winter-template-v1196">:root{--toc-space:0px!important}.page{grid-template-columns:var(--menu-space) minmax(0,1000px)!important;justify-content:center!important}.main{min-width:0}.section-heading{gap:14px}.section-heading .summary-text{min-width:0}.mobile-guide,.aside-guide{display:none!important}.section-frame{display:block!important}@media(max-width:920px){.page{display:block!important}.left-space{display:none!important}}@media(max-width:620px){.banner-event-name{font-size:clamp(36px,9vw,56px)!important}}</style><style>
-/* Gina banner illumination v20261119 */
+/* Refined Gina banner: contrast and constellation, not excessive glow */
 .luxury-chronicle .event-banner.constellation-banner{
  background:
- radial-gradient(ellipse at 77% 43%,rgba(54,169,255,.35),transparent 39%),
- radial-gradient(ellipse at 18% 75%,rgba(130,72,228,.29),transparent 46%),
- radial-gradient(ellipse at 47% 5%,rgba(44,196,236,.17),transparent 48%),
- linear-gradient(125deg,#14284d 0%,#101a3b 49%,#102d50 100%)!important;
- border:1px solid rgba(135,222,255,.68)!important;
- box-shadow:0 0 24px rgba(24,159,255,.28),inset 0 0 36px rgba(64,170,250,.17),0 24px 55px rgba(0,0,0,.42)!important;
+ radial-gradient(ellipse at 79% 45%,rgba(30,119,181,.24) 0%,transparent 43%),
+ radial-gradient(ellipse at 19% 85%,rgba(78,53,136,.18) 0%,transparent 51%),
+ linear-gradient(125deg,#0b162b 0%,#0b1b33 54%,#10243c 100%)!important;
+ border:1px solid rgba(119,191,228,.42)!important;
+ box-shadow:inset 0 1px 0 rgba(233,248,255,.12),inset 0 0 30px rgba(27,103,166,.12),0 22px 46px rgba(0,0,0,.38)!important;
 }
 .luxury-chronicle .constellation-banner .banner-event-name{
- color:#fff9ed!important;
- text-shadow:0 0 8px rgba(255,255,255,.62),0 0 26px rgba(108,205,255,.6),0 0 52px rgba(107,129,255,.38)!important;
+ color:#f8fbff!important;letter-spacing:-.035em;
+ text-shadow:0 2px 2px rgba(0,0,0,.45),0 0 22px rgba(116,200,255,.3)!important;
 }
 .luxury-chronicle .constellation-banner .banner-title-rule{
- width:170px;height:3px;background:linear-gradient(90deg,#fff2b6,#5ecbff,transparent);
- box-shadow:0 0 14px rgba(106,206,255,.7);
+ width:166px;height:2px;background:linear-gradient(90deg,#e7d29c 0%,#8bdfff 58%,transparent 100%);
+ box-shadow:0 0 8px rgba(106,206,255,.24);
 }
 .luxury-chronicle .constellation-banner .orion-card svg{
- filter:drop-shadow(0 0 8px rgba(120,213,255,.62));
+ filter:drop-shadow(0 0 4px rgba(119,200,247,.42));
 }
-.luxury-chronicle .constellation-banner .orion-card svg g[stroke]{
- stroke:#c6f2ff;stroke-opacity:.92;
-}
-.luxury-chronicle .constellation-banner .orion-card svg g[fill="url(#starGlow)"]{opacity:.96}
-.luxury-chronicle .constellation-banner .orion-label{
- color:#fff3d0;text-shadow:0 0 12px rgba(255,212,125,.75);
-}
-@media(max-width:620px){.luxury-chronicle .event-banner.constellation-banner{box-shadow:0 0 16px rgba(24,159,255,.25),inset 0 0 22px rgba(64,170,250,.14)!important}}
+.luxury-chronicle .constellation-banner .orion-card svg g[stroke]{stroke:#b2dff5;stroke-opacity:.85}
+.luxury-chronicle .constellation-banner .orion-card svg g[fill="url(#starGlow)"]{opacity:.85}
+.luxury-chronicle .constellation-banner .orion-label{color:#f6e2b3;text-shadow:0 0 8px rgba(242,211,138,.3)}
 </style></head>
 <body class="luxury-chronicle">
 <div aria-hidden="true" class="top-progress"><span id="readProgress"></span></div>
