@@ -33,6 +33,19 @@ body.is-ginas-revenge-route .gina-cover{display:block;width:100%;height:auto;asp
 .gina-short{padding:13px 15px;border-radius:15px;background:rgba(18,63,98,.66);border:1px solid rgba(113,210,255,.28)}.gina-short p{margin:5px 0;line-height:1.42}
 .gina-important{border-color:rgba(255,190,80,.3);background:linear-gradient(145deg,rgba(75,48,16,.28),rgba(6,30,53,.9))}
 @media(max-width:720px){.gina-card{padding:12px 13px;border-radius:14px}.gina-card h2{font-size:18px}.gina-card p,.gina-card li,.gina-short p{font-size:14px;line-height:1.5}.gina-short{padding:11px 12px}.gina-cover{border-radius:14px}}
+
+/* Long multicolor neon corner strokes, matching the reference image */
+.gina-guide .gina-card{position:relative;overflow:hidden;isolation:isolate;--gina-neon:#32bdff;--gina-glow:rgba(50,189,255,.6);padding:24px 22px}
+.gina-guide .gina-card::before,.gina-guide .gina-card::after{content:"";position:absolute;z-index:2;pointer-events:none;width:170px;height:160px;opacity:1;filter:drop-shadow(0 0 5px var(--gina-glow)) drop-shadow(0 0 11px var(--gina-glow))}
+.gina-guide .gina-card::before{top:0;left:0;border-top:3px solid var(--gina-neon);border-left:3px solid var(--gina-neon);border-top-left-radius:16px;-webkit-mask-image:linear-gradient(to right,#000 0 82%,transparent 100%),linear-gradient(to bottom,#000 0 82%,transparent 100%);mask-image:linear-gradient(to right,#000 0 82%,transparent 100%),linear-gradient(to bottom,#000 0 82%,transparent 100%);-webkit-mask-composite:source-in;mask-composite:intersect}
+.gina-guide .gina-card::after{right:0;bottom:0;border-right:3px solid var(--gina-neon);border-bottom:3px solid var(--gina-neon);border-bottom-right-radius:16px;-webkit-mask-image:linear-gradient(to left,#000 0 82%,transparent 100%),linear-gradient(to top,#000 0 82%,transparent 100%);mask-image:linear-gradient(to left,#000 0 82%,transparent 100%),linear-gradient(to top,#000 0 82%,transparent 100%);-webkit-mask-composite:source-in;mask-composite:intersect}
+.gina-guide .gina-card:nth-child(6n+1){--gina-neon:#39bfff;--gina-glow:rgba(57,191,255,.62)}
+.gina-guide .gina-card:nth-child(6n+2){--gina-neon:#9b83ff;--gina-glow:rgba(155,131,255,.55)}
+.gina-guide .gina-card:nth-child(6n+3){--gina-neon:#ff75d5;--gina-glow:rgba(255,117,213,.55)}
+.gina-guide .gina-card:nth-child(6n+4){--gina-neon:#42e2c0;--gina-glow:rgba(66,226,192,.55)}
+.gina-guide .gina-card:nth-child(6n+5){--gina-neon:#ffce70;--gina-glow:rgba(255,206,112,.54)}
+.gina-guide .gina-card:nth-child(6n){--gina-neon:#ff8b91;--gina-glow:rgba(255,139,145,.54)}
+@media(max-width:720px){.gina-guide .gina-card{padding:20px 17px}.gina-guide .gina-card::before,.gina-guide .gina-card::after{width:110px;height:105px;border-width:2px}}
 </style>
 </head>
 <body class="is-ginas-revenge-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="ginas-revenge">
@@ -48,16 +61,16 @@ body.is-ginas-revenge-route .gina-cover{display:block;width:100%;height:auto;asp
 <section class="intro" id="ginas-revenge"><span class="eyebrow">PvE-событие</span><div class="owl-page-title"><h1 class="owl-heading"><span class="owl-title-text">Месть Джины</span></h1></div><p><b>Месть Джины</b> — событие для получения фрагментов Джины, ресурсов и ускорений.</p><p><b>Схема простая:</b> звери → рога Криптида → рейды → фрагменты Джины.</p></section>
 <section class="section gina-guide">
 <div class="gina-short"><p>🐺 Охотимся на зверей и получаем рога.</p><p>📯 Рогами призываем Криптидов.</p><p>👹 Криптидов бьём рейдами.</p><p>🧩 Создатель рейда получает самые выгодные награды.</p><p>🤝 Автоприсоединение помогает добирать ресурсы и фрагменты.</p></div>
-<div class="gina-card"><h2>🐺 Охота на зверей</h2><p>Со зверей во время события могут выпадать <b>рога Криптида</b> и охотничьи мешочки.</p><p>Если в маяке есть задания на зверей, сначала лучше закрывать их. Так одна трата выносливости приносит сразу несколько наград.</p></div>
-<div class="gina-card"><h2>📯 Рога Криптида</h2><p>Рог нужен для призыва Криптида.</p><p><b>Рога можно копить.</b> Не обязательно тратить всё сразу, если сейчас важнее сохранить выносливость.</p></div>
-<div class="gina-card"><h2>👹 Криптид</h2><p>Криптида атакуют <b>рейдом</b>.</p><p>Создание своего рейда требует выносливость. Криптиды обычно не требуют огромного марша, поэтому можно оставить больше мест союзникам.</p></div>
-<div class="gina-card gina-important"><h2>🎁 Первые 10 своих рейдов</h2><p>В начале события выгодно закрыть <b>10 собственных рейдов</b>, чтобы забрать дополнительные награды и фрагменты Джины.</p><p>После этого уже можно решать, тратить оставшиеся рога сейчас или сохранить на будущее, если событие продолжит проходить в вашем государстве. В более развитых государствах этот режим может заменяться другим.</p></div>
-<div class="gina-card"><h2>🤝 Чужие рейды</h2><p>Включаем <b>автоприсоединение</b>. Это позволяет получать дополнительные ресурсы и шанс на фрагменты практически без ручной охоты.</p><p>Помним, что награды за участие имеют дневные ограничения.</p></div>
-<div class="gina-card"><h2>⚡ Выносливость</h2><p>Удобный порядок:</p><p><b>маяк → звери → рога → свои рейды.</b></p><p>Банки выносливости лучше тратить тогда, когда действительно хотите ускорить прокачку Джины или сделать запас рогов.</p></div>
-<div class="gina-card"><h2>🦸 Зачем нужна Джина</h2><p>Джина полезна прежде всего в дикой природе. Она помогает экономить выносливость и ускоряет походы на PvE-цели.</p><p>Для серьёзного PvP она обычно не является первым выбором.</p></div>
-<div class="gina-card"><h2>💬 Опыт игроков</h2><ul><li>Сначала закрываем 10 своих рейдов.</li><li>Не тратим все рога автоматически.</li><li>Используем задания маяка вместе с охотой.</li><li>Держим включённым автоприсоединение.</li><li>Не забиваем слабого Криптида огромным маршем.</li><li>Джину ценим прежде всего за экономию выносливости.</li></ul></div>
-<div class="gina-card"><h2>🚫 Частые ошибки</h2><ul><li>забыть про первые 10 собственных рейдов;</li><li>потратить всю выносливость только на Криптидов;</li><li>игнорировать задания маяка;</li><li>не использовать автоприсоединение;</li><li>считать Джину основным PvP-героем.</li></ul></div>
-<div class="gina-card gina-important"><h2>✅ Быстрая схема</h2><p><b>🔍 маяк → 🐺 звери → 📯 рога → 👹 Криптиды → 🧩 фрагменты Джины → 🤝 автоприсоединение</b></p><p><b>Главное:</b> сначала берём гарантированные награды, затем копим рога и не сливаем выносливость без необходимости.</p></div>
+<div class="gina-card"><h2>Охота на зверей</h2><p>Со зверей во время события могут выпадать <b>рога Криптида</b> и охотничьи мешочки.</p><p>Если в маяке есть задания на зверей, сначала лучше закрывать их. Так одна трата выносливости приносит сразу несколько наград.</p></div>
+<div class="gina-card"><h2>Рога Криптида</h2><p>Рог нужен для призыва Криптида.</p><p><b>Рога можно копить.</b> Не обязательно тратить всё сразу, если сейчас важнее сохранить выносливость.</p></div>
+<div class="gina-card"><h2>Криптид</h2><p>Криптида атакуют <b>рейдом</b>.</p><p>Создание своего рейда требует выносливость. Криптиды обычно не требуют огромного марша, поэтому можно оставить больше мест союзникам.</p></div>
+<div class="gina-card gina-important"><h2>Первые 10 своих рейдов</h2><p>В начале события выгодно закрыть <b>10 собственных рейдов</b>, чтобы забрать дополнительные награды и фрагменты Джины.</p><p>После этого уже можно решать, тратить оставшиеся рога сейчас или сохранить на будущее, если событие продолжит проходить в вашем государстве. В более развитых государствах этот режим может заменяться другим.</p></div>
+<div class="gina-card"><h2>Чужие рейды</h2><p>Включаем <b>автоприсоединение</b>. Это позволяет получать дополнительные ресурсы и шанс на фрагменты практически без ручной охоты.</p><p>Помним, что награды за участие имеют дневные ограничения.</p></div>
+<div class="gina-card"><h2>Выносливость</h2><p>Удобный порядок:</p><p><b>маяк → звери → рога → свои рейды.</b></p><p>Банки выносливости лучше тратить тогда, когда действительно хотите ускорить прокачку Джины или сделать запас рогов.</p></div>
+<div class="gina-card"><h2>Зачем нужна Джина</h2><p>Джина полезна прежде всего в дикой природе. Она помогает экономить выносливость и ускоряет походы на PvE-цели.</p><p>Для серьёзного PvP она обычно не является первым выбором.</p></div>
+<div class="gina-card"><h2>Опыт игроков</h2><ul><li>Сначала закрываем 10 своих рейдов.</li><li>Не тратим все рога автоматически.</li><li>Используем задания маяка вместе с охотой.</li><li>Держим включённым автоприсоединение.</li><li>Не забиваем слабого Криптида огромным маршем.</li><li>Джину ценим прежде всего за экономию выносливости.</li></ul></div>
+<div class="gina-card"><h2>Частые ошибки</h2><ul><li>забыть про первые 10 собственных рейдов;</li><li>потратить всю выносливость только на Криптидов;</li><li>игнорировать задания маяка;</li><li>не использовать автоприсоединение;</li><li>считать Джину основным PvP-героем.</li></ul></div>
+<div class="gina-card gina-important"><h2>Быстрая схема</h2><p><b>🔍 маяк → 🐺 звери → 📯 рога → 👹 Криптиды → 🧩 фрагменты Джины → 🤝 автоприсоединение</b></p><p><b>Главное:</b> сначала берём гарантированные награды, затем копим рога и не сливаем выносливость без необходимости.</p></div>
 </section>
 <div class="footer">Белая Мгла • Автор: SOVA58</div>
 </div>
