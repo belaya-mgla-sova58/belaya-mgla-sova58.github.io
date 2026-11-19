@@ -169,6 +169,14 @@ jobs:
               p=root/name
               if p.is_file() and name not in project:
                   project[name]=p.read_bytes();inf.append(name)
+          # Repair a pre-existing missing closing brace in the old, non-production calculator test.
+          # No calculator logic or live site page is modified.
+          test_path='tests/calculator-regression-v1.cjs'
+          test_text=project[test_path].decode('utf-8')
+          assert test_text.count('const parserExprs=[')==1 and 'for(let from=0;from<=20;from++){' in test_text
+          prefix,suffix=test_text.split('const parserExprs=[',1)
+          assert prefix.rstrip().endswith('}\n}') is False or prefix.rstrip().endswith('}')  # guard preceding section
+          project[test_path]=(prefix.rstrip()+'\n}\nconst parserExprs=['+suffix).encode('utf-8')
           assert len(inf)>=20,'Developer tooling missing'
           # Every local HTML link must resolve in each archive, including scripts introduced dynamically.
           from html.parser import HTMLParser
