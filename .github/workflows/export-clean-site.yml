@@ -1,0 +1,115 @@
+name: Export clean website ZIP
+on:
+  push:
+    branches: [clean-export-2026-11-19]
+    paths:
+      - '.github/workflows/export-clean-site.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assemble clean static website package
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import os, re, zipfile, hashlib, json, collections
+          root=Path('.')
+          excluded_dirs={'.git','.github','tests','visual-tests','scripts','node_modules',
+              'test-results','playwright-report','coverage','_site','.venv','venv','__pycache__'}
+          allowed={'.html','.css','.js','.json','.webmanifest','.xml','.txt','.png','.jpg','.jpeg',
+              '.webp','.avif','.svg','.ico','.mp3','.mp4','.webm','.gif','.woff','.woff2','.ttf','.otf',
+              '.pdf','.wasm'}
+          files=sorted(p for p in root.rglob('*') if p.is_file()
+              and not any(part in excluded_dirs for part in p.parts)
+              and (p.suffix.lower() in allowed or p.name=='.nojekyll'))
+          pages=[p for p in files if p.suffix.lower()=='.html']
+          assert len(pages)>=190, f'Unexpectedly few website pages: {len(pages)}'
+          assert Path('index.html') in files and Path('bear.html') in files
+          text_ext={'.html','.css','.js','.json','.webmanifest','.xml','.txt'}
+          texts={p:p.read_text('utf-8',errors='replace') for p in files if p.suffix.lower() in text_ext}
+          # Exclude ONLY CSS/JS not discoverable from the existing page and script references.
+          # Other assets are retained if ambiguous: do not silently break dynamic game images.
+          css_js={p for p in files if p.suffix.lower() in {'.css','.js'}}
+          names=collections.defaultdict(list)
+          for p in css_js:names[p.name].append(p)
+          keep_text=set(pages)|set(p for p in texts if p.suffix.lower() not in {'.css','.js'})
+          queue=list(keep_text)
+          import_pat=re.compile(r'(?<![A-Za-z0-9_.-])([A-Za-z0-9_./-]+\.(?:css|js))(?:\?[^"''\s<>)]*)?',re.I)
+          while queue:
+              current=queue.pop()
+              for token in import_pat.findall(texts.get(current,'')):
+                  basename=token.split('/')[-1]
+                  for candidate in names.get(basename,[]):
+                      if candidate not in keep_text:
+                          keep_text.add(candidate)
+                          queue.append(candidate)
+          unused_code=sorted(css_js-keep_text)
+          included=[p for p in files if p not in unused_code]
+          # Ensure no original legacy Bear illustration survives the new clean export.
+          forbidden={'assets/img_22767d469133f308.webp','assets/img_f4053b4bd49b720d.webp'}
+          assert not forbidden.intersection({str(p) for p in included})
+          # Verify that every static local HTML reference remains in the package.
+          from html.parser import HTMLParser
+          from urllib.parse import urlsplit,unquote
+          class URLs(HTMLParser):
+              def __init__(self):
+                  super().__init__(); self.links=[]
+              def handle_starttag(self, tag, attrs):
+                  d=dict(attrs)
+                  for k in ('href','src','poster'):
+                      if d.get(k): self.links.append(d[k])
+          included_set={p.as_posix() for p in included}
+          missing=[]
+          for p in pages:
+              parser=URLs();parser.feed(texts[p])
+              for href in parser.links:
+                  if href.startswith(('#','//','data:','mailto:','tel:','javascript:','blob:')):continue
+                  u=urlsplit(href)
+                  if u.scheme or u.netloc:continue
+                  target=unquote(u.path)
+                  if not target or '{' in target or '}' in target: continue
+                  target_path=(Path(target.lstrip('/')) if target.startswith('/') else p.parent/target)
+                  if target_path.is_dir():target_path/='index.html'
+                  if target_path.as_posix() not in included_set:
+                      missing.append((str(p),href))
+          if missing:
+              raise RuntimeError(f'Archive would have {len(missing)} broken HTML references: {missing[:20]}')
+          archive=Path('belaya-mgla-clean-site-2026-11-19.zip')
+          with zipfile.ZipFile(archive,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=6,allowZip64=True) as z:
+              for p in included:z.write(p,p.as_posix())
+          with zipfile.ZipFile(archive) as z:
+              bad=z.testzip()
+              assert bad is None, f'Invalid ZIP entry: {bad}'
+              assert len(z.namelist())==len(included)
+              assert 'index.html' in z.namelist()
+              assert 'bear.html' in z.namelist()
+              assert 'service-worker.js' in z.namelist()
+          digest=hashlib.sha256(archive.read_bytes()).hexdigest()
+          report={
+            'source_commit':os.environ.get('GITHUB_SHA'),
+            'pages':len(pages),'files_in_archive':len(included),
+            'omitted_unreferenced_css_js':len(unused_code),
+            'omitted_css_js_names':[p.as_posix() for p in unused_code],
+            'missing_html_refs':len(missing),
+            'zip_bytes':archive.stat().st_size,
+            'sha256':digest,
+            'note':'Uncertain images retained to avoid broken game icons; deleted legacy Bear backgrounds are absent.'
+          }
+          Path('PACKAGE-AUDIT.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
+          print(json.dumps(report,ensure_ascii=False,indent=2))
+          PY
+      - name: Upload full website ZIP and audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: belaya-mgla-clean-site-2026-11-19
+          path: |
+            belaya-mgla-clean-site-2026-11-19.zip
+            PACKAGE-AUDIT.json
+          if-no-files-found: error
+          retention-days: 90
