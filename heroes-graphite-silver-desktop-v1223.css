@@ -197,3 +197,100 @@
 @media (prefers-reduced-motion:reduce){
  body.is-heroes-route .hero-category-link-v708{transition:none!important}
 }
+
+/* v1224: strictly neutral black, charcoal and silver on desktop.
+   Suppress blue inherited from shared site styles only on Heroes. */
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine){
+ body.is-heroes-route{
+  --bg:#08090b!important;--ink:#edf0f3!important;--muted:#aeb2ba!important;
+  --card:#15171b!important;--blue:#989da5!important;--blue2:#555960!important;
+  --ice:#d5d7db!important;--glow:#cfd2d7!important;--bm-m-line:rgba(195,198,203,.34)!important;
+  background:radial-gradient(ellipse at 72% 3%,rgba(185,188,193,.10),transparent 50%),linear-gradient(150deg,#060708,#131518 60%,#08090b)!important;
+ }
+ body.is-heroes-route .site-cosmic-background-v442{
+  opacity:.2!important;filter:grayscale(1)!important;
+ }
+ body.is-heroes-route .nav-wrap{
+  background:linear-gradient(180deg,#191a1d,#090a0c)!important;
+  border-color:#494b51!important;
+ }
+ body.is-heroes-route .nav-wrap .route-link,
+ body.is-heroes-route .nav-wrap .route-link.active,
+ body.is-heroes-route .nav-wrap .route-link:hover{
+  text-shadow:none!important;
+ }
+ body.is-heroes-route .nav-wrap :is(img.sidebar-color-icon,.sidebar-exact-logo),
+ body.is-heroes-route :is(.related-guides-v625,.hero-category-v708) img{
+  filter:grayscale(1) saturate(0)!important;
+ }
+ body.is-heroes-route .site-search-v426,
+ body.is-heroes-route .site-search-box-v426,
+ body.is-heroes-route .site-search-results-v426{
+  background:#121417!important;border-color:rgba(197,199,204,.45)!important;
+  color:#eceef1!important;box-shadow:none!important;
+ }
+ body.is-heroes-route .site-search-v426 :is(input,button,a,span){
+  color:#eceef1!important;accent-color:#bbbfc6!important;
+ }
+ body.is-heroes-route .site-search-v426 :is(button:hover,a:hover){
+  background:#27292d!important;
+ }
+ body.is-heroes-route .page-heading-v424.frost-header-v431{
+  background:linear-gradient(118deg,#090a0c,#292c31 58%,#101113)!important;
+  border-color:#b2b5bb!important;
+ }
+ body.is-heroes-route .page-heading-v424.frost-header-v431 :is(h1,p){
+  background-image:none!important;text-shadow:none!important;
+ }
+ body.is-heroes-route .hero-category-link-v708{
+  background:linear-gradient(125deg,#25282c,#101114 66%,#1d1f23)!important;
+  border-color:#aeb2ba!important;
+ }
+ body.is-heroes-route .hero-category-copy-v708 :is(small,strong,span){
+  background-image:none!important;-webkit-text-fill-color:currentColor!important;
+ }
+ body.is-heroes-route .hero-category-arrow-v708{
+  background:linear-gradient(145deg,#565a61,#25272b)!important;
+  border-color:#b5b9bf!important;
+ }
+ body.is-heroes-route .guide-page-v69{
+  background:linear-gradient(160deg,#15171a,#0b0c0f)!important;border-color:#575b61!important;
+ }
+ body.is-heroes-route :is(.guide-topics .topic-pill,.guide-fold-all-v414){
+  background:linear-gradient(140deg,#35383e,#202226)!important;
+  border-color:#74777e!important;color:#ebedf0!important;
+ }
+ body.is-heroes-route .page-toc-v409{
+  background:#1b1d21!important;border-color:#696d74!important;
+ }
+ body.is-heroes-route .page-toc-v409 :is(summary,a){color:#e4e6ea!important}
+ body.is-heroes-route .guide-section.guide-fold-v414{
+  background:linear-gradient(125deg,#292c30,#111216)!important;
+  border-color:#666970!important;
+ }
+ body.is-heroes-route .guide-section.guide-fold-v414[open]{
+  border-color:#b4b8be!important;
+ }
+ body.is-heroes-route .guide-fold-summary-v414:hover{
+  background:rgba(230,232,235,.07)!important;
+ }
+ body.is-heroes-route .guide-fold-body-v414{
+  background:#101114!important;border-color:#4a4d53!important;
+ }
+ body.is-heroes-route .guide-callout.tip{
+  background:linear-gradient(115deg,#32353a,#1b1d21)!important;
+  border-color:#787c83!important;border-left-color:#d0d3d8!important;
+ }
+ body.is-heroes-route .copy-block-v409{
+  background:#363940!important;border-color:#8a8d94!important;color:#f0f1f3!important;
+ }
+ body.is-heroes-route .site-photo-card{
+  background:#191b1e!important;border-color:#797d84!important;
+ }
+ body.is-heroes-route .related-guide-card-v625{
+  background:linear-gradient(140deg,#292c31,#111215)!important;border-color:#92969d!important;
+ }
+ body.is-heroes-route main#appMain :is(a,button,summary,input):focus-visible{
+  outline-color:#e6e7e9!important;
+ }
+}
