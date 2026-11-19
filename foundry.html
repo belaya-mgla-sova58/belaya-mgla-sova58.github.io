@@ -1162,7 +1162,7 @@ body.foundry-chronicle .section-frame.gold{border-color:rgba(255,173,188,.66)}
 body.foundry-chronicle .section-content .foundry-quick,body.foundry-chronicle .section-content .foundry-note{margin:15px 0;padding:16px;border:1px solid rgba(255,154,173,.37);border-radius:15px;background:rgba(100,37,60,.25)}
 body.foundry-chronicle #toc a.photo-planet-link::before,body.foundry-chronicle #toc a.photo-planet-link::after,body.foundry-chronicle #mobileToc a.photo-planet-link::before,body.foundry-chronicle #mobileToc a.photo-planet-link::after{content:none!important;display:none!important;background-image:none!important}
 
-/* Литейная: изящные шестилучевые кристальные снежинки в цвет разделов */
+/* Литейная: выбранный рисунок снежинки №4, цветовая гамма разделов */
 body.foundry-chronicle .event-banner.constellation-banner .banner-content{
   justify-content:center!important;min-height:170px!important;text-align:center!important;padding:18px 24px!important;
 }
@@ -1187,10 +1187,9 @@ body.foundry-chronicle #mobileToc a.snowflake-link::after{
 }
 body.foundry-chronicle a.snowflake-link .section-snowflake{
   width:27px!important;height:27px!important;min-width:27px!important;flex:0 0 27px!important;
-  display:block!important;overflow:visible;fill:none!important;
-  stroke:var(--section-accent,#9ce9ff)!important;stroke-width:1.25;
-  stroke-linecap:round;stroke-linejoin:round;
-  filter:drop-shadow(0 0 2px var(--section-accent,#9ce9ff));
+  display:block!important;object-fit:contain!important;overflow:visible;
+  border:0!important;background:none!important;
+  filter:hue-rotate(var(--snow-hue,0deg)) saturate(1.18) drop-shadow(0 0 2px var(--section-accent,#9ce9ff));
   transition:transform .23s ease,filter .23s ease;
 }
 body.foundry-chronicle a.snowflake-link .portal-label{
@@ -1200,7 +1199,7 @@ body.foundry-chronicle a.snowflake-link:hover .section-snowflake,
 body.foundry-chronicle a.snowflake-link:focus-visible .section-snowflake,
 body.foundry-chronicle a.snowflake-link.active .section-snowflake{
   transform:rotate(12deg) scale(1.14);
-  filter:drop-shadow(0 0 5px var(--section-accent,#9ce9ff));
+  filter:hue-rotate(var(--snow-hue,0deg)) saturate(1.28) drop-shadow(0 0 5px var(--section-accent,#9ce9ff));
 }
 body.foundry-chronicle .section-frame{
   border-color:color-mix(in srgb,var(--section-accent,#9ce9ff) 36%,transparent)!important;
@@ -1217,13 +1216,6 @@ body.foundry-chronicle .section-frame .summary-title{
   body.foundry-chronicle a.snowflake-link .section-snowflake{transition:none!important}
 }
 
-body.foundry-chronicle a.snowflake-link .section-snowflake .snowflake-facet{
-  fill:color-mix(in srgb,var(--section-accent,#9ce9ff) 30%,transparent)!important;
-  stroke:var(--section-accent,#9ce9ff)!important;stroke-width:.8!important;
-}
-body.foundry-chronicle a.snowflake-link .section-snowflake .snowflake-heart{
-  fill:#f8fdff!important;stroke:var(--section-accent,#9ce9ff)!important;stroke-width:.75!important;
-}
 </style>
 <meta content="Зимняя осада в Белой Мгле: правила, звёзды, сердца, боевой дух, хранители и советы по боям." name="description"/><link href="https://belaya-mgla-sova58.github.io/winter-siege.html" rel="canonical"/><link href="favicon.ico" rel="icon" sizes="any"/><link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/><link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="apple-touch-icon.png" rel="apple-touch-icon"/><meta content="Гайд по Медведю в Белой мгле: роли капитана и участника, первые навыки героев, подбор войск, питомцы, эксперименты и ссылки на калькулятор." name="description"/><meta content="#031426" name="theme-color"/><meta content="article" property="og:type"/><meta content="Белая мгла · SOVA58" property="og:site_name"/><meta content="Белая Мгла • Битва за литейную" property="og:title"/><meta content="Гайд по событию «Битва за литейную»: этапы, награды и экономия ресурсов." property="og:description"/><meta content="https://belaya-mgla-sova58.github.io/foundry.html" property="og:url"/><meta content="https://belaya-mgla-sova58.github.io/assets/foundry-cosmic-v1196.jpg" property="og:image"/><link href="https://belaya-mgla-sova58.github.io/foundry.html" rel="canonical"/><link href="manifest-v541.webmanifest" rel="manifest"/><meta content="SOVA58" name="author"/></head>
 <body class="luxury-chronicle bear-chronicle foundry-chronicle">
@@ -1288,7 +1280,7 @@ const sectionColors = [
   '#ff9fbd','#84baff','#edb0f8','#f4cd89','#9fe0ff',
   '#a8e2a4','#ffa994','#f6d488'
 ];
-const snowflakeNS='http://www.w3.org/2000/svg';
+const snowHues = [95,180,0,95,145,10,185,0,95,175,135,30,95];
 sections.forEach((section, index) => {
   const title = section.querySelector('.summary-title').textContent.trim();
   const color = sectionColors[index] || '#a8dfff';
@@ -1300,27 +1292,14 @@ sections.forEach((section, index) => {
     a.className = 'photo-planet-link snowflake-link';
     a.style.setProperty('--section-accent', color);
     a.setAttribute('aria-label', title);
-    const svg = document.createElementNS(snowflakeNS, 'svg');
-    svg.setAttribute('viewBox', '0 0 40 40');
-    svg.setAttribute('class', 'section-snowflake');
-    svg.setAttribute('aria-hidden', 'true');
-    // Six crystalline arms with fine branching tips: no surrounding circle.
-    for (let arm=0;arm<6;arm++) {
-      const group=document.createElementNS(snowflakeNS,'g');
-      group.setAttribute('transform','rotate('+(arm*60)+' 20 20)');
-      const shaft=document.createElementNS(snowflakeNS,'path');
-      shaft.setAttribute('d','M20 18 L20 3.1 M20 7.4 L15.6 11.2 M20 7.4 L24.4 11.2 M20 12.9 L17.1 15.4 M20 12.9 L22.9 15.4 M20 3.1 L18 5.2 M20 3.1 L22 5.2');
-      group.appendChild(shaft);
-      const facet=document.createElementNS(snowflakeNS,'path');
-      facet.setAttribute('class','snowflake-facet');
-      facet.setAttribute('d','M20 5 L18.6 8.2 L20 10.4 L21.4 8.2 Z');
-      group.appendChild(facet);
-      svg.appendChild(group);
-    }
-    const center=document.createElementNS(snowflakeNS,'path');
-    center.setAttribute('class','snowflake-heart');
-    center.setAttribute('d','M20 15.8 L24.2 18 L24.2 22 L20 24.2 L15.8 22 L15.8 18 Z');
-    svg.appendChild(center);
+    const svg = document.createElement('img');
+    svg.className = 'section-snowflake';
+    svg.src = 'data:image/webp;base64,UklGRj4JAABXRUJQVlA4WAoAAAAQAAAALwAALwAAQUxQSFMFAAAB8L/9/9nI//+P6nK9J20Xg521d2eOfdi2bdu2bdu2ba5t2xo+Ho/n8IGZRdu0vf2QTDvPiJgAChVhpx32kyMsiQ6WhIQE+Dz+GX5IIKkjBEgCAXKJyg095YhUZEEgSUTHecDsLbz/hyIAhHx3YTqdsmvx8gGUV/6Kl95tqZRd5/sRIIFCKkDtoOLhlpsBKB9AKiQsObZ4fPBuWTu322074Un5QEfg+a64zk5ftumiJtuipHtMIk9FSHnFS4o7Uf7+mlmLlwzfd6tXji5yktqjHUkOcEJdDzyhTxwO/rP5Gtj75/NLnIQDnCQXES0EuE73frhFwt+VUX9R0blsi4piCQEiz/K4i/eswOOA7iixzwXdxQlffj/+7etVVLFrkQTHOFHevzheskXoyqqlqxuT59Kt8Wpi6jXzkaIizvhf4zN0P3HktO747Ll5Nw7d8Hftqr+uDvGAWS7XeuzW9gVx+VPt2X0qb12bvnryI2/Zkl6K87Cd1XO9ZcweJOzzS25jMtt8/H8POtR1jE3iBWv7z+YN/cB+LXXiwuwx02zzxuw4/JCnrQIzs5bqZ9muc9dDv5/dnRfMhif4+a3unhusc/5ab+Hd8EKIg8899IT7JrbUb//gCbxx1bb7DN22Jn0oPSqKXyzllW2nbpz3+Bn7nXE0IlrArcNXrk41TZyzf/J13ptwV03y0gufZ2fb+ep1y61mxYw3twHRrvPL11ny6r7lX5s1JOfs8dn6+nSwcvRzejg72WzBTj2OWWp2kudFCTHssnMr4OSv355muWDu6g3ZTJDb+N3jjWY1779/Z4JORxy2BWovOhYbFO+z0FI5SwZBJhNkNuRy/6b/3YvyvkfcUgoiH/mxou4JuOrL4054qy6ZCTJBJpOp/+zYvZ9/1aP3hS9t08WRv/x+h5z/4agrS+n5Rk0yCLKZIJNunnsoxfdOefD4Pbfq51Noos8tTWabLyi9YfbmVCbIZoMgvXnJMZ1eNLORu/XppAIkr7Ri1zu/Od1PnH7z8iAIMpkgnau+Jo7/wvDzKnp3duQv+bF4zINrVz37+Lh0kEkHQZDemBp731MLnoF4zPN9ByhCEoCXOHCnnhPMbMo3dUGQTja9+KCZrR7W7/j+MaIjJMfA1185G/YeuaYhF8wfdMKM6uamqsr9+DrINi+fdJ1H+S2PHIBTO0p0+9zs22MvXrox9VPyOY77/tRZlRe9/Ji7zL5oDVYeNuz6jfbv9l57CDjguSkpG/nKV10WnszA3t7c5u5dtmb7qq7P/jLeGmd9fE0c1I5jh0dvve2Hun+Wu5v2pqz81jIuythL+Hfv1osBj3oTKivfO/v0m3bFEeG76WZmo9Z8TN+YDlla6U7MpTfYk25Mw8Vx9eaa1aPMzFYkPIV87rDW1uy0bTfNdnj8bsMHLf20qvXN6pNfs9r+OD2Z3f4929Bq9+GHONHMrH5gqf2O7zSj7pjO2n9DcArFh69oGKA4z9o+mmtmdhzhLX757NXXvz4OfXQkPp0fPmybgRUj5s4cvhtUPDtMHlvOKmPnUd9++suEXUNFRDpiAiW67z/31mP3mrR6h9NiPq7IAWWIsN8jBJ7ve46w5Jft8+z5DF31zx4g5zuBEM55nkehAlC8T/8hVy+bO2/x3X0QkSJaKiDaxXout0fm1d9m/20hF1GolIcAj+Onnjx0o+1z4K/X4IFUEHkJIAZPmX1HWBIFK6SIaLmjgiBlF3kekkAClAdIEkghgdNhG4KUXUcIFBIdKCkKj2vM3sNDEoqkgwQSyHOLNvWWA7VLRyoaBD53fYNHHnS0JCIcOx2hfMgbAFZQOCDEAwAAEBAAnQEqMAAwAD6tSJlKJiSiIbVdWADAFYlsAMEPdshHqt4OcA2z/PPegDeAPQA6TWuUPo/4d+a9VX0CtB8ctIfSBYw/RUzhvUfsA/qx6TnsZ9En9pmZWC//bIxUtFNQNqIrwUeR36Fy0emJFd4EueB5V3mtAyrjeTHOv/5dbJO4OG9/aJaw9LAA/v8aV3/VjRhGcCjf/xMfwjJRiqTGIqF3d5tYOmc0XyrzAcjVXBI/i19X4LXcLryNfzSkXsTsaL/r8nB+ekG/aHXKs2ar+Vr8ze2dBs9mmtrfPAgKF+W//NDvo63p+y0fBqRmbhBco6G72WTMkX0YkdZtDaX1897jmYyhgCbDyGLBI1V1ZNd9i3SPc/l1pipoRHhdtrj6B9HGKlkBJ4ibBoATUiubfoiFewLINeOm4+/2fQtRkeyE0ObJVdw2w1gfoPvpAAseJfredoH/hr92JrpAfEVKjAMbBEfpni1OBXdVT/sWP9xj/HWg6/l7ob7T/3pdwnLALeyLhWSc1GIe6byARJLRTsDX+cf4/4S8D+fukwc2PaDao/r/sspPnq8pwRfxl0tka/BMqF7DMKX2NcYWdH69+rOleZ67Km2MRTLTGLnGUvOw+N6EU9V6W7CD1gVuqwYgQkfEhxOF+tlzaLZPSnm8uOIYXZydyKjYj8iAhKr1n4ot/nAHo5oTW7OnAGRmWI+AQDnp+kr0W5DZc4C0W6tpjIcccNzqHm4+QKCy5gtXZsoI1JeiqKwVzVklCmwZeLSqZn5JUO3S+yBvXkPdRFyvXIcKI/mW3y9ZSE49p6UcNVpgGMrjsRQIvoxQIMJ9EIZKBUvC9utP6R8mszKER++w5k2xlisDNKRwVtvXqm3RxKSfDEhTx3IQMvCo1ar8CS0DvLAKYAX0ih8hI31Wr9mEZZd6+TmpLlyDDuj5stGAdbsHxBT2iQZ8DFg99oTPYkW8eSZsKwoim65x0RhlIBfxN5yIWmd5snO4tOAq44m6ptgwpLEe1Qq2BfCgEqf0g72Cy65Pd7EeDpOLPzKRNvzKDY26WNTVbBcAiTl5nl8U/ULQ72xNkShYmg7ZdUDsOTGRLZ2No6otN1Mcjpv4JPs9xWmR0oiz8Xrco/ISIJyHuoC0vv13UummuhK70/NJgZyVrcCR9+BwvW3dLsh41696H22wPHSLFRFNtkwxF6Xy/KFcf3B6paGKrbn+cYlgQ2QrqtFYt8z9fYSEjN1ffjCLYU2JBh9KsqYs5f/0fxWAENzz222CiMaGxjEi77VBUbHaZVEAAA==';
+    svg.alt = '';
+    svg.decoding = 'async';
+    svg.width = 27;
+    svg.height = 27;
+    svg.style.setProperty('--snow-hue', snowHues[index]+'deg');
     const label = document.createElement('span');
     label.className = 'portal-label';
     label.textContent = title;
