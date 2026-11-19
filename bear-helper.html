@@ -8,6 +8,43 @@
 .owned-extras>p{color:#9ebbd0;font-size:12px;line-height:1.5;margin:8px 0 12px}
 .owned-empty-tip{font-size:12px;color:#b7d3e5;line-height:1.5}
 .owned-empty-tip b{color:#e2edf5}
+
+/* v1220: compact, readable phones without touching troop calculations. */
+@media(max-width:600px){
+ .wrap{width:100%;max-width:100%;padding:10px 10px max(32px,env(safe-area-inset-bottom,0px));overflow-wrap:break-word}
+ .top{gap:8px;padding:11px;border-radius:13px}
+ .hero,.card,.out{padding:15px 13px;border-radius:17px;margin-bottom:12px}
+ .hero-title{align-items:flex-start;gap:10px}
+ .hero h1{font-size:clamp(23px,6.7vw,30px);line-height:1.16;overflow-wrap:anywhere}
+ .hero p{font-size:13px;line-height:1.55}
+ .bear-orb{width:48px;height:48px;flex:0 0 48px}
+ .grid3,.row{grid-template-columns:minmax(0,1fr)}
+ .tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .tabs button{width:100%;min-width:0;padding:11px 9px}
+ .chips{gap:7px}
+ .chips button{min-height:44px}
+ .actions .primary{width:100%;min-height:48px}
+ input,select{font-size:16px;min-height:46px}
+ .section-head{align-items:flex-start;flex-wrap:wrap}
+ .section-head h2{font-size:19px}
+ .trio{grid-template-columns:minmax(0,1fr)}
+ .hp{display:grid;grid-template-columns:70px minmax(0,1fr);column-gap:12px;align-items:center;text-align:left}
+ .avatar-wrap,.hp img{width:66px;height:66px}
+ .avatar-wrap{grid-row:1/8}
+ .hp b,.hp .role-sub,.hp .hero-reason,.hp select,.hp .hero-grade{grid-column:2;min-width:0}
+ .hp .hero-reason{font-size:11px}
+ .hp select{font-size:16px;min-height:44px}
+ .owned-entry{grid-template-columns:minmax(0,1fr) auto;min-width:0}
+ .owned-entry select{max-width:110px;font-size:14px;min-height:44px}
+ .summary{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .troops{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+ .troops .troop{min-width:0;overflow-wrap:anywhere}
+ .note,.status,.priority-box{overflow-wrap:break-word}
+}
+@media(max-width:360px){
+ .tabs{grid-template-columns:minmax(0,1fr)}
+ .troops{grid-template-columns:minmax(0,1fr)}
+}
 </style><script defer src="/analytics-metrika-v1.js?v=6"></script>
 </head><body><div class="wrap"><div class="top"><a href="index.html">❄ Белая Мгла</a><a href="bear.html">📖 Пояснения и тактики</a><a href="calculators.html">← К калькуляторам</a></div>
 <section class="hero"><div class="hero-title"><div class="bear-orb">🐻</div><div><h1>Калькулятор Медведя</h1><p>Готовые составы маршей по твоим запасам войск. <a class="helper-guide-link" href="bear.html">Все пояснения о навыках и тактиках →</a></p></div></div><div class="tabs" id="tabs"><button class="active" data-mode="mixed">🔥+👥 Создаю и присоединяюсь</button><button data-mode="join">👥 Присоединяюсь</button><button data-mode="lead">🔥 Создаю сбор</button><button data-mode="troops">⚔️ Только войска</button></div></section>
