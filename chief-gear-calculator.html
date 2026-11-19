@@ -102,6 +102,48 @@ body{background:radial-gradient(ellipse at 78% 5%,rgba(99,67,157,.31),transparen
 .site-back-nav a{display:inline-flex;align-items:center;gap:7px;text-decoration:none;border:1px solid rgba(146,205,246,.37);background:rgba(15,40,70,.82);color:#e6f6ff;padding:9px 14px;border-radius:999px;font-weight:700;font-size:13px}
 .site-back-nav a:hover,.site-back-nav a:focus-visible{background:#24517c;border-color:#a4e7ff}
 @media(max-width:530px){.site-back-nav{gap:7px}.site-back-nav a{padding:8px 10px;font-size:12px}}
+
+/* Mobile usability v1220: original game data and calculations untouched. */
+@media screen and (max-width:600px){
+ html,body{max-width:100%;overflow-x:clip}
+ .wrap{width:100%;max-width:100%;padding:13px 11px max(38px,env(safe-area-inset-bottom,0px));overflow-wrap:anywhere}
+ .site-back-nav{gap:7px;margin-bottom:16px}
+ .site-back-nav a{min-height:42px;display:inline-flex;align-items:center;padding:8px 11px;font-size:12px}
+ .mast{gap:8px;margin-bottom:15px;flex-wrap:wrap}
+ .test{max-width:100%;font-size:11px}
+ .hero{margin:0 0 14px;min-width:0}
+ .hero h1{font-size:clamp(25px,7.2vw,34px);line-height:1.15;overflow-wrap:anywhere}
+ .hero .lead{font-size:13px;line-height:1.6}
+ .steps{gap:8px;margin:13px 0 17px}
+ .step{font-size:12px}
+ .layout,.left,.side{min-width:0!important;max-width:100%!important;grid-template-columns:minmax(0,1fr)!important}
+ .card{padding:15px 12px;border-radius:17px}
+ .card+.card{margin-top:12px}
+ .sectiontop{gap:9px;margin-bottom:14px}
+ .sectiontop h2{font-size:18px;overflow-wrap:anywhere}
+ .segmented{gap:5px}
+ .segmented button{min-height:46px;font-size:13px;overflow-wrap:anywhere}
+ .slotgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .slot{min-width:0;min-height:118px;padding:11px 8px}
+ .slot b{font-size:12px;line-height:1.35;overflow-wrap:anywhere}
+ .fieldrow,.stockgrid,.exchangegrid{grid-template-columns:minmax(0,1fr)!important}
+ .field,.field label,.tool-panel,.bulk-panel,.optimizer,.miniResult,.resulthead{min-width:0;max-width:100%}
+ input:not([type=checkbox]),select,textarea{min-width:0;max-width:100%;min-height:46px;font-size:16px}
+ .actions{display:flex;flex-wrap:wrap;gap:8px}
+ .actions .btn{min-height:45px;flex:1 1 145px;white-space:normal}
+ .needgrid,.metricgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .need,.metric,.tool-panel,.details{min-width:0;overflow-wrap:anywhere}
+ .material-title{min-width:0}
+ .material-title .material-label{overflow-wrap:anywhere}
+ .bigTotal strong{overflow-wrap:anywhere;word-break:break-word}
+ .bulk-row select{max-width:100%}
+ .compareItem .compare-buttons{flex-wrap:wrap}
+ .confirm-dialog{max-height:calc(100dvh - 28px);overflow-y:auto}
+}
+@media screen and (max-width:370px){
+ .slotgrid{grid-template-columns:minmax(0,1fr)}
+ .needgrid,.metricgrid{grid-template-columns:minmax(0,1fr)}
+}
 </style></head>
 <body><main class="wrap"><nav class="site-back-nav" aria-label="Навигация по сайту"><a href="index.html">⌂ Главная</a><a href="calculators.html">‹ Все калькуляторы</a><a href="svs-prep.html">Подготовка к СВС</a></nav>
 <nav class="mast"><div class="brand"><div class="brandmark">✧</div><span>БЕЛАЯ МГЛА</span></div><span class="test">Снаряжение · Талисманы · СВС</span></nav>
