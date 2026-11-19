@@ -144,6 +144,45 @@ body{background:radial-gradient(ellipse at 78% 5%,rgba(99,67,157,.31),transparen
  .slotgrid{grid-template-columns:minmax(0,1fr)}
  .needgrid,.metricgrid{grid-template-columns:minmax(0,1fr)}
 }
+
+/* Obsidian Silver Champagne | autonomous calculator theme v1225 */
+:root{--bg:#0a0a0c;--panel:#1b1c20;--surface:#1b1c20;--surface2:#29282a;
+ --line:#646466;--edge:#646466;--text:#f0f0f1;--muted:#c1c0c1;
+ --blue:#d6d6d8;--glow:#dcdcdf;--violet:#b8b6b3;--yellow:#e5cba5;--amber:#e5cba5;
+}
+body{
+ background:radial-gradient(ellipse at 70% 5%,rgba(203,195,183,.09),transparent 45%),linear-gradient(155deg,#070809,#131416 60%,#090a0b)!important;
+ color:#f0f0f1!important;
+}
+:where(.top,.hero,.card,.out,.owned-box,.owned-entry,.note,.status,.priority-box,.hp,.march,
+.site-back-nav a,.bulk-panel,.optimizer,.tool-panel,.details,.need,.stock,.slot,.metric,.setpanel,.setstat,.step,.compareItem,.opt-result){
+ background:linear-gradient(140deg,#29292d,#111214)!important;
+ border-color:rgba(203,205,207,.45)!important;
+ color:#eeeff0!important;
+}
+:where(h1,h2,h3,h4,.section-head h2,.hero h1,.sectiontop h2,.resulthead h2){
+ color:#f4f4f5!important;-webkit-text-fill-color:#f4f4f5!important;
+}
+:where(p,small,.helper,.hint,.lead,.role-sub,.field label,.note,.summary,.subnote){
+ color:#c6c6c8!important;
+}
+:where(input,select,textarea){
+ background:#191a1c!important;color:#f0f0f0!important;
+ border-color:rgba(205,206,207,.52)!important;
+}
+:where(button,.btn,.chip):not(.primary):not(.active){
+ background:linear-gradient(130deg,#37383a,#1c1d1f)!important;
+ border-color:rgba(209,210,211,.5)!important;color:#f1f1f2!important;
+}
+:where(.primary,.active,.segmented button.active){
+ background:linear-gradient(130deg,#eee1cc,#c7a980)!important;
+ color:#1c1712!important;border-color:#e9d8bb!important;
+}
+:where(a,.helper-guide-link){color:#e6c9a0!important}
+:where(button,input,select,a,summary):focus-visible{
+ outline:2px solid #e8cba6!important;outline-offset:3px;
+}
+
 </style></head>
 <body><main class="wrap"><nav class="site-back-nav" aria-label="Навигация по сайту"><a href="index.html">⌂ Главная</a><a href="calculators.html">‹ Все калькуляторы</a><a href="svs-prep.html">Подготовка к СВС</a></nav>
 <nav class="mast"><div class="brand"><div class="brandmark">✧</div><span>БЕЛАЯ МГЛА</span></div><span class="test">Снаряжение · Талисманы · СВС</span></nav>
