@@ -1,0 +1,105 @@
+name: Audit current live-page asset requests
+on:
+  push:
+    branches: [audit-only-live-assets-2026-11-19]
+    paths: ['.github/workflows/audit-current-loaded-assets.yml']
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install headless Chrome for audit
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.57.0
+          npx playwright install --with-deps chromium
+      - name: Crawl all active pages with lazy images enabled
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/site-audit.log 2>&1 &
+          node <<'JS'
+          const {chromium}=require('playwright');
+          const fs=require('node:fs');
+          const ROOT='http://127.0.0.1:4173/';
+          const excluded=new Set(['buildings-new.html','maintenance.html','owl-reset-20261028.html','owl-reset.html','welcome.html']);
+          const routes=fs.readdirSync('.').filter(n=>n.endsWith('.html')&&!excluded.has(n));
+          const requested=new Set(),failed=[],errors=[],samples=[];
+          const origin=new URL(ROOT).origin;
+          let done=0;
+          async function main(){
+            const browser=await chromium.launch({headless:true});
+            for(const mode of ['desktop','mobile']){
+              const context=await browser.newContext({
+                viewport:mode==='desktop'?{width:1440,height:900}:{width:390,height:844},
+                serviceWorkers:'block',isMobile:mode==='mobile',hasTouch:mode==='mobile'
+              });
+              await context.route('**/*',route=>{
+                const u=new URL(route.request().url());
+                if(u.origin===origin)return route.continue();
+                return route.abort();
+              });
+              const queue=routes.slice();
+              const workers=Array.from({length:4},async()=>{
+                while(queue.length){
+                  const file=queue.shift();
+                  const page=await context.newPage();
+                  page.on('request',r=>{
+                    const u=new URL(r.url());
+                    if(u.origin===origin)requested.add(decodeURIComponent(u.pathname.slice(1)));
+                  });
+                  page.on('response',r=>{
+                    const u=new URL(r.url());
+                    if(u.origin===origin&&r.status()>=400)
+                      failed.push({page:file,mode,path:decodeURIComponent(u.pathname.slice(1)),http:r.status()});
+                  });
+                  page.on('pageerror',e=>errors.push({page:file,mode,error:e.message.slice(0,130)}));
+                  try{
+                    await page.goto(ROOT+file,{waitUntil:'domcontentloaded',timeout:30000});
+                    await page.evaluate(()=>{
+                      for(const x of document.querySelectorAll('details'))x.open=true;
+                      for(const x of document.querySelectorAll('img[loading="lazy"]'))x.loading='eager';
+                      for(const x of document.querySelectorAll('iframe[loading="lazy"]'))x.loading='eager';
+                    });
+                    await page.waitForTimeout(120);
+                    await page.evaluate(async()=>{
+                      const h=Math.min(document.body.scrollHeight,25000);
+                      for(let y=0;y<=h;y+=Math.max(600,window.innerHeight*2)){
+                        window.scrollTo(0,y);
+                        await new Promise(resolve=>setTimeout(resolve,20));
+                      }
+                      window.scrollTo(0,0);
+                    });
+                    await page.waitForTimeout(250);
+                  }catch(e){samples.push({page:file,mode,error:String(e.message).slice(0,150)});}
+                  await page.close();
+                  done++;
+                  if(done%60===0)console.log('Crawled',done,'/',routes.length*2,'routes');
+                }
+              });
+              await Promise.all(workers);
+              await context.close();
+            }
+            await browser.close();
+          }
+          main().then(()=>{
+            const report={pages:routes.length,routesTested:done,requested:[...requested].sort(),
+              httpErrors:failed.slice(0,250),pageErrors:errors.slice(0,100),
+              navigationFailures:samples,matchedRequests:requested.size};
+            fs.writeFileSync('live-resource-request-audit.json',JSON.stringify(report,null,2));
+            console.log(JSON.stringify({pages:routes.length,routesTested:done,
+              assetsRequested:requested.size,missing:failed.length,
+              navigationFailures:samples.length,scriptErrors:errors.length,
+              sample404:failed.slice(0,12)},null,2));
+          }).catch(e=>{console.error(e);process.exitCode=1});
+          JS
+      - name: Upload local resource audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-resource-request-audit
+          path: live-resource-request-audit.json
+          if-no-files-found: warn
