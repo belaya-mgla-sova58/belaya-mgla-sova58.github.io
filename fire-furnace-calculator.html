@@ -265,7 +265,31 @@ refineStrategy.addEventListener('change',()=>updateRefining(refineBuildFC,refine
   document.getElementById('fMeat').textContent=fmt(total[0]);document.getElementById('fWood').textContent=fmt(total[1]);document.getElementById('fCoal').textContent=fmt(total[2]);document.getElementById('fIron').textContent=fmt(total[3]);document.getElementById('fCrystal').textContent=Math.round(total[4]).toLocaleString('ru-RU');document.getElementById('fRefined').textContent=Math.round(total[5]).toLocaleString('ru-RU');document.getElementById('fireStepCount').textContent=cur>=50?'FC10 достигнут':out.length+' шагов';updateRefining(total[4],total[5]);
   stepsEl.innerHTML=cur>=50?'<div class="calc-note-v378">🔥 Максимальный этап FC10 уже достигнут. Выберите более ранний уровень для нового расчёта.</div>':out.map((x,i)=>`<article class="calc-step-v378 ${x.kind==='furnace'?'is-furnace':''}"><div class="calc-step-num-v378">${i+1}</div><div class="calc-step-body-v378"><div class="calc-step-title-v378"><span>${icon[x.name]}</span><b>${x.name}</b><strong>${label(x.from)} → ${label(x.to)}</strong></div><div class="calc-step-res-v378 fire-step-res-v380">${resHtml(x.cost)}</div>${x.kind==='furnace'&&x.to%5===0?'<div class="calc-ready-v378">Этап завершён ✓</div>':''}</div></article>`).join('');
  }
- [from,to,...Object.values(ids).map(id=>document.getElementById(id))].forEach(el=>el.addEventListener('change',calc));calc();
+ // Remember the player's own building levels and refining preferences on this device.
+ const savedKey='sova58-fire-furnace-progress-v1';
+ const controls=[from,to,...Object.values(ids).map(id=>document.getElementById(id)),refineOwned,refineStrategy];
+ try{
+  const stored=JSON.parse(localStorage.getItem(savedKey)||'null');
+  if(stored&&typeof stored==='object'){
+   controls.forEach(el=>{
+    const value=stored[el.id];
+    if(typeof value!=='string')return;
+    if(el.tagName==='SELECT'){
+     if([...el.options].some(opt=>opt.value===value))el.value=value;
+    }else if(/^\d{1,7}$/.test(value)&&Number(value)<=1000000){
+     el.value=value;
+    }
+   });
+  }
+ }catch(e){/* Storage may be unavailable; calculations still work. */}
+ const saveProgress=()=>{
+  try{localStorage.setItem(savedKey,JSON.stringify(Object.fromEntries(controls.map(el=>[el.id,el.value]))));}
+  catch(e){/* Ignore disabled storage. */}
+ };
+ [from,to,...Object.values(ids).map(id=>document.getElementById(id))].forEach(el=>el.addEventListener('change',()=>{calc();saveProgress()}));
+ refineOwned.addEventListener('input',saveProgress);
+ refineStrategy.addEventListener('change',saveProgress);
+ calc();
 })();
 </script>
 <nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424"><a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-home-v534.webp" width="32" height="32"/></span><b>Главная</b></a><a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-events-v534.webp" width="32" height="32"/></span><b>События</b></a><a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-heroes-v534.webp" width="32" height="32"/></span><b>Герои</b></a><a data-v424-nav="calc" href="calculators.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-calculator-v534.webp" width="32" height="32"/></span><b>Калькуляторы</b></a><a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-knowledge-v534.webp" width="32" height="32"/></span><b>База знаний</b></a></nav><script defer="" src="pwa-install.js?v=987"></script></body></html>
