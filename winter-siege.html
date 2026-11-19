@@ -984,63 +984,47 @@ body.luxury-chronicle::after{
 }
 
 
-/* SOVA58: Neon L-corners on Winter Siege title banner; original page and Orion remain unchanged */
+/* SOVA58: complete, softly glowing cyan neon frame for Winter Siege title banner. */
 .luxury-chronicle .event-banner.constellation-banner{
   isolation:isolate;
-  --banner-neon:#7edcff;
-  --banner-halo:rgba(88,209,255,.75);
-}
-.luxury-chronicle .event-banner.constellation-banner::before,
-.luxury-chronicle .event-banner.constellation-banner::after{
-  content:""!important;
-  position:absolute;
-  display:block;
-  z-index:3;
-  width:min(240px,42%);
-  height:min(185px,68%);
-  box-sizing:border-box;
-  inset:auto;
-  border:0;
-  border-radius:0;
-  background:none!important;
-  transform:none!important;
-  opacity:1;
-  pointer-events:none;
-  filter:drop-shadow(0 0 5px var(--banner-halo)) drop-shadow(0 0 15px var(--banner-halo));
-  animation:siegeCornerGlow 4.8s ease-in-out infinite;
+  border-color:rgba(107,206,247,.34);
 }
 .luxury-chronicle .event-banner.constellation-banner::before{
-  top:12px;left:12px;
-  border-top:4px solid var(--banner-neon);
-  border-left:4px solid var(--banner-neon);
-  border-top-left-radius:19px;
-  -webkit-mask-image:linear-gradient(to right,#000 0 79%,transparent 100%),linear-gradient(to bottom,#000 0 77%,transparent 100%);
-  mask-image:linear-gradient(to right,#000 0 79%,transparent 100%),linear-gradient(to bottom,#000 0 77%,transparent 100%);
-  -webkit-mask-composite:source-in;
-  mask-composite:intersect;
+  content:""!important;
+  display:block!important;
+  position:absolute;
+  inset:12px;
+  width:auto;
+  height:auto;
+  z-index:3;
+  box-sizing:border-box;
+  border:3px solid rgba(126,220,255,.95)!important;
+  border-radius:19px;
+  background:none!important;
+  -webkit-mask:none!important;
+  mask:none!important;
+  transform:none!important;
+  opacity:1!important;
+  filter:none!important;
+  animation:none!important;
+  box-shadow:0 0 8px rgba(88,209,255,.44),
+             0 0 16px rgba(75,166,238,.22),
+             inset 0 0 7px rgba(88,209,255,.18)!important;
+  pointer-events:none;
 }
 .luxury-chronicle .event-banner.constellation-banner::after{
-  right:12px;bottom:12px;
-  border-right:4px solid var(--banner-neon);
-  border-bottom:4px solid var(--banner-neon);
-  border-bottom-right-radius:19px;
-  -webkit-mask-image:linear-gradient(to left,#000 0 79%,transparent 100%),linear-gradient(to top,#000 0 77%,transparent 100%);
-  mask-image:linear-gradient(to left,#000 0 79%,transparent 100%),linear-gradient(to top,#000 0 77%,transparent 100%);
-  -webkit-mask-composite:source-in;
-  mask-composite:intersect;
-  animation-delay:-2.4s;
+  content:none!important;
+  display:none!important;
+  animation:none!important;
 }
 .luxury-chronicle .banner-title-area::before,
 .luxury-chronicle .banner-title-area::after{content:none!important}
 @media(max-width:680px){
-  .luxury-chronicle .event-banner.constellation-banner::before,
-  .luxury-chronicle .event-banner.constellation-banner::after{width:min(120px,37%);height:min(120px,55%)}
-  .luxury-chronicle .event-banner.constellation-banner::before{top:8px;left:8px;border-top-width:3px;border-left-width:3px}
-  .luxury-chronicle .event-banner.constellation-banner::after{right:8px;bottom:8px;border-right-width:3px;border-bottom-width:3px}
-}
-@media(prefers-reduced-motion:reduce){
-  .luxury-chronicle .event-banner.constellation-banner::before,
-  .luxury-chronicle .event-banner.constellation-banner::after{animation:none}
+  .luxury-chronicle .event-banner.constellation-banner::before{
+    inset:8px;
+    border-width:2px!important;
+    border-radius:14px;
+  }
 }
 
 </style>
