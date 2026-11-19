@@ -1162,19 +1162,23 @@ body.foundry-chronicle .section-frame.gold{border-color:rgba(255,173,188,.66)}
 body.foundry-chronicle .section-content .foundry-quick,body.foundry-chronicle .section-content .foundry-note{margin:15px 0;padding:16px;border:1px solid rgba(255,154,173,.37);border-radius:15px;background:rgba(100,37,60,.25)}
 body.foundry-chronicle #toc a.photo-planet-link::before,body.foundry-chronicle #toc a.photo-planet-link::after,body.foundry-chronicle #mobileToc a.photo-planet-link::before,body.foundry-chronicle #mobileToc a.photo-planet-link::after{content:none!important;display:none!important;background-image:none!important}
 
-/* Литейная: Портал-туманность. Мягкие космические облака вместо металлических колец */
+/* Литейная: воздушные звёздные туманности вместо одинаковых круглых колец */
 body.foundry-chronicle .event-banner.constellation-banner .banner-content{
-  justify-content:center!important;min-height:205px!important;text-align:center!important;
+  justify-content:center!important;min-height:170px!important;text-align:center!important;
+  padding:18px 24px!important;
 }
 body.foundry-chronicle .event-banner.constellation-banner .banner-title-area{
-  flex:1 1 auto!important;padding:10px!important;max-width:100%!important;
+  flex:1 1 auto!important;padding:5px!important;max-width:100%!important;
 }
-body.foundry-chronicle .event-banner.constellation-banner .banner-title-rule{margin:17px auto 0!important}
+body.foundry-chronicle .event-banner.constellation-banner .banner-event-name{
+  font-size:clamp(35px,4.1vw,60px)!important;line-height:1.05!important;
+}
+body.foundry-chronicle .event-banner.constellation-banner .banner-title-rule{margin:13px auto 0!important}
 body.foundry-chronicle .event-banner.constellation-banner .orion-card{display:none!important}
 body.foundry-chronicle #toc a.portal-link,
 body.foundry-chronicle #mobileToc a.portal-link{
-  display:flex!important;align-items:center!important;gap:11px!important;
-  min-height:58px!important;padding:6px 9px!important;background-image:none!important;
+  display:flex!important;align-items:center!important;gap:12px!important;
+  min-height:51px!important;padding:5px 7px!important;background-image:none!important;
 }
 body.foundry-chronicle #toc a.portal-link::before,
 body.foundry-chronicle #toc a.portal-link::after,
@@ -1183,48 +1187,54 @@ body.foundry-chronicle #mobileToc a.portal-link::after{
   content:none!important;display:none!important;
 }
 body.foundry-chronicle a.portal-link .cosmic-portal{
-  width:42px!important;height:42px!important;min-width:42px!important;flex:0 0 42px!important;
-  position:relative;isolation:isolate;display:grid!important;place-items:center;overflow:visible;
-  border:0!important;border-radius:50%!important;
-  background:
-    radial-gradient(ellipse at 17% 25%,rgba(104,240,255,.91) 0%,rgba(89,190,255,.50) 13%,transparent 31%),
-    radial-gradient(ellipse at 78% 20%,rgba(255,132,233,.94) 0%,rgba(205,82,239,.5) 16%,transparent 36%),
-    radial-gradient(ellipse at 92% 70%,rgba(112,251,235,.93) 0%,rgba(80,183,244,.57) 15%,transparent 37%),
-    radial-gradient(ellipse at 19% 81%,rgba(219,95,255,.9) 0%,rgba(126,76,243,.55) 16%,transparent 38%),
-    conic-gradient(from 35deg,#4d0f86,#a735e5,#36c8ed,#242075,#bc40e9,#245eae,#4d0f86)!important;
-  box-shadow:0 0 9px rgba(190,85,255,.56),0 0 17px rgba(65,220,242,.36),inset 0 0 8px rgba(183,224,255,.48)!important;
-  filter:saturate(1.1);transition:transform .25s ease,filter .25s ease,box-shadow .25s ease;
-  animation:nebulaPulse 6s ease-in-out infinite;
+  width:35px!important;height:35px!important;min-width:35px!important;flex:0 0 35px!important;
+  position:relative;isolation:isolate;display:block!important;
+  border:0!important;border-radius:0!important;background:transparent!important;
+  box-shadow:none!important;overflow:visible;
+  filter:drop-shadow(0 0 5px rgba(149,137,255,.31));
+  transition:transform .25s ease,filter .25s ease!important;
 }
 body.foundry-chronicle a.portal-link .cosmic-portal::before{
-  content:"";position:absolute;inset:2px;border-radius:43% 57% 50% 50% / 55% 43% 57% 45%;
+  content:"";position:absolute;inset:-2px -4px;pointer-events:none;
+  border-radius:53% 47% 62% 38% / 38% 56% 44% 62%;
   background:
-    radial-gradient(ellipse at 34% 15%,rgba(143,242,255,.85) 0%,transparent 27%),
-    radial-gradient(ellipse at 85% 36%,rgba(251,107,248,.7) 0%,transparent 38%),
-    radial-gradient(ellipse at 35% 82%,rgba(146,78,251,.8) 0%,transparent 36%),
-    conic-gradient(from 60deg,rgba(190,94,255,.65),rgba(18,9,55,.1),rgba(62,222,247,.7),rgba(12,7,45,.1),rgba(190,94,255,.65));
-  filter:blur(3px);opacity:.94;
-  animation:nebulaClouds 12s linear infinite;pointer-events:none;
+    radial-gradient(ellipse 58% 47% at 24% 67%,rgba(56,229,240,.78),transparent 88%),
+    radial-gradient(ellipse 58% 52% at 73% 35%,rgba(181,111,250,.79),transparent 90%),
+    radial-gradient(ellipse 48% 52% at 38% 25%,rgba(255,139,213,.56),transparent 90%),
+    radial-gradient(ellipse 48% 40% at 61% 72%,rgba(65,105,220,.52),transparent 90%);
+  filter:blur(2.8px);opacity:.92;
+  animation:nebulaFloat 7s ease-in-out infinite alternate;
 }
 body.foundry-chronicle a.portal-link .cosmic-portal::after{
-  content:"";position:absolute;inset:-3px;border-radius:50%;
+  content:"";position:absolute;inset:-2px;border:0;box-shadow:none;pointer-events:none;
   background:
-    radial-gradient(circle at 10% 38%,#efffff 0 1px,transparent 2px),
-    radial-gradient(circle at 79% 20%,#ffedff 0 .8px,transparent 1.8px),
-    radial-gradient(circle at 85% 79%,#d5faff 0 1px,transparent 2px),
-    radial-gradient(circle at 27% 89%,#fff 0 .8px,transparent 1.8px);
-  filter:drop-shadow(0 0 3px rgba(219,239,255,.9));
-  pointer-events:none;
+    radial-gradient(circle at 15% 26%,#ebfeff 0 0.85px,transparent 1.7px),
+    radial-gradient(circle at 78% 17%,#ffe7fc 0 0.75px,transparent 1.5px),
+    radial-gradient(circle at 87% 75%,#f4f5ff 0 0.8px,transparent 1.6px),
+    radial-gradient(circle at 28% 83%,#caffff 0 0.7px,transparent 1.5px);
+  filter:drop-shadow(0 0 2px rgba(225,243,255,.8));
 }
 body.foundry-chronicle a.portal-link .cosmic-portal-core{
-  display:block;position:absolute;inset:9px;z-index:1;pointer-events:none;border-radius:50%;
+  display:block;position:absolute;inset:6px 7px;z-index:1;pointer-events:none;
+  border-radius:50%;box-shadow:none;
   background:
-    radial-gradient(circle at 28% 22%,#fff 0 1px,transparent 2px),
-    radial-gradient(circle at 75% 67%,#b7fff7 0 .7px,transparent 1.6px),
-    radial-gradient(ellipse at 50% 50%,rgba(17,11,52,.95) 0 24%,rgba(62,23,126,.9) 46%,rgba(114,48,206,.43) 68%,transparent 80%),
-    conic-gradient(from 40deg,rgba(44,219,239,.68),rgba(26,9,86,.8),rgba(255,112,232,.68),rgba(20,12,65,.85),rgba(44,219,239,.68));
-  box-shadow:inset 0 0 8px rgba(4,8,36,.95),0 0 8px rgba(214,116,255,.5);
-  animation:nebulaCore 9s ease-in-out infinite alternate;
+    radial-gradient(circle at 52% 48%,#fff 0 1px,rgba(221,249,255,.85) 2px,rgba(144,213,255,.4) 4px,transparent 11px),
+    radial-gradient(ellipse at 50% 50%,rgba(56,35,111,.54) 0%,rgba(55,42,119,.31) 36%,transparent 75%);
+  animation:nebulaStar 4.6s ease-in-out infinite alternate;
+}
+body.foundry-chronicle #toc a.portal-link:nth-child(3n+2) .cosmic-portal::before,
+body.foundry-chronicle #mobileToc a.portal-link:nth-child(3n+2) .cosmic-portal::before{
+  transform:rotate(31deg);background:
+    radial-gradient(ellipse 64% 49% at 27% 54%,rgba(105,173,255,.8),transparent 86%),
+    radial-gradient(ellipse 58% 44% at 72% 40%,rgba(96,244,219,.75),transparent 86%),
+    radial-gradient(ellipse 58% 56% at 48% 71%,rgba(147,100,248,.58),transparent 88%);
+}
+body.foundry-chronicle #toc a.portal-link:nth-child(3n) .cosmic-portal::before,
+body.foundry-chronicle #mobileToc a.portal-link:nth-child(3n) .cosmic-portal::before{
+  transform:rotate(-25deg);background:
+    radial-gradient(ellipse 54% 48% at 26% 38%,rgba(251,139,203,.73),transparent 85%),
+    radial-gradient(ellipse 59% 54% at 75% 67%,rgba(139,109,253,.79),transparent 89%),
+    radial-gradient(ellipse 49% 49% at 35% 73%,rgba(92,229,249,.61),transparent 89%);
 }
 body.foundry-chronicle a.portal-link .portal-label{
   flex:1;min-width:0;line-height:1.4!important;white-space:normal!important;
@@ -1232,17 +1242,20 @@ body.foundry-chronicle a.portal-link .portal-label{
 body.foundry-chronicle a.portal-link:hover .cosmic-portal,
 body.foundry-chronicle a.portal-link:focus-visible .cosmic-portal,
 body.foundry-chronicle a.portal-link.active .cosmic-portal{
-  transform:scale(1.1);filter:saturate(1.42) brightness(1.16);
-  box-shadow:0 0 11px rgba(237,115,255,.85),0 0 22px rgba(64,227,245,.65),inset 0 0 10px rgba(218,232,255,.55)!important;
+  transform:scale(1.12);filter:drop-shadow(0 0 7px rgba(145,227,255,.73)) saturate(1.25)!important;
+  box-shadow:none!important;
 }
-@keyframes nebulaPulse{
-  0%,100%{filter:saturate(1.04) brightness(.94)}
-  50%{filter:saturate(1.25) brightness(1.13)}
+@keyframes nebulaFloat{
+  from{translate:0 -1px;scale:.97;opacity:.8}
+  to{translate:1px 1px;scale:1.06;opacity:1}
 }
-@keyframes nebulaClouds{to{transform:rotate(360deg)}}
-@keyframes nebulaCore{
-  from{transform:rotate(-14deg) scale(.95)}
-  to{transform:rotate(18deg) scale(1.04)}
+@keyframes nebulaStar{
+  from{opacity:.72;transform:scale(.92)}
+  to{opacity:1;transform:scale(1.08)}
+}
+@media(max-width:680px){
+  body.foundry-chronicle .event-banner.constellation-banner .banner-content{min-height:150px!important}
+  body.foundry-chronicle .event-banner.constellation-banner .banner-event-name{font-size:clamp(30px,7.5vw,46px)!important}
 }
 @media(prefers-reduced-motion:reduce){
   body.foundry-chronicle a.portal-link .cosmic-portal,
@@ -1295,8 +1308,8 @@ body.foundry-chronicle a.portal-link.active .cosmic-portal{
 <div class="footnote">Белая Мгла · SOVA58</div>
 </section>
 <aside class="aside-guide">
-<h2>Планетный указатель</h2>
-<p>Каждая планета ведёт к своему разделу гайда.</p>
+<h2>Звёздный указатель</h2>
+<p>Выбери туманность, чтобы перейти к разделу.</p>
 <nav class="toc" id="toc"></nav>
 </aside>
 </main>
