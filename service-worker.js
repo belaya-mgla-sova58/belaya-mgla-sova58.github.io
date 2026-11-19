@@ -38,6 +38,7 @@ function isVersionedCoreAsset(url){
     path.endsWith('/site-desktop-v985.css') ||
     path.endsWith('/guides-shared-v1222.css') ||
     path.endsWith('/guides-shared-v1222.js') ||
+    path.endsWith('/chief-gear-core-v1222.js') ||
     path.endsWith('/site-palace-shared-v1221.css') ||
     path.endsWith('/home-royal-bundle-v1222.css') ||
     path.endsWith('/mobile-ice-aurora-v1140.css')
