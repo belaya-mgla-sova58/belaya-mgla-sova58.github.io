@@ -1766,3 +1766,103 @@ body.site-hq-v407.cosmic-visible-v444:is([data-static-route="bear"],[data-static
 @media(prefers-reduced-motion:reduce){
  body.site-hq-v407.cosmic-visible-v444:is([data-static-route="bear"],[data-static-route="crazy-joe"],[data-static-route="alliance-showdown"],[data-static-route="alliance-championship"],[data-static-route="alliance-mobilization"],[data-static-route="frostfire-mine"],[data-static-route="tundra-trade-route"],[data-static-route="brothers-in-arms"],[data-static-route="foundry"],[data-static-route="forts"],[data-static-route="castle"],[data-static-route="winter-siege"],[data-static-route="canyon-clash"],[data-static-route="ginas-revenge"],[data-static-route="mercenary-prestige"],[data-static-route="endless-trial"],[data-static-route="fishing"],[data-static-route="snowplow"],[data-static-route="dreams"],[data-static-route="state-power"],[data-static-route="svs-prep"],[data-static-route="svs"])::before,body.site-hq-v407.cosmic-visible-v444:is([data-static-route="bear"],[data-static-route="crazy-joe"],[data-static-route="alliance-showdown"],[data-static-route="alliance-championship"],[data-static-route="alliance-mobilization"],[data-static-route="frostfire-mine"],[data-static-route="tundra-trade-route"],[data-static-route="brothers-in-arms"],[data-static-route="foundry"],[data-static-route="forts"],[data-static-route="castle"],[data-static-route="winter-siege"],[data-static-route="canyon-clash"],[data-static-route="ginas-revenge"],[data-static-route="mercenary-prestige"],[data-static-route="endless-trial"],[data-static-route="fishing"],[data-static-route="snowplow"],[data-static-route="dreams"],[data-static-route="state-power"],[data-static-route="svs-prep"],[data-static-route="svs"])::after{animation:none!important}
 }
+
+
+/* OBSIDIAN / SILVER / CHAMPAGNE | Site-wide interface theme v1225.
+   UI surfaces only. Do not recolor game screenshots, hero portraits, event art or icons. */
+:root{
+ --bg:#08090b;--bg-2:#101114;--ink:#f0f0f1;--card:#191b1f;
+ --muted:#b1b0af;--blue:#c7cbd0;--blue2:#858c95;--ice:#d6d8da;
+ --gold:#d8bb8f;--line:rgba(205,208,212,.39);
+ --bm-obsidian:#090a0d;--bm-silver:#d9dbdd;--bm-champagne:#dec5a0;
+}
+body:is(.site-hq-v407,.is-home-route,.is-heroes-route,.is-calculators-route,.is-events-route,.is-other-route){
+ color:#e9e9eb!important;
+ background:radial-gradient(ellipse 65% 40% at 83% 7%,rgba(178,176,170,.085),transparent 75%),linear-gradient(155deg,#060709,#101114 54%,#090a0c)!important;
+}
+body:is(.site-hq-v407,.is-home-route) .site-cosmic-background-v442{
+ filter:grayscale(1) saturate(0)!important;opacity:.22!important
+}
+body:is(.site-hq-v407,.is-home-route) .nav-wrap{
+ background:linear-gradient(170deg,#18191c,#08090b)!important;
+ border-color:rgba(213,216,220,.31)!important;
+}
+body:is(.site-hq-v407,.is-home-route) .nav-wrap nav>a.route-link{
+ color:#e0e0e1!important;
+}
+body:is(.site-hq-v407,.is-home-route) .nav-wrap nav>a.route-link:is(:hover,.active,[aria-current=page]){
+ color:#f8f6f2!important;background:linear-gradient(105deg,#363638,#1b1b1d)!important;
+ border-color:rgba(224,224,226,.48)!important;
+}
+body:is(.site-hq-v407,.is-home-route) .site-search-box-v426,
+body:is(.site-hq-v407,.is-home-route) .site-search-results-v426{
+ background:#17181c!important;border-color:rgba(203,205,209,.48)!important;
+ color:#f0f0f0!important;
+}
+body:is(.site-hq-v407,.is-home-route) :is(.site-search-input-v426,.site-search-icon-v426){
+ color:#e8e8e8!important;
+}
+body:is(.site-hq-v407,.is-home-route) main#appMain :is(
+ .page-heading-v424,.modern-home-hero-v424,.modern-panel-v424,.modern-topic-card-v424,
+ .guide-page-v69,.guide-fold-v414,.guide-nav-card,.related-guide-card-v625,
+ .event-group-v522,.event-jump-nav-v1,.calc-hub-head,.calc-hub-card,
+ .gen-panel,.gen-hub-hero,.hero-mini,.site-photo-card
+){
+ background:linear-gradient(140deg,rgba(33,34,37,.97),rgba(13,14,17,.97))!important;
+ border-color:rgba(194,197,201,.4)!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.07),0 10px 28px rgba(0,0,0,.23)!important;
+}
+body:is(.site-hq-v407,.is-home-route) main#appMain :is(
+ h1,h2,h3,h4,.guide-fold-title-v414,.calc-hub-copy strong,
+ .modern-panel-head-v424,.page-heading-v424 h1
+){
+ color:#f1f1f2!important;-webkit-text-fill-color:#f1f1f2!important;
+ text-shadow:none!important;
+}
+body:is(.site-hq-v407,.is-home-route) main#appMain :is(
+ p,li,.guide-fold-body-v414,.calc-hub-copy small,.event-group-copy-v522 p,
+ .page-heading-v424 p,.hero-category-copy-v708 span
+){
+ color:#c4c5c7!important;-webkit-text-fill-color:#c4c5c7!important;
+}
+body:is(.site-hq-v407,.is-home-route) main#appMain :is(
+ .topic-pill,.guide-fold-all-v414,.event-jump-links-v1 a,
+ .guide-fold-summary-v414,.page-toc-v409,.guide-callout,
+ .calc-hub-open,.related-guide-card-v625
+){
+ border-color:rgba(195,199,203,.4)!important;
+}
+body:is(.site-hq-v407,.is-home-route) main#appMain :is(
+ .guide-fold-summary-v414,.page-toc-v409,.topic-pill,
+ .guide-fold-all-v414,.guide-callout.tip
+){
+ background:linear-gradient(130deg,#292a2d,#151619)!important;
+ color:#ededee!important;
+}
+body:is(.site-hq-v407,.is-home-route) main#appMain :is(
+ .guide-fold-body-v414,.page-toc-links-v409,.related-guides-head-v625
+){
+ background-color:#151619!important;color:#d0d0d2!important;
+}
+body:is(.site-hq-v407,.is-home-route) main#appMain a:not(.route-link):not(.guide-nav-card):not(.calc-hub-card):not(.related-guide-card-v625){
+ color:#dec5a0;
+}
+body:is(.site-hq-v407,.is-home-route) main#appMain :is(button,.btn,[role=button]):not(.site-search-clear-v426){
+ border-color:rgba(205,208,211,.44)!important;
+}
+body:is(.site-hq-v407,.is-home-route) main#appMain :is(input,select,textarea){
+ background-color:#16181b!important;color:#f0f0f1!important;
+ border-color:rgba(200,202,205,.48)!important;
+}
+body:is(.site-hq-v407,.is-home-route) .mobile-topbar,
+body:is(.site-hq-v407,.is-home-route) .mobile-bottom-v424{
+ background:linear-gradient(180deg,#222326,#08090b)!important;
+ border-color:rgba(202,205,207,.5)!important;
+}
+body:is(.site-hq-v407,.is-home-route) .mobile-topbar-title :is(strong,small),
+body:is(.site-hq-v407,.is-home-route) .mobile-bottom-v424 a b{
+ color:#f0f0f0!important;
+}
+body:is(.site-hq-v407,.is-home-route) :is(a,button,input,select,summary):focus-visible{
+ outline:2px solid #e0c49e!important;outline-offset:3px;
+}
