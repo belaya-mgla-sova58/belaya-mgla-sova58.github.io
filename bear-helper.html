@@ -185,4 +185,37 @@ function calc(){
 }
 $('distribution').onchange=()=>{$('distributionExplain').textContent=$('distribution').value==='keep'?'Сохраняет пропорцию во всех маршах, но может оставить часть армии свободной.':'Заполняет марши по вместимости и распределяет дефицитные типы равномерно. Фактические проценты могут измениться.'};
 $('calc').onclick=calc;fillHeroes();
+// Keep the player's troop inputs and chosen ratio on this device between visits.
+(function restoreBearSettings(){
+ const key='sova58-bear-helper-settings-v1';
+ const ids=['inf','lan','mar','cap','mc','distribution'];
+ function save(){
+  try{
+   const values=Object.fromEntries(ids.map(id=>[id,$(id).value]));
+   values.ratio=ratio;
+   localStorage.setItem(key,JSON.stringify(values));
+  }catch(e){/* Private browsing or storage disabled: calculator still works. */}
+ }
+ try{
+  const values=JSON.parse(localStorage.getItem(key)||'null');
+  if(values&&typeof values==='object'){
+   ids.forEach(id=>{
+    const el=$(id),value=values[id];
+    if(typeof value!=='string')return;
+    if(el.tagName==='SELECT'){
+     if([...el.options].some(opt=>opt.value===value))el.value=value;
+    }else if(/^\\d{1,10}$/.test(value)&&Number(value)<=1000000000){
+     el.value=value;
+    }
+   });
+   if(typeof values.ratio==='string'){
+    const chip=[...document.querySelectorAll('#ratios .chip')].find(b=>b.dataset.r===values.ratio);
+    if(chip)chip.click();
+   }
+   $('distribution').onchange();
+  }
+ }catch(e){/* Ignore corrupt/blocked storage. */}
+ ids.forEach(id=>{$(id).addEventListener('input',save);$(id).addEventListener('change',save)});
+ document.querySelectorAll('#ratios .chip').forEach(chip=>chip.addEventListener('click',save));
+})();
 </script></body></html>
