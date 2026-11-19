@@ -1,0 +1,139 @@
+name: Compare 40 key pages against clean Netlify copy
+on:
+  push:
+    branches: [audit-only-live-assets-2026-11-19]
+    paths: ['.github/workflows/compare-site-pages-v5.yml']
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 24
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install comparison dependencies
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.57.0 pixelmatch@5.3.0 pngjs@7.0.0
+          echo "CHROME=$(command -v google-chrome-stable)" >> "$GITHUB_ENV"
+      - name: Compare real pages in browser
+        shell: bash
+        run: |
+          node <<'JS'
+          const fs=require('node:fs');
+          const crypto=require('node:crypto');
+          const {PNG}=require('pngjs');
+          const pixelmatch=require('pixelmatch');
+          const {chromium}=require('playwright');
+          const paths=[
+            'index.html','events.html','heroes.html','hero-generations.html','hero-mia.html',
+            'experts.html','expert-generations.html','expert-romulus-preview.html','pets.html',
+            'gear.html','governor.html','governor-orders.html','chief-gear-calculator.html',
+            'essence-mithril-calculator.html','calculators.html','bear.html','bear-helper.html',
+            'winter-siege.html','canyon-clash.html','castle.html','fishing.html','foundry.html',
+            'svs.html','svs-prep.html','alliance.html','alliance-mobilization.html','state-58.html',
+            'sova58.html','newbie.html','faq.html','news.html','news-elena.html',
+            'whitefox-elena-44-45.html','news-ru.html','furnace-calculator.html',
+            'fire-furnace-calculator.html','site-updates.html','buildings.html','president-guide.html',
+            'creative-corner.html'];
+          const origins={original:'https://belaya-mgla-sova58.github.io/',
+                         clean:'https://velvety-platypus-359fd2.netlify.app/'};
+          const modes={desktop:{width:1365,height:900},mobile:{width:390,height:844}};
+          const cases=[]; for(const p of paths)for(const m of Object.keys(modes))cases.push({path:p,mode:m});
+          const results=[],screens=[],browser=await chromium.launch({headless:true,executablePath:process.env.CHROME,args:['--no-sandbox']});
+          async function measure(ctx,p,mode,kind){
+            const page=await ctx.newPage();const errors=[],fail=[];
+            page.on('response',r=>{if(r.status()>=400&&new URL(r.url()).hostname.endsWith('netlify.app')||r.status()>=400&&r.url().includes('belaya-mgla-sova58.github.io')) fail.push(r.status()+' '+r.url().slice(0,170))});
+            page.on('pageerror',e=>errors.push(e.message.slice(0,130)));
+            let navErr=null,screen=null,body={},title='';
+            try {
+              const response=await page.goto(origins[kind]+p,{waitUntil:'domcontentloaded',timeout:90000});
+              await page.waitForTimeout(1600);
+              await page.evaluate(()=>{
+                document.querySelectorAll('details').forEach(d=>d.open=true);
+                document.querySelectorAll('img[loading="lazy"]').forEach(i=>i.loading='eager');
+                document.documentElement.style.scrollBehavior='auto';
+              });
+              await page.waitForTimeout(1200);
+              body=await page.evaluate(()=>{
+                const b=document.body;
+                const c=getComputedStyle(b);
+                return {title:document.title,textLen:b.innerText.length,styles:document.styleSheets.length,
+                  bodyBackground:c.backgroundColor,bodyFont:c.fontFamily,
+                  brokenImages:[...document.images].filter(i=>i.complete&&i.naturalWidth===0).map(i=>i.getAttribute('src')).slice(0,15),
+                  allImages:document.images.length,
+                  documentWidth:document.documentElement.scrollWidth,
+                  htmlLen:document.documentElement.outerHTML.length,
+                  status:document.readyState,
+                  visibleHeadings:[...document.querySelectorAll('h1,h2')].slice(0,6).map(e=>e.textContent.trim().slice(0,90))};
+              });
+              title=await page.title();
+              screen=await page.screenshot({type:'png',animations:'disabled'});
+              if(response&&response.status()>=400)navErr='HTTP '+response.status();
+            }catch(e){navErr=String(e.message).slice(0,300);}
+            await page.close();
+            return {kind,body,title,navErr,errors,fail,screen};
+          }
+          // Four concurrent pages; each browser context retains host connections.
+          const ctxs={};
+          for(const mode of Object.keys(modes)){
+            ctxs[mode]={};
+            for(const kind of Object.keys(origins))
+              ctxs[mode][kind]=await browser.newContext({viewport:modes[mode],serviceWorkers:'block',reducedMotion:'reduce'});
+          }
+          let ix=0;
+          async function worker(){
+            while(ix<cases.length){
+              const task=cases[ix++];
+              const [a,b]=await Promise.all([
+                measure(ctxs[task.mode].original,task.path,task.mode,'original'),
+                measure(ctxs[task.mode].clean,task.path,task.mode,'clean')]);
+              let pix=null,sha=null;
+              if(a.screen&&b.screen){
+                const x=PNG.sync.read(a.screen),y=PNG.sync.read(b.screen);
+                if(x.width===y.width&&x.height===y.height)pix=pixelmatch(x.data,y.data,null,x.width,x.height,{threshold:.16,includeAA:false})/(x.width*x.height);
+                sha=crypto.createHash('sha256').update(a.screen).digest('hex')===crypto.createHash('sha256').update(b.screen).digest('hex');
+              }
+              results.push({path:task.path,mode:task.mode,visualDifference:pix,pixelIdentical:sha,
+                original:{...a,screen:undefined},clean:{...b,screen:undefined}});
+              if(pix!==null&&(pix>0.05||a.navErr||b.navErr||a.body.styles===0||b.body.styles===0)){
+                screens.push({path:task.path,mode:task.mode,difference:pix,a:a.screen,b:b.screen});
+              }
+              if(results.length%10===0)console.log('Compared',results.length,'/',cases.length);
+            }
+          }
+          await Promise.all(Array.from({length:4},worker));
+          await browser.close();
+          screens.sort((a,b)=>b.difference-a.difference);
+          fs.mkdirSync('comparison-images',{recursive:true});
+          for(const [i,x]of screens.slice(0,8).entries()){
+            const safe=x.path.replace(/[^a-z0-9_-]/gi,'_')+'-'+x.mode;
+            fs.writeFileSync('comparison-images/'+i+'-original-'+safe+'.png',x.a);
+            fs.writeFileSync('comparison-images/'+i+'-clean-'+safe+'.png',x.b);
+          }
+          const report={numCases:cases.length,completed:results.length,
+            testOrigin:origins.clean,sourceOrigin:origins.original,
+            summary:{above5pct:results.filter(x=>x.visualDifference!==null&&x.visualDifference>0.05).length,
+               above1pct:results.filter(x=>x.visualDifference!==null&&x.visualDifference>0.01).length,
+               missingScreens:results.filter(x=>x.visualDifference===null).length,
+               zeroStyles:results.filter(x=>x.original.body.styles===0||x.clean.body.styles===0).length,
+               navFailures:results.filter(x=>x.original.navErr||x.clean.navErr).length,
+               missingImages:results.filter(x=>x.original.body.brokenImages?.length||x.clean.body.brokenImages?.length).length},
+            results:results.sort((a,b)=>(b.visualDifference||0)-(a.visualDifference||0))};
+          fs.writeFileSync('comparison-v5-results.json',JSON.stringify(report,null,2));
+          console.log('SUMMARY',JSON.stringify(report.summary,null,2));
+          console.log('TOP 12',JSON.stringify(report.results.slice(0,12).map(x=>({path:x.path,mode:x.mode,difference:x.visualDifference,cssOriginal:x.original.body.styles,cssClean:x.clean.body.styles,
+            missingOriginal:x.original.body.brokenImages,missingClean:x.clean.body.brokenImages,
+            originalError:x.original.navErr,cleanError:x.clean.navErr})),null,2));
+          JS
+      - name: Upload comparison report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: comparison-v5-all-40-key-pages
+          path: |
+            comparison-v5-results.json
+            comparison-images/*.png
+          if-no-files-found: warn
