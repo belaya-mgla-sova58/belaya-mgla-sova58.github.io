@@ -21,7 +21,7 @@ jobs:
       - name: Compare real pages in browser
         shell: bash
         run: |
-          node <<'JS'
+          node --input-type=commonjs <<'JS'
           const fs=require('node:fs');
           const crypto=require('node:crypto');
           const {PNG}=require('pngjs');
@@ -42,6 +42,7 @@ jobs:
                          clean:'https://velvety-platypus-359fd2.netlify.app/'};
           const modes={desktop:{width:1365,height:900},mobile:{width:390,height:844}};
           const cases=[]; for(const p of paths)for(const m of Object.keys(modes))cases.push({path:p,mode:m});
+          (async()=>{
           const results=[],screens=[],browser=await chromium.launch({headless:true,executablePath:process.env.CHROME,args:['--no-sandbox']});
           async function measure(ctx,p,mode,kind){
             const page=await ctx.newPage();const errors=[],fail=[];
@@ -127,6 +128,7 @@ jobs:
           console.log('TOP 12',JSON.stringify(report.results.slice(0,12).map(x=>({path:x.path,mode:x.mode,difference:x.visualDifference,cssOriginal:x.original.body.styles,cssClean:x.clean.body.styles,
             missingOriginal:x.original.body.brokenImages,missingClean:x.clean.body.brokenImages,
             originalError:x.original.navErr,cleanError:x.clean.navErr})),null,2));
+          })().catch(e=>{console.error(e);process.exitCode=1});
           JS
       - name: Upload comparison report
         if: always()
