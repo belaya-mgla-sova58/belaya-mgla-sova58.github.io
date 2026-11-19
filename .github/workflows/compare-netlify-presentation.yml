@@ -1,0 +1,74 @@
+name: Compare Netlify visual presentation and live source
+on:
+  push:
+    branches: [audit-only-live-assets-2026-11-19]
+    paths: ['.github/workflows/compare-netlify-presentation.yml']
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Prepare headless Chrome
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.57.0
+          if command -v google-chrome-stable; then echo "BROWSER_PATH=$(command -v google-chrome-stable)" >> "$GITHUB_ENV"; else exit 1; fi
+      - name: Compare runtime styling and asset requests
+        shell: bash
+        run: |
+          node <<'JS'
+          const {chromium}=require('playwright'),fs=require('fs');
+          const urls={source:'https://belaya-mgla-sova58.github.io/', test:'https://velvety-platypus-359fd2.netlify.app/'};
+          async function run(){
+            const browser=await chromium.launch({headless:true,executablePath:process.env.BROWSER_PATH,args:['--no-sandbox']});
+            const report={};
+            for(const [name,url] of Object.entries(urls)){
+              const context=await browser.newContext({viewport:{width:1440,height:900},serviceWorkers:'block'});
+              const page=await context.newPage(),reqs=[],failures=[],errors=[];
+              page.on('request',r=>{if(/\.(css|png|webp|svg|js)(\?|$)/i.test(r.url()))reqs.push({url:r.url(),t:Date.now()});});
+              page.on('requestfailed',r=>failures.push({url:r.url(),err:r.failure()?.errorText}));
+              page.on('response',r=>{if(r.status()>=400)errors.push({url:r.url(),code:r.status()});});
+              page.on('pageerror',e=>errors.push({code:'script',msg:e.message.slice(0,200)}));
+              const start=Date.now();
+              let navigation='ok';
+              try{await page.goto(url,{waitUntil:'domcontentloaded',timeout:40000})}catch(e){navigation=e.message.slice(0,300)}
+              await page.waitForTimeout(9000);
+              const state=()=>page.evaluate(()=>{
+                const select=s=>{const n=document.querySelector(s);if(!n)return null;const c=getComputedStyle(n);return {tag:n.tagName,display:c.display,color:c.color,bg:c.backgroundColor,font:c.fontFamily,position:c.position,width:n.getBoundingClientRect().width,height:n.getBoundingClientRect().height}};
+                };
+                return {location:location.href,title:document.title,
+                  stylesheets:document.styleSheets.length,links:[...document.querySelectorAll('link[rel=stylesheet]')].map(x=>({href:x.href,disabled:x.disabled})),
+                  body:select('body'), nav:select('nav'), aside:select('.sidebar'),header:select('header'),
+                  brokenImages:[...document.images].filter(i=>i.complete&&!i.naturalWidth).slice(0,35).map(i=>i.src),
+                  stylesUnreadable:[...document.styleSheets].filter(x=>{try{return x.cssRules.length===0}catch(e){return true}}).slice(0,40).map(x=>x.href),
+                  currentBg:getComputedStyle(document.documentElement).backgroundColor};
+              });
+              const early=await state();
+              await page.screenshot({path:'compare-'+name+'-early.png',fullPage:false});
+              await page.waitForTimeout(35000);
+              const later=await state();
+              await page.screenshot({path:'compare-'+name+'-late.png',fullPage:false});
+              report[name]={navigation,elapsed:Date.now()-start,early,later,
+                requests:reqs,failed:failures,errors};
+              console.log(name,'css',early.stylesheets,'to',later.stylesheets,'broken',early.brokenImages.length,'to',later.brokenImages.length,'requests',reqs.length,'failed',failures.length,'errors',errors.length);
+              await context.close();
+            }
+            await browser.close();
+            fs.writeFileSync('compare-results.json',JSON.stringify(report,null,2));
+          }
+          run().catch(e=>{console.error(e);process.exitCode=1});
+          JS
+      - name: Upload screenshots and diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-site-style-comparison
+          path: |
+            compare-*.png
+            compare-results.json
+          if-no-files-found: warn
