@@ -891,6 +891,81 @@ body.luxury-chronicle::after{
 .bm-guide-nav-title{font-size:15px;font-weight:800;letter-spacing:.08em;color:#f2d38a;margin:0 9px 12px}
 .bm-guide-nav a{display:block;padding:10px 12px;text-decoration:none;color:#dbe9f8;border-radius:10px;border:1px solid transparent;font-size:14px;transition:background .2s,border-color .2s}
 .bm-guide-nav a:hover,.bm-guide-nav a[aria-current]{background:rgba(242,211,138,.1);border-color:rgba(242,211,138,.16);color:#fff}
+
+/* SOVA58: two inset neon L corners, matching hand-drawn reference */
+.luxury-chronicle .section-frame{
+  --neon-line:#0cbdff;
+  --neon-halo:rgba(12,189,255,.7);
+}
+.luxury-chronicle .section-frame::before,
+.luxury-chronicle .section-frame::after{
+  content:"";
+  position:absolute;
+  z-index:2;
+  pointer-events:none;
+  box-sizing:border-box;
+  display:block;
+  width:min(220px,40%);
+  height:min(210px,56%);
+  opacity:1;
+  border:0;
+  border-radius:0;
+  background:none;
+  filter:drop-shadow(0 0 3px var(--neon-halo))
+         drop-shadow(0 0 9px var(--neon-halo));
+}
+/* Top-left: horizontal arm right, vertical arm down */
+.luxury-chronicle .section-frame::before{
+  top:13px;left:13px;right:auto;bottom:auto;
+  border-top:4px solid var(--neon-line);
+  border-left:4px solid var(--neon-line);
+  border-top-left-radius:19px;
+  -webkit-mask-image:
+    linear-gradient(to right,#000 0 77%,transparent 100%),
+    linear-gradient(to bottom,#000 0 78%,transparent 100%);
+  mask-image:
+    linear-gradient(to right,#000 0 77%,transparent 100%),
+    linear-gradient(to bottom,#000 0 78%,transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-composite:intersect;
+}
+/* Bottom-right: vertical arm up, horizontal arm left */
+.luxury-chronicle .section-frame::after{
+  top:auto;left:auto;right:13px;bottom:13px;
+  border-right:4px solid var(--neon-line);
+  border-bottom:4px solid var(--neon-line);
+  border-bottom-right-radius:19px;
+  -webkit-mask-image:
+    linear-gradient(to left,#000 0 77%,transparent 100%),
+    linear-gradient(to top,#000 0 78%,transparent 100%);
+  mask-image:
+    linear-gradient(to left,#000 0 77%,transparent 100%),
+    linear-gradient(to top,#000 0 78%,transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-composite:intersect;
+}
+.luxury-chronicle .section-frame .section-icon{display:none!important}
+.luxury-chronicle .section-frame:is(#s1,#s8,#s15){--neon-line:#0cbdff;--neon-halo:rgba(12,189,255,.7)}
+.luxury-chronicle .section-frame:is(#s2,#s9,#s16){--neon-line:#a17aff;--neon-halo:rgba(161,122,255,.7)}
+.luxury-chronicle .section-frame:is(#s3,#s10,#s17){--neon-line:#ff72d9;--neon-halo:rgba(255,114,217,.65)}
+.luxury-chronicle .section-frame:is(#s4,#s11,#s18){--neon-line:#25e4bc;--neon-halo:rgba(37,228,188,.68)}
+.luxury-chronicle .section-frame:is(#s5,#s12,#s19){--neon-line:#ffd06e;--neon-halo:rgba(255,208,110,.68)}
+.luxury-chronicle .section-frame:is(#s6,#s13){--neon-line:#ff818b;--neon-halo:rgba(255,129,139,.68)}
+.luxury-chronicle .section-frame:is(#s7,#s14){--neon-line:#86acff;--neon-halo:rgba(134,172,255,.7)}
+@media(max-width:680px){
+  .luxury-chronicle .section-frame::before,
+  .luxury-chronicle .section-frame::after{
+    width:min(135px,38%);
+    height:min(155px,52%);
+  }
+  .luxury-chronicle .section-frame::before{
+    top:9px;left:9px;border-top-width:3px;border-left-width:3px;
+  }
+  .luxury-chronicle .section-frame::after{
+    right:9px;bottom:9px;border-right-width:3px;border-bottom-width:3px;
+  }
+}
+
 </style>
 <meta content="Зимняя осада в Белой Мгле: правила, звёзды, сердца, боевой дух, хранители и советы по боям." name="description"/><link href="https://belaya-mgla-sova58.github.io/winter-siege.html" rel="canonical"/></head>
 <body class="luxury-chronicle">
