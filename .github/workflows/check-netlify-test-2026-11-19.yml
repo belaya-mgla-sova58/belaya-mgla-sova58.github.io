@@ -1,0 +1,35 @@
+name: Diagnose test-site Netlify accessibility
+on:
+  push:
+    branches:
+      - audit-only-live-assets-2026-11-19
+    paths:
+      - .github/workflows/check-netlify-test-2026-11-19.yml
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check HTTPS, DNS and page files from public internet
+        shell: bash
+        run: |
+          set +e
+          echo "::group::DNS"
+          getent ahosts velvety-platypus-359fd2.netlify.app || true
+          getent ahosts 6afeeaa02fc259533a4ca34a--velvety-platypus-359fd2.netlify.app || true
+          echo "::endgroup::"
+          for url in \
+            "https://velvety-platypus-359fd2.netlify.app/" \
+            "https://velvety-platypus-359fd2.netlify.app/index.html" \
+            "https://velvety-platypus-359fd2.netlify.app/assets/img_6dc1ef08d6ab264b.webp" \
+            "https://6afeeaa02fc259533a4ca34a--velvety-platypus-359fd2.netlify.app/" \
+            "https://belaya-mgla-sova58.github.io/"; do
+            echo "=== $url ==="
+            curl --max-time 25 -LsS -o /tmp/check-out -D /tmp/check-headers -w 'HTTP=%{http_code} FINAL=%{url_effective} TYPE=%{content_type} BYTES=%{size_download} DNS=%{time_namelookup} TOTAL=%{time_total}\n' "$url"
+            head -c 450 /tmp/check-headers
+            printf '\nCONTENT PREFIX: '
+            head -c 250 /tmp/check-out | strings | head -n 4
+            echo
+          done
