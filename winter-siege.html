@@ -966,6 +966,23 @@ body.luxury-chronicle::after{
   }
 }
 
+
+/* SOVA58: soft living glow on the existing two-corner neon frames.
+   Scoped to Winter Siege; no site-wide changes. */
+@keyframes siegeCornerGlow{
+  0%,100%{opacity:.92;filter:drop-shadow(0 0 3px var(--neon-halo)) drop-shadow(0 0 10px var(--neon-halo));}
+  50%{opacity:1;filter:drop-shadow(0 0 6px var(--neon-halo)) drop-shadow(0 0 18px var(--neon-halo)) drop-shadow(0 0 27px var(--neon-halo));}
+}
+.luxury-chronicle .section-frame::before,
+.luxury-chronicle .section-frame::after{
+  animation:siegeCornerGlow 4.8s ease-in-out infinite;
+}
+.luxury-chronicle .section-frame::after{animation-delay:-2.4s}
+@media(prefers-reduced-motion:reduce){
+  .luxury-chronicle .section-frame::before,
+  .luxury-chronicle .section-frame::after{animation:none}
+}
+
 </style>
 <meta content="Зимняя осада в Белой Мгле: правила, звёзды, сердца, боевой дух, хранители и советы по боям." name="description"/><link href="https://belaya-mgla-sova58.github.io/winter-siege.html" rel="canonical"/></head>
 <body class="luxury-chronicle">
