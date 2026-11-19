@@ -6183,7 +6183,7 @@ body.is-state-positions-route .hero #uiRouteDescription{
 
 /* v207: approved header for event page "Охота на медведя" */
 body.is-bear-route .hero {
-  background-image:url("img_f4053b4bd49b720d.webp") !important;
+  background-image:none!important;
   background-size: cover !important;
   background-position: center center !important;
   background-repeat: no-repeat !important;
@@ -6215,7 +6215,7 @@ body.is-crazy-joe-route .hero::before {
 
 /* v209: approved Охота на медведя header, tuned for mobile crop */
 body.is-bear-route .hero {
-  background-image:url("img_22767d469133f308.webp") !important;
+  background-image:none!important;
   background-size:cover !important;
   background-position:center center !important;
   background-repeat:no-repeat !important;
