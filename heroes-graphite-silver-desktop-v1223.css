@@ -1,0 +1,199 @@
+/* SOVA58 Heroes | Graphite & Silver desktop edition v1223.
+   Pure visual layer: no game information, links, behavior, or phone styles changed. */
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine){
+ body.is-heroes-route{
+  --hero-silver:#e9edf3;--hero-pearl:#c4ccd6;--hero-steel:#92a1b3;
+  --hero-edge:rgba(196,207,220,.32);--hero-ink:#07090f;
+  background:radial-gradient(ellipse 57% 42% at 80% 7%,rgba(116,129,153,.12),transparent 80%),linear-gradient(145deg,#05070c 0%,#0b1019 54%,#05070d 100%)!important;
+  color:#e7eaf0;
+ }
+ body.is-heroes-route .site-cosmic-background-v442{
+  opacity:.32!important;filter:grayscale(1) saturate(.1)!important;
+ }
+ body.is-heroes-route .nav-wrap{
+  background:linear-gradient(175deg,#141820,#070a10)!important;
+  border-right:1px solid rgba(210,220,234,.27)!important;
+  box-shadow:9px 0 34px rgba(0,0,0,.18)!important;
+ }
+ body.is-heroes-route .nav-wrap .route-link{
+  color:#c1cbd8!important;border-color:transparent!important;
+ }
+ body.is-heroes-route .nav-wrap .route-link:hover,
+ body.is-heroes-route .nav-wrap .route-link.active{
+  color:#f6f8fb!important;
+  background:linear-gradient(110deg,rgba(169,181,200,.23),rgba(75,85,103,.11))!important;
+  border-color:rgba(194,206,221,.34)!important;
+ }
+ body.is-heroes-route main#appMain{
+  min-width:0!important;max-width:1500px!important;
+ }
+ body.is-heroes-route main#appMain>.route-page.active{
+  min-width:0!important;
+ }
+ body.is-heroes-route .site-search-box-v426{
+  background:rgba(12,16,24,.93)!important;border-color:rgba(190,204,220,.38)!important;
+  box-shadow:0 9px 28px rgba(0,0,0,.2)!important;
+ }
+ body.is-heroes-route .site-search-input-v426{color:#f1f3f7!important}
+ body.is-heroes-route .breadcrumbs-v409,
+ body.is-heroes-route .breadcrumbs-v409 a{color:#aebccc!important}
+ body.is-heroes-route .page-heading-v424.frost-header-v431{
+  position:relative;overflow:hidden;isolation:isolate;
+  padding:47px 51px 45px!important;
+  min-height:210px;
+  border-radius:26px!important;
+  border:1px solid rgba(230,235,242,.5)!important;
+  background:radial-gradient(circle at 86% 27%,rgba(198,209,229,.17),transparent 32%),linear-gradient(118deg,#0c1018 0%,#1b2430 54%,#070a11 100%)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.23),0 18px 54px rgba(0,0,0,.32)!important;
+ }
+ body.is-heroes-route .page-heading-v424.frost-header-v431::before{
+  content:"";position:absolute;inset:1px;z-index:-1;pointer-events:none;
+  background:linear-gradient(128deg,transparent 38%,rgba(235,241,251,.045) 52%,transparent 68%);
+ }
+ body.is-heroes-route .page-heading-v424.frost-header-v431::after{
+  content:"✧";position:absolute;right:7%;top:50%;transform:translateY(-50%);
+  color:rgba(227,235,247,.47);font:normal 118px/1 Georgia,serif;
+  text-shadow:0 0 28px rgba(193,202,221,.24);pointer-events:none;
+ }
+ body.is-heroes-route .page-heading-v424 h1{
+  margin:0 0 12px!important;
+  font:700 clamp(42px,4.1vw,62px)/1.12 Georgia,"Times New Roman",serif!important;
+  letter-spacing:.035em!important;
+  color:#f3f5f9!important;-webkit-text-fill-color:#f3f5f9!important;
+  text-shadow:0 2px 22px rgba(241,247,255,.12)!important;
+ }
+ body.is-heroes-route .page-heading-v424 p{
+  max-width:650px;color:#c4cedc!important;font-size:16px!important;line-height:1.65!important;
+ }
+ body.is-heroes-route .hero-category-v708{margin:25px 0 30px!important}
+ body.is-heroes-route .hero-category-link-v708{
+  position:relative;overflow:hidden;
+  min-height:156px;padding:30px 34px!important;border-radius:22px!important;
+  border:1px solid rgba(229,236,247,.49)!important;
+  background:linear-gradient(114deg,#222c39 0%,#0e131d 60%,#131922 100%)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 16px 38px rgba(0,0,0,.22)!important;
+ }
+ body.is-heroes-route .hero-category-link-v708::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(110deg,transparent 50%,rgba(220,232,248,.075) 70%,transparent 84%);
+ }
+ body.is-heroes-route .hero-category-link-v708:hover{
+  transform:translateY(-3px)!important;
+  border-color:rgba(250,252,255,.8)!important;
+  box-shadow:0 20px 45px rgba(0,0,0,.33),inset 0 1px rgba(255,255,255,.25)!important;
+ }
+ body.is-heroes-route .hero-category-copy-v708 small{
+  color:#aebccc!important;letter-spacing:.15em!important;
+ }
+ body.is-heroes-route .hero-category-copy-v708 strong{
+  color:#f5f6f8!important;font:700 clamp(27px,2.7vw,38px)/1.2 Georgia,serif!important;
+ }
+ body.is-heroes-route .hero-category-copy-v708 span{color:#bec9d5!important;font-size:15px!important}
+ body.is-heroes-route .hero-category-arrow-v708{
+  width:56px!important;height:56px!important;flex-basis:56px!important;
+  border:1px solid rgba(210,222,234,.42)!important;
+  background:linear-gradient(145deg,rgba(194,204,219,.25),rgba(75,86,101,.14))!important;
+  color:#f3f6fa!important;
+ }
+ body.is-heroes-route .guide-page-v69{
+  background:linear-gradient(160deg,rgba(17,22,32,.97),rgba(7,10,16,.98))!important;
+  border:1px solid rgba(188,199,214,.3)!important;
+  border-radius:24px!important;padding:27px 30px 31px!important;
+  box-shadow:0 18px 48px rgba(0,0,0,.18)!important;
+ }
+ body.is-heroes-route .guide-topics{gap:10px!important}
+ body.is-heroes-route .guide-topics .topic-pill{
+  background:linear-gradient(145deg,#2c3440,#151b26)!important;
+  color:#e2e7ef!important;border:1px solid rgba(203,215,229,.38)!important;
+  padding:9px 15px!important;border-radius:999px!important;
+ }
+ body.is-heroes-route .page-toc-v409{
+  border:1px solid rgba(188,199,214,.33)!important;
+  border-radius:16px!important;
+  background:rgba(18,24,34,.93)!important;
+ }
+ body.is-heroes-route .page-toc-v409 summary{color:#e5ebf2!important}
+ body.is-heroes-route .page-toc-links-v409 a{color:#c5d3e1!important}
+ body.is-heroes-route .guide-fold-toolbar-v414{
+  color:#aebdcd!important;
+ }
+ body.is-heroes-route .guide-fold-all-v414{
+  background:linear-gradient(140deg,#344150,#1a212c)!important;
+  border:1px solid rgba(212,221,232,.42)!important;
+  color:#f1f4f7!important;
+ }
+ body.is-heroes-route .guide-section.guide-fold-v414{
+  border:1px solid rgba(175,193,214,.31)!important;
+  border-radius:17px!important;
+  background:linear-gradient(135deg,rgba(35,45,59,.93),rgba(13,18,28,.96))!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.07),0 7px 23px rgba(0,0,0,.13)!important;
+  overflow:hidden;
+  margin:0 0 13px!important;
+ }
+ body.is-heroes-route .guide-section.guide-fold-v414[open]{
+  border-color:rgba(219,227,239,.55)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.1),0 12px 26px rgba(0,0,0,.18)!important;
+ }
+ body.is-heroes-route .guide-fold-summary-v414{
+  min-height:75px!important;padding:18px 22px!important;
+  background:transparent!important;
+ }
+ body.is-heroes-route .guide-fold-summary-v414:hover{
+  background:rgba(208,223,244,.065)!important;
+ }
+ body.is-heroes-route .guide-fold-title-v414{
+  font:700 21px/1.38 Georgia,"Times New Roman",serif!important;
+  color:#f0f3f7!important;-webkit-text-fill-color:#f0f3f7!important;
+ }
+ body.is-heroes-route .guide-fold-action-v414{
+  color:#ced8e4!important;font-size:12px!important;
+ }
+ body.is-heroes-route .guide-fold-body-v414{
+  color:#d0d9e4!important;padding:18px 25px 23px!important;
+  border-top:1px solid rgba(199,212,229,.17)!important;
+  background:rgba(5,9,16,.44)!important;
+ }
+ body.is-heroes-route .guide-fold-body-v414 :is(p,li){
+  color:#cbd5e2!important;font-size:15px!important;line-height:1.85!important;
+ }
+ body.is-heroes-route .guide-fold-body-v414 :is(h3,b,strong){color:#f2f5f9!important}
+ body.is-heroes-route .guide-callout.tip{
+  color:#e6edf6!important;
+  background:linear-gradient(110deg,rgba(78,91,110,.26),rgba(19,26,39,.84))!important;
+  border:1px solid rgba(185,202,221,.33)!important;
+  border-left:3px solid #bbc7d8!important;
+  border-radius:12px!important;
+ }
+ body.is-heroes-route .guide-callout.tip b{color:#e9eef5!important}
+ body.is-heroes-route .copy-block-v409{
+  background:rgba(95,108,128,.36)!important;
+  border-color:rgba(198,211,229,.35)!important;color:#e9eff7!important;
+ }
+ body.is-heroes-route .site-photo-card{
+  border:1px solid rgba(203,215,233,.4)!important;
+  background:#111925!important;border-radius:17px!important;
+ }
+ body.is-heroes-route .site-photo-card img{
+  display:block;max-width:100%;height:auto;border-radius:12px;
+ }
+ body.is-heroes-route .site-photo-card figcaption{color:#b9c9da!important}
+ body.is-heroes-route .related-guides-v625{
+  margin-top:30px!important;
+ }
+ body.is-heroes-route .related-guides-head-v625 :is(span,h2){
+  color:#f1f4f9!important;-webkit-text-fill-color:#f1f4f9!important;
+ }
+ body.is-heroes-route .related-guide-card-v625{
+  border:1px solid rgba(190,205,224,.4)!important;
+  background:linear-gradient(145deg,#202b39,#0e141e)!important;
+  color:#f0f4f9!important;
+  border-radius:16px!important;
+ }
+ body.is-heroes-route .related-guide-card-v625 :is(span,b){color:#e6edf5!important}
+ body.is-heroes-route :is(a,button,summary):focus-visible{
+  outline:2px solid #d5e0f0!important;outline-offset:3px!important;
+ }
+}
+@media (prefers-reduced-motion:reduce){
+ body.is-heroes-route .hero-category-link-v708{transition:none!important}
+}
