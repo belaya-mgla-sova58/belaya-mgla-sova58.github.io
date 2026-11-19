@@ -1224,6 +1224,63 @@ body.fishing-chronicle .section-content :is(.savebox,.rule,.prestige-short,.endl
 body.fishing-chronicle .section-content table{width:100%;border-collapse:collapse;display:block;overflow-x:auto}
 body.fishing-chronicle .section-content td,body.fishing-chronicle .section-content th{padding:9px;border:1px solid #6987a655}
 body.fishing-chronicle .section-content img,body.fishing-chronicle .intro-card img{max-width:100%;height:auto;border-radius:12px}
+
+/* fishing finish v1: underwater aurora, accessible navigation */
+body.fishing-chronicle{
+  --fishing-neon:#77ead8;
+  --fishing-deep:#093b59;
+}
+body.fishing-chronicle .event-banner.constellation-banner{
+  position:relative;isolation:isolate;overflow:hidden;
+  border:2px solid #77ead8!important;
+  background:radial-gradient(ellipse at 18% 15%,rgba(66,208,212,.24),transparent 55%),
+             radial-gradient(ellipse at 88% 85%,rgba(61,111,217,.25),transparent 55%),
+             linear-gradient(135deg,rgba(6,48,76,.95),rgba(15,20,65,.95))!important;
+  box-shadow:0 0 18px rgba(119,234,216,.45),inset 0 0 25px rgba(38,174,198,.12)!important;
+}
+body.fishing-chronicle .event-banner.constellation-banner::before{
+  border-color:#a9fff0!important;
+  box-shadow:0 0 14px rgba(119,234,216,.62),inset 0 0 14px rgba(119,234,216,.18)!important;
+}
+body.fishing-chronicle .event-banner.constellation-banner::after{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:repeating-radial-gradient(ellipse at 50% 125%,transparent 0 28px,rgba(139,242,255,.085) 29px 30px,transparent 31px 64px);
+  opacity:.48;
+}
+body.fishing-chronicle .event-banner .banner-content{position:relative;z-index:1}
+body.fishing-chronicle .banner-title-rule{
+  width:min(230px,65%)!important;height:2px!important;
+  background:linear-gradient(90deg,transparent,#8affea 35%,#a9d6ff 70%,transparent)!important;
+  box-shadow:0 0 11px rgba(119,234,216,.56);
+}
+body.fishing-chronicle .intro-card{
+  border-color:rgba(119,234,216,.34)!important;
+  background:linear-gradient(145deg,rgba(9,41,68,.83),rgba(15,24,55,.82))!important;
+}
+body.fishing-chronicle .section-frame{
+  border-color:color-mix(in srgb,var(--section-accent,#77ead8) 40%,transparent)!important;
+  box-shadow:0 10px 30px rgba(0,6,24,.18),inset 0 1px 0 rgba(255,255,255,.035);
+}
+body.fishing-chronicle :is(#toc,#mobileToc) a.snowflake-link{
+  border-radius:13px!important;
+  transition:background .18s ease,border-color .18s ease,transform .18s ease;
+}
+body.fishing-chronicle :is(#toc,#mobileToc) a.snowflake-link:is(:hover,:focus-visible,.active){
+  background:rgba(94,215,222,.12)!important;
+  border-color:rgba(132,239,235,.42)!important;
+}
+body.fishing-chronicle :is(#toc,#mobileToc) a.snowflake-link:focus-visible,
+body.fishing-chronicle .bear-secondary-link:focus-visible{
+  outline:2px solid #f9e3a0!important;outline-offset:3px!important;
+}
+@media(max-width:680px){
+ body.fishing-chronicle .event-banner.constellation-banner .banner-content{min-height:142px!important;padding:18px!important}
+ body.fishing-chronicle .event-banner.constellation-banner .banner-event-name{font-size:clamp(29px,7.1vw,43px)!important;overflow-wrap:break-word}
+}
+@media(prefers-reduced-motion:reduce){
+ body.fishing-chronicle :is(#toc,#mobileToc) a.snowflake-link{transition:none!important}
+}
+
 </style>
 <link href="favicon.ico" rel="icon" sizes="any"/><link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/><link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="apple-touch-icon.png" rel="apple-touch-icon"/><meta content="#031426" name="theme-color"/><meta content="article" property="og:type"/><meta content="Белая мгла · SOVA58" property="og:site_name"/><meta content="Белая Мгла • Рыболовный турнир" property="og:title"/><meta content="Гайд по событию «Рыболовный турнир»: этапы, награды и экономия ресурсов." property="og:description"/><meta content="https://belaya-mgla-sova58.github.io/fishing.html" property="og:url"/><link href="manifest-v541.webmanifest" rel="manifest"/><meta content="SOVA58" name="author"/><meta name="description" content="Гайд «Рыболовный турнир»: разделы, правила, тактика и советы Совы."><link rel="canonical" href="https://belaya-mgla-sova58.github.io/fishing.html"></head>
 <body class="luxury-chronicle bear-chronicle fishing-chronicle">
