@@ -17,7 +17,16 @@ jobs:
       - name: Install headless Chrome for audit
         run: |
           npm install --no-save --no-audit --no-fund playwright@1.57.0
-          npx playwright install --with-deps chromium
+          if command -v google-chrome-stable >/dev/null; then
+            echo "BROWSER_PATH=$(command -v google-chrome-stable)" >> "$GITHUB_ENV"
+          elif command -v google-chrome >/dev/null; then
+            echo "BROWSER_PATH=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          elif command -v chromium >/dev/null; then
+            echo "BROWSER_PATH=$(command -v chromium)" >> "$GITHUB_ENV"
+          else
+            echo "::error::No pre-installed Chrome or Chromium browser"
+            exit 1
+          fi
       - name: Crawl all active pages with lazy images enabled
         run: |
           python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/site-audit.log 2>&1 &
@@ -31,7 +40,7 @@ jobs:
           const origin=new URL(ROOT).origin;
           let done=0;
           async function main(){
-            const browser=await chromium.launch({headless:true});
+            const browser=await chromium.launch({headless:true,executablePath:process.env.BROWSER_PATH,args:['--no-sandbox']});
             for(const mode of ['desktop','mobile']){
               const context=await browser.newContext({
                 viewport:mode==='desktop'?{width:1440,height:900}:{width:390,height:844},
