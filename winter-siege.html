@@ -983,6 +983,66 @@ body.luxury-chronicle::after{
   .luxury-chronicle .section-frame::after{animation:none}
 }
 
+
+/* SOVA58: Neon L-corners on Winter Siege title banner; original page and Orion remain unchanged */
+.luxury-chronicle .event-banner.constellation-banner{
+  isolation:isolate;
+  --banner-neon:#7edcff;
+  --banner-halo:rgba(88,209,255,.75);
+}
+.luxury-chronicle .event-banner.constellation-banner::before,
+.luxury-chronicle .event-banner.constellation-banner::after{
+  content:""!important;
+  position:absolute;
+  display:block;
+  z-index:3;
+  width:min(240px,42%);
+  height:min(185px,68%);
+  box-sizing:border-box;
+  inset:auto;
+  border:0;
+  border-radius:0;
+  background:none!important;
+  transform:none!important;
+  opacity:1;
+  pointer-events:none;
+  filter:drop-shadow(0 0 5px var(--banner-halo)) drop-shadow(0 0 15px var(--banner-halo));
+  animation:siegeCornerGlow 4.8s ease-in-out infinite;
+}
+.luxury-chronicle .event-banner.constellation-banner::before{
+  top:12px;left:12px;
+  border-top:4px solid var(--banner-neon);
+  border-left:4px solid var(--banner-neon);
+  border-top-left-radius:19px;
+  -webkit-mask-image:linear-gradient(to right,#000 0 79%,transparent 100%),linear-gradient(to bottom,#000 0 77%,transparent 100%);
+  mask-image:linear-gradient(to right,#000 0 79%,transparent 100%),linear-gradient(to bottom,#000 0 77%,transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-composite:intersect;
+}
+.luxury-chronicle .event-banner.constellation-banner::after{
+  right:12px;bottom:12px;
+  border-right:4px solid var(--banner-neon);
+  border-bottom:4px solid var(--banner-neon);
+  border-bottom-right-radius:19px;
+  -webkit-mask-image:linear-gradient(to left,#000 0 79%,transparent 100%),linear-gradient(to top,#000 0 77%,transparent 100%);
+  mask-image:linear-gradient(to left,#000 0 79%,transparent 100%),linear-gradient(to top,#000 0 77%,transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-composite:intersect;
+  animation-delay:-2.4s;
+}
+.luxury-chronicle .banner-title-area::before,
+.luxury-chronicle .banner-title-area::after{content:none!important}
+@media(max-width:680px){
+  .luxury-chronicle .event-banner.constellation-banner::before,
+  .luxury-chronicle .event-banner.constellation-banner::after{width:min(120px,37%);height:min(120px,55%)}
+  .luxury-chronicle .event-banner.constellation-banner::before{top:8px;left:8px;border-top-width:3px;border-left-width:3px}
+  .luxury-chronicle .event-banner.constellation-banner::after{right:8px;bottom:8px;border-right-width:3px;border-bottom-width:3px}
+}
+@media(prefers-reduced-motion:reduce){
+  .luxury-chronicle .event-banner.constellation-banner::before,
+  .luxury-chronicle .event-banner.constellation-banner::after{animation:none}
+}
+
 </style>
 <meta content="Зимняя осада в Белой Мгле: правила, звёзды, сердца, боевой дух, хранители и советы по боям." name="description"/><link href="https://belaya-mgla-sova58.github.io/winter-siege.html" rel="canonical"/></head>
 <body class="luxury-chronicle">
