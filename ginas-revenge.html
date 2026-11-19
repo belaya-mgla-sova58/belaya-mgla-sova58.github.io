@@ -1330,7 +1330,7 @@ const sectionColors = [
 const snowHues = [95,180,0,95,145,10,185,0,95,175,135,30,95];
 sections.forEach((section, index) => {
   const title = section.querySelector('.summary-title').textContent.trim();
-  const color = sectionColors[index] || '#a8dfff';
+  const color = sectionColors[index % sectionColors.length];
   section.style.setProperty('--section-accent', color);
   [toc,mobileToc].forEach(nav => {
     const a = document.createElement('a');
@@ -1346,7 +1346,7 @@ sections.forEach((section, index) => {
     svg.decoding = 'async';
     svg.width = 27;
     svg.height = 27;
-    svg.style.setProperty('--snow-hue', snowHues[index]+'deg');
+    svg.style.setProperty('--snow-hue', snowHues[index % snowHues.length]+'deg');
     const label = document.createElement('span');
     label.className = 'portal-label';
     label.textContent = title;
