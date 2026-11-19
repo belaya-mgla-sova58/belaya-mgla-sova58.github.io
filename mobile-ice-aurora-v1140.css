@@ -432,3 +432,68 @@ html:not(.force-desktop-root) body:is(.site-hq-v407,.is-home-route,[data-static-
   justify-self:center!important;
  }
 }
+
+/* Mobile usability pass v1220: readable one-column cards, comfortable controls,
+   safe bottom navigation and confined long content. No desktop changes. */
+@media screen and (max-width:820px){
+ html:not(.force-desktop-root) body.site-hq-v407 main#appMain,
+ html:not(.force-desktop-root) body.site-hq-v407 main#appMain>.route-page.active{
+  min-width:0!important;max-width:100%!important;box-sizing:border-box!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407 main#appMain>.route-page.active{
+  padding-bottom:max(96px,calc(76px + env(safe-area-inset-bottom,0px)))!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407 main#appMain .route-page.active :is(.guide-page-v69,.intro,.section,.calc-hub,.calc-hub-card,.event-group-v522,.calc-step-body-v378){
+  min-width:0;max-width:100%;overflow-wrap:anywhere;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407 main#appMain .route-page.active :is(input,select,textarea){
+  box-sizing:border-box;max-width:100%;min-width:0;font-size:16px;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407 main#appMain .route-page.active :is(button,[role="button"],select,input:not([type="checkbox"]),textarea){
+  min-height:44px;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407 main#appMain .route-page.active :is(table,pre){
+  max-width:100%;
+ }
+ html:not(.force-desktop-root) body.is-fire-furnace-calc-route :is(.calc-step-v378,.calc-step-body-v378,.calc-step-res-v378,.calc-refining-inner-v1,.calc-total-v378){
+  min-width:0!important;max-width:100%!important;box-sizing:border-box!important;
+ }
+ html:not(.force-desktop-root) body.is-fire-furnace-calc-route .calc-step-res-v378{
+  display:flex!important;flex-wrap:wrap!important;gap:8px!important;
+ }
+ html:not(.force-desktop-root) body.is-calculators-route .calc-hub-card{
+  width:100%;box-sizing:border-box;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407 nav.mobile-bottom-v424{
+  padding-bottom:max(7px,env(safe-area-inset-bottom,0px))!important;
+ }
+ html:not(.force-desktop-root) body.site-hq-v407 nav.mobile-bottom-v424>a{
+  min-width:0;min-height:54px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+ }
+}
+@media screen and (max-width:520px){
+ html:not(.force-desktop-root) body.is-events-route .events-groups-v522 .event-group-grid-v522{
+  grid-template-columns:minmax(0,1fr)!important;gap:11px!important;
+ }
+ html:not(.force-desktop-root) body.is-events-route .events-groups-v522 .guide-nav-card{
+  width:100%!important;max-width:100%!important;
+ }
+ html:not(.force-desktop-root) body.is-events-route .events-groups-v522 .guide-nav-card .event-card-caption-v1{
+  font-size:13px!important;line-height:1.4!important;min-height:46px!important;
+ }
+ html:not(.force-desktop-root) body.is-events-route .event-jump-links-v1 a{
+  min-height:44px!important;
+ }
+ html:not(.force-desktop-root) body.is-calculators-route .calc-hub-grid{
+  grid-template-columns:minmax(0,1fr)!important;
+ }
+ html:not(.force-desktop-root) body.is-fire-furnace-calc-route :is(.calc-refining-grid-v1,.calc-res-grid-v378){
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ }
+}
+@media screen and (max-width:360px){
+ html:not(.force-desktop-root) body.is-fire-furnace-calc-route :is(.calc-refining-grid-v1,.calc-res-grid-v378){
+  grid-template-columns:minmax(0,1fr)!important;
+ }
+}
