@@ -1162,7 +1162,7 @@ body.foundry-chronicle .section-frame.gold{border-color:rgba(255,173,188,.66)}
 body.foundry-chronicle .section-content .foundry-quick,body.foundry-chronicle .section-content .foundry-note{margin:15px 0;padding:16px;border:1px solid rgba(255,154,173,.37);border-radius:15px;background:rgba(100,37,60,.25)}
 body.foundry-chronicle #toc a.photo-planet-link::before,body.foundry-chronicle #toc a.photo-planet-link::after,body.foundry-chronicle #mobileToc a.photo-planet-link::before,body.foundry-chronicle #mobileToc a.photo-planet-link::after{content:none!important;display:none!important;background-image:none!important}
 
-/* Литейная: снежинки в цвет разделов вместо туманностей */
+/* Литейная: изящные шестилучевые кристальные снежинки в цвет разделов */
 body.foundry-chronicle .event-banner.constellation-banner .banner-content{
   justify-content:center!important;min-height:170px!important;text-align:center!important;padding:18px 24px!important;
 }
@@ -1176,7 +1176,7 @@ body.foundry-chronicle .event-banner.constellation-banner .banner-title-rule{mar
 body.foundry-chronicle .event-banner.constellation-banner .orion-card{display:none!important}
 body.foundry-chronicle #toc a.snowflake-link,
 body.foundry-chronicle #mobileToc a.snowflake-link{
-  display:flex!important;align-items:center!important;gap:11px!important;
+  display:flex!important;align-items:center!important;gap:10px!important;
   min-height:51px!important;padding:5px 7px!important;background-image:none!important;
 }
 body.foundry-chronicle #toc a.snowflake-link::before,
@@ -1186,11 +1186,11 @@ body.foundry-chronicle #mobileToc a.snowflake-link::after{
   content:none!important;display:none!important;
 }
 body.foundry-chronicle a.snowflake-link .section-snowflake{
-  width:33px!important;height:33px!important;min-width:33px!important;flex:0 0 33px!important;
+  width:27px!important;height:27px!important;min-width:27px!important;flex:0 0 27px!important;
   display:block!important;overflow:visible;fill:none!important;
-  stroke:var(--section-accent,#9ce9ff)!important;stroke-width:1.8;
+  stroke:var(--section-accent,#9ce9ff)!important;stroke-width:1.25;
   stroke-linecap:round;stroke-linejoin:round;
-  filter:drop-shadow(0 0 3px var(--section-accent,#9ce9ff));
+  filter:drop-shadow(0 0 2px var(--section-accent,#9ce9ff));
   transition:transform .23s ease,filter .23s ease;
 }
 body.foundry-chronicle a.snowflake-link .portal-label{
@@ -1199,8 +1199,8 @@ body.foundry-chronicle a.snowflake-link .portal-label{
 body.foundry-chronicle a.snowflake-link:hover .section-snowflake,
 body.foundry-chronicle a.snowflake-link:focus-visible .section-snowflake,
 body.foundry-chronicle a.snowflake-link.active .section-snowflake{
-  transform:rotate(15deg) scale(1.1);
-  filter:drop-shadow(0 0 6px var(--section-accent,#9ce9ff));
+  transform:rotate(12deg) scale(1.14);
+  filter:drop-shadow(0 0 5px var(--section-accent,#9ce9ff));
 }
 body.foundry-chronicle .section-frame{
   border-color:color-mix(in srgb,var(--section-accent,#9ce9ff) 36%,transparent)!important;
@@ -1215,6 +1215,14 @@ body.foundry-chronicle .section-frame .summary-title{
 }
 @media(prefers-reduced-motion:reduce){
   body.foundry-chronicle a.snowflake-link .section-snowflake{transition:none!important}
+}
+
+body.foundry-chronicle a.snowflake-link .section-snowflake .snowflake-facet{
+  fill:color-mix(in srgb,var(--section-accent,#9ce9ff) 30%,transparent)!important;
+  stroke:var(--section-accent,#9ce9ff)!important;stroke-width:.8!important;
+}
+body.foundry-chronicle a.snowflake-link .section-snowflake .snowflake-heart{
+  fill:#f8fdff!important;stroke:var(--section-accent,#9ce9ff)!important;stroke-width:.75!important;
 }
 </style>
 <meta content="Зимняя осада в Белой Мгле: правила, звёзды, сердца, боевой дух, хранители и советы по боям." name="description"/><link href="https://belaya-mgla-sova58.github.io/winter-siege.html" rel="canonical"/><link href="favicon.ico" rel="icon" sizes="any"/><link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/><link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="apple-touch-icon.png" rel="apple-touch-icon"/><meta content="Гайд по Медведю в Белой мгле: роли капитана и участника, первые навыки героев, подбор войск, питомцы, эксперименты и ссылки на калькулятор." name="description"/><meta content="#031426" name="theme-color"/><meta content="article" property="og:type"/><meta content="Белая мгла · SOVA58" property="og:site_name"/><meta content="Белая Мгла • Битва за литейную" property="og:title"/><meta content="Гайд по событию «Битва за литейную»: этапы, награды и экономия ресурсов." property="og:description"/><meta content="https://belaya-mgla-sova58.github.io/foundry.html" property="og:url"/><meta content="https://belaya-mgla-sova58.github.io/assets/foundry-cosmic-v1196.jpg" property="og:image"/><link href="https://belaya-mgla-sova58.github.io/foundry.html" rel="canonical"/><link href="manifest-v541.webmanifest" rel="manifest"/><meta content="SOVA58" name="author"/></head>
@@ -1293,12 +1301,26 @@ sections.forEach((section, index) => {
     a.style.setProperty('--section-accent', color);
     a.setAttribute('aria-label', title);
     const svg = document.createElementNS(snowflakeNS, 'svg');
-    svg.setAttribute('viewBox', '0 0 36 36');
+    svg.setAttribute('viewBox', '0 0 40 40');
     svg.setAttribute('class', 'section-snowflake');
     svg.setAttribute('aria-hidden', 'true');
-    const path = document.createElementNS(snowflakeNS, 'path');
-    path.setAttribute('d', 'M18 2.5V33.5 M2.5 18H33.5 M7.05 7.05L28.95 28.95 M28.95 7.05L7.05 28.95 M13.5 6.5L18 11L22.5 6.5 M13.5 29.5L18 25L22.5 29.5 M6.5 13.5L11 18L6.5 22.5 M29.5 13.5L25 18L29.5 22.5 M8.8 3.8L9.8 9.8L3.8 8.8 M27.2 3.8L26.2 9.8L32.2 8.8 M8.8 32.2L9.8 26.2L3.8 27.2 M27.2 32.2L26.2 26.2L32.2 27.2');
-    svg.appendChild(path);
+    // Six crystalline arms with fine branching tips: no surrounding circle.
+    for (let arm=0;arm<6;arm++) {
+      const group=document.createElementNS(snowflakeNS,'g');
+      group.setAttribute('transform','rotate('+(arm*60)+' 20 20)');
+      const shaft=document.createElementNS(snowflakeNS,'path');
+      shaft.setAttribute('d','M20 18 L20 3.1 M20 7.4 L15.6 11.2 M20 7.4 L24.4 11.2 M20 12.9 L17.1 15.4 M20 12.9 L22.9 15.4 M20 3.1 L18 5.2 M20 3.1 L22 5.2');
+      group.appendChild(shaft);
+      const facet=document.createElementNS(snowflakeNS,'path');
+      facet.setAttribute('class','snowflake-facet');
+      facet.setAttribute('d','M20 5 L18.6 8.2 L20 10.4 L21.4 8.2 Z');
+      group.appendChild(facet);
+      svg.appendChild(group);
+    }
+    const center=document.createElementNS(snowflakeNS,'path');
+    center.setAttribute('class','snowflake-heart');
+    center.setAttribute('d','M20 15.8 L24.2 18 L24.2 22 L20 24.2 L15.8 22 L15.8 18 Z');
+    svg.appendChild(center);
     const label = document.createElement('span');
     label.className = 'portal-label';
     label.textContent = title;
