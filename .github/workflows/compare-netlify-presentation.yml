@@ -40,7 +40,6 @@ jobs:
               await page.waitForTimeout(9000);
               const state=()=>page.evaluate(()=>{
                 const select=s=>{const n=document.querySelector(s);if(!n)return null;const c=getComputedStyle(n);return {tag:n.tagName,display:c.display,color:c.color,bg:c.backgroundColor,font:c.fontFamily,position:c.position,width:n.getBoundingClientRect().width,height:n.getBoundingClientRect().height}};
-                };
                 return {location:location.href,title:document.title,
                   stylesheets:document.styleSheets.length,links:[...document.querySelectorAll('link[rel=stylesheet]')].map(x=>({href:x.href,disabled:x.disabled})),
                   body:select('body'), nav:select('nav'), aside:select('.sidebar'),header:select('header'),
