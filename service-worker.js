@@ -1,4 +1,4 @@
-const CACHE_NAME = 'belaya-mgla-v1206';
+const CACHE_NAME = 'belaya-mgla-v1222';
 // On first visit, never download desktop-only CSS in the background on a phone.
 // Versioned styles are cached on first actual use by the fetch handler.
 const STATIC_CORE = [];
@@ -32,10 +32,15 @@ async function freshPage(req){
 function isVersionedCoreAsset(url){
   const path=url.pathname;
   const version=url.searchParams.get('v')||'';
-  return /^[0-9]{3,4}$/.test(version) && (
+  return /^[0-9]{1,4}$/.test(version) && (
     path.endsWith('/site-v626.min.css') ||
     path.endsWith('/site-home-v995.css') ||
-    path.endsWith('/site-desktop-v985.css')
+    path.endsWith('/site-desktop-v985.css') ||
+    path.endsWith('/guides-shared-v1222.css') ||
+    path.endsWith('/guides-shared-v1222.js') ||
+    path.endsWith('/site-palace-shared-v1221.css') ||
+    path.endsWith('/home-royal-bundle-v1222.css') ||
+    path.endsWith('/mobile-ice-aurora-v1140.css')
   );
 }
 
