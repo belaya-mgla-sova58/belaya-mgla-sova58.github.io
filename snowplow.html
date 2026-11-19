@@ -1312,7 +1312,7 @@ sections.forEach((section, index) => {
     svg.decoding = 'async';
     svg.width = 27;
     svg.height = 27;
-    svg.style.setProperty('--snow-hue', snowHues[index]+'deg');
+    svg.style.setProperty('--snow-hue', snowHues[index % snowHues.length]+'deg');
     const label = document.createElement('span');
     label.className = 'portal-label';
     label.textContent = title;
