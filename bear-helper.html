@@ -204,7 +204,7 @@ $('calc').onclick=calc;fillHeroes();
     if(typeof value!=='string')return;
     if(el.tagName==='SELECT'){
      if([...el.options].some(opt=>opt.value===value))el.value=value;
-    }else if(/^\\d{1,10}$/.test(value)&&Number(value)<=1000000000){
+    }else if(/^\d{1,10}$/.test(value)&&Number(value)<=1000000000){
      el.value=value;
     }
    });
