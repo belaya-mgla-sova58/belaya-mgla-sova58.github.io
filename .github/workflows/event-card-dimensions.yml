@@ -1,0 +1,65 @@
+name: Reserve layout space for event card illustrations
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/event-card-dimensions.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  dimensions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Install Pillow
+        run: python3 -m pip install --user Pillow
+      - name: Set only event-card image intrinsic dimensions
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import re
+          path=Path('events.html')
+          html=path.read_text('utf-8')
+          count=[0]
+          def fixed(match):
+              tag=match.group(0)
+              src=re.search(r'\bsrc="([^"]+)"',tag)
+              if not src or 'width=' in tag or 'height=' in tag:
+                  return tag
+              name=src.group(1).split('?')[0]
+              if not name.startswith('assets/') or '-card-' not in name:
+                  return tag
+              image=Path(name)
+              if not image.is_file():raise SystemExit('Missing image '+name)
+              with Image.open(image) as im:
+                  width,height=im.size
+              if not width or not height:raise SystemExit('Invalid dimensions '+name)
+              count[0]+=1
+              return tag[:-2]+' width="'+str(width)+'" height="'+str(height)+'"/>' if tag.endswith('/>') else tag[:-1]+' width="'+str(width)+'" height="'+str(height)+'">'
+          out=re.sub(r'<img\b[^>]*>',fixed,html)
+          if count[0]<18:
+              raise SystemExit('Unexpectedly few event card images: '+str(count[0]))
+          path.write_text(out,'utf-8')
+          print('Event card images reserved:',count[0])
+          PY
+      - name: Commit event image dimensions
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add events.html
+          if git diff --cached --quiet; then
+            echo 'Event image dimensions are already present.'
+            exit 0
+          fi
+          git commit -m 'Prevent event card image shifts by reserving natural dimensions'
+          git pull --rebase origin main
+          git push origin HEAD:main

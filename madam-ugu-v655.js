@@ -136,7 +136,7 @@ function init(){
   var launcher=el('a',{id:'madamUguLauncherV720',href:'#','aria-label':'Открыть шар предсказаний Мадам Угу'});
   var img=el('img',{src:'assets/madam-ugu-branch-v682.webp?v=682',alt:'Мадам Угу'});
   launcher.appendChild(img);document.body.appendChild(launcher);
-  var closeLauncher=el('button',{id:'madamUguCloseLauncherV720','aria-label':'Скрыть Мадам Угу'},'×');
+  var closeLauncher=el('button',{id:'madamUguCloseLauncherV720','aria-label':'Скрыть Мадам Угу ×'},'×');
   document.body.appendChild(closeLauncher);
 
   var orb=q('.ugu720-orb',panel),msg=q('.ugu720-message',panel),counter=q('.ugu720-counter',panel),

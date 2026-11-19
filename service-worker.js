@@ -1,62 +1,42 @@
-const CACHE_NAME = 'belaya-mgla-v984';
-const STATIC_CORE = [
-  './site-v626.min.css?v=984',
-  './manifest-v541.webmanifest',
-  './assets/home-hero-polish-v447.webp',
-  './assets/ui-home-v534.webp',
-  './assets/ui-events-v534.webp',
-  './assets/ui-heroes-v534.webp',
-  './assets/ui-gear-v534.webp',
-  './assets/ui-experts-v534.webp',
-  './assets/ui-pets-v534.webp',
-  './assets/ui-calculator-v534.webp',
-  './assets/ui-knowledge-v534.webp'
-];
+const CACHE_NAME = 'belaya-mgla-v1193';
+// On first visit, never download desktop-only CSS in the background on a phone.
+// Versioned styles are cached on first actual use by the fetch handler.
+const STATIC_CORE = [];
 
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(STATIC_CORE)).catch(()=>{}));
+  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(STATIC_CORE.map(path => new Request(path,{cache:'reload'})))).catch(()=>{}));
   self.skipWaiting();
 });
 
+// Updates should not forcibly reload open tabs or discard user input.
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys()
-      .then(keys => Promise.all(keys.filter(k => k.startsWith('belaya-mgla-') && k !== CACHE_NAME).map(k => caches.delete(k))))
-      .then(() => self.clients.claim())
-      .then(() => self.clients.matchAll({type:'window',includeUncontrolled:true}))
-      .then(clients => Promise.all(clients.map(client => {
-        try{
-          const u=new URL(client.url);
-          if(u.origin===self.location.origin && u.searchParams.get('ugu_refresh')!=='984'){
-            u.searchParams.set('ugu_refresh','984');
-            return client.navigate(u.toString());
-          }
-        }catch(e){}
-        return Promise.resolve();
-      })))
+    self.clients.claim().then(() => {
+      // Cleanup is best-effort; it cannot block the newly active worker.
+      caches.keys().then(keys => Promise.all(
+        keys.filter(k => k.startsWith('belaya-mgla-') && k !== CACHE_NAME)
+          .map(k => caches.delete(k))
+      )).catch(() => {});
+    })
   );
 });
 
-function optimizeHtml(html){
-  html=html.replace(/<section\s+class=["']pwa-install-v540["'][\s\S]*?<\/section>/i,'');
-  html=html.replace(/<section\s+class=["']home-today-v581["'][\s\S]*?<\/section>/i,'');
-  html=html.replace(/madam-ugu-v655\.js\?v=\d+/g,'madam-ugu-v655.js?v=958');
-  html=html.replace(/madam-ugu-mobile-match-v701\.js\?v=\d+/g,'madam-ugu-mobile-match-v701.js?v=714');
-  html=html.replace(/pwa-install\.js\?v=\d+/g,'pwa-install.js?v=955');
-  html=html.replace(/site-v629\.min\.js\?v=\d+/g,'site-v629.min.js?v=960');
-  // Preserve the actual CSS version declared by each page; do not rewrite to an old cached asset.
-  return html;
+// HTML is always loaded directly from the network. Do not rewrite resource
+// versions or remove page sections: the published HTML is the source of truth.
+async function freshPage(req){
+  return fetch(req,{cache:'no-store'});
 }
 
-async function freshPage(req){
-  const resp=await fetch(req,{cache:'no-store'});
-  const type=(resp.headers.get('content-type')||'').toLowerCase();
-  if(!resp.ok||!type.includes('text/html')) return resp;
-  let html=optimizeHtml(await resp.text());
-  const headers=new Headers(resp.headers);
-  headers.set('Cache-Control','no-store, no-cache, must-revalidate, max-age=0');
-  headers.delete('content-length');
-  return new Response(html,{status:resp.status,statusText:resp.statusText,headers});
+// Only explicitly versioned core CSS/JS are cache-first. A new ?v= URL
+// always creates a separate entry; HTML navigation still fetches fresh.
+function isVersionedCoreAsset(url){
+  const path=url.pathname;
+  const version=url.searchParams.get('v')||'';
+  return /^[0-9]{3,4}$/.test(version) && (
+    path.endsWith('/site-v626.min.css') ||
+    path.endsWith('/site-home-v995.css') ||
+    path.endsWith('/site-desktop-v985.css')
+  );
 }
 
 function isFresh(url){
@@ -71,6 +51,7 @@ function isFresh(url){
          p.endsWith('/fortune-phrases.txt') ||
          p.endsWith('/pwa-install.js') ||
          p.endsWith('/site-v626.min.css') ||
+         p.endsWith('/site-home-v995.css') ||
          p.endsWith('/home-date-v588.js');
 }
 
@@ -82,6 +63,23 @@ self.addEventListener('fetch', event => {
 
   if(req.mode==='navigate'||url.pathname.endsWith('.html')){
     event.respondWith(freshPage(req).catch(()=>fetch(req,{cache:'no-store'})));
+    return;
+  }
+
+  // Avoid re-downloading the same versioned stylesheet and loader on
+  // every route. Cached responses also remain available temporarily offline.
+  if(isVersionedCoreAsset(url)){
+    event.respondWith(
+      caches.open(CACHE_NAME).then(async cache=>{
+        const cached=await cache.match(req);
+        if(cached)return cached;
+        const response=await fetch(req,{cache:'no-store'});
+        if(response.ok&&response.type!=='opaque'){
+          try{await cache.put(req,response.clone())}catch(e){}
+        }
+        return response;
+      }).catch(()=>fetch(req))
+    );
     return;
   }
 

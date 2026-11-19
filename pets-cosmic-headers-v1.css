@@ -1,0 +1,98 @@
+/* Whiteout Pets · Cosmic Winter Headers v1.
+   Shared visual styling only, original portraits, texts and mechanics unchanged. */
+body.is-pets-route .pets-redesign-head,
+body.is-pets-route .pet-detail-hero{
+ position:relative!important;isolation:isolate;overflow:hidden!important;
+ background:radial-gradient(ellipse at 90% 5%,rgba(160,111,225,.25),transparent 51%),
+  radial-gradient(ellipse at 15% 95%,rgba(77,188,233,.19),transparent 46%),
+  linear-gradient(118deg,#0a2440 0%,#152c4c 57%,#24294e 100%)!important;
+ border:1px solid rgba(136,201,252,.55)!important;
+ border-radius:20px!important;
+ box-shadow:inset 0 1px 0 rgba(223,246,255,.15),0 14px 32px rgba(0,11,37,.24)!important;
+}
+body.is-pets-route .pets-redesign-head::before,
+body.is-pets-route .pet-detail-hero::before{
+ content:"";position:absolute;pointer-events:none;inset:0;z-index:-1;
+ background:radial-gradient(circle at 78% 27%,rgba(208,240,255,.42) 0 1px,transparent 2px),
+ radial-gradient(circle at 61% 13%,rgba(220,195,255,.6) 0 1px,transparent 2px),
+ radial-gradient(circle at 91% 70%,rgba(210,240,255,.4) 0 1px,transparent 2px),
+ radial-gradient(circle at 48% 62%,rgba(176,225,255,.25) 0 1px,transparent 2px);
+ opacity:.75;
+}
+body.is-pets-route .pets-redesign-head::after,
+body.is-pets-route .pet-detail-hero::after{
+ content:"✦";position:absolute;top:14px;right:21px;pointer-events:none;
+ font:27px/1 Georgia,serif;color:rgba(187,219,255,.44);
+}
+body.is-pets-route .pets-redesign-head h1,
+body.is-pets-route .pet-detail-hero h1{
+ color:#f5f9ff!important;-webkit-text-fill-color:#f5f9ff!important;
+ text-shadow:0 2px 12px rgba(5,18,44,.37)!important;
+ line-height:1.15!important;letter-spacing:.02em;
+}
+body.is-pets-route .pets-redesign-head p,
+body.is-pets-route .pet-detail-hero p{
+ color:#d6e8fa!important;-webkit-text-fill-color:#d6e8fa!important;
+ line-height:1.65!important;
+}
+body.is-pets-route .pets-eyebrow,
+body.is-pets-route .pet-detail-tag{
+ color:#bde9ff!important;-webkit-text-fill-color:#bde9ff!important;
+}
+body.is-pets-route .pet-detail-tag{
+ background:linear-gradient(115deg,rgba(23,83,133,.63),rgba(77,61,128,.55))!important;
+ border:1px solid rgba(135,211,246,.48)!important;
+ border-radius:999px!important;
+}
+body.is-pets-route .pets-head-count span,
+body.is-pets-route .pet-detail-metrics span{
+ background:rgba(226,243,255,.075)!important;
+ border:1px solid rgba(153,211,251,.32)!important;
+ color:#e4f1fe!important;-webkit-text-fill-color:#e4f1fe!important;
+ border-radius:11px!important;
+}
+body.is-pets-route .pets-head-count b{
+ color:#fff!important;-webkit-text-fill-color:#fff!important;
+}
+body.is-pets-route .pet-detail-img{
+ position:relative;z-index:1;
+ border:2px solid rgba(143,209,244,.55)!important;
+ border-radius:17px!important;
+ background:linear-gradient(135deg,#163954,#242c50)!important;
+ box-shadow:0 0 0 4px rgba(146,194,242,.09),0 6px 22px rgba(5,19,46,.24)!important;
+}
+body.is-pets-route .pet-detail-img img{
+ width:100%;height:100%;object-fit:cover;
+}
+body.is-pets-route .pet-detail-crumb{
+ border-color:rgba(132,194,239,.32)!important;
+}
+body.is-pets-route .pets-index a{
+ border-color:rgba(136,196,244,.42)!important;
+ background:linear-gradient(120deg,rgba(17,55,89,.95),rgba(37,44,91,.88))!important;
+ color:#e8f5ff!important;-webkit-text-fill-color:#e8f5ff!important;
+ box-shadow:0 4px 12px rgba(5,18,42,.1);
+}
+body.is-pets-route .pets-index a:hover{
+ border-color:#95dafa!important;filter:brightness(1.09);
+}
+@media(max-width:720px){
+ body.is-pets-route .pets-redesign-head,
+ body.is-pets-route .pet-detail-hero{
+  border-radius:15px!important;
+  padding:19px 16px!important;
+ }
+ body.is-pets-route .pet-detail-hero{
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:17px!important;
+ }
+ body.is-pets-route .pet-detail-img{
+  width:min(100%,230px)!important;max-width:230px!important;
+  margin:0 auto!important;
+ }
+ body.is-pets-route .pets-redesign-head::after,
+ body.is-pets-route .pet-detail-hero::after{
+  right:11px;top:11px;font-size:20px;
+ }
+ body.is-pets-route .pet-detail-hero h1{font-size:clamp(26px,7vw,38px)!important;}
+}

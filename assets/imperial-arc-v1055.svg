@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="420" viewBox="0 0 1600 420" role="img" aria-label="Декоративная имперская ледяная арка">
+<defs>
+<linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff1ca"/><stop offset=".34" stop-color="#cda65b"/><stop offset=".68" stop-color="#f1d99c"/><stop offset="1" stop-color="#90642f"/></linearGradient>
+<linearGradient id="arc" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f5deb0" stop-opacity=".7"/><stop offset="1" stop-color="#5d78af" stop-opacity=".07"/></linearGradient>
+<radialGradient id="halo"><stop stop-color="#b4d8ff" stop-opacity=".43"/><stop offset=".55" stop-color="#805cb6" stop-opacity=".17"/><stop offset="1" stop-color="#04132d" stop-opacity="0"/></radialGradient>
+<g id="wing" fill="none" stroke="url(#gold)" stroke-linecap="round" stroke-linejoin="round">
+<path stroke-width="2" d="M0 0C56 24 105 32 155 20S237 4 285 33 351 61 417 33"/>
+<path stroke-width="1.2" d="M0 14C75 56 141 59 201 43S319 40 393 75"/>
+<path stroke-width="1.6" d="M22 25Q79 98 147 98Q106 65 73 82Q113 128 193 113"/>
+<path stroke-width="1.4" d="M95 44Q130 5 173 23Q135 33 150 62Q182 27 225 44"/>
+<path stroke-width="1.2" d="M230 42Q264 105 309 111Q282 81 267 98Q303 132 375 115"/>
+<path stroke-width="1.1" d="M340 34Q361 9 402 12Q380 21 384 42"/>
+</g>
+<g id="flake" stroke="url(#gold)" stroke-width="1.3" fill="none" stroke-linecap="round">
+<path d="M0 -24V24M-24 0H24M-17 -17L17 17M17 -17L-17 17"/>
+<path d="M-5 -18L0 -13L5 -18M-5 18L0 13L5 18M-18 -5L-13 0L-18 5M18 -5L13 0L18 5"/>
+<circle r="4" fill="#f7e3bd" stroke="none"/>
+</g>
+</defs>
+<ellipse cx="800" cy="165" rx="660" ry="270" fill="url(#halo)"/>
+<path d="M21 397V103Q88 70 135 103Q183 157 245 105Q330 18 411 86Q513 147 590 77Q695 -24 800 47Q905 -24 1010 77Q1087 147 1189 86Q1270 18 1355 105Q1417 157 1465 103Q1512 70 1579 103V397" fill="none" stroke="url(#gold)" stroke-width="2" opacity=".84"/>
+<path d="M40 390V121Q92 90 140 120Q184 180 249 122Q330 40 410 103Q517 174 600 93Q698 7 800 72Q902 7 1000 93Q1083 174 1190 103Q1270 40 1351 122Q1416 180 1460 120Q1508 90 1560 121V390" fill="none" stroke="url(#arc)" stroke-width="1.2"/>
+<path d="M60 8H660L706 34M1540 8H940L894 34" fill="none" stroke="url(#gold)" stroke-width="1.5"/>
+<path d="M60 15H615M1540 15H985" fill="none" stroke="#d9b67a" opacity=".52"/>
+<use href="#wing" x="74" y="24"/><use href="#wing" transform="translate(1526 24) scale(-1 1)"/>
+<use href="#flake" x="800" y="44"/>
+<path d="M785 89L800 62L815 89L800 115Z" fill="#9acfee" fill-opacity=".65" stroke="url(#gold)" stroke-width="2"/>
+<path d="M800 65V114M787 90H813" stroke="#eff9ff" stroke-opacity=".75"/>
+<g fill="none" stroke="url(#gold)" stroke-width="1.7">
+<path d="M23 372L53 342L83 372L53 402Z"/>
+<path d="M1577 372L1547 342L1517 372L1547 402Z"/>
+<path d="M18 100L42 76L66 100L42 124Z"/>
+<path d="M1582 100L1558 76L1534 100L1558 124Z"/>
+<path d="M750 8L800 0L850 8"/>
+</g>
+<g opacity=".75"><use href="#flake" x="215" y="188" transform="rotate(11 215 188) scale(.68)"/><use href="#flake" x="1385" y="188" transform="rotate(-11 1385 188) scale(.68)"/>
+<use href="#flake" x="128" y="269" transform="rotate(12 128 269) scale(.4)"/><use href="#flake" x="1472" y="269" transform="rotate(-12 1472 269) scale(.4)"/>
+</g>
+<g fill="#f3d9a5"><circle cx="665" cy="31" r="2"/><circle cx="935" cy="31" r="2"/><circle cx="440" cy="73" r="1.8"/><circle cx="1160" cy="73" r="1.8"/></g>
+</svg>

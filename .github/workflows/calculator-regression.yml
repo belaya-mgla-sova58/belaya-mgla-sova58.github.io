@@ -1,0 +1,38 @@
+name: Проверка калькуляторов
+
+on:
+  push:
+    paths:
+      - "bear-helper.html"
+      - "furnace-calculator.html"
+      - "fire-furnace-calculator.html"
+      - "essence-mithril-calculator.html"
+      - "tests/calculator-regression-v1.cjs"
+      - ".github/workflows/calculator-regression.yml"
+  pull_request:
+    paths:
+      - "bear-helper.html"
+      - "furnace-calculator.html"
+      - "fire-furnace-calculator.html"
+      - "essence-mithril-calculator.html"
+      - "tests/calculator-regression-v1.cjs"
+      - ".github/workflows/calculator-regression.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  calculator-regression:
+    name: Расчёты и контроль ошибок
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Получить файлы сайта
+        uses: actions/checkout@v4
+      - name: Установить Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Проверить калькуляторы
+        run: node tests/calculator-regression-v1.cjs

@@ -1,0 +1,14 @@
+{
+  "name": "belaya-mgla-visual-checks",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "compare": "node visual-diff.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "pixelmatch": "^8.0.0",
+    "pngjs": "^7.0.0"
+  }
+}

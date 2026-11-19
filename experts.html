@@ -4,12 +4,13 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Белая Мгла • Эксперты</title>
-<link href="site-v626.min.css?v=983" rel="stylesheet"/>
+<link rel="preconnect" href="https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com"/>
+<link href="site-v626.min.css?v=1053" rel="stylesheet"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<script defer src="site-v629.min.js?v=978"></script>
+<script defer src="site-v629.min.js?v=1098"></script>
 <script defer src="notifications-v630.js?v=630"></script>
 <meta content="Подробные гайды по экспертам Белой Мглы: навыки, таланты, отношения, стоимость и приоритет прокачки." name="description"/>
 <meta content="#071426" name="theme-color"/>
@@ -25,7 +26,7 @@
 .wave{--edge:#6dd3df;--glow:#173f4b;overflow:hidden;border:1px solid color-mix(in srgb,var(--edge) 45%,transparent);border-radius:18px;background:#06141b;box-shadow:0 10px 28px rgba(0,0,0,.22)}
 .wave>summary{position:relative;isolation:isolate;display:flex;align-items:center;min-height:104px;padding:12px 54px 12px 16px;cursor:pointer;list-style:none;background:linear-gradient(90deg,rgba(5,18,25,.99),rgba(7,29,38,.95) 55%,rgba(8,20,26,.99));overflow:hidden}
 .wave>summary::-webkit-details-marker{display:none}
-.wave>summary:before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 78% 44%,color-mix(in srgb,var(--edge) 12%,transparent),transparent 26%),repeating-linear-gradient(20deg,transparent 0 34px,rgba(186,232,239,.03) 35px 36px,transparent 37px 70px)}
+.wave>summary::before{content:none!important;display:none!important}\n.wave>summary{background:radial-gradient(circle at 78% 44%,color-mix(in srgb,var(--edge) 12%,transparent),transparent 26%),repeating-linear-gradient(20deg,transparent 0 34px,rgba(186,232,239,.03) 35px 36px,transparent 37px 70px),linear-gradient(90deg,rgba(5,18,25,.99),rgba(7,29,38,.95) 55%,rgba(8,20,26,.99))}
 .wave-copy{position:relative;z-index:3;max-width:55%}
 .wave-copy small{display:block;margin-bottom:5px;color:var(--edge);font-size:9px;font-weight:950;letter-spacing:.14em;text-transform:uppercase}
 .wave-copy strong{display:block;color:#fff;font-size:clamp(20px,3.8vw,31px);line-height:1.03}
@@ -43,7 +44,62 @@
 .experts-note{margin-top:14px;padding:12px 14px;border:1px solid rgba(118,190,212,.13);border-radius:13px;background:rgba(86,155,180,.06);color:#aabec8;font-size:11px;line-height:1.45}
 @media(max-width:620px){.experts-clean{width:min(100% - 12px,1040px)}.experts-head{padding:15px}.wave>summary{min-height:86px;padding:10px 42px 10px 11px}.wave-copy{max-width:52%}.wave-copy span{display:none}.wave-faces{right:38px;gap:3px}.wave-faces img{width:48px;height:48px;border-radius:11px}.wave[data-count="1"] .wave-faces img{width:50px;height:50px}.wave-arrow{right:7px;width:26px;height:26px}.expert-row{grid-template-columns:1fr auto;gap:5px 8px}.expert-row span{grid-column:1/-1;grid-row:2}.expert-row strong{font-size:15px}}
 @media(max-width:390px){.wave-copy strong{font-size:17px}.wave-copy small{font-size:7px}.wave-faces img{width:43px;height:43px}.wave[data-count="1"] .wave-faces img{width:45px;height:45px}}
+
+/* Five minimalistic fantasy panorama headers, with dark gradient fallback
+   until optimized assets are uploaded into /assets. */
+body.is-experts-route .experts-clean .wave > summary{
+  background-position:center center!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+  color:#f3fbff!important;
+}
+body.is-experts-route .experts-clean .wave.wave1 > summary{
+  background-image:
+    linear-gradient(90deg,rgba(3,17,30,.96) 0%,rgba(4,23,39,.84) 43%,rgba(4,19,34,.38) 76%,rgba(3,14,28,.57) 100%),
+    url("assets/experts-wave-1-ice.webp"),
+    linear-gradient(110deg,#071c31,#114a66)!important;
+}
+body.is-experts-route .experts-clean .wave.wave2 > summary{
+  background-image:
+    linear-gradient(90deg,rgba(23,14,10,.95) 0%,rgba(34,20,12,.83) 43%,rgba(25,13,12,.36) 76%,rgba(20,11,12,.58) 100%),
+    url("assets/experts-wave-2-gold.webp"),
+    linear-gradient(110deg,#20130d,#5b3216)!important;
+}
+body.is-experts-route .experts-clean .wave.wave3 > summary{
+  background-image:
+    linear-gradient(90deg,rgba(27,9,21,.95) 0%,rgba(39,12,30,.82) 43%,rgba(25,8,23,.35) 76%,rgba(20,7,18,.57) 100%),
+    url("assets/experts-wave-3-ruby.webp"),
+    linear-gradient(110deg,#230d20,#53172e)!important;
+}
+body.is-experts-route .experts-clean .wave.wave4 > summary{
+  background-image:
+    linear-gradient(90deg,rgba(18,11,34,.95) 0%,rgba(30,15,51,.83) 43%,rgba(23,9,45,.33) 76%,rgba(16,8,30,.58) 100%),
+    url("assets/experts-wave-4-amethyst.webp"),
+    linear-gradient(110deg,#19112f,#4d2069)!important;
+}
+body.is-experts-route .experts-clean .wave.wave5 > summary{
+  background-image:
+    linear-gradient(90deg,rgba(27,16,9,.96) 0%,rgba(34,19,10,.83) 43%,rgba(27,15,10,.35) 76%,rgba(20,11,9,.57) 100%),
+    url("assets/experts-wave-5-amber.webp"),
+    linear-gradient(110deg,#211308,#593414)!important;
+}
+body.is-experts-route .experts-clean .wave .wave-copy small{color:var(--edge)!important;text-shadow:0 1px 6px #000}
+body.is-experts-route .experts-clean .wave .wave-copy strong{color:#fff!important;text-shadow:0 2px 10px #000b}
+body.is-experts-route .experts-clean .wave .wave-copy span{color:#d5e6ef!important;text-shadow:0 1px 7px #000c}
+body.is-experts-route .experts-clean .wave .wave-faces img{
+  box-shadow:0 4px 15px #000b,0 0 0 1px color-mix(in srgb,var(--edge) 40%,transparent);
+}
+@media(prefers-reduced-motion:reduce){body.is-experts-route .experts-clean .wave{transition:none}}
+
 </style>
+<link rel="stylesheet" href="site-desktop-v985.css?v=985" media="screen and (min-width:1100px) and (hover:hover) and (pointer:fine)" data-sova-desktop-v985/>
+<link rel="stylesheet" href="grand-imperial-interiors-v1054.css?v=1"/>
+<link rel="stylesheet" href="imperial-palace-art-v1055.css?v=1"/>
+<link rel="stylesheet" href="royal-crest-interiors-v1056.css?v=1"/>
+<link rel="stylesheet" href="crown-jewel-cards-v1057.css?v=1"/>
+<link rel="stylesheet" href="royal-ice-gallery-v1058.css?v=1"/>
+<link rel="stylesheet" href="palace-chapters-v1059.css?v=1"/>
+<link rel="stylesheet" href="imperial-balance-v1060.css?v=1"/><link rel="stylesheet" href="gallery-identity-v1063.css?v=5"/>
 </head>
 <body class="is-experts-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="experts">
 <div aria-hidden="true" class="site-cosmic-background-v442"></div>
@@ -63,7 +119,7 @@
 <div class="experts-note">Наличие гайда не означает, что эксперт уже доступен в вашем государстве. Открытие зависит от этапа развития и версии игры.</div>
 </div></div></main>
 <button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button>
-<nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424"><a data-v424-nav="home" href="index.html"><span class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" src="assets/ui-home-v534.webp"/></span><b>Главная</b></a><a data-v424-nav="events" href="events.html"><span class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" src="assets/ui-events-v534.webp"/></span><b>События</b></a><a data-v424-nav="heroes" href="heroes.html"><span class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" src="assets/ui-heroes-v534.webp"/></span><b>Герои</b></a><a data-v424-nav="calc" href="fire-furnace-calculator.html"><span class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" src="assets/ui-calculator-v534.webp"/></span><b>Калькулятор</b></a><a data-v424-nav="knowledge" href="other.html"><span class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" src="assets/ui-knowledge-v534.webp"/></span><b>База знаний</b></a></nav>
-<script defer src="pwa-install.js?v=586"></script>
+<nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424"><a data-v424-nav="home" href="index.html"><span class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" src="assets/ui-home-v534.webp"/></span><b>Главная</b></a><a data-v424-nav="events" href="events.html"><span class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" src="assets/ui-events-v534.webp"/></span><b>События</b></a><a data-v424-nav="heroes" href="heroes.html"><span class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" src="assets/ui-heroes-v534.webp"/></span><b>Герои</b></a><a data-v424-nav="calc" href="calculators.html"><span class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" src="assets/ui-calculator-v534.webp"/></span><b>Калькуляторы</b></a><a data-v424-nav="knowledge" href="other.html"><span class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" src="assets/ui-knowledge-v534.webp"/></span><b>База знаний</b></a></nav>
+<script defer src="pwa-install.js?v=987"></script>
 </body>
 </html>

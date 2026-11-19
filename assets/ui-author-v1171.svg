@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Иконка автора">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#121d45"/><stop offset=".52" stop-color="#193b62"/><stop offset="1" stop-color="#070e28"/></linearGradient>
+ <linearGradient id="feather" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fdf4d6"/><stop offset=".5" stop-color="#d5efff"/><stop offset="1" stop-color="#70d8ff"/></linearGradient>
+ <filter id="glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.5"/></filter>
+</defs>
+<rect x="2.5" y="2.5" width="59" height="59" rx="15" fill="url(#bg)" stroke="#69d9ff" stroke-width="2"/>
+<path d="M8 16q18-14 43-3M56 47q-18 13-39 5" fill="none" stroke="#69d9ff" stroke-opacity=".35" stroke-width="1.1"/>
+<path d="M17 51c3-7 7-13 14-20" fill="none" stroke="#e6c889" stroke-width="3" stroke-linecap="round"/>
+<path d="M21 46C25 27 40 13 52 13c1 17-12 34-31 33Z" fill="#68c8ff" opacity=".5" filter="url(#glow)"/>
+<path d="M21 46C25 27 40 13 52 13c1 17-12 34-31 33Z" fill="url(#feather)" stroke="#f4dfaa" stroke-width="1.1"/>
+<path d="M20 49 45 20M32 35l-4-8m12 0-8 1" fill="none" stroke="#1f6387" stroke-width="1.7" stroke-linecap="round"/>
+<path d="M17 13v6m-3-3h6M51 46v6m-3-3h6" stroke="#f2d58d" stroke-width="1.6" stroke-linecap="round"/>
+</svg>

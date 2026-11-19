@@ -1,0 +1,91 @@
+/* Белая Мгла: v1086 low-paint mobile scrolling on homepage only.
+   One nebula image layer, no backdrop sampling, predictable static cards.
+   No changes to desktop, other routes, news artwork or SVG drawings. */
+@media screen and (max-width:820px) {
+ html:not(.force-desktop-root){
+  background-image:none!important;
+  background-color:#07132b!important;
+  background-attachment:scroll!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route.cosmic-visible-v444{
+  /* Previously the same large nebula was repainted on body and four nested wrappers,
+     each using cover against the page's full scroll height. Keep it once, tiled cheaply. */
+  background-color:#05132b!important;
+  background-image:url("assets/cosmic-nebula-visible-v444.webp")!important;
+  background-position:center top!important;
+  background-repeat:repeat-y!important;
+  background-size:100% auto!important;
+  background-attachment:scroll!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route.cosmic-visible-v444
+ :is(main#appMain,.modern-home-v424,.route-page.active,.route-page[data-route="home"]){
+  background-image:none!important;
+  background-color:transparent!important;
+  background-attachment:scroll!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route .site-cosmic-background-v442{
+  display:none!important;
+  animation:none!important;
+  transform:none!important;
+ }
+ /* Static sapphire panels replace real-time glass/backdrop sampling while preserving outlines. */
+ html:not(.force-desktop-root) body.is-home-route
+ :is(.home-news-v442,.home-portal-box-v1016,.home-more-visible-v1025,
+     .home-utility-v1025,.home-bear-calc-v780,.modern-panel-v424,
+     .modern-topic-card-v424,.modern-list-v424>a,.home-index-links-v1016>a,
+     .home-tools-grid-v1016>a,.home-portal-links-v1016>a,.home-quick-links-v1024>a,
+     .home-news-banner-v449,.home-news-card-v442,.mobile-topbar,.mobile-bottom-v424,
+     .site-search-box-v426,.nav-wrap){
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  background-attachment:scroll!important;
+  will-change:auto!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route
+ :is(.mobile-topbar,.mobile-bottom-v424,.site-search-box-v426){
+  background-color:rgba(6,22,49,.97)!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+ }
+ /* Large diffuse shadows on dozens of moving cards trigger expensive paint work. */
+ html:not(.force-desktop-root) body.is-home-route
+ :is(.home-index-links-v1016>a,.home-tools-grid-v1016>a,.home-portal-links-v1016>a,
+     .home-quick-links-v1024>a,.modern-topic-card-v424,.modern-list-v424>a,
+     .home-news-banner-v449){
+  box-shadow:0 3px 9px rgba(0,8,28,.30)!important;
+  transition:none!important;
+  will-change:auto!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route
+ :is(.home-news-v442,.home-portal-box-v1016,.home-bear-calc-v780,.home-utility-v1025,.modern-panel-v424){
+  box-shadow:0 4px 12px rgba(0,7,26,.28)!important;
+  will-change:auto!important;
+ }
+ /* Bright SVG strokes and gradient borders carry the neon look;
+    CSS drop-shadow on every icon is unnecessary on a phone. */
+ html:not(.force-desktop-root) body.is-home-route
+ :is(svg.bm-home-glyph-v1074,svg.bm-heading-icon-v1076,
+     svg.bm-news-icon-v1076,svg.bm-mobile-nav-icon-v1082){
+  filter:none!important;
+  -webkit-filter:none!important;
+  animation:none!important;
+  transition:none!important;
+  transform:none!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route
+ :is(.home-news-card-v442,.modern-topic-card-v424,.modern-list-v424>a,
+     .home-index-links-v1016>a,.home-tools-grid-v1016>a,.home-portal-links-v1016>a,
+     .home-quick-links-v1024>a):hover{
+  transform:none!important;
+ }
+ /* Sections below the fold can skip their own painting until near the viewport;
+    do not do this to the hero, search or main news, which need immediate layout. */
+ html:not(.force-desktop-root) body.is-home-route
+ .home-more-visible-v1025>.home-portal-secondary-v1016>.modern-home-columns-v424>.modern-panel-v424{
+  content-visibility:auto;
+  contain-intrinsic-size:auto 360px;
+ }
+ html:not(.force-desktop-root) body.is-home-route .reader-progress-v451{
+  display:none!important;
+ }
+}

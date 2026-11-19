@@ -1,0 +1,67 @@
+name: Build optimized responsive home banner
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/responsive-home-banner.yml"
+      - "belaya_mgla_new_header_2048.webp"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: responsive-home-banner
+  cancel-in-progress: false
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Install image library
+        run: python3 -m pip install --user Pillow
+      - name: Generate high quality smaller copies of the approved original
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import hashlib
+          original=Path('belaya_mgla_new_header_2048.webp')
+          if not original.exists():raise SystemExit('Original header is missing')
+          with Image.open(original) as im:
+              im.load()
+              if im.width!=2048 or abs(im.height-682)>3:
+                  raise SystemExit(f'Unexpected original banner proportions: {im.size}')
+              mode='RGBA' if 'A' in im.getbands() else 'RGB'
+              base=im.convert(mode)
+              original_size=original.stat().st_size
+              for width in (768,1280):
+                  height=round(base.height*width/base.width)
+                  dst=Path(f'belaya_mgla_new_header_{width}.webp')
+                  reduced=base.resize((width,height),Image.Resampling.LANCZOS)
+                  extra={}
+                  if im.info.get('icc_profile'):extra['icc_profile']=im.info['icc_profile']
+                  reduced.save(dst,'WEBP',quality=84,method=6,**extra)
+                  with Image.open(dst) as verified:
+                      verified.verify()
+                  size=dst.stat().st_size
+                  if size>=original_size:
+                      raise SystemExit(f'Variant {width}px not smaller than original')
+                  print(f'{dst}: {width}x{height}, {size} bytes vs {original_size} bytes original')
+          PY
+      - name: Publish derived assets only if different
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add belaya_mgla_new_header_768.webp belaya_mgla_new_header_1280.webp
+          if git diff --cached --quiet; then
+            echo 'Responsive images are already current.'
+            exit 0
+          fi
+          git commit -m 'Add optimized 768px and 1280px variants of the original home banner'
+          git pull --rebase origin main
+          git push origin HEAD:main

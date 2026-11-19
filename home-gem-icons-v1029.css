@@ -1,0 +1,108 @@
+/* White Mist: gem-medallion icons v1029.
+   The winter line pictograms become polished multicolor game emblems.
+   Homepage lower material panels only. */
+body.is-home-route .modern-home-v424 .home-more-visible-v1025{
+ --medallion-size:37px;
+}
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-topic-card-v424,
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-list-v424>a{
+ --icon-glow:#57d8ff;
+ --icon-bright:#d0f8ff;
+ --icon-mid:#1670bc;
+ --icon-deep:#102e66;
+}
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .v445-topic-icon,
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .v424-list-icon{
+ position:relative!important;isolation:isolate!important;
+ display:grid!important;place-items:center!important;
+ width:var(--medallion-size)!important;height:var(--medallion-size)!important;
+ min-width:var(--medallion-size)!important;min-height:var(--medallion-size)!important;
+ max-width:var(--medallion-size)!important;max-height:var(--medallion-size)!important;
+ box-sizing:border-box!important;margin:0!important;padding:5px!important;
+ border-radius:11px!important;
+ background:
+  radial-gradient(circle at 25% 17%,rgba(255,255,255,.48),transparent 38%),
+  radial-gradient(circle at 80% 92%,var(--icon-mid) 0%,transparent 72%),
+  linear-gradient(145deg,var(--icon-mid),var(--icon-deep))!important;
+ border:1px solid var(--icon-bright)!important;
+ outline:1px solid rgba(7,21,49,.5)!important;
+ outline-offset:-4px!important;
+ box-shadow:inset 0 1px 1px rgba(255,255,255,.55),
+ inset 0 -3px 6px rgba(4,13,43,.42),0 3px 7px rgba(0,6,32,.36),
+ 0 0 12px color-mix(in srgb,var(--icon-glow) 32%,transparent)!important;
+ overflow:hidden!important;transform:none!important;
+}
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .v445-topic-icon:after,
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .v424-list-icon:after{
+ content:""!important;position:absolute!important;inset:2px!important;
+ border:1px solid rgba(255,255,255,.18)!important;border-radius:8px!important;
+ pointer-events:none!important;z-index:0!important;
+}
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .home-winter-glyph-v1028{
+ position:relative!important;z-index:2!important;
+ display:block!important;width:25px!important;height:25px!important;
+ min-width:25px!important;min-height:25px!important;max-width:25px!important;max-height:25px!important;
+ stroke:var(--icon-bright)!important;stroke-width:2.1!important;
+ fill:color-mix(in srgb,var(--icon-bright) 20%,transparent)!important;
+ filter:drop-shadow(0 2px 1px rgba(0,11,37,.8)) drop-shadow(0 0 5px var(--icon-glow))!important;
+ transform:none!important;
+}
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 a:hover .home-winter-glyph-v1028{
+ stroke:#fff!important;filter:drop-shadow(0 0 7px var(--icon-glow))!important;
+}
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-topic-card-v424{
+ grid-template-columns:var(--medallion-size) minmax(0,1fr)!important;
+ gap:2px 10px!important;min-height:69px!important;
+}
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-list-v424>a{
+ grid-template-columns:var(--medallion-size) minmax(0,1fr) 14px!important;
+ column-gap:10px!important;min-height:55px!important;
+}
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-card-grid-v424>a:nth-child(9n+1){
+ --icon-glow:#62ddff;--icon-bright:#d0f5ff;--icon-mid:#248ec7;--icon-deep:#16325d;
+}
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-card-grid-v424>a:nth-child(9n+2){
+ --icon-glow:#b899ff;--icon-bright:#eee1ff;--icon-mid:#8055d2;--icon-deep:#30215e;
+}
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-card-grid-v424>a:nth-child(9n+3){
+ --icon-glow:#76e3ff;--icon-bright:#e0fbff;--icon-mid:#137ba5;--icon-deep:#124565;
+}
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-card-grid-v424>a:nth-child(9n+4){
+ --icon-glow:#ecb4ff;--icon-bright:#ffecff;--icon-mid:#ac63c2;--icon-deep:#452059;
+}
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-card-grid-v424>a:nth-child(9n+5){
+ --icon-glow:#55f7d5;--icon-bright:#d6fff5;--icon-mid:#159c9c;--icon-deep:#104d5b;
+}
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-card-grid-v424>a:nth-child(9n+6){
+ --icon-glow:#ffd490;--icon-bright:#fff0c7;--icon-mid:#bb8536;--icon-deep:#624422;
+}
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-card-grid-v424>a:nth-child(9n+7){
+ --icon-glow:#ffdf86;--icon-bright:#fff2cf;--icon-mid:#a78332;--icon-deep:#625024;
+}
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-card-grid-v424>a:nth-child(9n+8){
+ --icon-glow:#a7f5a2;--icon-bright:#ecffe4;--icon-mid:#398f5c;--icon-deep:#244e42;
+}
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-card-grid-v424>a:nth-child(9n+9){
+ --icon-glow:#a6d7ff;--icon-bright:#e5f3ff;--icon-mid:#4c82b2;--icon-deep:#253f7b;
+}
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-list-v424>a:nth-child(5n+1){
+ --icon-glow:#cf9eff;--icon-bright:#f6dfff;--icon-mid:#9361bf;--icon-deep:#412765;
+}
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-list-v424>a:nth-child(5n+2){
+ --icon-glow:#f8d17b;--icon-bright:#fff3cb;--icon-mid:#b58845;--icon-deep:#60431d;
+}
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-list-v424>a:nth-child(5n+3){
+ --icon-glow:#70d7ff;--icon-bright:#e3faff;--icon-mid:#318fc8;--icon-deep:#24466b;
+}
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-list-v424>a:nth-child(5n+4){
+ --icon-glow:#b6a1ff;--icon-bright:#e7e1ff;--icon-mid:#6965c8;--icon-deep:#35336f;
+}
+body.is-home-route .modern-home-v424 .home-more-visible-v1025 .modern-list-v424>a:nth-child(5n+5){
+ --icon-glow:#8febbb;--icon-bright:#dfffe8;--icon-mid:#449773;--icon-deep:#245247;
+}
+@media(max-width:620px){
+ body.is-home-route .modern-home-v424 .home-more-visible-v1025{--medallion-size:33px}
+ body.is-home-route .modern-home-v424 .home-more-visible-v1025 .home-winter-glyph-v1028{
+  width:22px!important;height:22px!important;min-width:22px!important;min-height:22px!important;
+ }
+}

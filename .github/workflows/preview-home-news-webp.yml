@@ -1,0 +1,93 @@
+name: Optimize and publish homepage news banners
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/optimize-news-banners.py'
+      - '.github/workflows/preview-home-news-webp.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Pillow
+        run: python -m pip install Pillow
+      - name: Encode and compare news banners
+        run: python scripts/optimize-news-banners.py
+      - name: Upload preview images and compression report
+        uses: actions/upload-artifact@v4
+        with:
+          name: homepage-news-webp-preview
+          path: optimized-preview/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Publish verified optimized assets (retain originals)
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import json, shutil
+          root=Path('.')
+          reports=json.loads((root/'optimized-preview/report.json').read_text(encoding='utf-8'))
+          index=root/'index.html'
+          html=index.read_text(encoding='utf-8')
+          source_to_destination={
+            'assets/news-ru-selected.jpg': ('assets/news-ru-selected-optimized.webp','news-ru-selected-optimized.webp'),
+            'assets/creative-corner-header-v447.webp': ('assets/creative-corner-header-optimized.webp','creative-corner-header-optimized.webp'),
+          }
+          published=0
+          for item in reports:
+            if 'webp_bytes' not in item:
+              print('Skipped', item['source'], item.get('result'))
+              continue
+            source=item['source']
+            destination,expected=source_to_destination[source]
+            if item['result'] != expected:
+              raise SystemExit('Unexpected output filename')
+            original=root/source
+            candidate=root/'optimized-preview'/expected
+            if candidate.stat().st_size != item['webp_bytes']:
+              raise SystemExit('File size changed unexpectedly')
+            from PIL import Image
+            with Image.open(original) as a, Image.open(candidate) as b:
+              if a.size != b.size:
+                raise SystemExit('Banner dimensions changed')
+              b.verify()
+            original_ref='src="'+source+'"'
+            optimized_ref='src="'+destination+'"'
+            if html.count(original_ref)==1 and html.count(optimized_ref)==0:
+              html=html.replace(original_ref,optimized_ref)
+            elif html.count(original_ref)==0 and html.count(optimized_ref)==1:
+              print('Already linked:',destination)
+            else:
+              raise SystemExit('Unexpected banner references: '+source)
+            shutil.copyfile(candidate,root/destination)
+            published+=1
+            print('Verified:',source,'->',destination)
+          if published:
+            index.write_text(html,encoding='utf-8')
+          print('Approved banners:',published)
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          for asset in assets/news-ru-selected-optimized.webp assets/creative-corner-header-optimized.webp; do
+            if [ -f "$asset" ]; then git add "$asset"; fi
+          done
+          if git diff --cached --quiet; then
+            echo "No approved banner changes to publish."
+            exit 0
+          fi
+          git commit -m "Publish quality-checked WebP news banners"
+          git pull --rebase origin main
+          git push origin HEAD:main

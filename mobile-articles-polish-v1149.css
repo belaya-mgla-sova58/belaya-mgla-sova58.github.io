@@ -1,0 +1,72 @@
+/* Mobile long-form publications: widths, readable story text, image fidelity.
+   All comments, view counters, reaction buttons, article copy and audio remain untouched. */
+@media screen and (max-width:820px){
+html:not(.force-desktop-root) body.news-top-whitefox main#appMain :is(.news-shell,.whitefox-article-shell,.whitefox-story,.whitefox-story-head,.wf-new,.wf-new-body,.wf-new-body-main,.wf-new-story,.wf-new-side){
+ box-sizing:border-box!important;width:100%!important;max-width:100%!important;min-width:0!important;
+}
+html:not(.force-desktop-root) body.news-top-whitefox main#appMain .wf-new-body{
+ display:grid!important;grid-template-columns:minmax(0,1fr)!important;
+ gap:12px!important;
+}
+html:not(.force-desktop-root) body.news-top-whitefox main#appMain .wf-new-side{
+ width:100%!important;max-width:100%!important;
+}
+html:not(.force-desktop-root) body.news-top-whitefox main#appMain :is(.whitefox-story-block,.wf-new-story,.wf-new-questions,.wf-new-romance,.whitefox-questions-v557,.whitefox-romance-v557){
+ box-sizing:border-box!important;min-width:0!important;max-width:100%!important;
+ overflow-wrap:break-word!important;
+}
+html:not(.force-desktop-root) body.news-top-whitefox main#appMain :is(.whitefox-story,.wf-new-story) :is(p,li){
+ font-size:clamp(15px,3.9vw,17px)!important;line-height:1.72!important;
+ overflow-wrap:break-word!important;
+}
+html:not(.force-desktop-root) body.news-top-whitefox main#appMain :is(.whitefox-story,.wf-new-story,.wf-new-head) :is(h1,h2,h3){
+ overflow-wrap:break-word!important;line-height:1.26!important;
+}
+html:not(.force-desktop-root) body.news-top-whitefox main#appMain :is(.whitefox-article-shell,.wf-new) img{
+ height:auto!important;max-width:100%!important;
+}
+html:not(.force-desktop-root) body.news-top-whitefox main#appMain :is(.whitefox-article-shell,.wf-new) :is(.comment-form,.comments-list,.comment-editor,.comment-card){
+ box-sizing:border-box!important;min-width:0!important;max-width:100%!important;
+}
+html:not(.force-desktop-root) body.news-top-whitefox main#appMain :is(textarea,input,button,select){
+ max-width:100%!important;box-sizing:border-box!important;
+}
+html:not(.force-desktop-root) body.news-top-whitefox main#appMain :is(textarea,input,select){
+ font-size:max(16px,1em)!important;
+}
+/* Creative articles preserve drawings and audio; no image crop and no overflow. */
+html:not(.force-desktop-root) body.news-top-creative main#appMain :is(.news-shell,.creative-v349-article-shell,.creative-v349-article,.creative-song-page-v396,.creative-song-article-v396,.creative-song-player-v396){
+ box-sizing:border-box!important;width:100%!important;min-width:0!important;max-width:100%!important;
+}
+html:not(.force-desktop-root) body.news-top-creative main#appMain :is(.creative-v349-article,.creative-song-article-v396) :is(h1,h2,h3,p,.creative-v349-stanza){
+ overflow-wrap:break-word!important;
+}
+html:not(.force-desktop-root) body.news-top-creative main#appMain :is(.creative-v349-article,.creative-song-article-v396) :is(img,video,canvas,audio){
+ max-width:100%!important;height:auto;
+}
+html:not(.force-desktop-root) body.news-top-creative main#appMain audio{
+ display:block!important;width:100%!important;max-width:100%!important;
+}
+html:not(.force-desktop-root) body.news-top-creative main#appMain :is(.creative-song-stats-v396,.creative-poem-like-v354,.creative-author-like-v371){
+ box-sizing:border-box!important;min-width:0!important;max-width:100%!important;
+}
+html:not(.force-desktop-root) body.news-subpage main#appMain :is(.news-shell,.news-page,.whitefox-story,.creative-v349-article) a:focus-visible{
+ outline:2px solid #ffdfaa!important;outline-offset:2px!important;
+}
+/* Halloween special keeps its own warm autumn design, only containment adjusted. */
+html:not(.force-desktop-root) body[data-static-route="news-halloween-2026"] main#appMain{
+ box-sizing:border-box!important;max-width:100%!important;min-width:0!important;
+}
+html:not(.force-desktop-root) body[data-static-route="news-halloween-2026"] main#appMain :is(.wrap,.hero-banner,.notice-grid,.stats){
+ box-sizing:border-box!important;max-width:100%!important;min-width:0!important;
+}
+html:not(.force-desktop-root) body[data-static-route="news-halloween-2026"] main#appMain .hero-banner img{
+ display:block!important;width:100%!important;height:auto!important;object-fit:contain!important;
+}
+html:not(.force-desktop-root) body[data-static-route="news-halloween-2026"] main#appMain :is(.stats,.stats-left){
+ flex-wrap:wrap!important;min-width:0!important;max-width:100%!important;
+}
+html:not(.force-desktop-root) body[data-static-route="news-halloween-2026"] main#appMain :is(.notice-grid,.stats) :is(p,li,h2,h3){
+ overflow-wrap:break-word!important;
+}
+}

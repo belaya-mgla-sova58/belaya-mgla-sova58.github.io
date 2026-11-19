@@ -1,0 +1,45 @@
+/* Compact pet headers v12. Images precomposed to 1500x210: no cropping or distorted pixels. */
+body.is-pets-route .pets-redesign .pet-stage>summary,
+body.is-pets-route .pets-redesign .pet-stage[open]>summary,
+body.is-pets-route .pets-redesign .pet-stage>summary:hover,
+body.is-pets-route .pets-redesign .pet-stage>summary:focus-visible {
+ display:block!important;position:relative!important;isolation:isolate!important;
+ box-sizing:border-box!important;min-height:0!important;
+ height:clamp(125px,13.8vw,184px)!important;max-height:184px!important;
+ padding:0!important;overflow:hidden!important;border-radius:13px!important;
+ border:1px solid rgba(148,211,255,.35)!important;
+ background-color:#091632!important;
+ background-image:var(--pet-compact-banner-v12)!important;
+ background-position:center!important;
+ background-size:100% auto!important;
+ background-repeat:no-repeat!important;
+ box-shadow:0 7px 20px rgba(0,8,28,.24)!important;
+}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="1"]{--pet-compact-banner-v12:url("assets/pets/generation-01-compact-v12.webp")}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="2"]{--pet-compact-banner-v12:url("assets/pets/generation-02-compact-v12.webp")}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="3"]{--pet-compact-banner-v12:url("assets/pets/generation-03-compact-v12.webp")}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="4"]{--pet-compact-banner-v12:url("assets/pets/generation-04-compact-v12.webp")}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="5"]{--pet-compact-banner-v12:url("assets/pets/generation-05-compact-v12.webp")}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="6"]{--pet-compact-banner-v12:url("assets/pets/generation-06-compact-v12.webp")}
+body.is-pets-route .pets-redesign .pet-stage[data-generation="7"]{--pet-compact-banner-v12:url("assets/pets/generation-07-compact-v12.webp")}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-faces,
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-title,
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-compact-art-v11{display:none!important;visibility:hidden!important}
+body.is-pets-route .pets-redesign .pet-stage>summary::before,
+body.is-pets-route .pets-redesign .pet-stage>summary::after{display:none!important}
+body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-chevron{
+ position:absolute!important;right:9px!important;top:50%!important;z-index:10!important;
+ transform:translateY(-50%)!important;display:grid!important;place-items:center!important;
+ width:30px!important;height:30px!important;border-radius:50%!important;
+ border:1px solid rgba(196,231,255,.48)!important;background:rgba(4,16,45,.69)!important;color:#e6faff!important;
+}
+@media(max-width:700px){
+ body.is-pets-route .pets-redesign .pet-stage>summary,
+ body.is-pets-route .pets-redesign .pet-stage[open]>summary{
+  height:clamp(70px,16vw,108px)!important;max-height:108px!important;
+  background-size:100% auto!important;border-radius:9px!important;
+ }
+ body.is-pets-route .pets-redesign .pet-stage>summary .pet-stage-chevron{
+  right:3px!important;width:23px!important;height:23px!important
+ }
+}
