@@ -104,6 +104,128 @@ jobs:
           Path('PACKAGE-AUDIT.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
           print(json.dumps(report,ensure_ascii=False,indent=2))
           PY
+      - name: Audit, refresh cache and prepare complete working project
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import zipfile, re, json, os, pathlib, hashlib
+          src=pathlib.Path('belaya-mgla-clean-site-2026-11-19.zip')
+          with zipfile.ZipFile(src) as z:
+              site={n:z.read(n) for n in z.namelist()}
+          assert 'service-worker.js' in site and 'pwa-install.js' in site
+          old_sw=site['service-worker.js'].decode('utf-8')
+          old_install=site['pwa-install.js'].decode('utf-8')
+          assert "belaya-mgla-v1193" in old_sw
+          assert "service-worker.js?v=1193" in old_install
+          site['service-worker.js']=old_sw.replace('belaya-mgla-v1193','belaya-mgla-v1205').encode('utf-8')
+          site['pwa-install.js']=old_install.replace('service-worker.js?v=1193','service-worker.js?v=1205').encode('utf-8')
+          revisions=0
+          for n,data in list(site.items()):
+              if n.endswith('.html'):
+                  s=data.decode('utf-8')
+                  t,count=re.subn(r'(site-v626\.min\.css\?v=)\d+',r'\g<1>1205',s)
+                  if count:site[n]=t.encode('utf-8'); revisions+=count
+          assert revisions>=120, 'Not enough CSS cache keys changed'
+          missing_canyon='assets/canyon-header-v802.webp'
+          misspelled_canyon='assets/canyon-header-v802.webp.webp'
+          assert missing_canyon not in site and misspelled_canyon in site
+          site[missing_canyon]=site.pop(misspelled_canyon)
+          # Remove only confirmed unused old Bear banner variants.
+          obsolete_bear=[
+            'assets/bear-approved-header-v478.svg',
+            'assets/bear-approved-v476.svg',
+            'assets/bear-approved-v478.webp',
+            'assets/bear-approved-v497.webp',
+            'assets/bear-card-v471.webp',
+            'assets/bear-header-v471.webp',
+            'assets/bear-header-v499.webp',
+            'assets/event-bear-v498.jpg']
+          text=''.join(v.decode('utf-8','replace') for n,v in site.items()
+                   if n.endswith(('.html','.css','.js','.json','.webmanifest','.xml','.txt')))
+          for name in obsolete_bear:
+              if name not in site:continue
+              assert name not in text and name.split('/')[-1] not in text, 'Still-referenced Bear asset: '+name
+              site.pop(name)
+          # Project archive additionally includes all legitimate source-control tooling.
+          project=dict(site)
+          project['README-CLEAN-EXPORT.txt']=(
+              'BELAYA MGLA CLEAN WORKING PROJECT / 2026-11-19\n'
+              'Use CLEAN-SITE ZIP for an isolated static preview or web hosting.\n'
+              'Use CLEAN-PROJECT ZIP to replace a GitHub repository and continue development.\n'
+              'Keep existing backup branch snapshot-2026-11-19-current-base.\n'
+              'Extract files into repository root, not one nested directory.\n'
+              'CSS and PWA cache keys refreshed to 1205. Review GitHub Pages deployment and all browser tests before replacing production.\n'
+          ).encode('utf-8')
+          inf=[]
+          root=pathlib.Path('.')
+          for folder in ['.github','tests','visual-tests','scripts']:
+              for p in (root/folder).rglob('*'):
+                  if p.is_file() and not any(s in p.parts for s in ['node_modules','test-results','playwright-report','__pycache__']):
+                      if p.name=='export-clean-site.yml':continue
+                      rel=p.as_posix()
+                      if rel not in project:
+                          project[rel]=p.read_bytes();inf.append(rel)
+          for name in ['package.json','WORKING-RULES.md','PROJECT-HISTORY.md','README.md']:
+              p=root/name
+              if p.is_file() and name not in project:
+                  project[name]=p.read_bytes();inf.append(name)
+          assert len(inf)>=20,'Developer tooling missing'
+          # Every local HTML link must resolve in each archive, including scripts introduced dynamically.
+          from html.parser import HTMLParser
+          from urllib.parse import urlsplit,unquote
+          class P(HTMLParser):
+              def __init__(self):super().__init__();self.links=[]
+              def handle_starttag(self,tag,attrs):
+                  d=dict(attrs)
+                  for key in ['href','src','poster']:
+                      if d.get(key):self.links.append(d[key])
+          missing=[]
+          for page,content in site.items():
+              if not page.endswith('.html'):continue
+              parser=P();parser.feed(content.decode('utf-8','replace'))
+              parent=pathlib.PurePosixPath(page).parent
+              for val in parser.links:
+                  if val.startswith(('#','//','data:','mailto:','tel:','javascript:','blob:')):continue
+                  u=urlsplit(val)
+                  if u.scheme or u.netloc or not u.path or '{' in u.path:continue
+                  target=(pathlib.PurePosixPath(u.path.lstrip('/')) if u.path.startswith('/') else parent/u.path)
+                  target=pathlib.PurePosixPath(os.path.normpath(str(target)))
+                  if str(target) not in site and not val.endswith('/'):missing.append((page,val))
+          assert not missing, repr(missing[:10])
+          assert not any('img_22767d469133f308' in name or 'img_f4053b4bd49b720d' in name for name in site)
+          checks={}
+          for kind,items in [('site',site),('project',project)]:
+              dest=pathlib.Path('belaya-mgla-'+kind+'-checked-2026-11-19.zip')
+              with zipfile.ZipFile(dest,'w',zipfile.ZIP_DEFLATED,compresslevel=6,allowZip64=True) as z:
+                  for name,content in sorted(items.items()):z.writestr(name,content)
+              with zipfile.ZipFile(dest) as z:
+                  assert not z.testzip()
+                  assert len(z.namelist())==len(items)
+                  for required in ['index.html','bear.html','winter-siege.html','site-v626.min.css','service-worker.js','manifest-v541.webmanifest','search-index.json']:
+                      assert required in z.namelist(), required
+              checks[kind]={'file':str(dest),'entries':len(items),'size':dest.stat().st_size,
+                       'sha256':hashlib.sha256(dest.read_bytes()).hexdigest()}
+          assert len([n for n in site if n.endswith('.html')])==203
+          assert 'onesignal/OneSignalSDKWorker.js' not in site  # inactive legacy integration
+          summary={'source_commit':os.environ.get('GITHUB_SHA'),'css_cache_revisions':revisions,
+              'sw_version':'1205','deleted_verified_bear_assets':obsolete_bear,'source_files_added':len(inf),
+              'missing_HTML_files':len(missing),'outputs':checks}
+          pathlib.Path('FINAL-PACKAGE-CHECK.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')
+          print(json.dumps(summary,ensure_ascii=False,indent=2))
+          PY
+          mkdir -p /tmp/sova58-package-validation
+          unzip -q belaya-mgla-project-checked-2026-11-19.zip -d /tmp/sova58-package-validation
+          (cd /tmp/sova58-package-validation && node tests/pwa-integrity.cjs && node tests/calculator-regression-v1.cjs)
+      - name: Upload fully checked ZIPs
+        uses: actions/upload-artifact@v4
+        with:
+          name: belaya-mgla-checked-archives-2026-11-19
+          path: |
+            belaya-mgla-site-checked-2026-11-19.zip
+            belaya-mgla-project-checked-2026-11-19.zip
+            FINAL-PACKAGE-CHECK.json
+          if-no-files-found: error
+          retention-days: 90
       - name: Upload full website ZIP and audit
         uses: actions/upload-artifact@v4
         with:
