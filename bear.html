@@ -168,6 +168,47 @@ body.is-bear-route .bear-page-links a:focus-visible{
  body.is-bear-route .bear-guide details.bear-explain-section>summary,
  body.is-bear-route .bear-page-links a{transition:none!important}
 }
+
+/* bear-header-full-neon-v1197: только шапка «Охота на медведя».
+   Замкнутый неоновый контур, а не две отдельные угловые линии. */
+body.is-bear-route.site-hq-v407 main#appMain > .route-page.active > section.intro#bear{
+  position:relative!important;
+  box-sizing:border-box!important;
+  border:3px solid #7edcff!important;
+  border-radius:24px!important;
+  box-shadow:0 0 0 1px rgba(150,225,255,.3),
+             0 0 12px rgba(70,198,255,.34),
+             0 0 26px rgba(70,198,255,.16),
+             inset 0 0 14px rgba(82,204,255,.1)!important;
+  animation:bearHeaderNeonBreathe 5.4s ease-in-out infinite;
+}
+@keyframes bearHeaderNeonBreathe{
+  0%,100%{
+    border-color:#70d7ff;
+    box-shadow:0 0 0 1px rgba(150,225,255,.26),
+               0 0 10px rgba(70,198,255,.3),
+               0 0 23px rgba(70,198,255,.14),
+               inset 0 0 12px rgba(82,204,255,.09);
+  }
+  50%{
+    border-color:#99e7ff;
+    box-shadow:0 0 0 1px rgba(166,235,255,.38),
+               0 0 15px rgba(70,198,255,.43),
+               0 0 30px rgba(70,198,255,.19),
+               inset 0 0 17px rgba(82,204,255,.13);
+  }
+}
+@media(max-width:820px){
+  body.is-bear-route.site-hq-v407 main#appMain > .route-page.active > section.intro#bear{
+    border-width:2px!important;
+    border-radius:18px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  body.is-bear-route.site-hq-v407 main#appMain > .route-page.active > section.intro#bear{
+    animation:none!important;
+  }
+}
 </style><link rel="stylesheet" href="site-desktop-v985.css?v=985" media="screen and (min-width:1100px) and (hover:hover) and (pointer:fine)" data-sova-desktop-v985/>
 <link rel="stylesheet" href="desktop-guides-expanded-v1080.css?v=1" media="screen and (min-width:1100px) and (hover:hover) and (pointer:fine)" data-desktop-guide-expansion/>
 <link rel="stylesheet" href="desktop-guide-editorial-v1092.css?v=2" media="all" data-guide-editorial-style/>
