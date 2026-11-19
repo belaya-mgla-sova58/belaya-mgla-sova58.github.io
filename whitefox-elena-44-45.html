@@ -390,10 +390,10 @@ body.news-top-whitefox .whitefox-index .whitefox-card-stat-v557 b{color:inherit!
 
     function parseFlat(root){
       const chunks={}; const markers={}; const likes={}; const deleted={};
-      const chunkRe=new RegExp('^__c2__'+scope+'__([a-z0-9-]+)__([0-9]+)__([0-9]+)__(.+)</html>,'i');
-      const markerRe=new RegExp('^__c2m__'+scope+'__([a-z0-9-]+)__([0-9]+)</html>,'i');
-      const likeRe=new RegExp('^__cl2__'+scope+'__([a-z0-9-]+)</html>,'i');
-      const deleteRe=new RegExp('^__cd2__'+scope+'__([a-z0-9-]+)</html>,'i');
+      const chunkRe=new RegExp('^__c2__'+scope+'__([a-z0-9-]+)__([0-9]+)__([0-9]+)__(.+)$','i');
+      const markerRe=new RegExp('^__c2m__'+scope+'__([a-z0-9-]+)__([0-9]+)$','i');
+      const likeRe=new RegExp('^__cl2__'+scope+'__([a-z0-9-]+)$','i');
+      const deleteRe=new RegExp('^__cd2__'+scope+'__([a-z0-9-]+)$','i');
       Object.entries(root||{}).forEach(([k,v])=>{
         let m=k.match(chunkRe); if(m){const id=m[1],idx=Number(m[2]),total=Number(m[3]);if(!chunks[id])chunks[id]={total,parts:{}};chunks[id].parts[idx]=b64uDecode(m[4]);return;}
         m=k.match(markerRe); if(m){
