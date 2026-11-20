@@ -164,63 +164,81 @@ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1)>.owl-t
  transform-origin:center center!important;
 }
 
-/* v48: NO BLUE on reference / guide pages. Obsidian, silver and champagne gold. */
-html:has(body.winter-site-reference-v1),
-body.winter-site-reference-v1{
- background:#0b0b0d!important;color:#eee9e5!important;
+
+/* v49: precise obsidian surfaces, preserve the actual hierarchy and dimension. */
+body.winter-site-reference-v1,
+html:has(body.winter-site-reference-v1){
+ background:#0b0b0d!important;color:#ece9e5!important;
 }
 body.winter-site-reference-v1>.winter-site-background-v1{
- background:radial-gradient(ellipse at 46% 15%,#242227 0%,#111114 55%,#08090a 100%)!important;
+ background:radial-gradient(ellipse at 45% 18%,#262428 0%,#131315 57%,#09090b 100%)!important;
 }
 body.winter-site-reference-v1 .nav-wrap{
- background:linear-gradient(180deg,#181719,#0b0b0d)!important;
+ background:linear-gradient(180deg,#1a191c,#0c0c0e)!important;
 }
 body.winter-site-reference-v1 .nav-wrap a.route-link{
- background:linear-gradient(120deg,#29282b,#121214)!important;
- background-image:linear-gradient(120deg,#29282b,#121214)!important;
- border-color:rgba(196,191,186,.38)!important;color:#f0eeee!important;
+ background:linear-gradient(115deg,#302c2e,#171619)!important;
+ background-image:linear-gradient(115deg,#302c2e,#171619)!important;
+ border:1px solid rgba(185,182,182,.38)!important;
 }
 body.winter-site-reference-v1 .nav-wrap a.route-link.active{
- background:linear-gradient(115deg,#514233,#262124)!important;
- background-image:linear-gradient(115deg,#514233,#262124)!important;
- border-color:#e1c18f!important;
+ background:linear-gradient(110deg,#574536,#292326)!important;
+ background-image:linear-gradient(110deg,#574536,#292326)!important;
+ border-color:#e9c993!important;
 }
-body.winter-site-reference-v1 :is(.site-search-box-v426,.breadcrumbs-v409,.page-heading-v424.frost-header-v431,.guide-page-v69,.page-toc-v409,.guide-section.guide-fold-v414,.related-guides-v625,.guide-calc-link-v1,.guide-callout){
- background:linear-gradient(125deg,#252327,#111114)!important;
- background-image:linear-gradient(125deg,#252327,#111114)!important;
- border-color:rgba(181,178,177,.48)!important;
- box-shadow:inset 0 1px rgba(255,255,255,.045)!important;
+body.winter-site-reference-v1 :is(.site-search-box-v426,.breadcrumbs-v409){
+ background:linear-gradient(110deg,#252327,#111114)!important;
+ background-image:linear-gradient(110deg,#252327,#111114)!important;
+ border-color:rgba(206,187,160,.42)!important;
 }
 body.winter-site-reference-v1 .page-heading-v424.frost-header-v431{
- background:linear-gradient(125deg,#302b2b,#161517 70%,#0e0e10)!important;
- background-image:linear-gradient(125deg,#302b2b,#161517 70%,#0e0e10)!important;
- border-color:rgba(220,187,131,.55)!important;
+ background:linear-gradient(120deg,#302b2d 0%,#1b1a1d 55%,#0f1012 100%)!important;
+ background-image:linear-gradient(120deg,#302b2d 0%,#1b1a1d 55%,#0f1012 100%)!important;
+ border:1px solid rgba(220,186,128,.62)!important;
+ box-shadow:inset 0 1px rgba(255,248,232,.10),0 5px 22px rgba(0,0,0,.18)!important;
 }
-body.winter-site-reference-v1 :is(.page-toc-links-v409 a,.related-guide-card-v625,.guide-fold-summary-v414,.guide-fold-body-v414,.guide-fold-toolbar-v414,.guide-fold-all-v414,.topic-pill,.guide-topics,.guide-calc-link-v1 a){
- background:linear-gradient(120deg,#28272b,#151416)!important;
- background-image:linear-gradient(120deg,#28272b,#151416)!important;
- border-color:rgba(178,174,173,.38)!important;
- color:#eee9e5!important;
+body.winter-site-reference-v1 .guide-page-v69{
+ background:linear-gradient(145deg,rgba(27,26,29,.97),rgba(13,13,15,.97))!important;
+ background-image:linear-gradient(145deg,rgba(27,26,29,.97),rgba(13,13,15,.97))!important;
+ border-color:rgba(188,184,184,.42)!important;
+}
+body.winter-site-reference-v1 .page-toc-v409{
+ background:linear-gradient(150deg,#252328,#121214)!important;
+ background-image:linear-gradient(150deg,#252328,#121214)!important;
+ border:1px solid rgba(183,179,182,.47)!important;
+}
+body.winter-site-reference-v1 .page-toc-links-v409 a{
+ background:linear-gradient(105deg,#302b30,#1d1a1e)!important;
+ background-image:linear-gradient(105deg,#302b30,#1d1a1e)!important;
+ border-color:rgba(193,185,183,.38)!important;
+}
+body.winter-site-reference-v1 .guide-section.guide-fold-v414{
+ background:#19181b!important;
+ background-image:none!important;
+ border-color:rgba(187,181,180,.45)!important;
 }
 body.winter-site-reference-v1 .guide-section.guide-fold-v414>.guide-fold-summary-v414{
- background:linear-gradient(100deg,#302c2e,#171619)!important;
- background-image:linear-gradient(100deg,#302c2e,#171619)!important;
+ background:linear-gradient(106deg,#312e31,#1b191c)!important;
+ background-image:linear-gradient(106deg,#312e31,#1b191c)!important;
+ border-color:rgba(194,182,168,.33)!important;
 }
 body.winter-site-reference-v1 .guide-section.guide-fold-v414>.guide-fold-body-v414{
- background:#151416!important;background-image:none!important;
+ background:#141416!important;background-image:none!important;
 }
-body.winter-site-reference-v1 :is(.page-toc-v409,.related-guides-v625,.guide-section.guide-fold-v414){
- border:1px solid rgba(176,169,168,.52)!important;
+body.winter-site-reference-v1 .related-guides-v625{
+ background:linear-gradient(130deg,#242226,#111113)!important;
+ background-image:linear-gradient(130deg,#242226,#111113)!important;
+ border-color:rgba(185,179,179,.45)!important;
 }
-body.winter-site-reference-v1 :is(.page-toc-links-v409 a:hover,.related-guide-card-v625:hover,.guide-fold-all-v414:hover){
- background:#35302d!important;border-color:#e0bd85!important;
+body.winter-site-reference-v1 .related-guide-card-v625{
+ background:linear-gradient(112deg,#302c2f,#181719)!important;
+ background-image:linear-gradient(112deg,#302c2f,#181719)!important;
+ border-color:rgba(191,183,179,.46)!important;
 }
-body.winter-site-reference-v1 :is(.guide-fold-action-v414,.page-toc-v409 a,.related-guide-card-v625 b,.guide-calc-link-v1 a){
+body.winter-site-reference-v1 .guide-calc-link-v1{
+ background:#242023!important;
+ border-color:rgba(228,196,142,.45)!important;
+}
+body.winter-site-reference-v1 :is(.guide-fold-action-v414,.related-guide-card-v625 b,.guide-calc-link-v1 a){
  color:#e9c995!important;
-}
-body.winter-site-reference-v1 :is(.guide-section.guide-fold-v414,.page-toc-v409,.related-guides-v625) :is(h2,h3,b,p,li){
- text-shadow:none!important;
-}
-body.winter-site-reference-v1 :is(.page-heading-v424,.guide-page-v69,.related-guides-v625,.page-toc-v409,.guide-section.guide-fold-v414){
- --blue:#c3b9a9;--accent:#e6c48c;--primary:#ded3c4;
 }
