@@ -151,3 +151,96 @@ body:is(.site-hq-v407,.is-home-route) .mobile-bottom-v424 a b{
 body:is(.site-hq-v407,.is-home-route) :is(a,button,input,select,summary):focus-visible{
  outline:2px solid #e0c49e!important;outline-offset:3px;
 }
+
+
+/* SOVA58 sitewide graphite + silver palette v20261120. Decorative blue UI only; images and gameplay icons unchanged. */
+:root{--bg:#141821;--ink:#f0edf1;--muted:#c6c3cc;--card:#1e222c;--blue:#d9bf93;--blue2:#827a81;--ice:#cfd5dc;--gold:#dfbf88}
+body.site-hq-v407,body.is-home-route,body.modern-v424{
+ --bg:#141821;--ink:#f0edf1;--muted:#c6c3cc;--card:#1e222c;--blue:#d9bf93;--blue2:#827a81;--ice:#cfd5dc;--gold:#dfbf88;
+ --grand-silver:#d9dce3;--grand-deep:#111720;
+}
+body:is(.site-hq-v407,.is-home-route) .nav-wrap{
+ background:linear-gradient(180deg,#1b1e27,#11141d)!important;
+ border-right-color:rgba(224,198,153,.44)!important;
+}
+body:is(.site-hq-v407,.is-home-route) .nav-wrap nav a.route-link,
+body:is(.site-hq-v407,.is-home-route) .nav-wrap .route-link{
+ background:linear-gradient(115deg,#35363e,#1c202a)!important;
+ border-color:rgba(214,217,222,.33)!important;color:#f0eef0!important;
+ box-shadow:none!important;
+}
+body:is(.site-hq-v407,.is-home-route) .nav-wrap nav a.route-link.active,
+body:is(.site-hq-v407,.is-home-route) .nav-wrap .route-link.active{
+ background:linear-gradient(105deg,#51453a,#282a33)!important;
+ border-color:#e1c38e!important;box-shadow:inset 3px 0 #e1c38e!important;
+}
+body:is(.site-hq-v407,.is-home-route) .nav-wrap nav a.route-link:hover,
+body:is(.site-hq-v407,.is-home-route) .nav-wrap .route-link:hover{
+ background:linear-gradient(115deg,#4a484a,#252832)!important;
+ border-color:#d9bc93!important;
+}
+body:is(.site-hq-v407,.is-home-route) .nav-wrap .sidebar-color-icon{
+ filter:grayscale(1) brightness(1.25)!important;
+}
+body:is(.site-hq-v407,.is-home-route) .mobile-topbar,
+body:is(.site-hq-v407,.is-home-route) .mobile-bottom-v424{
+ background:linear-gradient(180deg,#272b34,#12151d)!important;
+ border-color:rgba(218,213,209,.46)!important;
+}
+body:is(.site-hq-v407,.is-home-route) .mobile-bottom-v424 a:is(.active,[aria-current="page"]){
+ color:#edcf9d!important;background:rgba(218,184,128,.13)!important;
+}
+body:is(.site-hq-v407,.is-home-route) .site-search-v426 .site-search-box-v426{
+ background:rgba(24,26,34,.96)!important;border-color:rgba(205,208,215,.44)!important;
+}
+body:is(.site-hq-v407,.is-home-route) .site-search-v426 :is(input,button){
+ color:#f0eef2!important;
+}
+body:is(.site-hq-v407,.is-home-route) .page-heading-v424.frost-header-v431{
+ background:linear-gradient(120deg,rgba(30,33,43,.93),rgba(14,17,26,.82))!important;
+ border-color:rgba(217,200,176,.43)!important;
+}
+body:is(.site-hq-v407,.is-home-route) .breadcrumbs-v409{
+ background:rgba(24,27,36,.72)!important;border-color:rgba(208,210,218,.34)!important;
+}
+body:is(.site-hq-v407,.is-home-route) :is(.page-toc-v409,.guide-fold-summary-v414,.guide-fold-body-v414,.guide-callout.tip){
+ border-color:rgba(215,213,213,.30)!important;
+}
+body:is(.site-hq-v407,.is-home-route) .page-toc-v409{
+ background:rgba(23,26,34,.9)!important;color:#edf0f4!important;
+}
+body:is(.site-hq-v407,.is-home-route) .page-toc-links-v409 a:hover{
+ background:rgba(221,188,134,.15)!important;color:#f4e8d5!important;
+}
+body:is(.site-hq-v407,.is-home-route) .guide-fold-summary-v414{
+ background:linear-gradient(95deg,#32353e,#1c202a)!important;
+ color:#f0edf2!important;
+}
+body:is(.site-hq-v407,.is-home-route) .guide-fold-body-v414{
+ background:rgba(20,22,30,.91)!important;
+}
+body:is(.site-hq-v407,.is-home-route) .guide-fold-action-v414,
+body:is(.site-hq-v407,.is-home-route) .guide-fold-all-v414{
+ background:#34333a!important;border-color:rgba(216,194,159,.56)!important;
+ color:#e9d3b0!important;
+}
+body:is(.site-hq-v407,.is-home-route) :is(.related-guide-card-v625,.related-guides-v625,.copy-block-v409){
+ background:linear-gradient(135deg,#31333b,#191c24)!important;
+ border-color:rgba(217,214,219,.37)!important;color:#f2edf2!important;
+}
+body:is(.site-hq-v407,.is-home-route) main#appMain :is(table th){
+ background:#343842!important;color:#ecd8b3!important;
+ border-color:rgba(224,201,168,.35)!important;
+}
+body:is(.site-hq-v407,.is-home-route) main#appMain :is(table td){
+ border-color:rgba(211,217,224,.23)!important;
+}
+body:is(.site-hq-v407,.is-home-route) main#appMain :is(button,.btn,.primary-button){
+ border-color:rgba(211,199,180,.45)!important;
+}
+body:is(.site-hq-v407,.is-home-route) main#appMain :is(button,.btn,.primary-button):hover{
+ border-color:#e5cc9c!important;
+}
+body:is(.site-hq-v407,.is-home-route) :is(a,button,input,select,summary):focus-visible{
+ outline-color:#e0c49e!important;
+}
