@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Forum&family=Manrope:wght@400;500;600;700;800&display=swap');
 
 /* === SOVA58 DESIGN STANDARD: NO BLUE UI v11 (20 Nov 2026) ===
    Graphite / platinum / warm-gold. Artwork source files are untouched. */
@@ -167,7 +168,7 @@ html body.modern-v424 .site-search-v426 :is(input,button,svg){border-color:#c7aa
 html body.modern-v424 :is(.nav-wrap,.page-heading-v424,.guide-section,.event-group-v522,.site-search-v426) :is(a,button,summary):focus-visible{outline-color:#e5bf83!important}
 
 /* DESIGN ALIGNMENT v15: gold + silver type hierarchy, untouched game art. */
-@import url('https://fonts.googleapis.com/css2?family=Forum&family=Manrope:wght@400;500;600;700;800&display=swap');
+
 html body.modern-v424 :is(main#appMain,.nav-wrap,.mobile-topbar,.mobile-bottom-v424,.site-search-v426){
  font-family:"Manrope",Arial,sans-serif!important;
 }
