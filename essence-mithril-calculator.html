@@ -1154,7 +1154,7 @@ state.feed[key]=safeNum($(feedInputs[key]).value,9999999);
 draw();
 });
 });
-$("ecXpReset").addEventListener("click",()=>{state=defaults();draw();$("ecXpStatus").textContent="Расчёт опыта сброшен."});
+$("ecXpReset").addEventListener("click",()=>{if(!window.confirm("Сбросить расчёт опыта и все введённые значения этого раздела?"))return;state=defaults();draw();$("ecXpStatus").textContent="Расчёт опыта сброшен."});
 $("ecXpCopy").addEventListener("click",async()=>{
 const msg=[
 "Белая мгла • Опыт снаряжения",
