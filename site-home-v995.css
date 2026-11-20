@@ -244,3 +244,137 @@ body:is(.site-hq-v407,.is-home-route) main#appMain :is(button,.btn,.primary-butt
 body:is(.site-hq-v407,.is-home-route) :is(a,button,input,select,summary):focus-visible{
  outline-color:#e0c49e!important;
 }
+
+
+/* === SOVA58 DESIGN STANDARD: NO BLUE UI v11 (20 Nov 2026) ===
+   Graphite / platinum / warm-gold. Artwork source files are untouched. */
+:root{
+ --bm11-charcoal:#111115;--bm11-panel:#262428;--bm11-silver:#eeebeb;
+ --bm11-gold:#dfbf8b;--bm11-border:rgba(221,189,140,.67);
+ --v424-line:rgba(220,190,145,.6);--v424-muted:#d1cbca;
+ --grand-gold:#dfbf8b;--grand-silver:#eeebeb;
+}
+html:has(body.modern-v424),html body.modern-v424,
+html body.modern-v424.star-glass-v436,
+html body.modern-v424.cosmic-visible-v444{
+ background-color:#101114!important;
+ background-image:linear-gradient(145deg,#19191d,#101114)!important;
+}
+html body.modern-v424 .site-cosmic-background-v442{
+ filter:grayscale(1) sepia(.15) brightness(.56)!important;
+ opacity:.38!important;
+}
+html body.modern-v424 main#appMain,
+html body.modern-v424 main#appMain .route-page.active{
+ background-color:transparent!important;
+ background-image:none!important;
+}
+html body.modern-v424 .nav-wrap,
+html body.modern-v424 .mobile-topbar,
+html body.modern-v424 .mobile-bottom-v424{
+ background-color:#18181c!important;
+ background-image:linear-gradient(150deg,#242226,#101114)!important;
+ border-color:rgba(218,187,142,.67)!important;
+ box-shadow:0 4px 21px rgba(0,0,0,.26)!important;
+}
+html body.modern-v424 .nav-wrap nav a.route-link,
+html body.modern-v424 .nav-wrap nav>a.route-link{
+ background-color:#242327!important;
+ background-image:linear-gradient(125deg,#2b282c,#17181b)!important;
+ border-color:rgba(209,201,190,.43)!important;
+ color:#eeebed!important;
+ box-shadow:none!important;
+}
+html body.modern-v424 .nav-wrap nav a.route-link[aria-current="page"],
+html body.modern-v424 .mobile-bottom-v424 a[aria-current="page"]{
+ background-color:#3a302a!important;
+ background-image:linear-gradient(135deg,#49382e,#252226)!important;
+ border-color:#e3c18c!important;color:#fff2dd!important;
+ box-shadow:inset 3px 0 #f1d29b,0 0 13px rgba(219,178,118,.18)!important;
+}
+html body.modern-v424 .nav-wrap .route-link img,
+html body.modern-v424 .mobile-bottom-v424 img{
+ filter:grayscale(1) sepia(.45) saturate(.65)!important;
+}
+html body.modern-v424 :is(.site-search-v426,.site-search-box-v426,.site-search-input-v426,.site-search-icon-v426,.site-search-clear-v426,.site-search-results-v426){
+ background-color:#1c1c20!important;background-image:none!important;
+ border-color:rgba(215,189,151,.55)!important;
+ color:#f3eff0!important;box-shadow:none!important;
+}
+html body.modern-v424 main#appMain :is(.breadcrumbs-v409,.page-heading-v424.frost-header-v431,.page-heading-v424,.calc-hub-head,.gen-hub-hero,.gen-page-hero,.modern-panel-v424,.home-portal-box-v1016,.home-utility-v1025,.kb-clean-card-v920,.guide-section,.guide-page-v69>details.guide-fold-v414,.guide-fold-summary-v414,.guide-fold-body-v414,.guide-fold-toolbar-v414,.page-toc-v409,.page-toc-v409>summary,.guide-callout,.event-group-v522,.event-jump-nav-v1,.related-guides-v625,.related-guide-card-v625,.calc-hub-card){
+ background-color:#242327!important;
+ background-image:linear-gradient(145deg,#2d292c,#17181c)!important;
+ border-color:rgba(218,191,150,.61)!important;
+ box-shadow:inset 0 1px rgba(250,228,194,.08),0 10px 27px rgba(0,0,0,.23)!important;
+}
+html body.modern-v424 main#appMain :is(.page-heading-v424.frost-header-v431,.page-heading-v424,.calc-hub-head,.gen-hub-hero,.gen-page-hero) h1{
+ color:#efedf0!important;-webkit-text-fill-color:#efedf0!important;
+ text-shadow:0 0 15px rgba(238,218,181,.1)!important;
+}
+html body.modern-v424 main#appMain :is(.event-group-copy-v522 h3,.modern-panel-head-v424 h2,.home-portal-block-title-v1016,.guide-fold-title-v414,.event-jump-label-v1){
+ color:#e9c991!important;-webkit-text-fill-color:#e9c991!important;
+}
+html body.modern-v424 main#appMain :is(.event-group-copy-v522 p,.page-heading-v424 p,.guide-fold-body-v414 p){
+ color:#d6d1d0!important;-webkit-text-fill-color:#d6d1d0!important;
+}
+html body.modern-v424 main#appMain :is(.event-jump-links-v1 a,.topic-pill,.home-extra-toggle-v1,.guide-fold-action-v414,.page-toc-links-v409 a,.guide-section summary,.mini-card){
+ background-color:#2e2a2b!important;
+ background-image:linear-gradient(125deg,#36302e,#202024)!important;
+ border-color:rgba(217,188,143,.6)!important;
+ color:#f0e9e0!important;
+}
+html body.modern-v424 main#appMain :is(.guide-nav-card,.calc-hub-card,.home-tools-grid-v1016 a,.home-index-links-v1016 a,.home-portal-links-v1016 a,.modern-topic-card-v424,.pet-catalog-card,.expert-row){
+ background-color:#252428!important;
+ background-image:linear-gradient(145deg,#2c292c,#1a1a1e)!important;
+ border-color:rgba(221,189,140,.61)!important;
+ box-shadow:0 9px 23px rgba(0,0,0,.23),0 0 11px rgba(220,184,130,.08)!important;
+}
+html body.modern-v424 main#appMain :is(.guide-nav-card,.calc-hub-card,.home-tools-grid-v1016 a,.modern-topic-card-v424):hover{
+ border-color:#f0cf99!important;
+ box-shadow:0 0 19px rgba(220,185,131,.19)!important;
+}
+html body.modern-v424 main#appMain :is(.event-card-caption-v1,.home-portal-links-v1016 a span,.home-tools-grid-v1016 a span){
+ background-color:#252327!important;background-image:linear-gradient(115deg,#302b2d,#1c1c20)!important;
+ border-color:rgba(219,190,146,.55)!important;
+ color:#f0edec!important;-webkit-text-fill-color:#f0edec!important;
+}
+html body.modern-v424 .events-groups-v522 .event-group-v522{
+ --event-accent:218,188,137!important;
+ --hall-glow:rgba(220,184,133,.08)!important;
+ background:#252428!important;background-image:linear-gradient(150deg,#302b2e,#19191d)!important;
+}
+html body.modern-v424 :is(.btn,.primary-button,button):focus-visible,
+html body.modern-v424 :is(a,summary,input,select):focus-visible{
+ outline-color:#ebca92!important;
+}
+html body.modern-v424 main#appMain a:not([class]):not([aria-label]){color:#e6c58f!important}
+/* Preserve artwork files; remove their BLUE tint only in the Events directory. */
+html body.is-events-route .events-groups-v522 .guide-nav-card img{
+ filter:grayscale(1) sepia(.33) saturate(.70) contrast(1.04)!important;
+}
+html body.is-events-route .site-cosmic-background-v442{display:none!important}
+html body.is-events-route main#appMain .guide-page-v69{
+ background:#17181b!important;background-image:none!important;
+}
+/* Independent event-guide family that does not use modern-v424. */
+html body.luxury-chronicle{
+ --grand-gold:#dfbf8b;--grand-silver:#eeebeb;
+ background-color:#101114!important;
+ background-image:linear-gradient(150deg,#19191d,#101114)!important;
+ color:#eeebeb!important;
+}
+html body.luxury-chronicle :is(.intro-card,.section-frame,.section-content,.toc,.bm-guide-nav,.aside-guide,.battle-fact,.footnote,.guide-card,.summary-card){
+ background-color:#272428!important;
+ background-image:linear-gradient(145deg,#2f2a2d,#19191d)!important;
+ border-color:rgba(221,188,137,.63)!important;
+ box-shadow:0 9px 25px rgba(0,0,0,.23)!important;
+}
+html body.luxury-chronicle :is(.toc a,.bm-guide-nav a,.bear-page-links a,.snowflake-link){
+ border-color:rgba(220,191,149,.53)!important;
+ color:#f0e9e0!important;
+}
+html body.luxury-chronicle :is(a,button,summary):focus-visible{outline-color:#edcb95!important}
+/* No glow animation needed for the gold-and-platinum theme. */
+@media(prefers-reduced-motion:reduce){
+ html body.modern-v424 :is(.guide-nav-card,.modern-topic-card-v424){transition:none!important}
+}
