@@ -85,83 +85,134 @@ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#a
 }
 
 
-/* v45: a compact final flourish, not a second empty screen. */
-@media (min-width:921px){
- html:not(.force-desktop-root) body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain{
-  padding-bottom:12px!important;
- }
- html:not(.force-desktop-root) body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.route-page.active{
-  padding-bottom:8px!important;
- }
+
+/* Reference restoration v53: photo supplied 20 Nov 2026.
+   Obsidian mirror, warm silver outlines, champagne-gold filigree.
+   No layout rewrites, no broad changes to home/events. */
+body.winter-site-reference-v1{
+ --bm-frame:#d5b27d;--bm-ink:#eeebed;--bm-silver:#b4b7bc;
+ --bm-surface:#19191c;--blue:#b4b7bc;--blue2:#36363a;
+ background:#0b0c0e!important;
 }
-body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44{
- min-height:0!important;height:145px!important;
- margin:2px clamp(12px,2vw,32px) 0!important;
- padding:0!important;max-width:none!important;
+html:has(body.winter-site-reference-v1){background:#0b0c0e!important}
+body.winter-site-reference-v1>.winter-site-background-v1{
+ background:radial-gradient(ellipse at 50% 57%,#1a1c23 0%,#111216 48%,#08090b 100%)!important;
 }
-body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44 img{
- width:clamp(170px,19vw,270px)!important;
- right:clamp(18px,2vw,33px)!important;bottom:0!important;
- max-height:145px!important;object-fit:contain!important;object-position:right bottom!important;
+/* Top decorations are small, high and delicate, never across breadcrumb text. */
+body.winter-site-reference-v1>.owl-top-ornaments-v44{
+ top:0!important;height:115px!important;overflow:hidden!important;
 }
-body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .related-guides-v625{
- margin-bottom:8px!important;
+body.winter-site-reference-v1>.owl-top-ornaments-v44>.owl-branch-left-v44{
+ width:clamp(165px,17vw,290px)!important;
+ left:clamp(114px,10.5vw,180px)!important;
+ top:0!important;
+ transform:scaleY(-1)!important;transform-origin:top center!important;
 }
+body.winter-site-reference-v1>.owl-top-ornaments-v44>.owl-branch-right-v44{
+ width:clamp(185px,19vw,320px)!important;right:12px!important;top:0!important;
+ transform:scaleY(-1)!important;transform-origin:top center!important;
+}
+/* Keep the photographed gold frame and fine feather orbit. */
+body.winter-site-reference-v1>.winter-photo-decor-v40>.winter-photo-frame-v40{
+ border-color:rgba(220,182,115,.90)!important;
+ box-shadow:inset 0 0 0 1px rgba(248,220,167,.10),0 0 14px rgba(213,163,90,.14)!important;
+}
+body.winter-site-reference-v1.site-hq-v407.modern-v424 .nav-wrap{
+ background:linear-gradient(180deg,#161719,#0b0c0e)!important;
+ background-image:linear-gradient(180deg,#161719,#0b0c0e)!important;
+}
+body.winter-site-reference-v1.site-hq-v407.modern-v424 .nav-wrap nav a.route-link{
+ background:linear-gradient(120deg,#242327,#111317)!important;
+ background-image:linear-gradient(120deg,#242327,#111317)!important;
+ border-color:rgba(166,168,173,.44)!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.045)!important;
+}
+body.winter-site-reference-v1.site-hq-v407.modern-v424 .nav-wrap nav a.route-link.active{
+ background:linear-gradient(115deg,#554530,#232226)!important;
+ background-image:linear-gradient(115deg,#554530,#232226)!important;
+ border-color:#ddbd83!important;box-shadow:inset 3px 0 #f3d69e!important;
+}
+body.winter-site-reference-v1.site-hq-v407.modern-v424 .site-search-v426 .site-search-box-v426,
+body.winter-site-reference-v1.site-hq-v407.modern-v424 main#appMain .route-page.active .breadcrumbs-v409{
+ background:linear-gradient(115deg,#232327,#131417)!important;
+ background-image:linear-gradient(115deg,#232327,#131417)!important;
+ border-color:rgba(182,181,182,.42)!important;
+}
+body.winter-site-reference-v1.site-hq-v407.modern-v424 main#appMain .route-page.active>.page-heading-v424{
+ background:linear-gradient(120deg,#242326,#16171a 70%,#111215)!important;
+ background-image:linear-gradient(120deg,#242326,#16171a 70%,#111215)!important;
+ border-color:rgba(207,185,149,.43)!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.055)!important;
+}
+body.winter-site-reference-v1.site-hq-v407.modern-v424 main#appMain .route-page.active>.page-heading-v424::before{
+ display:none!important;content:none!important;
+}
+body.winter-site-reference-v1.site-hq-v407.modern-v424 main#appMain .route-page.active .guide-page-v69{
+ background:linear-gradient(130deg,#202024,#101114)!important;
+ background-image:linear-gradient(130deg,#202024,#101114)!important;
+ border-color:rgba(157,161,169,.34)!important;
+}
+body.winter-site-reference-v1.site-hq-v407.modern-v424 main#appMain .route-page.active .page-toc-v409{
+ background:linear-gradient(125deg,#202125,#111215)!important;
+ background-image:linear-gradient(125deg,#202125,#111215)!important;
+ border-color:rgba(159,163,167,.46)!important;
+}
+body.winter-site-reference-v1.site-hq-v407.modern-v424 main#appMain .route-page.active .page-toc-v409 .page-toc-links-v409 a{
+ background:linear-gradient(115deg,#242427,#141518)!important;
+ background-image:linear-gradient(115deg,#242427,#141518)!important;
+ border-color:rgba(171,171,172,.43)!important;
+ color:#ede9e9!important;
+}
+body.winter-site-reference-v1.site-hq-v407.modern-v424 main#appMain .route-page.active .guide-section.guide-fold-v414,
+body.winter-site-reference-v1.site-hq-v407.modern-v424 main#appMain .route-page.active .guide-page-v69>details.guide-fold-v414{
+ background:#19191c!important;background-image:none!important;
+ border-color:rgba(159,165,172,.43)!important;
+}
+body.winter-site-reference-v1.site-hq-v407.modern-v424 main#appMain .route-page.active .guide-fold-summary-v414{
+ background:linear-gradient(110deg,#262528,#161619)!important;
+ background-image:linear-gradient(110deg,#262528,#161619)!important;
+ border-color:rgba(178,174,168,.34)!important;
+}
+body.winter-site-reference-v1.site-hq-v407.modern-v424 main#appMain .route-page.active .guide-fold-body-v414{
+ background:#151518!important;background-image:none!important;
+}
+body.winter-site-reference-v1.site-hq-v407.modern-v424 main#appMain .route-page .guide-fold-action-v414,
+body.winter-site-reference-v1.site-hq-v407.modern-v424 main#appMain .route-page .guide-fold-all-v414{
+ background:#2a292c!important;background-image:none!important;
+ border-color:rgba(187,181,167,.55)!important;
+}
+body.winter-site-reference-v1.site-hq-v407.modern-v424 main#appMain .related-guides-v625{
+ background:linear-gradient(125deg,#191a1d,#0e0f11)!important;
+ background-image:linear-gradient(125deg,#191a1d,#0e0f11)!important;
+ border-color:rgba(154,160,169,.38)!important;
+}
+body.winter-site-reference-v1.site-hq-v407.modern-v424 main#appMain .related-guide-card-v625{
+ background:linear-gradient(120deg,#202124,#111215)!important;
+ background-image:linear-gradient(120deg,#202124,#111215)!important;
+ border-color:rgba(168,169,171,.47)!important;
+}
+/* Restore the large photographic feather and its breathing room. */
+body.winter-site-reference-v1 main#appMain>.owl-page-end-v44{
+ height:clamp(220px,22vw,315px)!important;min-height:0!important;
+ margin:10px 20px 8px!important;max-width:none!important;
+}
+body.winter-site-reference-v1 main#appMain>.owl-page-end-v44 img{
+ width:clamp(280px,29vw,450px)!important;
+ max-height:310px!important;right:clamp(12px,2vw,34px)!important;
+ bottom:0!important;object-fit:contain!important;
+}
+/* Respect the compact mobile layout. */
 @media(max-width:920px){
- body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44{
-  height:115px!important;min-height:0!important;
-  margin:3px 12px 0!important;
- }
- body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44 img{
-  width:205px!important;max-height:115px!important;
- }
+ body.winter-site-reference-v1>.owl-top-ornaments-v44{height:78px!important}
+ body.winter-site-reference-v1>.owl-top-ornaments-v44>.owl-branch-left-v44{width:150px!important;left:8px!important}
+ body.winter-site-reference-v1>.owl-top-ornaments-v44>.owl-branch-right-v44{width:155px!important;right:5px!important}
+ body.winter-site-reference-v1 main#appMain>.owl-page-end-v44{height:175px!important;margin:8px 12px 15px!important}
+ body.winter-site-reference-v1 main#appMain>.owl-page-end-v44 img{width:240px!important;max-height:170px!important}
 }
 @media(max-width:580px){
- body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44{
-  height:105px!important;min-height:0!important;margin:0 8px 12px!important;
- }
- body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44 img{
-  width:175px!important;max-height:105px!important;
- }
+ body.winter-site-reference-v1>.owl-top-ornaments-v44{height:60px!important}
+ body.winter-site-reference-v1>.owl-top-ornaments-v44>.owl-branch-left-v44{width:105px!important}
+ body.winter-site-reference-v1>.owl-top-ornaments-v44>.owl-branch-right-v44{width:110px!important}
+ body.winter-site-reference-v1 main#appMain>.owl-page-end-v44{height:135px!important;margin-bottom:78px!important}
+ body.winter-site-reference-v1 main#appMain>.owl-page-end-v44 img{width:185px!important;max-height:130px!important}
 }
-
-/* v46: further reduce unused footer area while retaining the owl feather. */
-@media(min-width:921px){
- body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44{
-  height:90px!important;margin:0 12px!important;
- }
- body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44 img{
-  width:clamp(145px,15vw,205px)!important;max-height:90px!important;
- }
- body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain{
-  padding-bottom:0!important;
- }
- body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .related-guides-v625{
-  margin-bottom:0!important;
- }
-}
-@media(min-width:581px) and (max-width:920px){
- body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44{
-  height:90px!important;margin:0 10px!important;
- }
- body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44 img{
-  width:165px!important;max-height:90px!important;
- }
-}
-@media(max-width:580px){
- body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44{
-  height:80px!important;margin:0 8px 6px!important;
- }
- body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44 img{
-  width:145px!important;max-height:80px!important;
- }
-}
-
-/* v47: turn the top branches upside down so their leaves hang from the top border. */
-body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1)>.owl-top-ornaments-v44>.owl-branch-left-v44,
-body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1)>.owl-top-ornaments-v44>.owl-branch-right-v44{
- transform:scaleY(-1)!important;
- transform-origin:center center!important;
-}
-
-
