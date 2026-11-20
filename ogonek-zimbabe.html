@@ -803,7 +803,7 @@ a{color:inherit;text-decoration:none}
 (function(){
  const reset=()=>{
   const el=document.getElementById('scroll');
-  if(el){el.scrollTop=0; const count=document.getElementById('count');if(count)count.textContent='1 / 6';}
+  if(el){el.scrollTop=0; const count=document.getElementById('count');if(count)count.textContent='1 / '+el.querySelectorAll('.exchange').length;}
  };
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',reset,{once:true});
  else reset();
