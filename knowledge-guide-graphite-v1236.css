@@ -1,0 +1,89 @@
+/* Belaya Mgla | shared graphite/silver visual layer for nine non-event knowledge guides.
+   Scoped via class opt-in: .bm-knowledge-graphite-v1236.
+   No content, images, dimensions or interaction changes. */
+html:has(body.bm-knowledge-graphite-v1236){background:#0b0c0f!important}
+body.bm-knowledge-graphite-v1236{
+ background:#0b0c0f!important;background-image:none!important;color:#e5e5e8!important;
+}
+body.bm-knowledge-graphite-v1236>.site-cosmic-background-v442{display:none!important}
+body.bm-knowledge-graphite-v1236 main#appMain,
+body.bm-knowledge-graphite-v1236 main#appMain>.route-page.active{
+ background:#0f1013!important;background-image:none!important;
+}
+body.bm-knowledge-graphite-v1236 .nav-wrap{
+ background:linear-gradient(180deg,#26272c,#141519 65%,#0b0c0f)!important;
+ background-image:linear-gradient(180deg,#26272c,#141519 65%,#0b0c0f)!important;
+ border-right:1px solid rgba(194,195,202,.47)!important;
+}
+body.bm-knowledge-graphite-v1236 .nav-wrap nav>a.route-link{
+ background:linear-gradient(145deg,#32333a,#191a1e)!important;
+ background-image:linear-gradient(145deg,#32333a,#191a1e)!important;
+ border-color:rgba(190,192,201,.43)!important;color:#eeeeef!important;
+}
+body.bm-knowledge-graphite-v1236 .nav-wrap nav>a.route-link:is(.active,[aria-current="page"]){
+ background:linear-gradient(145deg,#524636,#29272b)!important;
+ border-color:#d9b67f!important;
+}
+body.bm-knowledge-graphite-v1236 main#appMain :is(.site-search-v426,.site-search-box-v426,.site-search-input-v426){
+ background:#1b1c20!important;background-image:none!important;
+ border-color:rgba(190,192,199,.46)!important;color:#e6e6ea!important;
+}
+body.bm-knowledge-graphite-v1236 main#appMain .breadcrumbs-v409{
+ background:linear-gradient(140deg,#35353b,#191a1e)!important;
+ background-image:linear-gradient(140deg,#35353b,#191a1e)!important;
+ border-color:rgba(193,195,202,.49)!important;
+}
+body.bm-knowledge-graphite-v1236 main#appMain .breadcrumbs-v409 :is(a,span){color:#e1e0e3!important}
+body.bm-knowledge-graphite-v1236 main#appMain .route-page.active>.page-heading-v424{
+ background:radial-gradient(ellipse at 88% 8%,rgba(217,218,224,.1),transparent 57%),linear-gradient(145deg,#303137,#16171a)!important;
+ background-image:radial-gradient(ellipse at 88% 8%,rgba(217,218,224,.1),transparent 57%),linear-gradient(145deg,#303137,#16171a)!important;
+ border-color:rgba(198,200,206,.52)!important;
+}
+body.bm-knowledge-graphite-v1236 main#appMain .route-page.active>.page-heading-v424 :is(h1,p){color:#ebebef!important}
+body.bm-knowledge-graphite-v1236 main#appMain .guide-page-v69 .page-toc-v409,
+body.bm-knowledge-graphite-v1236 main#appMain .guide-page-v69 .page-toc-v409>summary{
+ background:linear-gradient(135deg,#36363b,#1b1b20)!important;
+ background-image:linear-gradient(135deg,#36363b,#1b1b20)!important;
+ border-color:rgba(193,195,202,.5)!important;color:#f0eff1!important;
+}
+body.bm-knowledge-graphite-v1236 main#appMain .guide-page-v69 .page-toc-links-v409,
+body.bm-knowledge-graphite-v1236 main#appMain .guide-page-v69 .page-toc-links-v409 a{
+ background:#232429!important;background-image:none!important;
+ border-color:rgba(192,194,201,.4)!important;color:#e7e7e9!important;
+}
+body.bm-knowledge-graphite-v1236 main#appMain .guide-page-v69 .guide-fold-toolbar-v414{
+ background:#17181c!important;background-image:none!important;color:#c4c5cb!important;
+}
+body.bm-knowledge-graphite-v1236 main#appMain .guide-page-v69 :is(.guide-fold-all-v414,.guide-fold-action-v414){
+ background:linear-gradient(145deg,#3b3b40,#1d1e22)!important;
+ border-color:rgba(196,198,204,.49)!important;color:#eaeaec!important;
+}
+body.bm-knowledge-graphite-v1236 main#appMain .guide-page-v69 details.guide-fold-v414,
+body.bm-knowledge-graphite-v1236 main#appMain .guide-page-v69 details.guide-fold-v414>summary{
+ background:linear-gradient(145deg,#292a2f,#16171a)!important;
+ background-image:linear-gradient(145deg,#292a2f,#16171a)!important;
+ border-color:rgba(192,194,201,.43)!important;
+}
+body.bm-knowledge-graphite-v1236 main#appMain .guide-page-v69 :is(.mini-card,.guide-callout){
+ background:linear-gradient(145deg,#2c2d32,#18191d)!important;
+ background-image:linear-gradient(145deg,#2c2d32,#18191d)!important;
+ border-color:rgba(192,194,201,.44)!important;color:#e1e1e4!important;
+}
+body.bm-knowledge-graphite-v1236 main#appMain .ice-knowledge-panel-v1137,
+body.bm-knowledge-graphite-v1236 main#appMain .ice-knowledge-panel-v1137 a{
+ background:linear-gradient(145deg,#313238,#18191d)!important;
+ background-image:linear-gradient(145deg,#313238,#18191d)!important;
+ border-color:rgba(192,194,202,.44)!important;color:#e5e5e9!important;
+}
+body.bm-knowledge-graphite-v1236 main#appMain :is(a,button,summary):focus-visible{
+ outline:2px solid #dfbe88!important;outline-offset:2px!important;
+}
+@media(max-width:820px){
+ html:not(.force-desktop-root) body.bm-knowledge-graphite-v1236 :is(.mobile-topbar,.mobile-bottom-v424){
+ background:#1c1d21!important;background-image:none!important;
+ border-color:rgba(192,194,202,.42)!important;
+ }
+ html:not(.force-desktop-root) body.bm-knowledge-graphite-v1236 main#appMain>.route-page.active{
+ background:#0f1013!important;
+ }
+}
