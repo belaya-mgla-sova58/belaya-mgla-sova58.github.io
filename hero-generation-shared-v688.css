@@ -52,3 +52,44 @@ body.is-heroes-route .hero-gens-page :is(.gen-hub-card,.gen-hero-card,.gen-back)
 @media(prefers-reduced-motion:reduce){
   body.is-heroes-route .hero-gens-page :is(.gen-hub-card,.gen-hero-card):hover{transform:none}
 }
+
+/* Hero portrait mobile clarity v689 */
+body.is-heroes-route .hero-gens-page .gen-hero-img{
+ min-width:0;overflow:hidden;
+}
+body.is-heroes-route .hero-gens-page .gen-hero-img img{
+ display:block;max-width:100%;max-height:100%;
+ object-fit:contain;object-position:center bottom;
+}
+body.is-heroes-route .hero-gens-page .gen-hero-body{
+ min-width:0;
+}
+body.is-heroes-route .hero-gens-page .gen-hero-body :is(h2,p,span,b){
+ overflow-wrap:break-word;
+}
+@media(max-width:620px){
+ body.is-heroes-route .hero-gens-page .gen-page-grid{
+  gap:13px;
+ }
+ body.is-heroes-route .hero-gens-page .gen-hero-img{
+  height:clamp(240px,75vw,330px);
+ }
+ body.is-heroes-route .hero-gens-page .gen-hero-body{
+  padding:16px 17px 19px;
+ }
+ body.is-heroes-route .hero-gens-page .gen-hero-body>span{
+  font-size:13px;line-height:1.45;
+ }
+ body.is-heroes-route .hero-gens-page .gen-hero-body h2{
+  font-size:clamp(25px,7vw,30px);
+ }
+ body.is-heroes-route .hero-gens-page .gen-hero-body p{
+  font-size:14px;line-height:1.55;
+ }
+ body.is-heroes-route .hero-gens-page .gen-hero-body b{
+  font-size:13px;line-height:1.5;
+ }
+ body.is-heroes-route .hero-gens-page .gen-info-strip span{
+  font-size:13px;line-height:1.55;
+ }
+}
