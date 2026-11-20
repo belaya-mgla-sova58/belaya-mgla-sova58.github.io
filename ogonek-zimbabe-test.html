@@ -677,12 +677,38 @@ a{color:inherit;text-decoration:none}
  .chat-view .ogonek-final-like{min-height:44px;min-width:160px;padding:10px 16px;font-size:14px}
 }
 @media(prefers-reduced-motion:reduce){.chat-view .ogonek-final-like{transition:none!important}}
-</style><link rel="stylesheet" href="site-skip-navigation-v1184.css?v=1184"/><style id="zimbabe-host-followup-v1">
-/* An extra on-air comment by the host, with original Barash interview typography. */
-.chat-view .host-followup{margin:18px 0 2px 5%;padding:12px 14px;border-left:3px solid #ebc38a;border-radius:12px;background:rgba(26,28,35,.76)}
-.chat-view .host-followup .sender{color:#ffe0aa}
-.chat-view .host-followup .message.host-note{max-width:94%;border-radius:13px;background:linear-gradient(125deg,rgba(49,39,42,.93),rgba(26,28,36,.92));border-color:rgba(255,216,157,.66);color:#fff0d7}
-@media(max-width:650px){.chat-view .host-followup{margin-left:0;padding:9px}.chat-view .host-followup .message.host-note{max-width:100%;padding:12px 13px}}
+</style><link rel="stylesheet" href="site-skip-navigation-v1184.css?v=1184"/><style id="zimbabe-host-followup-v2">
+/* Дополнительные реплики ведущего: спокойная типографика, без отдельного ярлыка. */
+.chat-view .host-followup{
+  box-sizing:border-box;
+  width:fit-content;
+  max-width:min(86%,720px);
+  margin:17px 0 5px 6%;
+  padding:12px 18px 13px;
+  border-left:2px solid rgba(245,205,149,.85);
+  border-radius:4px 13px 13px 4px;
+  background:linear-gradient(90deg,rgba(25,35,53,.86),rgba(25,35,53,.56));
+}
+.chat-view .host-followup .sender{
+  margin:0 0 6px!important;
+  font:700 12px/1.4 system-ui,"Segoe UI",sans-serif!important;
+  letter-spacing:.025em;
+  color:#ffdfab!important;
+}
+.chat-view .host-followup .message.host-note{
+  display:block!important;width:auto!important;max-width:100%!important;
+  padding:0!important;margin:0!important;
+  background:none!important;border:0!important;border-radius:0!important;
+  box-shadow:none!important;backdrop-filter:none!important;
+  color:#fff1d9!important;
+  font:italic 17px/1.6 Georgia,"Times New Roman",serif!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.3)!important;
+}
+.chat-view .host-followup .message.host-note::before{display:none!important}
+@media(max-width:700px){
+ .chat-view .host-followup{max-width:96%;margin:13px 0 3px 3%;padding:11px 13px}
+ .chat-view .host-followup .message.host-note{font-size:15px!important;line-height:1.55!important}
+}
 </style></head><body><a class="bm-skip-to-content-v1184" href="#chat-view">Перейти к содержимому</a><main aria-label="Интервью с zimbabe" class="page chat-view" id="chat-view" data-ogonek-article><h1 style="position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;">Наш гость: [ZOV]zimbabe</h1><div class="backbar"><a class="backbutton" href="ogonek.html">← Ко всем интервью</a></div><header class="guest-head"><p class="eyebrow">К вам на огонек · интервью</p><div class="guest-card"><span class="guest-spark">✦</span><p class="guestline">Наш гость: <strong>[ZOV]zimbabe</strong></p><div class="hostline">Ведущий: [VgB]HiTmaN74</div><span class="guest-spark">✦</span></div></header>
 <section aria-label="Интервью с [ZOV]zimbabe" class="chat">
 <div class="ogonek-desktop-jewelry" aria-hidden="true">
@@ -705,7 +731,7 @@ a{color:inherit;text-decoration:none}
 <section aria-label="Вопрос 1" class="exchange" id="q1">
 <div class="question-row"><div class="sender"><span class="mark mark-host">H</span><span>[VgB]HiTmaN74</span><span class="meta">вопрос 01</span></div><div class="message question">Как ты вообще оказался в «Белой мгле»? (Многие увидели рекламу, кого-то позвал знакомый.)</div></div>
 <div class="answer-row"><div class="sender"><span class="meta">ответ 01</span><span>[ZOV]zimbabe</span><span class="mark mark-guest">Z</span></div><div class="message answer">Меня обманула реклама) Хотел на ночь глядя деревья порубить.</div></div>
-<div class="host-followup"><div class="sender"><span class="mark mark-host">H</span><span>[VgB]HiTmaN74</span><span class="meta">дополнение ведущего</span></div><div class="message host-note">Да, многие пришли по рекламе, где показано одно, а в итоге совсем другое, и застряли тут надолго.</div></div>
+<div class="host-followup"><div class="sender"><span>[VgB]HiTmaN74</span></div><div class="message host-note">Да, многие пришли по рекламе, где показано одно, а в итоге совсем другое, и застряли тут надолго.</div></div>
 </section>
 <section aria-label="Вопрос 2" class="exchange" id="q2">
 <div class="question-row"><div class="sender"><span class="mark mark-host">H</span><span>[VgB]HiTmaN74</span><span class="meta">вопрос 02</span></div><div class="message question">Сейчас ты уже опытный игрок. Если бы мог вернуться в начало и дать себе один совет, какой бы он был?</div></div>
@@ -722,7 +748,7 @@ a{color:inherit;text-decoration:none}
 <section aria-label="Вопрос 5" class="exchange" id="q5">
 <div class="question-row"><div class="sender"><span class="mark mark-host">H</span><span>[VgB]HiTmaN74</span><span class="meta">вопрос 05</span></div><div class="message question">Чувствуешь ли ты давление доната? Или можно нормально играть в своё удовольствие, если не гонишься за топ-1?</div></div>
 <div class="answer-row"><div class="sender"><span class="meta">ответ 05</span><span>[ZOV]zimbabe</span><span class="mark mark-guest">Z</span></div><div class="message answer">Да конечно, любое интересное событие без минимального доната уже не раскрывается в полной мере. Ну и как не стремиться в топ?)</div></div>
-<div class="host-followup"><div class="sender"><span class="mark mark-host">H</span><span>[VgB]HiTmaN74</span><span class="meta">дополнение ведущего</span></div><div class="message host-note">Тут согласен) Охота быть в топах, как в личных, так и в проходящих событиях.</div></div>
+<div class="host-followup"><div class="sender"><span>[VgB]HiTmaN74</span></div><div class="message host-note">Тут согласен) Охота быть в топах, как в личных, так и в проходящих событиях.</div></div>
 </section>
 <section aria-label="Вопрос 6" class="exchange" id="q6">
 <div class="question-row"><div class="sender"><span class="mark mark-host">H</span><span>[VgB]HiTmaN74</span><span class="meta">вопрос 06</span></div><div class="message question">Было ли такое, что из-за игры ты реально подружился с кем-то в реале?</div></div>
