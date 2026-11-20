@@ -1139,7 +1139,7 @@ body.moon-mirror-test .related-guide-card-v625:hover{
 </style><style id="frost-feather-site-v27">
 /* Approved silver feather, frosted foliage, gold line design. */
 body.moon-mirror-test .heroes-frost-backdrop-v26{
- background:#131821 url("assets/frost-silver-feather-background.svg?v=3") center center / cover no-repeat!important;
+ background:#131821 url("assets/frost-silver-feather-background.svg?v=4") center center / cover no-repeat!important;
 }
 body.moon-mirror-test .heroes-frost-backdrop-v26::before,
 body.moon-mirror-test .heroes-frost-backdrop-v26::after,
@@ -1148,7 +1148,38 @@ body.moon-mirror-test .heroes-frost-backdrop-v26 [class*="curve-"]{display:none!
 body:is(.gear-editorial-test,.moon-mirror-test) main#appMain{
  background-image:none!important;
 }
-</style></head><body class="moon-mirror-test is-heroes-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="heroes"><div aria-hidden="true" class="heroes-frost-backdrop-v26"><span class="heroes-frost-sheen-v26"></span><span class="heroes-frost-curve-v26"></span><span class="heroes-frost-curve-v26 second"></span></div>
+</style><style id="winter-gilt-frame-v30">
+/* Gold-frost page frame modeled after the approved winter reference. Does not block interaction. */
+body.moon-mirror-test .winter-gilt-frame-v30{
+ display:block!important;position:fixed!important;
+ top:12px!important;bottom:13px!important;
+ left:clamp(218px,16vw,307px)!important;right:16px!important;
+ border:1px solid rgba(226,192,134,.78)!important;border-radius:17px!important;
+ pointer-events:none!important;z-index:19!important;
+ box-shadow:0 0 0 1px rgba(48,37,27,.25),inset 0 0 0 1px rgba(244,222,181,.09),0 0 18px rgba(208,164,93,.12)!important;
+ background:transparent!important;
+}
+body.moon-mirror-test .winter-gilt-frame-v30::before{
+ content:""!important;position:absolute!important;left:17%!important;right:17%!important;top:-2px!important;height:3px!important;
+ border-radius:30px!important;
+ background:linear-gradient(90deg,transparent,rgba(239,209,153,.35),rgba(255,235,193,.82),rgba(239,209,153,.35),transparent)!important;
+ box-shadow:0 0 13px 2px rgba(255,214,147,.24)!important;
+}
+body.moon-mirror-test .winter-gilt-frame-v30::after{
+ content:""!important;position:absolute!important;left:17%!important;right:17%!important;bottom:-2px!important;height:2px!important;
+ border-radius:30px!important;
+ background:linear-gradient(90deg,transparent,rgba(244,224,194,.42),rgba(255,239,209,.86),rgba(244,224,194,.42),transparent)!important;
+ box-shadow:0 0 10px rgba(245,217,165,.28)!important;
+}
+@media(max-width:1099px){
+ body.moon-mirror-test .winter-gilt-frame-v30{left:13px!important;right:13px!important;top:63px!important;bottom:65px!important;border-color:rgba(226,192,134,.52)!important}
+}
+@media(max-width:680px){
+ body.moon-mirror-test .winter-gilt-frame-v30{left:5px!important;right:5px!important;top:58px!important;bottom:65px!important;border-color:rgba(226,192,134,.26)!important;box-shadow:none!important}
+ body.moon-mirror-test .winter-gilt-frame-v30::before,body.moon-mirror-test .winter-gilt-frame-v30::after{display:none!important}
+}
+@media(prefers-reduced-motion:reduce){body.moon-mirror-test .winter-gilt-frame-v30{transition:none!important}}
+</style></head><body class="moon-mirror-test is-heroes-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="heroes"><div class="winter-gilt-frame-v30" aria-hidden="true"></div><div aria-hidden="true" class="heroes-frost-backdrop-v26"><span class="heroes-frost-sheen-v26"></span><span class="heroes-frost-curve-v26"></span><span class="heroes-frost-curve-v26 second"></span></div>
 <div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
 <button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
 <div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div>
