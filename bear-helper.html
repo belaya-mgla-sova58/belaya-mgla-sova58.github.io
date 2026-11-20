@@ -342,5 +342,51 @@ $('calc').onclick=calc;fillHeroes();
  }catch(e){/* Ignore corrupt/blocked storage. */}
  ids.forEach(id=>{$(id).addEventListener('input',save);$(id).addEventListener('change',save)});
  document.querySelectorAll('#ratios .chip').forEach(chip=>chip.addEventListener('click',save));
+ // Remember the hero setup as well as troop counts, without affecting combat calculations.
+ const heroesKey='sova58-bear-helper-heroes-v1';
+ function saveHeroes(){
+  try{
+   const heroSlots=[...document.querySelectorAll('#trio .hp')].map(d=>({
+    name:d.querySelector('.hsel')?.value||'',
+    level:d.querySelector('.skill-level')?.value||'5'
+   }));
+   localStorage.setItem(heroesKey,JSON.stringify({
+    generation:$('gen').value,mode:mode,
+    owned:[...owned.entries()],slots:heroSlots
+   }));
+  }catch(e){/* Storage may be disabled. */}
+ }
+ try{
+  const saved=JSON.parse(localStorage.getItem(heroesKey)||'null');
+  if(saved&&typeof saved==='object'){
+   const generation=String(saved.generation||'');
+   if([...$('gen').options].some(o=>o.value===generation))$('gen').value=generation;
+   if(Array.isArray(saved.owned)){
+    saved.owned.slice(0,100).forEach(entry=>{
+     if(!Array.isArray(entry)||typeof entry[0]!=='string')return;
+     const hero=H.find(h=>h.name===entry[0]);
+     const level=Number(entry[1]);
+     if(hero&&Number.isInteger(level)&&level>=1&&level<=5)owned.set(hero.name,level);
+    });
+   }
+   const button=[...document.querySelectorAll('#tabs button')].find(b=>b.dataset.mode===saved.mode);
+   if(button)button.click();else fillHeroes();
+   if(Array.isArray(saved.slots)){
+    document.querySelectorAll('#trio .hp').forEach((d,i)=>{
+     const slot=saved.slots[i];if(!slot||typeof slot!=='object')return;
+     const select=d.querySelector('.hsel');
+     if(select&&[...select.options].some(o=>o.value===slot.name))select.value=slot.name;
+     const skill=d.querySelector('.skill-level');
+     if(skill&&[...skill.options].some(o=>o.value===String(slot.level)))skill.value=String(slot.level);
+    });
+    update();
+   }
+   renderOwned();
+  }
+ }catch(e){/* Ignore invalid saved data. */}
+ $('gen').addEventListener('change',saveHeroes);
+ $('tabs').addEventListener('click',saveHeroes);
+ $('trio').addEventListener('change',saveHeroes);
+ $('ownedRoster').addEventListener('change',saveHeroes);
 })();
 </script></body></html>
