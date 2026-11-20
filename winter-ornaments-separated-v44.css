@@ -217,3 +217,48 @@ body.winter-site-reference-v1 main#appMain>.owl-page-end-v44 img{
  body.winter-site-reference-v1 main#appMain>.owl-page-end-v44 img{width:185px!important;max-height:130px!important}
 }
 
+
+/* v81: foliage must NEVER sit on top of site text, search or the logo.
+   Leaves stay decorative and are tucked into the frame on all winter pages. */
+html body:is(.winter-site-reference-v1,.gear-editorial-test,.moon-mirror-test)>.owl-top-ornaments-v44{
+ z-index:0!important;top:-8px!important;
+ height:76px!important;overflow:hidden!important;
+ opacity:.77!important;pointer-events:none!important;
+}
+html body:is(.winter-site-reference-v1,.gear-editorial-test,.moon-mirror-test)>.owl-top-ornaments-v44>.owl-branch-left-v44{
+ left:clamp(215px,19vw,340px)!important;
+ width:clamp(118px,11vw,176px)!important;
+ top:-11px!important;transform:scaleY(-1)!important;
+}
+html body:is(.winter-site-reference-v1,.gear-editorial-test,.moon-mirror-test)>.owl-top-ornaments-v44>.owl-branch-right-v44{
+ right:7px!important;width:clamp(140px,13vw,196px)!important;
+ top:-9px!important;transform:scaleY(-1)!important;
+}
+html body:is(.winter-site-reference-v1,.gear-editorial-test,.moon-mirror-test)>main#appMain{
+ position:relative!important;z-index:2!important;
+}
+html body:is(.winter-site-reference-v1,.gear-editorial-test,.moon-mirror-test)>.nav-wrap{
+ z-index:30!important;
+}
+@media(max-width:920px){
+ html body:is(.winter-site-reference-v1,.gear-editorial-test,.moon-mirror-test)>.owl-top-ornaments-v44{
+  height:56px!important;top:-8px!important;
+ }
+ html body:is(.winter-site-reference-v1,.gear-editorial-test,.moon-mirror-test)>.owl-top-ornaments-v44>.owl-branch-left-v44{
+  left:clamp(75px,15vw,128px)!important;width:98px!important;
+ }
+ html body:is(.winter-site-reference-v1,.gear-editorial-test,.moon-mirror-test)>.owl-top-ornaments-v44>.owl-branch-right-v44{
+  right:4px!important;width:105px!important;
+ }
+}
+@media(max-width:580px){
+ html body:is(.winter-site-reference-v1,.gear-editorial-test,.moon-mirror-test)>.owl-top-ornaments-v44{
+  height:41px!important;
+ }
+ html body:is(.winter-site-reference-v1,.gear-editorial-test,.moon-mirror-test)>.owl-top-ornaments-v44>.owl-branch-left-v44{
+  left:68px!important;width:72px!important;
+ }
+ html body:is(.winter-site-reference-v1,.gear-editorial-test,.moon-mirror-test)>.owl-top-ornaments-v44>.owl-branch-right-v44{
+  width:80px!important;
+ }
+}
