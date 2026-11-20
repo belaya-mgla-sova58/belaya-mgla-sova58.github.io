@@ -93,6 +93,35 @@ a {color:inherit}
  .host{margin-bottom:14px}
  .stats{padding:9px 18px}
 }
+
+/* Второй этап уменьшения: компактные выпуски без потери читаемости */
+.wrap{max-width:850px}
+.topbar{margin-bottom:13px}
+.intro{padding:12px 8px 12px}
+.intro h1{font-size:clamp(29px,3.6vw,40px);margin:8px 0}
+.intro p{font-size:13px;line-height:1.5}
+.ornament{margin-top:10px}
+.section-label{margin:5px 0 10px;font-size:11px}
+.interview-card{margin-bottom:13px;border-radius:14px}
+.interview-card::before{inset:5px;border-radius:10px}
+.interview-link{padding:18px 23px}
+.interview-card h2{font-size:clamp(24px,3vw,33px);line-height:1.16;margin:7px 0 7px}
+.interview-card .description{font-size:13px;line-height:1.45;margin:0 0 9px}
+.host{font-size:11px;margin:0 0 10px}
+.edition{font-size:10px;letter-spacing:.1em}
+.open{padding:6px 12px;font-size:12px}
+.stats{padding:7px 23px;font-size:11px}
+.like{min-height:29px;padding:4px 9px;font-size:11px}
+.guest-invite{margin-top:17px;padding:17px}
+@media(max-width:600px){
+ .wrap{padding:10px 11px 35px}
+ .intro{padding:12px 4px}
+ .interview-card{margin-bottom:12px}
+ .interview-link{padding:16px 15px}
+ .interview-card h2{font-size:clamp(23px,6.2vw,30px);margin:8px 0}
+ .interview-card .description{font-size:12px;line-height:1.45}
+ .stats{padding:7px 15px}
+}
 </style>
 </head>
 <body>
