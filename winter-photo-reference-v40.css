@@ -1,0 +1,149 @@
+/* Белая мгла. Visual system rebuilt from the uploaded approved screenshot, 824 x 464.
+   Guides + calculators only, preserving page contents, links and calculator logic. */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test){
+ --bm-frame:#dbaf6e;--bm-ink:#f2f1f3;--bm-silver:#a4aab8;
+ --bm-surface:#16191f;
+ background-color:#11151d!important;background-image:none!important;
+ color:var(--bm-ink)!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .winter-site-frame-v1,
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .winter-gilt-frame-v30{
+ display:none!important;
+}
+/* Paint details on their own noninteractive layer, keeping the whole site functional. */
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winter-photo-decor-v40{
+ position:fixed!important;inset:0!important;z-index:32!important;
+ display:block!important;pointer-events:none!important;overflow:hidden!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winter-photo-decor-v40>.winter-photo-frame-v40{
+ position:absolute!important;inset:7px 8px!important;border:1px solid rgba(227,181,107,.76)!important;
+ border-radius:31px!important;
+ box-shadow:0 0 0 1px rgba(244,216,168,.1),inset 0 0 1px rgba(255,243,216,.22),0 0 15px rgba(223,171,95,.15)!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winter-photo-decor-v40>.winter-photo-frame-v40:before,
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winter-photo-decor-v40>.winter-photo-frame-v40:after{
+ content:""!important;position:absolute!important;left:11%!important;right:11%!important;
+ height:2px!important;
+ background:linear-gradient(90deg,transparent,rgba(229,185,112,.3) 10%,#f8e2b5 50%,rgba(229,185,112,.3) 90%,transparent)!important;
+ box-shadow:0 0 9px 1px rgba(251,211,142,.24)!important;border-radius:100%!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winter-photo-decor-v40>.winter-photo-frame-v40:before{top:-1px!important}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winter-photo-decor-v40>.winter-photo-frame-v40:after{bottom:-1px!important}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winter-photo-decor-v40>.winter-photo-leaves-left-v40,
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winter-photo-decor-v40>.winter-photo-leaves-right-v40{
+ position:absolute!important;top:1px!important;display:block!important;
+ height:clamp(66px,8.5vw,110px)!important;
+ background-size:contain!important;background-repeat:no-repeat!important;
+ opacity:.92!important;filter:drop-shadow(0 0 4px rgba(218,226,239,.18))!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winter-photo-decor-v40>.winter-photo-leaves-left-v40{
+ left:clamp(90px,11vw,205px)!important;width:clamp(180px,21vw,280px)!important;
+ background-image:url("assets/reference-top-left-v1.svg?v=1")!important;background-position:left top!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winter-photo-decor-v40>.winter-photo-leaves-right-v40{
+ right:12px!important;width:clamp(190px,22vw,305px)!important;
+ background-image:url("assets/reference-top-right-v1.svg?v=1")!important;background-position:right top!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winter-photo-decor-v40>.winter-photo-feather-v40{
+ position:absolute!important;right:clamp(17px,2.7vw,42px)!important;bottom:clamp(19px,3.3vh,42px)!important;
+ width:clamp(180px,23vw,325px)!important;aspect-ratio:218/196!important;
+ display:block!important;
+ background-image:url("assets/owl-feather-from-reference-v1.svg?v=1")!important;
+ background-size:contain!important;background-position:center!important;background-repeat:no-repeat!important;
+ filter:drop-shadow(0 0 13px rgba(231,194,128,.23))!important;opacity:.98!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winter-photo-decor-v40>.winter-photo-orbit-v40{
+ position:absolute!important;right:clamp(15px,3vw,48px)!important;bottom:clamp(19px,3.4vh,42px)!important;
+ width:clamp(180px,24vw,330px)!important;height:clamp(200px,24vw,350px)!important;
+ background:radial-gradient(ellipse at 73% 29%,transparent 0%,transparent 50%,rgba(241,196,119,.65) 50.5%,transparent 51.1%,transparent 100%)!important;
+ opacity:.28!important;transform:rotate(-27deg)!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winter-photo-decor-v40>.winter-photo-wave-v40{
+ position:absolute!important;bottom:12px!important;left:clamp(135px,14vw,245px)!important;
+ height:145px!important;width:clamp(290px,40vw,630px)!important;
+ border-top:1px solid rgba(221,232,249,.64)!important;border-radius:60% 90% 0 0!important;
+ transform:translateY(70px) rotate(12deg)!important;
+ box-shadow:0 -8px 18px -16px rgba(235,241,255,.75)!important;opacity:.7!important;
+}
+/* Retire broken earlier image mask and previous foliage layers. */
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .real-photo-feather-v35,
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .winter-leaves-front-v2,
+body.winter-site-reference-v1>.winter-site-background-v1:after{display:none!important;content:none!important}
+/* Reference's midnight graphite background with highlights instead of blue. */
+body.winter-site-reference-v1>.winter-site-background-v1,
+body.gear-editorial-test .gear-frost-backdrop-v6,
+body.moon-mirror-test .heroes-frost-backdrop-v26{
+ background:#11151d url("assets/frost-silver-feather-background.svg?v=6") center center/cover no-repeat!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .nav-wrap{
+ background:linear-gradient(180deg,#131922,#0e1218)!important;
+ border-right:1px solid rgba(234,196,132,.68)!important;
+ box-shadow:4px 0 16px rgba(0,0,0,.16)!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .nav-wrap a.route-link{
+ background:linear-gradient(120deg,#252934,#191e28)!important;
+ background-image:linear-gradient(120deg,#252934,#191e28)!important;
+ border:1px solid rgba(164,177,192,.3)!important;border-radius:10px!important;
+ color:#f3f0f2!important;box-shadow:inset 0 1px rgba(255,255,255,.055)!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .nav-wrap a.route-link.active{
+ background:linear-gradient(110deg,#493e31,#222830)!important;
+ border-color:#dfbb82!important;box-shadow:inset 3px 0 #f5d79f,0 0 10px rgba(245,203,139,.15)!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .nav-wrap a.route-link:hover{
+ background:#33353d!important;border-color:#debb85!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .site-search-box-v426,
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .breadcrumbs-v409{
+ background:linear-gradient(110deg,#24252c,#181a22)!important;
+ background-image:linear-gradient(110deg,#24252c,#181a22)!important;
+ color:#e8e4e9!important;border:1px solid rgba(219,189,143,.33)!important;
+ box-shadow:none!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .site-search-icon-v426,
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .breadcrumbs-v409 a{color:#e4c38d!important}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) :is(.page-heading-v424.frost-header-v431,.guide-page-v69){
+ border-color:rgba(168,174,184,.35)!important;
+ background:linear-gradient(140deg,rgba(24,27,34,.94),rgba(13,16,21,.93))!important;
+ box-shadow:none!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) :is(.related-guides-v625,.gear-calc-panel-v1){
+ border:1px solid rgba(162,173,188,.4)!important;
+ background:linear-gradient(115deg,rgba(20,24,31,.95),rgba(10,13,18,.96))!important;
+ border-radius:11px!important;box-shadow:inset 0 1px rgba(249,249,255,.035)!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .related-guides-head-v625{
+ background:transparent!important;background-image:none!important;border-bottom:1px solid rgba(216,209,201,.32)!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .related-guide-card-v625{
+ background:linear-gradient(135deg,#20252e,#101218)!important;
+ border:1px solid rgba(172,185,198,.43)!important;border-radius:9px!important;
+ box-shadow:inset 0 1px rgba(247,249,255,.025)!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .related-guide-card-v625:hover{
+ border-color:#f0c989!important;box-shadow:0 0 17px rgba(231,186,118,.13)!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .back-to-top{
+ background:linear-gradient(130deg,#d3b98e,#fae0b2)!important;
+ color:#18191f!important;border:1px solid #ffdfaa!important;border-radius:10px!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .v69-footer{
+ color:#b8b8c2!important;border-color:rgba(226,188,126,.5)!important;
+}
+/* Interior guide sections remain readable, with existing colored vertical accents. */
+body.gear-editorial-test .gear-entry-v1,
+body.moon-mirror-test .hero-reading-article-v1230 section.guide-section.guide-fold-v414{
+ background:#15171e!important;border-right:1px solid rgba(172,180,192,.41)!important;
+ border-bottom:1px solid rgba(172,180,192,.41)!important;
+}
+@media(max-width:800px){
+ body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winter-photo-decor-v40>.winter-photo-feather-v40{
+  width:135px!important;right:11px!important;bottom:65px!important;opacity:.6!important;
+ }
+ body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winter-photo-decor-v40>.winter-photo-orbit-v40{display:none!important}
+ body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winter-photo-decor-v40>.winter-photo-leaves-left-v40{left:18px!important;width:145px!important;height:60px!important}
+ body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winter-photo-decor-v40>.winter-photo-leaves-right-v40{width:135px!important;height:60px!important}
+ body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winter-photo-decor-v40>.winter-photo-frame-v40{display:none!important}
+ body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winter-photo-decor-v40>.winter-photo-wave-v40{display:none!important}
+}
