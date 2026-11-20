@@ -278,8 +278,12 @@ function updateRefining(buildFC,buildRFC){
  document.getElementById('refineCount').textContent=compactCount(average.pulls);
  document.getElementById('refineSummary').textContent=needed===0?
   'В выбранном маршруте уже хватает Очищенных кристаллов. Дополнительные обмены не требуются.':
-  'По среднему результату: примерно '+average.weeks+' игровых недель, '+compactCount(average.pulls)+' обменов, ожидаемая выработка '+average.got.toFixed(1).replace('.',',')+' Очищенных кристаллов.';
- document.getElementById('refineWorst').textContent=needed===0?'':'Если каждый обмен принесёт только минимальную награду: до '+compactCount(worst.spent)+' обычных Огненных кристаллов на обмен ('+worst.weeks+' игровых недель). Фактический итог может быть между этими ориентирами.';
+  average.fulfilled?
+  'По среднему результату: примерно '+average.weeks+' игровых недель, '+compactCount(average.pulls)+' обменов, ожидаемая выработка '+average.got.toFixed(1).replace('.',',')+' Очищенных кристаллов.':
+  'За '+average.weeks+' игровых недель расчёта по среднему результату цель ещё не достигнута. Получится примерно '+average.got.toFixed(1).replace('.',',')+' Очищенных кристаллов; срок и полная стоимость не определены.';
+ document.getElementById('refineWorst').textContent=needed===0?'':worst.fulfilled?
+  'Если каждый обмен принесёт только минимальную награду: суммарно до '+compactCount(worst.spent)+' обычных Огненных кристаллов за все обмены ('+worst.weeks+' игровых недель). Фактический итог может быть между этими ориентирами.':
+  'При минимальной награде за '+worst.weeks+' игровых недель цель не достигнута. За этот период потребуется '+compactCount(worst.spent)+' обычных Огненных кристаллов; полная стоимость пока не определена.';
 }
 refineOwned.addEventListener('input',()=>updateRefining(refineBuildFC,refineBuildRFC));
 refineStrategy.addEventListener('change',()=>updateRefining(refineBuildFC,refineBuildRFC));
