@@ -280,7 +280,7 @@ function renderExtras(){
   const heading=document.createElement('strong');heading.textContent=o.name+' → '+o.stage;
   const row=document.createElement('div');row.className='compare-buttons';
   const detail=document.createElement('small');detail.textContent=o.troop+' · +'+fmt(o.power)+' мощи · '+fmt(o.points)+' очков СВС';
-  const btn=document.createElement('button');btn.type='button';btn.className='btn';btn.textContent='В план';btn.onclick=()=>{category=o.cat;selected=o.id;state[o.cat][o.id].to=o.best;save();renderSlots();renderSelects();calculate();document.getElementById('slots').scrollIntoView({behavior:'smooth',block:'start'})};
+  const btn=document.createElement('button');btn.type='button';btn.className='btn';btn.textContent='В план';btn.onclick=()=>{const current=state[o.cat][o.id],needs=collect().needs,available=pool(),previous=materialCost(o.cat,current.from,current.to),proposed=materialCost(o.cat,current.from,o.best);const shortages=Object.keys(mats).filter(k=>needs[k]-previous[k]+proposed[k]>available[k]);if(shortages.length){alert('Для всех выбранных улучшений вместе не хватает материалов: '+shortages.map(k=>mats[k]).join(', ')+'. Уменьшите другие цели или добавьте запасы.');return;}category=o.cat;selected=o.id;state[o.cat][o.id].to=o.best;save();renderSlots();renderSelects();calculate();document.getElementById('slots').scrollIntoView({behavior:'smooth',block:'start'})};
   row.append(detail,btn);item.append(heading,row);list.append(item);
  }
 }
