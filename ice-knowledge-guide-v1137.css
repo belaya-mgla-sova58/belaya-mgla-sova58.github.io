@@ -34,3 +34,53 @@ body.bm-ice-encyclopedia-v1134 .ice-knowledge-main-v1137 :is(.guide-fold-body-v4
 body.bm-ice-encyclopedia-v1134 .ice-knowledge-main-v1137 :is(img,video,iframe,table){max-width:100%}
 body.bm-ice-encyclopedia-v1134 .ice-knowledge-main-v1137 :is(.table-wrap,.table-responsive){overflow-x:auto;max-width:100%}
 }
+
+/* v1139: the source of the blue right-hand TOC, corrected in place. */
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine){
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-layout-v1137{
+ grid-template-columns:minmax(235px,270px) minmax(0,1fr)!important;
+}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-side-v1137{
+ grid-column:1!important;grid-row:1!important;top:16px!important;
+}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-main-v1137{
+ grid-column:2!important;grid-row:1!important;
+}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-panel-v1137{
+ background:linear-gradient(145deg,#232326,#111215)!important;
+ background-image:linear-gradient(145deg,#232326,#111215)!important;
+ border:1px solid rgba(184,181,177,.52)!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.06),0 8px 22px rgba(0,0,0,.18)!important;
+}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-panel-v1137 h2{
+ color:#ece8e4!important;border-color:rgba(210,187,150,.3)!important;
+}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-panel-v1137 a{
+ background:linear-gradient(115deg,#29282b,#171719)!important;
+ background-image:linear-gradient(115deg,#29282b,#171719)!important;
+ border-color:rgba(180,175,169,.38)!important;
+ color:#eee9e4!important;
+}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-panel-v1137 a:hover,
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-panel-v1137 a:focus-visible{
+ background:#39332e!important;border-color:#e2c18b!important;
+}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-panel-v1137 li{
+ color:#ded9d5!important;
+}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-main-v1137 .guide-page-v69>details.guide-section,
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-main-v1137 :is(.troop-group,.building-group,.build-stage){
+ background:linear-gradient(140deg,#252427,#121214)!important;
+ background-image:linear-gradient(140deg,#252427,#121214)!important;
+ border-color:rgba(179,175,171,.48)!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.055)!important;
+}
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-main-v1137 :is(.troop-card,.building-card,.mini-card){
+ background:#1e1d20!important;border-color:rgba(177,174,171,.43)!important;
+}
+}
+@media screen and (min-width:1100px) and (max-width:1320px) and (hover:hover) and (pointer:fine){
+body.bm-ice-encyclopedia-v1134 .ice-knowledge-layout-v1137{
+ grid-template-columns:235px minmax(0,1fr)!important;
+}
+}
