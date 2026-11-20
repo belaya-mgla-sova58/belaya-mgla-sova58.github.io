@@ -65,6 +65,34 @@ a {color:inherit}
  .stats {padding:12px 23px}
 }
 @media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto}.interview-link:hover .open {transform:none}}
+
+/* Более компактный каталог интервью на компьютере и телефоне */
+.wrap{max-width:1000px}
+.intro{padding:23px 12px 18px}
+.intro h1{font-size:clamp(31px,4.5vw,49px)}
+.ornament{margin-top:16px}
+.section-label{margin:7px 0 13px}
+.interview-card{margin-bottom:17px;border-radius:18px}
+.interview-card::before{border-radius:12px}
+.interview-link{padding:clamp(19px,3vw,31px)}
+.interview-card h2{font-size:clamp(26px,3.5vw,42px);margin:11px 0 10px}
+.interview-card .description{font-size:clamp(13px,1.4vw,15px);line-height:1.55;margin:0 0 14px;max-width:720px}
+.host{margin-bottom:15px;font-size:12px}
+.edition{font-size:11px;letter-spacing:.13em}
+.open{padding:8px 15px;font-size:13px}
+.stats{padding:10px clamp(19px,3vw,31px);font-size:12px}
+.like{min-height:32px;padding:5px 11px}
+.guest-invite{margin-top:22px}
+@media(max-width:600px){
+ .wrap{padding:12px 12px 40px}
+ .intro{padding:18px 6px 15px}
+ .interview-card{border-radius:15px;margin-bottom:15px}
+ .interview-link{padding:20px 18px}
+ .interview-card h2{font-size:clamp(25px,7vw,34px);margin:10px 0}
+ .interview-card .description{font-size:13px}
+ .host{margin-bottom:14px}
+ .stats{padding:9px 18px}
+}
 </style>
 </head>
 <body>
