@@ -934,43 +934,48 @@ html body.gear-editorial-test.site-hq-v407.modern-v424 .nav-wrap nav>a.route-lin
 @media(prefers-reduced-motion:reduce){
  html body.gear-editorial-test .nav-wrap nav>a.route-link{transition:none!important;}
 }
-</style><style id="gear-toc-always-visible-v74">
-/* Dedicated placeholder maintains the left column while contents follows viewport. */
+</style><style id="gear-toc-portal-v75">
+/* Detached floating table of contents avoids the clipping/transforms of guide containers. */
 @media(min-width:921px){
- html body.gear-editorial-test main#appMain .gear-reading-layout-v1{
-  align-items:stretch!important;
- }
- html body.gear-editorial-test main#appMain .gear-reading-layout-v1>.gear-sidebar-slot-v74{
+ html body.gear-editorial-test .gear-reading-layout-v1>.gear-sidebar-slot-v74{
   position:relative!important;min-width:0!important;
-  align-self:stretch!important;height:100%!important;
-  grid-column:1!important;grid-row:1!important;
+  align-self:stretch!important;grid-column:1!important;grid-row:1!important;
  }
- html body.gear-editorial-test main#appMain .gear-reading-layout-v1>.gear-articles-v1{
-  grid-column:2!important;grid-row:1!important;min-width:0!important;
+ html body.gear-editorial-test .gear-reading-layout-v1>.gear-articles-v1{
+  grid-column:2!important;grid-row:1!important;
  }
- html body.gear-editorial-test main#appMain .gear-sidebar-slot-v74>.gear-sidebar-v1{
-  position:relative!important;top:auto!important;
-  width:100%!important;box-sizing:border-box!important;
-  max-height:calc(100vh - 28px)!important;
-  overflow-x:hidden!important;overflow-y:auto!important;
-  scrollbar-width:thin;z-index:30!important;
+ html body.gear-editorial-test>.gear-sidebar-v1.gear-toc-portal-active-v75{
+  position:fixed!important;z-index:10050!important;
+  top:14px!important;bottom:auto!important;
+  margin:0!important;transform:none!important;
+  max-height:calc(100vh - 28px)!important;overflow-y:auto!important;
+  overflow-x:hidden!important;overscroll-behavior:contain!important;
+  scrollbar-width:thin!important;
+  background:linear-gradient(155deg,#242226,#111114)!important;
+  border:1px solid rgba(195,177,150,.42)!important;
+  border-radius:11px!important;
+  box-shadow:0 13px 30px rgba(0,0,0,.38)!important;
+  box-sizing:border-box!important;
  }
- html body.gear-editorial-test main#appMain .gear-sidebar-slot-v74>.gear-sidebar-v1.is-following-v74{
-  position:fixed!important;top:14px!important;bottom:auto!important;
-  margin:0!important;
+ html body.gear-editorial-test>.gear-sidebar-v1.gear-toc-portal-active-v75 .gear-toc-v1{
+  margin:0!important;width:100%!important;max-width:100%!important;
  }
- html body.gear-editorial-test main#appMain .gear-sidebar-slot-v74>.gear-sidebar-v1.is-ended-v74{
-  position:absolute!important;top:auto!important;bottom:0!important;
+ html body.gear-editorial-test>.gear-sidebar-v1.gear-toc-portal-active-v75 .gear-toc-links-v2{
+  display:flex!important;flex-direction:column!important;gap:0!important;
+  padding:8px 12px!important;
  }
-}
-@media(max-width:920px){
- html body.gear-editorial-test main#appMain .gear-reading-layout-v1>.gear-sidebar-slot-v74{
-  display:block!important;height:auto!important;
-  position:static!important;
+ html body.gear-editorial-test>.gear-sidebar-v1.gear-toc-portal-active-v75 .gear-toc-links-v2>a{
+  display:flex!important;gap:13px!important;align-items:start!important;
+  border-bottom:1px solid rgba(201,185,161,.2)!important;
+  padding:10px 7px!important;min-width:0!important;text-decoration:none!important;
+  color:#ede8e4!important;
  }
- html body.gear-editorial-test main#appMain .gear-sidebar-slot-v74>.gear-sidebar-v1{
-  position:static!important;top:auto!important;bottom:auto!important;
-  max-height:none!important;overflow:visible!important;width:100%!important;
+ html body.gear-editorial-test>.gear-sidebar-v1.gear-toc-portal-active-v75 .gear-toc-links-v2>a>.gear-toc-number-v1{
+  flex:0 0 26px!important;color:#d9bd91!important;
+  font:400 19px/1.25 "Forum",Georgia,serif!important;
+ }
+ html body.gear-editorial-test>.gear-sidebar-v1.gear-toc-portal-active-v75 .gear-toc-links-v2>a>span:last-child{
+  color:#e9e2e1!important;font:600 13px/1.5 "Manrope",Arial,sans-serif!important;
  }
 }
 </style></head><body class="gear-editorial-test bm-guide-callouts-v1171 bm-guide-photos-v1170 bm-guide-navigation-v1169 bm-guide-reading-v1167 is-gear-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="gear"><div aria-hidden="true" class="owl-top-ornaments-v44"><span class="owl-branch-left-v44"></span><span class="owl-branch-right-v44"></span></div><div aria-hidden="true" class="winter-photo-decor-v40"><span class="winter-photo-frame-v40"></span><span class="winter-photo-sigil-v40">✦</span><span class="winter-photo-wave-v40"></span></div><div class="winter-gilt-frame-v30" aria-hidden="true"></div><div aria-hidden="true" class="gear-frost-backdrop-v6"><span class="gear-frost-sheen-v6"></span><span class="gear-frost-curve-v6"></span><span class="gear-frost-curve-v6 second"></span></div><a class="bm-skip-to-content-v1184" href="#appMain">Перейти к содержимому</a><div aria-hidden="true" class="site-cosmic-background-v442"></div>
@@ -1004,40 +1009,44 @@ html body.gear-editorial-test.site-hq-v407.modern-v424 .nav-wrap nav>a.route-lin
 <section class="gear-calc-panel-v1"><span>ПОЛЕЗНЫЙ ИНСТРУМЕНТ</span><h2>Калькулятор эссенции и мифрила</h2><p>Рассчитай материалы, необходимые для улучшения снаряжения.</p><a href="essence-mithril-calculator.html">Открыть калькулятор <span aria-hidden="true">↗</span></a></section>
 <section class="related-guides-v625" aria-label="Похожие гайды"><div class="related-guides-head-v625"><span>Ещё по теме</span><h2>Похожие гайды</h2></div><div class="related-guides-grid-v625"><a class="related-guide-card-v625" href="heroes.html"><span>Герои</span><b>Открыть гайд ›</b></a><a class="related-guide-card-v625" href="experts.html"><span>Эксперты</span><b>Открыть гайд ›</b></a><a class="related-guide-card-v625" href="pets.html"><span>Питомцы</span><b>Открыть гайд ›</b></a></div></section><div class="owl-page-end-v44" aria-hidden="true"><img src="assets/snowy-owl-feather-v44.png" alt="" loading="lazy" decoding="async" width="850" height="487"></div></main>
 <button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button>
-<nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424"><a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-home-v534.webp" width="32" height="32"/></span><b>Главная</b></a><a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-events-v534.webp" width="32" height="32"/></span><b>События</b></a><a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-heroes-v534.webp" width="32" height="32"/></span><b>Герои</b></a><a data-v424-nav="calc" href="fire-furnace-calculator.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-calculator-v534.webp" width="32" height="32"/></span><b>Калькулятор</b></a><a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-knowledge-v534.webp" width="32" height="32"/></span><b>База знаний</b></a></nav><script defer="" src="pwa-install.js?v=987"></script><script id="gear-toc-follow-js-v74">
+<nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424"><a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-home-v534.webp" width="32" height="32"/></span><b>Главная</b></a><a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-events-v534.webp" width="32" height="32"/></span><b>События</b></a><a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-heroes-v534.webp" width="32" height="32"/></span><b>Герои</b></a><a data-v424-nav="calc" href="fire-furnace-calculator.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-calculator-v534.webp" width="32" height="32"/></span><b>Калькулятор</b></a><a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-knowledge-v534.webp" width="32" height="32"/></span><b>База знаний</b></a></nav><script defer="" src="pwa-install.js?v=987"></script><script id="gear-toc-portal-js-v75">
 (function(){
  "use strict";
  var layout=document.querySelector(".gear-reading-layout-v1");
  var slot=layout&&layout.querySelector(".gear-sidebar-slot-v74");
  var aside=slot&&slot.querySelector(".gear-sidebar-v1");
  if(!layout||!slot||!aside)return;
- var mq=window.matchMedia("(min-width:921px)"),queued=false;
- function update(){
-  queued=false;
-  aside.classList.remove("is-following-v74","is-ended-v74");
+ var media=window.matchMedia("(min-width:921px)");
+ var floating=false,frame=0,offset=14;
+ function dock(){
+  if(floating){aside.classList.remove("gear-toc-portal-active-v75");slot.appendChild(aside);floating=false;}
   aside.style.removeProperty("left");aside.style.removeProperty("width");
-  if(!mq.matches)return;
-  var box=slot.getBoundingClientRect();
-  var layoutBox=layout.getBoundingClientRect();
-  var topOffset=14;
-  var w=box.width;
-  var maxSidebarHeight=Math.max(220,innerHeight-28);
-  // Use the actual measured height capped to the visible viewport.
-  var sidebarHeight=Math.min(aside.scrollHeight,maxSidebarHeight);
-  if(box.top>=topOffset)return;
-  if(layoutBox.bottom<=topOffset+sidebarHeight){
-   aside.classList.add("is-ended-v74");
-  }else{
-   aside.style.setProperty("left",box.left+"px","important");
-   aside.style.setProperty("width",w+"px","important");
-   aside.classList.add("is-following-v74");
-  }
+  aside.style.removeProperty("top");aside.style.removeProperty("position");aside.style.removeProperty("bottom");
+  slot.style.removeProperty("min-height");
  }
- function schedule(){if(queued)return;queued=true;requestAnimationFrame(update);}
- window.addEventListener("scroll",schedule,{passive:true});
- window.addEventListener("resize",schedule,{passive:true});
- if(mq.addEventListener)mq.addEventListener("change",schedule);
- window.addEventListener("load",schedule,{once:true});
- schedule();
+ function draw(){
+  frame=0;
+  if(!media.matches){dock();return;}
+  // Placeholder remains in the article grid so the column never collapses.
+  var rect=slot.getBoundingClientRect();
+  var guide=layout.getBoundingClientRect();
+  var height=Math.min(aside.scrollHeight,window.innerHeight-28);
+  if(rect.top>offset || guide.bottom<=offset+height){
+   dock();return;
+  }
+  if(!floating){
+   slot.style.setProperty("min-height",Math.max(aside.offsetHeight,500)+"px","important");
+   document.body.appendChild(aside);
+   aside.classList.add("gear-toc-portal-active-v75");
+   floating=true;
+  }
+  aside.style.setProperty("left",rect.left+"px","important");
+  aside.style.setProperty("width",rect.width+"px","important");
+ }
+ function update(){if(frame)return;frame=requestAnimationFrame(draw);}
+ window.addEventListener("scroll",update,{passive:true});
+ window.addEventListener("resize",update,{passive:true});
+ if(media.addEventListener)media.addEventListener("change",update);
+ update();
 })();
 </script></body></html>
