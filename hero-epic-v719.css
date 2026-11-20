@@ -6,3 +6,54 @@
 /* v721: catch legacy/injected duplicate mini avatars beside hero names and crumbs */
 .epic-hero h1 img,.epic-crumbs img,.epic-hero h1 .hero-avatar,.epic-crumbs .hero-avatar,.epic-hero h1 .mini-hero-icon,.epic-crumbs .mini-hero-icon{display:none!important}
 .epic-hero h1::before,.epic-hero h1::after,.epic-crumbs::before,.epic-crumbs::after{content:none!important;background-image:none!important}
+
+/* Hero detail cleanup v91: plain obsidian backdrop, no cosmic wallpaper,
+   and hero portraits sit at the top of their image frames with no empty ceiling.
+   Applies only to individual hero guides, never the heroes catalog. */
+html body.is-heroes-route:has(.jero-page,.epic-page){
+ background:#111114!important;background-color:#111114!important;
+ background-image:none!important;
+}
+html body.is-heroes-route:has(.jero-page,.epic-page)::before,
+html body.is-heroes-route:has(.jero-page,.epic-page)::after{
+ background-image:none!important;
+}
+html body.is-heroes-route:has(.jero-page,.epic-page)>.site-cosmic-background-v442,
+html body.is-heroes-route:has(.jero-page,.epic-page) .site-cosmic-background-v442{
+ display:none!important;background:none!important;background-image:none!important;
+ opacity:0!important;visibility:hidden!important;
+}
+html body.is-heroes-route:has(.jero-page,.epic-page) main,
+html body.is-heroes-route:has(.jero-page,.epic-page) main#appMain{
+ background-image:none!important;background-color:transparent!important;
+}
+html body.is-heroes-route .jero-page .jero-hero,
+html body.is-heroes-route .epic-page .epic-hero{
+ align-items:start!important;
+}
+html body.is-heroes-route .jero-page .jero-portrait-wrap,
+html body.is-heroes-route .epic-page .epic-portrait-wrap{
+ display:flex!important;align-items:flex-start!important;
+ justify-content:center!important;align-self:start!important;
+ min-height:0!important;height:auto!important;
+ overflow:hidden!important;
+}
+html body.is-heroes-route .jero-page .jero-portrait,
+html body.is-heroes-route .epic-page .epic-portrait{
+ display:block!important;position:relative!important;
+ width:100%!important;height:auto!important;
+ max-height:370px!important;object-fit:contain!important;
+ object-position:center top!important;
+ margin:0!important;align-self:flex-start!important;
+}
+@media(max-width:900px){
+ html body.is-heroes-route .jero-page .jero-portrait-wrap,
+ html body.is-heroes-route .epic-page .epic-portrait-wrap{
+  width:min(100%,390px)!important;max-width:100%!important;
+  margin:0 auto!important;min-height:0!important;
+ }
+ html body.is-heroes-route .jero-page .jero-portrait,
+ html body.is-heroes-route .epic-page .epic-portrait{
+  max-height:320px!important;
+ }
+}
