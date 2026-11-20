@@ -1100,3 +1100,21 @@ body.luxury-chronicle :is(.toc a,.bm-guide-nav a,.bear-page-links a,.to-top){
 body.luxury-chronicle :is(.toc a,.bm-guide-nav a,.bear-page-links a,.to-top):hover{
  background-color:#373536!important;color:#fff0d8!important;
 }
+
+/* v1226 mobile reading for event guides */
+@media(max-width:680px){
+ body.luxury-chronicle :is(.intro-card p,.section-content p,.section-content li,.summary-text,.footnote,.battle-fact){
+  font-size:14px!important;line-height:1.65!important;
+  overflow-wrap:break-word;
+ }
+ body.luxury-chronicle :is(.toc a,.bm-guide-nav a,.bear-page-links a){
+  font-size:13px!important;line-height:1.45!important;
+  min-height:40px;overflow-wrap:break-word;
+ }
+ body.luxury-chronicle :is(.section-frame,.section-content,.intro-card,.footnote){
+  min-width:0;max-width:100%;
+ }
+ body.luxury-chronicle :is(.section-content,.intro-card) :is(img,video){
+  max-width:100%;height:auto;
+ }
+}
