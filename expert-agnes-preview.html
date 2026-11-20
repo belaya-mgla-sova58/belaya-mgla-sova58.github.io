@@ -15,6 +15,32 @@
 @media(max-width:430px){.ag-photo{min-height:315px;padding:18px}.ag-photo img{width:min(88%,320px)}.ag-quick{grid-template-columns:1fr}.ag-copy h2{font-size:24px}.skill{padding:12px}.game-icon{width:46px;height:46px;flex-basis:46px}.steps{grid-template-columns:repeat(2,1fr)}.milestones{grid-template-columns:1fr}}
 </style>
 <link rel="stylesheet" href="site-desktop-v985.css?v=985" media="screen and (min-width:1100px) and (hover:hover) and (pointer:fine)" data-sova-desktop-v985/>
+
+<!-- expert detail mobile readability v2 -->
+<style id="expert-detail-mobile-readability-v2">
+@media(max-width:760px){
+ body.is-experts-route main#appMain .skill,
+ body.is-experts-route main#appMain .skill-top,
+ body.is-experts-route main#appMain .source-card{min-width:0}
+ body.is-experts-route main#appMain .skill :is(p,span,small,li),
+ body.is-experts-route main#appMain .source-card span{
+  font-size:13px!important;line-height:1.55!important;overflow-wrap:break-word
+ }
+ body.is-experts-route main#appMain .source-card b{
+  font-size:13px!important;line-height:1.45!important
+ }
+ body.is-experts-route main#appMain :is(.ag-sub,.cy-sub,.hg-sub){
+  font-size:13px!important;line-height:1.5!important;
+  width:auto;max-width:calc(100% - 28px);white-space:normal;overflow-wrap:break-word
+ }
+ body.is-experts-route main#appMain :is(.ag-photo,.cy-photo,.hg-photo) img{
+  max-width:100%!important;height:auto!important;object-fit:contain!important
+ }
+ body.is-experts-route main#appMain :is(.ag,.cy,.hg) :is(h1,h2,h3,p){
+  overflow-wrap:break-word
+ }
+}
+</style>
 </head>
 <body class="is-experts-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="experts">
 <div aria-hidden="true" class="site-cosmic-background-v442"></div>
