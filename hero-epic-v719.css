@@ -57,3 +57,28 @@ html body.is-heroes-route .epic-page .epic-portrait{
   max-height:320px!important;
  }
 }
+
+/* v1231: graphite mirror and silver for individual hero guides; keep rarity gold and hero art. */
+.epic-page{color:#e6e7eb!important}
+.epic-page .epic-hero{background:radial-gradient(ellipse at 92% 4%,rgba(205,207,216,.13),transparent 48%),linear-gradient(140deg,#2a2b30,#15161a 58%,#0c0d11)!important;border-color:rgba(198,200,207,.52)!important;box-shadow:inset 0 1px rgba(255,255,255,.1),0 20px 48px rgba(0,0,0,.35)!important}
+.epic-page .epic-section{background:linear-gradient(145deg,#292a2f,#111216)!important;border-color:rgba(185,187,194,.4)!important}
+.epic-page .epic-nav{background:rgba(23,24,29,.94)!important;border-color:rgba(188,189,195,.43)!important}
+.epic-page .epic-quick div,
+.epic-page .epic-stat,
+.epic-page .epic-skill,
+.epic-page .epic-box{background:linear-gradient(145deg,rgba(68,69,76,.43),rgba(21,22,26,.54))!important;border-color:rgba(183,185,191,.35)!important}
+.epic-page .epic-subtitle,
+.epic-page .epic-lead,
+.epic-page .epic-section-lead,
+.epic-page .epic-quick span,
+.epic-page .epic-stat span,
+.epic-page .epic-skill p,
+.epic-page .epic-box p,
+.epic-page .epic-crumbs{color:#bfc1c8!important}
+.epic-page .epic-crumbs a,
+.epic-page .epic-nav a,
+.epic-page .epic-source-link,
+.epic-page .epic-back{color:#e3c796!important}
+.epic-page .epic-portrait-wrap{background:linear-gradient(160deg,#35363c,#191a1f)!important;border-color:rgba(196,197,204,.45)!important}
+.epic-page :is(.epic-chip,.jero-chip){color:#e4e5e9!important;border-color:rgba(189,192,200,.38)!important}
+.epic-page :is(a,button):focus-visible{outline:2px solid #dec18d!important;outline-offset:3px!important}
