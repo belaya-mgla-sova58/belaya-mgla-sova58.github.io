@@ -217,24 +217,3 @@ body.winter-site-reference-v1 main#appMain>.owl-page-end-v44 img{
  body.winter-site-reference-v1 main#appMain>.owl-page-end-v44 img{width:185px!important;max-height:130px!important}
 }
 
-/* v54: neutralize legacy blue tables and guide surfaces, keep reference ornaments. */
-body.winter-site-reference-v1.site-hq-v407 main#appMain .route-page.active table{
- background:#141417!important;background-image:none!important;
- color:#e9e5e3!important;border-color:rgba(168,164,160,.46)!important;
-}
-body.winter-site-reference-v1.site-hq-v407 main#appMain .route-page.active table thead th,
-body.winter-site-reference-v1.site-hq-v407 main#appMain .route-page.active table th{
- background:#302e30!important;background-image:none!important;
- color:#f2efeb!important;border-color:rgba(180,174,168,.45)!important;
-}
-body.winter-site-reference-v1.site-hq-v407 main#appMain .route-page.active table tbody td,
-body.winter-site-reference-v1.site-hq-v407 main#appMain .route-page.active table td{
- background:#18181c!important;background-image:none!important;
- color:#dfdad8!important;border-color:rgba(146,145,145,.28)!important;
-}
-body.winter-site-reference-v1.site-hq-v407 main#appMain .route-page.active table tbody tr:nth-child(even) td{
- background:#222125!important;
-}
-body.winter-site-reference-v1.site-hq-v407 main#appMain .route-page.active :is(.page-toc-v409,.page-toc-links-v409 a,.guide-callout,.guide-fold-all-v414,.guide-fold-action-v414){
- border-color:rgba(175,168,163,.47)!important;
-}
