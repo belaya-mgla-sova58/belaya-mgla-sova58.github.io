@@ -78,3 +78,32 @@ html body.is-heroes-route .epic-page .epic-portrait{
 .jero-page .jero-portrait-wrap{background:linear-gradient(160deg,#35363c,#191a1f)!important;border-color:rgba(196,197,204,.45)!important}
 .jero-page :is(.epic-chip,.jero-chip){color:#e4e5e9!important;border-color:rgba(189,192,200,.38)!important}
 .jero-page :is(a,button):focus-visible{outline:2px solid #dec18d!important;outline-offset:3px!important}
+
+/* v1232 mobile readability for individual hero guides */
+@media(max-width:620px){
+ html body.is-heroes-route .jero-page .jero-hero h1{
+  font-size:clamp(35px,10vw,48px);line-height:1.08;overflow-wrap:break-word;
+ }
+ html body.is-heroes-route .jero-page :is(.jero-hero,.jero-section,.jero-skill,.jero-skill-head,.jero-box,.jero-priority>div,.jero-mode,.jero-gear-skill){
+  min-width:0;
+ }
+ html body.is-heroes-route .jero-page :is(.jero-skill h3,.jero-skill p,.jero-box p,.jero-box li,.jero-gear-skill b,.jero-priority b,.jero-mode p){
+  overflow-wrap:break-word;
+ }
+ html body.is-heroes-route .jero-page :is(.jero-quick span,.jero-stat span,.jero-gear-skill span,.jero-priority span,.jero-mode p){
+  font-size:13px;line-height:1.5;
+ }
+ html body.is-heroes-route .jero-page .jero-skill p{
+  font-size:14px;line-height:1.6;
+ }
+ html body.is-heroes-route .jero-page .jero-skill small{
+  font-size:12px;line-height:1.45;
+ }
+ html body.is-heroes-route .jero-page .jero-nav a{
+  min-height:40px;display:inline-flex;align-items:center;
+  font-size:13px;line-height:1.4;
+ }
+ html body.is-heroes-route .jero-page .jero-stats{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+ }
+}
