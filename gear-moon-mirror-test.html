@@ -391,7 +391,7 @@ body.gear-editorial-test .back-to-top{background:#343b48!important;color:#f4e4c7
 </style><style id="frost-feather-site-v27">
 /* Approved silver feather, frosted foliage, gold line design. */
 body.gear-editorial-test .gear-frost-backdrop-v6{
- background:#131821 url("assets/frost-silver-feather-background.svg?v=3") center center / cover no-repeat!important;
+ background:#131821 url("assets/frost-silver-feather-background.svg?v=4") center center / cover no-repeat!important;
 }
 body.gear-editorial-test .gear-frost-backdrop-v6::before,
 body.gear-editorial-test .gear-frost-backdrop-v6::after,
@@ -400,7 +400,38 @@ body.gear-editorial-test .gear-frost-backdrop-v6 [class*="curve-"]{display:none!
 body:is(.gear-editorial-test,.moon-mirror-test) main#appMain{
  background-image:none!important;
 }
-</style></head><body class="gear-editorial-test bm-guide-callouts-v1171 bm-guide-photos-v1170 bm-guide-navigation-v1169 bm-guide-reading-v1167 is-gear-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="gear"><div aria-hidden="true" class="gear-frost-backdrop-v6"><span class="gear-frost-sheen-v6"></span><span class="gear-frost-curve-v6"></span><span class="gear-frost-curve-v6 second"></span></div><a class="bm-skip-to-content-v1184" href="#appMain">Перейти к содержимому</a><div aria-hidden="true" class="site-cosmic-background-v442"></div>
+</style><style id="winter-gilt-frame-v30">
+/* Gold-frost page frame modeled after the approved winter reference. Does not block interaction. */
+body.gear-editorial-test .winter-gilt-frame-v30{
+ display:block!important;position:fixed!important;
+ top:12px!important;bottom:13px!important;
+ left:clamp(218px,16vw,307px)!important;right:16px!important;
+ border:1px solid rgba(226,192,134,.78)!important;border-radius:17px!important;
+ pointer-events:none!important;z-index:19!important;
+ box-shadow:0 0 0 1px rgba(48,37,27,.25),inset 0 0 0 1px rgba(244,222,181,.09),0 0 18px rgba(208,164,93,.12)!important;
+ background:transparent!important;
+}
+body.gear-editorial-test .winter-gilt-frame-v30::before{
+ content:""!important;position:absolute!important;left:17%!important;right:17%!important;top:-2px!important;height:3px!important;
+ border-radius:30px!important;
+ background:linear-gradient(90deg,transparent,rgba(239,209,153,.35),rgba(255,235,193,.82),rgba(239,209,153,.35),transparent)!important;
+ box-shadow:0 0 13px 2px rgba(255,214,147,.24)!important;
+}
+body.gear-editorial-test .winter-gilt-frame-v30::after{
+ content:""!important;position:absolute!important;left:17%!important;right:17%!important;bottom:-2px!important;height:2px!important;
+ border-radius:30px!important;
+ background:linear-gradient(90deg,transparent,rgba(244,224,194,.42),rgba(255,239,209,.86),rgba(244,224,194,.42),transparent)!important;
+ box-shadow:0 0 10px rgba(245,217,165,.28)!important;
+}
+@media(max-width:1099px){
+ body.gear-editorial-test .winter-gilt-frame-v30{left:13px!important;right:13px!important;top:63px!important;bottom:65px!important;border-color:rgba(226,192,134,.52)!important}
+}
+@media(max-width:680px){
+ body.gear-editorial-test .winter-gilt-frame-v30{left:5px!important;right:5px!important;top:58px!important;bottom:65px!important;border-color:rgba(226,192,134,.26)!important;box-shadow:none!important}
+ body.gear-editorial-test .winter-gilt-frame-v30::before,body.gear-editorial-test .winter-gilt-frame-v30::after{display:none!important}
+}
+@media(prefers-reduced-motion:reduce){body.gear-editorial-test .winter-gilt-frame-v30{transition:none!important}}
+</style></head><body class="gear-editorial-test bm-guide-callouts-v1171 bm-guide-photos-v1170 bm-guide-navigation-v1169 bm-guide-reading-v1167 is-gear-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="gear"><div class="winter-gilt-frame-v30" aria-hidden="true"></div><div aria-hidden="true" class="gear-frost-backdrop-v6"><span class="gear-frost-sheen-v6"></span><span class="gear-frost-curve-v6"></span><span class="gear-frost-curve-v6 second"></span></div><a class="bm-skip-to-content-v1184" href="#appMain">Перейти к содержимому</a><div aria-hidden="true" class="site-cosmic-background-v442"></div>
 <div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
 <button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
 <div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div>
