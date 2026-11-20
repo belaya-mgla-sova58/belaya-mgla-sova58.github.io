@@ -1,0 +1,100 @@
+/* Белая Мгла: final gold and graphite UI, 2026-11-20.
+ No modifications to game art, screenshots, hero/item images. */
+:root,html body.modern-v424,html body.luxury-chronicle{
+ --v424-line:#cbaa79!important;--v424-muted:#d5ced0!important;
+ --grand-gold:#f0c77f!important;--grand-silver:#f3f0ef!important;
+ --bm-neon-blue:#efc77f!important;--bm-neon-ice:#f1ddbc!important;
+ --event-accent:230,186,115!important;
+ --hall-glow:rgba(241,185,92,.15)!important;
+}
+html,html:has(body.modern-v424),html body.modern-v424,
+html body.modern-v424.star-glass-v436,html body.modern-v424.cosmic-visible-v444,
+html body.is-events-route,html body.luxury-chronicle{
+ background-color:#101013!important;
+ background-image:linear-gradient(140deg,#221b1c 0%,#141215 48%,#0c0b0e 100%)!important;
+}
+html body.modern-v424 .site-cosmic-background-v442{
+ background:#121014!important;background-image:none!important;
+ filter:grayscale(1) sepia(.25) brightness(.38)!important;opacity:.15!important;
+}
+html body.modern-v424 .nav-wrap,
+html body.modern-v424 .nav-wrap::before,
+html body.modern-v424 .nav-wrap::after,
+html body.modern-v424 .mobile-topbar,
+html body.modern-v424 .mobile-bottom-v424{
+ background:#191519!important;background-image:linear-gradient(155deg,#292124,#100e12)!important;
+ border-color:#ad8b5e!important;box-shadow:0 0 17px rgba(242,172,88,.10)!important;
+}
+html body.modern-v424 .nav-wrap nav a.route-link,
+html body.modern-v424 .nav-wrap nav>a.route-link,
+html body.modern-v424 .mobile-bottom-v424 a{
+ background:#282126!important;background-image:linear-gradient(130deg,#32292a,#1a171c)!important;
+ border:1px solid rgba(218,175,116,.65)!important;color:#f1eced!important;
+ box-shadow:none!important;
+}
+html body.modern-v424 .nav-wrap nav a.route-link:is(:hover,[aria-current="page"]),
+html body.modern-v424 .mobile-bottom-v424 a[aria-current="page"]{
+ background:#483327!important;background-image:linear-gradient(130deg,#4a352b,#2a2223)!important;
+ border-color:#f2c87f!important;box-shadow:inset 3px 0 #f5cb84,0 0 15px rgba(241,180,93,.24)!important;
+}
+html body.modern-v424 :is(.site-search-v426,.site-search-box-v426,.site-search-input-v426,.site-search-icon-v426,.site-search-clear-v426,.site-search-results-v426,.search-results-v426),
+html body.modern-v424 :is(.site-search-v426,.site-search-box-v426)::before{
+ background:#211d20!important;background-image:none!important;
+ border-color:rgba(229,189,130,.69)!important;color:#f5f1ef!important;
+ box-shadow:0 0 12px rgba(231,168,83,.10)!important;
+}
+html body.modern-v424 main#appMain,
+html body.modern-v424 main#appMain .route-page,
+html body.modern-v424 main#appMain .guide-page-v69{
+ background:#171417!important;background-image:none!important;
+ border-color:rgba(216,177,120,.56)!important;
+}
+html body.modern-v424 main#appMain :is(
+ .breadcrumbs-v409,.page-heading-v424,.frost-header-v431,.guide-topics,
+ .page-toc-v409,.page-toc-v409>summary,.page-toc-links-v409,
+ .guide-fold-toolbar-v414,.guide-fold-summary-v414,.guide-fold-body-v414,
+ .guide-section,.guide-fold-v414,.guide-callout,.mini-card,
+ .events-groups-v522 .event-group-v522,.event-jump-nav-v1,
+ .modern-panel-v424,.related-guides-v625,.related-guide-card-v625,
+ .calc-hub-head,.calc-hub-card,.kb-clean-card-v920
+ ){
+ background:#292326!important;
+ background-image:linear-gradient(135deg,#33292b,#1d191d)!important;
+ border-color:rgba(230,186,125,.66)!important;
+ box-shadow:inset 0 1px rgba(255,222,176,.08),0 0 15px rgba(231,167,89,.10)!important;
+}
+html body.modern-v424 main#appMain :is(
+ .breadcrumbs-v409,.page-heading-v424,.frost-header-v431,
+ .guide-fold-summary-v414,.guide-section,.guide-fold-v414,
+ .events-groups-v522 .event-group-v522,.modern-panel-v424
+ )::before,
+html body.modern-v424 main#appMain :is(
+ .breadcrumbs-v409,.page-heading-v424,.frost-header-v431,
+ .guide-fold-summary-v414,.guide-section,.guide-fold-v414,
+ .events-groups-v522 .event-group-v522,.modern-panel-v424
+ )::after{
+ background-image:none!important;border-color:rgba(229,185,119,.58)!important;
+ box-shadow:none!important;
+}
+html body.modern-v424 main#appMain :is(
+ .event-jump-links-v1 a,.topic-pill,.guide-fold-action-v414,
+ .event-group-count-v522,.event-group-icon-v522
+ ){
+ background:#332824!important;background-image:linear-gradient(135deg,#423029,#261d20)!important;
+ border-color:rgba(240,194,126,.68)!important;color:#f3e7d8!important;
+}
+html body.modern-v424 main#appMain :is(.guide-nav-card,.related-guide-card-v625,.calc-hub-card){
+ background:#241e21!important;background-image:none!important;
+ border-color:rgba(232,186,119,.58)!important;
+}
+html body.modern-v424 main#appMain :is(.guide-nav-card,.related-guide-card-v625,.calc-hub-card):hover{
+ border-color:#f5c779!important;box-shadow:0 0 19px rgba(247,184,92,.2)!important;
+}
+html body.modern-v424 main#appMain :is(.event-card-caption-v1,.guide-nav-card .event-card-caption-v1){
+ background:#292326!important;background-image:linear-gradient(120deg,#32292a,#1e1b1d)!important;
+ border-color:rgba(235,186,119,.50)!important;color:#f3eeee!important;
+}
+html body.modern-v424 :is(a,button,input,summary):focus-visible{outline-color:#f6c877!important}
+@media(max-width:820px){
+ html body.modern-v424 :is(.mobile-topbar,.mobile-bottom-v424,.nav-wrap){background:#1c171b!important}
+}
