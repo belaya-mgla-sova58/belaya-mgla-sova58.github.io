@@ -3,8 +3,12 @@
    Uses the existing Firebase likes and Abacus views services. */
 (function(){
   'use strict';
-  var likeKey='k-vam-na-ogonek-barash-v1';
-  var viewKey='k-vam-na-ogonek-barash';
+  // Separate counters per guest. The interview list retains Barash's counters.
+  var article=document.querySelector('[data-ogonek-article]');
+  var articleId=article&&article.getAttribute('data-ogonek-id');
+  var isZimbabe=articleId==='zimbabe'||/\/ogonek-zimbabe(?:-test)?\.html$/.test(location.pathname);
+  var likeKey=isZimbabe?'k-vam-na-ogonek-zimbabe-v1':'k-vam-na-ogonek-barash-v1';
+  var viewKey=isZimbabe?'k-vam-na-ogonek-zimbabe':'k-vam-na-ogonek-barash';
   var likeUrl='https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/'+encodeURIComponent(likeKey)+'.json';
   var viewUrl='https://abacus.jasoncameron.dev/';
   var likedKey='belaya-mgla-firebase-liked-'+likeKey;
