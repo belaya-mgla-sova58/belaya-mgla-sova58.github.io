@@ -813,6 +813,47 @@ body.gear-editorial-test main#appMain .gear-articles-v1 .gear-entry-v1 .guide-fo
 body.gear-editorial-test main#appMain .gear-articles-v1 .gear-entry-v1 .guide-fold-title-v414{
  padding-left:0!important;
 }
+</style><style id="gear-footer-trim-v68">
+/* Fix the actual source of the huge gap: legacy main has min-height:100vh
+   and global footer reserves extra bottom margin. Gear page only. */
+@media(min-width:921px){
+ html body.gear-editorial-test main#appMain {
+   min-height:0!important;height:auto!important;
+   padding-bottom:0!important;margin-bottom:0!important;
+ }
+ html body.gear-editorial-test main#appMain>.owl-page-end-v44 {
+   height:68px!important;min-height:0!important;max-height:68px!important;
+   margin:0 12px 0!important;padding:0!important;
+ }
+ html body.gear-editorial-test main#appMain>.owl-page-end-v44 img {
+   width:clamp(120px,13vw,175px)!important;max-height:68px!important;
+   bottom:0!important;right:10px!important;
+ }
+ html body.gear-editorial-test .site-footer-v256 {
+   margin-top:3px!important;margin-bottom:0!important;
+   padding-top:0!important;padding-bottom:6px!important;min-height:0!important;
+ }
+ html body.gear-editorial-test .site-footer-v256 .site-footer-inner,
+ html body.gear-editorial-test .site-footer-v256 .site-footer-container{
+   min-height:0!important;margin-top:0!important;margin-bottom:0!important;
+   padding-bottom:0!important;
+ }
+ html body.gear-editorial-test main#appMain>.related-guides-v625 {
+   margin-bottom:0!important;
+ }
+}
+@media(max-width:920px){
+ html body.gear-editorial-test main#appMain{min-height:0!important;padding-bottom:0!important;}
+ html body.gear-editorial-test main#appMain>.owl-page-end-v44{
+   height:66px!important;min-height:0!important;margin:0 8px 3px!important;
+ }
+ html body.gear-editorial-test main#appMain>.owl-page-end-v44 img{
+   width:115px!important;max-height:65px!important;
+ }
+ html body.gear-editorial-test .site-footer-v256{
+   margin-top:3px!important;margin-bottom:12px!important;
+ }
+}
 </style></head><body class="gear-editorial-test bm-guide-callouts-v1171 bm-guide-photos-v1170 bm-guide-navigation-v1169 bm-guide-reading-v1167 is-gear-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="gear"><div aria-hidden="true" class="owl-top-ornaments-v44"><span class="owl-branch-left-v44"></span><span class="owl-branch-right-v44"></span></div><div aria-hidden="true" class="winter-photo-decor-v40"><span class="winter-photo-frame-v40"></span><span class="winter-photo-sigil-v40">✦</span><span class="winter-photo-wave-v40"></span></div><div class="winter-gilt-frame-v30" aria-hidden="true"></div><div aria-hidden="true" class="gear-frost-backdrop-v6"><span class="gear-frost-sheen-v6"></span><span class="gear-frost-curve-v6"></span><span class="gear-frost-curve-v6 second"></span></div><a class="bm-skip-to-content-v1184" href="#appMain">Перейти к содержимому</a><div aria-hidden="true" class="site-cosmic-background-v442"></div>
 <div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
 <button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
