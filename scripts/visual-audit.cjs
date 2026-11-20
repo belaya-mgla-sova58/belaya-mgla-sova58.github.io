@@ -11,7 +11,7 @@ fs.mkdirSync(output, { recursive: true });
 const queue = [origin.href];
 const visited = new Set();
 const records = [];
-const browser = awaitBrowser();
+let browser;
 
 function normalize(raw) {
   try {
@@ -29,7 +29,6 @@ function filename(url, mode) {
   const hash = crypto.createHash('sha1').update(url).digest('hex').slice(0, 9);
   return mode + '/' + slug + '-' + hash + '.png';
 }
-async function awaitBrowser() { return chromium.launch({ headless: true }); }
 async function takeScreenshot(page, url, mode) {
   const dest = filename(url, mode);
   fs.mkdirSync(path.dirname(path.join(output, dest)), { recursive: true });
@@ -62,6 +61,7 @@ async function inspect(url, mode) {
 }
 (async () => {
   try {
+    browser = await chromium.launch({ headless: true });
     while (queue.length && visited.size < limit) {
       const url = normalize(queue.shift());
       if (!url || visited.has(url)) continue;
@@ -82,5 +82,5 @@ async function inspect(url, mode) {
       }, null, 2));
     }
     console.log('Complete:', records.length, 'pages.');
-  } finally { await browser.close(); }
+  } finally { if (browser) await browser.close(); }
 })().catch(e => { console.error(e); process.exitCode = 1; });
