@@ -126,3 +126,24 @@ body.winter-site-reference-v1 .mobile-bottom-v424{
  body.winter-site-reference-v1>.winter-site-frame-v1{display:none!important}
  body.winter-site-reference-v1>.winter-site-background-v1::after{width:130px!important;bottom:70px!important;right:12px!important;opacity:.66!important}
 }
+
+
+/* winter-visible-foliage-v2: visible silver leaves from approved example, above background and below no controls. */
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1)>.winter-leaves-front-v2{
+ position:fixed!important;display:block!important;pointer-events:none!important;
+ top:0!important;left:0!important;right:0!important;height:clamp(155px,17vw,255px)!important;
+ z-index:38!important;
+ background:url("assets/winter-silver-top-leaves-v1.svg?v=1") center top / 100% 100% no-repeat!important;
+ opacity:.97!important;filter:drop-shadow(0 0 5px rgba(215,225,242,.20))!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test) .real-photo-feather-v35{
+ display:none!important;
+}
+body.winter-site-reference-v1>.winter-site-background-v1::after{
+ content:none!important;display:none!important;
+}
+@media(max-width:820px){
+ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1)>.winter-leaves-front-v2{
+  height:120px!important;background-size:auto 120px!important;opacity:.75!important;
+ }
+}
