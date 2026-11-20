@@ -155,3 +155,22 @@ body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winte
  color:#f8dba5!important;font:21px/1 Georgia,serif!important;
  text-shadow:0 0 7px rgba(247,204,142,.62)!important;
 }
+
+/* winter-photo-screenshot-cleanup-v41: no broken SVG mask or angular tracings. */
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .real-photo-feather-v35,
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .winter-photo-feather-v40,
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .winter-photo-orbit-v40,
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .winter-photo-leaves-left-v40,
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .winter-photo-leaves-right-v40 {
+ display:none!important;opacity:0!important;visibility:hidden!important;
+ background-image:none!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .winter-photo-decor-v40{
+ z-index:4!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .winter-photo-frame-v40{
+ border-color:rgba(226,182,116,.66)!important;
+}
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .winter-photo-sigil-v40{
+ color:#f1cd93!important;
+}
