@@ -1,0 +1,62 @@
+/* Белая Мгла: единый стиль калькуляторов, 20 ноября 2026. CSS only. */
+@import url('https://fonts.googleapis.com/css2?family=Forum&family=Manrope:wght@400;500;600;700;800&display=swap');
+body.bm-calc-jewel-v89{--bm-obsidian:#111114;--bm-silver:#d5cecb;--bm-gold:#e5c58f;--bm-border:rgba(209,190,162,.53);--bm-panel:linear-gradient(135deg,#29252a,#171518 67%,#101013);color:#ece6e1!important;background:#0e0f12!important;background-image:linear-gradient(125deg,#1a181c,#0e0f12 65%,#111014)!important;font-family:"Manrope",Arial,sans-serif!important}
+body.bm-calc-jewel-v89 h1,body.bm-calc-jewel-v89 h2,body.bm-calc-jewel-v89 .page-heading-v424 h1{font-family:"Forum",Georgia,serif!important;font-weight:400!important;color:#f5ece6!important;-webkit-text-fill-color:#f5ece6!important;text-shadow:none!important}
+body.bm-calc-jewel-v89 h1{font-size:clamp(41px,4.9vw,66px)!important;line-height:1.12!important}
+body.bm-calc-jewel-v89 h2{font-size:clamp(28px,2.9vw,38px)!important;line-height:1.2!important}
+body.bm-calc-jewel-v89 a:not(.route-link){color:#e6c78f}
+body.bm-calc-jewel-v89 :is(input,select,textarea){background:#201d22!important;background-image:none!important;border:1px solid rgba(204,181,151,.64)!important;border-radius:9px!important;color:#f4eee9!important;-webkit-text-fill-color:#f4eee9!important;box-shadow:inset 0 1px #ffffff10!important}
+body.bm-calc-jewel-v89 select option{background:#272227!important;color:#f4eae3!important}
+body.bm-calc-jewel-v89 :is(input,select,textarea):focus-visible{outline:2px solid #e5c58f!important;outline-offset:2px!important}
+body.bm-calc-jewel-v89 :is(button,.btn){border-color:rgba(209,181,139,.64)!important;background:linear-gradient(140deg,#3d3334,#211d21)!important;color:#f0dfc2!important;box-shadow:inset 0 1px #ffffff14!important}
+body.bm-calc-jewel-v89 :is(button,.btn):hover{border-color:#f0d3a1!important;box-shadow:0 0 12px rgba(235,194,134,.21)!important}
+body.bm-calc-jewel-v89 :is(button,.btn).active,body.bm-calc-jewel-v89 :is(button,.btn).primary,body.bm-calc-jewel-v89 .active.primary{background:linear-gradient(135deg,#e9c995,#b18d5c)!important;color:#241c18!important;-webkit-text-fill-color:#241c18!important;border-color:#efdaa9!important}
+body.bm-calc-jewel-v89 .bm-calc-top-neon-v89{pointer-events:none!important;position:absolute!important;top:0!important;left:0!important;right:0!important;height:6px!important;background:linear-gradient(90deg,#f1c77c 0%,#bca0f0 24%,#87e2b3 50%,#f5a4b9 75%,#e9cb9a 100%)!important;box-shadow:0 0 8px rgba(238,196,145,.38)!important;border-radius:13px 13px 0 0!important;z-index:3!important}
+/* Full site route calculators: sidebar and search */
+body.bm-calc-jewel-v89 .nav-wrap{background:#161417!important;background-image:linear-gradient(170deg,#211f23,#111114)!important;border-right:1px solid rgba(226,195,148,.67)!important;box-shadow:5px 0 20px #0004!important}
+body.bm-calc-jewel-v89 .nav-wrap nav>a.route-link{background:#201e22!important;background-image:linear-gradient(110deg,#2e292e,#151417)!important;border:1px solid rgba(195,180,162,.55)!important;border-radius:10px!important;color:#eee6e1!important}
+body.bm-calc-jewel-v89 .nav-wrap nav>a.route-link.active{background:linear-gradient(110deg,#604b34,#302526)!important;border-color:#e5c58f!important;color:#fff0d9!important}
+body.bm-calc-jewel-v89 main#appMain .site-search-box-v426,body.bm-calc-jewel-v89 main#appMain .breadcrumbs-v409{background:#211e22!important;background-image:linear-gradient(115deg,#282328,#131215)!important;border:1px solid var(--bm-border)!important}
+body.bm-calc-jewel-v89 main#appMain .page-heading-v424{position:relative!important;overflow:hidden!important;isolation:isolate!important;background:var(--bm-panel)!important;background-image:var(--bm-panel)!important;border:1px solid var(--bm-border)!important;border-radius:14px!important;box-shadow:inset 0 1px #ffffff12,0 9px 24px #0004!important;padding:25px 30px!important}
+body.bm-calc-jewel-v89 main#appMain .page-heading-v424::before{content:""!important;display:block!important;position:absolute!important;left:0!important;top:0!important;width:170px!important;height:75px!important;pointer-events:none!important;border-top:3px solid #bfa0f2!important;border-left:3px solid #bfa0f2!important;box-shadow:inset 3px 3px 14px rgba(191,160,242,.24)!important;z-index:0!important}
+body.bm-calc-jewel-v89 main#appMain .page-heading-v424 :is(h1,p){position:relative!important;z-index:1!important;color:#eee4dd!important;-webkit-text-fill-color:#eee4dd!important}
+body.bm-calc-jewel-v89 main#appMain .guide-page-v69 :is(.calc-select-v378,.calc-buildings-v379,.calc-total-v378,.calc-route-v378,.calc-note-v378,.calc-refining-v1,.calc-step-v378){background:var(--bm-panel)!important;background-image:var(--bm-panel)!important;border:1px solid var(--bm-border)!important;border-radius:13px!important;box-shadow:inset 0 1px #ffffff0e!important;color:#e8dfdb!important}
+body.bm-calc-jewel-v89 main#appMain .guide-page-v69 :is(.calc-buildings-v379,.calc-total-v378,.calc-route-v378) h2{color:#f1e8e2!important}
+body.bm-calc-jewel-v89 main#appMain .guide-page-v69 :is(.calc-select-v378,.calc-refining-controls-v1) label{color:#e7dbd4!important}
+body.bm-calc-jewel-v89 main#appMain .guide-page-v69 .calc-refining-grid-v1>div{background:#232024!important;border:1px solid rgba(194,172,145,.47)!important}
+body.bm-calc-jewel-v89 main#appMain .guide-page-v69 .calc-source-v378{color:#d6c6bd!important}
+/* Essence & Mithril advanced utility, preserve all controls */
+body.bm-calc-jewel-v89 main#appMain .ec-shell{color:#eae3df!important}
+body.bm-calc-jewel-v89 main#appMain .ec-hero{position:relative!important;overflow:hidden!important;background:var(--bm-panel)!important;background-image:var(--bm-panel)!important;border:1px solid var(--bm-border)!important;border-radius:15px!important;box-shadow:0 9px 24px #0004!important;padding:28px 30px!important}
+body.bm-calc-jewel-v89 main#appMain .ec-hero::before{content:""!important;position:absolute!important;left:0!important;top:0!important;width:130px!important;height:70px!important;border-left:3px solid #e8c685!important;border-top:3px solid #e8c685!important;pointer-events:none!important}
+body.bm-calc-jewel-v89 main#appMain .ec-hero .ec-kicker{color:#e5c58f!important;-webkit-text-fill-color:#e5c58f!important}
+body.bm-calc-jewel-v89 main#appMain .ec-hero p{color:#dfd4cc!important}
+body.bm-calc-jewel-v89 main#appMain .ec-shell :is(.ec-panel,.ec-fold,.ec-result,.ec-info-details,.ec-summary,.ec-xp-total-grid,.ec-simple-steps){background:var(--bm-panel)!important;background-image:var(--bm-panel)!important;border:1px solid var(--bm-border)!important;color:#e9e0db!important}
+body.bm-calc-jewel-v89 main#appMain .ec-shell :is(.ec-panel-head,.ec-result) :is(strong,h2,h3){color:#f3e8e0!important;-webkit-text-fill-color:#f3e8e0!important}
+body.bm-calc-jewel-v89 main#appMain .ec-shell :is(.ec-primary,.ec-secondary,.ec-simple-steps>span){border-color:#d3b78d!important;background:#3b3030!important;background-image:linear-gradient(115deg,#3c3234,#211d21)!important;color:#f0d8b3!important}
+body.bm-calc-jewel-v89 main#appMain .ec-shell .ec-primary{background:linear-gradient(135deg,#e2c38a,#ae8858)!important;color:#251e19!important}
+/* Standalone bear helper */
+body.bm-calc-jewel-v89 .wrap>.top,body.bm-calc-jewel-v89 .wrap>.hero,body.bm-calc-jewel-v89 .wrap>.card,body.bm-calc-jewel-v89 .wrap>.out{background:var(--bm-panel)!important;background-image:var(--bm-panel)!important;border:1px solid var(--bm-border)!important;border-radius:15px!important;box-shadow:inset 0 1px #ffffff0f,0 9px 24px #0004!important}
+body.bm-calc-jewel-v89 .wrap>.hero{position:relative!important;overflow:hidden!important}
+body.bm-calc-jewel-v89 .wrap>.hero::before{content:""!important;position:absolute!important;top:0!important;left:0!important;width:170px!important;height:80px!important;border-top:3px solid #e7c28a!important;border-left:3px solid #e7c28a!important;pointer-events:none!important}
+body.bm-calc-jewel-v89 .wrap>.hero p,body.bm-calc-jewel-v89 .wrap>.card .note{color:#ddd2ce!important}
+body.bm-calc-jewel-v89 .wrap>.card :is(.field,.priority-box,.owned-box,.march,.status,.note){border-color:rgba(202,184,158,.43)!important;background-color:#211d22!important}
+body.bm-calc-jewel-v89 .wrap>.card :is(.section-head,.step-title) h2{color:#eee6e1!important}
+body.bm-calc-jewel-v89 .wrap .top a{color:#f1d59f!important}
+body.bm-calc-jewel-v89 .wrap .bear-orb{background:linear-gradient(145deg,#e3c18e,#7c614e)!important}
+/* Standalone governor calculator */
+body.bm-calc-jewel-v89 main.wrap>.site-back-nav,body.bm-calc-jewel-v89 main.wrap>.mast,body.bm-calc-jewel-v89 main.wrap>.hero,body.bm-calc-jewel-v89 main.wrap .card,body.bm-calc-jewel-v89 main.wrap .tool-panel,body.bm-calc-jewel-v89 main.wrap .step,body.bm-calc-jewel-v89 main.wrap .bulk-panel{background:var(--bm-panel)!important;background-image:var(--bm-panel)!important;border:1px solid var(--bm-border)!important;box-shadow:inset 0 1px #ffffff0e,0 8px 22px #0004!important}
+body.bm-calc-jewel-v89 main.wrap>.hero{position:relative!important;overflow:hidden!important;padding:25px!important;border-radius:15px!important}
+body.bm-calc-jewel-v89 main.wrap>.hero::before{content:""!important;position:absolute!important;left:0!important;top:0!important;width:170px!important;height:80px!important;border-left:3px solid #edb49e!important;border-top:3px solid #edb49e!important;pointer-events:none!important}
+body.bm-calc-jewel-v89 main.wrap .eyebrow,body.bm-calc-jewel-v89 main.wrap .sectiontop .number{color:#e5c58f!important}
+body.bm-calc-jewel-v89 main.wrap .hero h1 span{color:#e4c18a!important;-webkit-text-fill-color:#e4c18a!important;font-family:inherit!important}
+body.bm-calc-jewel-v89 main.wrap .brandmark{background:#392f31!important;border-color:#e5c58f!important;color:#f1d5a6!important}
+body.bm-calc-jewel-v89 main.wrap .test,body.bm-calc-jewel-v89 main.wrap .tinytag{background:#30292d!important;border-color:#bda27e!important;color:#e6d3b4!important}
+body.bm-calc-jewel-v89 main.wrap :is(.segmented,.slotgrid,.fieldrow,.stockgrid,.exchangegrid,.selection-result,.miniResult,.resulthead){border-color:rgba(202,178,151,.5)!important}
+body.bm-calc-jewel-v89 main.wrap .primary,body.bm-calc-jewel-v89 main.wrap button.active{background:linear-gradient(135deg,#e8c993,#b08c5a)!important;color:#261d19!important;border-color:#f0daa9!important}
+body.bm-calc-jewel-v89 :is(.muted,.hint,.helper,.lead,.subnote){color:#dbd1cb!important}
+@media(max-width:760px){
+ body.bm-calc-jewel-v89 h1{font-size:clamp(36px,8vw,49px)!important}
+ body.bm-calc-jewel-v89 .wrap>.hero::before,body.bm-calc-jewel-v89 main.wrap>.hero::before{width:100px!important;height:50px!important}
+ body.bm-calc-jewel-v89 main#appMain .page-heading-v424{padding:18px!important}
+}
