@@ -45,9 +45,21 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.58;ba
 @media(prefers-reduced-motion:reduce){.owl-wrap,.ball,.ball-halo,.ball-ring{animation:none!important}}
 </style>
 <script defer src="/analytics-metrika-v1.js?v=3"></script>
+<style id="fortune-standalone-navigation-v1">
+.fortune-site-nav{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 16px}
+.fortune-site-nav a{display:inline-flex;align-items:center;justify-content:center;min-height:42px;box-sizing:border-box;padding:9px 13px;border-radius:12px;border:1px solid rgba(217,197,164,.52);background:rgba(26,27,36,.85);color:#f1e6d8;text-decoration:none;font:600 13px/1.4 system-ui,Arial,sans-serif}
+.fortune-site-nav a:hover,.fortune-site-nav a:focus-visible{border-color:#f5daa4;background:rgba(55,48,55,.93);outline-offset:3px}
+@media(max-width:420px){.fortune-site-nav{gap:7px}.fortune-site-nav a{flex:1 1 105px;padding:9px 8px}}
+</style>
 </head>
 <body>
 <main class="page">
+<nav class="fortune-site-nav" aria-label="Навигация по Белой мгле">
+  <a href="index.html">← Главная</a>
+  <a href="other.html">База знаний</a>
+  <a href="calculators.html">Калькуляторы</a>
+</nav>
+
   <header class="top">
     <h1 class="title">Сова-предсказательница 🔮</h1>
     <p class="sub">Три предсказания в день. Новые появятся после полуночи.</p>
