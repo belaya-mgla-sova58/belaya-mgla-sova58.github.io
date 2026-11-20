@@ -921,6 +921,38 @@ body.moon-mirror-test .hero-reading-article-v1230 .guide-section.guide-fold-v414
  body.moon-mirror-test .hero-reading-article-v1230 .guide-section.guide-fold-v414,
  body.moon-mirror-test .hero-reading-article-v1230 .guide-section.guide-fold-v414::after{transition:none!important}
 }
+</style><style id="editorial-side-reflection-v23">
+/* Visible hover: repair misplaced overlay from v22 and tint each article in its own color. */
+body.moon-mirror-test .hero-reading-article-v1230 .guide-section.guide-fold-v414{
+ transition:box-shadow .24s ease,border-color .24s ease,background-color .24s ease!important;
+}
+body.moon-mirror-test .hero-reading-article-v1230 .guide-section.guide-fold-v414::after{
+ content:""!important;display:block!important;position:absolute!important;z-index:3!important;
+ inset:8px auto 8px 0!important;width:36px!important;height:auto!important;
+ opacity:0!important;pointer-events:none!important;
+ transform:translateX(-12px)!important;
+ background:linear-gradient(90deg,color-mix(in srgb,var(--article-stripe,#d5b777) 76%,transparent),color-mix(in srgb,var(--article-stripe,#d5b777) 30%,transparent) 28%,transparent 100%)!important;
+ filter:blur(7px)!important;
+ transition:opacity .26s ease,transform .26s ease!important;
+}
+body.moon-mirror-test .hero-reading-article-v1230 .guide-section.guide-fold-v414:hover,
+body.moon-mirror-test .hero-reading-article-v1230 .guide-section.guide-fold-v414:focus-within{
+ border-left-color:var(--article-stripe,#d5b777)!important;
+ box-shadow:0 0 0 1px color-mix(in srgb,var(--article-stripe,#d5b777) 45%,transparent),0 0 23px -5px var(--article-stripe,#d5b777),inset 13px 0 24px -17px var(--article-stripe,#d5b777)!important;
+}
+body.moon-mirror-test .hero-reading-article-v1230 .guide-section.guide-fold-v414:hover::after,
+body.moon-mirror-test .hero-reading-article-v1230 .guide-section.guide-fold-v414:focus-within::after{
+ opacity:.93!important;transform:translateX(0)!important;
+}
+body.moon-mirror-test .hero-reading-article-v1230 .guide-section.guide-fold-v414>.guide-fold-summary-v414{
+ transition:background .22s ease!important;
+}
+body.moon-mirror-test .hero-reading-article-v1230 .guide-section.guide-fold-v414:hover>.guide-fold-summary-v414,
+body.moon-mirror-test .hero-reading-article-v1230 .guide-section.guide-fold-v414:focus-within>.guide-fold-summary-v414{
+ background:linear-gradient(90deg,color-mix(in srgb,var(--article-stripe,#d5b777) 20%,rgba(14,12,22,.97)),rgba(18,14,24,.56) 75%)!important;
+}
+@media(hover:none){body.moon-mirror-test .hero-reading-article-v1230 .guide-section.guide-fold-v414:hover::after{opacity:0!important}}
+@media(prefers-reduced-motion:reduce){body.moon-mirror-test .hero-reading-article-v1230 .guide-section.guide-fold-v414,body.moon-mirror-test .hero-reading-article-v1230 .guide-section.guide-fold-v414::after,body.moon-mirror-test .hero-reading-article-v1230 .guide-section.guide-fold-v414>.guide-fold-summary-v414{transition:none!important}}
 </style></head><body class="moon-mirror-test is-heroes-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="heroes"><div aria-hidden="true" class="cosmos-viewport-v8"><img src="assets/space-purple-nebula-bg.webp?v=8" alt="" decoding="async"/></div><div aria-hidden="true" class="site-cosmic-background-v442"></div>
 <div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
 <button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
