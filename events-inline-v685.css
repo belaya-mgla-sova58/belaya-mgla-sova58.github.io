@@ -250,8 +250,8 @@ body.is-events-route .guide-nav-card.gina-event-card-v587{display:flex!important
     body.is-events-route .gina-event-icon-v587{display:grid;place-items:center;flex:0 0 58px;width:58px;height:58px;border-radius:18px;background:rgba(245,184,73,.12);border:1px solid rgba(245,184,73,.24);font-size:32px}
     body.is-events-route .gina-event-copy-v587{display:grid;gap:4px;min-width:0}
     body.is-events-route .gina-event-copy-v587 strong{color:#fff;font-size:20px;line-height:1.1}
-    body.is-events-route .gina-event-copy-v587 small{color:#a9c8da;font-size:12px;line-height:1.35}
-    body.is-events-route .gina-event-badge-v587{display:inline-flex;width:max-content;padding:3px 7px;border-radius:999px;background:rgba(66,195,255,.10);border:1px solid rgba(99,205,255,.18);color:#7bd8ff;font-size:10px;font-weight:900;letter-spacing:.06em}
+    body.is-events-route .gina-event-copy-v587 small{color:#d8dbe1;font-size:12px;line-height:1.35}
+    body.is-events-route .gina-event-badge-v587{display:inline-flex;width:max-content;padding:3px 7px;border-radius:999px;background:rgba(66,195,255,.10);border:1px solid rgba(99,205,255,.18);color:#d8dbe1;font-size:10px;font-weight:900;letter-spacing:.06em}
 
 body.is-events-route .event-group-grid-v522{align-items:start!important;}
 body.is-events-route .event-group-grid-v522>.guide-nav-card{align-self:start!important;width:100%!important;}
@@ -268,16 +268,16 @@ body.is-events-route .guide-nav-card.bear-event-card-v499 img{width:100%!importa
 body.is-events-route .event-schedule-v608{margin:10px 0 22px;padding:18px;border:1px solid rgba(92,196,255,.22);border-radius:22px;background:linear-gradient(145deg,rgba(5,29,58,.92),rgba(7,18,44,.94));box-shadow:0 16px 36px rgba(0,0,0,.18)}
 body.is-events-route .event-schedule-head-v608{display:flex;justify-content:space-between;gap:12px;align-items:end;margin-bottom:14px;flex-wrap:wrap}
 body.is-events-route .event-schedule-head-v608 h2{margin:0;color:#f4fbff;font-size:22px}
-body.is-events-route .event-schedule-head-v608 p{margin:4px 0 0;color:#91b5cb;font-size:12px}
-body.is-events-route .event-schedule-msk-v608{padding:6px 10px;border:1px solid rgba(116,207,255,.20);border-radius:999px;background:rgba(58,164,225,.10);color:#8fdcff;font-size:11px;font-weight:800}
+body.is-events-route .event-schedule-head-v608 p{margin:4px 0 0;color:#9da3ad;font-size:12px}
+body.is-events-route .event-schedule-msk-v608{padding:6px 10px;border:1px solid rgba(116,207,255,.20);border-radius:999px;background:rgba(58,164,225,.10);color:#d8dbe1;font-size:11px;font-weight:800}
 body.is-events-route .event-active-v608{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 16px}
 body.is-events-route .event-active-card-v608{padding:11px 12px;border:1px solid rgba(255,255,255,.09);border-radius:14px;background:rgba(255,255,255,.035);color:#eaf7ff;font-size:12px}
 body.is-events-route .event-active-card-v608 b{display:block;margin-bottom:3px;color:#fff;font-size:13px}
-body.is-events-route .event-active-card-v608 span{color:#8fb3c8}
+body.is-events-route .event-active-card-v608 span{color:#9da3ad}
 body.is-events-route .event-week-wrap-v608{overflow-x:auto;padding-bottom:4px}
 body.is-events-route .event-week-v608{min-width:760px;display:grid;grid-template-columns:180px repeat(7,minmax(72px,1fr));gap:5px;align-items:center}
-body.is-events-route .event-week-v608 .corner{color:#7899ae;font-size:11px;font-weight:800;padding:5px}
-body.is-events-route .event-day-v608{padding:8px 4px;border-radius:10px;background:rgba(255,255,255,.045);text-align:center;color:#a9c5d7;font-size:11px;font-weight:800}
+body.is-events-route .event-week-v608 .corner{color:#9da3ad;font-size:11px;font-weight:800;padding:5px}
+body.is-events-route .event-day-v608{padding:8px 4px;border-radius:10px;background:rgba(255,255,255,.045);text-align:center;color:#d8dbe1;font-size:11px;font-weight:800}
 body.is-events-route .event-day-v608.today{background:linear-gradient(145deg,#f0ad3f,#d97a26);color:#fff;box-shadow:0 0 14px rgba(240,173,63,.20)}
 body.is-events-route .event-row-name-v608{padding:8px 9px;border-radius:10px;background:rgba(255,255,255,.028);color:#d9edf8;font-size:12px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 body.is-events-route .event-cell-v608{height:30px;border-radius:8px;background:rgba(255,255,255,.025)}
@@ -289,26 +289,26 @@ body.is-events-route .event-soon-v608{margin-top:16px;padding-top:14px;border-to
 body.is-events-route .event-soon-v608 h3{margin:0 0 8px;color:#f6fbff;font-size:15px}
 body.is-events-route .event-soon-list-v608{display:flex;gap:8px;flex-wrap:wrap}
 body.is-events-route .event-soon-chip-v608{padding:7px 10px;border:1px solid rgba(255,192,77,.20);border-radius:999px;background:rgba(142,90,20,.15);color:#ffd68b;font-size:11px;font-weight:800}
-body.is-events-route .event-schedule-note-v608{margin-top:10px;color:#6f93aa;font-size:10px}
+body.is-events-route .event-schedule-note-v608{margin-top:10px;color:#9da3ad;font-size:10px}
 @media(max-width:760px){body.is-events-route .event-schedule-v608{padding:14px;border-radius:18px}body.is-events-route .event-active-v608{grid-template-columns:1fr}body.is-events-route .event-week-v608{min-width:690px;grid-template-columns:165px repeat(7,minmax(68px,1fr))}}
 
 body.is-events-route .event-row-name-v608.event-wheel{border-left:3px solid #f3c247}
 body.is-events-route .event-row-name-v608.event-joe{border-left:3px solid #3fcf79}
 body.is-events-route .event-row-name-v608.event-fort{border-left:3px solid #f06a3f}
 body.is-events-route .event-row-name-v608.event-dreams{border-left:3px solid #43d6e8}
-body.is-events-route .event-row-name-v608.event-path{border-left:3px solid #4c7df3}
+body.is-events-route .event-row-name-v608.event-path{border-left:3px solid #9da3ad}
 body.is-events-route .event-row-name-v608.event-forge{border-left:3px solid #ad5cff}
 body.is-events-route .event-cell-v608.on.event-wheel{background:linear-gradient(145deg,#f6cd4f,#d89423)!important;box-shadow:0 0 10px rgba(246,205,79,.18)}
 body.is-events-route .event-cell-v608.on.event-joe{background:linear-gradient(145deg,#49d98a,#259b5c)!important;box-shadow:0 0 10px rgba(73,217,138,.16)}
 body.is-events-route .event-cell-v608.on.event-fort{background:linear-gradient(145deg,#ff874c,#c9493d)!important;box-shadow:0 0 10px rgba(255,135,76,.16)}
-body.is-events-route .event-cell-v608.on.event-dreams{background:linear-gradient(145deg,#52dff0,#278ebd)!important;box-shadow:0 0 10px rgba(82,223,240,.17)}
-body.is-events-route .event-cell-v608.on.event-path{background:linear-gradient(145deg,#5d91ff,#3655c7)!important;box-shadow:0 0 10px rgba(93,145,255,.16)}
+body.is-events-route .event-cell-v608.on.event-dreams{background:linear-gradient(145deg,#52dff0,#676b75)!important;box-shadow:0 0 10px rgba(82,223,240,.17)}
+body.is-events-route .event-cell-v608.on.event-path{background:linear-gradient(145deg,#9da3ad,#676b75)!important;box-shadow:0 0 10px rgba(93,145,255,.16)}
 body.is-events-route .event-cell-v608.on.event-forge{background:linear-gradient(145deg,#bd6cff,#7939d4)!important;box-shadow:0 0 10px rgba(189,108,255,.17)}
 body.is-events-route .event-soon-chip-v608.event-wheel{border-color:rgba(246,205,79,.55);background:rgba(246,205,79,.13);color:#ffe28a}
 body.is-events-route .event-soon-chip-v608.event-joe{border-color:rgba(73,217,138,.52);background:rgba(73,217,138,.12);color:#9af1bd}
 body.is-events-route .event-soon-chip-v608.event-dreams{border-color:rgba(82,223,240,.52);background:rgba(82,223,240,.12);color:#9deef8}
 body.is-events-route .event-soon-chip-v608.event-fort{border-color:rgba(255,135,76,.52);background:rgba(255,135,76,.12);color:#ffb18a}
-body.is-events-route .event-soon-chip-v608.event-path{border-color:rgba(93,145,255,.52);background:rgba(93,145,255,.12);color:#a9c5ff}
+body.is-events-route .event-soon-chip-v608.event-path{border-color:rgba(93,145,255,.52);background:rgba(93,145,255,.12);color:#d8dbe1}
 
 body.is-events-route .event-week-v608.event-week-v609{min-width:860px;grid-template-columns:180px repeat(8,minmax(72px,1fr))}
 body.is-events-route .event-cell-v608.on.event-snow,body.is-events-route .event-soon-chip-v608.event-snow{background:linear-gradient(145deg,rgba(78,190,239,.84),rgba(91,108,224,.78));border-color:rgba(133,220,255,.42);color:#d9f5ff}
