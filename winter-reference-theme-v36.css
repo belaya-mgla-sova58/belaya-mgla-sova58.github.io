@@ -15,7 +15,7 @@ body.moon-mirror-test .heroes-frost-backdrop-v26{
 /* Рамка по краю содержимого, а не поверх карточек. */
 body:is(.gear-editorial-test,.moon-mirror-test) .winter-gilt-frame-v30{
  display:block!important;position:fixed!important;
- top:10px!important;bottom:10px!important;left:205px!important;right:12px!important;
+ top:10px!important;bottom:10px!important;left:11px!important;right:11px!important;
  z-index:2!important;pointer-events:none!important;
  border:1px solid rgba(230,191,124,.72)!important;border-radius:28px!important;
  background:transparent!important;
