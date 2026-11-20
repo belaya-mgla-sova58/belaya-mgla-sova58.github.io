@@ -106,11 +106,11 @@ body.winter-site-reference-v1>.owl-top-ornaments-v44>.owl-branch-left-v44{
  width:clamp(165px,17vw,290px)!important;
  left:clamp(114px,10.5vw,180px)!important;
  top:0!important;
- transform:scaleY(-1)!important;transform-origin:top center!important;
+ transform:scaleY(-1)!important;transform-origin:center center!important;
 }
 body.winter-site-reference-v1>.owl-top-ornaments-v44>.owl-branch-right-v44{
  width:clamp(185px,19vw,320px)!important;right:12px!important;top:0!important;
- transform:scaleY(-1)!important;transform-origin:top center!important;
+ transform:scaleY(-1)!important;transform-origin:center center!important;
 }
 /* Keep the photographed gold frame and fine feather orbit. */
 body.winter-site-reference-v1>.winter-photo-decor-v40>.winter-photo-frame-v40{
