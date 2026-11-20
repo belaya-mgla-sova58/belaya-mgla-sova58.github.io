@@ -1,0 +1,127 @@
+/* Белая мгла: Events page fully monochrome graphite/gold.
+   Replaces v9 inline patch; all UI shells covered, game art remains untouched. */
+html:has(body.is-events-route),
+html body.is-events-route,
+html body.is-events-route.star-glass-v436,
+html body.is-events-route.cosmic-visible-v444{
+ --v424-line:rgba(216,188,144,.58)!important;
+ --v424-muted:#cbc8c8!important;
+ --event-accent:218,188,137!important;
+ --hall-glow:rgba(224,190,138,.08)!important;
+ background:#0f1013!important;
+ background-image:linear-gradient(145deg,#17171a,#0b0c0f)!important;
+ color:#eae8ea!important;
+}
+html body.is-events-route :is(.site-cosmic-background-v442,.site-cosmic-background-v442::before,.site-cosmic-background-v442::after){
+ background:none!important;background-image:none!important;opacity:0!important;
+}
+html body.is-events-route main#appMain,
+html body.is-events-route main#appMain .route-page.active,
+html body.is-events-route main#appMain .guide-page-v69,
+html body.is-events-route main#appMain .guide-page-v69>.guide-fold-body-v414{
+ background-color:#131317!important;
+ background-image:linear-gradient(160deg,#1b1b1f,#111216)!important;
+}
+html body.is-events-route .nav-wrap,
+html body.is-events-route.modern-v424 .nav-wrap,
+html body.is-events-route .mobile-topbar,
+html body.is-events-route .mobile-bottom-v424{
+ background-color:#17171b!important;
+ background-image:linear-gradient(170deg,#222125,#101114)!important;
+ border-color:rgba(218,185,135,.65)!important;
+ box-shadow:8px 0 25px rgba(0,0,0,.26)!important;
+}
+html body.is-events-route .nav-wrap :is(nav,nav>a.route-link){
+ border-color:rgba(204,196,188,.38)!important;
+}
+html body.is-events-route .nav-wrap nav>a.route-link,
+html body.is-events-route .nav-wrap nav>a.route-link:not([aria-current="page"]){
+ background-color:#232226!important;
+ background-image:linear-gradient(115deg,#29272b,#16171a)!important;
+ border:1px solid rgba(204,199,191,.44)!important;
+ color:#ece9e7!important;
+ box-shadow:none!important;
+}
+html body.is-events-route .nav-wrap nav>a.route-link[aria-current="page"],
+html body.is-events-route .mobile-bottom-v424 a[aria-current="page"]{
+ background-color:#352d29!important;
+ background-image:linear-gradient(115deg,#41352e,#242227)!important;
+ border-color:#dfbf89!important;
+ box-shadow:inset 3px 0 #ecd09b,0 0 14px rgba(214,178,124,.16)!important;
+ color:#fbf1dd!important;
+}
+html body.is-events-route :is(.site-search-v426,.site-search-box-v426,.site-search-input-v426,.site-search-icon-v426,.site-search-clear-v426,.site-search-results-v426){
+ background:#1d1d21!important;
+ background-image:none!important;
+ border-color:rgba(212,188,151,.54)!important;
+ color:#f1eef0!important;
+ box-shadow:none!important;
+}
+html body.is-events-route main#appMain :is(.breadcrumbs-v409,.page-heading-v424.frost-header-v431,.page-heading-v424.frost-header-v431::before,.guide-topics,.topic-pill,.page-toc-v409,.page-toc-v409>summary,.page-toc-links-v409){
+ background:#222125!important;
+ background-image:linear-gradient(120deg,#2b282b,#191a1e)!important;
+ border-color:rgba(216,189,148,.6)!important;
+ box-shadow:inset 0 1px rgba(244,222,194,.08),0 0 13px rgba(218,181,124,.07)!important;
+ color:#eae7e6!important;
+}
+html body.is-events-route main#appMain .page-heading-v424.frost-header-v431{
+ border:1.5px solid rgba(222,194,150,.77)!important;
+}
+html body.is-events-route main#appMain .page-heading-v424 h1{
+ color:#f0edf0!important;-webkit-text-fill-color:#f0edf0!important;
+ text-shadow:0 0 12px rgba(235,229,215,.1)!important;
+}
+html body.is-events-route main#appMain .page-heading-v424 p,
+html body.is-events-route main#appMain .event-group-copy-v522 p{color:#d5d0cf!important;-webkit-text-fill-color:#d5d0cf!important}
+html body.is-events-route main#appMain :is(.guide-section,.guide-section.guide-fold-v414,.guide-page-v69>details.guide-fold-v414,.guide-fold-summary-v414,.guide-fold-toolbar-v414,.guide-fold-action-v414,.guide-fold-body-v414,.guide-callout,.mini-card,.v69-footer){
+ background-color:#232226!important;
+ background-image:linear-gradient(135deg,#2b292c,#17181c)!important;
+ border-color:rgba(217,187,142,.56)!important;
+ box-shadow:inset 0 1px rgba(245,222,184,.08),0 8px 21px rgba(0,0,0,.18)!important;
+ color:#eeebeb!important;
+}
+html body.is-events-route main#appMain :is(.guide-section,.guide-fold-summary-v414,.guide-fold-body-v414,.guide-callout,.page-heading-v424)::before{
+ background-color:transparent!important;
+ background-image:none!important;
+}
+html body.is-events-route main#appMain :is(.guide-fold-title-v414,.event-jump-label-v1,.event-group-copy-v522 h3,.related-guides-head-v625 h2){
+ color:#e8c993!important;-webkit-text-fill-color:#e8c993!important;
+ text-shadow:none!important;
+}
+html body.is-events-route main#appMain :is(.event-jump-nav-v1,.event-group-v522,.events-groups-v522 .event-group-v522,.related-guides-v625,.related-guide-card-v625){
+ --event-accent:218,188,137!important;
+ --hall-glow:rgba(224,190,138,.06)!important;
+ background:#252326!important;
+ background-image:linear-gradient(150deg,#2d2a2c,#19191d)!important;
+ border:1px solid rgba(218,189,142,.68)!important;
+ box-shadow:0 0 15px rgba(218,185,130,.1),0 10px 23px rgba(0,0,0,.23)!important;
+}
+html body.is-events-route main#appMain .events-groups-v522 .event-group-v522{
+ border-color:#cdb082!important;
+}
+html body.is-events-route main#appMain :is(.event-jump-links-v1 a,.event-group-icon-v522,.event-group-count-v522){
+ background:#302b29!important;
+ background-image:linear-gradient(140deg,#3a322e,#211f22)!important;
+ border-color:rgba(223,190,143,.6)!important;
+ color:#f4e8d2!important;
+ box-shadow:none!important;
+}
+html body.is-events-route main#appMain .events-groups-v522 .guide-nav-card{
+ background:#19191d!important;background-image:none!important;
+ border:1px solid rgba(219,189,145,.67)!important;
+ box-shadow:0 0 10px rgba(219,185,130,.08),0 8px 20px rgba(0,0,0,.24)!important;
+}
+html body.is-events-route main#appMain .events-groups-v522 .event-card-caption-v1{
+ background:#242226!important;
+ background-image:linear-gradient(120deg,#2e2b2d,#19191d)!important;
+ border-top:1px solid rgba(219,189,144,.54)!important;
+ color:#f0edeb!important;-webkit-text-fill-color:#f0edeb!important;
+}
+html body.is-events-route main#appMain .events-groups-v522 .guide-nav-card:hover,
+html body.is-events-route main#appMain .event-jump-links-v1 a:hover{
+ border-color:#efce99!important;
+ box-shadow:0 0 19px rgba(220,186,128,.2)!important;
+}
+@media(prefers-reduced-motion:reduce){
+ html body.is-events-route main#appMain .events-groups-v522 .guide-nav-card{transition:none!important}
+}
