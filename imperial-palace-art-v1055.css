@@ -5,7 +5,7 @@ body.modern-v424 :is(.page-heading-v424.frost-header-v431,.gen-hub-hero,.gen-pag
  background-image:
   url("assets/imperial-arc-v1055.svg"),
   radial-gradient(ellipse at 68% 19%,rgba(136,165,238,.28),transparent 58%),
-  linear-gradient(120deg,#07172f 0%,#142e62 48%,#0a1a3b 100%)!important;
+  linear-gradient(120deg,#10141c 0%,#2b303a 48%,#1b202a 100%)!important;
  background-size:100% 100%,cover,cover!important;
  background-position:center,center,center!important;
  background-repeat:no-repeat!important;
