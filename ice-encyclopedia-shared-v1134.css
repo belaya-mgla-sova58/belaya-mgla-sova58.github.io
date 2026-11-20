@@ -110,3 +110,22 @@ body:is([data-static-route="bear"],[data-static-route="crazy-joe"],[data-static-
   background-attachment:scroll !important;
  }
 }
+
+
+/* v1233 | Graphite knowledge pages, explicitly excludes event and home routes. */
+@media screen and (min-width:1100px) and (hover:hover) and (pointer:fine){
+body.bm-ice-encyclopedia-v1134:is(.is-research-route,.is-resources-route,.is-troops-route,.is-buildings-route,.is-furnace-130-route,.is-fc15-route,.is-fc510-route,[data-static-route="troops-guide"]){
+ --ice-fg:#e1e1e5!important;--ice-line:rgba(193,195,202,.46)!important;
+}
+body.bm-ice-encyclopedia-v1134:is(.is-research-route,.is-resources-route,.is-troops-route,.is-buildings-route,.is-furnace-130-route,.is-fc15-route,.is-fc510-route,[data-static-route="troops-guide"]) main#appMain>.route-page.active>section[class*="-image-header-"]{
+ background:#24252a!important;border-color:rgba(191,193,201,.5)!important;
+}
+body.bm-ice-encyclopedia-v1134:is(.is-research-route,.is-resources-route,.is-troops-route,.is-buildings-route,.is-furnace-130-route,.is-fc15-route,.is-fc510-route,[data-static-route="troops-guide"]) main#appMain>.route-page.active :is(.intro,.page-heading-v424,.section,.guide-section,.bm-guide-topic-card-v1092){
+ background:radial-gradient(ellipse at 90% 0%,rgba(204,205,213,.1),transparent 60%),linear-gradient(140deg,#2c2d33,#131418)!important;
+ border-color:rgba(192,194,201,.46)!important;
+}
+body.bm-ice-encyclopedia-v1134:is(.is-research-route,.is-resources-route,.is-troops-route,.is-buildings-route,.is-furnace-130-route,.is-fc15-route,.is-fc510-route,[data-static-route="troops-guide"]) main#appMain .route-page.active :is(.guide-callout,.guide-nav-card){
+ background:linear-gradient(145deg,#36363b,#1a1b1f)!important;
+ border-color:rgba(207,183,145,.5)!important;
+}
+}
