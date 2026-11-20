@@ -325,3 +325,16 @@ html:not(.force-desktop-root) body.site-hq-v407.bm-ice-encyclopedia-v1134 main#a
   margin-right:auto!important;
  }
 }
+
+
+/* v1233 | Only non-event knowledge guides. Preserve layout and coloured game markers. */
+@media screen and (max-width:820px){
+html:not(.force-desktop-root) body.bm-ice-encyclopedia-v1134:is(.is-research-route,.is-resources-route,.is-troops-route,.is-buildings-route,.is-furnace-130-route,.is-fc15-route,.is-fc510-route,[data-static-route="troops-guide"]) main#appMain .route-page.active{
+ --pocket-card:linear-gradient(145deg,#2c2d32,#141519)!important;
+ --pocket-border:rgba(195,196,204,.48)!important;
+ --pocket-text:#dfe0e4!important;
+}
+html:not(.force-desktop-root) body.bm-ice-encyclopedia-v1134:is(.is-research-route,.is-resources-route,.is-troops-route,.is-buildings-route,.is-furnace-130-route,.is-fc15-route,.is-fc510-route,[data-static-route="troops-guide"]) main#appMain .route-page.active :is(.intro,.section,.guide-section,.guide-fold-v414,.guide-fold-body-v414,.building-card,.troop-card,.intro-card,.ice-knowledge-panel-v1137){
+ background:linear-gradient(145deg,#2e2f35,#17181c)!important;border-color:rgba(191,193,201,.45)!important;
+}
+}
