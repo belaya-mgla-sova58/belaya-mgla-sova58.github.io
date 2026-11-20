@@ -1,0 +1,167 @@
+/* Белая мгла: оформление по утверждённому образцу. Визуальная тема только для тестовых Героев и Снаряжения. */
+html:has(body.gear-editorial-test),html:has(body.moon-mirror-test){background:#11151d!important}
+body:is(.gear-editorial-test,.moon-mirror-test){
+ --winter-gold:#e3bd80;--winter-silver:#c4cad5;
+ --winter-ink:#f3f0f1;--winter-panel:#161920;
+ background:#11151d!important;background-image:none!important;color:var(--winter-ink)!important;
+}
+/* Спокойная графитовая основа, морозная листва и волны уже входят в декоративный фон. */
+body.gear-editorial-test .gear-frost-backdrop-v6,
+body.moon-mirror-test .heroes-frost-backdrop-v26{
+ position:fixed!important;inset:0!important;z-index:-1!important;
+ pointer-events:none!important;overflow:hidden!important;
+ background:#121720 url("assets/frost-silver-feather-background.svg?v=5") center center / cover no-repeat!important;
+}
+/* Рамка по краю содержимого, а не поверх карточек. */
+body:is(.gear-editorial-test,.moon-mirror-test) .winter-gilt-frame-v30{
+ display:block!important;position:fixed!important;
+ top:10px!important;bottom:10px!important;left:205px!important;right:12px!important;
+ z-index:2!important;pointer-events:none!important;
+ border:1px solid rgba(230,191,124,.72)!important;border-radius:28px!important;
+ background:transparent!important;
+ box-shadow:inset 0 0 0 1px rgba(253,226,180,.08),0 0 12px rgba(225,178,109,.11)!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test) .winter-gilt-frame-v30::before{
+ content:""!important;display:block!important;position:absolute!important;
+ top:-2px!important;left:13%!important;right:13%!important;height:3px!important;
+ border-radius:90px!important;
+ background:linear-gradient(90deg,transparent,rgba(234,201,146,.38) 25%,#f6ddac 50%,rgba(234,201,146,.38) 75%,transparent)!important;
+ box-shadow:0 0 9px 1px rgba(238,189,104,.24)!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test) .winter-gilt-frame-v30::after{
+ content:""!important;display:block!important;position:absolute!important;
+ bottom:-2px!important;left:16%!important;right:16%!important;height:3px!important;
+ border-radius:90px!important;
+ background:linear-gradient(90deg,transparent,rgba(234,201,146,.38) 25%,#f6ddac 50%,rgba(234,201,146,.38) 75%,transparent)!important;
+ box-shadow:0 0 10px rgba(238,189,104,.29)!important;
+}
+/* Тонкая золотая грань между меню и содержимым. */
+body:is(.gear-editorial-test,.moon-mirror-test) .nav-wrap{
+ background:linear-gradient(180deg,#161a23 0%,#11151d 75%,#131923 100%)!important;
+ border-right:1px solid rgba(230,192,129,.7)!important;
+ box-shadow:3px 0 16px rgba(0,0,0,.16)!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test) .nav-wrap nav a.route-link,
+body:is(.gear-editorial-test,.moon-mirror-test) .nav-wrap a.route-link{
+ background:#242934!important;background-image:linear-gradient(135deg,#282c37,#1a1e28)!important;
+ color:#f4f1f3!important;border:1px solid rgba(202,208,217,.28)!important;
+ border-radius:10px!important;box-shadow:inset 0 1px rgba(247,249,255,.045)!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test) .nav-wrap nav a.route-link.active,
+body:is(.gear-editorial-test,.moon-mirror-test) .nav-wrap a.route-link.active{
+ background:linear-gradient(110deg,#51402d,#24262f)!important;
+ border:1px solid #e8c78d!important;
+ box-shadow:inset 3px 0 #f5d391,0 0 13px rgba(248,203,132,.18)!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test) .nav-wrap nav a.route-link:hover,
+body:is(.gear-editorial-test,.moon-mirror-test) .nav-wrap a.route-link:hover{
+ background:#34333b!important;border-color:#e8c78d!important;
+}
+/* Поиск и путь к разделу: никакого синего. */
+body:is(.gear-editorial-test,.moon-mirror-test) .site-search-v426{background:transparent!important;border:0!important;box-shadow:none!important}
+body:is(.gear-editorial-test,.moon-mirror-test) .site-search-box-v426{
+ background:#191b22!important;background-image:none!important;
+ border:1px solid rgba(223,198,161,.4)!important;
+ border-radius:11px!important;box-shadow:0 8px 18px rgba(0,0,0,.22)!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test) .site-search-icon-v426{color:#d9be8c!important;background:transparent!important;box-shadow:none!important}
+body:is(.gear-editorial-test,.moon-mirror-test) .site-search-input-v426{background:transparent!important;color:#f0edf0!important;border:0!important;box-shadow:none!important}
+body:is(.gear-editorial-test,.moon-mirror-test) .breadcrumbs-v409{
+ background:rgba(25,28,36,.82)!important;background-image:none!important;
+ border:1px solid rgba(224,200,159,.33)!important;border-radius:8px!important;
+ box-shadow:none!important;color:#eee8ed!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test) .breadcrumbs-v409 :is(a,span){color:#ebd6b5!important}
+/* Дорогой чёрный металл вместо плоских плашек. */
+body.gear-editorial-test .page-heading-v424.frost-header-v431,
+body.moon-mirror-test .route-page.active[data-route="heroes"] .page-heading-v424.frost-header-v431{
+ background:linear-gradient(110deg,rgba(24,27,34,.95),rgba(15,17,24,.92))!important;
+ border:1px solid rgba(217,211,207,.37)!important;border-top-color:rgba(235,198,140,.58)!important;
+ border-radius:12px!important;box-shadow:inset 0 1px rgba(248,250,255,.07)!important;
+}
+body.gear-editorial-test .route-page.active[data-route="gear"] .guide-page-v69,
+body.moon-mirror-test .route-page.active[data-route="heroes"] .guide-page-v69{
+ background:rgba(17,21,29,.81)!important;border:1px solid rgba(202,210,224,.26)!important;
+ box-shadow:inset 0 1px rgba(251,251,255,.04)!important;border-radius:12px!important;
+}
+body.gear-editorial-test .gear-toc-v1,
+body.moon-mirror-test .hero-reading-layout-v1230 .page-toc-v409{
+ background:linear-gradient(145deg,rgba(37,42,52,.96),rgba(15,18,24,.96))!important;
+ border:1px solid rgba(201,209,219,.34)!important;border-radius:11px!important;
+}
+body.gear-editorial-test .gear-entry-v1,
+body.moon-mirror-test .hero-reading-article-v1230 section.guide-section.guide-fold-v414{
+ background:rgba(17,19,26,.96)!important;
+ border-right-color:rgba(199,204,216,.44)!important;
+ border-bottom-color:rgba(199,204,216,.44)!important;
+ border-radius:11px!important;
+}
+body.gear-editorial-test .gear-entry-v1>.guide-fold-summary-v414,
+body.moon-mirror-test .hero-reading-article-v1230 section.guide-section.guide-fold-v414>.guide-fold-summary-v414{
+ background:linear-gradient(108deg,rgba(46,50,60,.9),rgba(17,19,26,.94))!important;
+}
+body.gear-editorial-test .gear-entry-v1>.guide-fold-body-v414,
+body.moon-mirror-test .hero-reading-article-v1230 section.guide-section.guide-fold-v414>.guide-fold-body-v414{
+ background:rgba(17,19,26,.90)!important;
+}
+/* Калькулятор, похожие материалы и нижняя строка соответствуют фото. */
+body.gear-editorial-test .gear-calc-panel-v1{
+ background:linear-gradient(115deg,rgba(27,29,36,.94),rgba(14,17,23,.94))!important;
+ border:1px solid rgba(236,192,119,.64)!important;
+ border-radius:13px!important;box-shadow:0 0 16px rgba(231,186,112,.09)!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test) .related-guides-v625{
+ background:rgba(16,19,25,.93)!important;background-image:none!important;
+ border:1px solid rgba(211,216,226,.43)!important;border-radius:13px!important;
+ box-shadow:0 0 18px rgba(0,0,0,.12)!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test) .related-guides-head-v625{
+ background:transparent!important;background-image:none!important;
+ border-bottom:1px solid rgba(211,213,215,.27)!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test) .related-guide-card-v625{
+ background:linear-gradient(145deg,rgba(34,38,46,.93),rgba(12,14,20,.97))!important;
+ border:1px solid rgba(205,211,221,.49)!important;border-radius:12px!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.035)!important;min-height:104px!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test) .related-guide-card-v625:hover{
+ border-color:rgba(247,209,145,.82)!important;box-shadow:0 0 17px rgba(235,197,130,.16)!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test) .v69-footer{
+ color:#cfced4!important;background:transparent!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test) .back-to-top{
+ background:linear-gradient(120deg,#d5c5a8,#e7cf9b)!important;
+ border:1px solid #f4dbb2!important;border-radius:10px!important;
+ color:#1e2027!important;box-shadow:0 4px 15px rgba(0,0,0,.2)!important;
+}
+/* Декоративные элементы не должны закрывать ссылки и текст. */
+body:is(.gear-editorial-test,.moon-mirror-test) .winter-gilt-frame-v30,
+body:is(.gear-editorial-test,.moon-mirror-test) .real-photo-feather-v35{pointer-events:none!important}
+body.gear-editorial-test .gear-frost-backdrop-v6>.real-photo-feather-v35,
+body.moon-mirror-test .heroes-frost-backdrop-v26>.real-photo-feather-v35{
+ width:clamp(205px,25vw,345px)!important;height:auto!important;
+ aspect-ratio:173 / 188!important;right:clamp(25px,5vw,75px)!important;
+ bottom:25px!important;opacity:.92!important;
+ filter:drop-shadow(0 0 11px rgba(240,221,171,.24))!important;
+}
+/* Декоративная золотая лента на нижней панели. */
+body:is(.gear-editorial-test,.moon-mirror-test) .related-guide-card-v625 b{color:#e7c68b!important}
+@media (max-width:1099px){
+ body:is(.gear-editorial-test,.moon-mirror-test) .winter-gilt-frame-v30{
+  left:10px!important;right:10px!important;top:68px!important;bottom:75px!important;
+  border-color:rgba(229,192,129,.5)!important;
+ }
+}
+@media (max-width:680px){
+ body:is(.gear-editorial-test,.moon-mirror-test) .winter-gilt-frame-v30{
+  display:none!important;
+ }
+ body.gear-editorial-test .gear-frost-backdrop-v6>.real-photo-feather-v35,
+ body.moon-mirror-test .heroes-frost-backdrop-v26>.real-photo-feather-v35{
+  width:132px!important;right:12px!important;bottom:62px!important;opacity:.72!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ body:is(.gear-editorial-test,.moon-mirror-test) .related-guide-card-v625{transition:none!important}
+}
