@@ -163,3 +163,64 @@ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1)>.owl-t
  transform:scaleY(-1)!important;
  transform-origin:center center!important;
 }
+
+/* v48: NO BLUE on reference / guide pages. Obsidian, silver and champagne gold. */
+html:has(body.winter-site-reference-v1),
+body.winter-site-reference-v1{
+ background:#0b0b0d!important;color:#eee9e5!important;
+}
+body.winter-site-reference-v1>.winter-site-background-v1{
+ background:radial-gradient(ellipse at 46% 15%,#242227 0%,#111114 55%,#08090a 100%)!important;
+}
+body.winter-site-reference-v1 .nav-wrap{
+ background:linear-gradient(180deg,#181719,#0b0b0d)!important;
+}
+body.winter-site-reference-v1 .nav-wrap a.route-link{
+ background:linear-gradient(120deg,#29282b,#121214)!important;
+ background-image:linear-gradient(120deg,#29282b,#121214)!important;
+ border-color:rgba(196,191,186,.38)!important;color:#f0eeee!important;
+}
+body.winter-site-reference-v1 .nav-wrap a.route-link.active{
+ background:linear-gradient(115deg,#514233,#262124)!important;
+ background-image:linear-gradient(115deg,#514233,#262124)!important;
+ border-color:#e1c18f!important;
+}
+body.winter-site-reference-v1 :is(.site-search-box-v426,.breadcrumbs-v409,.page-heading-v424.frost-header-v431,.guide-page-v69,.page-toc-v409,.guide-section.guide-fold-v414,.related-guides-v625,.guide-calc-link-v1,.guide-callout){
+ background:linear-gradient(125deg,#252327,#111114)!important;
+ background-image:linear-gradient(125deg,#252327,#111114)!important;
+ border-color:rgba(181,178,177,.48)!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.045)!important;
+}
+body.winter-site-reference-v1 .page-heading-v424.frost-header-v431{
+ background:linear-gradient(125deg,#302b2b,#161517 70%,#0e0e10)!important;
+ background-image:linear-gradient(125deg,#302b2b,#161517 70%,#0e0e10)!important;
+ border-color:rgba(220,187,131,.55)!important;
+}
+body.winter-site-reference-v1 :is(.page-toc-links-v409 a,.related-guide-card-v625,.guide-fold-summary-v414,.guide-fold-body-v414,.guide-fold-toolbar-v414,.guide-fold-all-v414,.topic-pill,.guide-topics,.guide-calc-link-v1 a){
+ background:linear-gradient(120deg,#28272b,#151416)!important;
+ background-image:linear-gradient(120deg,#28272b,#151416)!important;
+ border-color:rgba(178,174,173,.38)!important;
+ color:#eee9e5!important;
+}
+body.winter-site-reference-v1 .guide-section.guide-fold-v414>.guide-fold-summary-v414{
+ background:linear-gradient(100deg,#302c2e,#171619)!important;
+ background-image:linear-gradient(100deg,#302c2e,#171619)!important;
+}
+body.winter-site-reference-v1 .guide-section.guide-fold-v414>.guide-fold-body-v414{
+ background:#151416!important;background-image:none!important;
+}
+body.winter-site-reference-v1 :is(.page-toc-v409,.related-guides-v625,.guide-section.guide-fold-v414){
+ border:1px solid rgba(176,169,168,.52)!important;
+}
+body.winter-site-reference-v1 :is(.page-toc-links-v409 a:hover,.related-guide-card-v625:hover,.guide-fold-all-v414:hover){
+ background:#35302d!important;border-color:#e0bd85!important;
+}
+body.winter-site-reference-v1 :is(.guide-fold-action-v414,.page-toc-v409 a,.related-guide-card-v625 b,.guide-calc-link-v1 a){
+ color:#e9c995!important;
+}
+body.winter-site-reference-v1 :is(.guide-section.guide-fold-v414,.page-toc-v409,.related-guides-v625) :is(h2,h3,b,p,li){
+ text-shadow:none!important;
+}
+body.winter-site-reference-v1 :is(.page-heading-v424,.guide-page-v69,.related-guides-v625,.page-toc-v409,.guide-section.guide-fold-v414){
+ --blue:#c3b9a9;--accent:#e6c48c;--primary:#ded3c4;
+}
