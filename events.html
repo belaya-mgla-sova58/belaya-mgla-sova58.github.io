@@ -119,38 +119,63 @@ body.is-events-route .events-groups-v522 .guide-nav-card .event-card-caption-v1{
  body.is-events-route .event-jump-links-v1 a{transition:none!important}
 }
 </style><link rel="stylesheet" href="site-polish-v1161.css?v=1161"/>
-<link rel="stylesheet" href="site-guide-reading-v1167.css?v=1167"/><link rel="stylesheet" href="site-guide-navigation-v1169.css?v=1169"/><link rel="stylesheet" href="site-skip-navigation-v1184.css?v=1184"/><style id="obsidian-final-overrides-v1225">
-/* Last in cascade to cover page-specific blue visual styles. */
-body:is(.is-home-route,.is-events-route,.is-calculators-route,.is-heroes-route) main#appMain :is(
- .calc-hub-card,.calc-hub-head,.event-group-v522,.event-jump-nav-v1,
- .guide-nav-card,.hero-category-link-v708,.gen-panel,.gen-hub-hero,
- .modern-panel-v424,.modern-topic-card-v424,.page-heading-v424
-){
- background:linear-gradient(140deg,#2c2c30,#111214)!important;
- border-color:rgba(206,207,209,.5)!important;
- box-shadow:inset 0 1px rgba(255,255,255,.10),0 10px 28px rgba(0,0,0,.25)!important;
+<link rel="stylesheet" href="site-guide-reading-v1167.css?v=1167"/><link rel="stylesheet" href="site-guide-navigation-v1169.css?v=1169"/><link rel="stylesheet" href="site-skip-navigation-v1184.css?v=1184"/><style id="events-ice-neon-v2">
+/* Local events-only neon upgrade; event illustrations and links remain unchanged. */
+body.is-events-route main#appMain .page-heading-v424.frost-header-v431{
+ background:radial-gradient(ellipse at 85% 5%,rgba(111,222,255,.29),transparent 53%),radial-gradient(ellipse at 13% 92%,rgba(159,121,255,.24),transparent 62%),linear-gradient(120deg,rgba(14,45,90,.96),rgba(35,82,135,.92),rgba(15,36,78,.96))!important;
+ border:2px solid rgba(131,237,255,.85)!important;
+ box-shadow:0 0 32px rgba(71,211,255,.27),inset 0 0 19px rgba(113,211,255,.14),0 14px 36px rgba(0,14,37,.24)!important;
 }
-body:is(.is-home-route,.is-events-route,.is-calculators-route,.is-heroes-route) main#appMain :is(
- .calc-hub-card,.calc-hub-card strong,.calc-hub-head h1,
- .event-group-head-v522 h3,.event-card-caption-v1,
- .hero-category-copy-v708 strong,.modern-panel-head-v424 h2
-){
- color:#f0f0f1!important;-webkit-text-fill-color:#f0f0f1!important;
+body.is-events-route main#appMain .events-groups-v522 .event-group-v522 {
+ background:linear-gradient(145deg,rgba(28,66,112,.88),rgba(17,42,86,.89))!important;
+ border:1px solid rgba(116,221,255,.64)!important;
+ box-shadow:inset 0 1px 0 rgba(228,253,255,.16),0 0 24px rgba(74,192,255,.17),0 12px 26px rgba(0,13,35,.2)!important;
 }
-body:is(.is-home-route,.is-events-route,.is-calculators-route,.is-heroes-route) main#appMain :is(
- .calc-hub-card small,.calc-hub-open,.event-group-copy-v522 p,
- .hero-category-copy-v708 span,.page-heading-v424 p
-){color:#d0cdca!important;-webkit-text-fill-color:#d0cdca!important}
-body:is(.is-home-route,.is-events-route,.is-calculators-route,.is-heroes-route) main#appMain :is(
- .calc-hub-open,.event-jump-links-v1 a,.hero-category-arrow-v708
-){color:#e5c69e!important}
-body.is-events-route .event-jump-links-v1 a{
- background:#29292c!important;border-color:rgba(211,211,213,.47)!important;
+body.is-events-route main#appMain .event-group-head-v522 {border-bottom-color:rgba(124,223,255,.34)!important}
+body.is-events-route main#appMain .event-group-copy-v522 h3{
+ color:#f0fbff!important;-webkit-text-fill-color:#f0fbff!important;text-shadow:0 0 16px rgba(99,222,255,.32)!important;
 }
-body.is-calculators-route a.calc-hub-card:hover,
-body.is-events-route .guide-nav-card:hover{
- background:linear-gradient(140deg,#383638,#1c1c1e)!important;
- border-color:#e7d4b8!important;
+body.is-events-route main#appMain .event-group-copy-v522 p{
+ color:#c6e6fb!important;-webkit-text-fill-color:#c6e6fb!important;
+}
+body.is-events-route main#appMain .event-group-count-v522,
+body.is-events-route main#appMain .event-group-icon-v522 {
+ background:rgba(63,133,188,.26)!important;border-color:rgba(150,236,255,.53)!important;color:#ecfbff!important;
+}
+body.is-events-route main#appMain .event-jump-nav-v1{
+ background:linear-gradient(120deg,rgba(20,68,116,.95),rgba(34,53,115,.94))!important;
+ border:1px solid rgba(122,231,255,.72)!important;box-shadow:0 0 22px rgba(83,207,255,.18)!important;
+}
+body.is-events-route main#appMain .event-jump-links-v1 a{
+ background:linear-gradient(135deg,rgba(34,92,145,.96),rgba(47,62,137,.95))!important;
+ border:1px solid rgba(127,228,255,.69)!important;color:#effcff!important;
+ box-shadow:inset 0 1px 0 rgba(232,253,255,.12),0 0 12px rgba(86,204,255,.13)!important;
+}
+body.is-events-route main#appMain .event-jump-links-v1 a:hover,
+body.is-events-route main#appMain .event-jump-links-v1 a:focus-visible{
+ background:linear-gradient(135deg,rgba(40,132,186,.96),rgba(95,88,180,.94))!important;
+ border-color:#b4f5ff!important;box-shadow:0 0 20px rgba(85,223,255,.33)!important;
+}
+body.is-events-route main#appMain .events-groups-v522 a.guide-nav-card {
+ background:rgba(12,45,87,.75)!important;border:1px solid rgba(119,221,255,.69)!important;
+ box-shadow:0 0 14px rgba(66,198,255,.18),0 8px 26px rgba(0,11,32,.25)!important;
+ overflow:hidden;
+}
+body.is-events-route main#appMain .events-groups-v522 a.guide-nav-card:hover,
+body.is-events-route main#appMain .events-groups-v522 a.guide-nav-card:focus-visible{
+ border-color:#b8f8ff!important;box-shadow:0 0 26px rgba(87,230,255,.36),0 12px 28px rgba(0,12,32,.24)!important;
+}
+body.is-events-route main#appMain .events-groups-v522 .event-card-caption-v1{
+ background:linear-gradient(100deg,rgba(14,55,103,.96),rgba(38,63,120,.94))!important;
+ border-top:1px solid rgba(151,237,255,.43)!important;color:#edfaff!important;-webkit-text-fill-color:#edfaff!important;
+}
+body.is-events-route main#appMain .related-guide-card-v625{
+ border-color:rgba(130,229,255,.6)!important;
+ background:linear-gradient(135deg,rgba(21,63,112,.91),rgba(23,44,99,.93))!important;
+ box-shadow:0 0 19px rgba(86,199,255,.16)!important;
+}
+@media(prefers-reduced-motion:reduce){
+ body.is-events-route main#appMain .events-groups-v522 a.guide-nav-card{transition:none!important}
 }
 </style><link rel="stylesheet" href="belaya-neon-ice-v1.css?v=1" data-belaya-neon-ice/>
 </head><body class="bm-guide-navigation-v1169 bm-guide-reading-v1167 is-events-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444 bm-ice-encyclopedia-v1134" data-static-route="events"><a class="bm-skip-to-content-v1184" href="#appMain">Перейти к содержимому</a><div aria-hidden="true" class="site-cosmic-background-v442"></div>
