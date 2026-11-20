@@ -129,3 +129,28 @@ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .back-
  body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .winter-photo-frame-v40{display:none!important}
  body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .page-heading-v424.frost-header-v431 h1{font-size:45px!important}
 }
+
+/* Photo ornament details extracted from the approved screenshot, not traced polygons. */
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1)>.winter-photo-decor-v40::before{
+ content:""!important;display:block!important;
+ position:absolute!important;inset:0!important;z-index:0!important;
+ pointer-events:none!important;
+ background-image:url("assets/winter-reference-photo-ornaments-v42.svg?v=2")!important;
+ background-position:center center!important;background-size:100% 100%!important;background-repeat:no-repeat!important;
+ opacity:.97!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1)>.winter-photo-decor-v40>.winter-photo-feather-v40,
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1)>.winter-photo-decor-v40>.winter-photo-leaves-left-v40,
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1)>.winter-photo-decor-v40>.winter-photo-leaves-right-v40,
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1)>.winter-photo-decor-v40>.winter-photo-orbit-v40{
+ display:none!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1)>.winter-photo-decor-v40>.winter-photo-frame-v40,
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1)>.winter-photo-decor-v40>.winter-photo-sigil-v40{
+ z-index:1!important;
+}
+@media(max-width:820px){
+ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1)>.winter-photo-decor-v40::before{
+  background-size:100% 100%!important;opacity:.6!important;
+ }
+}
