@@ -1,7 +1,7 @@
 /* Белая мгла: общий зимний облик по утверждённому изображению. Только справочные разделы. */
 @import url('https://fonts.googleapis.com/css2?family=Forum&family=Manrope:wght@400;500;600;700;800&display=swap');
 html:has(body.winter-site-reference-v1){background:#11151e!important}
-body.winter-site-reference-v1{background:#11151e!important;background-image:none!important;color:#eeeef2!important}
+body.winter-site-reference-v1{position:relative!important;isolation:isolate!important;background:#11151e!important;background-image:none!important;color:#eeeef2!important}
 body.winter-site-reference-v1>.winter-site-background-v1{
  display:block!important;position:fixed!important;inset:0!important;z-index:-1!important;
  background:#121720 url("assets/frost-silver-feather-background.svg?v=5") center / cover no-repeat!important;
