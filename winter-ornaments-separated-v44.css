@@ -83,3 +83,44 @@ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#a
  }
  body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44 img{width:215px!important}
 }
+
+
+/* v45: a compact final flourish, not a second empty screen. */
+@media (min-width:921px){
+ html:not(.force-desktop-root) body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain{
+  padding-bottom:12px!important;
+ }
+ html:not(.force-desktop-root) body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.route-page.active{
+  padding-bottom:8px!important;
+ }
+}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44{
+ min-height:0!important;height:145px!important;
+ margin:2px clamp(12px,2vw,32px) 0!important;
+ padding:0!important;max-width:none!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44 img{
+ width:clamp(170px,19vw,270px)!important;
+ right:clamp(18px,2vw,33px)!important;bottom:0!important;
+ max-height:145px!important;object-fit:contain!important;object-position:right bottom!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .related-guides-v625{
+ margin-bottom:8px!important;
+}
+@media(max-width:920px){
+ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44{
+  height:115px!important;min-height:0!important;
+  margin:3px 12px 0!important;
+ }
+ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44 img{
+  width:205px!important;max-height:115px!important;
+ }
+}
+@media(max-width:580px){
+ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44{
+  height:105px!important;min-height:0!important;margin:0 8px 12px!important;
+ }
+ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44 img{
+  width:175px!important;max-height:105px!important;
+ }
+}
