@@ -700,3 +700,53 @@ body.author-royal-route-v1180 .breadcrumbs-v409 [aria-current="page"]{color:var(
 @media(max-width:360px){
  .author-page-v1171 .author-identity-v1171 .author-royal-crest-v1180{width:92px!important}
 }
+
+
+/* v1190: SOVA58 graphite-silver palette; all author-page assets and layout preserved. */
+body.author-royal-route-v1180{background-color:#0b0c0f!important}
+body.author-royal-route-v1180 .breadcrumbs-v409 a{color:#d8d8dd!important}
+.author-page-v1171{
+ --royal-ice:#cacbd0;--royal-ink:#e6e6e9;--royal-border:rgba(214,183,130,.57);
+ --sova-royal-ice:#cacbd0;color:#e7e7ea!important;
+}
+.author-page-v1171:before{
+ background:radial-gradient(ellipse 45% 13% at 12% 8%,rgba(199,201,207,.12),transparent 95%),
+ radial-gradient(ellipse 60% 21% at 90% 44%,rgba(165,167,175,.09),transparent 97%)!important;
+}
+.author-page-v1171 .author-banner-v1171{background-color:#151619!important;
+ box-shadow:0 0 0 7px rgba(15,15,18,.94),0 16px 46px #000b,0 0 50px rgba(191,193,200,.09)!important}
+.author-page-v1171 .author-banner-label-v1171{
+ background:linear-gradient(120deg,rgba(44,43,47,.96),rgba(21,21,24,.9))!important}
+.author-page-v1171 .author-hero-v1171{
+ background:radial-gradient(circle at 14% 18%,rgba(204,207,213,.14),transparent 46%),
+ radial-gradient(circle at 94% 87%,rgba(161,162,169,.10),transparent 47%),
+ linear-gradient(115deg,#25262c 4%,#17181c 49%,#090a0e 100%)!important;
+ box-shadow:0 0 0 5px rgba(22,21,23,.84),0 0 0 6px rgba(232,193,122,.17),0 29px 70px #0009!important;
+}
+.author-page-v1171 .author-section-v1171,
+.author-page-v1171 .author-card-v1171,
+.author-page-v1171 .author-step-v1171,
+.author-page-v1171 .author-note-v1171,
+.author-page-v1171 .author-identity-v1171,
+.author-page-v1171 .author-58-v1171,
+.author-page-v1171 .author-outro-v1171,
+.author-page-v1171 .author-personal-v1208,
+.author-page-v1171 .sova-facts-section-v1209{
+ background:radial-gradient(ellipse at 90% 0%,rgba(201,202,209,.09),transparent 55%),
+ linear-gradient(145deg,#28282d 0%,#17181c 53%,#101115 100%)!important;
+ border-color:rgba(196,198,205,.36)!important;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 10px 24px rgba(0,0,0,.25)!important;
+}
+.author-page-v1171 .author-section-v1171 h2,
+.author-page-v1171 .author-card-v1171 h3,
+.author-page-v1171 .author-step-v1171 h3{color:#f0f0f1!important}
+.author-page-v1171 p,
+.author-page-v1171 li,
+.author-page-v1171 .author-personal-intro-v1208,
+.author-page-v1171 .sova-facts-lead-v1209{color:#c6c7cc!important}
+.author-page-v1171 .author-chronicle-v1207:before{
+ background:linear-gradient(#d5b27d,#bdbec4,#d5b27d)!important}
+.author-page-v1171 a:focus-visible{outline-color:#e3c492!important}
+@media(max-width:760px){
+ .author-page-v1171 .author-hero-v1171{background:linear-gradient(160deg,#292a2f,#111216)!important}
+}
