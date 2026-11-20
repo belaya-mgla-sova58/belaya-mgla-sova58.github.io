@@ -1020,7 +1020,123 @@ body.moon-mirror-test .hero-reading-article-v1230 section.guide-section.guide-fo
 body.moon-mirror-test .hero-reading-article-v1230 section.guide-section.guide-fold-v414:focus-within{
  box-shadow:0 0 0 1px color-mix(in srgb,var(--article-stripe,#d9bb88) 42%,transparent),0 7px 20px -9px var(--article-stripe,#d9bb88)!important;
 }
-</style></head><body class="moon-mirror-test is-heroes-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="heroes"><div aria-hidden="true" class="cosmos-viewport-v8"><img src="assets/space-purple-nebula-bg.webp?v=8" alt="" decoding="async"/></div><div aria-hidden="true" class="site-cosmic-background-v442"></div>
+</style><style id="heroes-winter-graphite-v26">
+/* Matching approved Gear winter palette. Scoped to Heroes preview only. */
+html:has(body.moon-mirror-test){background:#10141c!important}
+body.moon-mirror-test{
+ position:relative!important;isolation:isolate!important;
+ background:#111620!important;background-image:none!important;color:#eff0f4!important;
+}
+body.moon-mirror-test .cosmos-viewport-v8,body.moon-mirror-test .site-cosmic-background-v442{display:none!important}
+body.moon-mirror-test .heroes-frost-backdrop-v26{
+ position:fixed!important;inset:0!important;z-index:-1!important;overflow:hidden!important;pointer-events:none!important;
+ background:
+ radial-gradient(ellipse 69% 43% at 81% 8%,rgba(134,147,171,.20) 0%,transparent 73%),
+ radial-gradient(ellipse 62% 39% at 19% 105%,rgba(112,128,148,.22) 0%,transparent 70%),
+ radial-gradient(ellipse 55% 49% at 47% 63%,rgba(25,31,43,.53) 0%,transparent 80%),
+ linear-gradient(137deg,#131923 0%,#1a1e28 32%,#10141d 64%,#191f2a 100%)!important;
+}
+body.moon-mirror-test .heroes-frost-backdrop-v26::before{
+ content:"";position:absolute;inset:0;opacity:.6;
+ background:repeating-linear-gradient(139deg,transparent 0,transparent 82px,rgba(215,224,237,.022) 84px,transparent 88px);
+}
+body.moon-mirror-test .heroes-frost-backdrop-v26::after{
+ content:"";position:absolute;inset:0;filter:blur(8px);
+ background:radial-gradient(ellipse 36% 2px at 73% 27%,rgba(223,234,247,.38),transparent 90%),radial-gradient(ellipse 44% 2px at 22% 78%,rgba(220,230,242,.17),transparent 90%);
+}
+body.moon-mirror-test .heroes-frost-sheen-v26{
+ position:absolute!important;inset:-12% -30%!important;transform:rotate(-19deg);
+ background:linear-gradient(92deg,transparent 38%,rgba(206,218,230,.034) 43%,rgba(224,235,244,.11) 44%,transparent 46%,transparent 71%,rgba(218,227,236,.04) 73%,transparent 77%);
+ filter:blur(17px)!important;
+}
+body.moon-mirror-test .heroes-frost-curve-v26{
+ position:absolute;bottom:-15%;right:-15%;width:125%;height:49%;border-radius:50%;transform:rotate(-10deg);
+ border-top:1px solid rgba(219,229,243,.44);box-shadow:0 -13px 32px -22px rgba(229,237,247,.52);opacity:.68;
+}
+body.moon-mirror-test .heroes-frost-curve-v26.second{
+ bottom:-19%;right:13%;width:100%;height:39%;transform:rotate(11deg);
+ border-top-color:rgba(213,222,236,.31);opacity:.45;
+}
+body.moon-mirror-test .nav-wrap{
+ background:linear-gradient(180deg,#171c26,#12151e)!important;
+ border-right:1px solid rgba(217,186,137,.54)!important;
+}
+body.moon-mirror-test .nav-wrap .route-link{
+ background:linear-gradient(120deg,rgba(47,52,62,.83),rgba(29,32,42,.9))!important;
+ border:1px solid rgba(209,217,229,.22)!important;color:#eaeef5!important;box-shadow:none!important;
+}
+body.moon-mirror-test .nav-wrap .route-link.active{
+ background:linear-gradient(115deg,#463d32,#252831)!important;border:1px solid #dfbf85!important;
+ box-shadow:inset 3px 0 #ecc988,0 0 10px #cdaa6a30!important;
+}
+body.moon-mirror-test .nav-wrap .route-link:hover{background:#343b49!important;border-color:#dfc69d!important}
+body.moon-mirror-test .nav-wrap .sidebar-color-icon{filter:grayscale(1) brightness(1.27)!important}
+body.moon-mirror-test .route-page.active[data-route="heroes"] .page-heading-v424.frost-header-v431{
+ border-color:rgba(216,199,171,.44)!important;
+ background:linear-gradient(116deg,rgba(18,22,31,.95),rgba(33,38,49,.77))!important;
+ box-shadow:inset 0 1px rgba(244,248,255,.13),0 18px 38px #0003!important;
+}
+body.moon-mirror-test .hero-category-link-v708{
+ background:linear-gradient(110deg,rgba(29,34,45,.92),rgba(18,23,32,.82))!important;
+ border-color:rgba(224,193,143,.53)!important;box-shadow:inset 3px 0 rgba(221,191,144,.7)!important;
+}
+body.moon-mirror-test .hero-category-link-v708:hover{
+ background:linear-gradient(110deg,rgba(42,46,56,.96),rgba(23,28,37,.88))!important;
+ border-color:rgba(224,193,143,.83)!important;
+}
+body.moon-mirror-test .route-page.active[data-route="heroes"] .guide-page-v69{
+ background:rgba(17,22,31,.8)!important;border-color:rgba(204,215,224,.24)!important;
+}
+body.moon-mirror-test .hero-reading-choices-v1230 a{
+ background:linear-gradient(135deg,rgba(36,42,53,.9),rgba(18,22,32,.93))!important;
+ border-color:rgba(210,219,231,.29)!important;
+}
+body.moon-mirror-test .hero-reading-choices-v1230 a:hover{
+ background:linear-gradient(135deg,rgba(48,54,66,.95),rgba(24,29,39,.96))!important;
+ border-color:var(--stripe-color,#dcc59e)!important;
+}
+body.moon-mirror-test .hero-reading-layout-v1230 .page-toc-v409,
+body.moon-mirror-test .hero-reading-layout-v1230 .hero-reading-toc-v1230,
+body.moon-mirror-test .hero-reading-side-v1230{
+ background:linear-gradient(145deg,rgba(34,40,51,.96),rgba(17,20,28,.96))!important;
+ border-color:rgba(207,216,230,.30)!important;
+}
+body.moon-mirror-test .hero-reading-layout-v1230 .page-toc-v409 a{
+ border-color:rgba(208,215,226,.13)!important;
+}
+body.moon-mirror-test .hero-reading-article-v1230 section.guide-section.guide-fold-v414{
+ background:rgba(17,21,30,.96)!important;
+ border-right-color:rgba(209,219,230,.33)!important;
+ border-bottom-color:rgba(209,219,230,.33)!important;
+}
+body.moon-mirror-test .hero-reading-article-v1230 section.guide-section.guide-fold-v414>.guide-fold-summary-v414{
+ background:linear-gradient(105deg,rgba(48,55,68,.87),rgba(20,23,31,.94))!important;
+ border-bottom-color:rgba(217,224,235,.23)!important;
+}
+body.moon-mirror-test .hero-reading-article-v1230 section.guide-section.guide-fold-v414>.guide-fold-body-v414{
+ background:rgba(17,20,28,.90)!important;
+}
+body.moon-mirror-test .hero-reading-article-v1230 .guide-fold-body-v414 table{
+ background:#161b25!important;border-color:rgba(211,216,224,.28)!important;
+}
+body.moon-mirror-test .hero-reading-article-v1230 .guide-fold-body-v414 table th{
+ background:#333a47!important;color:#f0d9ac!important;border-bottom-color:rgba(221,198,162,.4)!important;
+}
+body.moon-mirror-test .hero-reading-article-v1230 .guide-fold-body-v414 table td{
+ background:#1c222d!important;color:#e8ecf2!important;border-bottom-color:rgba(204,217,230,.14)!important;
+}
+body.moon-mirror-test .related-guides-v625{
+ background:rgba(20,25,35,.92)!important;border:1px solid rgba(211,218,230,.29)!important;
+}
+body.moon-mirror-test .related-guides-head-v625{background:transparent!important;border-bottom-color:rgba(219,197,163,.3)!important}
+body.moon-mirror-test .related-guide-card-v625{
+ background:linear-gradient(133deg,rgba(51,58,71,.86),rgba(21,25,35,.95))!important;
+ border-color:rgba(214,222,235,.36)!important;
+}
+body.moon-mirror-test .related-guide-card-v625:hover{
+ box-shadow:0 0 19px rgba(222,231,244,.14)!important;border-color:#e2c99f!important;
+}
+</style></head><body class="moon-mirror-test is-heroes-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="heroes"><div aria-hidden="true" class="heroes-frost-backdrop-v26"><span class="heroes-frost-sheen-v26"></span><span class="heroes-frost-curve-v26"></span><span class="heroes-frost-curve-v26 second"></span></div>
 <div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
 <button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
 <div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div>
