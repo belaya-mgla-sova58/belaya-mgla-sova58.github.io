@@ -1,0 +1,39 @@
+name: Visual audit (screenshots)
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '**/*.html'
+      - '**/*.css'
+      - '**/*.js'
+      - '.github/workflows/visual-audit.yml'
+      - 'scripts/visual-audit.cjs'
+permissions:
+  contents: read
+jobs:
+  screenshots:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright
+        run: |
+          npm install --no-save --no-package-lock --ignore-scripts playwright
+          npx playwright install --with-deps chromium
+      - name: Capture live site (desktop + mobile)
+        env:
+          SITE_URL: https://belaya-mgla-sova58.github.io/
+          MAX_PAGES: '120'
+        run: node scripts/visual-audit.cjs
+      - name: Upload screenshots and report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-audit-screenshots
+          path: visual-audit-output/
+          if-no-files-found: warn
+          retention-days: 14
