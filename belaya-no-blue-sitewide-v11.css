@@ -45,10 +45,7 @@ html body.modern-v424 .mobile-bottom-v424 a[aria-current="page"]{
  border-color:#e3c18c!important;color:#fff2dd!important;
  box-shadow:inset 3px 0 #f1d29b,0 0 13px rgba(219,178,118,.18)!important;
 }
-html body.modern-v424 .nav-wrap .route-link img,
-html body.modern-v424 .mobile-bottom-v424 img{
- filter:grayscale(1) sepia(.45) saturate(.65)!important;
-}
+/* Navigation icons keep their own original colors. */
 html body.modern-v424 :is(.site-search-v426,.site-search-box-v426,.site-search-input-v426,.site-search-icon-v426,.site-search-clear-v426,.site-search-results-v426){
  background-color:#1c1c20!important;background-image:none!important;
  border-color:rgba(215,189,151,.55)!important;
@@ -101,10 +98,7 @@ html body.modern-v424 :is(a,summary,input,select):focus-visible{
  outline-color:#ebca92!important;
 }
 html body.modern-v424 main#appMain a:not([class]):not([aria-label]){color:#e6c58f!important}
-/* Preserve artwork files; remove their BLUE tint only in the Events directory. */
-html body.is-events-route .events-groups-v522 .guide-nav-card img{
- filter:grayscale(1) sepia(.33) saturate(.70) contrast(1.04)!important;
-}
+/* All event cover artwork must retain its full original color. */
 html body.is-events-route .site-cosmic-background-v442{display:none!important}
 html body.is-events-route main#appMain .guide-page-v69{
  background:#17181b!important;background-image:none!important;
@@ -171,3 +165,39 @@ html body.modern-v424 .mobile-bottom-v424 a[aria-current="page"]{
 html body.modern-v424 .site-cosmic-background-v442{filter:grayscale(1) sepia(.14) brightness(.46)!important;opacity:.22!important}
 html body.modern-v424 .site-search-v426 :is(input,button,svg){border-color:#c7aa7e!important;stroke:#dfc18c!important}
 html body.modern-v424 :is(.nav-wrap,.page-heading-v424,.guide-section,.event-group-v522,.site-search-v426) :is(a,button,summary):focus-visible{outline-color:#e5bf83!important}
+
+/* DESIGN ALIGNMENT v15: gold + silver type hierarchy, untouched game art. */
+@import url('https://fonts.googleapis.com/css2?family=Forum&family=Manrope:wght@400;500;600;700;800&display=swap');
+html body.modern-v424 :is(main#appMain,.nav-wrap,.mobile-topbar,.mobile-bottom-v424,.site-search-v426){
+ font-family:"Manrope",Arial,sans-serif!important;
+}
+html body.modern-v424 main#appMain :is(.page-heading-v424 h1,.guide-fold-title-v414,.event-group-copy-v522 h3,.related-guides-head-v625 h2,.modern-panel-head-v424 h2,.pet-stage-title,.calc-hub-head h1){
+ font-family:"Forum",Georgia,serif!important;
+ font-weight:400!important;
+ letter-spacing:.018em!important;
+}
+html body.modern-v424 main#appMain .page-heading-v424 h1{
+ font-size:clamp(42px,4.6vw,68px)!important;
+ line-height:1.08!important;
+}
+html body.modern-v424 main#appMain :is(.event-group-copy-v522 h3,.guide-fold-title-v414){
+ font-size:clamp(23px,2.1vw,33px)!important;
+ line-height:1.18!important;
+}
+html body.modern-v424 main#appMain :is(.page-heading-v424 p,.event-group-copy-v522 p,.guide-fold-body-v414 p){
+ font-family:"Manrope",Arial,sans-serif!important;
+}
+html body.modern-v424 .nav-wrap nav a.route-link,
+html body.modern-v424 .mobile-bottom-v424 a{
+ font-family:"Manrope",Arial,sans-serif!important;
+}
+/* Override older grayscale masks. Preserve colorful cover art, icons and portraits. */
+html body.modern-v424 main#appMain :is(.guide-nav-card img,.event-group-v522 img,.event-card img,.pet-stage img,.pet-portrait img,.hero-card img,.expert-card img,.catalog-card img),
+html body.modern-v424 .nav-wrap img,
+html body.modern-v424 .mobile-bottom-v424 img{
+ filter:none!important;
+ -webkit-filter:none!important;
+}
+html body.modern-v424 main#appMain .events-groups-v522 .guide-nav-card img{
+ filter:none!important;-webkit-filter:none!important;opacity:1!important;
+}
