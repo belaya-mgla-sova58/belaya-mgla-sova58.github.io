@@ -60,3 +60,26 @@ body.bm-calc-jewel-v89 :is(.muted,.hint,.helper,.lead,.subnote){color:#dbd1cb!im
  body.bm-calc-jewel-v89 .wrap>.hero::before,body.bm-calc-jewel-v89 main.wrap>.hero::before{width:100px!important;height:50px!important}
  body.bm-calc-jewel-v89 main#appMain .page-heading-v424{padding:18px!important}
 }
+
+/* v90 mobile calculator control and result safety */
+body.bm-calc-jewel-v89 :is(.wrap,.card,.tool-panel,.ec-shell,.ec-panel,.guide-page-v69){
+ min-width:0;
+}
+body.bm-calc-jewel-v89 :is(.wrap,.card,.tool-panel,.ec-shell,.ec-panel,.guide-page-v69) :is(h1,h2,h3,p,.result,.miniResult,.ec-result,.status){
+ overflow-wrap:break-word;
+}
+body.bm-calc-jewel-v89 pre{
+ max-width:100%;overflow-x:auto;
+}
+@media(max-width:760px){
+ body.bm-calc-jewel-v89 :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]),select,textarea){
+  box-sizing:border-box;max-width:100%;
+  font-size:16px!important;
+ }
+ body.bm-calc-jewel-v89 :is(.wrap,.card,.tool-panel,.ec-shell,.ec-panel,.guide-page-v69){
+  max-width:100%;
+ }
+ body.bm-calc-jewel-v89 :is(.ec-shell,.guide-page-v69,.wrap) :is(img,svg,video){
+  max-width:100%;
+ }
+}
