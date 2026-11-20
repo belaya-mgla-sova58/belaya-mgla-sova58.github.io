@@ -131,3 +131,43 @@ html body.luxury-chronicle :is(a,button,summary):focus-visible{outline-color:#ed
 @media(prefers-reduced-motion:reduce){
  html body.modern-v424 :is(.guide-nav-card,.modern-topic-card-v424){transition:none!important}
 }
+
+/* v12: remove remaining blue UI surfaces, including high-specificity desktop and pseudo-elements. */
+html body.modern-v424{
+ --v424-bg:#121216!important;--v424-panel:#262327!important;
+ --v424-line:rgba(230,194,138,.65)!important;
+ --bm-neon-blue:#e3c394!important;
+ --bm-neon-ice:#f4e6d0!important;
+ color-scheme:dark;
+}
+html body.modern-v424 :is(.nav-wrap,.sidebar,.sidebar-v424,.side-nav,.site-sidebar,.site-hq-v407,.mobile-topbar,.mobile-bottom-v424,.site-search-v426,.site-search-box-v426,.site-search-input-v426,.site-search-icon-v426,.breadcrumbs-v409,.page-heading-v424,.frost-header-v431,.page-toc-v409,.guide-fold-toolbar-v414,.guide-fold-summary-v414,.guide-fold-body-v414,.guide-page-v69,.guide-section,.events-groups-v522,.event-group-v522,.event-jump-nav-v1,.related-guides-v625,.related-guide-card-v625,.modern-panel-v424,.guide-nav-card){
+ border-color:rgba(219,187,139,.65)!important;
+}
+html body.modern-v424 :is(.nav-wrap,.sidebar,.sidebar-v424,.side-nav,.site-sidebar,.mobile-topbar,.mobile-bottom-v424){
+ background:#19181c!important;
+ background-image:linear-gradient(165deg,#2a2528,#141418)!important;
+}
+html body.modern-v424 :is(.nav-wrap nav a,.nav-wrap .route-link,.mobile-bottom-v424 a,.site-search-v426,.site-search-box-v426,.site-search-input-v426,.site-search-icon-v426){
+ background-color:#252226!important;
+ background-image:linear-gradient(130deg,#302a2b,#1b1a1e)!important;
+ border-color:rgba(224,192,145,.6)!important;
+ box-shadow:none!important;
+}
+html body.modern-v424 :is(.breadcrumbs-v409,.page-heading-v424,.frost-header-v431,.page-toc-v409,.guide-fold-toolbar-v414,.guide-fold-summary-v414,.guide-fold-body-v414,.guide-page-v69,.guide-section,.events-groups-v522,.event-group-v522,.event-jump-nav-v1,.related-guides-v625,.related-guide-card-v625,.modern-panel-v424,.guide-nav-card){
+ background-color:#242125!important;
+ background-image:linear-gradient(140deg,#2c272a,#17171b)!important;
+ box-shadow:0 8px 22px rgba(0,0,0,.24),0 0 13px rgba(220,178,122,.08)!important;
+}
+html body.modern-v424 :is(.breadcrumbs-v409,.page-heading-v424,.frost-header-v431,.page-toc-v409,.guide-fold-summary-v414,.guide-section,.event-group-v522,.modern-panel-v424)::before,
+html body.modern-v424 :is(.breadcrumbs-v409,.page-heading-v424,.frost-header-v431,.page-toc-v409,.guide-fold-summary-v414,.guide-section,.event-group-v522,.modern-panel-v424)::after{
+ border-color:rgba(221,188,143,.6)!important;
+ box-shadow:none!important;
+}
+html body.modern-v424 .nav-wrap nav a[aria-current="page"],
+html body.modern-v424 .mobile-bottom-v424 a[aria-current="page"]{
+ background:#39302a!important;background-image:linear-gradient(130deg,#49372b,#272226)!important;
+ border-color:#eac68d!important;box-shadow:inset 3px 0 #edcf99,0 0 16px rgba(235,186,116,.2)!important;
+}
+html body.modern-v424 .site-cosmic-background-v442{filter:grayscale(1) sepia(.14) brightness(.46)!important;opacity:.22!important}
+html body.modern-v424 .site-search-v426 :is(input,button,svg){border-color:#c7aa7e!important;stroke:#dfc18c!important}
+html body.modern-v424 :is(.nav-wrap,.page-heading-v424,.guide-section,.event-group-v522,.site-search-v426) :is(a,button,summary):focus-visible{outline-color:#e5bf83!important}
