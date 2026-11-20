@@ -319,6 +319,14 @@ refineStrategy.addEventListener('change',()=>updateRefining(refineBuildFC,refine
  };
  [from,to,...Object.values(ids).map(id=>document.getElementById(id))].forEach(el=>el.addEventListener('change',()=>{calc();saveProgress()}));
  refineOwned.addEventListener('input',saveProgress);
+ // Keep the displayed inventory consistent with the bounded number used in the calculation.
+ refineOwned.addEventListener('change',()=>{
+  const raw=Number(refineOwned.value);
+  const clean=Number.isFinite(raw)?Math.max(0,Math.min(1000000,Math.floor(raw))):0;
+  refineOwned.value=String(clean);
+  updateRefining(refineBuildFC,refineBuildRFC);
+  saveProgress();
+ });
  refineStrategy.addEventListener('change',saveProgress);
  calc();
 })();
