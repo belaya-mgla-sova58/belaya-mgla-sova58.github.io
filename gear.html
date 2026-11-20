@@ -551,7 +551,96 @@ body.gear-editorial-test .gear-frost-backdrop-v6>.real-photo-feather-v35{
  pointer-events:none!important;z-index:2!important;
 }
 @media(max-width:680px){body.gear-editorial-test .gear-frost-backdrop-v6>.real-photo-feather-v35{width:115px!important;right:8px!important;bottom:75px!important;opacity:.72!important}}
-</style><link href="winter-reference-theme-v36.css?v=3" rel="stylesheet" data-winter-reference-theme="approved-photo"/><link rel="stylesheet" href="winter-photo-reference-v40.css?v=41" data-winter-photo-reference /><link rel="stylesheet" href="winter-exact-premium-v42.css?v=3" data-final-premium-theme/><link rel="stylesheet" href="winter-ornaments-separated-v44.css?v=54" data-owl-ornaments="transparent" /></head><body class="gear-editorial-test bm-guide-callouts-v1171 bm-guide-photos-v1170 bm-guide-navigation-v1169 bm-guide-reading-v1167 is-gear-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="gear"><div aria-hidden="true" class="owl-top-ornaments-v44"><span class="owl-branch-left-v44"></span><span class="owl-branch-right-v44"></span></div><div aria-hidden="true" class="winter-photo-decor-v40"><span class="winter-photo-frame-v40"></span><span class="winter-photo-sigil-v40">✦</span><span class="winter-photo-wave-v40"></span></div><div class="winter-gilt-frame-v30" aria-hidden="true"></div><div aria-hidden="true" class="gear-frost-backdrop-v6"><span class="gear-frost-sheen-v6"></span><span class="gear-frost-curve-v6"></span><span class="gear-frost-curve-v6 second"></span></div><a class="bm-skip-to-content-v1184" href="#appMain">Перейти к содержимому</a><div aria-hidden="true" class="site-cosmic-background-v442"></div>
+</style><link href="winter-reference-theme-v36.css?v=3" rel="stylesheet" data-winter-reference-theme="approved-photo"/><link rel="stylesheet" href="winter-photo-reference-v40.css?v=41" data-winter-photo-reference /><link rel="stylesheet" href="winter-exact-premium-v42.css?v=3" data-final-premium-theme/><link rel="stylesheet" href="winter-ornaments-separated-v44.css?v=54" data-owl-ornaments="transparent" /><style id="gear-original-neon-font-v59">
+/* Restore the older graphite-neon visual treatment, scoped to equipment only. */
+@import url('https://fonts.googleapis.com/css2?family=Forum&family=Manrope:wght@400;500;600;700;800&display=swap');
+body.gear-editorial-test,
+body.gear-editorial-test main#appMain,
+body.gear-editorial-test .gear-reading-layout-v1,
+body.gear-editorial-test .gear-entry-v1 .guide-fold-body-v414,
+body.gear-editorial-test .gear-toc-v1 .gear-toc-links-v2{
+ font-family:"Manrope",Arial,sans-serif!important;
+}
+body.gear-editorial-test main#appMain :is(.page-heading-v424 h1,.gear-intro-v1 h2,.gear-toc-v1 h2,.gear-entry-v1 .guide-fold-title-v414,.gear-calc-panel-v1 h2,.related-guides-v625 h2){
+ font-family:"Forum",Georgia,serif!important;font-weight:400!important;letter-spacing:.012em!important;
+}
+body.gear-editorial-test .page-heading-v424 h1{
+ font-size:clamp(49px,5.6vw,78px)!important;line-height:1.08!important;
+}
+body.gear-editorial-test .gear-entry-v1 .guide-fold-title-v414{
+ font-size:clamp(27px,2.3vw,36px)!important;line-height:1.14!important;
+}
+body.gear-editorial-test .gear-entry-v1 .guide-fold-body-v414,
+body.gear-editorial-test .gear-entry-v1 .guide-fold-body-v414 :is(p,li,td){
+ font-family:"Manrope",Arial,sans-serif!important;font-size:16px!important;line-height:1.73!important;
+}
+/* A different restrained glow per chapter, never a solid electric-blue surface. */
+body.gear-editorial-test .gear-articles-v1>.gear-entry-v1{
+ --gear-neon:#c4bfca;
+ position:relative!important;isolation:isolate!important;
+ border:1px solid rgba(168,170,175,.38)!important;
+ border-top-color:rgba(198,196,201,.46)!important;
+ background:linear-gradient(130deg,rgba(29,29,33,.94),rgba(13,13,16,.97))!important;
+ background-image:linear-gradient(130deg,rgba(29,29,33,.94),rgba(13,13,16,.97))!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.055),0 8px 25px rgba(0,0,0,.2)!important;
+ border-radius:12px!important;overflow:hidden!important;
+}
+body.gear-editorial-test .gear-articles-v1>.gear-entry-v1:nth-child(3n+1){--gear-neon:#c2cbd3}
+body.gear-editorial-test .gear-articles-v1>.gear-entry-v1:nth-child(3n+2){--gear-neon:#aebfbb}
+body.gear-editorial-test .gear-articles-v1>.gear-entry-v1:nth-child(3n){--gear-neon:#c6b0d1}
+body.gear-editorial-test .gear-articles-v1>.gear-entry-v1 .gear-strip-v1{
+ display:none!important;
+}
+/* Four slim neon lines, individually cornered with a gentle metallic bloom. */
+body.gear-editorial-test .gear-articles-v1>.gear-entry-v1::before,
+body.gear-editorial-test .gear-articles-v1>.gear-entry-v1::after{
+ content:""!important;display:block!important;position:absolute!important;
+ width:clamp(82px,15%,160px)!important;height:clamp(46px,12%,76px)!important;
+ z-index:4!important;pointer-events:none!important;
+ background:none!important;
+ border-style:solid!important;border-color:var(--gear-neon)!important;
+ opacity:.86!important;
+ filter:drop-shadow(0 0 4px var(--gear-neon))!important;
+ border-radius:0!important;
+}
+body.gear-editorial-test .gear-articles-v1>.gear-entry-v1::before{
+ left:1px!important;top:1px!important;right:auto!important;bottom:auto!important;
+ border-width:2px 0 0 2px!important;border-top-left-radius:11px!important;
+}
+body.gear-editorial-test .gear-articles-v1>.gear-entry-v1::after{
+ right:1px!important;bottom:1px!important;left:auto!important;top:auto!important;
+ border-width:0 2px 2px 0!important;border-bottom-right-radius:11px!important;
+}
+body.gear-editorial-test .gear-articles-v1>.gear-entry-v1 .guide-fold-summary-v414{
+ background:linear-gradient(120deg,#29282d,#19181c)!important;
+ background-image:linear-gradient(120deg,#29282d,#19181c)!important;
+ padding-left:29px!important;
+}
+body.gear-editorial-test .gear-articles-v1>.gear-entry-v1 .guide-fold-body-v414{
+ background:#141419!important;background-image:none!important;
+}
+body.gear-editorial-test .gear-toc-v1{
+ background:linear-gradient(155deg,#232228,#111116)!important;
+ background-image:linear-gradient(155deg,#232228,#111116)!important;
+ border-color:rgba(191,188,186,.43)!important;
+}
+body.gear-editorial-test .gear-toc-v1 .gear-toc-links-v2 a{
+ background:transparent!important;color:#eae6e7!important;
+ border-color:rgba(179,175,171,.20)!important;
+ font-family:"Manrope",Arial,sans-serif!important;
+}
+body.gear-editorial-test .gear-toc-v1 .gear-toc-links-v2 a:hover{
+ background:rgba(209,192,168,.12)!important;
+}
+@media(max-width:720px){
+ body.gear-editorial-test .gear-entry-v1 .guide-fold-body-v414,
+ body.gear-editorial-test .gear-entry-v1 .guide-fold-body-v414 :is(p,li,td){font-size:14px!important}
+ body.gear-editorial-test .gear-articles-v1>.gear-entry-v1::before,
+ body.gear-editorial-test .gear-articles-v1>.gear-entry-v1::after{
+  width:72px!important;height:38px!important;
+ }
+}
+</style></head><body class="gear-editorial-test bm-guide-callouts-v1171 bm-guide-photos-v1170 bm-guide-navigation-v1169 bm-guide-reading-v1167 is-gear-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="gear"><div aria-hidden="true" class="owl-top-ornaments-v44"><span class="owl-branch-left-v44"></span><span class="owl-branch-right-v44"></span></div><div aria-hidden="true" class="winter-photo-decor-v40"><span class="winter-photo-frame-v40"></span><span class="winter-photo-sigil-v40">✦</span><span class="winter-photo-wave-v40"></span></div><div class="winter-gilt-frame-v30" aria-hidden="true"></div><div aria-hidden="true" class="gear-frost-backdrop-v6"><span class="gear-frost-sheen-v6"></span><span class="gear-frost-curve-v6"></span><span class="gear-frost-curve-v6 second"></span></div><a class="bm-skip-to-content-v1184" href="#appMain">Перейти к содержимому</a><div aria-hidden="true" class="site-cosmic-background-v442"></div>
 <div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
 <button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
 <div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div>
