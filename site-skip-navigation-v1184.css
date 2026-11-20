@@ -16,3 +16,13 @@
  transform:none!important;opacity:1!important;pointer-events:auto!important;
  outline:3px solid #e8f7ff!important;outline-offset:3px!important;
 }
+
+/* Graphite-silver for internal pages; home and events retain their own look. */
+body:not(.is-home-route):not(.is-events-route) .bm-skip-to-content-v1184{
+ background:linear-gradient(145deg,#303137,#131418)!important;
+ border-color:#c5c7cd!important;
+ box-shadow:0 8px 24px rgba(0,0,0,.4)!important;
+}
+body:not(.is-home-route):not(.is-events-route) .bm-skip-to-content-v1184:focus-visible{
+ outline-color:#e4c58f!important;
+}
