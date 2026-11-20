@@ -156,3 +156,10 @@ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .relat
   width:145px!important;max-height:80px!important;
  }
 }
+
+/* v47: turn the top branches upside down so their leaves hang from the top border. */
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1)>.owl-top-ornaments-v44>.owl-branch-left-v44,
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1)>.owl-top-ornaments-v44>.owl-branch-right-v44{
+ transform:scaleY(-1)!important;
+ transform-origin:center center!important;
+}
