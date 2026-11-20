@@ -223,7 +223,7 @@
     border-radius:16px!important;
   }
   body.site-hq-v407 .route-page.active :is(button,a,summary,input,select,textarea):focus-visible{
-    outline:2px solid #9fe2ff!important;
+    outline:2px solid #d8dbe1!important;
     outline-offset:3px!important;
   }
   body.site-hq-v407 .route-page.active :is(.guide-nav-card,.related-guide-card-v625,.calc-hub-card,.pet-catalog-card,.expert-row){
