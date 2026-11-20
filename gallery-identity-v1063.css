@@ -2,7 +2,7 @@
    Section personalities, preserving authored banners, icons, characters and logic. */
 body.modern-v424:not(.is-home-route){
  --gallery-metal:#e2c68e;
- --gallery-ice:#c6eaff;
+ --gallery-ice:#d8dbe1;
 }
 body.is-events-route .event-group-v522{
  border-left:3px solid rgba(226,194,132,.76)!important;
@@ -132,7 +132,7 @@ body.modern-v424:not(.is-home-route) .route-page.active :is(a,button,summary):fo
 /* v1065 | unified design tokens interior. Decorative consistency only. */
 body.modern-v424:not(.is-home-route){
  --bm-unified-gold:#e6ca93;
- --bm-unified-ice:#cbe8fa;
+ --bm-unified-ice:#d8dbe1;
  --bm-unified-line:rgba(198,213,230,.42);
  --bm-unified-radius:16px;
  --bm-unified-gap:clamp(12px,1.4vw,20px);
