@@ -66,6 +66,6 @@ body.bm-guide-reading-v1167:is(.is-svs-route,.is-svs-prep-route)
   min-height:48px;gap:8px;
  }
  html:not(.force-desktop-root) body.bm-guide-reading-v1167 .route-page.active>.breadcrumbs-v409{
-  font-size:12px!important;column-gap:5px;
+  font-size:13px!important;column-gap:5px;
  }
 }
