@@ -1,0 +1,88 @@
+/* SOVA58 graphite-gold standard v1.
+   UI chrome only. Never recolor photographs, game screenshots, item icons or illustrations. */
+:root{--bm-ui-charcoal:#111115;--bm-ui-graphite:#252326;--bm-ui-gold:#dabb85;--bm-ui-silver:#e9e8eb;--bm-ui-gold-glow:0 0 16px rgba(223,187,129,.16),0 10px 26px rgba(0,0,0,.24)}
+html body.modern-v424,html body.luxury-chronicle{
+ --grand-gold:#dabb85!important;--grand-silver:#e9e8eb!important;
+ --bm-polish-edge:rgba(219,189,142,.55)!important;
+ --bm-polish-light:#efd49e!important;
+ --bm-polish-shadow:0 0 17px rgba(222,187,130,.17)!important;
+ --bm-neon-edge:rgba(220,187,131,.55)!important;
+ --bm-neon-ice:#f3e1c4!important;
+ --bm-neon-blue:#d2d0cf!important;
+}
+html body.modern-v424 .nav-wrap{
+ background:linear-gradient(170deg,#1b1a1d,#0d0e11)!important;
+ border-color:rgba(223,189,133,.7)!important;
+ box-shadow:inset -1px 0 rgba(244,222,187,.1),4px 0 20px rgba(0,0,0,.32)!important;
+}
+html body.modern-v424 .nav-wrap nav a.route-link{
+ background:linear-gradient(140deg,#252427,#16171a)!important;
+ border-color:rgba(207,202,195,.43)!important;
+ color:#eeedf0!important;
+ box-shadow:none!important;
+}
+html body.modern-v424 .nav-wrap nav a.route-link:is(:hover,:focus-visible),
+html body.modern-v424 .nav-wrap nav a.route-link[aria-current="page"]{
+ background:linear-gradient(115deg,#39312b,#252225)!important;
+ border-color:#e4c38e!important;
+ box-shadow:inset 3px 0 #edd19b,0 0 14px rgba(220,178,113,.15)!important;
+ color:#fbf2e2!important;
+}
+html body.modern-v424 .mobile-bottom-v424{
+ background:linear-gradient(180deg,#232225,#101114)!important;
+ border-color:rgba(222,191,141,.55)!important;
+ box-shadow:0 -4px 19px rgba(0,0,0,.25)!important;
+}
+html body.modern-v424 .mobile-bottom-v424 a{
+ color:#eeeaeb!important;
+}
+html body.modern-v424 .mobile-bottom-v424 a[aria-current="page"]{
+ background:#342c28!important;
+ border-color:#e2c18b!important;
+ box-shadow:inset 0 1px rgba(246,217,167,.15),0 0 12px rgba(215,170,108,.18)!important;
+}
+html body.modern-v424 main#appMain :is(.page-heading-v424.frost-header-v431,.calc-hub-head,.gen-hub-hero,.gen-page-hero,.home-portal-hero-v1016){
+ border-color:rgba(219,190,147,.7)!important;
+ box-shadow:inset 0 1px rgba(250,229,194,.1),0 0 19px rgba(216,185,137,.12),0 14px 27px rgba(0,0,0,.22)!important;
+}
+html body.modern-v424 main#appMain :is(.page-heading-v424.frost-header-v431,.calc-hub-head,.gen-hub-hero,.gen-page-hero){
+ background:linear-gradient(145deg,#272528,#15161a 68%,#121317)!important;
+}
+html body.modern-v424 main#appMain :is(.page-heading-v424 h1,.calc-hub-head h1,.gen-hub-hero h1,.gen-page-hero h1){
+ color:#eae9eb!important;-webkit-text-fill-color:#eae9eb!important;
+ text-shadow:0 0 13px rgba(240,233,222,.09)!important;
+}
+html body.modern-v424 main#appMain :is(.event-jump-nav-v1,.event-group-v522,.calc-hub-card,.kb-clean-card-v920,.modern-panel-v424,.home-portal-box-v1016,.home-utility-v1025,.related-guide-card-v625){
+ border-color:rgba(218,190,148,.57)!important;
+ box-shadow:var(--bm-ui-gold-glow)!important;
+}
+html body.modern-v424 main#appMain :is(.calc-hub-card,.kb-clean-card-v920,.modern-panel-v424,.home-portal-box-v1016,.home-utility-v1025,.related-guide-card-v625){
+ background-color:rgba(34,33,37,.92)!important;
+}
+html body.modern-v424 main#appMain :is(.event-jump-links-v1 a,.topic-pill,.home-extra-toggle-v1){
+ background:linear-gradient(130deg,#302e30,#1d1e22)!important;
+ border-color:rgba(220,190,143,.54)!important;
+ color:#f1ece5!important;
+}
+html body.modern-v424 main#appMain :is(.event-jump-links-v1 a,.calc-hub-card,.kb-clean-card-v920,.related-guide-card-v625):hover{
+ border-color:#efd19a!important;
+ box-shadow:0 0 19px rgba(222,184,126,.19),0 11px 26px rgba(0,0,0,.23)!important;
+}
+html body.modern-v424 main#appMain :is(.modern-panel-head-v424 h2,.home-portal-block-title-v1016,.home-more-title-v1025,.event-group-copy-v522 h3){
+ color:#e8c994!important;-webkit-text-fill-color:#e8c994!important;
+}
+html body.modern-v424 main#appMain :is(.site-search-box-v426,.site-search-input-v426){
+ border-color:rgba(211,191,161,.56)!important;
+ background-color:#19191d!important;
+ color:#f1f0f1!important;
+}
+html body.modern-v424 a:focus-visible,html body.modern-v424 button:focus-visible{
+ outline-color:#edcb92!important;
+}
+html body.bm-calc-jewel-v89{
+ --glow:#e8cc9b!important;--edge:#aa926d!important;
+}
+/* Faint neutral glows, no blue or violet interface. */
+@media(prefers-reduced-motion:reduce){
+ html body.modern-v424 main#appMain :is(.calc-hub-card,.related-guide-card-v625){transition:none!important}
+}
