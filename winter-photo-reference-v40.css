@@ -74,7 +74,7 @@ body.winter-site-reference-v1>.winter-site-background-v1:after{display:none!impo
 body.winter-site-reference-v1>.winter-site-background-v1,
 body.gear-editorial-test .gear-frost-backdrop-v6,
 body.moon-mirror-test .heroes-frost-backdrop-v26{
- background:#11151d url("assets/frost-silver-feather-background.svg?v=6") center center/cover no-repeat!important;
+ background:#11151d url("assets/frost-silver-feather-background.svg?v=7") center center/cover no-repeat!important;
 }
 body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test) .nav-wrap{
  background:linear-gradient(180deg,#131922,#0e1218)!important;
@@ -146,4 +146,12 @@ body.moon-mirror-test .hero-reading-article-v1230 section.guide-section.guide-fo
  body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winter-photo-decor-v40>.winter-photo-leaves-right-v40{width:135px!important;height:60px!important}
  body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winter-photo-decor-v40>.winter-photo-frame-v40{display:none!important}
  body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winter-photo-decor-v40>.winter-photo-wave-v40{display:none!important}
+}
+/* Small gold winter emblem centered on the edge, matching the reference. */
+body:is(.winter-site-reference-v1,.moon-mirror-test,.gear-editorial-test)>.winter-photo-decor-v40>.winter-photo-sigil-v40{
+ position:absolute!important;top:0!important;left:50%!important;
+ transform:translateX(-50%)!important;width:21px!important;height:21px!important;
+ display:grid!important;place-items:center!important;
+ color:#f8dba5!important;font:21px/1 Georgia,serif!important;
+ text-shadow:0 0 7px rgba(247,204,142,.62)!important;
 }
