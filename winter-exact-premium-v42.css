@@ -1,0 +1,131 @@
+/* Белая мгла · gold/silver editorial refinement based on approved screenshot */
+html:has(body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1)){background:#0b0f15!important}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1){color:#f1eef0!important;background:#0d1118!important;background-image:none!important}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .winter-photo-decor-v40{pointer-events:none!important;position:fixed!important;inset:0!important;z-index:24!important;display:block!important}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .winter-photo-frame-v40{
+ display:block!important;position:absolute!important;inset:9px!important;
+ border:1px solid rgba(237,192,117,.88)!important;border-radius:32px!important;
+ box-shadow:inset 0 0 0 1px rgba(255,233,194,.10),0 0 0 1px rgba(222,171,95,.11),0 0 19px rgba(228,184,113,.19)!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .winter-photo-frame-v40:before,
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .winter-photo-frame-v40:after{
+ display:block!important;content:""!important;position:absolute!important;left:13%!important;right:13%!important;height:2px!important;
+ background:linear-gradient(90deg,transparent,rgba(255,215,151,.27),#ffe5b1 48%,rgba(255,215,151,.27),transparent)!important;
+ box-shadow:0 0 10px rgba(255,206,127,.5)!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .winter-photo-frame-v40:before{top:-2px!important}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .winter-photo-frame-v40:after{bottom:-2px!important}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .winter-photo-sigil-v40{
+ color:#ffe3a8!important;text-shadow:0 0 10px rgba(255,199,111,.65)!important;
+ font-size:22px!important;top:-5px!important;
+}
+/* Preserve background as dark silk rather than purple-blue strips. */
+body.gear-editorial-test .gear-frost-backdrop-v6,body.moon-mirror-test .heroes-frost-backdrop-v26,
+body.winter-site-reference-v1>.winter-site-background-v1{
+ background:radial-gradient(ellipse at 45% 18%,#1c2029 0%,#10141c 55%,#090c12 100%)!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .nav-wrap{
+ background:linear-gradient(180deg,#12161e,#0a0e14)!important;
+ border-right:1px solid rgba(232,190,124,.78)!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .nav-wrap a.route-link{
+ background:linear-gradient(110deg,#1e222a,#0c1016)!important;background-image:linear-gradient(110deg,#1e222a,#0c1016)!important;
+ border:1px solid rgba(165,176,189,.34)!important;border-radius:10px!important;color:#f3f1f2!important;
+ box-shadow:inset 0 1px rgba(251,252,255,.05)!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .nav-wrap a.route-link.active{
+ background:linear-gradient(110deg,#5d482f,#282329)!important;
+ border:1px solid #efc785!important;
+ box-shadow:inset 3px 0 #ffe1a8,0 0 14px rgba(249,197,114,.32)!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .nav-wrap a.route-link:hover{
+ border-color:#e7c58c!important;background:#343035!important
+}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .nav-wrap .sidebar-color-icon{
+ filter:grayscale(1) brightness(1.22)!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .site-search-v426{background:transparent!important}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .site-search-box-v426{
+ background:linear-gradient(100deg,#171a21,#0e1117)!important;
+ border:1px solid rgba(237,190,116,.63)!important;border-radius:12px!important;
+ box-shadow:inset 0 1px rgba(250,240,220,.06)!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .site-search-input-v426{background:transparent!important;color:#f4eef0!important}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .site-search-icon-v426{color:#efc786!important;background:transparent!important}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .breadcrumbs-v409{
+ background:linear-gradient(120deg,#1b1f26,#0c1015)!important;border:1px solid rgba(185,192,200,.35)!important;
+ border-radius:10px!important;box-shadow:none!important;color:#eee9ec!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .breadcrumbs-v409 :is(a,span){color:#ece6e9!important}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .page-heading-v424.frost-header-v431{
+ background:linear-gradient(120deg,rgba(29,29,31,.94),rgba(9,14,21,.95) 76%)!important;
+ border:1px solid rgba(223,186,124,.65)!important;border-right-color:rgba(196,203,212,.68)!important;
+ border-radius:17px!important;
+ box-shadow:inset 0 1px rgba(252,232,192,.16),0 0 16px rgba(218,161,84,.07)!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .page-heading-v424.frost-header-v431 h1{
+ font-family:"Forum",Georgia,serif!important;font-weight:400!important;
+ font-size:clamp(44px,4.6vw,65px)!important;line-height:1.1!important;
+ color:#f2f0f0!important;-webkit-text-fill-color:#f2f0f0!important;text-shadow:0 1px 1px #0008!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .guide-page-v69{
+ background:linear-gradient(125deg,rgba(24,27,33,.91),rgba(11,15,22,.94))!important;
+ border:1px solid rgba(180,187,198,.41)!important;border-radius:16px!important;
+ box-shadow:none!important;
+}
+body.gear-editorial-test .gear-topic-row-v1 span{
+ background:linear-gradient(120deg,#202229,#11151b)!important;
+ border:1px solid rgba(234,198,141,.55)!important;color:#f1edf0!important;
+}
+body.gear-editorial-test .gear-intro-v1 h2,
+body.gear-editorial-test .gear-toc-v1 h2{
+ font-family:"Forum",Georgia,serif!important;font-weight:400!important;
+ color:#f3eef0!important;
+}
+body.gear-editorial-test .gear-toc-v1{
+ background:linear-gradient(145deg,#242730,#0b0f15)!important;
+ border:1px solid rgba(188,198,210,.44)!important;border-radius:13px!important;
+}
+body.gear-editorial-test .gear-toc-v1 .gear-toc-links-v2>a{
+ background:transparent!important;border-bottom:1px solid rgba(210,195,178,.17)!important;
+}
+body.gear-editorial-test .gear-entry-v1,
+body.moon-mirror-test .hero-reading-article-v1230 section.guide-section.guide-fold-v414{
+ background:rgba(12,15,21,.96)!important;
+ border-right:1px solid rgba(200,205,213,.65)!important;
+ border-bottom:1px solid rgba(200,205,213,.44)!important;
+ border-radius:12px!important;
+}
+body.gear-editorial-test .gear-entry-v1>.guide-fold-summary-v414,
+body.moon-mirror-test .hero-reading-article-v1230 section.guide-section.guide-fold-v414>.guide-fold-summary-v414{
+ background:linear-gradient(106deg,#292a30,#12151c)!important;
+ border-bottom:1px solid rgba(215,203,188,.4)!important;
+}
+body.gear-editorial-test .gear-entry-v1>.guide-fold-body-v414,
+body.moon-mirror-test .hero-reading-article-v1230 section.guide-section.guide-fold-v414>.guide-fold-body-v414{
+ background:#11141b!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .related-guides-v625{
+ background:rgba(15,18,24,.96)!important;
+ border:1px solid rgba(182,190,203,.49)!important;border-radius:14px!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .related-guides-head-v625{
+ background:transparent!important;border-bottom:1px solid rgba(208,208,211,.29)!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .related-guide-card-v625{
+ background:linear-gradient(112deg,#1f2229,#0c0e13)!important;
+ border:1px solid rgba(184,193,205,.5)!important;border-radius:11px!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.05)!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .related-guide-card-v625:hover{
+ border-color:#ecc788!important;box-shadow:0 0 17px rgba(255,206,127,.17)!important;
+}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .related-guide-card-v625 b{color:#ecc788!important}
+body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .back-to-top{
+ color:#171a20!important;background:linear-gradient(120deg,#e2c99f,#ffe5b4)!important;
+ border:1px solid #f1d5a7!important;border-radius:10px!important;
+}
+@media(max-width:920px){
+ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .winter-photo-frame-v40{display:none!important}
+ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .page-heading-v424.frost-header-v431 h1{font-size:45px!important}
+}
