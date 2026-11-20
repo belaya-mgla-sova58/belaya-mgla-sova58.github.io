@@ -103,3 +103,52 @@ body.luxury-chronicle.bear-chronicle .bear-page-links a{
 @media(prefers-reduced-motion:reduce){
  body.luxury-chronicle.bear-chronicle :is(#toc,#mobileToc) a.snowflake-link{transition:none!important}
 }
+
+
+/* v2: final graphite treatment for event articles; override older blue panels without changing event artwork. */
+body.luxury-chronicle.bear-chronicle{
+ --bm-pearl:#f0ece7;
+ --bm-royal-gold:#e7c99e;
+}
+body.luxury-chronicle.bear-chronicle .intro-card,
+body.luxury-chronicle.bear-chronicle .section-frame,
+body.luxury-chronicle.bear-chronicle .aside-guide{
+ background:linear-gradient(145deg,rgba(43,42,45,.96),rgba(18,19,22,.98))!important;
+ border-color:rgba(210,194,174,.44)!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.08),0 14px 32px rgba(0,0,0,.26)!important;
+}
+body.luxury-chronicle.bear-chronicle .event-banner.constellation-banner{
+ box-shadow:0 15px 40px rgba(0,0,0,.32),0 0 0 1px rgba(224,196,157,.2)!important;
+}
+body.luxury-chronicle.bear-chronicle .intro-card .kicker,
+body.luxury-chronicle.bear-chronicle .summary-kicker,
+body.luxury-chronicle.bear-chronicle .aside-guide h2{
+ color:#f0d5a9!important;
+}
+body.luxury-chronicle.bear-chronicle .summary-title{
+ color:#f3eeea!important;
+ text-shadow:none!important;
+}
+body.luxury-chronicle.bear-chronicle .section-content{
+ color:#ddd8d4!important;line-height:1.74;
+}
+body.luxury-chronicle.bear-chronicle .section-content :is(p,li){
+ overflow-wrap:break-word;
+}
+body.luxury-chronicle.bear-chronicle :is(#toc,#mobileToc) a.snowflake-link:is(:hover,:focus-visible,.active){
+ background:rgba(231,201,158,.12)!important;
+ border-color:rgba(231,201,158,.52)!important;
+}
+@media(max-width:680px){
+ body.luxury-chronicle.bear-chronicle :is(.intro-card,.section-frame,.aside-guide){
+  min-width:0;max-width:100%;
+ }
+ body.luxury-chronicle.bear-chronicle .section-content{
+  font-size:clamp(14px,3.8vw,16px);
+  line-height:1.7;
+  overflow-wrap:break-word;
+ }
+ body.luxury-chronicle.bear-chronicle .section-content :is(img,video,svg){
+  max-width:100%;height:auto;
+ }
+}
