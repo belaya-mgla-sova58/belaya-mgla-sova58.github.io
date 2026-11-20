@@ -124,3 +124,35 @@ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .relat
   width:175px!important;max-height:105px!important;
  }
 }
+
+/* v46: further reduce unused footer area while retaining the owl feather. */
+@media(min-width:921px){
+ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44{
+  height:90px!important;margin:0 12px!important;
+ }
+ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44 img{
+  width:clamp(145px,15vw,205px)!important;max-height:90px!important;
+ }
+ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain{
+  padding-bottom:0!important;
+ }
+ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) .related-guides-v625{
+  margin-bottom:0!important;
+ }
+}
+@media(min-width:581px) and (max-width:920px){
+ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44{
+  height:90px!important;margin:0 10px!important;
+ }
+ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44 img{
+  width:165px!important;max-height:90px!important;
+ }
+}
+@media(max-width:580px){
+ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44{
+  height:80px!important;margin:0 8px 6px!important;
+ }
+ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1) main#appMain>.owl-page-end-v44 img{
+  width:145px!important;max-height:80px!important;
+ }
+}
