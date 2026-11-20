@@ -176,3 +176,35 @@ body.is-pets-route .pet-detail-page .pets-index a:focus-visible{
   body.is-pets-route .pet-detail-hero{padding:17px!important}
   body.is-pets-route .pet-detail-panel{padding:16px!important}
 }
+
+/* v3 pet detail: readable mobile text and uncropped portraits */
+body.is-pets-route .pet-detail-img img{
+ object-fit:contain!important;
+ object-position:center!important;
+ max-width:100%;max-height:100%;
+}
+body.is-pets-route .pet-detail-page :is(.pet-detail-grid,.pet-detail-panel,.pet-detail-hero){min-width:0}
+body.is-pets-route .pet-detail-page :is(h1,h2,p,th,td){overflow-wrap:break-word}
+@media(max-width:690px){
+ body.is-pets-route .pet-detail-page .pet-detail-crumb{
+  font-size:13px!important;line-height:1.5;overflow-wrap:anywhere;
+ }
+ body.is-pets-route .pet-detail-page .pet-detail-hero h1{
+  font-size:clamp(27px,7vw,38px)!important;line-height:1.2!important;
+ }
+ body.is-pets-route .pet-detail-page .pet-detail-panel p,
+ body.is-pets-route .pet-detail-page .pet-detail-panel li{
+  font-size:14px!important;line-height:1.65!important;
+ }
+ body.is-pets-route .pet-detail-page .pet-detail-metrics span,
+ body.is-pets-route .pet-detail-page .pet-detail-footnote,
+ body.is-pets-route .pet-detail-page .pets-index a{
+  font-size:13px!important;line-height:1.5!important;
+ }
+ body.is-pets-route .pet-detail-page .pet-detail-table{
+  font-size:13px!important;
+ }
+ body.is-pets-route .pet-detail-page .pet-detail-table :is(th,td){
+  padding:10px 6px!important;overflow-wrap:anywhere;
+ }
+}
