@@ -317,3 +317,27 @@ body.is-events-route .event-cell-v608.on.event-treasure,body.is-events-route .ev
 body.is-events-route .event-cell-v608.on.event-gina,body.is-events-route .event-soon-chip-v608.event-gina{background:linear-gradient(145deg,rgba(73,217,138,.80),rgba(44,143,105,.76));border-color:rgba(123,239,174,.42);color:#baf7d3}
 body.is-events-route .event-cell-v608.on.event-officer,body.is-events-route .event-soon-chip-v608.event-officer{background:linear-gradient(145deg,rgba(157,108,239,.84),rgba(89,77,201,.78));border-color:rgba(196,159,255,.42);color:#decaff}
 @media(max-width:760px){body.is-events-route .event-week-v608.event-week-v609{min-width:790px;grid-template-columns:165px repeat(8,minmax(68px,1fr))}}
+
+/* Mobile event schedule scroll affordance v686 */
+body.is-events-route .event-week-wrap-v608{
+ max-width:100%;
+ min-width:0;
+ overflow-x:auto;
+ overflow-y:hidden;
+ overscroll-behavior-x:contain;
+ -webkit-overflow-scrolling:touch;
+ scrollbar-width:thin;
+ scrollbar-color:rgba(224,194,157,.8) rgba(255,255,255,.08);
+}
+body.is-events-route .event-week-wrap-v608::-webkit-scrollbar{height:8px}
+body.is-events-route .event-week-wrap-v608::-webkit-scrollbar-track{background:rgba(255,255,255,.08);border-radius:99px}
+body.is-events-route .event-week-wrap-v608::-webkit-scrollbar-thumb{background:rgba(224,194,157,.8);border-radius:99px}
+body.is-events-route .event-week-v608{width:max-content;max-width:none}
+@media(max-width:760px){
+ body.is-events-route .event-week-wrap-v608{
+  margin-inline:0;
+  padding-bottom:11px;
+  touch-action:pan-x pan-y;
+ }
+ body.is-events-route .event-week-v608 :is(.event-day-v608,.event-cell-v608){min-width:0}
+}
