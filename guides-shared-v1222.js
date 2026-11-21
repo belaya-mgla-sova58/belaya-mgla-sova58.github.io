@@ -1,3 +1,10 @@
+/* SOVA58 v25: apply the single shared palette to older pages as well. */
+(function(){try{
+ if(document.querySelector('link[data-sova-unified-theme]'))return;
+ var n=document.createElement('link');n.rel='stylesheet';
+ n.href='belaya-unified-palette-v25.css?v=25';n.setAttribute('data-sova-unified-theme','');
+ (document.head||document.documentElement).appendChild(n);
+}catch(e){}})();
 
 const progress = document.getElementById('readProgress');
 const toTop = document.getElementById('toTop');
@@ -59,10 +66,4 @@ window.addEventListener('scroll', updateProgress, {passive:true});
 window.addEventListener('load', updateProgress);
 toTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
 
-/* SOVA58 v25: apply the single shared palette to older pages as well. */
-(function(){try{
- if(document.querySelector('link[data-sova-unified-theme]'))return;
- var n=document.createElement('link');n.rel='stylesheet';
- n.href='belaya-unified-palette-v25.css?v=25';n.setAttribute('data-sova-unified-theme','');
- (document.head||document.documentElement).appendChild(n);
-}catch(e){}})();
+
