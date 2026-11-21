@@ -1,0 +1,114 @@
+/* Белая мгла · единая графитово-золотая палитра v25.
+   Только оформление интерфейса. Цветные изображения, игровые иконки,
+   цветовые маркеры поколений и неон калькуляторов не перекрашиваются. */
+@import url('https://fonts.googleapis.com/css2?family=Forum&family=Manrope:wght@400;500;600;700;800&display=swap');
+:root{
+ --sova-bg:#111114;
+ --sova-panel:#242125;
+ --sova-panel-deep:#19161a;
+ --sova-panel-light:#30272a;
+ --sova-gold:#ba935c;
+ --sova-gold-bright:#f3d8a8;
+ --sova-silver:#c4ccd6;
+ --sova-text:#f2eeee;
+ --sova-border:rgba(215,175,119,.67);
+ --sova-shadow:0 0 16px rgba(224,169,94,.13);
+}
+html:has(body.modern-v424),html body.modern-v424,
+html body.modern-v424.cosmic-visible-v444,
+html body.modern-v424.star-glass-v436{
+ background-color:var(--sova-bg)!important;
+ background-image:linear-gradient(145deg,#211b20 0%,#111114 62%,#0e0d10 100%)!important;
+ color:var(--sova-text);
+}
+html body.modern-v424 :is(.nav-wrap,.mobile-topbar,.mobile-bottom-v424){
+ background-color:var(--sova-panel-deep)!important;
+ background-image:linear-gradient(155deg,#282125,#141317)!important;
+ border-color:var(--sova-border)!important;
+}
+html body.modern-v424 .nav-wrap nav a.route-link,
+html body.modern-v424 .nav-wrap nav>a.route-link,
+html body.modern-v424 .mobile-bottom-v424 a{
+ background-color:var(--sova-panel)!important;
+ background-image:linear-gradient(130deg,#34292c,#1b191d)!important;
+ border-color:rgba(206,175,129,.56)!important;
+ color:var(--sova-text)!important;
+ font-family:"Manrope",Arial,sans-serif!important;
+}
+html body.modern-v424 .nav-wrap nav a.route-link:is(.active,[aria-current="page"],:hover),
+html body.modern-v424 .mobile-bottom-v424 a[aria-current="page"]{
+ background:#453229!important;
+ background-image:linear-gradient(130deg,#4b362b,#292125)!important;
+ border-color:#edc587!important;
+ box-shadow:inset 3px 0 #e9c48c,0 0 13px rgba(229,174,100,.18)!important;
+}
+html body.modern-v424 :is(.site-search-v426,.site-search-box-v426,.site-search-input-v426,.site-search-results-v426){
+ background-color:#211c20!important;
+ background-image:none!important;
+ border-color:var(--sova-border)!important;
+ color:var(--sova-text)!important;
+}
+html body.modern-v424 main#appMain{
+ font-family:"Manrope",Arial,sans-serif!important;
+}
+html body.modern-v424 main#appMain :is(.page-heading-v424 h1,.guide-fold-title-v414,.home-more-title-v1025,.modern-panel-head-v424 h2,.calc-hub-group h2,.event-group-copy-v522 h3){
+ font-family:"Forum",Georgia,serif!important;
+ font-weight:400!important;
+ letter-spacing:.015em!important;
+}
+html body.modern-v424 main#appMain :is(.breadcrumbs-v409,.page-heading-v424.frost-header-v431,.guide-fold-summary-v414,.guide-fold-toolbar-v414,.guide-fold-body-v414,.modern-panel-v424,.modern-panel-head-v424,.page-toc-v409,.guide-section.guide-fold-v414,.home-portal-box-v1016,.kb-clean-card-v920){
+ background-color:var(--sova-panel)!important;
+ background-image:linear-gradient(135deg,#30282a,#1c191d)!important;
+ border-color:var(--sova-border)!important;
+}
+html body.modern-v424 main#appMain .page-heading-v424.frost-header-v431{
+ background-image:linear-gradient(120deg,#33282a,#211d20 60%,#171519)!important;
+ box-shadow:inset 0 1px rgba(255,225,181,.11),var(--sova-shadow)!important;
+}
+html body.modern-v424 main#appMain :is(.home-more-visible-v1025,.home-portal-secondary-v1016,.home-bottom-grid-v1025){
+ background-color:var(--sova-panel-deep)!important;
+ background-image:linear-gradient(145deg,#292126,#171519)!important;
+ border-color:var(--sova-border)!important;
+}
+html body.modern-v424 main#appMain .home-more-visible-v1025 :is(.modern-list-v424>a,.home-portal-links-v1016>a,.home-index-links-v1016>a),
+html body.modern-v424 main#appMain .home-quick-links-v1024>a{
+ background-color:var(--sova-panel-light)!important;
+ background-image:linear-gradient(130deg,#372b2d,#241e22)!important;
+ border-color:var(--sova-border)!important;
+ color:var(--sova-text)!important;
+}
+html body.modern-v424 main#appMain :is(.home-svs-prep-v1128,.home-svs-stage-v1128,.home-bear-calc-v780,.home-utility-v1025){
+ background-color:var(--sova-panel)!important;
+ background-image:linear-gradient(135deg,#30272a,#1a171c)!important;
+ border-color:var(--sova-border)!important;
+}
+html body.modern-v424 main#appMain .home-svs-days-v1128 button:not([aria-pressed="true"]){
+ background:#292326!important;border-color:var(--sova-border)!important;color:#eddfca!important;
+}
+html body.modern-v424 main#appMain .home-svs-stage-heading-v1128 span{background:#473329!important;color:#f3d8a8!important}
+html body.modern-v424 main#appMain .home-svs-eyebrow-v1128,
+html body.modern-v424 main#appMain .home-bear-calc-kicker-v780{color:#edc98f!important}
+html body.modern-v424 main#appMain :is(.guide-nav-card,.related-guide-card-v625,.event-group-v522){
+ background-color:#252025!important;
+ border-color:var(--sova-border)!important;
+}
+/* Keep category-specific gem/neon accents and all original image colors. */
+html body.modern-v424 .nav-wrap img,
+html body.modern-v424 .mobile-bottom-v424 img,
+html body.modern-v424 main#appMain :is(.guide-nav-card img,.event-group-v522 img,.modern-list-v424 img,.home-quick-links-v1024 img,.calc-hub-icon img,.pet-portrait img){
+ filter:none!important;-webkit-filter:none!important;
+}
+html body.modern-v424 :is(a,button,summary,input):focus-visible{outline-color:var(--sova-gold-bright)!important}
+/* Older independent event-guide pages share the same baseline palette. */
+html body.luxury-chronicle{
+ --grand-gold:#e9c48c!important;--grand-silver:#e6e1e1!important;
+ background-color:#111114!important;
+ background-image:linear-gradient(145deg,#211b20,#111114)!important;
+}
+html body.luxury-chronicle .nav-wrap{
+ background-color:#19161a!important;background-image:linear-gradient(165deg,#292226,#151317)!important;
+ border-color:var(--sova-border)!important;
+}
+@media(max-width:820px){
+ html body.modern-v424 :is(.nav-wrap,.mobile-topbar,.mobile-bottom-v424){background:#19161a!important}
+}
