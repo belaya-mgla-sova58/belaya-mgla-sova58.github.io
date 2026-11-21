@@ -152,3 +152,27 @@ body.luxury-chronicle.bear-chronicle :is(#toc,#mobileToc) a.snowflake-link:is(:h
   max-width:100%;height:auto;
  }
 }
+
+/* v3: long-form event reading stability without flattening themed artwork. */
+body.luxury-chronicle.bear-chronicle :is(.section-frame,.section-content,.section-heading,.summary-text,.banner-content,.intro-card) {
+  box-sizing:border-box;
+  min-width:0;
+  max-width:100%;
+}
+body.luxury-chronicle.bear-chronicle :is(.summary-title,.banner-event-name,.section-content h2,.section-content h3) {
+  overflow-wrap:break-word;
+}
+body.luxury-chronicle.bear-chronicle .section-content table {
+  max-width:100%;
+}
+@media (max-width:760px) {
+  body.luxury-chronicle.bear-chronicle .section-content {
+    overflow-x:auto;
+    overscroll-behavior-x:contain;
+    -webkit-overflow-scrolling:touch;
+  }
+  body.luxury-chronicle.bear-chronicle .section-content :is(img,video) {
+    max-width:100%;
+    height:auto;
+  }
+}
