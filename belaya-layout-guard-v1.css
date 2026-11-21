@@ -47,3 +47,25 @@
     min-width:0!important;
   }
 }
+
+/* Responsive content safety for the three large illustrated guides. */
+@media (max-width:760px) {
+  body.is-heroes-route :is(.hero-reading-layout-v1230,.hero-ref-card-v77,.hero-category-copy-v708),
+  body.is-gear-route :is(.gear-reading-layout-v1,.gear-articles-v1,.gear-entry-v1),
+  body.is-pets-route :is(.pet-card-grid,.pet-catalog-card,.pet-card-words,.pet-card-body) {
+    min-width:0;
+    max-width:100%;
+    box-sizing:border-box;
+  }
+  body.is-heroes-route :is(.hero-reading-layout-v1230,.hero-ref-card-v77) img,
+  body.is-gear-route :is(.gear-reading-layout-v1,.gear-entry-v1) img,
+  body.is-pets-route :is(.pet-card-grid,.pet-catalog-card) img {
+    max-width:100%;
+    height:auto;
+  }
+  body.is-heroes-route :is(.hero-category-copy-v708,.hero-ref-card-v77) :is(h2,h3,strong,p),
+  body.is-gear-route .gear-entry-v1 :is(h2,h3,strong,p),
+  body.is-pets-route .pet-catalog-card :is(strong,small,em,p) {
+    overflow-wrap:break-word;
+  }
+}
