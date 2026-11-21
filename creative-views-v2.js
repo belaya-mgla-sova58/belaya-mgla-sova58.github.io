@@ -11,7 +11,7 @@ var items={
  'creative-boss-little-furnace.html':'little-furnace',
  'creative-boss-joe.html':'joe'
 };
-var DAY=86400000;
+/* Browser lifetime guard: no repeat on refresh or returning visit. */
 function key(id){return '__creative_clean_views_v3_'+id;}
 function url(id){return BASE+encodeURIComponent(key(id))+'.json';}
 function valid(n){return typeof n==='number'&&isFinite(n)&&n>=0&&Math.floor(n)===n&&n<=1000000000;}
@@ -34,7 +34,7 @@ async function article(id){
  }
  if(!el)return;
  var stamp=0;try{stamp=Number(localStorage.getItem(storage(id))||0)||0;}catch(e){}
- if(stamp&&Date.now()-stamp<DAY){read(id,el);return;}
+ if(stamp){read(id,el);return;}
  // Claim the daily visit before network I/O, preventing refresh and multi-tab races.
  var now=Date.now();try{localStorage.setItem(storage(id),String(now));}catch(e){}
  try{
@@ -47,7 +47,7 @@ async function article(id){
    var n=await response.json();if(!valid(n))throw Error('invalid response');
    show(el,n);
  }catch(e){
-   try{if(localStorage.getItem(storage(id))===String(now))localStorage.removeItem(storage(id));}catch(ignore){}
+   /* Never retry a possibly committed view. */
    read(id,el);
  }
 }
