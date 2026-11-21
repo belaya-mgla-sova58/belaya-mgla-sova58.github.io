@@ -1,4 +1,4 @@
-/* SOVA58 Creative views v2. Catalogue reads only; article counts once per browser per 24h.
+/* SOVA58 Creative views v3. Catalogue reads only; article counts once per browser per 24h.
    Dedicated keys deliberately do not inherit corrupted legacy counters. */
 (function(){
 'use strict';
@@ -12,7 +12,7 @@ var items={
  'creative-boss-joe.html':'joe'
 };
 var DAY=86400000;
-function key(id){return '__creative_clean_views_v2_'+id;}
+function key(id){return '__creative_clean_views_v3_'+id;}
 function url(id){return BASE+encodeURIComponent(key(id))+'.json';}
 function valid(n){return typeof n==='number'&&isFinite(n)&&n>=0&&Math.floor(n)===n&&n<=1000000000;}
 function show(el,n){if(el)el.textContent=valid(n)?String(n):'—';}
@@ -21,7 +21,7 @@ async function read(id,el){
  var n=await response.json();show(el,n===null?0:n);}
  catch(e){show(el,null);}
 }
-function storage(id){return 'sova58-creative-counted-v2:'+id;}
+function storage(id){return 'sova58-creative-counted-v3:'+id;}
 async function article(id){
  var el=document.querySelector('[data-song-view-count] b');
  if(!el){
