@@ -71,7 +71,7 @@ function init(){
   '<div class="sova-nav-section"><h3>🕒 Недавно просмотренное</h3>'+(recent.length?'<div class="sova-nav-items">'+cards(recent.slice(0,8))+'</div>':'<p>История пока пуста.</p>')+'</div>'+
   '<div class="sova-nav-section"><h3>🔗 Похожие материалы</h3><div class="sova-nav-items">'+cards(related())+'</div></div>'+
   '<div class="sova-nav-section"><h3>✨ Обновления</h3><a href="site-updates.html">Что нового на сайте</a></div>'+
-  (CURRENT!=="index.html"?'<div class="sova-nav-section sova-nav-actions"><a href="javascript:history.back()" data-sova-back>↩ Назад</a><a href="other.html">База знаний</a><a href="#appMain" data-sova-top>↑ Наверх</a></div>':'');
+  (CURRENT!=="index.html"?'<div class="sova-nav-section sova-nav-actions"><a href="index.html" data-sova-back>↩ Назад</a><a href="other.html">База знаний</a><a href="#appMain" data-sova-top>↑ Наверх</a></div>':'');
   const saveBtn=body.querySelector(".sova-nav-save");
   if(saveBtn)saveBtn.addEventListener("click",()=>{
    let a=load("bmFavoritesV452").filter(x=>x&&valid(x.url));
