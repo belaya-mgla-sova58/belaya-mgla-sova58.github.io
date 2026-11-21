@@ -1221,137 +1221,86 @@ html body.is-home-route.modern-v424 .nav-wrap img{
  }
 }
 </style>
-<style id="home-desktop-two-equal-columns-v1242">
-/* Ровные половины справа от бокового меню, только настольный режим. */
+<style id="home-desktop-equal-tracks-v1243">
+/* Desktop: two mathematically equal tracks, no child may enlarge its track. */
 @media screen and (min-width:1100px) and (hover:hover) and (pointer:fine){
- html body.is-home-route main#appMain .route-page[data-route="home"]{
-   box-sizing:border-box!important;
-   min-width:0!important;
+ html body.is-home-route main#appMain .route-page[data-route="home"] > .modern-home-v424.home-portal-v1016{
+  --bm-desktop-gap:18px;
+  box-sizing:border-box!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,calc((100% - var(--bm-desktop-gap))/2)) minmax(0,calc((100% - var(--bm-desktop-gap))/2))!important;
+  grid-template-rows:auto auto!important;
+  gap:14px var(--bm-desktop-gap)!important;
+  justify-content:start!important;align-items:start!important;
+  width:calc(100% - 32px)!important;min-width:0!important;max-width:none!important;
+  padding:0!important;margin:0 16px!important;
  }
- html body.is-home-route main#appMain .route-page[data-route="home"] >
- .modern-home-v424.home-portal-v1016{
-   box-sizing:border-box!important;
-   width:calc(100% - 32px)!important;max-width:none!important;
-   margin:0 16px!important;
-   padding:0!important;
-   display:grid!important;
-   grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
-   grid-template-rows:auto auto!important;
-   column-gap:20px!important;row-gap:16px!important;
-   align-items:start!important;justify-content:stretch!important;
+ html body.is-home-route main#appMain .route-page[data-route="home"] > .modern-home-v424.home-portal-v1016 > .home-portal-grid-v1016{
+   display:contents!important;
  }
- /* Left column: banner directly above news. Right column: tools and recommendations. */
- html body.is-home-route main#appMain .modern-home-v424.home-portal-v1016 > 
- section.modern-home-hero-v424.home-portal-hero-v1016{
+ html body.is-home-route main#appMain .route-page[data-route="home"] > .modern-home-v424.home-portal-v1016 > section.home-portal-hero-v1016{
    grid-column:1!important;grid-row:1!important;
-   width:100%!important;max-width:100%!important;
-   margin:0!important;min-width:0!important;
-   height:auto!important;min-height:0!important;max-height:none!important;
-   aspect-ratio:2048/742!important;
-   border-radius:15px!important;
-   align-self:start!important;justify-self:stretch!important;
-   overflow:hidden!important;
+   display:block!important;align-self:start!important;justify-self:stretch!important;
+   box-sizing:border-box!important;min-width:0!important;max-width:100%!important;width:100%!important;
+   height:auto!important;min-height:0!important;max-height:none!important;aspect-ratio:2048/742!important;
+   padding:0!important;margin:0!important;overflow:hidden!important;
  }
- html body.is-home-route main#appMain .modern-home-v424.home-portal-v1016 >
- section.home-portal-hero-v1016 > img.home-stamped-img-v441{
-   display:block!important;position:relative!important;
-   width:100%!important;height:auto!important;
+ html body.is-home-route main#appMain .route-page[data-route="home"] > .modern-home-v424.home-portal-v1016 > section.home-portal-hero-v1016 > img.home-stamped-img-v441{
+   display:block!important;position:relative!important;inset:auto!important;
+   box-sizing:border-box!important;width:100%!important;max-width:100%!important;min-width:0!important;
+   height:auto!important;max-height:none!important;object-fit:contain!important;object-position:center!important;
    aspect-ratio:2048/742!important;
-   object-fit:contain!important;object-position:center!important;
  }
- html body.is-home-route main#appMain .modern-home-v424.home-portal-v1016 >
- .home-portal-grid-v1016{display:contents!important}
- html body.is-home-route main#appMain .modern-home-v424.home-portal-v1016 >
- .home-portal-grid-v1016 > .home-news-v442{
+ html body.is-home-route main#appMain .route-page[data-route="home"] > .modern-home-v424.home-portal-v1016 > .home-portal-grid-v1016 > .home-news-v442{
    grid-column:1!important;grid-row:2!important;
-   width:100%!important;max-width:none!important;min-width:0!important;
-   margin:0!important;align-self:start!important;
+   justify-self:stretch!important;align-self:start!important;box-sizing:border-box!important;
+   width:100%!important;max-width:100%!important;min-width:0!important;margin:0!important;
  }
- html body.is-home-route main#appMain .modern-home-v424.home-portal-v1016 >
- .home-portal-grid-v1016 > .home-portal-aside-v1016{
+ html body.is-home-route main#appMain .route-page[data-route="home"] > .modern-home-v424.home-portal-v1016 > .home-portal-grid-v1016 > .home-portal-aside-v1016{
    grid-column:2!important;grid-row:1 / span 2!important;
-   width:100%!important;max-width:none!important;min-width:0!important;
-   margin:0!important;align-self:start!important;
-   display:flex!important;flex-direction:column!important;gap:16px!important;
+   justify-self:stretch!important;align-self:start!important;box-sizing:border-box!important;
+   width:100%!important;max-width:100%!important;min-width:0!important;margin:0!important;
+   display:flex!important;flex-direction:column!important;gap:14px!important;
  }
- /* Consistent panel outlines, column edges and header baselines. */
- html body.is-home-route main#appMain .home-portal-v1016
- :is(.home-news-v442,.home-portal-aside-v1016 > .home-portal-box-v1016){
-   box-sizing:border-box!important;
-   width:100%!important;min-width:0!important;max-width:none!important;
+ html body.is-home-route main#appMain .home-portal-v1016 :is(.home-news-v442,.home-portal-aside-v1016>.home-portal-box-v1016){
+   box-sizing:border-box!important;width:100%!important;min-width:0!important;max-width:100%!important;
    margin-left:0!important;margin-right:0!important;
-   border-radius:17px!important;
  }
- html body.is-home-route main#appMain .home-portal-v1016
- .home-portal-aside-v1016 > .home-portal-box-v1016{
-   margin-top:0!important;margin-bottom:0!important;
-   padding:18px 20px!important;
+ html body.is-home-route main#appMain .home-portal-v1016 .home-portal-aside-v1016>.home-portal-box-v1016{
+   padding:15px!important;margin-top:0!important;margin-bottom:0!important;
  }
- html body.is-home-route main#appMain .home-portal-v1016 .home-news-v442{
-   padding:18px 20px!important;
+ html body.is-home-route main#appMain .home-portal-v1016 .home-news-v442{padding:15px!important}
+ html body.is-home-route main#appMain .home-portal-v1016 :is(.modern-panel-head-v424,.home-portal-box-v1016>.home-portal-block-title-v1016){
+   box-sizing:border-box!important;display:flex!important;align-items:center!important;
+   min-height:55px!important;margin:0 0 14px!important;padding:0 0 10px!important;
+   width:100%!important;border-bottom:1px solid rgba(219,181,120,.4)!important;
  }
- html body.is-home-route main#appMain .home-portal-v1016
- :is(.modern-panel-head-v424,.home-portal-box-v1016 > .home-portal-block-title-v1016){
-   box-sizing:border-box!important;
-   min-height:58px!important;
-   width:100%!important;
-   margin:0 0 16px!important;
-   padding:0 0 12px!important;
-   display:flex!important;
-   align-items:center!important;
-   justify-content:space-between!important;
-   gap:12px!important;
-   border-bottom:1px solid rgba(219,181,120,.4)!important;
+ html body.is-home-route main#appMain .home-portal-v1016 .home-portal-box-v1016>.home-portal-block-title-v1016{
+   justify-content:flex-start!important;gap:10px!important;
  }
- html body.is-home-route main#appMain .home-portal-v1016
- .modern-panel-head-v424 > div{
-   display:flex!important;align-items:center!important;gap:12px!important;
-   min-width:0!important;
+ html body.is-home-route main#appMain .home-portal-v1016 .modern-panel-head-v424>div{
+   display:flex!important;align-items:center!important;gap:10px!important;
  }
- html body.is-home-route main#appMain .home-portal-v1016
- :is(.modern-panel-head-v424 h2,.home-portal-box-v1016 > .home-portal-block-title-v1016){
-   font-size:clamp(18px,1.35vw,23px)!important;
-   line-height:1.22!important;
-   margin-top:0!important;
+ html body.is-home-route main#appMain .home-portal-v1016 :is(.home-news-grid-v442,.home-news-pair-v1022,.home-tools-grid-v1016,.home-portal-links-v1016){
+   width:100%!important;min-width:0!important;max-width:100%!important;
  }
- html body.is-home-route main#appMain .home-portal-v1016
- .home-portal-box-v1016 > .home-portal-block-title-v1016{
-   justify-content:flex-start!important;
+ html body.is-home-route main#appMain .home-portal-v1016 .home-tools-grid-v1016{
+   display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:7px!important;
  }
- html body.is-home-route main#appMain .home-portal-v1016
- :is(.home-news-grid-v442,.home-news-pair-v1022,.home-tools-grid-v1016){
-   min-width:0!important;width:100%!important;
+ html body.is-home-route main#appMain .home-portal-v1016 .home-tools-grid-v1016>a{
+   box-sizing:border-box!important;min-width:0!important;padding:8px 5px!important;
  }
- html body.is-home-route main#appMain .home-portal-v1016
- .home-tools-grid-v1016{
-   display:grid!important;
-   grid-template-columns:repeat(4,minmax(0,1fr))!important;
-   gap:9px!important;
+ html body.is-home-route main#appMain .home-portal-v1016 .home-tools-grid-v1016>a>span{
+   font-size:12px!important;line-height:1.3!important;
+   text-align:center!important;overflow-wrap:break-word!important;
  }
- html body.is-home-route main#appMain .home-portal-v1016
- .home-tools-grid-v1016 > a{
-   min-width:0!important;padding:10px 6px!important;
-   box-sizing:border-box!important;
+ html body.is-home-route main#appMain .modern-home-v424.home-portal-v1016>.home-more-visible-v1025,
+ html body.is-home-route main#appMain .modern-home-v424.home-portal-v1016>.modern-home-footer-v424{
+   grid-column:1/-1!important;grid-row:auto!important;
+   width:100%!important;min-width:0!important;max-width:100%!important;
  }
- html body.is-home-route main#appMain .home-portal-v1016
- .home-tools-grid-v1016 > a > span{
-   display:block!important;text-align:center!important;
-   font-size:13px!important;line-height:1.35!important;
-   overflow-wrap:normal!important;word-break:normal!important;
-   hyphens:auto!important;
- }
- /* Secondary full-width area remains below the two main columns. */
- html body.is-home-route main#appMain .modern-home-v424.home-portal-v1016 >
- .home-more-visible-v1025,
- html body.is-home-route main#appMain .modern-home-v424.home-portal-v1016 >
- .modern-home-footer-v424{
-   grid-column:1 / -1!important;grid-row:auto!important;
-   width:100%!important;max-width:none!important;min-width:0!important;
- }
- html body.is-home-route main#appMain .modern-home-v424.home-portal-v1016
- .home-more-visible-v1025 > .home-portal-secondary-v1016{
-   grid-template-columns:repeat(2,minmax(0,1fr))!important;
-   gap:20px!important;align-items:start!important;
+ html body.is-home-route main#appMain .home-portal-v1016 .home-more-visible-v1025>.home-portal-secondary-v1016{
+   display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px!important;
  }
 }
 </style>
