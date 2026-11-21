@@ -8,7 +8,7 @@
     {
       "binding": "DB",
       "database_name": "belaya-mgla-counters",
-      "database_id": "PUT_YOUR_D1_DATABASE_UUID_HERE",
+      "database_id": "81711b13-b816-4875-9bda-46e352a595de",
       "migrations_dir": "migrations"
     }
   ],
