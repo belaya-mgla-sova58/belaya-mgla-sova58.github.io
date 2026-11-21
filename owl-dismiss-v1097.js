@@ -14,8 +14,10 @@
   if(document.getElementById("bmOwlDismissStyleV1097"))return;
   var s=document.createElement("style");s.id="bmOwlDismissStyleV1097";
   s.textContent=[
-   "body.is-home-route #"+closeId+"{position:fixed!important;z-index:2147483645!important;display:grid!important;place-items:center!important;width:34px!important;height:34px!important;border:2px solid #ffe4a9!important;border-radius:50%!important;background:#10234f!important;color:#fff!important;font:700 24px/1 Arial,sans-serif!important;box-shadow:0 4px 16px #0009!important;cursor:pointer!important;touch-action:manipulation!important;padding:0!important;opacity:1!important;visibility:visible!important;}",
+   "body.is-home-route #"+closeId+"{position:fixed!important;z-index:2147483645!important;display:grid!important;place-items:center!important;width:38px!important;height:38px!important;border:2px solid #f2d69c!important;border-radius:50%!important;background:rgba(29,19,47,.96)!important;color:#fff!important;font:700 24px/1 Arial,sans-serif!important;box-shadow:0 4px 16px #0009,0 0 9px #a26deb88!important;cursor:pointer!important;touch-action:manipulation!important;padding:0!important;opacity:1!important;visibility:visible!important;}",
    "body.is-home-route #"+restoreId+"{position:fixed!important;right:10px!important;bottom:80px!important;z-index:2147483645!important;display:none!important;align-items:center!important;justify-content:center!important;min-width:105px!important;min-height:39px!important;padding:8px 11px!important;border:1px solid #e8c88d!important;border-radius:12px!important;background:#152a58!important;color:#fff!important;font:700 13px Arial,sans-serif!important;box-shadow:0 4px 14px #0008!important;cursor:pointer!important;}",
+   "body.is-home-route #madamUguCloseLauncherV720{display:none!important;}",
+   "body.is-home-route:has(#madamUguOverlayV720.is-open) #"+closeId+"{display:none!important;}",
    "body.is-home-route.bm-owl-hidden-v1097 #"+owlId+"{display:none!important;visibility:hidden!important;pointer-events:none!important;}",
    "body.is-home-route.bm-owl-hidden-v1097 #madamUguCloseLauncherV720{display:none!important;visibility:hidden!important;pointer-events:none!important;}",
    "body.is-home-route.bm-owl-hidden-v1097 #"+closeId+"{display:none!important;}",
@@ -28,8 +30,8 @@
   var r=owl.getBoundingClientRect();
   if(!r.width||!r.height){close.style.display="none";return}
   close.style.removeProperty("display");
-  var x=Math.min(window.innerWidth-37,Math.max(3,r.right-27));
-  var y=Math.min(window.innerHeight-37,Math.max(4,r.top-12));
+  var x=Math.min(window.innerWidth-42,Math.max(4,r.right-36));
+  var y=Math.min(window.innerHeight-42,Math.max(4,r.top+4));
   close.style.setProperty("left",x+"px","important");
   close.style.setProperty("top",y+"px","important");
  }
@@ -45,8 +47,8 @@
   if(!close){
    close=document.createElement("button");
    close.type="button";close.id=closeId;close.textContent="×";
-   close.setAttribute("aria-label","Скрыть сову");
-   close.title="Скрыть сову";
+   close.setAttribute("aria-label","Закрыть Мадам Угу");
+   close.title="Закрыть Мадам Угу";
    close.addEventListener("click",function(e){e.preventDefault();e.stopPropagation();apply(true)});
    document.body.appendChild(close);
   }
