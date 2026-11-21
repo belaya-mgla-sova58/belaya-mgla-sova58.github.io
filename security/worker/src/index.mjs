@@ -7,7 +7,8 @@ const ORIGIN = 'https://belaya-mgla-sova58.github.io';
 const SLUGS = new Set([
   'ogonek-barash','ogonek-zimbabe',
   'whitefox-01','whitefox-02','whitefox-03','whitefox-04','whitefox-05',
-  'whitefox-tv','halloween-2026','ru-update-2026-10-19'
+  'whitefox-tv','halloween-2026','ru-update-2026-10-19',
+  'creative-bananovyi-mom','creative-solnechny-zamok'
 ]);
 const encoder = new TextEncoder();
 
