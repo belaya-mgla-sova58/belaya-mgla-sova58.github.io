@@ -1,5 +1,5 @@
 !function(){"use strict";
-const VERSION="955",INDEX_URL="search-index.json?v="+VERSION,MAX_RESULTS=16,DEBOUNCE=120;
+const VERSION="959",INDEX_URL="search-index.json?v="+VERSION,MAX_RESULTS=30,DEBOUNCE=120;
 const norm=v=>String(v||"").toLowerCase().replace(/ё/g,"е").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-zа-я0-9\s-]/gi," ").replace(/\s+/g," ").trim();
 const esc=v=>String(v||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;");
 const SYNONYMS=[
@@ -16,7 +16,16 @@ const SYNONYMS=[
  ["калькулятор","кальк","расчет","расчёт"],
  ["база знаний","бз","справочник","гайд","гайды"],
  ["снаряжение","шмот","экипировка","gear"],
- ["исследования","исследование","наука","research"]
+ ["исследования","исследование","наука","research"],
+ ["мифрил","мифрилл","mithril"],
+ ["эссенция","камень эссенции","камни эссенции"],
+ ["осада","зимняя осада","winter siege"],
+ ["каньон","схватка в каньоне","canyon"],
+ ["мобилизация","мобилизация альянса","задания альянса"],
+ ["рыбалка","рыба","жетоны рыбалки","fishing"],
+ ["перенос","трансфер","переход государства"],
+ ["снаряжение губернатора","одежда губернатора","талисманы губернатора"],
+ ["солнечный замок","замок","битва за замок"]
 ].map(g=>g.map(norm));
 const ALIASES=[
  ["Охота на медведя","bear.html","Событие · рейды и герои","мишка медведь bear охота рейд рейды"],
