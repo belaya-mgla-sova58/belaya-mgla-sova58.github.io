@@ -2094,3 +2094,40 @@ html body.luxury-chronicle :is(a,button,summary):focus-visible{outline-color:#ed
 @media(prefers-reduced-motion:reduce){
  html body.modern-v424 :is(.guide-nav-card,.modern-topic-card-v424){transition:none!important}
 }
+
+
+/* SOVA58 NEON REBALANCE 2026-11-21: bright graphite/gold, no blue UI, owl excluded. */
+html body.modern-v424:is(.is-home-route,.is-events-route,.is-heroes-route,.is-equipment-route,.is-experts-route,.is-pets-route,.is-calculators-route) {
+ --sova-neon-gold:#ffdc82;--sova-neon-emerald:#45edab;--sova-neon-rose:#ff8fb4;--sova-neon-bronze:#f5af6f;
+}
+html body.modern-v424:is(.is-home-route,.is-events-route,.is-heroes-route,.is-equipment-route,.is-experts-route,.is-pets-route,.is-calculators-route) main#appMain :is(.guide-nav-card,.calc-hub-card,.modern-topic-card-v424,.event-group-v522,.home-tools-grid-v1016 a){
+ background-color:#333137!important;
+ background-image:linear-gradient(145deg,#3b383c,#29292d)!important;
+ border-color:rgba(246,205,141,.62)!important;
+ box-shadow:inset 0 1px 0 rgba(255,235,196,.09),0 8px 25px rgba(0,0,0,.18)!important;
+}
+html body.modern-v424:is(.is-home-route,.is-events-route,.is-heroes-route,.is-equipment-route,.is-experts-route,.is-pets-route,.is-calculators-route) main#appMain :is(.guide-nav-card,.calc-hub-card,.modern-topic-card-v424,.home-tools-grid-v1016 a):hover{
+ border-color:#ffdf93!important;
+ box-shadow:0 0 0 1px rgba(255,216,124,.23),0 0 24px rgba(255,202,98,.35),0 9px 28px rgba(0,0,0,.2)!important;
+}
+html body.modern-v424.is-events-route main#appMain .event-group-v522{
+ --event-accent:69,237,171!important;
+ border-color:rgba(69,237,171,.7)!important;
+ box-shadow:inset 0 1px 0 rgba(69,237,171,.12),0 0 18px rgba(69,237,171,.16)!important;
+}
+html body.modern-v424.is-pets-route main#appMain :is(.guide-nav-card,.modern-topic-card-v424){
+ border-color:rgba(69,237,171,.69)!important;
+ box-shadow:0 0 17px rgba(69,237,171,.13)!important;
+}
+html body.modern-v424.is-heroes-route main#appMain :is(.guide-nav-card,.modern-topic-card-v424){
+ border-color:rgba(245,175,111,.67)!important;
+ box-shadow:0 0 17px rgba(245,175,111,.13)!important;
+}
+html body.modern-v424.is-home-route main#appMain :is(.home-tools-grid-v1016 a,.calc-hub-card){
+ border-color:rgba(255,220,130,.73)!important;
+}
+@media(prefers-reduced-motion:no-preference){
+ html body.modern-v424 main#appMain :is(.guide-nav-card,.calc-hub-card,.modern-topic-card-v424,.home-tools-grid-v1016 a){
+ transition:border-color .22s ease,box-shadow .22s ease!important;
+ }
+}
