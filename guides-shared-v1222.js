@@ -2,7 +2,7 @@
 (function(){try{
  if(document.querySelector('link[data-sova-unified-theme]'))return;
  var n=document.createElement('link');n.rel='stylesheet';
- n.href='belaya-unified-palette-v25.css?v=27';n.setAttribute('data-sova-unified-theme','');
+ n.href='belaya-unified-palette-v25.css?v=28';n.setAttribute('data-sova-unified-theme','');
  (document.head||document.documentElement).appendChild(n);
 }catch(e){}})();
 
