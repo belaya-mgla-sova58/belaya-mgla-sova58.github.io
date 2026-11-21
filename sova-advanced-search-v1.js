@@ -11,7 +11,7 @@ const GROUPS=[
 ["мифрил","мифрилл","mithril"],["эссенция","камни эссенции","камень эссенции"],["трансфер","перенос","переход государства"],
 ["калькулятор","кальк","расчет","расчёт"],["войска","армия","солдаты"],["рыбалка","рыба","жетоны рыбалки"]
 ].map(g=>g.map(norm));
-const CATS=["Все разделы","События","Герои","Снаряжение","Эксперты","Питомцы","Калькуляторы","База знаний","Новости","О сайте"];
+const CATS=["Все разделы","События","Герои","Снаряжение","Эксперты","Питомцы","Калькуляторы","База знаний","Новости","О портале"];
 const QUICK=[["СВС","svs-prep.html"],["Медведь","bear.html"],["Герои","heroes.html"],["Питомцы","pets.html"],["Снаряжение","gear.html"],["Калькуляторы","calculators.html"],["База знаний","other.html"]];
 const category=r=>{const u=String(r.url||"").toLowerCase(),t=norm(r.title);
  if(/^(hero|heroes|hero-generations)/.test(u))return "Герои";
@@ -20,12 +20,12 @@ const category=r=>{const u=String(r.url||"").toLowerCase(),t=norm(r.title);
  if(/^(expert|experts)/.test(u))return "Эксперты";
  if(/(calculator|calculators|calc|essence|mithril)/.test(u))return "Калькуляторы";
  if(/^(news|site-updates|ogonek|interview)/.test(u))return "Новости";
- if(/^(about|author|sova)/.test(u))return "О сайте";
+ if(/^(about|author|sova)/.test(u))return "О портале";
  if(/^(other|buildings|troops|resources|research|alliance|state-|farm|beacon)/.test(u))return "База знаний";
  if(/^(events|bear|svs|state-power|winter-siege|canyon|fishing|foundry|castle|crazy-joe|frostfire|alliance-mobilization|alliance-championship|forts|mercenary|snowplow|dreams|ginas|brothers-in-arms)/.test(u))return "События";
  return /калькулятор/.test(t)?"Калькуляторы":"База знаний";
 };
-const seeds=QUICK.map(([title,url])=>({title,url,desc:"Раздел сайта",text:title+" "+url}));
+const seeds=QUICK.map(([title,url])=>({title,url,desc:"Раздел портала",text:title+" "+url}));
 let dataPromise;
 function index(){
  if(!dataPromise)dataPromise=fetch("search-index.json?v=959",{cache:"force-cache"}).then(r=>r.ok?r.json():{items:[]}).then(v=>Array.isArray(v.items)?v.items:[]).catch(()=>[]);
@@ -72,13 +72,13 @@ function init(root){
  const quick=()=>{output.innerHTML='<div class="sova-search-label">Быстрые подсказки</div><div class="sova-search-quick">'+QUICK.map(([title,url])=>'<a href="'+safe(url)+'">'+safe(title)+'</a>').join("")+'</div>'};
  function paint(arr,q){
   if(!arr.length){output.innerHTML='<p class="sova-search-muted">Совпадений не найдено. Попробуйте другое слово или включите опечатки и синонимы.</p>';return}
-  output.innerHTML='<div class="sova-search-label">Найдено: '+arr.length+(arr.length===30?" (первые 30)":"")+'</div><div class="sova-search-hits">'+arr.map(x=>'<a href="'+safe(x.r.url)+'"><b>'+safe(x.r.title)+'</b><small>'+safe(x.cat)+' · '+safe(String(x.r.desc||"Материал сайта").slice(0,140))+'</small></a>').join("")+'</div>';
+  output.innerHTML='<div class="sova-search-label">Найдено: '+arr.length+(arr.length===30?" (первые 30)":"")+'</div><div class="sova-search-hits">'+arr.map(x=>'<a href="'+safe(x.r.url)+'"><b>'+safe(x.r.title)+'</b><small>'+safe(x.cat)+' · '+safe(String(x.r.desc||"Материал портала").slice(0,140))+'</small></a>').join("")+'</div>';
  }
  async function update(){
   let n=++counter,q=norm(input.value),cat=sel.value;
   root.classList.add("sova-advanced-active");
   if(q.length<2){quick();return}
-  output.innerHTML='<p class="sova-search-muted">Ищем по сайту…</p>';
+  output.innerHTML='<p class="sova-search-muted">Ищем по порталу…</p>';
   const records=await index();if(n!==counter)return;
   const map=new Map(), opts=settings();
   for(const rec of [...records,...seeds]){
