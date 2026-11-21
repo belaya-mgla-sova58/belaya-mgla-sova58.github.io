@@ -4,7 +4,7 @@
 var likeKey='news-58-live-fantom456-v1';
 var viewKey='news-58-live-fantom456';
 var likeUrl='https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/'+encodeURIComponent(likeKey)+'.json';
-var viewUrl='https://abacus.jasoncameron.dev/';
+var viewUrl='https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/'+encodeURIComponent('__news_clean_views_v1_'+viewKey)+'.json';
 var storageKey='belaya-mgla-firebase-liked-'+likeKey;
 var sessionKey='bm-view-counted:'+viewKey;
 var isArticle=!!document.querySelector('[data-tvs-article]');
@@ -50,11 +50,15 @@ function load(){
  }
  if(viewCount){
    var seen=false;
-   try{seen=sessionStorage.getItem(sessionKey)==='1'}catch(e){}
-   var action=isArticle&&!seen?'hit':'get';
-   request(viewUrl+action+'/belaya-mgla-sova58/'+encodeURIComponent(viewKey))
-     .then(function(v){display(viewCount,typeof(v&&v.value)==='number'?v.value:null);if(isArticle&&!seen)try{sessionStorage.setItem(sessionKey,'1')}catch(e){}})
-     .catch(function(){display(viewCount,null)});
+   try{seen=localStorage.getItem(sessionKey)==='1'}catch(e){}
+   if(isArticle&&!seen){
+     try{localStorage.setItem(sessionKey,'1')}catch(e){}
+     request(viewUrl,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({'.sv':{increment:1}})})
+       .then(function(v){display(viewCount,typeof v==='number'?v:null)})
+       .catch(function(){request(viewUrl).then(function(v){display(viewCount,typeof v==='number'?v:null)}).catch(function(){display(viewCount,null)})});
+   }else{
+     request(viewUrl).then(function(v){display(viewCount,typeof v==='number'?v:0)}).catch(function(){display(viewCount,null)});
+   }
  }
 }
 // Give rendering and the rest of the site time to settle before requesting counters.
