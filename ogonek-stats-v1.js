@@ -56,7 +56,7 @@
       .catch(function(){if(!changed)display(likeEl,null)});
     if(isArticle||viewsEl){
       var seen=false;
-      try{seen=sessionStorage.getItem(seenKey)==='1'}catch(e){}
+      try{seen=localStorage.getItem(seenKey)==='1'}catch(e){}
       var initialViews=viewsEl&&viewsEl.getAttribute('data-last-confirmed');
       var cachedViews=initialViews===null?null:Number(initialViews);
       try{
@@ -85,6 +85,7 @@
         }
       }
       var countOne=isArticle&&!seen;
+      if(countOne)try{localStorage.setItem(seenKey,'1')}catch(e){}
       // Firebase server-side increment is atomic; don't repeat a failed write,
       // since the server might have committed it before the response was lost.
       var op=countOne?
@@ -92,7 +93,7 @@
           body:JSON.stringify({'.sv':{increment:1}})},12000):
         request(viewUrl,undefined,12000);
       op.then(function(value){
-          if(countOne)try{sessionStorage.setItem(seenKey,'1')}catch(e){}
+          /* View already claimed before the request. */
           updateViews(value);
         })
         .catch(function(){
