@@ -1,0 +1,22 @@
+name: Check secure counters
+on:
+  push:
+    paths:
+      - 'security/**'
+      - '.github/workflows/check-secure-counters.yml'
+  workflow_dispatch:
+jobs:
+  test:
+    name: Verify Worker counter protections
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run smoke tests
+        run: npm test --prefix security/worker
+      - name: Validate Worker module syntax
+        run: node --check security/worker/src/index.mjs
+      - name: Validate browser adapter syntax
+        run: node --check security/site/secure-stats-v1.js
