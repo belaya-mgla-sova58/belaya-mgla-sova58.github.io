@@ -69,3 +69,39 @@
     overflow-wrap:break-word;
   }
 }
+
+/* Event covers: preserve artwork proportions and keep captions readable. */
+body.is-events-route .event-group-grid-v522 > .guide-nav-card {
+  min-width:0;
+  max-width:100%;
+}
+body.is-events-route .event-group-grid-v522 > .guide-nav-card > img {
+  display:block;
+  max-width:100%;
+}
+body.is-events-route .event-group-grid-v522 .event-card-caption-v1 {
+  box-sizing:border-box;
+  max-width:100%;
+  overflow-wrap:break-word;
+  white-space:normal;
+}
+/* Calculator directory: the label column may shrink beside its icon. */
+body.is-calculators-route .calc-hub-card .calc-hub-copy {
+  min-width:0;
+  max-width:100%;
+  overflow-wrap:break-word;
+}
+body.is-calculators-route .calc-hub-card .calc-hub-copy :is(strong,small,.calc-hub-open) {
+  max-width:100%;
+  overflow-wrap:break-word;
+}
+/* Knowledge directory: keep every line and action inside its card. */
+body.is-other-route[data-static-route="other"] .kb-clean-grid-v920 > .kb-clean-card-v920 {
+  min-width:0;
+  max-width:100%;
+  box-sizing:border-box;
+}
+body.is-other-route[data-static-route="other"] .kb-clean-card-v920 :is(b,small,i) {
+  max-width:100%;
+  overflow-wrap:break-word;
+}
