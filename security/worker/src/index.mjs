@@ -118,7 +118,6 @@ export default {
     if(!/^[a-f0-9]{32}$/.test(anonymousId))return bad(request,'invalid_visitor');
     const ip=request.headers.get('CF-Connecting-IP')||'';
     if(!ip) return bad(request,'missing_ip',403);
-    const ua=(request.headers.get('User-Agent')||'').slice(0,240);
     const ipHash=await digest(env.HASH_SECRET,'ip:'+ip);
     const minute=Math.floor(Date.now()/60000);
     if(!await limited(env.DB,ipHash,minute,30)) {
@@ -134,7 +133,7 @@ export default {
     try{verified=await verifyTurnstile(json.turnstileToken,kind==='views'?'view':'like',env,ip)}
     catch{return bad(request,'verification_unavailable',503)}
     if(!verified)return bad(request,'verification_failed',403);
-    const visitorHash=await digest(env.HASH_SECRET,'v1:'+ip+'|'+ua+'|'+anonymousId);
+    const visitorHash=await digest(env.HASH_SECRET,'v1:visitor:'+anonymousId);
     const now=Math.floor(Date.now()/1000);
     const added=await record(env.DB,kind,slug,visitorHash,now);
     const totals=await count(env.DB,slug);
