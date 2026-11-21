@@ -8,7 +8,9 @@ const SLUGS = new Set([
   'ogonek-barash','ogonek-zimbabe',
   'whitefox-01','whitefox-02','whitefox-03','whitefox-04','whitefox-05',
   'whitefox-tv','halloween-2026','ru-update-2026-10-19',
-  'creative-bananovyi-mom','creative-solnechny-zamok'
+  'creative-bananovyi-mom','creative-solnechny-zamok',
+  'creative-roman48','creative-amoress-painting',
+  'creative-little-furnace','creative-joe'
 ]);
 const encoder = new TextEncoder();
 
