@@ -665,16 +665,71 @@ body.is-events-route .guide-nav-card:hover{
 </style>
 <link rel="stylesheet" href="belaya-graphite-gold-ui-v1.css?v=1" data-graphite-gold-ui/>
 <link rel="stylesheet" href="belaya-no-blue-sitewide-v11.css?v=15" data-no-blue-sitewide/>
-<style id="sova-gifts-style-v1230">
-body.is-home-route #sova-gifts-v1230{display:flex;align-items:center;gap:18px;max-width:1100px;margin:24px auto 20px;padding:16px 22px;border:1px solid rgba(232,195,130,.69);border-radius:19px;background:linear-gradient(125deg,rgba(23,29,48,.96),rgba(38,39,63,.9));box-shadow:0 8px 26px rgba(0,0,0,.22),inset 0 0 18px rgba(216,170,102,.08);color:#f4e6d7}
-body.is-home-route #sova-gifts-v1230 .sova-gifts-owl{width:96px;height:116px;object-fit:contain;flex:none;filter:drop-shadow(0 0 9px rgba(124,226,230,.26))}
-body.is-home-route #sova-gifts-v1230 .sova-gifts-copy{flex:1;min-width:0}
-body.is-home-route #sova-gifts-v1230 h2{margin:0 0 7px;font:600 clamp(19px,2vw,25px)/1.25 Georgia,serif;color:#f3d7a3}
-body.is-home-route #sova-gifts-v1230 p{margin:0 0 10px;font:14px/1.55 system-ui,sans-serif;color:#e9dcd4}
-body.is-home-route #sova-gifts-v1230 .sova-gifts-id{display:flex;align-items:center;flex-wrap:wrap;gap:10px;color:#f2ddb1;font-weight:700}
-body.is-home-route #sova-gifts-v1230 button{border:1px solid #c8a77c;border-radius:9px;background:#342d31;color:#fff0d7;padding:8px 12px;font:600 13px system-ui,sans-serif;cursor:pointer}
-body.is-home-route #sova-gifts-v1230 button:focus-visible{outline:2px solid #a8f3ee;outline-offset:3px}
-@media(max-width:600px){body.is-home-route #sova-gifts-v1230{gap:9px;margin:18px 10px;padding:12px}body.is-home-route #sova-gifts-v1230 .sova-gifts-owl{width:66px;height:90px}body.is-home-route #sova-gifts-v1230 h2{font-size:17px}body.is-home-route #sova-gifts-v1230 p{font-size:12px}}
+<style id="sova-gifts-style-v1231">
+/* SOVA58 gifts: a small owl in the homepage header and an optional compact dialog. */
+body.is-home-route .home-portal-hero-v1016{position:relative!important}
+body.is-home-route #sova-gifts-launcher-v1231{
+ position:absolute!important;left:12px!important;bottom:10px!important;z-index:75!important;
+ width:62px!important;height:62px!important;display:grid!important;place-items:center!important;
+ padding:4px!important;border:1.5px solid #e8c58e!important;border-radius:50%!important;
+ background:radial-gradient(circle at 50% 38%,#30455a 0%,#1a2036 70%,#121623 100%)!important;
+ box-shadow:0 0 0 3px rgba(8,15,33,.65),0 0 13px rgba(249,204,137,.42)!important;
+ cursor:pointer!important;touch-action:manipulation!important;
+}
+body.is-home-route #sova-gifts-launcher-v1231 img{
+ display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;
+ filter:drop-shadow(0 0 4px rgba(236,210,163,.35))!important;
+}
+body.is-home-route #sova-gifts-launcher-v1231:focus-visible,
+body.is-home-route #sova-gifts-modal-v1231 button:focus-visible{
+ outline:2px solid #c7ffff!important;outline-offset:3px!important;
+}
+body.is-home-route #sova-gifts-modal-v1231[hidden]{display:none!important}
+body.is-home-route #sova-gifts-modal-v1231:not([hidden]){
+ position:fixed!important;inset:0!important;z-index:2147483550!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ padding:16px!important;background:rgba(6,9,22,.46)!important;
+}
+body.is-home-route #sova-gifts-dialog-v1231{
+ box-sizing:border-box!important;position:relative!important;width:min(345px,calc(100vw - 32px))!important;
+ max-height:min(85dvh,370px)!important;overflow-y:auto!important;
+ padding:19px 17px 17px!important;border-radius:17px!important;
+ border:1px solid #d9b67c!important;color:#f7ecdb!important;
+ background:linear-gradient(150deg,#24212f,#191d31 75%,#24283c)!important;
+ box-shadow:0 14px 50px #000b,0 0 0 2px rgba(234,199,137,.13)!important;
+ text-align:center!important;font:14px/1.45 system-ui,sans-serif!important;
+}
+body.is-home-route #sova-gifts-close-v1231{
+ position:absolute!important;top:8px!important;right:8px!important;width:32px!important;height:32px!important;
+ display:grid!important;place-items:center!important;border:1px solid #dfc292!important;
+ border-radius:50%!important;background:#32273a!important;color:#fff!important;
+ font:700 23px/1 Arial,sans-serif!important;cursor:pointer!important;
+}
+body.is-home-route #sova-gifts-dialog-v1231 .gifts-owl-v1231{
+ display:block!important;margin:0 auto 3px!important;width:65px!important;height:78px!important;
+ object-fit:contain!important;filter:drop-shadow(0 0 6px rgba(162,212,252,.25))!important;
+}
+body.is-home-route #sova-gifts-dialog-v1231 h2{
+ margin:0 22px 9px!important;color:#f4d59f!important;
+ font:600 21px/1.21 Georgia,serif!important;
+}
+body.is-home-route #sova-gifts-dialog-v1231 p{margin:0 0 12px!important;color:#e9dfdf!important;font:13px/1.45 system-ui,sans-serif!important}
+body.is-home-route #sova-gifts-dialog-v1231 .gifts-id-v1231{
+ display:block!important;margin:6px 0 10px!important;color:#f8dfaa!important;
+ font:700 15px/1.5 system-ui,sans-serif!important;
+}
+body.is-home-route #sova-gifts-copy-v1231{
+ border:1px solid #dfc292!important;border-radius:10px!important;
+ padding:9px 14px!important;background:#40323b!important;color:#fff0d8!important;
+ cursor:pointer!important;font:700 14px system-ui,sans-serif!important;
+}
+body.is-home-route #sova-gifts-status-v1231{display:block!important;min-height:18px!important;margin-top:8px!important;color:#b6f3df!important;font:12px system-ui,sans-serif!important}
+@media(max-width:700px){
+ body.is-home-route #sova-gifts-launcher-v1231{
+  left:8px!important;bottom:7px!important;width:51px!important;height:51px!important;padding:3px!important;
+ }
+ body.is-home-route #sova-gifts-dialog-v1231 h2{font-size:19px!important}
+}
 </style>
 </head><body class="is-home-route home-hq-v405 home-hq-v406 home-site-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="home"><a class="bm-skip-to-content-v1184" href="#appMain">Перейти к содержимому</a><div aria-hidden="true" class="site-cosmic-background-v442"></div>
 <div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
@@ -694,7 +749,7 @@ body.is-home-route #sova-gifts-v1230 button:focus-visible{outline:2px solid #a8f
 </div><div class="route-page active" data-route="home"><div class="modern-home-v424 home-portal-v1016">
 <h1 class="home-main-title-v571">Белая Мгла</h1>
 <p class="independent-brand-v624">Игровой информационно-справочный портал «Белая мгла» от SOVA58</p>
-<section aria-label="Белая Мгла" class="modern-home-hero-v424 home-portal-hero-v1016"><img alt="Белая Мгла. Игровой информационно-справочный портал «Белая мгла» от SOVA58. Белая сова и ледяной замок." class="home-stamped-img-v441" decoding="async" loading="eager" fetchpriority="high" width="2048" height="682" src="belaya_mgla_new_header_2048.webp" srcset="belaya_mgla_new_header_768.webp 768w, belaya_mgla_new_header_1280.webp 1280w, belaya_mgla_new_header_2048.webp 2048w" sizes="(max-width: 820px) calc(100vw - 20px), (min-width: 1100px) calc(55vw - 143px), (max-width: 1500px) calc(100vw - 260px), 1280px"/><div class="mobile-hero-info-v1047" aria-hidden="true"><strong>Белая Мгла</strong><span>Гайды, события и инструменты 58-го государства</span></div></section>
+<section aria-label="Белая Мгла" class="modern-home-hero-v424 home-portal-hero-v1016"><img alt="Белая Мгла. Игровой информационно-справочный портал «Белая мгла» от SOVA58. Белая сова и ледяной замок." class="home-stamped-img-v441" decoding="async" loading="eager" fetchpriority="high" width="2048" height="682" src="belaya_mgla_new_header_2048.webp" srcset="belaya_mgla_new_header_768.webp 768w, belaya_mgla_new_header_1280.webp 1280w, belaya_mgla_new_header_2048.webp 2048w" sizes="(max-width: 820px) calc(100vw - 20px), (min-width: 1100px) calc(55vw - 143px), (max-width: 1500px) calc(100vw - 260px), 1280px"/><div class="mobile-hero-info-v1047" aria-hidden="true"><strong>Белая Мгла</strong><span>Гайды, события и инструменты 58-го государства</span></div><button type="button" id="sova-gifts-launcher-v1231" aria-haspopup="dialog" aria-controls="sova-gifts-dialog-v1231" aria-expanded="false" aria-label="Подарочек Сове" title="Подарочек Сове"><img src="assets/sova58-crest-royal-v1188.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" width="55" height="55"/></button></section>
 <div class="home-portal-grid-v1016">
  <section class="modern-panel-v424 home-news-v442"><div class="modern-panel-head-v424"><div><span class="v424-head-icon bm-heading-medallion-v1076"><svg class="bm-heading-icon-v1076" data-bm-icon="news" data-neon="cyan" viewBox="0 0 64 64" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="bm-neon-bg-0" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#172050"/><stop offset=".46" stop-color="#173651"/><stop offset="1" stop-color="#070c26"/></linearGradient></defs><rect x="2.4" y="2.4" width="59.2" height="59.2" rx="15" fill="url(#bm-neon-bg-0)" stroke="#6ceaff" stroke-width="2"/><path d="M9 12q11-8 27-4M53 49q-12 8-25 6" fill="none" stroke="#6ceaff" stroke-width="1.2" opacity=".38"/><path d="M10 44v3m-1.5-1.5h3M51 13v4m-2-2h4" stroke="#6ceaff" stroke-width="1" opacity=".6"/><g fill="none" stroke="#d6fdff" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="15" width="32" height="36" rx="3"/><path d="M23 23h18M23 30h18M23 37h7v8h-7zM34 38h8M34 44h8"/></g></svg></span><h2><span class="pc-news-title-v966">Главные новости</span><span class="mobile-news-title-v966">Последние новости</span></h2></div><a href="news.html">Все новости ›</a></div><div class="home-news-grid-v442 home-news-pair-v1022">
 <a class="home-news-card-v442 home-news-banner-v449 home-news-whitefox-v449" href="news-elena.html">
@@ -818,13 +873,68 @@ body.is-home-route #sova-gifts-v1230 button:focus-visible{outline:2px solid #a8f
 </section>
 </div></div>
 </section>
-<section id="sova-gifts-v1230" aria-labelledby="sova-gifts-title-v1230">
-<img class="sova-gifts-owl" src="assets/sova58-crest-royal-v1188.svg" alt="Маленькая сова SOVA58" width="96" height="116" loading="lazy" decoding="async"/>
-<div class="sova-gifts-copy"><h2 id="sova-gifts-title-v1230">🦉 Сова не кит, но тоже любит подарочки</h2>
-<p>На бездонный кошелёк не претендую, просто иногда Сове тоже хочется подарочков 😏</p>
-<div class="sova-gifts-id"><span>Мой игровой ID: <span id="sova-gifts-number-v1230">23027478</span></span><button type="button" id="sova-gifts-copy-v1230" aria-label="Скопировать игровой ID 23027478">Скопировать ID</button><span id="sova-gifts-result-v1230" aria-live="polite"></span></div>
-</div></section>
-<script id="sova-gifts-script-v1230">(function(){var b=document.getElementById('sova-gifts-copy-v1230');if(!b)return;b.addEventListener('click',function(){var id='23027478',status=document.getElementById('sova-gifts-result-v1230');if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(id).then(function(){status.textContent='Скопировано ✓'},function(){status.textContent='ID: '+id})}else{var input=document.createElement('textarea');input.value=id;input.style.position='fixed';input.style.opacity='0';document.body.appendChild(input);input.select();try{document.execCommand('copy');status.textContent='Скопировано ✓'}catch(e){status.textContent='ID: '+id}input.remove()}})})()</script>
+<div id="sova-gifts-modal-v1231" hidden>
+ <section id="sova-gifts-dialog-v1231" role="dialog" aria-modal="true" aria-labelledby="sova-gifts-title-v1231" tabindex="-1">
+  <button id="sova-gifts-close-v1231" type="button" aria-label="Закрыть окошко">×</button>
+  <img class="gifts-owl-v1231" src="assets/sova58-crest-royal-v1188.svg" alt="Сова SOVA58" width="65" height="78" loading="lazy" decoding="async"/>
+  <h2 id="sova-gifts-title-v1231">Сова не кит, но тоже любит подарочки 🦉</h2>
+  <p>На бездонный кошелёк не претендую, просто иногда Сове тоже хочется подарочков 😉</p>
+  <span class="gifts-id-v1231">Мой игровой ID: 23027478</span>
+  <button id="sova-gifts-copy-v1231" type="button">Скопировать ID</button>
+  <span id="sova-gifts-status-v1231" role="status" aria-live="polite"></span>
+ </section>
+</div>
+<script id="sova-gifts-script-v1231">
+(function(){
+ "use strict";
+ var launcher=document.getElementById("sova-gifts-launcher-v1231");
+ var modal=document.getElementById("sova-gifts-modal-v1231");
+ var dialog=document.getElementById("sova-gifts-dialog-v1231");
+ var closer=document.getElementById("sova-gifts-close-v1231");
+ var copy=document.getElementById("sova-gifts-copy-v1231");
+ var status=document.getElementById("sova-gifts-status-v1231");
+ if(!launcher||!modal||!dialog||!closer||!copy)return;
+ var lastFocus=null;
+ function open(){
+  lastFocus=document.activeElement;
+  modal.hidden=false;
+  launcher.setAttribute("aria-expanded","true");
+  closer.focus();
+ }
+ function close(){
+  modal.hidden=true;
+  launcher.setAttribute("aria-expanded","false");
+  if(lastFocus&&typeof lastFocus.focus==="function")lastFocus.focus();
+ }
+ launcher.addEventListener("click",open);
+ closer.addEventListener("click",close);
+ modal.addEventListener("click",function(e){if(e.target===modal)close()});
+ document.addEventListener("keydown",function(e){
+  if(modal.hidden)return;
+  if(e.key==="Escape"){e.preventDefault();close()}
+  if(e.key==="Tab"){
+   var buttons=[closer,copy],i=buttons.indexOf(document.activeElement);
+   if(e.shiftKey&&i===0){e.preventDefault();copy.focus()}
+   else if(!e.shiftKey&&i===1){e.preventDefault();closer.focus()}
+  }
+ });
+ copy.addEventListener("click",function(){
+  var id="23027478";
+  function fallback(){
+   var temp=document.createElement("textarea");temp.value=id;
+   temp.style.position="fixed";temp.style.opacity="0";
+   document.body.appendChild(temp);temp.select();
+   var ok=false;
+   try{ok=document.execCommand("copy")}catch(_){}
+   temp.remove();
+   status.textContent=ok?"ID скопирован ✓":"Мой ID: "+id;
+  }
+  if(navigator.clipboard&&window.isSecureContext){
+   navigator.clipboard.writeText(id).then(function(){status.textContent="ID скопирован ✓"},fallback);
+  }else fallback();
+ });
+})();
+</script>
 <footer class="modern-home-footer-v424">Белая Мгла • Государство 58 • Автор — Sova · © 2026 SOVA58
 </footer>
 </div></div></main>
