@@ -79,6 +79,43 @@ body.news-top-ru .ru-updates-grid-v545 .ru-halloween-v768{--ru-halloween-image:u
  }
 }
 </style><link rel="stylesheet" href="belaya-no-blue-sitewide-v11.css?v=11" data-no-blue-sitewide/>
+
+<style id="sova-ru-header-restore-v1">
+/* Restore the existing whitefox illustrated masthead for RU updates.
+   The shared CSS only targets .news-top-whitefox, while this route uses .news-top-ru. */
+html body.news-top-ru main#appMain .page-heading-v424.whitefox-news-header-v447{
+ position:relative!important;
+ overflow:hidden!important;
+ display:flex!important;
+ flex-direction:column!important;
+ justify-content:flex-end!important;
+ min-height:190px!important;
+ padding:20px 24px!important;
+ border-radius:18px!important;
+ border:1px solid rgba(232,190,140,.72)!important;
+ background-color:#28232b!important;
+ background-image:linear-gradient(180deg,rgba(20,13,22,.04) 0%,rgba(22,12,20,.18) 48%,rgba(21,13,21,.84) 100%),url("assets/whitefox-news-header-v447.webp")!important;
+ background-position:center center!important;
+ background-size:cover!important;
+ background-repeat:no-repeat!important;
+ box-shadow:0 9px 25px rgba(0,0,0,.25),inset 0 1px rgba(255,232,190,.13)!important;
+}
+html body.news-top-ru main#appMain .page-heading-v424.whitefox-news-header-v447 h1,
+html body.news-top-ru main#appMain .page-heading-v424.whitefox-news-header-v447 p{
+ position:relative!important;
+ z-index:2!important;
+ color:#fff3df!important;
+ -webkit-text-fill-color:#fff3df!important;
+ text-shadow:0 2px 8px rgba(0,0,0,.88)!important;
+}
+@media(max-width:700px){
+ html body.news-top-ru main#appMain .page-heading-v424.whitefox-news-header-v447{
+  min-height:140px!important;
+  padding:14px 16px!important;
+  background-position:center center!important;
+ }
+}
+</style>
 </head><body class="is-news-route news-subpage news-top-ru site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="news-ru"><div aria-hidden="true" class="site-cosmic-background-v442"></div><div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
 <button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
 <div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Новости</small></div>
