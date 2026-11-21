@@ -395,3 +395,48 @@ html body.is-home-route.modern-v424 .nav-wrap::after{
  background-color:#332c34!important;
  background-image:linear-gradient(150deg,#42363e,#29252d)!important;
 }
+
+/* v28: intentional high-contrast neon focal points.
+   Do not touch photos, illustrations, calculator jewel corners or standalone owl pages. */
+:root{
+ --sova-neon-gold:0 0 11px rgba(255,210,133,.48),0 0 27px rgba(255,198,109,.20);
+ --sova-neon-emerald:0 0 11px rgba(102,243,174,.52),0 0 25px rgba(80,219,155,.22);
+ --sova-neon-rose:0 0 11px rgba(255,155,205,.52),0 0 25px rgba(239,133,186,.22);
+ --sova-neon-bronze:0 0 11px rgba(255,179,114,.51),0 0 25px rgba(240,148,89,.20);
+}
+html body.modern-v424 .nav-wrap nav a.route-link[aria-current="page"],
+html body.modern-v424 .mobile-bottom-v424 a[aria-current="page"]{
+ box-shadow:inset 3px 0 #f6d79f,var(--sova-neon-gold)!important;
+ border-color:#f8dca8!important;
+}
+html body.is-home-route.modern-v424 main#appMain :is(.home-quick-links-v1024>a,.modern-list-v424>a):is(:hover,:focus-visible){
+ border-color:#ffdca7!important;
+ box-shadow:var(--sova-neon-gold)!important;
+}
+html body.modern-v424:is(.is-events-route,.is-pets-route) main#appMain :is(.page-heading-v424.frost-header-v431,.pet-section-heading){
+ border-color:#7ed9ac!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.12),var(--sova-neon-emerald)!important;
+}
+html body.modern-v424.is-events-route main#appMain .events-groups-v522 .event-group-v522:is(:hover,:focus-within),
+html body.modern-v424.is-pets-route main#appMain .pet-stage:is(:hover,:focus-within){
+ border-color:#89dbb4!important;
+ box-shadow:var(--sova-neon-emerald)!important;
+}
+html body.modern-v424.is-news-route main#appMain :is(.news-page-heading,.creative-corner-header-v447){
+ border-color:#e5a8c4!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.11),var(--sova-neon-rose)!important;
+}
+html body.modern-v424.is-news-route main#appMain :is(.news-category-card,.creative-v349-card,.creative-submit-v366):is(:hover,:focus-within){
+ border-color:#f2b6d2!important;
+ box-shadow:var(--sova-neon-rose)!important;
+}
+/* Bronze on guide headers only, not every panel. */
+html body.modern-v424:is(.is-gear-route,.is-other-route,.is-experts-route,.is-svs-route,.is-svs-prep-route,.is-beacon-route,.is-newbie-route,.is-research-route,.is-island-route)
+ main#appMain :is(.page-heading-v424.frost-header-v431,.guide-fold-summary-v414):is(:hover,:focus-within){
+ border-color:#f3bc8a!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.1),var(--sova-neon-bronze)!important;
+}
+html body.modern-v424.is-calculators-route main#appMain :is(.calc-hub-head,.calc-hub-group>h2){
+ text-shadow:0 0 13px rgba(255,178,113,.53)!important;
+}
+/* Respect reduced motion; no animation or pulsing. */
