@@ -16,7 +16,7 @@ function ensureHomeHero(){
   if(hero.querySelector('.home-stamped-img-v441'))return;
   // Fallback only for older pages that do not contain the hero image.
   var img=document.createElement('img');
-  img.alt='Независимый сайт с гайдами по Белой мгле от SOVA58';
+  img.alt='Независимый портал с гайдами по Белой мгле от SOVA58';
   img.className='home-stamped-img-v441';
   img.width=1800;
   img.height=643;
