@@ -147,3 +147,85 @@ html body.luxury-chronicle :is(.section-heading h2,.banner-event-name,.summary-t
 html body.luxury-chronicle :is(.event-banner img,.intro-card img,.section-content img,.bm-guide-nav img){
  filter:none!important;-webkit-filter:none!important;
 }
+
+/* v26 · Section accents, never a recolor of art or the owl.
+   Emerald = Events/Pets; Dusty Rose = News/Creative;
+   Warm Bronze = Guides/Calculators. The background stays graphite. */
+html body.modern-v424.is-events-route,
+html body.modern-v424.is-pets-route {
+ --sova-section-accent:#408a70;
+ --sova-section-glow:rgba(63,149,115,.20);
+ --sova-section-wash:rgba(30,86,68,.27);
+}
+html body.modern-v424.is-news-route {
+ --sova-section-accent:#be8da7;
+ --sova-section-glow:rgba(184,119,152,.21);
+ --sova-section-wash:rgba(107,62,84,.28);
+}
+html body.modern-v424:is(.is-gear-route,.is-other-route,.is-calculators-route,.is-experts-route,.is-beacon-route,.is-newbie-route,.is-research-route,.is-island-route,.is-svs-prep-route,.is-svs-route) {
+ --sova-section-accent:#c28a6b;
+ --sova-section-glow:rgba(189,120,91,.20);
+ --sova-section-wash:rgba(113,60,43,.23);
+}
+/* Subtle tinted banner glass, not a full-page color wash. */
+html body.modern-v424:is(.is-events-route,.is-pets-route,.is-news-route,.is-gear-route,.is-other-route,.is-calculators-route,.is-experts-route,.is-beacon-route,.is-newbie-route,.is-research-route,.is-island-route,.is-svs-prep-route,.is-svs-route)
+main#appMain :is(.page-heading-v424.frost-header-v431,.news-page-heading,.calc-hub-head,.pet-section-heading) {
+ background-color:#292327!important;
+ background-image:linear-gradient(115deg,var(--sova-section-wash),rgba(36,33,37,.96) 42%,#1b181c)!important;
+ border-color:color-mix(in srgb,var(--sova-section-accent) 55%,#c5ad8e)!important;
+ box-shadow:inset 0 1px rgba(255,235,204,.08),0 0 17px var(--sova-section-glow)!important;
+}
+/* Emerald linework for the events directory. Cards remain neutral graphite. */
+html body.modern-v424.is-events-route main#appMain .events-groups-v522 .event-group-v522{
+ background-color:#252226!important;
+ background-image:linear-gradient(135deg,rgba(25,69,55,.33),#242125 45%,#1b191d)!important;
+ border-color:rgba(98,155,125,.56)!important;
+ box-shadow:0 0 17px rgba(55,131,101,.10)!important;
+}
+html body.modern-v424.is-events-route main#appMain :is(.event-group-count-v522,.event-jump-links-v1 a){
+ background:#26352e!important;
+ background-image:linear-gradient(130deg,#2f4539,#252427)!important;
+ border-color:rgba(101,164,130,.59)!important;
+ color:#d4ebdd!important;
+}
+/* Pets: soft emerald on group headings; portrait art is left alone. */
+html body.modern-v424.is-pets-route main#appMain :is(.pet-section-heading,.pet-stage-list){
+ border-color:rgba(107,162,130,.48)!important;
+}
+html body.modern-v424.is-pets-route main#appMain .pet-stage>summary{
+ box-shadow:inset 4px 0 0 rgba(106,183,139,.68)!important;
+}
+/* Dusty rose for news and creative cards, with platinum text. */
+html body.modern-v424.is-news-route main#appMain :is(.news-shell,.news-category-card,.creative-v349-card,.creative-submit-v366,.creative-music-v590,.creative-corner-header-v447){
+ background-color:#282126!important;
+ background-image:linear-gradient(140deg,rgba(100,54,79,.26),#292327 44%,#211c20)!important;
+ border-color:rgba(188,134,162,.59)!important;
+ box-shadow:0 0 14px rgba(188,119,156,.09)!important;
+}
+html body.modern-v424.is-news-route main#appMain :is(.news-kicker,.news-categories-heading-v1,.creative-v349-kind,.creative-music-badge-v590){
+ color:#e8adc8!important;
+}
+html body.modern-v424.is-news-route main#appMain :is(.creative-submit-v366-btn,.news-category-link){
+ border-color:rgba(199,144,171,.66)!important;
+}
+/* Warm bronze on expandable guide headers and informational panels. */
+html body.modern-v424:is(.is-gear-route,.is-other-route,.is-experts-route,.is-beacon-route,.is-newbie-route,.is-research-route,.is-island-route,.is-svs-prep-route,.is-svs-route)
+main#appMain :is(.guide-fold-summary-v414,.guide-callout,.kb-clean-card-v920){
+ background-color:#2a2426!important;
+ background-image:linear-gradient(125deg,rgba(110,61,43,.20),#292326 44%,#211d20)!important;
+ border-color:rgba(197,143,108,.59)!important;
+}
+html body.modern-v424:is(.is-gear-route,.is-other-route,.is-experts-route,.is-beacon-route,.is-newbie-route,.is-research-route,.is-island-route,.is-svs-prep-route,.is-svs-route)
+main#appMain :is(.guide-fold-title-v414,.related-guides-head-v625 h2) {
+ text-shadow:0 0 13px rgba(188,116,82,.15)!important;
+}
+/* Calculator cards retain their distinct multi-color neon corners.
+   Only catalogue section headings get a bronze accent. */
+html body.modern-v424.is-calculators-route main#appMain :is(.calc-hub-head,.calc-hub-group>h2){
+ border-color:rgba(201,144,105,.62)!important;
+ color:#f0d7bc!important;
+}
+html body.modern-v424.is-calculators-route main#appMain .calc-hub-kicker{
+ color:#e5a984!important;
+}
+/* No changes to game art, graphic overlays or standalone owl pages. */
