@@ -225,9 +225,9 @@
   }
   async function init(){
     let n;
-    if(!sessionStorage.getItem(sessionKey)){
+    if(!localStorage.getItem(sessionKey)){
+      localStorage.setItem(sessionKey,'1');
       n=await inc();
-      sessionStorage.setItem(sessionKey,'1');
     }else n=await read();
     const b=el.querySelector('b'); if(b) b.textContent=n;
   }
