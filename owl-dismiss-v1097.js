@@ -20,7 +20,7 @@
    "body.is-home-route:has(#madamUguOverlayV720.is-open) #"+closeId+"{display:none!important;}",
    "body.is-home-route.bm-owl-hidden-v1097 #"+owlId+"{display:none!important;visibility:hidden!important;pointer-events:none!important;}",
    "body.is-home-route.bm-owl-hidden-v1097 #madamUguCloseLauncherV720{display:none!important;visibility:hidden!important;pointer-events:none!important;}",
-   "body.is-home-route.bm-owl-hidden-v1097 #"+closeId+"{display:none!important;}",
+   "html body.is-home-route.bm-owl-hidden-v1097 #"+closeId+"{display:none!important;visibility:hidden!important;pointer-events:none!important;}",
    "body.is-home-route.bm-owl-hidden-v1097 #"+restoreId+"{display:flex!important;}"
   ].join("\n");
   document.head.appendChild(s);
@@ -28,7 +28,7 @@
  function position(){
   if(!owl||!close||document.body.classList.contains("bm-owl-hidden-v1097"))return;
   var r=owl.getBoundingClientRect();
-  if(!r.width||!r.height){close.style.display="none";return}
+  if(!r.width||!r.height){close.style.setProperty("display","none","important");return}
   close.style.removeProperty("display");
   var x=Math.min(window.innerWidth-42,Math.max(4,r.right-36));
   var y=Math.min(window.innerHeight-42,Math.max(4,r.top+4));
@@ -38,7 +38,29 @@
  function apply(value){
   document.body.classList.toggle("bm-owl-hidden-v1097",value);
   save(value);
-  if(!value)requestAnimationFrame(position);
+  // Keep the launcher and both possible close buttons synchronized.
+  var legacy=document.getElementById("madamUguCloseLauncherV720");
+  if(owl){
+   if(value){owl.style.setProperty("display","none","important");owl.setAttribute("aria-hidden","true")}
+   else{owl.style.removeProperty("display");owl.removeAttribute("aria-hidden")}
+  }
+  [close,legacy].forEach(function(btn){
+   if(!btn)return;
+   btn.style.setProperty("display","none","important");
+   btn.style.setProperty("visibility","hidden","important");
+   btn.style.setProperty("pointer-events","none","important");
+  });
+  if(restore){
+   restore.style.setProperty("display",value?"flex":"none","important");
+  }
+  if(!value)requestAnimationFrame(function(){
+   if(close){
+    close.style.removeProperty("display");
+    close.style.removeProperty("visibility");
+    close.style.removeProperty("pointer-events");
+   }
+   position();
+  });
  }
  function install(){
   owl=document.getElementById(owlId);
