@@ -130,28 +130,6 @@ body.bananovyi-mom-v592 .creative-song-chorus-v396{background:linear-gradient(90
 body.bananovyi-mom-v592 .creative-song-finale-v396{color:#ffe17a!important}
 </style>
 
-<script id="creative-song-view-v396-script">
-(function(){
-  var BASE='https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/';
-  var VIEW_KEY='creative-bananovyi-mom-krestyanka-v1';
-  var url=BASE+encodeURIComponent('__views__'+VIEW_KEY)+'.json';
-  var el=document.querySelector('[data-song-view-count] b');
-  function set(v){ if(el) el.textContent=String(typeof v==='number'&&v>=0?v:0); }
-  async function read(){
-    try{var r=await fetch(url,{cache:'no-store'});var v=await r.json();set(typeof v==='number'?v:0);return typeof v==='number'?v:0}catch(e){set(0);return 0}
-  }
-  async function inc(){
-    try{
-      var r=await fetch(url,{method:'PUT',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify({'.sv':{'increment':1}})});
-      var v=await r.json();set(typeof v==='number'?v:0);
-    }catch(e){read()}
-  }
-  var sk='creative-viewed-session:'+VIEW_KEY;
-  if(!sessionStorage.getItem(sk)){
-    inc().then(function(){try{sessionStorage.setItem(sk,'1')}catch(e){}});
-  }else{read()}
-  window.addEventListener('pageshow',read);
-})();
-</script>
+
 <div class="footer news-footer">Белая Мгла • Автор - Sova</div></div>
-</main><button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button><nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424"><a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-home-v534.webp"/></span><b>Главная</b></a><a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-events-v534.webp"/></span><b>События</b></a><a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-heroes-v534.webp"/></span><b>Герои</b></a><a data-v424-nav="calc" href="calculators.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-calculator-v534.webp"/></span><b>Калькуляторы</b></a><a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-knowledge-v534.webp"/></span><b>База знаний</b></a></nav><script defer="" src="pwa-install.js?v=987"></script></body></html>
+</main><button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button><nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424"><a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-home-v534.webp"/></span><b>Главная</b></a><a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-events-v534.webp"/></span><b>События</b></a><a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-heroes-v534.webp"/></span><b>Герои</b></a><a data-v424-nav="calc" href="calculators.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-calculator-v534.webp"/></span><b>Калькуляторы</b></a><a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-knowledge-v534.webp"/></span><b>База знаний</b></a></nav><script defer="" src="pwa-install.js?v=987"></script><script defer src="creative-views-v2.js?v=2"></script></body></html>
