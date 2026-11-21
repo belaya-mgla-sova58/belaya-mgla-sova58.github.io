@@ -343,7 +343,7 @@
     if(likeBtn&&liked){likeBtn.classList.add('is-liked');likeBtn.setAttribute('aria-pressed','true');likeBtn.disabled=true;}
     if(likeBtn&&!liked){likeBtn.addEventListener('click',async()=>{likeBtn.disabled=true;const n=await increment(articleKey);if(likeCount)likeCount.textContent=n.toLocaleString('ru-RU');likeBtn.classList.add('is-liked');likeBtn.setAttribute('aria-pressed','true');localStorage.setItem('belaya-mgla-liked:'+articleKey,'1');});}
     const sess='belaya-mgla-view-session:whitefox-elena-42-reset-v2';
-    let views;if(!sessionStorage.getItem(sess)){views=await increment(viewKey);sessionStorage.setItem(sess,'1')}else views=await readNumber(viewKey);
+    let views;if(!localStorage.getItem(sess)){localStorage.setItem(sess,'1');views=await increment(viewKey)}else views=await readNumber(viewKey);
     if(viewsEl)viewsEl.textContent=views.toLocaleString('ru-RU');
   }
 
