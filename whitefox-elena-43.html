@@ -223,7 +223,7 @@
 <div class="whitefox-author">Автор — Elena</div>
 <div class="whitefox-head-stats-v557">
 <button aria-label="Поставить лайк публикации" aria-pressed="false" class="whitefox-head-like-v557" id="whitefox43Like" type="button"><span aria-hidden="true" class="heart">♥</span><span>Нравится</span><b id="whitefox43LikeCount">0</b></button>
-<span aria-label="Просмотры публикации" class="whitefox-head-stat-v557">👀 <b id="whitefox43Views">0</b> просмотров</span>
+<span aria-label="Просмотры с 21 ноября" class="whitefox-head-stat-v557">👀 <b id="whitefox43Views">0</b> просмотров с 21 ноября</span>
 </div>
 <div class="whitefox-week42-jump-v558" aria-label="Быстрые переходы по публикации"><a href="#whitefox43Questions">❓ Вопросы</a><a href="#whitefox43Romance">💕 Клуб романтики</a></div>
 </div>
@@ -302,7 +302,8 @@
   const BASE='https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/';
   const ROOT=BASE.slice(0,-1)+'.json';
   const articleKey='news-elena-43-v1';
-  const viewKey='__views__whitefox-elena-43';
+   /* 21 Nov 2026: public count restarted at zero. Old Firebase key __views__whitefox-elena-43 retained unmodified; last screenshot: 1400 views. */
+  const viewKey='__views__whitefox-elena-43-from-20261121-v1';
   const likeBtn=document.getElementById('whitefox43Like');
   const likeCount=document.getElementById('whitefox43LikeCount');
   const viewsEl=document.getElementById('whitefox43Views');
@@ -343,7 +344,7 @@
     const liked=localStorage.getItem('belaya-mgla-liked:'+articleKey)==='1';
     if(likeBtn&&liked){likeBtn.classList.add('is-liked');likeBtn.setAttribute('aria-pressed','true');likeBtn.disabled=true;}
     if(likeBtn&&!liked){likeBtn.addEventListener('click',async()=>{likeBtn.disabled=true;const n=await increment(articleKey);if(likeCount)likeCount.textContent=n.toLocaleString('ru-RU');likeBtn.classList.add('is-liked');likeBtn.setAttribute('aria-pressed','true');localStorage.setItem('belaya-mgla-liked:'+articleKey,'1');});}
-    const sess='belaya-mgla-view-session:whitefox-elena-43';
+    const sess='belaya-mgla-view-session:whitefox-elena-43-from-20261121-v1';
     let views;if(!sessionStorage.getItem(sess)){views=await increment(viewKey);sessionStorage.setItem(sess,'1')}else views=await readNumber(viewKey);
     if(viewsEl)viewsEl.textContent=views.toLocaleString('ru-RU');
   }
