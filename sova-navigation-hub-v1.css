@@ -17,3 +17,4 @@
 #sova-nav-hub-v1 .sova-nav-actions{display:flex;flex-wrap:wrap;gap:6px}
 @media(max-width:820px){#sova-nav-hub-v1 .sova-nav-trigger{bottom:88px;right:10px;padding:8px 11px;font-size:12px}}
 @media(prefers-reduced-motion:reduce){#sova-nav-hub-v1 *{scroll-behavior:auto!important}}
+#sova-nav-hub-v1 .sova-nav-update{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:999px;border:1px solid #d8af74;color:#ffe5b3;font-size:10px;font-weight:700;white-space:nowrap}
