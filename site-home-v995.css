@@ -430,3 +430,26 @@ html body.site-hq-v407:is([data-static-route="bear"],[data-static-route="crazy-j
  border-color:#ffdb90!important;
  box-shadow:0 0 21px rgba(241,179,100,.22),0 8px 24px rgba(0,0,0,.19)!important;
 }
+
+
+/* SOVA58 SITE SEARCH WIDER 2026-11-21. Applies to search only, not the owl. */
+@media(min-width:981px){
+ html body.modern-v424 main#appMain>.site-search-v426{
+  width:min(100%,1040px)!important;max-width:1040px!important;
+  margin-left:auto!important;margin-right:auto!important;
+ }
+ html body.is-home-route.modern-v424 main#appMain>.site-search-v426{
+  width:min(94%,1040px)!important;max-width:1040px!important;
+ }
+ html body.modern-v424 main#appMain .site-search-box-v426{
+  width:100%!important;max-width:none!important;box-sizing:border-box!important;
+  min-height:54px!important;
+ }
+ html body.modern-v424 main#appMain .site-search-input-v426{
+  width:100%!important;min-width:0!important;font-size:16px!important;
+ }
+}
+html body.modern-v424 main#appMain .site-search-box-v426:focus-within{
+ border-color:#ffda8a!important;
+ box-shadow:0 0 0 1px rgba(255,218,138,.38),0 0 20px rgba(246,189,106,.22)!important;
+}
