@@ -97,6 +97,7 @@ function init(root){
  input.addEventListener("keydown",e=>{if(e.key==="Escape"){root.classList.remove("sova-advanced-active");control.classList.remove("sova-search-visible");}});
  root.addEventListener("focusin",()=>{control.classList.add("sova-search-visible");root.classList.add("sova-advanced-active")});
  document.addEventListener("pointerdown",e=>{if(!root.contains(e.target)){root.classList.remove("sova-advanced-active");control.classList.remove("sova-search-visible")}});
+ if(document.activeElement===input){control.classList.add("sova-search-visible");update()}
  }
  function run(){document.querySelectorAll("[data-site-search]").forEach(init)}
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",run,{once:true});else run();
