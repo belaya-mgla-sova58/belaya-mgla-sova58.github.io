@@ -176,3 +176,19 @@ body.luxury-chronicle.bear-chronicle .section-content table {
     height:auto;
   }
 }
+
+/* v4: keep guide-to-guide buttons readable on narrow screens. */
+body.luxury-chronicle.bear-chronicle .bear-page-links a {
+  box-sizing:border-box;
+  min-width:0;
+  max-width:100%;
+  white-space:normal;
+  overflow-wrap:break-word;
+  text-align:center;
+}
+@media (max-width:420px) {
+  body.luxury-chronicle.bear-chronicle .bear-page-links {
+    min-width:0;
+    max-width:100%;
+  }
+}
