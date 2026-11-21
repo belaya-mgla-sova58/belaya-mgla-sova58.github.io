@@ -364,3 +364,34 @@ html body.luxury-chronicle :is(.bm-guide-nav a,.bear-page-links a){
  background:#302a31!important;
  }
 }
+
+/* Home-page high-specificity light balance: overrule old dark blue-cleanup rules. */
+html body.is-home-route.modern-v424 main#appMain .home-news-v442 .home-svs-prep-v1128,
+html body.is-home-route.modern-v424 main#appMain .home-news-v442 .home-svs-stage-v1128,
+html body.is-home-route.modern-v424 main#appMain .home-more-visible-v1025 .modern-panel-v424,
+html body.is-home-route.modern-v424 main#appMain .home-more-visible-v1025 .modern-panel-head-v424,
+html body.is-home-route.modern-v424 main#appMain .home-utility-v1025{
+ background-color:#41373e!important;
+ background-image:linear-gradient(135deg,#514149,#39323b)!important;
+ border-color:rgba(230,188,141,.70)!important;
+}
+html body.is-home-route.modern-v424 main#appMain .home-portal-v1016 .home-more-visible-v1025,
+html body.is-home-route.modern-v424 main#appMain .home-more-visible-v1025 .home-portal-secondary-v1016,
+html body.is-home-route.modern-v424 main#appMain .home-more-visible-v1025 .modern-home-columns-v424{
+ background-color:#383039!important;
+ background-image:linear-gradient(145deg,#473a42,#302a33)!important;
+ border-color:rgba(227,188,140,.67)!important;
+}
+html body.is-home-route.modern-v424 main#appMain .home-more-visible-v1025 .modern-list-v424>a,
+html body.is-home-route.modern-v424 main#appMain .home-utility-v1025 .home-quick-links-v1024>a,
+html body.is-home-route.modern-v424 main#appMain .home-more-visible-v1025 .home-portal-links-v1016>a{
+ background-color:#514149!important;
+ background-image:linear-gradient(130deg,#59474d,#40353d)!important;
+ border-color:rgba(234,198,149,.73)!important;
+}
+html body.is-home-route.modern-v424 .nav-wrap,
+html body.is-home-route.modern-v424 .nav-wrap::before,
+html body.is-home-route.modern-v424 .nav-wrap::after{
+ background-color:#332c34!important;
+ background-image:linear-gradient(150deg,#42363e,#29252d)!important;
+}
