@@ -415,3 +415,18 @@ html body.modern-v424.is-home-route main#appMain :is(.home-tools-grid-v1016 a,.c
  transition:border-color .22s ease,box-shadow .22s ease!important;
  }
 }
+
+
+/* SOVA58 GUIDE DEBLUE 2026-11-21: restores warm graphite and visible event accents. */
+html{background-color:#19191d!important}
+html body.site-hq-v407:is([data-static-route="bear"],[data-static-route="crazy-joe"],[data-static-route="alliance-showdown"],[data-static-route="alliance-championship"],[data-static-route="alliance-mobilization"],[data-static-route="frostfire-mine"],[data-static-route="tundra-trade-route"],[data-static-route="brothers-in-arms"],[data-static-route="foundry"],[data-static-route="forts"],[data-static-route="castle"],[data-static-route="winter-siege"],[data-static-route="canyon-clash"],[data-static-route="ginas-revenge"],[data-static-route="mercenary-prestige"],[data-static-route="endless-trial"],[data-static-route="fishing"],[data-static-route="snowplow"],[data-static-route="dreams"],[data-static-route="state-power"],[data-static-route="svs-prep"],[data-static-route="svs"]) main#appMain .route-page.active :is(.gina-card,.bear-card,.prestige-card,.ff-card,.forts-card,.castle-card,.section-frame,[class*="guide-card"]):not(.guide-nav-card):not(.related-guide-card-v625){
+ border-color:rgba(247,201,132,.68)!important;
+ background-color:#343136!important;
+ background-image:linear-gradient(140deg,rgba(61,55,57,.97),rgba(42,40,45,.97))!important;
+ color:#f5eee4!important;
+ box-shadow:0 8px 24px rgba(0,0,0,.23),inset 0 1px 0 rgba(255,235,200,.07)!important;
+}
+html body.site-hq-v407:is([data-static-route="bear"],[data-static-route="crazy-joe"],[data-static-route="alliance-showdown"],[data-static-route="alliance-championship"],[data-static-route="alliance-mobilization"],[data-static-route="frostfire-mine"],[data-static-route="tundra-trade-route"],[data-static-route="brothers-in-arms"],[data-static-route="foundry"],[data-static-route="forts"],[data-static-route="castle"],[data-static-route="winter-siege"],[data-static-route="canyon-clash"],[data-static-route="ginas-revenge"],[data-static-route="mercenary-prestige"],[data-static-route="endless-trial"],[data-static-route="fishing"],[data-static-route="snowplow"],[data-static-route="dreams"],[data-static-route="state-power"],[data-static-route="svs-prep"],[data-static-route="svs"]) main#appMain .route-page.active :is(.gina-card,.bear-card,.prestige-card,.ff-card,.forts-card,.castle-card,.section-frame,[class*="guide-card"]):not(.guide-nav-card):not(.related-guide-card-v625):hover{
+ border-color:#ffdb90!important;
+ box-shadow:0 0 21px rgba(241,179,100,.22),0 8px 24px rgba(0,0,0,.19)!important;
+}
