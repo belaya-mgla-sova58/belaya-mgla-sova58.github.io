@@ -1,17 +1,17 @@
-/* Common global counters for the first “К вам на огонек” interview.
-   News shows totals, article records one visit per browser session.
-   Uses the existing Firebase likes and Abacus views services. */
+/* Shared counters for the 'К вам на огонёк' interviews.
+   Catalog reads totals; each interview records one view per browser session.
+   Both views and likes use the same existing Firebase Realtime Database. */
 (function(){
   'use strict';
   function init(root, id, isArticle){
     var isZimbabe=id==='zimbabe';
     var likeKey=isZimbabe?'k-vam-na-ogonek-zimbabe-v1':'k-vam-na-ogonek-barash-v1';
-    // Counters before the 2026-11-21 reset remain stored under the original keys.
-    // New independent view series plus historic, user-confirmed starting totals.
-    var viewKey=isZimbabe?'k-vam-na-ogonek-zimbabe-20261121-v2':'k-vam-na-ogonek-barash-20261121-v2';
+    // Historical, user-confirmed numbers (previous Abacus service was unreliable).
+    // New increments use independent Firebase keys, without altering old Abacus data.
+    var viewKey=isZimbabe?'ogonek-zimbabe-firebase-views-20261121-v1':'ogonek-barash-firebase-views-20261121-v1';
     var viewBaseline=isZimbabe?15:73;
   var likeUrl='https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/'+encodeURIComponent(likeKey)+'.json';
-  var viewUrl='https://abacus.jasoncameron.dev/';
+  var viewUrl='https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/'+encodeURIComponent(viewKey)+'.json';
   var likedKey='belaya-mgla-firebase-liked-'+likeKey;
   var seenKey='bm-view-counted:'+viewKey;
   var cachedViewsKey='bm-view-last:'+viewKey;
@@ -57,41 +57,50 @@
     if(isArticle||viewsEl){
       var seen=false;
       try{seen=sessionStorage.getItem(seenKey)==='1'}catch(e){}
-      var action=isArticle&&!seen?'hit':'get';
-      var counterPath='/belaya-mgla-sova58/'+encodeURIComponent(viewKey);
       var initialViews=viewsEl&&viewsEl.getAttribute('data-last-confirmed');
       var cachedViews=initialViews===null?null:Number(initialViews);
       try{
         var saved=localStorage.getItem(cachedViewsKey);
-        if(saved!==null&&Number.isSafeInteger(Number(saved))&&Number(saved)>=0)cachedViews=Math.max(cachedViews??0,Number(saved));
+        if(saved!==null&&Number.isSafeInteger(Number(saved))&&Number(saved)>=0){
+          cachedViews=Math.max(cachedViews??0,Number(saved));
+        }
       }catch(e){}
       if(viewsEl&&cachedViews!==null){
         viewsEl.textContent=format(cachedViews);
-        viewsEl.title='Последнее подтверждённое число просмотров';
+        viewsEl.title='Последнее сохранённое значение. Обновляем…';
       }
-
-      function updateViews(response){
-        var value=response&&response.value;
-        if(!Number.isSafeInteger(value)||value<0)throw Error('Invalid view count');
+      function updateViews(value){
+        if(value===null)value=0;
+        if(!Number.isSafeInteger(value)||value<0)throw Error('Invalid view total');
         var total=value+viewBaseline;
-        if(!Number.isSafeInteger(total))throw Error('Invalid total view count');
+        if(!Number.isSafeInteger(total))throw Error('Invalid total');
         display(viewsEl,total);
-        if(viewsEl)viewsEl.removeAttribute('title');
+        if(viewsEl)viewsEl.title='Просмотры обновлены';
         try{localStorage.setItem(cachedViewsKey,String(total))}catch(e){}
       }
-
-      request(viewUrl+action+counterPath,undefined,12000)
-        .then(function(response){
-          if(action==='hit')try{sessionStorage.setItem(seenKey,'1')}catch(e){}
-          updateViews(response);
+      function failed(){
+        if(viewsEl){
+          viewsEl.title='Не удалось связаться со счётчиком. Показано последнее сохранённое значение.';
+          if(cachedViews===null)display(viewsEl,null);
+        }
+      }
+      var countOne=isArticle&&!seen;
+      // Firebase server-side increment is atomic; don't repeat a failed write,
+      // since the server might have committed it before the response was lost.
+      var op=countOne?
+        request(viewUrl,{method:'PUT',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({'.sv':{increment:1}})},12000):
+        request(viewUrl,undefined,12000);
+      op.then(function(value){
+          if(countOne)try{sessionStorage.setItem(seenKey,'1')}catch(e){}
+          updateViews(value);
         })
         .catch(function(){
-          // Retry the read only. A timed-out hit may already have been counted.
-          return new Promise(function(resolve){setTimeout(resolve,1000)})
-            .then(function(){return request(viewUrl+'get'+counterPath,undefined,12000)})
-            .then(updateViews)
-            .catch(function(){if(cachedViews===null)display(viewsEl,null)});
+          // A read may succeed even when the initial write response was lost.
+          // Never issue a second increment automatically.
+          return request(viewUrl,undefined,12000).then(updateViews).catch(failed);
         });
+
     }
   }
   load();
