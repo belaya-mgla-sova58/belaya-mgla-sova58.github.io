@@ -1,0 +1,32 @@
+/* Белая мгла: аккуратность сеток и длинных заголовков.
+   Небольшой совместимый слой. Не меняет функциональность и темы разделов. */
+:is(.guide-nav-grid,.event-group-grid-v522,.calc-hub-grid,.kb-clean-grid-v920,.pet-card-grid,.related-guides-grid-v625,.home-news-grid-v442,.home-portal-grid-v1016,.modern-card-grid-v424) > * {
+  min-width:0;
+  max-width:100%;
+}
+:is(.guide-nav-card,.calc-hub-card,.kb-clean-card-v920,.pet-catalog-card,.related-guide-card-v625,.modern-topic-card-v424,.home-news-card-v442) {
+  box-sizing:border-box;
+  min-width:0;
+  max-width:100%;
+}
+:is(.guide-nav-card,.calc-hub-card,.kb-clean-card-v920,.pet-catalog-card,.related-guide-card-v625,.modern-topic-card-v424,.home-news-card-v442)
+:is(h2,h3,h4,b,strong,small,p,span) {
+  overflow-wrap:break-word;
+}
+:is(.page-heading-v424,.guide-section,.wave-panel,.pet-redesign-section,.pet-section-heading,.calc-hub-head) {
+  min-width:0;
+  max-width:100%;
+  box-sizing:border-box;
+}
+:is(.page-heading-v424,.guide-section,.pet-section-heading,.calc-hub-head) :is(h1,h2,h3) {
+  overflow-wrap:break-word;
+  text-wrap:balance;
+}
+@media (max-width:760px) {
+  :is(.guide-nav-grid,.event-group-grid-v522,.calc-hub-grid,.kb-clean-grid-v920,.pet-card-grid,.related-guides-grid-v625) {
+    max-width:100%;
+  }
+  :is(.guide-nav-card,.calc-hub-card,.kb-clean-card-v920,.pet-catalog-card,.related-guide-card-v625) img {
+    max-width:100%;
+  }
+}
