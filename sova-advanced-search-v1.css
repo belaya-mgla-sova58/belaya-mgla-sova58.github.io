@@ -1,0 +1,19 @@
+/* SOVA58 advanced site search, warm graphite and gold */
+.sova-search-panel{display:none;box-sizing:border-box;width:100%;padding:14px;margin:7px auto 15px;border:1px solid rgba(243,196,126,.68);border-radius:16px;background:linear-gradient(145deg,#343037,#242328);box-shadow:0 12px 30px rgba(0,0,0,.24);color:#f8edda;position:relative;z-index:95}
+.sova-search-panel.sova-search-visible{display:block}
+.sova-advanced-active>.site-search-results-v426{display:none!important}
+.sova-search-options,.sova-search-switches{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.sova-search-options>label{flex:1 1 200px;font-size:13px;font-weight:700;color:#f0d2a3}
+.sova-search-options select{display:block;box-sizing:border-box;width:100%;margin-top:5px;padding:9px 12px;border-radius:9px;border:1px solid #a78155;background:#242227;color:#fff3e0;font:inherit}
+.sova-search-switches{margin:13px 0 9px;gap:9px 18px;font-size:12px}
+.sova-search-switches label{display:flex;align-items:center;gap:5px;cursor:pointer}
+.sova-search-switches input{accent-color:#e6b968}
+.sova-search-label{font-size:12px;color:#e9bd78;font-weight:800;margin:10px 0}
+.sova-search-quick{display:flex;flex-wrap:wrap;gap:8px}
+.sova-search-quick a{display:inline-flex;padding:7px 11px;border:1px solid #9c764b;border-radius:20px;background:#393138;color:#f7ddb1;text-decoration:none;font-size:12px}
+.sova-search-hits{max-height:min(54vh,590px);overflow:auto;display:grid;gap:7px}
+.sova-search-hits a{display:grid;gap:3px;padding:10px 12px;border-radius:10px;border:1px solid rgba(223,182,126,.32);background:#302c31;text-decoration:none;color:#f7eee2}
+.sova-search-hits a:hover,.sova-search-quick a:hover{border-color:#ffe19d;box-shadow:0 0 13px rgba(248,200,119,.18)}
+.sova-search-hits small{font-size:11px;color:#d4bfa7}
+.sova-search-muted{font-size:12px;color:#dac4aa;margin:10px 0}
+@media(max-width:700px){.sova-search-panel{padding:11px}.sova-search-options>label{flex:1 1 120px}.sova-search-switches{gap:8px}}
