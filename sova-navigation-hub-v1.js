@@ -7,6 +7,7 @@ const ROUTES=[
 ["index.html","Главная","home"],["events.html","События","events"],["heroes.html","Герои","heroes"],["gear.html","Снаряжение","gear"],["pets.html","Питомцы","pets"],["experts.html","Эксперты","experts"],["calculators.html","Калькуляторы","calculators"],["other.html","База знаний","knowledge"],["news.html","Новости","news"],["site-updates.html","Обновления сайта","updates"],
 ["bear.html","Охота на медведя","events"],["svs-prep.html","Подготовка к СВС","events"],["svs.html","Битва СВС","events"],["winter-siege.html","Зимняя осада","events"],["canyon-clash.html","Схватка в каньоне","events"],["fire-furnace-calculator.html","Огненная топка","calculators"],["furnace-calculator.html","Калькулятор топки","calculators"],["hero-generations.html","Поколения героев","heroes"],["troops.html","Войска","knowledge"],["research.html","Исследования","knowledge"],["resources.html","Ресурсы","knowledge"],["buildings.html","Здания","knowledge"]
 ];
+const UPDATES={"experts.html":"Обновлено","beacon.html":"Новое","mails.html":"Новое","arena.html":"Обновлено"};
 const MAP=new Map(ROUTES.map(([u,t,c])=>[u,{url:u,title:t,category:c}]));
 const esc=s=>String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const load=(k)=>{try{let v=JSON.parse(localStorage.getItem(k)||"[]");return Array.isArray(v)?v:[]}catch(e){return []}};
@@ -59,7 +60,7 @@ function init(){
  trigger.addEventListener("click",()=>drawer.hidden?open():close());
  root.querySelector(".sova-nav-close").addEventListener("click",close);shade.addEventListener("click",close);
  document.addEventListener("keydown",e=>{if(e.key==="Escape")close()});
- function cards(a){return a.map(x=>'<a href="'+esc(x.url)+'">'+esc(x.title||info(x.url).title)+'</a>').join("")}
+ function cards(a){return a.map(x=>'<a href="'+esc(x.url)+'">'+esc(x.title||info(x.url).title)+(UPDATES[x.url]?'<span class="sova-nav-update">'+esc(UPDATES[x.url])+'</span>':'')+'</a>').join("")}
  function render(){
   let {favorites,older,recent}=stored(),favs=[...favorites];
   older.forEach(u=>{let url=MAP.has(u)?u:null;if(url&&!favs.some(x=>x.url===url))favs.push(info(url))});
