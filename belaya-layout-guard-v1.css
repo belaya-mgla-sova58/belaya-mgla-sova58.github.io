@@ -105,3 +105,25 @@ body.is-other-route[data-static-route="other"] .kb-clean-card-v920 :is(b,small,i
   max-width:100%;
   overflow-wrap:break-word;
 }
+
+/* Long-form guides: avoid fixed-width content forcing phone-wide scrolling. */
+@media (max-width:760px) {
+ body.is-troops-route :is(.troops-wrap,.troop-grid,.tier-grid,.progress-grid,.troop-card,.tier-card,.progress-card),
+ body.is-newbie-route :is(.guide-page-v69,.guide-section,.guide-fold-body-v414),
+ body.is-buildings-route :is(.guide-section,.guide-page-v69),
+ body.luxury-chronicle :is(.section-frame,.section-content,.banner-content),
+ body.is-furnace-calc-route :is(.calc-building-grid-v379,.calc-res-grid-v378),
+ body.is-essence-mithril-calc-route :is(.ec-shell,.ec-panel,.ec-result-grid,.ec-stock-grid,.ec-item-grid) {
+   box-sizing:border-box;
+   min-width:0;
+   max-width:100%;
+ }
+ body.is-troops-route :is(.troop-card,.tier-card,.progress-card) :is(h2,h3,h4,strong,p,small),
+ body.is-newbie-route .guide-fold-body-v414 :is(h2,h3,p,li),
+ body.luxury-chronicle .section-content :is(h2,h3,p,li) {
+   overflow-wrap:break-word;
+ }
+ body.is-essence-mithril-calc-route .ec-table-wrap {
+   max-width:100%;
+ }
+}
