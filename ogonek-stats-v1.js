@@ -6,7 +6,10 @@
   function init(root, id, isArticle){
     var isZimbabe=id==='zimbabe';
     var likeKey=isZimbabe?'k-vam-na-ogonek-zimbabe-v1':'k-vam-na-ogonek-barash-v1';
-    var viewKey=isZimbabe?'k-vam-na-ogonek-zimbabe':'k-vam-na-ogonek-barash';
+    // Counters before the 2026-11-21 reset remain stored under the original keys.
+    // New independent view series plus historic, user-confirmed starting totals.
+    var viewKey=isZimbabe?'k-vam-na-ogonek-zimbabe-20261121-v2':'k-vam-na-ogonek-barash-20261121-v2';
+    var viewBaseline=isZimbabe?15:73;
   var likeUrl='https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/'+encodeURIComponent(likeKey)+'.json';
   var viewUrl='https://abacus.jasoncameron.dev/';
   var likedKey='belaya-mgla-firebase-liked-'+likeKey;
@@ -70,9 +73,11 @@
       function updateViews(response){
         var value=response&&response.value;
         if(!Number.isSafeInteger(value)||value<0)throw Error('Invalid view count');
-        display(viewsEl,value);
+        var total=value+viewBaseline;
+        if(!Number.isSafeInteger(total))throw Error('Invalid total view count');
+        display(viewsEl,total);
         if(viewsEl)viewsEl.removeAttribute('title');
-        try{localStorage.setItem(cachedViewsKey,String(value))}catch(e){}
+        try{localStorage.setItem(cachedViewsKey,String(total))}catch(e){}
       }
 
       request(viewUrl+action+counterPath,undefined,12000)
