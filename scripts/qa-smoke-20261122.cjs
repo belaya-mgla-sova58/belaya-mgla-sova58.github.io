@@ -220,10 +220,28 @@ async function scenario(page,pathName,mode,record){
         await page.locator('#days [data-day="'+d+'"]').click({timeout:4000});
         const n=await page.locator('#mainItems input[data-id]').count();
         counts.push(n);
-        if(n<4)throw Error('Not all items visible for day '+d+': '+n);
+        if(n<8)throw Error('Not all items visible for day '+d+': '+n);
         if(await page.locator('#extraItems input[data-id]').count()>0)throw Error('Extra items hidden behind disclosure on day '+d);
       }
+      await page.locator('#days [data-day="2"]').click();
+      for(const id of ['gatherMeat','gatherWood','gatherCoal','gatherIron']){
+        if(await page.locator('#mainItems input[data-id="'+id+'"]').count()!==1)throw Error('Missing gathering resource: '+id);
+      }
+      for(const [id,v] of [['gatherMeat','1000'],['gatherWood','1000'],['gatherCoal','200'],['gatherIron','50']])
+        await page.locator('#mainItems input[data-id="'+id+'"]').fill(v);
+      const gather=Number((await page.locator('#potential').textContent()||'').replace(/[^0-9]/g,''));
+      if(gather!==8)throw Error('Expected 8 points from four gathering units, got '+gather);
+      await page.locator('#days [data-day="3"]').click();
+      for(const id of ['beasts','beasts21','beasts16','beasts11','beasts1'])
+        if(await page.locator('#mainItems input[data-id="'+id+'"]').count()!==1)throw Error('Missing beast level group '+id);
+      await page.locator('#mainItems input[data-id="beasts1"]').fill('1');
+      await page.locator('#mainItems input[data-id="beasts21"]').fill('1');
+      const hunt=Number((await page.locator('#potential').textContent()||'').replace(/[^0-9]/g,''));
+      if(hunt!==20250)throw Error('Expected 20250 from two beast groups, got '+hunt);
       await page.locator('#days [data-day="4"]').click();
+      for(let tier=1;tier<=11;tier++){
+        if(await page.locator('#mainItems input[data-id="t'+tier+'"]').count()!==1)throw Error('Troop tier T'+tier+' missing');
+      }
       await page.locator('#mainItems input[data-id="t10"]').fill('100');
       const actual=Number((await page.locator('#potential').textContent()||'').replace(/[^0-9]/g,''));
       if(actual!==6000)throw Error('Expected 6000 points for 100 T10 at the test rate, got '+actual);
