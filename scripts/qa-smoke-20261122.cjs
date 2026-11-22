@@ -16,6 +16,21 @@ async function scenario(page,pathName,mode,record){
     catch(e){record.scenarios.push({name,ok:false,error:String(e).slice(0,280)});record.issues.push(name+': '+String(e).slice(0,160))}
   }
   if(pathName==='/'){
+    if(mode==='desktop'){
+      await task('desktop_home_header_not_hidden_by_sidebar',async()=>{
+        const details=await page.evaluate(()=>{
+          const nav=document.querySelector('.nav-wrap'),heading=document.querySelector('.pc-topbar-title-v966'),search=document.querySelector('.site-search-v426');
+          if(!nav||!heading||!search)throw Error('Header, sidebar or search absent');
+          const n=nav.getBoundingClientRect(),h=heading.getBoundingClientRect(),s=search.getBoundingClientRect();
+          return {sidebarRight:Math.round(n.right),titleLeft:Math.round(h.left),titleRight:Math.round(h.right),searchLeft:Math.round(s.left),
+            visible:getComputedStyle(heading).display!=='none'};
+        });
+        if(!details.visible)throw Error('Desktop portal title is hidden');
+        if(details.titleLeft < details.sidebarRight + 8)throw Error('Sidebar overlaps portal title: '+JSON.stringify(details));
+        if(details.titleRight > details.searchLeft-6)throw Error('Portal title overlaps search: '+JSON.stringify(details));
+        return 'Title clear of sidebar and search: '+JSON.stringify(details);
+      });
+    }
     await task('consent_dialog',async()=>{
       const dialog=page.locator('#sova-metrika-consent');
       if(await dialog.count() && await dialog.isVisible()){
