@@ -168,7 +168,7 @@ function exchangeBalance(){
   let skipped=0;const used=Array(recipes.length).fill(0);
   for(const [i,n] of state.exchanges){
     const [from,to,give,get]=recipes[i],limit=exchangeLimit(i);
-    if(!state.exchangeUnlocked[recipeGroup(i)]||(limit!==null&&used[i]+n>limit)||!Number.isSafeInteger(give*n)||!Number.isSafeInteger(get*n)||p[from]<give*n||!Number.isSafeInteger(p[to]+get*n)){skipped++;continue}
+    if(!state.exchangeUnlocked[recipeGroup(i)]||(limit!==null&&used[i]+n>limit)||!Number.isSafeInteger(give*n)||!Number.isSafeInteger(get*n)||p[from]<give*n||!Number.isSafeInteger(p[to]+get*n)||p[to]+get*n>maxMaterialStock){skipped++;continue}
     p[from]-=give*n;p[to]+=get*n;used[i]+=n;
   }
   return {p,skipped,used};
@@ -534,7 +534,57 @@ $('charmWeeklyLimit').onchange=()=>{const i=Number($('recipe').value);if(i<7)ret
 $('charmSuggestedLimit').onclick=()=>{const i=Number($('recipe').value);const suggested={7:500,8:500,9:50,10:50};if(!(i in suggested))return;state.charmWeeklyLimits[String(i)]=suggested[i];save();updateLimitInput();calculate();clearOptimizerPreview()};
 $('charmClearLimit').onclick=()=>{const i=Number($('recipe').value);if(i<7)return;delete state.charmWeeklyLimits[String(i)];save();updateLimitInput();calculate();clearOptimizerPreview()};
 for(const [id,cat] of [['gearUnlocked','gear'],['charmUnlocked','charm']]){$(id).onchange=e=>{state.exchangeUnlocked[cat]=e.target.checked;save();calculate();clearOptimizerPreview()}}
-$('exchangeBtn').onclick=()=>{const i=Number($('recipe').value),n=Number($('count').value),p=pool(),[from,,give]=recipes[i],limit=exchangeLimit(i);if(!Number.isSafeInteger(n)||n<1||n>1000000){alert('Введите целое положительное количество операций.');return}if(!state.exchangeUnlocked[recipeGroup(i)]){alert('Сначала подтвердите, что этот вид обмена открыт у вас в игре.');return}if(limit!==null && exchangeBalance().used[i]+n>limit){alert('Превышен недельный лимит этого обмена.');return}if(!Number.isSafeInteger(give*n)||p[from]<give*n){alert('Не хватает материала для такого обмена.');return}state.exchanges.push([i,n]);save();calculate();clearOptimizerPreview()};$('undoBtn').onclick=()=>{state.exchanges.pop();save();calculate();clearOptimizerPreview()};$('newWeekBtn').onclick=()=>{if(confirm('Очистить все запланированные обмены для новой недели? Уровни и исходные запасы сохранятся.')){state.exchanges=[];save();calculate();clearOptimizerPreview()}};$('resetBtn').onclick=()=>{
+function exchangeFeedback(message){
+ const target=$('exchangeError');
+ if(!target)return;
+ target.textContent=message||'';
+ target.hidden=!message;
+}
+$('exchangeBtn').onclick=()=>{
+ const i=Number($('recipe').value),countRaw=$('count').value.trim();
+ const n=validWholeInput(countRaw,1000000),recipe=recipes[i];
+ if(!recipe||n===null||n<1||$('count').validity.badInput){
+  exchangeFeedback('Введите целое количество обменов от 1 до 1 000 000.');return;
+ }
+ if(!state.exchangeUnlocked[recipeGroup(i)]){
+  exchangeFeedback('Этот вид обмена не отмечен как открытый в игре.');return;
+ }
+ const current=exchangeBalance(),limit=exchangeLimit(i);
+ if(current.skipped){
+  exchangeFeedback('Сначала исправьте недоступные обмены в текущем плане или отмените их.');return;
+ }
+ if(limit!==null&&current.used[i]+n>limit){
+  exchangeFeedback('Недельный лимит превышен. Доступно ещё '+fmt(Math.max(0,limit-current.used[i]))+' обменов.');return;
+ }
+ const [from,to,give,get]=recipe;
+ if(!Number.isSafeInteger(give*n)||current.p[from]<give*n){
+  exchangeFeedback('Не хватает материала: '+mats[from]+'. Нужно '+fmt(give*n)+' для выбранного обмена.');return;
+ }
+ if(!Number.isSafeInteger(get*n)||!Number.isSafeInteger(current.p[to]+get*n)||current.p[to]+get*n>maxMaterialStock){
+  exchangeFeedback('После обмена запас '+mats[to]+' превысит допустимый максимум. Уменьшите количество операций.');return;
+ }
+ const before=state.exchanges;
+ state.exchanges=[...before,[i,n]];
+ const check=exchangeBalance();
+ if(check.skipped||check.used[i]!==current.used[i]+n){
+  state.exchanges=before;
+  exchangeFeedback('Обмен нельзя учесть из-за ограничений или недостатка материалов.');return;
+ }
+ exchangeFeedback('');
+ save();calculate();clearOptimizerPreview();
+};
+$('recipe').addEventListener('change',()=>exchangeFeedback(''));
+$('count').addEventListener('input',()=>exchangeFeedback(''));
+$('undoBtn').onclick=()=>{
+ if(!state.exchanges.length){exchangeFeedback('В плане пока нет обменов для отмены.');return}
+ state.exchanges.pop();exchangeFeedback('');save();calculate();clearOptimizerPreview();
+};
+$('newWeekBtn').onclick=()=>{
+ if(confirm('Очистить все запланированные обмены для новой недели? Уровни и исходные запасы сохранятся.')){
+  state.exchanges=[];exchangeFeedback('');save();calculate();clearOptimizerPreview();
+ }
+};
+$('resetBtn').onclick=()=>{
  if(!confirm('Сбросить все уровни, материалы, обмены и цель СВС? Основная запись и резервная копия также будут очищены.'))return;
  // Remove both older snapshots before writing a fresh empty state. Otherwise
  // a stale backup could restore the pre-reset plan if the primary gets damaged.
