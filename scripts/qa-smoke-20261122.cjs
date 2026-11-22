@@ -684,6 +684,51 @@ async function scenario(page,pathName,mode,record){
       return 'Corrupt primary JSON recovered gear level, materials and bonus from independently saved backup';
     });
   }
+  if(pathName==='/chief-gear-calculator.html'){
+    await task('chief_reset_erases_primary_and_backup',async()=>{
+      const key='belaya-mgla-chief-calculator-v1',backup=key+'-backup-v1';
+      await page.locator('#gearTab').click();
+      await page.locator('#current').selectOption('-1');
+      await page.locator('#target').selectOption('0');
+      await page.locator('#inv-alloy').fill('345678');
+      await page.locator('#bonus').fill('17');
+      const before=await page.evaluate(({key,backup})=>({
+        primary:JSON.parse(localStorage.getItem(key)),
+        backup:JSON.parse(localStorage.getItem(backup))
+      }),{key,backup});
+      if(before.primary.inventory.alloy!==345678||before.backup.inventory.alloy!==345678)
+        throw Error('Expected a nonempty plan in both snapshots before reset');
+      page.once('dialog',dialog=>dialog.accept());
+      await page.locator('#resetBtn').click();
+      const check=await page.evaluate(({key,backup})=>{
+        const primary=JSON.parse(localStorage.getItem(key));
+        const snapshot=JSON.parse(localStorage.getItem(backup));
+        return {primary,snapshot,stock:document.getElementById('inv-alloy')?.value,
+          bonus:document.getElementById('bonus')?.value};
+      },{key,backup});
+      for(const saved of [check.primary,check.snapshot]){
+        if(saved.inventory.alloy!==0||saved.bonus!==0||saved.svsGoal!==0||
+           saved.exchanges.length||saved.gear.cap.to!==-1||
+           Object.values(saved.gear).some(x=>x.from!==-1||x.to!==-1)||
+           Object.values(saved.charm).some(x=>x.from!==-1||x.to!==-1))
+          throw Error('Full reset retained an old level or inventory in storage');
+      }
+      if(check.stock!=='0'||check.bonus!=='0')
+        throw Error('Reset did not redraw empty stock and bonus');
+      // A broken main record after reset must recover EMPTY backup,
+      // not the plan present before the reset.
+      await page.evaluate(k=>localStorage.setItem(k,'{broken after reset'),key);
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      const after=await page.evaluate(k=>({
+        stock:document.getElementById('inv-alloy')?.value,
+        bonus:document.getElementById('bonus')?.value,
+        plan:JSON.parse(localStorage.getItem(k+'-backup-v1'))
+      }),key);
+      if(after.stock!=='0'||after.bonus!=='0'||after.plan.gear.cap.to!==-1)
+        throw Error('Old saved data returned after reset and primary corruption');
+      return 'Both records reset to blank; even corrupted primary cannot resurrect old stock or upgrades';
+    });
+  }
   if(pathName==='/essence-mithril-calculator.html'){
     await task('essence_stock_inputs',async()=>{
       const essence=page.locator('#ecStockEssence'),mithril=page.locator('#ecStockMithril');
