@@ -668,7 +668,13 @@ body.is-events-route .guide-nav-card:hover{
 <link rel="stylesheet" href="belaya-no-blue-sitewide-v11.css?v=15" data-no-blue-sitewide/>
 
 
-<link href="belaya-layout-guard-v1.css?v=2" rel="stylesheet" data-layout-guard="v1"/></head><body class="is-home-route home-hq-v405 home-hq-v406 home-site-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="home"><a class="bm-skip-to-content-v1184" href="#appMain">Перейти к содержимому</a>
+<link href="belaya-layout-guard-v1.css?v=2" rel="stylesheet" data-layout-guard="v1"/><!-- Remove redundant hamburger stripes from mobile side Menu tab; keep text label and click action. -->
+<style id="sova-mobile-menu-no-stripes-v1">
+@media (max-width:1200px), (hover:none) and (pointer:coarse) {
+  body #mobileMenuToggle::before { content:none!important; display:none!important; }
+}
+</style>
+</head><body class="is-home-route home-hq-v405 home-hq-v406 home-site-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="home"><a class="bm-skip-to-content-v1184" href="#appMain">Перейти к содержимому</a>
 <div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
 <button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
 <div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Главная</small></div>
