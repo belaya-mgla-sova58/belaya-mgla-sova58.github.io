@@ -49,7 +49,7 @@ function init(){
   }
   html body.is-home-route #sovaSupportTrigger{
     position:fixed!important;right:13px!important;left:auto!important;
-    top:auto!important;bottom:24px!important;
+    top:auto!important;bottom:96px!important;
     width:70px!important;height:70px!important;
     z-index:2147483050!important;
     padding:4px!important;
