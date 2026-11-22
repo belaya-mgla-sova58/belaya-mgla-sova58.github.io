@@ -1,4 +1,4 @@
-name: QA smoke: 19 pages, desktop + Android
+name: "QA smoke: 19 pages, desktop + Android"
 on:
   push:
     branches: [main]
