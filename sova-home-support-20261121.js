@@ -37,10 +37,66 @@ function init(){
   @media(max-width:820px){#sovaSupportTrigger{right:8px;top:8px;bottom:auto;width:60px;height:60px;padding:3px!important}#sovaSupportLayer .sova-support-dialog{width:min(100%,350px);padding:16px 16px 15px;border-radius:18px}#sovaSupportLayer .sova-support-owl{width:69px;height:69px}#sovaSupportLayer .sova-support-title{font-size:23px!important}}
   @media(max-width:420px){#sovaSupportTrigger{width:55px;height:55px}#sovaSupportLayer .sova-support-title{font-size:21px!important}}
   @media(prefers-reduced-motion:reduce){#sovaSupportTrigger{transition:none!important}}
+
+  /* Gift owl v1250: dedicated, noticeable bottom-right control. */
+  @keyframes sovaGiftFloatV1250{
+    0%,100%{transform:translate3d(0,0,0) scale(1)}
+    50%{transform:translate3d(0,-7px,0) scale(1.035)}
+  }
+  @keyframes sovaGiftGlowV1250{
+    0%,100%{box-shadow:0 0 0 3px rgba(242,208,149,.15),0 0 12px rgba(171,96,227,.45),0 5px 18px rgba(0,0,0,.36)}
+    50%{box-shadow:0 0 0 5px rgba(242,208,149,.28),0 0 27px rgba(206,141,255,.84),0 6px 23px rgba(0,0,0,.46)}
+  }
+  html body.is-home-route #sovaSupportTrigger{
+    position:fixed!important;right:13px!important;left:auto!important;
+    top:auto!important;bottom:24px!important;
+    width:70px!important;height:70px!important;
+    z-index:2147483050!important;
+    padding:4px!important;
+    transform-origin:center bottom;
+    animation:sovaGiftFloatV1250 3.2s ease-in-out infinite,sovaGiftGlowV1250 3.2s ease-in-out infinite!important;
+    -webkit-tap-highlight-color:transparent;
+  }
+  html body.is-home-route #sovaSupportTrigger:focus-visible{
+    outline:3px solid #ffdf9c!important;outline-offset:4px!important;
+  }
+  html body.is-home-route #sovaSupportLayer{
+    z-index:2147483500!important;
+  }
+  @media screen and (max-width:820px){
+    html:not(.force-desktop-root) body.is-home-route #sovaSupportTrigger{
+      top:auto!important;left:auto!important;right:9px!important;
+      bottom:calc(112px + env(safe-area-inset-bottom,0px))!important;
+      width:82px!important;height:82px!important;
+    }
+    /* Two different owls should not sit on top of each other. */
+    html:not(.force-desktop-root) body.is-home-route #madamUguLauncherV720{
+      bottom:calc(216px + env(safe-area-inset-bottom,0px))!important;
+    }
+    html:not(.force-desktop-root) body.is-home-route.mobile-menu-open #sovaSupportTrigger,
+    html:not(.force-desktop-root) body.is-home-route.mobile-nav-open #sovaSupportTrigger{
+      visibility:hidden!important;pointer-events:none!important;
+    }
+  }
+  @media screen and (max-width:820px) and (max-height:570px){
+    html:not(.force-desktop-root) body.is-home-route #sovaSupportTrigger{
+      width:66px!important;height:66px!important;bottom:calc(91px + env(safe-area-inset-bottom,0px))!important;
+    }
+    html:not(.force-desktop-root) body.is-home-route #madamUguLauncherV720{
+      bottom:calc(179px + env(safe-area-inset-bottom,0px))!important;
+    }
+  }
+  @media(prefers-reduced-motion:reduce){
+    html body.is-home-route #sovaSupportTrigger{
+      animation:none!important;
+      box-shadow:0 0 0 3px rgba(244,204,142,.27),0 0 16px rgba(190,111,253,.65)!important;
+    }
+  }
+
   `;
   document.head.append(style);
   const button=document.createElement('button');button.type='button';button.id='sovaSupportTrigger';button.title='Поддержать Сову в игре';button.setAttribute('aria-label','Поддержать Сову в игре');button.setAttribute('aria-haspopup','dialog');button.setAttribute('aria-expanded','false');button.setAttribute('aria-controls','sovaSupportLayer');
-  const img=document.createElement('img');img.src=OWL_SRC;img.alt='';img.width=80;img.height=80;img.decoding='async';button.append(img);hero.append(button);
+  const img=document.createElement('img');img.src=OWL_SRC;img.alt='';img.width=80;img.height=80;img.decoding='async';button.append(img);document.body.append(button);
   const layer=document.createElement('div');layer.id='sovaSupportLayer';layer.hidden=true;
   layer.innerHTML=`<div class="sova-support-shade" data-sova-close></div><section role="dialog" aria-modal="true" aria-labelledby="sovaSupportTitle" class="sova-support-dialog"><button class="sova-support-close" type="button" aria-label="Закрыть окошко" data-sova-close>×</button><img class="sova-support-owl" src="${OWL_SRC}" alt="Милая белая сова с подарком"><div class="sova-support-kicker">🦉 Маленькая совиная просьба</div><h2 class="sova-support-title" id="sovaSupportTitle">Сова не кит,<br><span>но тоже любит подарочки</span> 💜</h2><p>До китовых запасов мне далеко, зато энтузиазма хоть отбавляй! 😂</p><p>Если вдруг захотите порадовать Сову подарочком в игре, буду очень рада! 💜</p><div class="sova-support-id"><div class="sova-support-id-label">🎁 Мой игровой ID</div><div class="sova-support-id-row"><span class="sova-support-id-num">${GAME_ID}</span><button type="button" class="sova-support-copy" id="sovaSupportCopy">⧉ Копировать</button></div><div class="sova-support-status" role="status" aria-live="polite" id="sovaSupportStatus"></div></div><p class="sova-support-aside">Сова, конечно, птица гордая… но от маленькой порции доната крылья не отвалятся! 😏✨</p><div class="sova-support-thanks">Спасибо каждому за поддержку! ❤️</div></section>`;
   document.body.append(layer);
