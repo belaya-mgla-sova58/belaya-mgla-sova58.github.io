@@ -6,6 +6,10 @@ on:
     paths:
       - 'scripts/full-site-audit-20261122.cjs'
       - '.github/workflows/full-site-audit-20261122.yml'
+      - 'whitefox-elena-44-45.html'
+      - 'winter-siege.html'
+      - 'owl-dismiss-v1097.js'
+      - 'sitemap.xml'
 permissions:
   contents: read
 concurrency:
