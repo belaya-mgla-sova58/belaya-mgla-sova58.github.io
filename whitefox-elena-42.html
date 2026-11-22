@@ -223,7 +223,7 @@
 <div class="whitefox-author">Автор — Elena</div>
 <div class="whitefox-head-stats-v557">
 <button aria-label="Поставить лайк публикации" aria-pressed="false" class="whitefox-head-like-v557" id="whitefox42Like" type="button"><span aria-hidden="true" class="heart">♥</span><span>Нравится</span><b id="whitefox42LikeCount">0</b></button>
-<span aria-label="Просмотры" class="whitefox-head-stat-v557">👀 <b id="whitefox42Views">0</b> просмотров</span>
+
 </div>
 <div class="whitefox-week42-jump-v558" aria-label="Быстрые переходы по публикации"><a href="#whitefox42Questions">❓ Вопросы</a><a class="romance" href="#whitefox42Romance">💕 Романтика</a></div>
 </div>
@@ -300,11 +300,8 @@
   const BASE='https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/';
   const ROOT=BASE.slice(0,-1)+'.json';
   const articleKey='news-elena-42-v1';
-   /* 21 Nov 2026: public count restarted at zero. Old Firebase key __views__whitefox-elena-42 retained unmodified; last screenshot: 1368 views. */
-  const viewKey='__views__whitefox-elena-42-reset-v2';
   const likeBtn=document.getElementById('whitefox42Like');
   const likeCount=document.getElementById('whitefox42LikeCount');
-  const viewsEl=document.getElementById('whitefox42Views');
   const enc=s=>encodeURIComponent(s);
   const urlFor=k=>BASE+enc(k)+'.json';
 
@@ -342,9 +339,6 @@
     const liked=localStorage.getItem('belaya-mgla-liked:'+articleKey)==='1';
     if(likeBtn&&liked){likeBtn.classList.add('is-liked');likeBtn.setAttribute('aria-pressed','true');likeBtn.disabled=true;}
     if(likeBtn&&!liked){likeBtn.addEventListener('click',async()=>{likeBtn.disabled=true;const n=await increment(articleKey);if(likeCount)likeCount.textContent=n.toLocaleString('ru-RU');likeBtn.classList.add('is-liked');likeBtn.setAttribute('aria-pressed','true');localStorage.setItem('belaya-mgla-liked:'+articleKey,'1');});}
-    const sess='belaya-mgla-view-session:whitefox-elena-42-reset-v2';
-    let views;if(!localStorage.getItem(sess)){localStorage.setItem(sess,'1');views=await readNumber(viewKey)/* protected counter migration pending */}else views=await readNumber(viewKey);
-    if(viewsEl)viewsEl.textContent=views.toLocaleString('ru-RU');
   }
 
   function safeDate(ts){try{return new Intl.DateTimeFormat('ru-RU',{day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'}).format(new Date(ts))}catch(e){return ''}}
