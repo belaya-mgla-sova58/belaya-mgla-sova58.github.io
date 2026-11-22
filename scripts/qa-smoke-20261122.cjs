@@ -221,23 +221,48 @@ async function scenario(page,pathName,mode,record){
     });
   }
   if(pathName==='/fire-furnace-calculator.html'){
-    await task('fire_furnace_controls',async()=>{
+    await task('fire_furnace_progress',async()=>{
       const from=page.locator('#fireFrom'),to=page.locator('#fireTo');
-      if(!(await from.count())||!(await to.count()))throw Error('From/to selectors missing');
+      if(await from.count()!==1||await to.count()!==1)throw Error('Fire furnace selectors missing');
       const n=await to.locator('option').count();
-      if(n<2)throw Error('Target stage choices missing');
-      const owned=page.locator('#refineOwned');
-      await owned.fill('20');await owned.dispatchEvent('change');
-      return n+' target options, refine input accepted';
+      if(n<10)throw Error('Expected 10 fire crystal stages');
+      await from.selectOption('0');
+      await to.selectOption('10');
+      const before=await page.locator('#fireSteps .calc-step-v378').count();
+      if(before<10)throw Error('FC1–FC2 progression did not create enough steps: '+before);
+      await page.locator('#refineOwned').fill('20');
+      await page.locator('#refineOwned').dispatchEvent('change');
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      await page.locator('#fireTo option').first().waitFor({state:'attached',timeout:8000});
+      if(await page.locator('#fireFrom').inputValue()!=='0'||await page.locator('#fireTo').inputValue()!=='10')
+        throw Error('Fire furnace start and target did not persist');
+      if(await page.locator('#refineOwned').inputValue()!=='20')throw Error('Refined crystal stock not saved');
+      const after=await page.locator('#fireSteps .calc-step-v378').count();
+      if(after!==before)throw Error('Fire furnace steps changed across reload');
+      return n+' fire furnace targets; '+after+' steps and owned crystals persist';
     });
   }
   if(pathName==='/furnace-calculator.html'){
-    await task('furnace_controls',async()=>{
+    await task('furnace_progress',async()=>{
       const from=page.locator('#calcFrom'),to=page.locator('#calcTo');
-      if(!(await from.count())||!(await to.count()))throw Error('From/to selectors missing');
+      if(await from.count()!==1||await to.count()!==1)throw Error('Furnace selectors missing');
       const n=await to.locator('option').count();
-      if(n<2)throw Error('Target stage choices missing');
-      return n+' target options';
+      if(n<11)throw Error('Expected 11 normal furnace levels');
+      await from.selectOption('20');
+      await to.selectOption('22');
+      await page.locator('#curEmbassy').selectOption('20');
+      const before=await page.locator('#calcSteps .calc-step-v378').count();
+      if(before<2)throw Error('Furnace route did not produce upgrade steps');
+      const meat=await page.locator('#totalMeat').textContent();
+      if(!meat||/^0(?:\\s|$)/.test(meat))throw Error('Furnace cost did not render');
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      await page.locator('#calcTo option').first().waitFor({state:'attached',timeout:8000});
+      if(await page.locator('#calcFrom').inputValue()!=='20'||await page.locator('#calcTo').inputValue()!=='22')
+        throw Error('Normal furnace range not saved on reload');
+      if(await page.locator('#curEmbassy').inputValue()!=='20')throw Error('Embassy level not saved');
+      const after=await page.locator('#calcSteps .calc-step-v378').count();
+      if(after!==before)throw Error('Furnace upgrade route changed across reload');
+      return n+' normal furnace levels; cost and '+after+' upgrade steps persist';
     });
   }
   if(pathName==='/skhvatka.html'){
