@@ -512,6 +512,63 @@ async function inspect(browser,ctx,mode,pathName){
       }
       await ctx.close();
     }
+    // Focused small-phone geometry checks for the current navigation and dialogs.
+    // Read-only: open/close controls only, never submit any forms.
+    const narrow=[];
+    for(const width of [320,360,390]){
+      const ctx=await browser.newContext({
+        viewport:{width,height:740},deviceScaleFactor:1,
+        isMobile:true,hasTouch:true,reducedMotion:'reduce',serviceWorkers:'block'
+      });
+      try{
+        for(const pathName of ['/','/calculators.html','/news.html']){
+          const page=await ctx.newPage();
+          const item={width,path:pathName,issues:[]};
+          try{
+            const response=await page.goto(ORIGIN+pathName,{waitUntil:'domcontentloaded',timeout:25000});
+            await page.waitForTimeout(900);
+            item.status=response?.status()||0;
+            const geometry=await page.evaluate(()=>{
+              const visible=el=>{if(!el)return false;const s=getComputedStyle(el),r=el.getBoundingClientRect();return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0};
+              const nav=document.querySelector('nav.mobile-bottom-v424');
+              const links=nav?[...nav.querySelectorAll(':scope > a')]:[];
+              const navRect=nav?.getBoundingClientRect();
+              const linkRects=links.map(a=>{const r=a.getBoundingClientRect();return {label:a.textContent.trim(),left:r.left,right:r.right,width:r.width,height:r.height}});
+              const overflow=Math.max(0,document.documentElement.scrollWidth-innerWidth);
+              const clipping=linkRects.filter(r=>r.left< -1||r.right>innerWidth+1||r.width<35);
+              return {viewport:innerWidth,overflow,navVisible:visible(nav),navRect:navRect?{left:navRect.left,right:navRect.right,top:navRect.top,bottom:navRect.bottom}:null,
+                linkCount:links.length,clipping,links:linkRects};
+            });
+            item.geometry=geometry;
+            if(item.status>=400)item.issues.push('HTTP '+item.status);
+            if(geometry.overflow>8)item.issues.push('Horizontal overflow '+geometry.overflow+'px');
+            if(!geometry.navVisible)item.issues.push('Mobile navigation is hidden');
+            if(geometry.linkCount!==5)item.issues.push('Expected five mobile links, found '+geometry.linkCount);
+            if(geometry.clipping.length)item.issues.push('Clipped or too narrow navigation links: '+JSON.stringify(geometry.clipping));
+            if(pathName==='/'){
+              const trigger=page.locator('#sovaSupportTrigger');
+              if(await trigger.isVisible().catch(()=>false)){
+                await trigger.click({timeout:4000});
+                const modal=page.locator('#sovaSupportLayer');
+                if(await modal.isVisible().catch(()=>false)){
+                  const r=await modal.boundingBox();
+                  if(r&&(r.x< -2||r.x+r.width>width+2||r.y< -2||r.y+r.height>742))
+                    item.issues.push('Support popup extends beyond phone viewport: '+JSON.stringify(r));
+                  await modal.locator('.sova-support-close').click({timeout:3500}).catch(()=>item.issues.push('Support popup could not close'));
+                }else item.issues.push('Support popup did not open');
+              }else item.issues.push('Support button is not visible');
+            }
+            await page.screenshot({path:path.join(output,'narrow-'+width+'-'+(pathName==='/'?'index':pathName.slice(1).replace('.html',''))+'.jpg'),type:'jpeg',quality:60}).catch(()=>{});
+          }catch(e){item.issues.push(String(e).slice(0,220))}
+          narrow.push(item);
+          await page.close().catch(()=>{});
+        }
+      }finally{await ctx.close()}
+    }
+    fs.writeFileSync(path.join(output,'narrow-viewport-report.json'),JSON.stringify(narrow,null,2));
+    const narrowFailures=narrow.filter(x=>x.issues.length);
+    console.log('QA_NARROW '+JSON.stringify({checks:narrow.length,failures:narrowFailures.length,items:narrowFailures}));
+    if(narrowFailures.length)process.exitCode=1;
   }finally{await browser.close()}
   const total={pages:all.length,failedPages:all.filter(x=>x.issues.length).length,failedScenarios:all.flatMap(x=>x.scenarios).filter(x=>!x.ok).length,brokenImages:all.reduce((a,x)=>a+(x.images.brokenViewport?.length||0),0),overflowPages:all.filter(x=>x.horizontalOverflow>8).length,errorPages:all.filter(x=>x.consoleErrors.length).length,assetErrorPages:all.filter(x=>x.assetErrors.length).length};
   fs.writeFileSync(path.join(output,'summary.json'),JSON.stringify(total,null,2));
