@@ -3,6 +3,7 @@
 (function(){
  "use strict";
  if(!document.body || !document.body.classList.contains("is-home-route"))return;
+ if(!window.matchMedia || !window.matchMedia("(max-width:820px) and (pointer:coarse)").matches)return;
  var owlId="madamUguLauncherV720";
  var key="bm-home-owl-hidden-v1097";
  var closeId="bmOwlDismissV1097";
@@ -15,8 +16,8 @@
   var s=document.createElement("style");s.id="bmOwlDismissStyleV1097";
   s.textContent=[
    "body.is-home-route #"+closeId+"{position:fixed!important;z-index:2147483645!important;display:grid!important;place-items:center!important;width:38px!important;height:38px!important;border:2px solid #f2d69c!important;border-radius:50%!important;background:rgba(29,19,47,.96)!important;color:#fff!important;font:700 24px/1 Arial,sans-serif!important;box-shadow:0 4px 16px #0009,0 0 9px #a26deb88!important;cursor:pointer!important;touch-action:manipulation!important;padding:0!important;opacity:1!important;visibility:visible!important;}",
-   "body.is-home-route #"+restoreId+"{position:fixed!important;right:10px!important;bottom:80px!important;z-index:2147483645!important;display:none!important;align-items:center!important;justify-content:center!important;min-width:105px!important;min-height:39px!important;padding:8px 11px!important;border:1px solid #e8c88d!important;border-radius:12px!important;background:#152a58!important;color:#fff!important;font:700 13px Arial,sans-serif!important;box-shadow:0 4px 14px #0008!important;cursor:pointer!important;}",
-   "body.is-home-route #madamUguCloseLauncherV720{display:none!important;}",
+   "body.is-home-route #"+restoreId+"{position:fixed!important;right:10px!important;bottom:105px!important;z-index:2147483645!important;display:none!important;align-items:center!important;justify-content:center!important;min-width:105px!important;min-height:39px!important;padding:8px 11px!important;border:1px solid #e8c88d!important;border-radius:12px!important;background:#152a58!important;color:#fff!important;font:700 13px Arial,sans-serif!important;box-shadow:0 4px 14px #0008!important;cursor:pointer!important;}",
+   "html:not(.force-desktop-root) body.is-home-route #madamUguCloseLauncherV720{display:none!important;}",
    "body.is-home-route:has(#madamUguOverlayV720.is-open) #"+closeId+"{display:none!important;}",
    "body.is-home-route.bm-owl-hidden-v1097 #"+owlId+"{display:none!important;visibility:hidden!important;pointer-events:none!important;}",
    "body.is-home-route.bm-owl-hidden-v1097 #madamUguCloseLauncherV720{display:none!important;visibility:hidden!important;pointer-events:none!important;}",
