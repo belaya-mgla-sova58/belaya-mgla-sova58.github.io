@@ -55,13 +55,13 @@ const wait=ms=>new Promise(done=>setTimeout(done,ms));
        const description=document.querySelector('meta[name="description"]')?.content||'';
        const nav=performance.getEntriesByType('navigation')[0];
        return {title:document.title,description,canonical,lang:document.documentElement.lang,
-        headings:document.querySelectorAll('h1').length,
+        headings:[...document.querySelectorAll('h1')].filter(el=>el.getClientRects().length>0&&getComputedStyle(el).visibility!=='hidden'&&getComputedStyle(el).display!=='none').length,
         headingDetails:[...document.querySelectorAll('h1')].map(el=>({
          text:el.textContent.trim().slice(0,70),
-         visible:el.getClientRects().length>0&&getComputedStyle(el).visibility!=='hidden'
+         visible:el.getClientRects().length>0&&getComputedStyle(el).visibility!=='hidden'&&getComputedStyle(el).display!=='none'
         })),
         width:document.documentElement.scrollWidth,innerWidth,
-        links,emptyAnchors:[...document.querySelectorAll('a[href="#"],a[href="javascript:void(0)"]')].length,
+        links,emptyAnchors:[...document.querySelectorAll('a[href="#"],a[href="javascript:void(0)"]')].map(a=>({text:a.textContent.trim().slice(0,70),label:a.getAttribute('aria-label')||'',className:String(a.className||'').slice(0,90),href:a.getAttribute('href')})),
         unnamedButtons:[...document.querySelectorAll('button')].filter(b=>!b.textContent.trim()&&!b.getAttribute('aria-label')&&!b.getAttribute('title')).length,
         brokenLocalAnchors:[...document.querySelectorAll('a[href^="#"]')].filter(a=>{
          const hash=a.getAttribute('href');if(!hash||hash==='#')return false;
@@ -84,7 +84,7 @@ const wait=ms=>new Promise(done=>setTimeout(done,ms));
        entry.warnings.push('Canonical missing or does not match page: '+info.canonical);
       if(info.width>info.innerWidth+8)
        entry.errors.push('Horizontal overflow '+(info.width-info.innerWidth)+'px');
-      if(info.emptyAnchors)entry.warnings.push(info.emptyAnchors+' placeholder links');
+      if(info.emptyAnchors.length)entry.warnings.push(info.emptyAnchors.length+' placeholder links: '+JSON.stringify(info.emptyAnchors));
       if(info.unnamedButtons)entry.warnings.push(info.unnamedButtons+' unnamed buttons');
       if(info.brokenLocalAnchors.length)
        entry.warnings.push('Missing same-page anchor targets: '+info.brokenLocalAnchors.join(', '));
@@ -160,11 +160,12 @@ const wait=ms=>new Promise(done=>setTimeout(done,ms));
       if(viewport.width<=390){
        const narrow=await page.evaluate(()=>({
         tiny:[...document.querySelectorAll('main p, main li, article p, article li')]
-         .filter(el=>el.getBoundingClientRect().width>0&&parseFloat(getComputedStyle(el).fontSize)<12).length,
+         .filter(el=>el.getBoundingClientRect().width>0&&parseFloat(getComputedStyle(el).fontSize)<12)
+         .map(el=>({tag:el.tagName,className:String(el.className||'').slice(0,90),size:getComputedStyle(el).fontSize,text:el.textContent.trim().slice(0,90)})).slice(0,8),
         fixedBars:[...document.querySelectorAll('nav,footer')]
          .filter(e=>getComputedStyle(e).position==='fixed').length
        }));
-       if(narrow.tiny>0)entry.warnings.push(narrow.tiny+' very small paragraphs or list items');
+       if(narrow.tiny.length)entry.warnings.push(narrow.tiny.length+' very small paragraphs or list items: '+JSON.stringify(narrow.tiny));
       }
       if(jsErrors.length)entry.errors.push('JavaScript: '+jsErrors.slice(0,4).join('; '));
       if(failedAssets.length)entry.errors.push('Assets: '+[...new Set(failedAssets)].slice(0,6).join('; '));
