@@ -28,6 +28,27 @@ for(const name of names){
     reportFile:path.basename(filepath)};
    rows.push(row);
    console.log('LIGHTHOUSE_PAGE '+JSON.stringify(row));
+   if(mode==='mobile') {
+    const lcp=a['largest-contentful-paint-element']?.details?.items?.map(item=>({
+      node:item.node?.snippet||item.node?.nodeLabel||null,
+      url:item.url||item.node?.lhId||null
+    })).slice(0,3)||[];
+    const largestRequests=(a['network-requests']?.details?.items||[])
+      .filter(item=>item.url&&Number.isFinite(item.transferSize))
+      .sort((x,y)=>y.transferSize-x.transferSize).slice(0,8)
+      .map(item=>({url:item.url.slice(0,200),bytes:item.transferSize,resourceType:item.resourceType}));
+    const opportunities=Object.entries(a)
+      .filter(([id,v])=>typeof v?.numericValue==='number'&&/savings|blocking|unused|modern-image|efficiently-encode|server-response|unminified|redirects/i.test(id))
+      .map(([id,v])=>({id,ms:Math.round(v.numericValue),score:v.score}))
+      .slice(0,12);
+    const insightIds=['lcp-discovery-insight','lcp-breakdown-insight','render-blocking-insight'];
+    const insights=insightIds.map(id=>({
+      id,score:a[id]?.score??null,
+      explanation:a[id]?.explanation?.slice(0,240)||null,
+      displayValue:a[id]?.displayValue||null
+    })).filter(x=>x.score!==null||x.explanation||x.displayValue);
+    console.log('LIGHTHOUSE_DIAG '+JSON.stringify({page:name,device:mode,lcp,largestRequests,opportunities,insights}));
+   }
   }catch(e){rows.push({page:name,device:mode,error:String(e).slice(0,200)})}
  }
 }
