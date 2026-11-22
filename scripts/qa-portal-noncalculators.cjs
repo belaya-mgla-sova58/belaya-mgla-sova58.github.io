@@ -59,6 +59,11 @@ const wait=ms=>new Promise(done=>setTimeout(done,ms));
         width:document.documentElement.scrollWidth,innerWidth,
         links,emptyAnchors:[...document.querySelectorAll('a[href="#"],a[href="javascript:void(0)"]')].length,
         unnamedButtons:[...document.querySelectorAll('button')].filter(b=>!b.textContent.trim()&&!b.getAttribute('aria-label')&&!b.getAttribute('title')).length,
+        brokenLocalAnchors:[...document.querySelectorAll('a[href^="#"]')].filter(a=>{
+         const hash=a.getAttribute('href');if(!hash||hash==='#')return false;
+         const id=decodeURIComponent(hash.slice(1));return !document.getElementById(id)
+           &&!document.querySelector('[name="'+CSS.escape(id)+'"]');
+        }).map(a=>a.getAttribute('href')).slice(0,8),
         timing:nav?{domContentLoadedMs:Math.round(nav.domContentLoadedEventEnd),
           pageTransferBytes:nav.transferSize,
           cssFiles:document.querySelectorAll('link[rel="stylesheet"]').length,
@@ -77,6 +82,8 @@ const wait=ms=>new Promise(done=>setTimeout(done,ms));
        entry.errors.push('Horizontal overflow '+(info.width-info.innerWidth)+'px');
       if(info.emptyAnchors)entry.warnings.push(info.emptyAnchors+' placeholder links');
       if(info.unnamedButtons)entry.warnings.push(info.unnamedButtons+' unnamed buttons');
+      if(info.brokenLocalAnchors.length)
+       entry.warnings.push('Missing same-page anchor targets: '+info.brokenLocalAnchors.join(', '));
       entry.performance=info.timing||{};
       for(const href of info.links){
        try{
