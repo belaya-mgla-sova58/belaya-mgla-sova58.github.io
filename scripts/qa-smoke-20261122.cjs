@@ -549,6 +549,11 @@ async function inspect(browser,ctx,mode,pathName){
               // Consent may cover the support button on first visit: dismiss it for testing.
               const consent=page.locator('#sova-metrika-consent');
               if(await consent.isVisible().catch(()=>false)){
+                const consentRect=await consent.boundingBox();
+                if(consentRect && (
+                  consentRect.x < -2 || consentRect.x+consentRect.width > width+2 ||
+                  consentRect.y < -2 || consentRect.y+consentRect.height > 742
+                )) item.issues.push('Analytics consent extends beyond viewport: '+JSON.stringify(consentRect));
                 const decline=page.locator('#sova-metrika-decline');
                 if(await decline.isVisible().catch(()=>false))
                   await decline.click({timeout:3500});
