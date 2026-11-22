@@ -1083,7 +1083,11 @@ async function scenario(page,pathName,mode,record){
       }));
       if(blocked.skipped!==2||blocked.offers!==0||!/недоступных обменов/.test(blocked.notice))
         throw Error('Affordability offered upgrades despite broken chain: '+JSON.stringify(blocked));
-      return 'Chained exchange output can fund one upgrade only, and unavailable chains block additional suggestions';
+      await page.locator('#optSvs').click();
+      const optimizerMessage=await page.locator('#optResult').textContent()||'';
+      if(!/недоступных обменов/.test(optimizerMessage)||!(await page.locator('#applyOpt').isHidden()))
+        throw Error('Optimizer offered an unsafe plan with failed exchanges: '+optimizerMessage);
+      return 'Chained exchange output funds one upgrade only; failed chains block both affordability offers and automatic optimization';
     });
   }
   if(pathName==='/essence-mithril-calculator.html'){
