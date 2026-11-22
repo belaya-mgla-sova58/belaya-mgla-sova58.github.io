@@ -393,6 +393,31 @@ async function inspect(browser,ctx,mode,pathName){
       if(geometry&&geometry.mainLeft<geometry.sidebarRight-2)
         record.issues.push('Desktop navigation overlaps main page: '+JSON.stringify(geometry));
     }
+    // Collect accessibility and DOM-integrity findings without assuming all
+    // visually hidden labels are errors. This first pass is diagnostic.
+    record.accessibility=await page.evaluate(()=>{
+      const ids=new Map();
+      for(const el of document.querySelectorAll('[id]')){
+        ids.set(el.id,(ids.get(el.id)||0)+1);
+      }
+      const duplicates=[...ids].filter(([id,n])=>n>1).map(([id,n])=>({id,count:n})).slice(0,20);
+      const isVisible=el=>{
+        const c=getComputedStyle(el),r=el.getBoundingClientRect();
+        return c.display!=='none'&&c.visibility!=='hidden'&&r.width>0&&r.height>0;
+      };
+      const name=el=>(el.getAttribute('aria-label')||el.getAttribute('title')||el.getAttribute('aria-labelledby')||el.innerText||'').trim();
+      const unnamedButtons=[...document.querySelectorAll('button')].filter(el=>isVisible(el)&&!name(el))
+        .slice(0,12).map(el=>({id:el.id,cls:String(el.className||'').slice(0,70)}));
+      const emptyLinks=[...document.querySelectorAll('a[href]')].filter(el=>isVisible(el)&&!name(el)&&!el.querySelector('img[alt]:not([alt=""])'))
+        .slice(0,12).map(el=>({href:el.getAttribute('href')?.slice(0,110)}));
+      const unlabeledInputs=[...document.querySelectorAll('input:not([type=hidden]),select,textarea')].filter(el=>{
+        if(!isVisible(el))return false;
+        if(el.getAttribute('aria-label')||el.getAttribute('aria-labelledby')||el.getAttribute('title'))return false;
+        if(el.labels?.length)return false;
+        return true;
+      }).slice(0,12).map(el=>({id:el.id,type:el.type||el.tagName}));
+      return {duplicateIds:duplicates,unnamedButtons,emptyLinks,unlabeledInputs};
+    });
     record.horizontalOverflow=data.overflow;
     record.images=data.images;
     record.navigation=data.navigation;
