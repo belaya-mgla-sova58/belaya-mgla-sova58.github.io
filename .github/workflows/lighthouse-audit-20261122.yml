@@ -42,7 +42,7 @@ jobs:
         run: |
           mkdir -p lighthouse-audit-output
           base="https://belaya-mgla-sova58.github.io"
-          for item in "home:index.html" "calculators:calculators.html" "chief-gear:chief-gear-calculator.html"; do
+          for item in "home:" "calculators:calculators.html" "chief-gear:chief-gear-calculator.html"; do
             name="${item%%:*}"
             file="${item#*:}"
             for device in mobile desktop; do
