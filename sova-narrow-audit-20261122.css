@@ -43,7 +43,7 @@
 }
 @media screen and (max-width:760px) {
   body.modern-v424 #sovaSupportLayer :is([role="dialog"],.sova-support-modal,.sova-support-dialog),
-  body.modern-v424 #sova-metrika-consent :is([role="dialog"],.consent-dialog) {
+  body.modern-v424 #sova-metrika-consent {
     box-sizing:border-box!important;
     max-width:calc(100vw - 24px)!important;
     max-height:calc(100dvh - 32px)!important;
