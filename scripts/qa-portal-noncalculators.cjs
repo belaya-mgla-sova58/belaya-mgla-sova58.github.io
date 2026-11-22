@@ -56,6 +56,10 @@ const wait=ms=>new Promise(done=>setTimeout(done,ms));
        const nav=performance.getEntriesByType('navigation')[0];
        return {title:document.title,description,canonical,lang:document.documentElement.lang,
         headings:document.querySelectorAll('h1').length,
+        headingDetails:[...document.querySelectorAll('h1')].map(el=>({
+         text:el.textContent.trim().slice(0,70),
+         visible:el.getClientRects().length>0&&getComputedStyle(el).visibility!=='hidden'
+        })),
         width:document.documentElement.scrollWidth,innerWidth,
         links,emptyAnchors:[...document.querySelectorAll('a[href="#"],a[href="javascript:void(0)"]')].length,
         unnamedButtons:[...document.querySelectorAll('button')].filter(b=>!b.textContent.trim()&&!b.getAttribute('aria-label')&&!b.getAttribute('title')).length,
@@ -74,7 +78,7 @@ const wait=ms=>new Promise(done=>setTimeout(done,ms));
       });
       if(!info.title.trim())entry.errors.push('Missing title');
       if(!info.description.trim())entry.errors.push('Missing meta description');
-      if(info.headings!==1)entry.warnings.push('Expected one H1, got '+info.headings);
+      if(info.headings!==1)entry.warnings.push('Expected one H1, got '+info.headings+': '+JSON.stringify(info.headingDetails));
       if(info.lang!=='ru')entry.warnings.push('Missing Russian language metadata');
       if(info.canonical!==ROOT+(route==='/'?'/':route))
        entry.warnings.push('Canonical missing or does not match page: '+info.canonical);
@@ -120,6 +124,17 @@ const wait=ms=>new Promise(done=>setTimeout(done,ms));
        }else entry.errors.push('Search input missing');
       }
       if(route==='/'&&viewport.width<=390){
+       // Consent is a legitimate blocking dialog on a fresh visit. Close it
+       // through the real UI before testing controls behind it.
+       const consent=page.locator('#sova-metrika-consent');
+       if(await consent.count()&&await consent.isVisible()){
+        const decline=page.locator('#sova-metrika-decline');
+        if(!(await decline.count()))entry.errors.push('Visible consent dialog has no decline button');
+        else {
+         await decline.click({timeout:8000});
+         if(await consent.isVisible())entry.errors.push('Consent dialog remains open after declining');
+        }
+       }
        const toggle=page.locator('#mobileMenuToggle');
        if(await toggle.count()){
         await toggle.click({timeout:5000});
