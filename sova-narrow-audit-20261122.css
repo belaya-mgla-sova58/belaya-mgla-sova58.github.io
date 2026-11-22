@@ -1,0 +1,57 @@
+/* Mobile audit: compact bottom navigation and viewport-safe dialogs.
+   Scoped to narrow viewports; no changes to the approved header, decorative owls or desktop. */
+@media screen and (max-width:390px) {
+  html:not(.force-desktop-root) body.modern-v424 nav.mobile-bottom-v424 {
+    box-sizing:border-box!important;
+    display:grid!important;
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+    width:auto!important;max-width:none!important;
+    left:calc(4px + env(safe-area-inset-left,0px))!important;
+    right:calc(4px + env(safe-area-inset-right,0px))!important;
+    bottom:calc(5px + env(safe-area-inset-bottom,0px))!important;
+    padding:4px 3px!important;gap:2px!important;
+    min-height:68px!important;height:68px!important;
+    overflow:visible!important;
+  }
+  html:not(.force-desktop-root) body.modern-v424 nav.mobile-bottom-v424 > a {
+    min-width:0!important;max-width:100%!important;
+    width:100%!important;box-sizing:border-box!important;
+    padding:4px 0!important;gap:2px!important;
+    display:flex!important;flex-direction:column!important;
+    align-items:center!important;justify-content:center!important;
+  }
+  html:not(.force-desktop-root) body.modern-v424 nav.mobile-bottom-v424 > a .mobile-nav-icon-v429 {
+    width:25px!important;height:25px!important;min-width:0!important;min-height:0!important;
+    flex:0 0 25px!important;
+  }
+  html:not(.force-desktop-root) body.modern-v424 nav.mobile-bottom-v424 > a .mobile-nav-icon-v429 img {
+    width:23px!important;height:23px!important;object-fit:contain!important;
+  }
+  html:not(.force-desktop-root) body.modern-v424 nav.mobile-bottom-v424 > a b {
+    box-sizing:border-box!important;width:100%!important;
+    font:700 9px/1.22 system-ui,Arial,sans-serif!important;
+    overflow-wrap:anywhere!important;word-break:normal!important;
+    white-space:normal!important;text-align:center!important;
+    min-width:0!important;
+  }
+  html:not(.force-desktop-root) body.modern-v424 main#appMain {
+    padding-bottom:calc(102px + env(safe-area-inset-bottom,0px))!important;
+  }
+  html:not(.force-desktop-root) body.modern-v424:is(.mobile-menu-open,.mobile-nav-open) nav.mobile-bottom-v424 {
+    display:none!important;visibility:hidden!important;pointer-events:none!important;
+  }
+}
+@media screen and (max-width:760px) {
+  body.modern-v424 #sovaSupportLayer :is([role="dialog"],.sova-support-modal,.sova-support-dialog),
+  body.modern-v424 #sova-metrika-consent :is([role="dialog"],.consent-dialog) {
+    box-sizing:border-box!important;
+    max-width:calc(100vw - 24px)!important;
+    max-height:calc(100dvh - 32px)!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain!important;
+  }
+  body.modern-v424 #sovaSupportLayer :is(button,a,input),
+  body.modern-v424 #sova-metrika-consent :is(button,a,input) {
+    max-width:100%;
+  }
+}
