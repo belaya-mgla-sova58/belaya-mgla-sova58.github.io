@@ -440,3 +440,45 @@ html body.modern-v424.is-calculators-route main#appMain :is(.calc-hub-head,.calc
  text-shadow:0 0 13px rgba(255,178,113,.53)!important;
 }
 /* Respect reduced motion; no animation or pulsing. */
+
+
+/* SOVA58 2026-11-22: neutral site background; remove old cosmic wallpaper only.
+   Editorial banners, illustrated cards and images are deliberately untouched. */
+html:has(> body.cosmic-visible-v444),
+html:has(> body.star-glass-v436),
+html:has(> body.luxury-chronicle),
+html body.cosmic-visible-v444,
+html body.star-glass-v436,
+html body.luxury-chronicle,
+html body.cosmic-visible-v444.is-home-route,
+html:not(.force-desktop-root) body.is-home-route.cosmic-visible-v444,
+html body.cosmic-visible-v444.star-glass-v436.modern-v424 {
+  background-color:#17161a!important;
+  background-image:linear-gradient(180deg,#242026 0%,#18171c 55%,#111216 100%)!important;
+  background-repeat:no-repeat!important;
+  background-position:center top!important;
+  background-size:auto!important;
+  background-attachment:scroll!important;
+}
+html body .site-cosmic-background-v442,
+html body .site-cosmic-background-v442::before,
+html body .site-cosmic-background-v442::after{
+  display:none!important;content:none!important;
+  background:none!important;
+}
+html body.star-glass-v436::before,
+html body.star-glass-v436::after,
+html body.cosmic-visible-v444::before,
+html body.cosmic-visible-v444::after{
+  display:none!important;content:none!important;background:none!important;
+}
+/* Legacy cosmic wallpaper was also painted on the home content wrappers. */
+html body.is-home-route.cosmic-visible-v444.star-glass-v436
+:is(#appMain,main,.modern-home-v424,.route-page,.route-page[data-route="home"]){
+  background-image:none!important;
+}
+/* Other guide page backgrounds are plain, with content artwork preserved. */
+html body.luxury-chronicle main#appMain,
+html body.luxury-chronicle .route-page.active{
+  background-image:none!important;
+}
