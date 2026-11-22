@@ -46,7 +46,8 @@
      return;
    }
    const left=Math.max(2,Math.min(innerWidth-owlWidth-2,rect.right-owlWidth-5));
-   const top=Math.max(2,Math.min(innerHeight-owlHeight-2,rect.bottom-owlHeight-3));
+   /* Keep Madam Ugu below the banner so she never covers the separate gift owl. */
+   const top=Math.max(2,Math.min(innerHeight-owlHeight-2,rect.bottom+8));
    owl.style.setProperty('left',left+'px','important');
    owl.style.setProperty('top',top+'px','important');
    owl.style.setProperty('right','auto','important');
