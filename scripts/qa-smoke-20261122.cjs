@@ -87,6 +87,17 @@ async function scenario(page,pathName,mode,record){
         if(!(await toggle.count()))throw Error('Menu button missing');
         await toggle.click({timeout:5500});
         const expanded=await toggle.getAttribute('aria-expanded');
+        const menuGeometry=await page.evaluate(()=>{
+          const drawer=document.querySelector('.nav-wrap');
+          const links=[...document.querySelectorAll('.nav-wrap > nav > a.route-link')];
+          if(!drawer||!links.length)return null;
+          const d=drawer.getBoundingClientRect();
+          return {drawerWidth:d.width,links:links.map(a=>{const b=a.getBoundingClientRect();return {width:b.width,left:b.left,right:b.right}})};
+        });
+        if(menuGeometry){
+          const narrow=menuGeometry.links.filter(a=>a.width<menuGeometry.drawerWidth-50);
+          if(narrow.length)throw Error('Menu links narrower than drawer: '+JSON.stringify(menuGeometry).slice(0,360));
+        }
         const bottom=page.locator('nav.mobile-bottom-v424').first();
         const bstyle=await bottom.evaluate(el=>({display:getComputedStyle(el).display,visibility:getComputedStyle(el).visibility})).catch(()=>null);
         await page.screenshot({path:path.join(output,'menu-android.jpg'),type:'jpeg',quality:65,fullPage:false}).catch(()=>{});
@@ -137,11 +148,11 @@ async function scenario(page,pathName,mode,record){
           throw Error('Mobile X is too far from Madam Ugu image: '+JSON.stringify(geometry).slice(0,220));
         await close.click({timeout:5500});
         if(await launcher.isVisible())throw Error('Mobile owl remained visible after pressing X');
-        await restore.waitFor({state:'visible',timeout:4000});
-        await restore.click({timeout:5500});
-        await launcher.waitFor({state:'visible',timeout:5500});
-        await close.waitFor({state:'visible',timeout:5500});
-        return 'Mobile owl closes via X and reopens via restore control';
+        if(await restore.count() && await restore.isVisible())throw Error('Removed restore control unexpectedly visible');
+        await page.reload({waitUntil:'domcontentloaded'});
+        await page.locator('#madamUguLauncherV720').waitFor({state:'visible',timeout:9500});
+        await page.locator('#bmOwlDismissV1097').waitFor({state:'visible',timeout:9500});
+        return 'Mobile owl closes until reload, no restore button, and returns on reload';
       }
       const toggle=page.locator('#madamUguCloseLauncherV720');
       await toggle.waitFor({state:'visible',timeout:8000});
