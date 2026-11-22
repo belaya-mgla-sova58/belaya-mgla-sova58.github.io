@@ -840,6 +840,83 @@ async function scenario(page,pathName,mode,record){
       return 'Negative, fractional and oversized stocks rejected; valid correction works; goal and bonus reject invalid numbers';
     });
   }
+  if(pathName==='/chief-gear-calculator.html'){
+    await task('chief_exchange_validation_and_undo_recomputes_stock',async()=>{
+      const key='belaya-mgla-chief-calculator-v1';
+      await page.evaluate(k=>{
+        const s=JSON.parse(localStorage.getItem(k));
+        for(const m of Object.keys(s.inventory))s.inventory[m]=0;
+        s.inventory.plans=35;
+        s.exchangeUnlocked={gear:true,charm:false};
+        s.charmWeeklyLimits={};
+        s.exchanges=[];
+        localStorage.setItem(k,JSON.stringify(s));
+      },key);
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      if(!(await page.locator('#exchangeDetails').getAttribute('open')))
+        await page.locator('#exchangeDetails summary').click();
+      await page.locator('#recipe').selectOption('0');
+      await page.locator('#count').fill('1.5');
+      await page.locator('#exchangeBtn').click();
+      let check=await page.evaluate(k=>({
+        count:JSON.parse(localStorage.getItem(k)).exchanges.length,
+        warning:document.getElementById('exchangeError').textContent
+      }),key);
+      if(check.count!==0||!/целое количество/.test(check.warning))
+        throw Error('Fractional exchange was incorrectly accepted: '+JSON.stringify(check));
+      await page.locator('#count').fill('4');
+      await page.locator('#exchangeBtn').click();
+      check=await page.evaluate(k=>({
+        count:JSON.parse(localStorage.getItem(k)).exchanges.length,
+        warning:document.getElementById('exchangeError').textContent
+      }),key);
+      if(check.count!==0||!/Не хватает материала/.test(check.warning))
+        throw Error('Exchange exceeded material balance: '+JSON.stringify(check));
+      await page.locator('#count').fill('2');
+      await page.locator('#exchangeBtn').click();
+      let result=await page.evaluate(k=>({
+        exchanges:JSON.parse(localStorage.getItem(k)).exchanges,
+        balance:exchangeBalance().p,
+        warning:document.getElementById('exchangeError').textContent
+      }),key);
+      if(JSON.stringify(result.exchanges)!==JSON.stringify([[0,2]])||
+         result.balance.plans!==15||result.balance.amber!==2||result.warning.trim())
+        throw Error('Valid exchange balance incorrect: '+JSON.stringify(result));
+      await page.locator('#undoBtn').click();
+      result=await page.evaluate(k=>({
+        exchanges:JSON.parse(localStorage.getItem(k)).exchanges,
+        balance:exchangeBalance().p
+      }),key);
+      if(result.exchanges.length||result.balance.plans!==35||result.balance.amber!==0)
+        throw Error('Undo did not restore original exchange balance: '+JSON.stringify(result));
+      await page.locator('#count').fill('501');
+      await page.locator('#exchangeBtn').click();
+      check=await page.evaluate(k=>({
+        count:JSON.parse(localStorage.getItem(k)).exchanges.length,
+        warning:document.getElementById('exchangeError').textContent
+      }),key);
+      if(check.count!==0||!/Недельный лимит/.test(check.warning))
+        throw Error('Weekly exchange limit not enforced: '+JSON.stringify(check));
+      await page.evaluate(k=>{
+        const s=JSON.parse(localStorage.getItem(k));
+        s.inventory.alloy=1000000000000;s.inventory.plans=5;
+        localStorage.setItem(k,JSON.stringify(s));
+      },key);
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      if(!(await page.locator('#exchangeDetails').getAttribute('open')))
+        await page.locator('#exchangeDetails summary').click();
+      await page.locator('#recipe').selectOption('2');
+      await page.locator('#count').fill('1');
+      await page.locator('#exchangeBtn').click();
+      check=await page.evaluate(k=>({
+        count:JSON.parse(localStorage.getItem(k)).exchanges.length,
+        warning:document.getElementById('exchangeError').textContent
+      }),key);
+      if(check.count!==0||!/превысит допустимый максимум/.test(check.warning))
+        throw Error('Overflowing exchange was accepted: '+JSON.stringify(check));
+      return 'Invalid/fractional, underfunded, over-limit and overflow exchanges rejected; valid exchange and undo recalculate shared balances';
+    });
+  }
   if(pathName==='/essence-mithril-calculator.html'){
     await task('essence_stock_inputs',async()=>{
       const essence=page.locator('#ecStockEssence'),mithril=page.locator('#ecStockMithril');
