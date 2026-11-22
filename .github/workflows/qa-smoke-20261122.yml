@@ -10,6 +10,9 @@ on:
       - 'home-desktop-v966.js'
       - 'sova-home-support-20261121.js'
   workflow_dispatch:
+concurrency:
+  group: qa-smoke-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
