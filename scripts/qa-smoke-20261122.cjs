@@ -83,7 +83,24 @@ async function scenario(page,pathName,mode,record){
         await launcher.waitFor({state:'visible',timeout:8500});
         const close=page.locator('#bmOwlDismissV1097');
         const restore=page.locator('#bmOwlRestoreV1097');
-        await close.waitFor({state:'visible',timeout:7000});
+        try{await close.waitFor({state:'visible',timeout:7000})}
+        catch(e){
+          const detail=await page.evaluate(()=>{
+            const ids=['madamUguLauncherV720','bmOwlDismissV1097','bmOwlRestoreV1097','madamUguCloseLauncherV720'];
+            return {viewport:{width:innerWidth,height:innerHeight},
+              classes:document.body.className,
+              sessionOwl:sessionStorage.getItem('bm-home-owl-hidden-v1097'),
+              parts:ids.map(id=>{
+                const el=document.getElementById(id);
+                if(!el)return {id,exists:false};
+                const c=getComputedStyle(el),r=el.getBoundingClientRect();
+                return {id,exists:true,display:c.display,visibility:c.visibility,opacity:c.opacity,
+                  rect:{x:r.x,y:r.y,w:r.width,h:r.height},inlineDisplay:el.style.display};
+              })};
+          }).catch(err=>({error:String(err)}));
+          console.log('QA_OWL_DIAG '+JSON.stringify(detail));
+          throw Error('Mobile owl X is not visible: '+JSON.stringify(detail).slice(0,440));
+        }
         await close.click({timeout:5500});
         if(await launcher.isVisible())throw Error('Mobile owl remained visible after pressing X');
         await restore.waitFor({state:'visible',timeout:4000});
