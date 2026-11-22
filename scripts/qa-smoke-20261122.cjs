@@ -797,6 +797,48 @@ async function scenario(page,pathName,mode,record){
       return 'Single-item warning includes shared reserved inventory and updates when shortage is fixed';
     });
   }
+  if(pathName==='/chief-gear-calculator.html'){
+    await task('chief_rejects_invalid_numeric_inputs',async()=>{
+      const key='belaya-mgla-chief-calculator-v1';
+      await page.locator('#stockDetails summary').click().catch(()=>{});
+      await page.locator('#inv-alloy').fill('1500');
+      for(const bad of ['-6','1.5','1000000000001']){
+        await page.locator('#inv-alloy').fill(bad);
+        const check=await page.evaluate(k=>({
+          stored:JSON.parse(localStorage.getItem(k)).inventory.alloy,
+          invalid:document.getElementById('inv-alloy').getAttribute('aria-invalid'),
+          error:document.getElementById('inv-error-alloy').textContent
+        }),key);
+        if(check.stored!==1500||check.invalid!=='true'||!check.error)
+          throw Error('Invalid inventory input was accepted or not explained: '+bad+' '+JSON.stringify(check));
+      }
+      await page.locator('#inv-alloy').fill('2000');
+      const corrected=await page.evaluate(k=>({
+        stock:JSON.parse(localStorage.getItem(k)).inventory.alloy,
+        invalid:document.getElementById('inv-alloy').getAttribute('aria-invalid')
+      }),key);
+      if(corrected.stock!==2000||corrected.invalid!=='false')
+        throw Error('Valid inventory correction did not clear error');
+      await page.locator('#svsGoal').fill('2000000');
+      await page.locator('#svsGoal').fill('-50');
+      const goal=await page.evaluate(k=>({
+        value:JSON.parse(localStorage.getItem(k)).svsGoal,
+        invalid:document.getElementById('svsGoal').getAttribute('aria-invalid')
+      }),key);
+      if(goal.value!==2000000||goal.invalid!=='true')
+        throw Error('Invalid SvS goal overwrote saved value');
+      await page.locator('#svsGoal').fill('2000000');
+      await page.locator('#bonus').fill('20');
+      await page.locator('#bonus').fill('501');
+      const bonus=await page.evaluate(k=>({
+        value:JSON.parse(localStorage.getItem(k)).bonus,
+        invalid:document.getElementById('bonus').getAttribute('aria-invalid')
+      }),key);
+      if(bonus.value!==20||bonus.invalid!=='true')
+        throw Error('Invalid bonus overwrote saved value');
+      return 'Negative, fractional and oversized stocks rejected; valid correction works; goal and bonus reject invalid numbers';
+    });
+  }
   if(pathName==='/essence-mithril-calculator.html'){
     await task('essence_stock_inputs',async()=>{
       const essence=page.locator('#ecStockEssence'),mithril=page.locator('#ecStockMithril');
