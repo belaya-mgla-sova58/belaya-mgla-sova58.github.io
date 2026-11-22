@@ -1,4 +1,4 @@
-name: "QA smoke: 19 pages, desktop + Android"
+name: "QA smoke: 20 pages, desktop + Android"
 on:
   push:
     branches: [main]
@@ -6,6 +6,7 @@ on:
       - 'scripts/qa-smoke-20261122.cjs'
       - '.github/workflows/qa-smoke-20261122.yml'
       - 'index.html'
+      - 'svs-kopilka-test.html'
       - 'owl-dismiss-v1097.js'
       - 'home-desktop-v966.js'
       - 'sova-home-support-20261121.js'
