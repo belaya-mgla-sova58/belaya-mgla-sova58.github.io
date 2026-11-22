@@ -204,35 +204,8 @@
 <span class="news-like-label">Нравится</span>
 <span aria-live="polite" class="news-like-count">0</span>
 </button>
-<span aria-label="Просмотры" id="elena4041ArticleViews" style="display:inline-flex;align-items:center;gap:6px;padding:10px 14px;border:1px solid rgba(129,103,187,.28);border-radius:999px;background:rgba(255,255,255,.72);font-weight:700;white-space:nowrap;">👀 <b>0</b></span>
+
 </div>
-<script>
-(function(){
-  const BASE='https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/';
-  const viewKey='__views__whitefox-elena-40-41-reset-v2';
-  const sessionKey='belaya-mgla-view-session:whitefox-elena-40-41-reset-v2';
-  const el=document.getElementById('elena4041ArticleViews');
-  if(!el) return;
-  const url=BASE+encodeURIComponent(viewKey)+'.json';
-  async function read(){
-    try{ const r=await fetch(url,{cache:'no-store'}); const v=await r.json(); return typeof v==='number'?Math.max(0,v):0; }catch(e){ return 0; }
-  }
-  async function inc(){
-    try{
-      const r=await fetch(url,{method:'PUT',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify({'.sv':{increment:1}})});
-      const v=await r.json(); return typeof v==='number'?Math.max(0,v):await read();
-    }catch(e){ return await read(); }
-  }
-  async function init(){
-    let n;
-    if(!localStorage.getItem(sessionKey)){
-      localStorage.setItem(sessionKey,'1');
-      n=await read(); // view updates paused until protected backend
-    }else n=await read();
-    const b=el.querySelector('b'); if(b) b.textContent=n;
-  }
-  init();
-})();
-</script>
+
 </section>
 <div class="footer news-footer">Белая Мгла • Автор - Sova</div></div></main><button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button><nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424"><a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-home-v534.webp"/></span><b>Главная</b></a><a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-events-v534.webp"/></span><b>События</b></a><a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-heroes-v534.webp"/></span><b>Герои</b></a><a data-v424-nav="calc" href="calculators.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-calculator-v534.webp"/></span><b>Калькуляторы</b></a><a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-knowledge-v534.webp"/></span><b>База знаний</b></a></nav><script defer="" src="pwa-install.js?v=987"></script></body></html>
