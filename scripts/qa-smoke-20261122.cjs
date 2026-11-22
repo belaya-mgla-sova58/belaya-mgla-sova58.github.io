@@ -1157,6 +1157,55 @@ async function scenario(page,pathName,mode,record){
       return 'Two sequential exchange-funded upgrades consume stocks once and prevent a third; plan persists on reload';
     });
   }
+  if(pathName==='/chief-gear-calculator.html'){
+    await task('chief_mark_done_preserves_other_targets_and_warns_on_shortage',async()=>{
+      const key='belaya-mgla-chief-calculator-v1';
+      const setup=await page.evaluate(k=>{
+        const s=JSON.parse(localStorage.getItem(k));
+        for(const v of Object.values(s.gear))v.from=v.to=-1;
+        for(const v of Object.values(s.charm))v.from=v.to=-1;
+        const row=JSON.parse(document.getElementById('bm-game-data').textContent).records.find(r=>r.kind==='gear');
+        const mapping={alloy:'alloy',polish:'polishing_solution',plans:'design_plans',amber:'lunar_amber',guides:'charm_guide',designs:'charm_design',secrets:'charm_secrets'};
+        for(const [k,col] of Object.entries(mapping))s.inventory[k]=row.cost[col]||0;
+        s.gear.cap={from:-1,to:0};s.gear.watch={from:-1,to:0};
+        s.exchanges=[];s.exchangeUnlocked={gear:false,charm:false};
+        localStorage.setItem(k,JSON.stringify(s));
+        return {cost:Object.fromEntries(Object.entries(mapping).map(([k,col])=>[k,row.cost[col]||0]))};
+      },key);
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      await page.locator('#gearTab').click();
+      await page.locator('#markDone').click();
+      const description=await page.locator('#doneDescription').textContent()||'';
+      if(!/остальных выбранных улучшений/.test(description))
+        throw Error('No shortage warning in mark-done dialog: '+description);
+      let warning='';
+      page.once('dialog',d=>{warning=d.message();return d.dismiss()});
+      await page.locator('#doneDeduct').click();
+      let saved=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)),key);
+      if(saved.gear.cap.from!==-1||saved.gear.watch.to!==0||
+         JSON.stringify(saved.inventory)!==JSON.stringify(setup.cost))
+        throw Error('Declining shortage confirmation modified levels or inventory');
+      if(!/другие запланированные улучшения/.test(warning))
+        throw Error('Missing explicit confirmation of other-item shortages: '+warning);
+      page.once('dialog',d=>d.accept());
+      await page.locator('#doneDeduct').click();
+      saved=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)),key);
+      if(saved.gear.cap.from!==0||saved.gear.cap.to!==0||
+         saved.gear.watch.from!==-1||saved.gear.watch.to!==0||
+         Object.values(saved.inventory).some(v=>v!==0)||saved.exchanges.length)
+        throw Error('Settling first item removed other targets or deducted twice: '+JSON.stringify(saved));
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      const verified=await page.evaluate(k=>({
+        state:JSON.parse(localStorage.getItem(k)),
+        planned:document.getElementById('planned').textContent,
+        shortage:document.querySelector('#needs .deficit.bad')?.textContent||''
+      }),key);
+      if(verified.state.gear.watch.to!==0||verified.state.gear.cap.from!==0||
+         !/не хватает/i.test(verified.shortage))
+        throw Error('Remaining upgrade shortage disappeared on reload: '+JSON.stringify(verified));
+      return 'Shortage warning can be cancelled; confirming completes one slot exactly once while retaining other goals and updated shortages';
+    });
+  }
   if(pathName==='/essence-mithril-calculator.html'){
     await task('essence_stock_inputs',async()=>{
       const essence=page.locator('#ecStockEssence'),mithril=page.locator('#ecStockMithril');
