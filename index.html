@@ -267,7 +267,8 @@ body.is-home-route .home-tools-grid-v1016>a[href="bear-helper.html"]>img{width:4
  body.is-home-route .modern-home-v424.home-portal-v1016 > section.home-portal-hero-v1016::after {
    display:none!important; content:none!important; background:none!important;
  }
- body.is-home-route .modern-home-v424.home-portal-v1016 > .home-main-title-v571,
+ /* Keep the semantic H1 available to screen readers; the shared stylesheet
+    already makes .home-main-title-v571 visually hidden without display:none. */
  body.is-home-route .modern-home-v424.home-portal-v1016 > .independent-brand-v624,
  body.is-home-route .modern-home-v424.home-portal-v1016 > section.home-portal-hero-v1016 > .mobile-hero-info-v1047 {
    display:none!important;
