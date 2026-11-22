@@ -213,6 +213,57 @@ async function scenario(page,pathName,mode,record){
     });
   }
   if(pathName==='/chief-gear-calculator.html'){
+    await task('chief_upgrade_table_integrity',async()=>{
+      const result=await page.evaluate(()=>{
+        const raw=document.querySelector('#bm-game-data')?.textContent;
+        if(!raw)throw Error('Embedded upgrade table missing');
+        const dataset=JSON.parse(raw),errors=[],counts={};
+        const fields={
+          gear:['alloy','polishing_solution','design_plans','lunar_amber'],
+          charm:['charm_guide','charm_design','charm_secrets']
+        };
+        const samples=[];
+        for(const [kind,expected] of [['gear',150],['charm',75]]){
+          const rows=dataset.records.filter(x=>x.kind===kind);
+          counts[kind]=rows.length;
+          if(rows.length!==expected)errors.push(kind+' rows '+rows.length+' instead of '+expected);
+          const labels=new Set();
+          rows.forEach((r,i)=>{
+            if(r.id!==kind+'-'+String(i+1).padStart(3,'0'))errors.push(kind+' ID at '+i);
+            if(r.order!==i+1)errors.push(kind+' order at '+i);
+            if(typeof r.label_ru!=='string'||!r.label_ru.trim())errors.push(kind+' empty label '+i);
+            if(labels.has(r.label_ru))errors.push(kind+' duplicate label '+r.label_ru);
+            labels.add(r.label_ru);
+            for(const field of fields[kind])if(!Number.isSafeInteger(r.cost?.[field])||r.cost[field]<0)errors.push(kind+' invalid '+field+' at '+i);
+            if(!Number.isFinite(r.power_total)||r.power_total<=0)errors.push(kind+' invalid power at '+i);
+            if(!Number.isFinite(r.stat_total_percent)||r.stat_total_percent<0)errors.push(kind+' invalid percent at '+i);
+            if(!Number.isFinite(r.upgrade_score)||r.upgrade_score<0)errors.push(kind+' invalid score at '+i);
+            if(i>0&&r.power_total<rows[i-1].power_total)errors.push(kind+' declining power at '+i);
+            if(i>0&&r.stat_total_percent<rows[i-1].stat_total_percent)errors.push(kind+' declining stat at '+i);
+          });
+          // Several boundary-spanning upgrades: summing step costs must equal a
+          // direct interval sum, while power difference must telescope.
+          for(const [start,end] of [[-1,0],[0,Math.min(9,rows.length-1)],[Math.max(0,rows.length-12),rows.length-1]]){
+            const total=Object.fromEntries(fields[kind].map(x=>[x,0]));
+            let delta=0;
+            for(let i=start+1;i<=end;i++){
+              for(const field of fields[kind])total[field]+=rows[i].cost[field];
+              delta+=rows[i].power_total-(i?rows[i-1].power_total:0);
+            }
+            const expectedPower=rows[end].power_total-(start<0?0:rows[start].power_total);
+            if(Math.abs(delta-expectedPower)>0.001)errors.push(kind+' inconsistent power interval '+start+'..'+end);
+            if(Object.values(total).some(v=>!Number.isSafeInteger(v)||v<0))errors.push(kind+' unsafe interval cost '+start+'..'+end);
+            samples.push(kind+':'+start+'..'+end);
+          }
+        }
+        return {counts,samples,errors:errors.slice(0,20),ruVerified:dataset.status?.ru_game_verified};
+      });
+      if(result.errors.length)throw Error('Upgrade table errors: '+JSON.stringify(result.errors));
+      if(result.ruVerified!==false)throw Error('Missing explicit RU verification status');
+      return JSON.stringify({rows:result.counts,checkedIntervals:result.samples.length,ruSourceVerified:false});
+    });
+  }
+  if(pathName==='/chief-gear-calculator.html'){
     await task('chief_gear_tabs',async()=>{
       const charm=page.locator('#charmTab'),gear=page.locator('#gearTab');
       await charm.click({timeout:6000});
