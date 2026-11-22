@@ -16,13 +16,13 @@ body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1)>.owl-t
 body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1)>.owl-top-ornaments-v44>.owl-branch-left-v44{
  width:clamp(230px,26vw,420px)!important;aspect-ratio:780/295!important;
  left:clamp(145px,10vw,216px)!important;
- background-image:url("assets/silver-branch-left-v44.png")!important;
+ background-image:url("assets/silver-branch-left-v44.webp")!important;
  background-position:left top!important;
 }
 body:is(.gear-editorial-test,.moon-mirror-test,.winter-site-reference-v1)>.owl-top-ornaments-v44>.owl-branch-right-v44{
  width:clamp(230px,26vw,420px)!important;aspect-ratio:835/310!important;
  right:9px!important;
- background-image:url("assets/silver-branch-right-v44.png")!important;
+ background-image:url("assets/silver-branch-right-v44.webp")!important;
  background-position:right top!important;
 }
 /* The old attempts were positioned over text. Never render them again. */
