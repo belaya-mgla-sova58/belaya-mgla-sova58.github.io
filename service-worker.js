@@ -1,96 +1,32 @@
-const CACHE_NAME = 'belaya-mgla-v1225';
-// On first visit, never download desktop-only CSS in the background on a phone.
-// Versioned styles are cached on first actual use by the fetch handler.
-const STATIC_CORE = [];
+/* Белая мгла: обновление 22.11.2026.
+   No stale offline snapshots. HTML, CSS, JS and JSON are network-fresh.
+   Player progress in localStorage/IndexedDB is never touched. */
+const CACHE_NAME='belaya-mgla-v1226';
 
-self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(STATIC_CORE.map(path => new Request(path,{cache:'reload'})))).catch(()=>{}));
+self.addEventListener('install',function(event){
+  // Release the previous worker immediately.
   self.skipWaiting();
 });
 
-// Updates should not forcibly reload open tabs or discard user input.
-self.addEventListener('activate', event => {
-  event.waitUntil(
-    self.clients.claim().then(() => {
-      // Cleanup is best-effort; it cannot block the newly active worker.
-      caches.keys().then(keys => Promise.all(
-        keys.filter(k => k.startsWith('belaya-mgla-') && k !== CACHE_NAME)
-          .map(k => caches.delete(k))
-      )).catch(() => {});
-    })
-  );
+self.addEventListener('activate',function(event){
+  event.waitUntil((async function(){
+    // Delete only site-owned legacy caches. Keep local player data intact.
+    const names=await caches.keys();
+    await Promise.all(names.filter(function(name){
+      return name.startsWith('belaya-mgla-');
+    }).map(function(name){return caches.delete(name)}));
+    await self.clients.claim();
+  })());
 });
 
-// HTML is always loaded directly from the network. Do not rewrite resource
-// versions or remove page sections: the published HTML is the source of truth.
-async function freshPage(req){
-  return fetch(req,{cache:'no-store'});
-}
-
-// Only explicitly versioned core CSS/JS are cache-first. A new ?v= URL
-// always creates a separate entry; HTML navigation still fetches fresh.
-function isVersionedCoreAsset(url){
-  const path=url.pathname;
-  const version=url.searchParams.get('v')||'';
-  return /^[0-9]{1,4}$/.test(version) && (
-    path.endsWith('/site-v626.min.css') ||
-    path.endsWith('/site-home-v995.css') ||
-    path.endsWith('/site-desktop-v985.css') ||
-    path.endsWith('/guides-shared-v1222.css') ||
-    path.endsWith('/guides-shared-v1222.js') ||
-    path.endsWith('/chief-gear-core-v1222.js') ||
-    path.endsWith('/site-palace-shared-v1221.css') ||
-    path.endsWith('/home-royal-bundle-v1222.css') ||
-    path.endsWith('/mobile-ice-aurora-v1140.css')
-  );
-}
-
-function isFresh(url){
-  const p=url.pathname;
-  return p.endsWith('/site-v629.min.js') ||
-         p.endsWith('/home-alliance-questionnaire-v731.js') ||
-         p.endsWith('/search-expanded-v724.js') ||
-         p.endsWith('/search-index.json') ||
-         p.endsWith('/madam-ugu-v655.js') ||
-         p.endsWith('/madam-ugu-mobile-match-v701.js') ||
-         p.endsWith('/predictions-cosmic.html') ||
-         p.endsWith('/fortune-phrases.txt') ||
-         p.endsWith('/pwa-install.js') ||
-         p.endsWith('/site-v626.min.css') ||
-         p.endsWith('/site-home-v995.css') ||
-         p.endsWith('/home-date-v588.js');
-}
-
-self.addEventListener('fetch', event => {
-  const req=event.request;
-  if(req.method!=='GET') return;
-  const url=new URL(req.url);
-  if(url.origin!==self.location.origin) return;
-
-  if(req.mode==='navigate'||url.pathname.endsWith('.html')){
-    event.respondWith(freshPage(req).catch(()=>fetch(req,{cache:'no-store'})));
-    return;
+self.addEventListener('fetch',function(event){
+  const request=event.request;
+  if(request.method!=='GET')return;
+  const url=new URL(request.url);
+  if(url.origin!==self.location.origin)return;
+  // Navigation and UI code must never fall back to a previous release.
+  if(request.mode==='navigate' || /\.(?:html|css|js|json|webmanifest)$/i.test(url.pathname)){
+    event.respondWith(fetch(request,{cache:'no-store'}));
   }
-
-  // Avoid re-downloading the same versioned stylesheet and loader on
-  // every route. Cached responses also remain available temporarily offline.
-  if(isVersionedCoreAsset(url)){
-    event.respondWith(
-      caches.open(CACHE_NAME).then(async cache=>{
-        const cached=await cache.match(req);
-        if(cached)return cached;
-        const response=await fetch(req,{cache:'no-store'});
-        if(response.ok&&response.type!=='opaque'){
-          try{await cache.put(req,response.clone())}catch(e){}
-        }
-        return response;
-      }).catch(()=>fetch(req))
-    );
-    return;
-  }
-
-  if(isFresh(url)){
-    event.respondWith(fetch(req,{cache:'no-store'}).catch(()=>Response.error()));
-    return;
-  }
+  // Images and media retain native browser caching to save bandwidth.
 });
