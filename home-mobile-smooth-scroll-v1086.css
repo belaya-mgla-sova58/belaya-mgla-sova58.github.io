@@ -11,7 +11,7 @@
   /* Previously the same large nebula was repainted on body and four nested wrappers,
      each using cover against the page's full scroll height. Keep it once, tiled cheaply. */
   background-color:#05132b!important;
-  background-image:url("assets/cosmic-nebula-visible-v444.webp")!important;
+  background-image:none!important;
   background-position:center top!important;
   background-repeat:repeat-y!important;
   background-size:100% auto!important;
