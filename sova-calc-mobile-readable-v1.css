@@ -1,0 +1,59 @@
+/* Белая мгла: мобильные поля и результаты калькуляторов, v1.
+   Только размеры/читаемость. Расчёты, значения и цвета не меняем. */
+@media screen and (max-width:820px){
+ html:not(.force-desktop-root) body:is(
+   .is-furnace-calc-route,.is-fire-furnace-calc-route,.is-essence-mithril-calc-route
+ ) main#appMain :is(.guide-page-v69,.ec-shell,.ec-panel,.calc-route-v378,.calc-total-v378){
+   min-width:0!important;max-width:100%!important;box-sizing:border-box!important;
+ }
+ html:not(.force-desktop-root) body:is(
+   .is-furnace-calc-route,.is-fire-furnace-calc-route,.is-essence-mithril-calc-route
+ ) main#appMain :is(input,select,textarea){
+   max-width:100%!important;min-width:0!important;box-sizing:border-box!important;
+   font-size:16px!important;
+ }
+ html:not(.force-desktop-root) body:is(
+   .is-furnace-calc-route,.is-fire-furnace-calc-route,.is-essence-mithril-calc-route
+ ) main#appMain :is(button,select,input[type="number"]){
+   min-height:43px;
+ }
+ html:not(.force-desktop-root) body:is(
+   .is-furnace-calc-route,.is-fire-furnace-calc-route,.is-essence-mithril-calc-route
+ ) main#appMain :is(.calc-building-grid-v379,.calc-res-grid-v378,.ec-grid,.ec-stock-grid){
+   min-width:0;max-width:100%;
+ }
+ html:not(.force-desktop-root) body.is-essence-mithril-calc-route .ec-table-wrap{
+   max-width:100%!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch;
+ }
+ html:not(.force-desktop-root) body.is-essence-mithril-calc-route .ec-table{
+   font-size:clamp(12px,3.3vw,14px)!important;
+ }
+ html:not(.force-desktop-root) body.is-essence-mithril-calc-route .ec-table :is(th,td){
+   padding:9px 8px!important;line-height:1.45;
+ }
+ body.bm-calc-jewel-v89:not(.modern-v424) main.wrap{
+   max-width:100%!important;min-width:0!important;box-sizing:border-box!important;
+ }
+ body.bm-calc-jewel-v89:not(.modern-v424) main.wrap :is(
+   .layout,.card,.field,.fieldrow,.slotgrid,.stockgrid,.metricgrid,.needgrid,.exchangegrid
+ ){
+   max-width:100%!important;min-width:0!important;box-sizing:border-box!important;
+ }
+ body.bm-calc-jewel-v89:not(.modern-v424) main.wrap :is(input,select,textarea){
+   min-width:0!important;max-width:100%!important;box-sizing:border-box!important;
+   font-size:16px!important;
+ }
+ body.bm-calc-jewel-v89:not(.modern-v424) main.wrap :is(button,.btn){
+   min-height:42px;
+ }
+ body.bm-calc-jewel-v89:not(.modern-v424) main.wrap :is(
+   .metric,.need,.stock,.slot,.compareItem
+ ){
+   overflow-wrap:anywhere;min-width:0;
+ }
+}
+@media screen and (max-width:440px){
+ body.bm-calc-jewel-v89:not(.modern-v424) main.wrap .fieldrow{
+   grid-template-columns:minmax(0,1fr)!important;
+ }
+}
