@@ -67,6 +67,10 @@
   owl=document.getElementById(owlId);
   if(!owl)return false;
   css();
+  // Other homepage scripts may remove and rebuild floating controls after initialization.
+  // Recover a detached close button instead of keeping a stale JS reference.
+  if(close && !close.isConnected)close=null;
+  if(restore && !restore.isConnected)restore=null;
   if(!close){
    close=document.createElement("button");
    close.type="button";close.id=closeId;close.textContent="×";
@@ -87,6 +91,16 @@
   window.addEventListener("resize",position,{passive:true});
   window.addEventListener("scroll",position,{passive:true});
   if(observer)observer.disconnect();
+  observer=new MutationObserver(function(){
+   var current=document.getElementById(owlId);
+   if(!current)return;
+   if(current!==owl || !close || !close.isConnected || !restore || !restore.isConnected){
+    if(!close || !close.isConnected)close=null;
+    if(!restore || !restore.isConnected)restore=null;
+    install();
+   }
+  });
+  observer.observe(document.body,{childList:true});
   return true;
  }
  function start(){
