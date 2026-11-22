@@ -270,6 +270,25 @@ async function scenario(page,pathName,mode,record){
         if(from17<0||through18.length!==9||sum17to18.guides!==1300||
            sum17to18.designs!==1130||sum17to18.secrets!==180)
           errors.push('17-to-18 charm aggregate differs from cross-checked 1300/1130/180: '+JSON.stringify(sum17to18));
+        // Public FC Crazy aggregate: Red T5 (stage 0) -> Red T6 (stage 0).
+        // Twenty individual upgrades share one finite material pool.
+        const gears=dataset.records.filter(x=>x.kind==='gear');
+        const t5=gears.findIndex(x=>x.label_ru==='Красное T5 · этап 0');
+        const t6=gears.findIndex(x=>x.label_ru==='Красное T6 · этап 0');
+        if(t5<0||t6-t5!==20)errors.push('Red T5 to T6 must contain exactly 20 upgrades');
+        else{
+          const sum=gears.slice(t5+1,t6+1).reduce((acc,row)=>{
+            acc.alloy+=row.cost.alloy;
+            acc.polish+=row.cost.polishing_solution;
+            acc.plans+=row.cost.design_plans;
+            acc.amber+=row.cost.lunar_amber;
+            return acc;
+          },{alloy:0,polish:0,plans:0,amber:0});
+          if(sum.alloy!==1000000||sum.polish!==9900||sum.plans!==1650||sum.amber!==260)
+            errors.push('Red T5 to T6 aggregate differs from 1000000/9900/1650/260: '+JSON.stringify(sum));
+          if(gears[t6].power_total-gears[t5].power_total!==816000)
+            errors.push('Unexpected power delta between red T5 and T6');
+        }
         const finalCharm=dataset.records.filter(x=>x.kind==='charm').at(-1);
         if(!finalCharm||finalCharm.order!==75||!finalCharm.label_ru.includes('этап 1'))
           errors.push('Level 18 must clearly indicate only its first verified stage');
