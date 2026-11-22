@@ -507,12 +507,21 @@ function renderExtras(){
   row.append(detail,btn);item.append(heading,row);list.append(item);
  }
 }
+function remainingUpgradeDeficits(cat,id,balance){
+ const slot=state[cat][id],all=collect().needs,own=materialCost(cat,slot.from,slot.to);
+ const remaining=Object.fromEntries(Object.keys(mats).map(k=>[k,Math.max(0,all[k]-own[k])]));
+ const stock=Object.fromEntries(Object.keys(mats).map(k=>[k,Math.max(0,balance.p[k]-own[k])]));
+ const short=Object.keys(mats).filter(k=>remaining[k]>stock[k]);
+ return {remaining,stock,short};
+}
 function settleDone(deduct){
  const val=currentSlot();if(val.to<=val.from)return;
  if(deduct){
   const balance=exchangeBalance(),newPool=balance.p,cost=materialCost(category,val.from,val.to);
   if(balance.skipped)return alert('В плане есть обмены, которые нельзя выполнить. Исправьте их перед списанием, чтобы они не пропали.');
   if(!Object.keys(mats).every(k=>newPool[k]>=cost[k]))return alert('Для списания не хватает материалов. Обновите запасы или выберите «Только обновить уровень».');
+  const leftover=remainingUpgradeDeficits(category,selected,balance);
+  if(leftover.short.length&&!confirm('После списания этого предмета на другие запланированные улучшения не хватит: '+leftover.short.map(k=>mats[k]+' '+fmt(leftover.remaining[k]-leftover.stock[k])).join(', ')+'. Остальные цели сохранятся, но часть из них пока недоступна. Всё равно списать?'))return;
   if(state.exchanges.length&&!confirm('В расчёте использованы запланированные обмены ('+state.exchanges.length+'). Подтвердите только если эти обмены уже выполнены в игре: их результат будет включён в остатки, а список планов обмена очистится. Продолжить?'))return;
   for(const k of Object.keys(mats))newPool[k]-=cost[k];
   state.inventory=newPool;state.exchanges=[];
@@ -525,7 +534,9 @@ $('markDone').onclick=()=>{
  const cost=materialCost(category,val.from,val.to),balance=exchangeBalance(),p=balance.p;
  const canDeduct=balance.skipped===0&&Object.keys(mats).every(k=>p[k]>=cost[k]);
  const costText=Object.entries(cost).filter(([,n])=>n>0).map(([k,n])=>mats[k]+': '+fmt(n)).join('; ');
- $('doneDescription').textContent=name+' → '+rows(category)[val.to].label+'. Расход: '+(costText||'0')+'. '+(balance.skipped?'Некоторые обмены выполнить нельзя, поэтому списание недоступно, пока план обмена не исправлен.':canDeduct?(state.exchanges.length?'Баланс учитывает '+state.exchanges.length+' запланированных обменов. При списании потребуется отдельно подтвердить, что они уже выполнены в игре.':'Вы можете списать материалы из запасов или только обновить уровень.'):'На виртуальном балансе недостаточно материалов, поэтому доступно только обновление уровня без списания.');
+ const other=remainingUpgradeDeficits(category,selected,balance);
+ const remainingInfo=canDeduct?(other.short.length?' ⚠️ Для остальных выбранных улучшений после списания не хватает: '+other.short.map(k=>mats[k]+' '+fmt(other.remaining[k]-other.stock[k])).join(', ')+'.':' Остальные запланированные улучшения сохранятся; на их материалы хватает.'):'';
+ $('doneDescription').textContent=name+' → '+rows(category)[val.to].label+'. Расход: '+(costText||'0')+'. '+(balance.skipped?'Некоторые обмены выполнить нельзя, поэтому списание недоступно, пока план обмена не исправлен.':canDeduct?(state.exchanges.length?'Баланс учитывает '+state.exchanges.length+' запланированных обменов. При списании потребуется отдельно подтвердить, что они уже выполнены в игре.':'Вы можете списать материалы из запасов или только обновить уровень.'):'На виртуальном балансе недостаточно материалов, поэтому доступно только обновление уровня без списания.')+remainingInfo;
  $('doneDeduct').disabled=!canDeduct;
  $('doneDialog').showModal();
 };
