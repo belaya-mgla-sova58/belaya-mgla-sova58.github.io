@@ -1,10 +1,11 @@
-name: "QA smoke: 20 pages, desktop + Android"
+name: "QA smoke: desktop, Android and 320-390px"
 on:
   push:
     branches: [main]
     paths:
       - 'scripts/qa-smoke-20261122.cjs'
       - '.github/workflows/qa-smoke-20261122.yml'
+      - 'sova-narrow-audit-20261122.css'
       - 'index.html'
       - 'svs-kopilka-test.html'
       - 'owl-dismiss-v1097.js'
