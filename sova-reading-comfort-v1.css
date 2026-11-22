@@ -1,0 +1,61 @@
+/* Белая мгла · комфортное чтение v1
+   Смягчает подложки длинных текстов, сохраняя графитово-золотую тему.
+   Калькуляторы и их интерфейсы не затрагиваются. */
+html body.modern-v424:not(.is-calculators-route) main#appMain :is(
+  .guide-fold-body-v414,
+  .guide-section.guide-fold-v414,
+  .modern-panel-v424,
+  .home-portal-box-v1016,
+  .kb-clean-card-v920,
+  .event-group-v522,
+  .section-frame,
+  .section-content,
+  .intro-card,
+  .summary-text,
+  .battle-fact,
+  .guide-page-v69,
+  .guide-callout,
+  .page-toc-v409
+){
+  background-color:#302D31!important;
+  background-image:linear-gradient(145deg,#383439 0%,#302D31 58%,#2B282D 100%)!important;
+}
+html body.modern-v424:not(.is-calculators-route) main#appMain :is(
+  .guide-fold-body-v414,
+  .guide-section.guide-fold-v414,
+  .modern-panel-v424,
+  .home-portal-box-v1016,
+  .kb-clean-card-v920,
+  .event-group-v522,
+  .section-frame,
+  .section-content,
+  .intro-card,
+  .summary-text,
+  .battle-fact,
+  .guide-page-v69
+) :is(p,li,dd,blockquote,.description,.desc,.muted,.note,.caption){
+  color:#F0ECEA!important;
+}
+html body.modern-v424:not(.is-calculators-route) main#appMain :is(
+  .guide-fold-body-v414,
+  .guide-section.guide-fold-v414,
+  .modern-panel-v424,
+  .home-portal-box-v1016,
+  .kb-clean-card-v920,
+  .event-group-v522,
+  .section-frame,
+  .section-content,
+  .intro-card,
+  .summary-text,
+  .battle-fact,
+  .guide-page-v69
+) :is(p,li,dd,blockquote){
+  line-height:1.68;
+}
+html body.luxury-chronicle :is(.intro-card,.section-frame,.section-content,.summary-text,.battle-fact,.footnote,.aside-guide){
+  background-color:#302D31!important;
+  background-image:linear-gradient(145deg,#383439,#2B282D)!important;
+}
+html body.luxury-chronicle :is(.intro-card,.section-frame,.section-content,.summary-text,.battle-fact,.footnote,.aside-guide) :is(p,li,dd){
+  color:#F0ECEA!important;
+}
