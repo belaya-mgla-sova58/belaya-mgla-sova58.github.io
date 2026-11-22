@@ -507,9 +507,12 @@ $('svsGoal').oninput=e=>{
  const field=e.target,goal=validWholeInput(field.value,1000000000000);
  if(goal===null||field.validity.badInput){
   field.setCustomValidity('Введите целое неотрицательное количество очков до 1 000 000 000 000.');
-  field.setAttribute('aria-invalid','true');return;
+  field.setAttribute('aria-invalid','true');
+  $('svsGoalError').textContent=field.validationMessage;$('svsGoalError').hidden=false;
+  return;
  }
  field.setCustomValidity('');field.setAttribute('aria-invalid','false');
+ $('svsGoalError').hidden=true;$('svsGoalError').textContent='';
  if(state.svsGoal!==goal){state.svsGoal=goal;save();renderExtras()}
 };
 $('svsGoal').onblur=e=>{
@@ -521,6 +524,7 @@ $('clearItem').onclick=()=>{const v=currentSlot();v.to=v.from;save();renderSelec
  const valid=(raw===''||/^\d+(?:\.\d+)?$/.test(raw))&&Number.isFinite(n)&&n>=0&&n<=500;
  field.setAttribute('aria-invalid',String(!valid));
  field.setCustomValidity(valid?'':'Введите бонус от 0 до 500%, без отрицательных значений.');
+ $('bonusError').hidden=valid;$('bonusError').textContent=valid?'':field.validationMessage;
  if(!valid||state.bonus===n)return;
  state.bonus=n;save();calculate();clearOptimizerPreview();
 };
