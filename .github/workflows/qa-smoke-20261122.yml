@@ -5,6 +5,9 @@ on:
     paths:
       - 'scripts/qa-smoke-20261122.cjs'
       - '.github/workflows/qa-smoke-20261122.yml'
+      - 'owl-dismiss-v1097.js'
+      - 'home-desktop-v966.js'
+      - 'sova-home-support-20261121.js'
   workflow_dispatch:
 permissions:
   contents: read
