@@ -95,11 +95,12 @@ function card(item){
  return '<label class="stockrow" data-filled="'+(v>0)+'"><span class="glyph" aria-hidden="true">'+item.short+'</span><span class="stockname">'+item.name+'<small>'+desc+'</small></span><input data-id="'+item.id+'" aria-label="'+item.name+', '+item.unit+'" type="number" inputmode="decimal" min="0" step="'+step+'" placeholder="0" value="'+(v||"")+'"></label>';
 }
 function renderItems(){
+ // No more hidden resources: list every relevant way to earn points for the selected SvS day.
+ // The previous "more items" disclosure made important items appear missing.
  var all=relevant();
- $("mainItems").innerHTML=all.filter(function(x){return x.main}).map(card).join("");
- var extra=all.filter(function(x){return !x.main});
- $("extraDetails").hidden=!extra.length;
- $("extraItems").innerHTML=extra.map(card).join("");
+ $("mainItems").innerHTML=all.map(card).join("");
+ $("extraItems").innerHTML="";
+ $("extraDetails").hidden=true;
 }
 function renderSummary(){
  var sum=relevant().reduce(function(a,x){return a+points(x)},0),goal=target();
