@@ -302,6 +302,46 @@ async function scenario(page,pathName,mode,record){
       return 'Cancelled confirmation preserves plans; accepted settlement commits; invalid exchanges block deduction';
     });
   }
+  if(pathName==='/chief-gear-calculator.html'){
+    await task('chief_affordability_reserves_shared_inventory',async()=>{
+      const key='belaya-mgla-chief-calculator-v1';
+      const chosen=await page.evaluate(k=>{
+        const state=JSON.parse(localStorage.getItem(k));
+        const data=JSON.parse(document.querySelector('#bm-game-data').textContent);
+        const first=data.records.find(r=>r.kind==='gear');
+        const fields={alloy:'alloy',polish:'polishing_solution',plans:'design_plans',amber:'lunar_amber',guides:'charm_guide',designs:'charm_design',secrets:'charm_secrets'};
+        for(const levels of [state.gear,state.charm])for(const slot of Object.values(levels)){slot.from=-1;slot.to=-1;}
+        for(const mat of Object.keys(state.inventory))state.inventory[mat]=0;
+        for(const [mat,field] of Object.entries(fields))state.inventory[mat]=first.cost[field]||0;
+        state.exchanges=[];state.exchangeUnlocked={gear:false,charm:false};
+        localStorage.setItem(k,JSON.stringify(state));
+        return {materialCosts:state.inventory};
+      },key);
+      if(!Object.values(chosen.materialCosts).some(n=>n>0))throw Error('First gear step has no material costs');
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      const options=page.locator('#compare .compareItem');
+      if(!(await options.count()))throw Error('Expected at least one individually affordable suggestion');
+      await options.first().locator('button').click();
+      const result=await page.evaluate(k=>{
+        const s=JSON.parse(localStorage.getItem(k));
+        const data=JSON.parse(document.querySelector('#bm-game-data').textContent);
+        const fields={alloy:'alloy',polish:'polishing_solution',plans:'design_plans',amber:'lunar_amber',guides:'charm_guide',designs:'charm_design',secrets:'charm_secrets'};
+        const used=Object.fromEntries(Object.keys(fields).map(x=>[x,0]));
+        for(const [kind,slots] of [['gear',s.gear],['charm',s.charm]]){
+          const rows=data.records.filter(r=>r.kind===kind);
+          for(const level of Object.values(slots))for(let i=level.from+1;i<=level.to;i++)
+            for(const [k,v] of Object.entries(fields))used[k]+=rows[i].cost[v]||0;
+        }
+        return {used,inventory:s.inventory};
+      },key);
+      for(const k of Object.keys(result.used))
+        if(result.used[k]>result.inventory[k])throw Error('Shared materials overcommitted: '+k);
+      const label=await page.locator('#affordableCount').textContent();
+      if(!/дополнительных вариантов|Свободных материалов/.test(label||''))
+        throw Error('Affordability list did not update after reserving materials: '+label);
+      return 'One suggestion selected; total commitments stay within common stock';
+    });
+  }
   if(pathName==='/essence-mithril-calculator.html'){
     await task('essence_stock_inputs',async()=>{
       const essence=page.locator('#ecStockEssence'),mithril=page.locator('#ecStockMithril');
