@@ -439,7 +439,10 @@ async function inspect(browser,ctx,mode,pathName){
         if(el.labels?.length)return false;
         return true;
       }).slice(0,12).map(el=>({id:el.id,type:el.type||el.tagName,html:el.outerHTML.slice(0,260)}));
-      return {duplicateIds:duplicates,unnamedButtons,emptyLinks,unlabeledInputs};
+      const invalidComboboxes=[...document.querySelectorAll('[role="combobox"]')].filter(el=>
+        !['true','false'].includes(el.getAttribute('aria-expanded'))
+      ).slice(0,12).map(el=>({id:el.id,html:el.outerHTML.slice(0,180)}));
+      return {duplicateIds:duplicates,unnamedButtons,emptyLinks,unlabeledInputs,invalidComboboxes};
     });
     // Accessibility regressions must fail the browser test, not remain invisible in logs.
     const accessibility=record.accessibility;
@@ -449,6 +452,8 @@ async function inspect(browser,ctx,mode,pathName){
       record.issues.push('Visible inputs without accessible labels: '+JSON.stringify(accessibility.unlabeledInputs).slice(0,190));
     if(accessibility.unnamedButtons.length)
       record.issues.push('Visible buttons without accessible names: '+JSON.stringify(accessibility.unnamedButtons).slice(0,190));
+    if(accessibility.invalidComboboxes.length)
+      record.issues.push('Comboboxes missing aria-expanded: '+JSON.stringify(accessibility.invalidComboboxes).slice(0,190));
     if(accessibility.emptyLinks.length)
       record.issues.push('Visible links without accessible names: '+JSON.stringify(accessibility.emptyLinks).slice(0,190));
     record.horizontalOverflow=data.overflow;
