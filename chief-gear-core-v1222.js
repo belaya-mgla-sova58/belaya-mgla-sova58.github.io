@@ -165,13 +165,23 @@ function updateLimitInput(){
 }
 function exchangeBalance(){
   const p=Object.fromEntries(Object.keys(mats).map(k=>[k,Math.max(0,Number(state.inventory[k])||0)]));
-  let skipped=0;const used=Array(recipes.length).fill(0);
-  for(const [i,n] of state.exchanges){
-    const [from,to,give,get]=recipes[i],limit=exchangeLimit(i);
-    if(!state.exchangeUnlocked[recipeGroup(i)]||(limit!==null&&used[i]+n>limit)||!Number.isSafeInteger(give*n)||!Number.isSafeInteger(get*n)||p[from]<give*n||!Number.isSafeInteger(p[to]+get*n)||p[to]+get*n>maxMaterialStock){skipped++;continue}
+  let skipped=0;const used=Array(recipes.length).fill(0),failures=[];
+  // Exchanges are ordered. Outputs from earlier valid steps become inputs to
+  // later steps, but a failed step never generates materials.
+  for(let index=0;index<state.exchanges.length;index++){
+    const [i,n]=state.exchanges[index],recipe=recipes[i];
+    if(!recipe){skipped++;failures.push({index,reason:'Неизвестный обмен'});continue}
+    const [from,to,give,get]=recipe,limit=exchangeLimit(i);
+    let reason='';
+    if(!state.exchangeUnlocked[recipeGroup(i)])reason='обмен не открыт';
+    else if(limit!==null&&used[i]+n>limit)reason='превышен недельный лимит';
+    else if(!Number.isSafeInteger(give*n)||!Number.isSafeInteger(get*n))reason='недопустимое количество';
+    else if(p[from]<give*n)reason='не хватает: '+mats[from];
+    else if(!Number.isSafeInteger(p[to]+get*n)||p[to]+get*n>maxMaterialStock)reason='превышен предел запаса: '+mats[to];
+    if(reason){skipped++;failures.push({index,reason});continue}
     p[from]-=give*n;p[to]+=get*n;used[i]+=n;
   }
-  return {p,skipped,used};
+  return {p,skipped,used,failures};
 }
 function pool(){return exchangeBalance().p}
 function renderExchange(){
@@ -181,10 +191,11 @@ function renderExchange(){
   updateLimitInput();updateExchangeInfo();
 }
 function updateExchangeInfo(){
- const qty=state.exchanges.reduce((s,r)=>s+r[1],0),{skipped,used}=exchangeBalance();
- const i=Number($('recipe').value)||0,recipe=recipes[i],limit=exchangeLimit(i);
+ const qty=state.exchanges.reduce((s,r)=>s+r[1],0),{skipped,used,failures}=exchangeBalance();
+ const i=Number($('recipe').value)||0,limit=exchangeLimit(i);
  const note=limit===null?'Недельный лимит не задан. Сверьте ограничение в игре; пока калькулятор его не применяет.':`Недельный лимит: ${fmt(limit)} обменов. По текущему плану осталось ${fmt(Math.max(0,limit-used[i]))}.`;
- $('exchangeInfo').textContent=(skipped?`⚠️ ${skipped} запланированных обменов не учитываются: не хватает запасов, не открыт обмен или превышен недельный лимит. `:qty?`В плане ${fmt(qty)} обменов. `:'Обменов пока нет. ')+note;
+ const failedText=failures.map(f=>`Шаг ${f.index+1}: ${f.reason}`).join('; ');
+ $('exchangeInfo').textContent=(skipped?`⚠️ Не выполнено ${skipped} из ${state.exchanges.length} запланированных шагов (${failedText}). Результаты недоступных шагов не учитываются. `:qty?`В плане ${fmt(qty)} обменов, выполняются по порядку. `:'Обменов пока нет. ')+note;
 }
 function collect(){const needs=Object.fromEntries(Object.keys(mats).map(k=>[k,0]));let power=0,gs=0,cs=0,count=0;for(const cat of ['gear','charm'])for(const [id] of positions(cat)){const v=state[cat][id],r=rows(cat);if(v.to<=v.from)continue;count++;power+=r[v.to].power-(v.from<0?0:r[v.from].power);for(let i=v.from+1;i<=v.to;i++){for(const k of Object.keys(mats))needs[k]+=r[i][k]||0;if(cat==='gear')gs+=r[i].score;else cs+=r[i].score}}return{needs,power,gs,cs,count}}
 // Matching-quality set bonuses, tracked as independent Defense (3) and Attack (6) thresholds.
