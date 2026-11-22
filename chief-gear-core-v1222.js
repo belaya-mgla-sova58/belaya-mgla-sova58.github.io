@@ -201,13 +201,61 @@ function recommendation(mode){
       if(cost>0)burden+=cost/Math.max(1,initial[k]);
     }
     const merit=value/Math.max(0.00001,burden);
-    if(!chosen||merit>chosen.merit){chosen={item,r,next,gainPoints,gainPower,merit}}
+    if(!chosen||merit>chosen.merit){chosen={moves:[{item,next}],cost:Object.fromEntries(Object.keys(mats).map(k=>[k,r[k]||0])),gainPower,merit}}
+  }
+  // Set thresholds sometimes require several upgrades. Evaluate the full
+  // affordable bundle, not merely the last step that activates the bonus.
+  if(mode==='power'){
+    const gear=all.filter(x=>x.cat==='gear');
+    const levels=Object.fromEntries(gear.map(x=>[x.id,x.at]));
+    const before=gearSetAt(levels);
+    for(const threshold of [
+      {count:3,tier:before.defTier+1,bonus:'def'},
+      {count:6,tier:before.atkTier+1,bonus:'atk'}
+    ]){
+      if(threshold.tier>=gearSetTiers.length)continue;
+      const eligible=gear.filter(x=>gearTierAt(x.at)>=threshold.tier).length;
+      const needed=threshold.count-eligible;
+      if(needed<=0)continue;
+      const others=gear.filter(x=>gearTierAt(x.at)<threshold.tier).map(item=>({
+        item,next:G.findIndex((r,i)=>i>item.at&&gearTierAt(i)>=threshold.tier)
+      })).filter(x=>x.next>=0);
+      if(others.length<needed)continue;
+      for(let mask=1;mask<(1<<others.length);mask++){
+        const moves=others.filter((x,i)=>mask&(1<<i));
+        if(moves.length!==needed)continue;
+        const cost=Object.fromEntries(Object.keys(mats).map(k=>[k,0]));
+        let gainPower=0;
+        for(const {item,next} of moves){
+          const required=materialCost('gear',item.at,next);
+          for(const k of Object.keys(mats))cost[k]+=required[k];
+          gainPower+=G[next].power-(item.at<0?0:G[item.at].power);
+        }
+        if(!Object.keys(mats).every(k=>cost[k]<=remaining[k]))continue;
+        const candidateLevels={...levels};
+        for(const {item,next} of moves)candidateLevels[item.id]=next;
+        const after=gearSetAt(candidateLevels);
+        const bonusGain=Math.max(0,after.def-before.def)+Math.max(0,after.atk-before.atk);
+        if(bonusGain<=0)continue;
+        let burden=0;
+        for(const k of Object.keys(mats))if(cost[k]>0)burden+=cost[k]/Math.max(1,initial[k]);
+        const merit=(gainPower+bonusGain*100000)/Math.max(.00001,burden);
+        if(!chosen||merit>chosen.merit)chosen={moves,cost,gainPower,merit};
+      }
+    }
   }
   if(!chosen)break;
-  for(const k of Object.keys(mats))remaining[k]-=chosen.r[k]||0;
-  chosen.item.at=chosen.next;
-  if(chosen.item.cat==='gear')totalGearScore+=chosen.r.score;else totalCharmScore+=chosen.r.score;
-  totalPower+=chosen.gainPower;changes++;
+  for(const k of Object.keys(mats))remaining[k]-=chosen.cost[k];
+  for(const {item,next} of chosen.moves){
+    const data=rows(item.cat);
+    for(let i=item.at+1;i<=next;i++){
+      if(item.cat==='gear')totalGearScore+=data[i].score;
+      else totalCharmScore+=data[i].score;
+      totalPower+=data[i].power-(i?data[i-1].power:0);
+      changes++;
+    }
+    item.at=next;
+  }
  }
  const totalPoints=Math.round(totalGearScore*36*(1+bonus/100))+Math.round(totalCharmScore*70*(1+bonus/100));
  const setAtEnd=gearSetAt(Object.fromEntries(all.filter(x=>x.cat==='gear').map(x=>[x.id,x.at])));
