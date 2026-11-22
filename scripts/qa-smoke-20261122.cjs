@@ -41,6 +41,12 @@ async function scenario(page,pathName,mode,record){
       }
       return 'Already dismissed or absent';
     });
+    await task('privacy_posthog_not_autoloaded',async()=>{
+      await page.waitForTimeout(700);
+      const scripts=await page.locator('script[src*="posthog"]').count();
+      if(scripts)throw Error('PostHog loaded without a separate consent');
+      return 'No PostHog scripts before consent';
+    });
     await task('home_search',async()=>{
       const field=page.locator('input.site-search-input-v426').first();
       if(!(await field.count()))throw Error('Search input missing');
