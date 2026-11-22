@@ -135,6 +135,27 @@ async function scenario(page,pathName,mode,record){
       return 'Desktop owl expands and collapses by real control';
     });
   }
+  if(pathName==='/calculators.html'&&mode==='android'){
+    await task('mobile_calculator_heading_word_wrap',async()=>{
+      const info=await page.locator('.calc-hub-head h1').evaluate(el=>{
+        const node=el.firstChild;
+        if(!node||node.nodeType!==Node.TEXT_NODE)return {error:'Heading has unexpected nodes'};
+        const text=node.textContent,range=document.createRange(),lines=new Map();
+        for(let i=0;i<text.length;i++){
+          if(!text[i].trim())continue;
+          range.setStart(node,i);range.setEnd(node,i+1);
+          const rect=range.getBoundingClientRect();
+          const key=Math.round(rect.top);
+          lines.set(key,(lines.get(key)||'')+text[i]);
+        }
+        return {lines:[...lines.values()],font:getComputedStyle(el).fontSize};
+      });
+      if(info.error)throw Error(info.error);
+      if(info.lines.length>2)throw Error('Heading splits into '+info.lines.length+' lines: '+JSON.stringify(info));
+      if(info.lines.some(line=>line.length<3))throw Error('Isolated character in heading: '+JSON.stringify(info));
+      return 'Mobile title within '+info.lines.length+' readable lines: '+JSON.stringify(info);
+    });
+  }
   if(pathName==='/news.html'){
     await task('news_card_artwork',async()=>{
       const cards=await page.evaluate(()=>{
