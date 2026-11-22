@@ -78,8 +78,9 @@ async function scenario(page,pathName,mode,record){
     }
     await task('owl_close',async()=>{
       const launcher=page.locator('#madamUguLauncherV720');
-      await launcher.waitFor({state:'visible',timeout:8500});
+      await launcher.waitFor({state:'attached',timeout:8500});
       if(mode==='android'){
+        await launcher.waitFor({state:'visible',timeout:8500});
         const close=page.locator('#bmOwlDismissV1097');
         const restore=page.locator('#bmOwlRestoreV1097');
         await close.waitFor({state:'visible',timeout:7000});
