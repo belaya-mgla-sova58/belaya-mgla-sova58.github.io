@@ -767,6 +767,36 @@ async function scenario(page,pathName,mode,record){
       }
     });
   }
+  if(pathName==='/chief-gear-calculator.html'){
+    await task('chief_selected_item_warning_reserves_other_slots',async()=>{
+      const key='belaya-mgla-chief-calculator-v1';
+      await page.evaluate(k=>{
+        const s=JSON.parse(localStorage.getItem(k));
+        const record=JSON.parse(document.getElementById('bm-game-data').textContent).records.find(x=>x.kind==='gear');
+        for(const id of Object.keys(s.gear))s.gear[id]={from:-1,to:-1};
+        for(const id of Object.keys(s.charm))s.charm[id]={from:-1,to:-1};
+        s.gear.cap={from:-1,to:0};s.gear.watch={from:-1,to:0};
+        for(const id of Object.keys(s.inventory))s.inventory[id]=0;
+        s.inventory.alloy=record.cost.alloy;
+        s.inventory.polish=record.cost.polishing_solution;
+        s.inventory.plans=record.cost.design_plans;
+        s.inventory.amber=record.cost.lunar_amber;
+        s.exchanges=[];s.exchangeUnlocked={gear:false,charm:false};
+        localStorage.setItem(k,JSON.stringify(s));
+      },key);
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      const warning=await page.locator('#selectedWarning').textContent()||'';
+      if(!/остальных запланированных/.test(warning)||!/не хватает/.test(warning))
+        throw Error('Selected gear appears affordable despite same stock reserved for another: '+warning);
+      await page.locator('#stockDetails summary').click();
+      await page.locator('#inv-alloy').fill('3000');
+      await page.locator('#inv-polish').fill('30');
+      const sufficient=await page.locator('#selectedWarning').textContent()||'';
+      if(!/хватает с учётом всех остальных/.test(sufficient))
+        throw Error('Warning did not clear after material stock became sufficient: '+sufficient);
+      return 'Single-item warning includes shared reserved inventory and updates when shortage is fixed';
+    });
+  }
   if(pathName==='/essence-mithril-calculator.html'){
     await task('essence_stock_inputs',async()=>{
       const essence=page.locator('#ecStockEssence'),mithril=page.locator('#ecStockMithril');
