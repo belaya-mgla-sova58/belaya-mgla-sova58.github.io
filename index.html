@@ -1375,4 +1375,75 @@ html body.is-home-route.modern-v424 .nav-wrap img{
  }
 }
 </style>
+
+<style id="sova-bottom-mobile-nav-fix-v1253">
+/* Compact phone dock: equal five buttons, visible icons/labels and safe bottom space. */
+@media screen and (max-width:820px){
+  html:not(.force-desktop-root) body.is-home-route nav.mobile-bottom-v424{
+    position:fixed!important;
+    left:max(6px,env(safe-area-inset-left))!important;
+    right:max(6px,env(safe-area-inset-right))!important;
+    bottom:calc(10px + env(safe-area-inset-bottom,0px))!important;
+    width:auto!important;
+    max-width:none!important;
+    height:68px!important;
+    min-height:68px!important;
+    padding:4px!important;
+    margin:0!important;
+    box-sizing:border-box!important;
+    display:grid!important;
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+    align-items:stretch!important;
+    gap:3px!important;
+    overflow:visible!important;
+    border-radius:17px!important;
+    z-index:2000!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route nav.mobile-bottom-v424 > a{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:2px!important;
+    min-height:0!important;
+    height:100%!important;
+    min-width:0!important;
+    width:100%!important;
+    margin:0!important;
+    padding:3px 1px!important;
+    box-sizing:border-box!important;
+    overflow:hidden!important;
+    border-radius:12px!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route nav.mobile-bottom-v424 > a .mobile-nav-icon-v429{
+    display:grid!important;place-items:center!important;
+    flex:0 0 29px!important;
+    width:29px!important;height:29px!important;
+    min-width:0!important;min-height:0!important;
+    margin:0!important;padding:0!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route nav.mobile-bottom-v424 > a .mobile-nav-icon-v429 img{
+    display:block!important;width:25px!important;height:25px!important;
+    min-width:0!important;min-height:0!important;
+    object-fit:contain!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route nav.mobile-bottom-v424 > a b{
+    display:block!important;
+    max-width:100%!important;
+    margin:0!important;
+    font:700 10px/1.22 system-ui,Arial,sans-serif!important;
+    text-align:center!important;
+    white-space:normal!important;
+    overflow-wrap:anywhere!important;
+  }
+  html:not(.force-desktop-root) body.is-home-route main#appMain{
+    padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))!important;
+  }
+}
+@media screen and (max-width:370px){
+  html:not(.force-desktop-root) body.is-home-route nav.mobile-bottom-v424 > a b{
+    font-size:9px!important;
+  }
+}
+</style>
 </body></html>
