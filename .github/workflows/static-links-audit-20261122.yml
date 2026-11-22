@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
     paths:
+      - '**/*.html'
+      - '**/*.css'
+      - '**/*.js'
       - 'scripts/static-links-audit-20261122.cjs'
       - '.github/workflows/static-links-audit-20261122.yml'
 permissions:
