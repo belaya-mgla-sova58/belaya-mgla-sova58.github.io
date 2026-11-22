@@ -24,6 +24,23 @@ const key='belaya-mgla-chief-calculator-v1';const $=id=>document.getElementById(
 // Keep a second valid snapshot: a corrupted localStorage record must not
 // erase the player's last successfully saved levels and materials.
 const backupKey=key+'-backup-v1';
+let storageWorking=true;
+function probeStorage(){
+ try{
+  const probe=key+'-probe';
+  localStorage.setItem(probe,'1');
+  const ok=localStorage.getItem(probe)==='1';
+  localStorage.removeItem(probe);
+  return ok;
+ }catch(e){return false}
+}
+storageWorking=probeStorage();
+function showStorageStatus(){
+ const indicator=$('storageStatus');
+ if(!indicator)return;
+ indicator.hidden=storageWorking;
+ indicator.textContent=storageWorking?'':'⚠️ Браузер не разрешает сохранять данные. Расчёты работают, но введённые уровни и материалы могут исчезнуть после закрытия или обновления страницы.';
+}
 function readSaved(){
  for(const storageKey of [key,backupKey]){
   try{
@@ -47,8 +64,11 @@ for(const k of Object.keys(mats)){const n=Number(state.inventory[k]);state.inven
 state.bonus=Number.isFinite(Number(state.bonus))?Math.max(0,Math.min(500,Number(state.bonus))):0;
 let category='gear',selected='cap';const save=()=>{
  const snapshot=JSON.stringify(state);
- try{localStorage.setItem(key,snapshot)}catch(e){/* private browsing */ }
- try{localStorage.setItem(backupKey,snapshot)}catch(e){/* private browsing */ }
+ let mainSaved=false,backupSaved=false;
+ try{localStorage.setItem(key,snapshot);mainSaved=localStorage.getItem(key)===snapshot}catch(e){/* storage blocked */ }
+ try{localStorage.setItem(backupKey,snapshot);backupSaved=localStorage.getItem(backupKey)===snapshot}catch(e){/* storage blocked */ }
+ storageWorking=mainSaved&&backupSaved;
+ showStorageStatus();
 };
 const currentSlot=()=>state[category][selected];const rows=cat=>cat==='gear'?G:C;const positions=cat=>cat==='gear'?gearSlots:charmSlots;
 function setCategory(cat){category=cat;selected=cat==='gear'?'cap':'cap-1';renderSlots();renderSelects();renderBulk();renderExtras()}
@@ -457,4 +477,4 @@ $('exchangeBtn').onclick=()=>{const i=Number($('recipe').value),n=Number($('coun
  clearOptimizerPreview();setCategory('gear');renderInventory();renderExchange();
  $('bonus').value='0';$('svsGoal').value='';calculate();
 };
-renderSlots();renderSelects();renderBulk();renderInventory();renderExchange();calculate();
+renderSlots();renderSelects();renderBulk();renderInventory();renderExchange();calculate();showStorageStatus();
