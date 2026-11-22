@@ -26,6 +26,7 @@ on:
       - 'fire-furnace-calculator.html'
       - 'chief-gear-calculator.html'
       - 'chief-gear-core-v1222.js'
+      - 'site-core-v625.min.js'
       - 'essence-mithril-calculator.html'
       - 'ogonek.html'
       - 'news-elena.html'
