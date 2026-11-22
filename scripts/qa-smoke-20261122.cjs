@@ -166,6 +166,9 @@ async function scenario(page,pathName,mode,record){
       await page.locator('#target').selectOption('0');
       const points=Number((await page.locator('#totalPoints').textContent()||'').replace(/[^0-9]/g,''));
       if(!(points>0))throw Error('Upgrading first gear stage did not produce SvS points');
+      const readNum=async(id)=>Number((await page.locator('#'+id).textContent()||'').replace(/[^0-9]/g,''));
+      const gearPoints=await readNum('gearPoints'),charmPoints=await readNum('charmPoints');
+      if(points!==gearPoints+charmPoints)throw Error('Total SvS points differ from gear+charm points: '+JSON.stringify({points,gearPoints,charmPoints}));
       await page.locator('#clearItem').click();
       const resetPoints=Number((await page.locator('#totalPoints').textContent()||'').replace(/[^0-9]/g,''));
       if(resetPoints!==0)throw Error('Clearing upgrade did not restore zero planned points');
