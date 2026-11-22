@@ -1,4 +1,4 @@
-/* Белая Мгла: Мадам Угу поверх нижнего правого края шапки (мобильная версия).
+/* Белая Мгла: Мадам Угу плавает справа ниже новостей, отдельно от донат-совы в шапке.
    Крестик скрывает её только до следующей перезагрузки. */
 (function(){
  'use strict';
@@ -32,22 +32,18 @@
  }
  function position(){
    if(!owl || !close || hiddenForThisPage)return;
-   const h=getHero();
-   if(!h)return;
-   const rect=h.getBoundingClientRect();
-   const visible=rect.bottom>0 && rect.top<innerHeight && rect.width>0 && rect.height>0;
+   /* Original floating placement near the lower-right, not tied to the banner. */
    const overlayOpen=!!document.querySelector('#madamUguOverlayV720.is-open');
-   const shouldShow=visible && !overlayOpen;
-   if(!shouldShow){
+   if(overlayOpen){
      owl.style.setProperty('visibility','hidden','important');
      owl.style.setProperty('pointer-events','none','important');
      close.style.setProperty('visibility','hidden','important');
      close.style.setProperty('pointer-events','none','important');
      return;
    }
-   const left=Math.max(2,Math.min(innerWidth-owlWidth-2,rect.right-owlWidth-5));
-   /* Keep Madam Ugu below the banner so she never covers the separate gift owl. */
-   const top=Math.max(2,Math.min(innerHeight-owlHeight-2,rect.bottom+8));
+   const left=Math.max(2,innerWidth-owlWidth-10);
+   const bottomGap=innerHeight<570?165:216;
+   const top=Math.max(4,innerHeight-owlHeight-bottomGap);
    owl.style.setProperty('left',left+'px','important');
    owl.style.setProperty('top',top+'px','important');
    owl.style.setProperty('right','auto','important');
