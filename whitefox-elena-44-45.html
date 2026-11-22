@@ -246,7 +246,7 @@ body.news-top-whitefox .whitefox-index .whitefox-card-stat-v557 b{color:inherit!
 <p>Две недели, за которые 58-й успел отпраздновать Хеллоуин, побороться за форты, пережить напряжённый СВС и запастись новыми вопросами. 😈</p>
 <div class="whitefox-head-stats-v557" aria-label="Лайки и просмотры публикации">
 <button aria-label="Поставить лайк публикации" aria-pressed="false" class="whitefox-head-like-v557" id="whitefox43Like" type="button"><span aria-hidden="true" class="heart">♥</span><span>Нравится</span><b id="whitefox43LikeCount">…</b></button>
-<span aria-label="Просмотры публикации" class="whitefox-head-stat-v557">👁 <b id="whitefox43Views">…</b> просмотров</span>
+
 </div></header>
 <div class="wfix-paper-ticker" aria-label="Редакционные сведения"><span>WHITEFOX NEWS</span><span>ГОСУДАРСТВО 58</span><span>НЕДЕЛИ 44–45</span></div>
 <nav class="wf-new-nav" aria-label="Содержание выпуска"><a href="#wf-halloween">🎃 Хеллоуин и форты</a><a href="#wf-mom">🍟 MOM и ORG</a><a href="#wf-svs">🏆 СВС с 63-м</a><a href="#wf-after">🔥 После замка</a><a href="#wf-questions">❓ Вопросы</a><a href="#wf-romance">💕 Клуб романтики</a></nav>
@@ -317,10 +317,8 @@ body.news-top-whitefox .whitefox-index .whitefox-card-stat-v557 b{color:inherit!
   const BASE='https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/';
   const ROOT=BASE.slice(0,-1)+'.json';
   const articleKey='news-elena-44-45-v1';
-  const viewKey='__views__whitefox-elena-44-45-reset-v2';
   const likeBtn=document.getElementById('whitefox43Like');
   const likeCount=document.getElementById('whitefox43LikeCount');
-  const viewsEl=document.getElementById('whitefox43Views');
   const enc=s=>encodeURIComponent(s);
   const urlFor=k=>BASE+enc(k)+'.json';
 
@@ -358,9 +356,6 @@ body.news-top-whitefox .whitefox-index .whitefox-card-stat-v557 b{color:inherit!
     const liked=localStorage.getItem('belaya-mgla-liked:'+articleKey)==='1';
     if(likeBtn&&liked){likeBtn.classList.add('is-liked');likeBtn.setAttribute('aria-pressed','true');likeBtn.disabled=true;}
     if(likeBtn&&!liked){likeBtn.addEventListener('click',async()=>{likeBtn.disabled=true;const n=await increment(articleKey);if(likeCount)likeCount.textContent=n.toLocaleString('ru-RU');likeBtn.classList.add('is-liked');likeBtn.setAttribute('aria-pressed','true');localStorage.setItem('belaya-mgla-liked:'+articleKey,'1');});}
-    const sess='belaya-mgla-view-session:whitefox-elena-44-45-reset-v2';
-    let views;if(!localStorage.getItem(sess)){localStorage.setItem(sess,'1');views=await readNumber(viewKey)/* protected counter migration pending */}else views=await readNumber(viewKey);
-    if(viewsEl)viewsEl.textContent=views.toLocaleString('ru-RU');
   }
 
   function safeDate(ts){try{return new Intl.DateTimeFormat('ru-RU',{day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'}).format(new Date(ts))}catch(e){return ''}}
