@@ -1,0 +1,36 @@
+name: Responsive matrix audit - 20 pages x 7 widths
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/responsive-matrix-20261122.cjs'
+      - '.github/workflows/responsive-matrix-20261122.yml'
+permissions:
+  contents: read
+concurrency:
+  group: responsive-matrix-audit
+  cancel-in-progress: true
+jobs:
+  matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser
+        run: |
+          npm install --no-save --no-package-lock --ignore-scripts playwright
+          npx playwright install --with-deps chromium
+      - name: Check responsiveness without touching counters
+        run: node scripts/responsive-matrix-20261122.cjs
+      - name: Upload report and any screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: responsive-matrix-report
+          path: responsive-matrix-output/
+          retention-days: 14
+          if-no-files-found: warn
