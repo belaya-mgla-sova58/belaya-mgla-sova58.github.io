@@ -546,6 +546,15 @@ async function inspect(browser,ctx,mode,pathName){
             if(geometry.linkCount!==5)item.issues.push('Expected five mobile links, found '+geometry.linkCount);
             if(geometry.clipping.length)item.issues.push('Clipped or too narrow navigation links: '+JSON.stringify(geometry.clipping));
             if(pathName==='/'){
+              // Consent may cover the support button on first visit: dismiss it for testing.
+              const consent=page.locator('#sova-metrika-consent');
+              if(await consent.isVisible().catch(()=>false)){
+                const decline=page.locator('#sova-metrika-decline');
+                if(await decline.isVisible().catch(()=>false))
+                  await decline.click({timeout:3500});
+                if(await consent.isVisible().catch(()=>false))
+                  item.issues.push('Consent dialog remained open after decline');
+              }
               const trigger=page.locator('#sovaSupportTrigger');
               if(await trigger.isVisible().catch(()=>false)){
                 await trigger.click({timeout:4000});
@@ -567,10 +576,15 @@ async function inspect(browser,ctx,mode,pathName){
     }
     fs.writeFileSync(path.join(output,'narrow-viewport-report.json'),JSON.stringify(narrow,null,2));
     const narrowFailures=narrow.filter(x=>x.issues.length);
+    fs.writeFileSync(path.join(output,'narrow-viewport-summary.json'),JSON.stringify({
+      checks:narrow.length,failedChecks:narrowFailures.length,
+      widths:[320,360,390],failed:narrowFailures
+    },null,2));
     console.log('QA_NARROW '+JSON.stringify({checks:narrow.length,failures:narrowFailures.length,items:narrowFailures}));
     if(narrowFailures.length)process.exitCode=1;
   }finally{await browser.close()}
-  const total={pages:all.length,failedPages:all.filter(x=>x.issues.length).length,failedScenarios:all.flatMap(x=>x.scenarios).filter(x=>!x.ok).length,brokenImages:all.reduce((a,x)=>a+(x.images.brokenViewport?.length||0),0),overflowPages:all.filter(x=>x.horizontalOverflow>8).length,errorPages:all.filter(x=>x.consoleErrors.length).length,assetErrorPages:all.filter(x=>x.assetErrors.length).length};
+  const narrowSummary=JSON.parse(fs.readFileSync(path.join(output,'narrow-viewport-summary.json'),'utf8'));
+  const total={pages:all.length,failedPages:all.filter(x=>x.issues.length).length,failedScenarios:all.flatMap(x=>x.scenarios).filter(x=>!x.ok).length,brokenImages:all.reduce((a,x)=>a+(x.images.brokenViewport?.length||0),0),overflowPages:all.filter(x=>x.horizontalOverflow>8).length,errorPages:all.filter(x=>x.consoleErrors.length).length,assetErrorPages:all.filter(x=>x.assetErrors.length).length,narrowChecks:narrowSummary.checks,narrowFailures:narrowSummary.failedChecks};
   fs.writeFileSync(path.join(output,'summary.json'),JSON.stringify(total,null,2));
   console.log('QA_TOTAL '+JSON.stringify(total));
   if(total.failedPages>0){
