@@ -984,6 +984,58 @@ async function scenario(page,pathName,mode,record){
       return 'Chains use shared sequential stock, deny duplicate spends, recalculate undo and identify each skipped step';
     });
   }
+  if(pathName==='/chief-gear-calculator.html'){
+    await task('chief_exchange_warns_before_spending_planned_resources',async()=>{
+      const key='belaya-mgla-chief-calculator-v1';
+      await page.evaluate(k=>{
+        const s=JSON.parse(localStorage.getItem(k));
+        for(const id of Object.keys(s.gear))s.gear[id]={from:-1,to:-1};
+        for(const id of Object.keys(s.charm))s.charm[id]={from:-1,to:-1};
+        s.gear.cap={from:-1,to:0};
+        for(const id of Object.keys(s.inventory))s.inventory[id]=0;
+        const first=JSON.parse(document.getElementById('bm-game-data').textContent).records.find(r=>r.kind==='gear');
+        s.inventory.alloy=first.cost.alloy;
+        s.inventory.polish=first.cost.polishing_solution;
+        s.inventory.plans=20;
+        s.exchangeUnlocked={gear:true,charm:false};
+        s.exchanges=[];
+        localStorage.setItem(k,JSON.stringify(s));
+      },key);
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      if(!(await page.locator('#exchangeDetails').getAttribute('open')))
+        await page.locator('#exchangeDetails summary').click();
+      await page.locator('#recipe').selectOption('4'); // 1 polish -> 50 alloy
+      await page.locator('#count').fill('1');
+      let dialogText='';
+      page.once('dialog',async d=>{dialogText=d.message();await d.dismiss()});
+      await page.locator('#exchangeBtn').click();
+      let outcome=await page.evaluate(k=>({
+        swaps:JSON.parse(localStorage.getItem(k)).exchanges,
+        info:document.getElementById('exchangeError').textContent
+      }),key);
+      if(!/ухудшит обеспеченность/.test(dialogText)||outcome.swaps.length||
+         !/материалы сохранены/.test(outcome.info))
+        throw Error('Reserved polish spent without actionable confirmation: '+JSON.stringify({dialogText,outcome}));
+      page.once('dialog',d=>d.accept());
+      await page.locator('#exchangeBtn').click();
+      outcome=await page.evaluate(k=>({
+        swaps:JSON.parse(localStorage.getItem(k)).exchanges,
+        shortage:document.getElementById('selectedWarning').textContent,
+        balance:exchangeBalance().p
+      }),key);
+      if(JSON.stringify(outcome.swaps)!==JSON.stringify([[4,1]])||
+         !/не хватает/.test(outcome.shortage)||outcome.balance.polish!==14)
+        throw Error('Confirmed exchange failed to show affected plan shortage: '+JSON.stringify(outcome));
+      await page.locator('#undoBtn').click();
+      outcome=await page.evaluate(k=>({
+        swaps:JSON.parse(localStorage.getItem(k)).exchanges,
+        warning:document.getElementById('selectedWarning').textContent
+      }),key);
+      if(outcome.swaps.length||!/хватает/.test(outcome.warning))
+        throw Error('Undo did not restore reserved materials to plan: '+JSON.stringify(outcome));
+      return 'Existing upgrade stock is protected by confirmation; reject preserves plan, accept shows shortage, undo restores';
+    });
+  }
   if(pathName==='/essence-mithril-calculator.html'){
     await task('essence_stock_inputs',async()=>{
       const essence=page.locator('#ecStockEssence'),mithril=page.locator('#ecStockMithril');
