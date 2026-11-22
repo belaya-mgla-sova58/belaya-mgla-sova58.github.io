@@ -4,6 +4,10 @@ on:
   push:
     branches: [main]
     paths:
+      - '**/*.html'
+      - '**/*.css'
+      - '**/*.js'
+      - '**/*.svg'
       - 'scripts/full-site-audit-20261122.cjs'
       - '.github/workflows/full-site-audit-20261122.yml'
       - 'whitefox-elena-44-45.html'
