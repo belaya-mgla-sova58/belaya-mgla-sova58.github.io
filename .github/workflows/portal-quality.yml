@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - '**.html'
-      - '**.css'
-      - '**.js'
+      - '**/*.html'
+      - '**/*.css'
+      - '**/*.js'
       - 'scripts/qa-portal-noncalculators.cjs'
       - '.github/workflows/portal-quality.yml'
       - 'robots.txt'
