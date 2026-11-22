@@ -11,6 +11,9 @@ on:
       - 'chief-gear-calculator.html'
       - 'chief-gear-core-v1222.js'
       - 'assets/sova-chief-*-v1223.*'
+      - 'site-v629.min.js'
+      - 'site-author-v625.min.js'
+      - 'posthog-v734.js'
 permissions:
   contents: read
 concurrency:
