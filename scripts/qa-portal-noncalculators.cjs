@@ -151,6 +151,26 @@ const wait=ms=>new Promise(done=>setTimeout(done,ms));
   const context=await browser.newContext();
   try{
    const request=context.request;
+   try{
+    const robots=await request.get(ROOT+'/robots.txt',{timeout:12000});
+    const robotText=robots.ok()?await robots.text():'';
+    if(!robots.ok()||!robotText.includes('/sitemap.xml'))
+     reports.push({page:'/robots.txt',viewport:'seo',errors:['Robots file missing or does not reference sitemap'],warnings:[]});
+    const sitemap=await request.get(ROOT+'/sitemap.xml',{timeout:12000});
+    const xml=sitemap.ok()?await sitemap.text():'';
+    const locs=[...xml.matchAll(/<loc>\s*([^<]+)<\/loc>/g)].map(x=>x[1].trim());
+    if(!sitemap.ok()||!locs.length)
+     reports.push({page:'/sitemap.xml',viewport:'seo',errors:['Sitemap missing or contains no URLs'],warnings:[]});
+    else{
+     const duplicated=locs.filter((x,i)=>locs.indexOf(x)!==i);
+     if(duplicated.length)reports.push({page:'/sitemap.xml',viewport:'seo',errors:['Duplicate entries: '+duplicated.slice(0,5).join(', ')],warnings:[]});
+     for(const pagePath of pages){
+      const expected=ROOT+(pagePath==='/'?'/':pagePath);
+      if(!locs.includes(expected))reports.push({page:pagePath,viewport:'seo',
+       errors:[],warnings:['Page absent from sitemap']});
+     }
+    }
+   }catch(e){reports.push({page:'/sitemap.xml',viewport:'seo',errors:['SEO fetch failed: '+String(e).slice(0,130)],warnings:[]})}
    for(const route of linked){
     if(pages.includes(route)||route==='/')continue;
     if(/calculator|helper|kopilka|furnace|mithril/i.test(route))continue;
