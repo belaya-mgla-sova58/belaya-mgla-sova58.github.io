@@ -247,7 +247,10 @@ async function scenario(page,pathName,mode,record){
       if(actual!==6000)throw Error('Expected 6000 points for 100 T10 at the test rate, got '+actual);
       await page.locator('#buildPlan').click();
       if(!/T10/.test(await page.locator('#plan').textContent()||''))throw Error('Planning output did not include T10');
+      await page.locator('details:has(#bonus) > summary').click();
       await page.locator('#bonus').fill('10');
+      const t10Rate=await page.locator('#mainItems .stockrow:has(input[data-id="t10"])').textContent();
+      if(!/66\s*очк/.test(t10Rate||''))throw Error('Bonus 10% not reflected in visible unit points');
       const boosted=Number((await page.locator('#potential').textContent()||'').replace(/[^0-9]/g,''));
       if(boosted!==6600)throw Error('10% bonus did not increase 6000 points to 6600: '+boosted);
       await page.locator('#goals [data-goal="custom"]').click();
@@ -268,8 +271,11 @@ async function scenario(page,pathName,mode,record){
       await page.locator('#days [data-day="4"]').click();
       await page.locator('#goals [data-goal="custom"]').click();
       await page.locator('#customGoal').fill('0.1');
+      await page.locator('details:has(#bonus) > summary').click();
       await page.locator('#bonus').fill('0');
       await page.locator('#mainItems input[data-id="t10"]').fill('2000');
+      await page.locator('#mainItems input[data-id="mithril"]').fill('0.5');
+      if(await page.locator('#mainItems input[data-id="mithril"]').inputValue()!=='0')throw Error('Fractional Mithril must be rounded down');
       await page.locator('#mainItems input[data-id="mithril"]').fill('1');
       await page.locator('#buildPlan').click();
       const used=await page.locator('#plan li').allTextContents();
