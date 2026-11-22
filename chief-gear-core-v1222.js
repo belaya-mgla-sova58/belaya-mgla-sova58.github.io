@@ -264,8 +264,16 @@ function clearOptimizerPreview(){
  $('optList').replaceChildren();
 }
 function recommendation(mode){
+ // A partially failed exchange sequence is not a reliable budget for
+ // automatic upgrades. Repair it first rather than silently skipping steps.
+ const exchange=exchangeBalance();
+ if(exchange.skipped){
+  clearOptimizerPreview();
+  $('optResult').textContent='⚠️ В цепочке есть '+exchange.skipped+' недоступных обменов. Сначала исправьте их в разделе «Обмен материалов».';
+  return;
+ }
  // Recompute from ACTUAL current levels, not previously planned targets.
- const remaining={...pool()},initial={...remaining},all=[];
+ const remaining={...exchange.p},initial={...remaining},all=[];
  for(const cat of ['gear','charm'])for(const [id,,name,troop] of positions(cat)){
   const v=state[cat][id];all.push({cat,id,name,troop,at:v.from,start:v.from});
  }
