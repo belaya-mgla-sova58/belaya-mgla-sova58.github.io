@@ -58,7 +58,7 @@ async function scenario(page,pathName,mode,record){
         const bottom=page.locator('nav.mobile-bottom-v424').first();
         const bstyle=await bottom.evaluate(el=>({display:getComputedStyle(el).display,visibility:getComputedStyle(el).visibility})).catch(()=>null);
         await page.screenshot({path:path.join(output,'menu-android.jpg'),type:'jpeg',quality:65,fullPage:false}).catch(()=>{});
-        await toggle.click({timeout:5500});
+        await page.locator('#sovaMobileCloseV986').click({timeout:5500});
         if(expanded!=='true')throw Error('Menu does not mark aria-expanded=true');
         if(bstyle && bstyle.display!=='none' && bstyle.visibility!=='hidden')throw Error('Bottom navigation remains visible over open drawer');
         return 'Opens, hides bottom nav, closes';
