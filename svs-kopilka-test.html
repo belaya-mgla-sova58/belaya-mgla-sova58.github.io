@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111015">
+<meta name="robots" content="noindex,nofollow">
+<title>Совина копилка СВС · тест | Белая мгла</title>
+<style>
+:root{color-scheme:dark;--bg:#0b0c10;--card:#19191d;--card2:#232127;--edge:#625542;--gold:#ebcc96;--muted:#c3bec0;--white:#f8f3ed;--mint:#b4e6c8;--alert:#ffcbc5}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 72% -90px,#3b333c 0,transparent 430px),#0b0c10;color:var(--white);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+a{color:var(--gold)}button,input,summary{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid #ffdc96;outline-offset:3px}
+.wrap{width:min(100% - 28px,960px);margin:auto;padding-bottom:66px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:23px 0;color:var(--muted);font-size:13px}.top strong{color:var(--gold);letter-spacing:.11em}.top a{text-decoration:none;border-bottom:1px solid #74634d}
+.hero{position:relative;overflow:hidden;padding:30px clamp(19px,5vw,43px);border:1px solid #79664c;border-radius:18px;background:linear-gradient(135deg,#2b252a,#151519 70%);box-shadow:0 20px 50px #0005}
+.hero:after{content:"✦";position:absolute;right:20px;top:-50px;font:190px Georgia,serif;color:#a99a7a12;pointer-events:none}.kicker{font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);font-weight:800}.hero h1{font:400 clamp(38px,6vw,60px)/1.05 Georgia,serif;margin:10px 0 12px}.hero p{color:#ded6d1;max-width:640px;margin:0}.hero .test{display:inline-block;border:1px solid #b89865;border-radius:99px;padding:4px 12px;font-size:11px;color:#f4dcae;margin-top:18px}
+.steps{display:flex;gap:8px;flex-wrap:wrap;margin:17px 0 3px;color:#d8c8ac;font-size:12px}.steps span{padding:5px 11px;background:#242127;border-radius:30px;border:1px solid #574d44}
+.panel{margin-top:15px;background:linear-gradient(140deg,#222025,#151518);border:1px solid #5c5046;border-radius:17px;padding:clamp(16px,3vw,25px)}.head{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap;margin-bottom:13px}.head h2{margin:0;font:400 26px Georgia,serif}.head small,.note{color:var(--muted);font-size:13px}.daytabs,.goals{display:flex;flex-wrap:wrap;gap:9px}.day,.goal{border-radius:11px;padding:11px 17px;border:1px solid #70604c;background:#2b282c;color:#e6dfd9;font-weight:750;min-height:45px}.day[aria-pressed="true"],.goal[aria-pressed="true"]{background:linear-gradient(120deg,#f1d9a8,#caa36e);border-color:#f8e3b9;color:#211a12}.day{flex:1;min-width:90px}.goal{flex:1;min-width:95px}.dayname{padding:10px 1px 0;color:var(--gold);font-size:14px}
+.customrow{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:15px}.customrow label{color:#d8d3d1}.customrow input,.bonus input,.stockrow input{border:1px solid #8e7858;background:#0f1116;color:white;border-radius:10px;padding:11px 12px;min-height:45px;max-width:100%;outline-offset:1px}.customrow input{width:170px}.customrow input:disabled{opacity:.48}
+.stockhint{color:#e6d6bc;background:#2b251f;border-left:3px solid #d7b580;border-radius:4px 10px 10px 4px;padding:11px 13px;margin:11px 0 15px}.items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.stockrow{display:flex;gap:12px;align-items:center;border:1px solid #65564c;border-radius:12px;background:#222126;padding:12px;min-width:0}.stockrow[data-filled="true"]{border-color:#bda27c;background:#29262a}.stockrow .glyph{width:42px;height:42px;flex:0 0 42px;border-radius:11px;border:1px solid #877052;display:grid;place-items:center;background:radial-gradient(circle at 28% 20%,#605040,#27252b);font-weight:900;color:#f6d69d;font-size:11px;letter-spacing:-.03em}.stockrow .stockname{flex:1;min-width:0;font-size:13px;font-weight:730}.stockrow .stockname small{display:block;color:#bfb5b5;font-size:11px;font-weight:400;line-height:1.35;margin-top:2px}.stockrow input{width:94px;flex:0 0 94px;text-align:right;font-variant-numeric:tabular-nums}
+details{margin-top:12px}summary{cursor:pointer;color:var(--gold);font-weight:750;padding:10px 1px;list-style:revert}.bonus{padding:6px 0 0}.bonus input{width:110px;margin-left:7px}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.primary,.secondary{border-radius:11px;padding:12px 20px;min-height:48px;font-weight:800}.primary{background:linear-gradient(110deg,#f2d9a9,#c69d61);color:#251d17;border:1px solid #ffe2aa}.secondary{background:#26252a;color:#eee4d9;border:1px solid #87715a}.btn-right{margin-left:auto}
+.summarygrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:15px}.stat{padding:13px;border:1px solid #5f5244;border-radius:12px;background:#242126}.stat span{display:block;color:#bfb5b0;font-size:12px}.stat b{display:block;font-size:clamp(16px,2.3vw,23px);margin-top:4px;word-wrap:break-word}.stat em{font-style:normal;font-weight:400;font-size:12px}
+.bar{height:13px;background:#0e1014;border:1px solid #574a3e;border-radius:20px;overflow:hidden;margin-top:13px}.bar span{display:block;height:100%;width:0%;background:linear-gradient(90deg,#bd8e58,#f6dfad);transition:width .25s}
+.result{border:1px solid #8c754f;border-radius:14px;background:#292421;margin-top:16px;padding:17px}.result h3{font:400 23px Georgia,serif;margin:0 0 8px}.result ul{padding-left:22px;margin:10px 0;line-height:1.8}.result li::marker{color:#e4c286}.result .ok{color:var(--mint);font-weight:800}.result .low{color:var(--alert);font-weight:800}.warning{margin-top:12px;color:#c3b8ae;font-size:12px;line-height:1.6}.muted{color:var(--muted)}footer{padding:24px 5px;color:#bcb4b3;font-size:12px;line-height:1.7}
+@media(max-width:680px){.items{grid-template-columns:1fr}.panel{padding:16px}.day{min-width:calc(33% - 8px);padding:10px 11px}.stockrow{padding:10px;gap:9px}.stockrow input{width:90px;flex-basis:90px}.summarygrid{grid-template-columns:1fr 1fr}.summarygrid .stat:last-child{grid-column:1/-1}.btn-right{margin-left:0}.actions button{flex:1}.top{padding:16px 0}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bar span{transition:none}}
+</style>
+</head>
+<body><main class="wrap">
+<nav class="top" aria-label="Навигация"><strong>БЕЛАЯ МГЛА · SOVA58</strong><a href="calculators.html">← Все калькуляторы</a></nav>
+<header class="hero"><span class="kicker">Помощник игрока без доната</span><h1>Совина копилка СВС</h1><p>Выбери день, цель и укажи только то, что есть у тебя. Сова подскажет, чем можно набрать очки, а что приберечь. Никаких скриншотов и длинных анкет.</p><span class="test">Тестовая версия · без публикации в каталоге</span></header>
+<div class="steps"><span>1 · День</span><span>2 · Цель</span><span>3 · Запасы</span><span>4 · План</span></div>
+<section class="panel" aria-labelledby="chooseDay"><div class="head"><h2 id="chooseDay">Выбери день СВС</h2><small>Все пять дней подготовки</small></div><div class="daytabs" id="days" role="group" aria-label="День подготовки"></div><div class="dayname" id="dayName"></div></section>
+<section class="panel" aria-labelledby="chooseGoal"><div class="head"><h2 id="chooseGoal">Сколько очков хочешь?</h2><small>Без погони за рейтингом</small></div><div class="goals" id="goals" role="group" aria-label="Цель по очкам"></div><div class="customrow"><label for="customGoal">Своя цель, млн очков</label><input id="customGoal" type="number" min=".1" step=".1" inputmode="decimal" disabled aria-label="Своя цель в миллионах"></div></section>
+<section class="panel" aria-labelledby="chooseStock"><div class="head"><h2 id="chooseStock">Что есть в запасах?</h2><small>Заполняй только нужное</small></div><div class="stockhint" id="owlHint">🦉 Пока всё на месте. Отличное начало!</div><div class="items" id="mainItems"></div><details id="extraDetails"><summary>Ещё предметы и способы набрать очки</summary><div class="items" id="extraItems"></div></details>
+<details><summary>Дополнительно: бонус к очкам</summary><div class="bonus"><label for="bonus">Бонус Валерии или другого источника, %</label><input id="bonus" type="number" min="0" max="300" step="1" inputmode="numeric" placeholder="0"><p class="note">Указывай только тот бонус, который виден в списке источников очков СВС в игре. Если его нет, оставь 0.</p></div></details>
+<div class="actions"><button type="button" class="primary" id="buildPlan">Получить мой план</button><button type="button" class="secondary" id="reset">Очистить запасы</button></div><p class="note">Запасы сохраняются в этом браузере на данном устройстве. Ничего не отправляется на сервер.</p></section>
+<section class="panel" aria-labelledby="pointsHeading" id="planSection"><div class="head"><h2 id="pointsHeading">Твой расчёт</h2><small>Оценка по введённым значениям</small></div><div class="summarygrid"><div class="stat"><span>Можно набрать за день</span><b id="potential">0</b></div><div class="stat"><span>Твоя цель</span><b id="target">5 млн</b></div><div class="stat"><span>Хватит до цели?</span><b id="status">Укажи запасы</b></div></div><div class="bar" aria-label="Доля цели, покрытая запасами"><span id="barFill"></span></div><div class="result" id="plan" aria-live="polite"><h3>Твой план появится здесь</h3><p>Впиши хотя бы один ресурс и нажми «Получить мой план».</p></div><p class="warning">Важно: это расчёт возможных очков, а не обещание наград. Кристаллы засчитываются при подходящем улучшении, обучение войск — после завершения, а значения для снаряжения и талисманов зависят от фактического прироста. Перед тратами сверяй источники очков в игре.</p></section>
+<footer>Экспериментальная «Совина копилка» для «Белой мглы». Расчётные базовые ставки взяты из сводок SvS 2026 года; для проверки используй список «Источники очков» в событии. <a href="https://fccrazy.app/calculators/svs-prep" target="_blank" rel="noopener noreferrer">Ставки по дням</a> · <a href="svs-prep.html">Гайд СВС на портале</a>.</footer>
+</main>
+<script>
+(function(){
+"use strict";
+var STORAGE="bm-svs-kopilka-simple-v1";
+var days=["","Строительство города","Базовые навыки","Охота на зверей","Развитие героев и войск","Усиление мощи"];
+// Amounts are usable actions/items, not guaranteed points from passive inventory.
+var I=[
+{id:"refined",name:"Очищенные огненные кристаллы",short:"ОК+",unit:"шт.",rate:30000,days:[1,2,5],best:1,main:true,tip:"только при начале подходящего улучшения здания"},
+{id:"fire",name:"Огненные кристаллы",short:"ОК",unit:"шт.",rate:2000,days:[1,2,5],best:1,main:true,tip:"только при начале подходящего улучшения здания"},
+{id:"fcshard",name:"Осколки огненного кристалла",short:"ОСК",unit:"шт.",rate:1000,days:[1,2,5],best:2,main:true,tip:"только при исследовании"},
+{id:"build",name:"Ускорения строительства",short:"СТР",unit:"час.",rate:1800,step:.25,days:[1,2,5],best:1,main:true,tip:"зачёт за каждую минуту ускорения"},
+{id:"research",name:"Ускорения исследований",short:"ИСС",unit:"час.",rate:1800,step:.25,days:[1,2,5],best:2,main:true,tip:"зачёт за каждую минуту ускорения"},
+{id:"training",name:"Ускорения обучения",short:"ВОЙ",unit:"час.",rate:1800,step:.25,days:[1,2,5],best:5,main:false,tip:"в 4-й день считаются очки за законченных бойцов, а не за минуты"},
+{id:"expertfast",name:"Ускорения обучения экспертов",short:"ЭКС",unit:"час.",rate:1800,step:.25,days:[1,2,3,5],best:3,main:false,tip:"зачёт за каждую минуту ускорения"},
+{id:"charm",name:"Прирост очков талисманов губернатора",short:"ТАЛ",unit:"очк.",rate:70,days:[1,3,4],best:4,main:false,tip:"именно прирост характеристического счёта, не число талисманов"},
+{id:"wheel",name:"Прокрутки колеса удачи",short:"КОЛ",unit:"раз",rate:8000,days:[2,3],best:2,main:true},
+{id:"mythic",name:"Мифические фрагменты героев",short:"МИФ",unit:"шт.",rate:3040,days:[2,3],best:2,main:true,tip:"при реально проведённом повышении звёзд"},
+{id:"epic",name:"Эпические фрагменты героев",short:"ЭП",unit:"шт.",rate:1220,days:[2,3],best:2,main:false,tip:"при реально проведённом повышении звёзд"},
+{id:"rare",name:"Редкие фрагменты героев",short:"РЕД",unit:"шт.",rate:350,days:[2,3],best:2,main:false,tip:"при реально проведённом повышении звёзд"},
+{id:"sigil",name:"Знаки экспертов (не обычные)",short:"ЗН",unit:"шт.",rate:6000,days:[2,3],best:2,main:true},
+{id:"books",name:"Книги знаний",short:"КН",unit:"шт.",rate:60,days:[2,3],best:3,main:false},
+{id:"advanced",name:"Продвинутые знаки приручения",short:"ЗВ+",unit:"шт.",rate:15000,days:[3,5],best:3,main:true},
+{id:"wild",name:"Обычные знаки приручения",short:"ЗВ",unit:"шт.",rate:1150,days:[3,5],best:3,main:false},
+{id:"rallies",name:"Планируемые рейды на полярных ужасов",short:"РЕЙ",unit:"раз",rate:30000,days:[3],best:3,main:true,tip:"планируемые успешные рейды, не предметы"},
+{id:"beasts",name:"Звери уровней 26–30",short:"ЗВР",unit:"раз",rate:12000,days:[3],best:3,main:false,tip:"планируемые победы"},
+{id:"pet",name:"Прирост очков питомцев",short:"ПЕТ",unit:"очк.",rate:50,days:[3,5],best:3,main:false,tip:"не количество предметов, а прирост игрового счёта"},
+{id:"mithril",name:"Мифрил",short:"МФ",unit:"шт.",rate:144000,days:[4,5],best:4,main:true},
+{id:"essence",name:"Камни эссенции",short:"ЭС",unit:"шт.",rate:4000,days:[4,5],best:4,main:true},
+{id:"widgets",name:"Виджеты эксклюзивного снаряжения",short:"ВИД",unit:"шт.",rate:8000,days:[4,5],best:4,main:true},
+{id:"t11",name:"Обученные войска T11",short:"T11",unit:"шт.",rate:75,days:[4],best:4,main:false,tip:"бойцы, закончившие обучение в этот день"},
+{id:"t10",name:"Обученные войска T10",short:"T10",unit:"шт.",rate:60,days:[4],best:4,main:true,tip:"бойцы, закончившие обучение в этот день"},
+{id:"t9",name:"Обученные войска T9",short:"T9",unit:"шт.",rate:45,days:[4],best:4,main:false,tip:"бойцы, закончившие обучение в этот день"},
+{id:"t8",name:"Обученные войска T8",short:"T8",unit:"шт.",rate:35,days:[4],best:4,main:false,tip:"бойцы, закончившие обучение в этот день"},
+{id:"gear",name:"Прирост очков снаряжения губернатора",short:"СН",unit:"очк.",rate:36,days:[5],best:5,main:false,tip:"прирост игрового показателя, не количество предметов"}
+];
+var state={day:1,goal:5000000,custom:5,stock:{},bonus:0};
+try{var old=JSON.parse(localStorage.getItem(STORAGE)||"null");if(old&&typeof old==="object"){state.day=[1,2,3,4,5].indexOf(+old.day)!==-1?+old.day:1;state.goal=[5e6,1e7,1.5e7,"custom"].indexOf(old.goal)!==-1?old.goal:5e6;state.custom=Number(old.custom)||5;state.stock=(old.stock&&typeof old.stock==="object")?old.stock:{};state.bonus=Math.min(300,Math.max(0,Number(old.bonus)||0));}}catch(e){}
+function $(id){return document.getElementById(id)}
+function save(){try{localStorage.setItem(STORAGE,JSON.stringify(state));}catch(e){}}
+function fmt(n){return Math.round(n).toLocaleString("ru-RU")}
+function count(x){var n=Number(state.stock[x.id]);return Number.isFinite(n)?Math.max(0,n):0}
+function target(){return state.goal==="custom"?Math.max(100000,Number(state.custom||5)*1000000):state.goal}
+function ratio(){return 1+state.bonus/100}
+function points(item){return count(item)*item.rate*ratio()}
+function relevant(){return I.filter(function(x){return x.days.indexOf(state.day)!==-1})}
+function renderChoices(){
+ $("days").innerHTML=days.slice(1).map(function(x,i){var d=i+1;return '<button type="button" class="day" data-day="'+d+'" aria-pressed="'+(d===state.day)+'">'+d+'-й день</button>';}).join("");
+ $("dayName").textContent=days[state.day];
+ var goals=[[5e6,"5 млн"],[1e7,"10 млн"],[1.5e7,"15 млн"],["custom","Своя"]];
+ $("goals").innerHTML=goals.map(function(x){return '<button type="button" class="goal" data-goal="'+x[0]+'" aria-pressed="'+(state.goal===x[0])+'">'+x[1]+'</button>';}).join("");
+ $("customGoal").disabled=state.goal!=="custom";$("customGoal").value=state.custom;
+ $("bonus").value=state.bonus||"";
+}
+function card(item){
+ var v=count(item),step=item.step||1,desc=(item.tip?item.tip+" · ":"")+fmt(item.rate*(item.step||1)*ratio())+" очк. за "+(item.step||1)+" "+item.unit;
+ return '<label class="stockrow" data-filled="'+(v>0)+'"><span class="glyph" aria-hidden="true">'+item.short+'</span><span class="stockname">'+item.name+'<small>'+desc+'</small></span><input data-id="'+item.id+'" aria-label="'+item.name+', '+item.unit+'" type="number" inputmode="decimal" min="0" step="'+step+'" placeholder="0" value="'+(v||"")+'"></label>';
+}
+function renderItems(){
+ var all=relevant();
+ $("mainItems").innerHTML=all.filter(function(x){return x.main}).map(card).join("");
+ var extra=all.filter(function(x){return !x.main});
+ $("extraDetails").hidden=!extra.length;
+ $("extraItems").innerHTML=extra.map(card).join("");
+}
+function renderSummary(){
+ var sum=relevant().reduce(function(a,x){return a+points(x)},0),goal=target();
+ $("potential").textContent=fmt(sum)+" очк.";
+ $("target").textContent=(goal/1000000).toLocaleString("ru-RU")+" млн";
+ $("status").textContent=sum<=0?"Укажи запасы":sum>=goal?"Да":"Пока нет";
+ $("status").style.color=sum>=goal?"var(--mint)":sum>0?"var(--alert)":"";
+ $("barFill").style.width=Math.min(100,100*sum/goal)+"%";
+ var k=Object.keys(state.stock).filter(function(id){return Number(state.stock[id])>0}).length;
+ $("owlHint").textContent=k===0?"🦉 Сова следит за запасами. Начни с самого ценного предмета.":k<=2?"🦉 Уже "+k+" вида запасов. Заполнять всё подряд не нужно!":"🦉 "+k+" видов записано. Сова одобряет накопительство.";
+}
+function build(){
+ var goal=target(),avail=relevant().filter(function(x){return count(x)>0}).slice();
+ if(!avail.length){$("plan").innerHTML='<h3>Пока нечего считать</h3><p>Введи хотя бы одно количество. Остальные поля можно оставить пустыми.</p>';return;}
+ var total=avail.reduce(function(s,x){return s+points(x)},0);
+ // Prefer activity's best day; otherwise use shared stock only when required.
+ avail.sort(function(a,b){return Number(b.best===state.day)-Number(a.best===state.day)||b.rate-a.rate});
+ var remain=goal,selected=[],held=[];
+ avail.forEach(function(x){
+   if(remain<=0){held.push(x);return}
+   var quantity=count(x),step=x.step||1;
+   var raw=remain/(x.rate*ratio());
+   var want=Math.min(quantity,Math.ceil((raw-1e-9)/step)*step);
+   want=Math.max(0,Math.round(want*100000)/100000);
+   if(want>0){selected.push({item:x,amount:want,earned:want*x.rate*ratio()});remain=Math.max(0,remain-want*x.rate*ratio())}
+   if(want<quantity)held.push(x);
+ });
+ var used=selected.reduce(function(s,x){return s+x.earned},0),html="<h3>"+(remain<=0?"План до выбранной цели":"План из доступных запасов")+"</h3>";
+ html+="<p class='"+(remain<=0?"ok":"low")+"'>"+(remain<=0?"Цель достижима по введённым значениям.":"Не хватает около "+fmt(remain)+" очк.")+"</p><ul>";
+ selected.forEach(function(x){html+="<li><b>"+x.item.name+"</b>: "+x.amount.toLocaleString("ru-RU")+" "+x.item.unit+" → примерно "+fmt(x.earned)+" очк."+(x.item.best!==state.day?" <span class='muted'>(также пригодится в "+x.item.best+"-й день)</span>":"")+"</li>"});
+ html+="</ul><p><b>Запланировано:</b> "+fmt(used)+" очк. из возможных "+fmt(total)+".</p>";
+ if(held.length){html+="<p><b>Можно оставить в копилке:</b> "+held.map(function(x){return x.name}).join(", ")+".</p>"}
+ if(state.day===2)html+="<p class='note'>Бесплатные очки: сбор мяса, дерева, угля и железа. Количество зависит от фактического возвращённого сбора.</p>";
+ if(state.day===3)html+="<p class='note'>Выносливость сама по себе не приносит очков: считаются успешные охоты и рейды.</p>";
+ if(state.day===4)html+="<p class='note'>При повышении уровня войск считаются разницы очков между уровнями. Для точного расчёта повышений нужна отдельная таблица.</p>";
+ html+="<p class='warning'>План приблизительный и не учитывает стоимость полного улучшения, ограничения уровней, запас на другие дни, доступность предметов для применения и возможные изменения игровых правил. Не трать редкие материалы только ради цифры в калькуляторе.</p>";
+ $("plan").innerHTML=html;
+}
+document.addEventListener("click",function(e){
+ var d=e.target.closest("[data-day]");if(d){state.day=+d.dataset.day;save();renderChoices();renderItems();renderSummary();build();return}
+ var g=e.target.closest("[data-goal]");if(g){state.goal=g.dataset.goal==="custom"?"custom":+g.dataset.goal;save();renderChoices();renderSummary();build();}
+});
+document.addEventListener("input",function(e){
+ var id=e.target.dataset.id;if(id){state.stock[id]=Math.max(0,Number(e.target.value)||0);var parent=e.target.closest(".stockrow");if(parent)parent.dataset.filled=state.stock[id]>0;save();renderSummary();return}
+ if(e.target.id==="customGoal"){state.custom=Math.max(.1,Number(e.target.value)||.1);save();renderSummary();}
+ if(e.target.id==="bonus"){state.bonus=Math.min(300,Math.max(0,Number(e.target.value)||0));save();renderSummary();}
+});
+$("buildPlan").addEventListener("click",function(){build();$("planSection").scrollIntoView({behavior:"smooth",block:"start"})});
+$("reset").addEventListener("click",function(){if(!confirm("Очистить все введённые запасы?"))return;state.stock={};save();renderItems();renderSummary();build();});
+renderChoices();renderItems();renderSummary();build();
+})();
+</script>
+</body></html>
