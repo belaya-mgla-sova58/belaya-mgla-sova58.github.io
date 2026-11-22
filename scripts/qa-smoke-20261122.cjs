@@ -383,6 +383,16 @@ async function inspect(browser,ctx,mode,pathName){
         footerVisible:!!document.querySelector('nav.mobile-bottom-v424')};
     });
     record.title=data.title;
+    if(mode==='desktop'){
+      const geometry=await page.evaluate(()=>{
+        const nav=document.querySelector('.nav-wrap'),main=document.getElementById('appMain');
+        if(!nav||!main||getComputedStyle(nav).display==='none'||getComputedStyle(nav).position!=='fixed')return null;
+        const n=nav.getBoundingClientRect(),m=main.getBoundingClientRect();
+        return {sidebarRight:Math.round(n.right),mainLeft:Math.round(m.left)};
+      });
+      if(geometry&&geometry.mainLeft<geometry.sidebarRight-2)
+        record.issues.push('Desktop navigation overlaps main page: '+JSON.stringify(geometry));
+    }
     record.horizontalOverflow=data.overflow;
     record.images=data.images;
     record.navigation=data.navigation;
