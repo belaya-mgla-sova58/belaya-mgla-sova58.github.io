@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
     paths:
+      - '**/*.html'
+      - '**/*.css'
+      - '**/*.js'
       - 'scripts/responsive-matrix-20261122.cjs'
       - '.github/workflows/responsive-matrix-20261122.yml'
       - 'belaya-no-blue-sitewide-v11.css'
