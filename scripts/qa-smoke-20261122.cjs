@@ -260,6 +260,48 @@ async function scenario(page,pathName,mode,record){
       return '6 gear slots, 18 charm slots, 6 decoded icons; upgrade and reset valid';
     });
   }
+  if(pathName==='/chief-gear-calculator.html'){
+    await task('chief_gear_exchange_settlement_safety',async()=>{
+      const key='belaya-mgla-chief-calculator-v1';
+      await page.evaluate(k=>{
+        const s=JSON.parse(localStorage.getItem(k));
+        for(const v of Object.values(s.gear)){v.from=-1;v.to=-1}
+        for(const v of Object.values(s.charm)){v.from=-1;v.to=-1}
+        for(const id of Object.keys(s.inventory))s.inventory[id]=1000000;
+        s.exchangeUnlocked={gear:true,charm:false};
+        s.exchanges=[[0,1]];
+        localStorage.setItem(k,JSON.stringify(s));
+      },key);
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      await page.locator('#target').selectOption('0');
+      await page.locator('#markDone').click();
+      if(await page.locator('#doneDeduct').isDisabled())throw Error('Valid exchange unexpectedly disables deduction');
+      const before=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)),key);
+      page.once('dialog',d=>d.dismiss());
+      await page.locator('#doneDeduct').click();
+      const cancelled=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)),key);
+      if(JSON.stringify(cancelled)!==JSON.stringify(before))throw Error('Cancelling exchange completion changed saved inventory or plans');
+      if(!(await page.locator('#doneDialog').isVisible()))throw Error('Dialog closed after cancelling exchange completion');
+      page.once('dialog',d=>d.accept());
+      await page.locator('#doneDeduct').click();
+      const applied=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)),key);
+      if(applied.exchanges.length)throw Error('Completed exchange was not cleared after explicit confirmation');
+      if(applied.gear.cap.from!==0)throw Error('Completed gear level not saved');
+      if(Object.values(applied.inventory).some(v=>!Number.isSafeInteger(v)||v<0))throw Error('Deduction produced invalid inventory');
+      // An impossible planned exchange must remain visible and prevent deduction.
+      applied.gear.cap.from=-1;applied.gear.cap.to=-1;
+      applied.exchanges=[[0,1000000]];
+      localStorage.setItem(key,JSON.stringify(applied));
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      await page.locator('#target').selectOption('0');
+      await page.locator('#markDone').click();
+      if(!(await page.locator('#doneDeduct').isDisabled()))throw Error('Invalid planned exchange did not block deduction');
+      const preserved=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)),key);
+      if(preserved.exchanges.length!==1)throw Error('Invalid exchange disappeared');
+      await page.locator('#doneCancel').click();
+      return 'Cancelled confirmation preserves plans; accepted settlement commits; invalid exchanges block deduction';
+    });
+  }
   if(pathName==='/essence-mithril-calculator.html'){
     await task('essence_stock_inputs',async()=>{
       const essence=page.locator('#ecStockEssence'),mithril=page.locator('#ecStockMithril');
