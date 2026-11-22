@@ -917,6 +917,73 @@ async function scenario(page,pathName,mode,record){
       return 'Invalid/fractional, underfunded, over-limit and overflow exchanges rejected; valid exchange and undo recalculate shared balances';
     });
   }
+  if(pathName==='/chief-gear-calculator.html'){
+    await task('chief_ordered_exchange_chain_no_double_spend',async()=>{
+      const key='belaya-mgla-chief-calculator-v1';
+      await page.evaluate(k=>{
+        const s=JSON.parse(localStorage.getItem(k));
+        for(const id of Object.keys(s.inventory))s.inventory[id]=0;
+        s.inventory.plans=20;s.exchanges=[];
+        s.exchangeUnlocked={gear:true,charm:false};
+        s.charmWeeklyLimits={};
+        localStorage.setItem(k,JSON.stringify(s));
+      },key);
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      if(!(await page.locator('#exchangeDetails').getAttribute('open')))
+        await page.locator('#exchangeDetails summary').click();
+      // 20 plans => 2 amber; then convert the remaining 10 plans to 30 polish.
+      await page.locator('#recipe').selectOption('0');
+      await page.locator('#count').fill('1');
+      await page.locator('#exchangeBtn').click();
+      await page.locator('#recipe').selectOption('1');
+      await page.locator('#count').fill('10');
+      await page.locator('#exchangeBtn').click();
+      let result=await page.evaluate(k=>({
+        exchanges:JSON.parse(localStorage.getItem(k)).exchanges,
+        balance:exchangeBalance(),
+        info:document.getElementById('exchangeInfo').textContent
+      }),key);
+      if(JSON.stringify(result.exchanges)!==JSON.stringify([[0,1],[1,10]])||
+         result.balance.p.plans!==0||result.balance.p.amber!==1||
+         result.balance.p.polish!==30||result.balance.skipped!==0)
+        throw Error('Ordered chain incorrectly allocates shared stock: '+JSON.stringify(result));
+      await page.locator('#recipe').selectOption('0');
+      await page.locator('#count').fill('1');
+      await page.locator('#exchangeBtn').click();
+      const denied=await page.evaluate(k=>({
+        exchanges:JSON.parse(localStorage.getItem(k)).exchanges.length,
+        message:document.getElementById('exchangeError').textContent
+      }),key);
+      if(denied.exchanges!==2||!/Не хватает материала/.test(denied.message))
+        throw Error('Chain double spent its remaining materials: '+JSON.stringify(denied));
+      await page.locator('#undoBtn').click();
+      result=await page.evaluate(k=>({
+        exchanges:JSON.parse(localStorage.getItem(k)).exchanges,
+        balance:exchangeBalance()
+      }),key);
+      if(result.exchanges.length!==1||result.balance.p.plans!==10||
+         result.balance.p.amber!==1||result.balance.p.polish!==0)
+        throw Error('Undo failed to restore intermediate chain state: '+JSON.stringify(result));
+      // A reduced initial stock invalidates the earlier exchange.
+      // A dependent step may not receive materials from a skipped operation.
+      await page.evaluate(k=>{
+        const s=JSON.parse(localStorage.getItem(k));
+        s.inventory.plans=0;
+        s.exchanges=[[0,1],[4,1]]; // plan->amber fails; polish->alloy also fails
+        localStorage.setItem(k,JSON.stringify(s));
+      },key);
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      result=await page.evaluate(()=>({
+        balance:exchangeBalance(),
+        info:document.getElementById('exchangeInfo').textContent
+      }));
+      if(result.balance.skipped!==2||result.balance.p.amber!==0||
+         result.balance.p.alloy!==0||result.balance.p.plans!==0||
+         !/Шаг 1/.test(result.info)||!/Шаг 2/.test(result.info))
+        throw Error('Failed chain credited nonexistent materials or hid reasons: '+JSON.stringify(result));
+      return 'Chains use shared sequential stock, deny duplicate spends, recalculate undo and identify each skipped step';
+    });
+  }
   if(pathName==='/essence-mithril-calculator.html'){
     await task('essence_stock_inputs',async()=>{
       const essence=page.locator('#ecStockEssence'),mithril=page.locator('#ecStockMithril');
