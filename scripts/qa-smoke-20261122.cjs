@@ -226,7 +226,22 @@ async function scenario(page,pathName,mode,record){
       if(actual!==6000)throw Error('Expected 6000 points for 100 T10 at the test rate, got '+actual);
       await page.locator('#buildPlan').click();
       if(!/T10/.test(await page.locator('#plan').textContent()||''))throw Error('Planning output did not include T10');
-      return 'All five days visible: '+counts.join('/')+' items; basic points calculation valid';
+      await page.locator('#bonus').fill('10');
+      const boosted=Number((await page.locator('#potential').textContent()||'').replace(/[^0-9]/g,''));
+      if(boosted!==6600)throw Error('10% bonus did not increase 6000 points to 6600: '+boosted);
+      await page.locator('#goals [data-goal="custom"]').click();
+      await page.locator('#customGoal').fill('1');
+      if(!/1\s*млн/.test((await page.locator('#target').textContent()||'').replace(/\u00a0/g,' ')))throw Error('Custom goal display is incorrect');
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      await page.locator('#days [data-day="4"]').waitFor({state:'visible',timeout:6000});
+      if(await page.locator('#mainItems input[data-id="t10"]').inputValue()!=='100')throw Error('Stock amount not persisted after reload');
+      if(await page.locator('#bonus').inputValue()!=='10')throw Error('Bonus not persisted after reload');
+      if(await page.locator('#goals [data-goal="custom"]').getAttribute('aria-pressed')!=='true')throw Error('Custom goal not persisted after reload');
+      page.once('dialog',d=>d.accept());
+      await page.locator('#reset').click();
+      const reset=Number((await page.locator('#potential').textContent()||'').replace(/[^0-9]/g,''));
+      if(reset!==0)throw Error('Reset did not clear stock points: '+reset);
+      return 'All five days: '+counts.join('/')+' items; 10% bonus, goal, persistence and reset valid';
     });
   }
 }
