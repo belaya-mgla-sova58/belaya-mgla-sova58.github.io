@@ -391,6 +391,34 @@ async function scenario(page,pathName,mode,record){
         return {gear:Object.values(s.gear).map(x=>x.to),charm:Object.values(s.charm).map(x=>x.to)};
       },key);
       if(JSON.stringify(restored)!==JSON.stringify(actual.targets))throw Error('Optimizer targets changed after reload');
+      const verified=await page.evaluate(k=>{
+        const saved=JSON.parse(localStorage.getItem(k));
+        const records=JSON.parse(document.getElementById('bm-game-data').textContent).records;
+        let scoreGear=0,scoreCharm=0,power=0;
+        for(const cat of ['gear','charm']){
+          const rows=records.filter(r=>r.kind===cat);
+          for(const item of Object.values(saved[cat])){
+            if(item.to<=item.from)continue;
+            power+=rows[item.to].power_total-(item.from<0?0:rows[item.from].power_total);
+            for(let i=item.from+1;i<=item.to;i++){
+              if(cat==='gear')scoreGear+=rows[i].upgrade_score;
+              else scoreCharm+=rows[i].upgrade_score;
+            }
+          }
+        }
+        const digits=id=>Number(document.getElementById(id).textContent.replace(/[^0-9]/g,''));
+        const multiplier=1+(saved.bonus||0)/100;
+        return {
+          expectedPower:Math.round(power),actualPower:digits('power'),
+          expectedGear:Math.round(scoreGear*36*multiplier),actualGear:digits('gearPoints'),
+          expectedCharm:Math.round(scoreCharm*70*multiplier),actualCharm:digits('charmPoints'),
+          actualTotal:digits('totalPoints')
+        };
+      },key);
+      if(verified.expectedPower!==verified.actualPower||verified.expectedGear!==verified.actualGear||
+         verified.expectedCharm!==verified.actualCharm||
+         verified.actualTotal!==verified.actualGear+verified.actualCharm)
+        throw Error('Displayed power or SvS points disagree with independent row totals: '+JSON.stringify(verified));
       return 'Both optimizer modes offer upgrades; applied plan stays within stock and persists on reload';
     });
   }
