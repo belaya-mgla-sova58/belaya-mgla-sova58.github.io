@@ -4,7 +4,7 @@ const {chromium,devices}=require('playwright');
 const fs=require('node:fs');
 const path=require('node:path');
 const ORIGIN='https://belaya-mgla-sova58.github.io';
-const pages=['/','/news.html','/events.html','/heroes.html','/gear.html','/experts.html','/pets.html','/calculators.html','/other.html','/state-58.html','/svs-prep.html','/skhvatka.html','/bear-helper.html','/furnace-calculator.html','/fire-furnace-calculator.html','/chief-gear-calculator.html','/essence-mithril-calculator.html','/ogonek.html','/news-elena.html'];
+const pages=['/','/news.html','/events.html','/heroes.html','/gear.html','/experts.html','/pets.html','/calculators.html','/other.html','/state-58.html','/svs-prep.html','/skhvatka.html','/bear-helper.html','/furnace-calculator.html','/fire-furnace-calculator.html','/chief-gear-calculator.html','/essence-mithril-calculator.html','/ogonek.html','/news-elena.html','/svs-kopilka-test.html'];
 const output=path.join(process.cwd(),'qa-smoke-output');
 fs.mkdirSync(output,{recursive:true});
 const all=[];
@@ -188,6 +188,27 @@ async function scenario(page,pathName,mode,record){
       const h=await page.locator('h1').textContent();
       if(!/Схватка/i.test(h||''))throw Error('Wrong title');
       return 'Event guide opens';
+    });
+  }
+  if(pathName==='/svs-kopilka-test.html'){
+    await task('svs_savings_all_day_items',async()=>{
+      const days=page.locator('#days [data-day]');
+      if(await days.count()!==5)throw Error('Five SvS days are not selectable');
+      const counts=[];
+      for(let d=1;d<=5;d++){
+        await page.locator('#days [data-day="'+d+'"]').click({timeout:4000});
+        const n=await page.locator('#mainItems input[data-id]').count();
+        counts.push(n);
+        if(n<4)throw Error('Not all items visible for day '+d+': '+n);
+        if(await page.locator('#extraItems input[data-id]').count()>0)throw Error('Extra items hidden behind disclosure on day '+d);
+      }
+      await page.locator('#days [data-day="4"]').click();
+      await page.locator('#mainItems input[data-id="t10"]').fill('100');
+      const actual=Number((await page.locator('#potential').textContent()||'').replace(/[^0-9]/g,''));
+      if(actual!==6000)throw Error('Expected 6000 points for 100 T10 at the test rate, got '+actual);
+      await page.locator('#buildPlan').click();
+      if(!/T10/.test(await page.locator('#plan').textContent()||''))throw Error('Planning output did not include T10');
+      return 'All five days visible: '+counts.join('/')+' items; basic points calculation valid';
     });
   }
 }
