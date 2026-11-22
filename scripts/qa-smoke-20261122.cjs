@@ -1036,6 +1036,56 @@ async function scenario(page,pathName,mode,record){
       return 'Existing upgrade stock is protected by confirmation; reject preserves plan, accept shows shortage, undo restores';
     });
   }
+  if(pathName==='/chief-gear-calculator.html'){
+    await task('chief_chain_affordability_reserves_shared_resources',async()=>{
+      const key='belaya-mgla-chief-calculator-v1';
+      await page.evaluate(k=>{
+        const s=JSON.parse(localStorage.getItem(k));
+        for(const id of Object.keys(s.gear))s.gear[id]={from:-1,to:-1};
+        for(const id of Object.keys(s.charm))s.charm[id]={from:-1,to:-1};
+        for(const id of Object.keys(s.inventory))s.inventory[id]=0;
+        s.inventory.alloy=1000;s.inventory.plans=10;
+        // 10 plans -> 30 polish -> 500 alloy, with 20 polish left.
+        s.exchanges=[[1,10],[4,10]];
+        s.exchangeUnlocked={gear:true,charm:false};
+        localStorage.setItem(k,JSON.stringify(s));
+      },key);
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      const before=await page.evaluate(()=>({
+        skipped:exchangeBalance().skipped,
+        pool:exchangeBalance().p,
+        offers:document.querySelectorAll('#compare .compareItem').length
+      }));
+      if(before.skipped!==0||before.pool.alloy!==1500||before.pool.polish!==20||before.offers<1)
+        throw Error('Valid two-exchange chain failed to offer upgrade: '+JSON.stringify(before));
+      const first=page.locator('#compare .compareItem button').first();
+      await first.click();
+      const after=await page.evaluate(k=>({
+        state:JSON.parse(localStorage.getItem(k)),
+        pool:exchangeBalance().p,
+        needs:collect().needs,
+        offers:document.querySelectorAll('#compare .compareItem').length
+      }),key);
+      if(after.offers!==0||after.needs.alloy!==1500||
+         after.pool.alloy!==1500||after.needs.polish!==15)
+        throw Error('Already reserved exchange output was offered again: '+JSON.stringify(after));
+      await page.evaluate(k=>{
+        const s=JSON.parse(localStorage.getItem(k));
+        for(const id of Object.keys(s.gear))s.gear[id]={from:-1,to:-1};
+        s.inventory.plans=0; // both exchange operations are now impossible
+        localStorage.setItem(k,JSON.stringify(s));
+      },key);
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      const blocked=await page.evaluate(()=>({
+        skipped:exchangeBalance().skipped,
+        offers:document.querySelectorAll('#compare .compareItem').length,
+        notice:document.getElementById('affordableCount').textContent
+      }));
+      if(blocked.skipped!==2||blocked.offers!==0||!/недоступных обменов/.test(blocked.notice))
+        throw Error('Affordability offered upgrades despite broken chain: '+JSON.stringify(blocked));
+      return 'Chained exchange output can fund one upgrade only, and unavailable chains block additional suggestions';
+    });
+  }
   if(pathName==='/essence-mithril-calculator.html'){
     await task('essence_stock_inputs',async()=>{
       const essence=page.locator('#ecStockEssence'),mithril=page.locator('#ecStockMithril');
