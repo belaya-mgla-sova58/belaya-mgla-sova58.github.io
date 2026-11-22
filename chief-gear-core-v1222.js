@@ -456,7 +456,7 @@ function renderExtras(){
  $('goalStatus').textContent=!goal?'Введите желаемое количество очков':score>=goal?'✓ Цель достигнута в плане':'До цели не хватает '+fmt(goal-score)+' очков';
  const v=currentSlot(),valid=v.to>v.from;
  $('markDone').disabled=!valid;
- $('doneHelp').textContent=valid?'После улучшения можно обновить текущий уровень. При желании спишем затраченные материалы из запасов.':'Сначала выберите целевой уровень.';
+ $('doneHelp').textContent=valid?'После улучшения рекомендуем списать затраченные материалы. «Только обновить уровень» подходит, если вы уже уменьшили запасы вручную.':'Сначала выберите целевой уровень.';
  const exchange=exchangeBalance(),available=exchange.p,planned=total.needs;
  const remaining=Object.fromEntries(Object.keys(mats).map(k=>[k,Math.max(0,available[k]-planned[k])]));
  const overspent=Object.keys(mats).filter(k=>planned[k]>available[k]);
@@ -516,6 +516,14 @@ function remainingUpgradeDeficits(cat,id,balance){
 }
 function settleDone(deduct){
  const val=currentSlot();if(val.to<=val.from)return;
+ if(!deduct){
+  const spent=materialCost(category,val.from,val.to);
+  const details=Object.entries(spent).filter(([,amount])=>amount>0)
+   .map(([id,amount])=>mats[id]+': '+fmt(amount)).join('; ');
+  const warning='Вы обновляете уровень БЕЗ списания материалов из запасов. '+(details?'Для этого улучшения были использованы: '+details+'. ':'')+
+   'Продолжайте только если материалы уже вычтены из введённых запасов вручную или вы пока не ведёте учёт материалов здесь. Иначе калькулятор завысит доступные остатки и предложит лишние улучшения. Подтвердить?';
+  if(!confirm(warning))return;
+ }
  if(deduct){
   const balance=exchangeBalance(),newPool=balance.p,cost=materialCost(category,val.from,val.to);
   if(balance.skipped)return alert('В плане есть обмены, которые нельзя выполнить. Исправьте их перед списанием, чтобы они не пропали.');
