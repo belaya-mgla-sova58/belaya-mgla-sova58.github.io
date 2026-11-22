@@ -1,14 +1,11 @@
 name: Visual audit (screenshots)
+# Full 120-page screenshot audit is intentionally manual.
+# Automatic checks are handled by the smaller QA smoke workflow.
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - '**/*.html'
-      - '**/*.css'
-      - '**/*.js'
-      - '.github/workflows/visual-audit.yml'
-      - 'scripts/visual-audit.cjs'
+concurrency:
+  group: visual-audit
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
