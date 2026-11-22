@@ -86,3 +86,56 @@
    touch-action:manipulation;
  }
 }
+
+/* v3: consistent readable cards and section navigation on narrow phones. */
+@media screen and (max-width:820px){
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main :is(.guide-fold-body-v414,.section-frame,.guide-section) :is(p,li){
+   text-align:left!important;
+   word-spacing:normal!important;
+   hyphens:auto;
+ }
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main :is(.guide-fold-summary-v414,.section-frame h2,.section-frame h3){
+   line-height:1.34!important;
+   overflow-wrap:break-word!important;
+ }
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main .guide-fold-summary-v414 {
+   min-height:54px!important;
+   display:flex!important;align-items:center!important;
+   gap:10px!important;padding:12px 13px!important;
+ }
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main .guide-fold-summary-v414 .guide-fold-title-v414 {
+   min-width:0!important;flex:1 1 auto!important;
+   margin:0!important;
+   font-size:clamp(18px,4.5vw,22px)!important;
+ }
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main :is(.page-toc-v409,.gear-toc-v1,.mobile-guide){
+   box-sizing:border-box!important;max-width:100%!important;
+   margin-inline:0!important;
+ }
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main :is(.page-toc-links-v409,.gear-toc-links-v2,#mobileToc){
+   max-width:100%!important;min-width:0!important;
+ }
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main :is(.page-toc-links-v409,.gear-toc-links-v2,#mobileToc) a{
+   min-width:0!important;min-height:42px!important;
+   display:flex!important;align-items:center!important;
+   padding:9px 11px!important;
+   line-height:1.4!important;
+   white-space:normal!important;overflow-wrap:break-word!important;
+ }
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main :is(blockquote,.guide-callout,.tip,.notice){
+   max-width:100%!important;min-width:0!important;
+   box-sizing:border-box!important;
+   padding:12px 14px!important;margin:12px 0!important;
+   line-height:1.65!important;
+   overflow-wrap:break-word!important;
+ }
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main :is(.section-frame,.guide-section,.guide-fold-v414,[id^="section-"]){
+   scroll-margin-top:76px!important;
+ }
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main .sova-guide-table-scroll-v2{
+   overscroll-behavior-x:contain;
+ }
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main .sova-guide-table-scroll-v2:focus-visible{
+   outline:2px solid #eac38a;outline-offset:3px;
+ }
+}
