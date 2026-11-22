@@ -400,6 +400,17 @@ async function inspect(browser,ctx,mode,pathName){
     if(record.horizontalOverflow>8)record.issues.push('Horizontal overflow '+record.horizontalOverflow+'px');
     if(data.images.brokenViewport.length)record.issues.push('Broken visible images: '+data.images.brokenViewport.join(',').slice(0,220));
     await scenario(page,pathName,mode,record);
+    if(mode==='android'){
+      const analyticsOverlap=await page.evaluate(()=>{
+        const nav=document.querySelector('.mobile-bottom-v424'),button=document.getElementById('sova-metrika-open');
+        if(!nav||!button||getComputedStyle(nav).display==='none'||getComputedStyle(button).display==='none')return null;
+        const a=nav.getBoundingClientRect(),b=button.getBoundingClientRect();
+        const overlap=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left))*Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+        return {navTop:Math.round(a.top),analyticsBottom:Math.round(b.bottom),overlap:Math.round(overlap)};
+      });
+      if(analyticsOverlap&&analyticsOverlap.overlap>0)
+        record.issues.push('Analytics settings button overlaps mobile navigation: '+JSON.stringify(analyticsOverlap));
+    }
     if(['/', '/news.html','/calculators.html','/chief-gear-calculator.html'].includes(pathName)){
       const basename=pathName==='/'?'index':pathName.slice(1).replace('.html','');
       const dest=path.join(output,mode+'-'+basename+'.jpg');
