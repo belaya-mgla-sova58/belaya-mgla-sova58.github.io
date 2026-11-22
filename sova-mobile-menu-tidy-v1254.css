@@ -121,6 +121,10 @@
  html:not(.force-desktop-root) body.is-home-route .home-portal-hero-v1016::after {
    background-image:none!important;
  }
+ html:not(.force-desktop-root) body.modern-v424.mobile-menu-open nav.mobile-bottom-v424,
+ html:not(.force-desktop-root) body.modern-v424.mobile-nav-open nav.mobile-bottom-v424 {
+   display:none!important;visibility:hidden!important;pointer-events:none!important;
+ }
  html:not(.force-desktop-root) body.modern-v424:is(.mobile-menu-open,.mobile-nav-open) .mobile-nav-overlay {
    position:fixed!important;inset:0!important;background:rgba(9,7,12,.78)!important;
    z-index:2147482990!important;
