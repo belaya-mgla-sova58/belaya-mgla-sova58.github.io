@@ -107,6 +107,28 @@ const wait=ms=>new Promise(done=>setTimeout(done,ms));
         await field.press('Escape');
        }else entry.errors.push('Search input missing');
       }
+      if(route==='/'&&viewport.width<=390){
+       const toggle=page.locator('#mobileMenuToggle');
+       if(await toggle.count()){
+        await toggle.click({timeout:5000});
+        if(await toggle.getAttribute('aria-expanded')!=='true')
+         entry.errors.push('Mobile menu does not expand');
+        const close=page.locator('#sovaMobileCloseV986');
+        if(await close.count()){
+         await close.click({timeout:5000});
+         if(await toggle.getAttribute('aria-expanded')!=='false')
+          entry.errors.push('Mobile menu does not close');
+        }else entry.errors.push('Mobile menu close button missing');
+       }else entry.errors.push('Mobile menu trigger missing');
+       const search=page.locator('input.site-search-input-v426').first();
+       if(await search.count()){
+        await search.fill('медведь');
+        await page.waitForTimeout(650);
+        const results=(await page.locator('.site-search-results-v426').first().textContent().catch(()=>''))||'';
+        if(!/медвед/i.test(results))entry.errors.push('Mobile portal search does not find медведь');
+        await search.press('Escape');
+       }else entry.errors.push('Mobile portal search input missing');
+      }
       // Report tall layouts; narrow mobile screens get text/readability checks.
       if(viewport.width<=390){
        const narrow=await page.evaluate(()=>({
