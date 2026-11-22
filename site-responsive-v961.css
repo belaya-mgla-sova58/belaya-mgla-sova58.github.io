@@ -222,7 +222,7 @@ html.force-desktop-root body:is(.site-hq-v407,.home-site-v407).modern-v424 .nav-
   }
   html:not(.force-desktop-root) body.is-home-route.modern-v424 .pc-topbar-title-v966{
     display:flex!important;flex-direction:column!important;justify-content:center!important;
-    position:absolute!important;top:12px!important;left:65px!important;
+    position:absolute!important;top:12px!important;left:17px!important;
     height:49px!important;max-width:44%!important;z-index:25!important;
     pointer-events:none!important;
   }
