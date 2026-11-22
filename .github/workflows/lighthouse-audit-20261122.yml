@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
     paths:
+      - '**/*.html'
+      - '**/*.css'
+      - '**/*.js'
       - '.github/workflows/lighthouse-audit-20261122.yml'
       - 'scripts/lighthouse-summary-20261122.mjs'
       - 'index.html'
