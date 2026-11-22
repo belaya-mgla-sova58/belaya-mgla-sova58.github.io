@@ -1,0 +1,35 @@
+name: QA smoke: 19 pages, desktop + Android
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/qa-smoke-20261122.cjs'
+      - '.github/workflows/qa-smoke-20261122.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - name: Checkout current production files
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright and Chromium
+        run: |
+          npm install --no-save --no-package-lock --ignore-scripts playwright
+          npx playwright install --with-deps chromium
+      - name: Test published portal read-only
+        run: node scripts/qa-smoke-20261122.cjs
+      - name: Attach compact results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-smoke-report
+          path: qa-smoke-output/
+          retention-days: 14
+          if-no-files-found: warn
