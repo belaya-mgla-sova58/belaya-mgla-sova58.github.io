@@ -95,7 +95,7 @@ body.bm-ice-encyclopedia-v1134 main#appMain .route-page.active :is(.guide-fold-t
 /* The approved star background is shared by event guides; order of planets, headers and content remain untouched. */
 body:is([data-static-route="bear"],[data-static-route="crazy-joe"],[data-static-route="alliance-showdown"],[data-static-route="alliance-championship"],[data-static-route="alliance-mobilization"],[data-static-route="frostfire-mine"],[data-static-route="tundra-trade-route"],[data-static-route="brothers-in-arms"],[data-static-route="foundry"],[data-static-route="forts"],[data-static-route="castle"],[data-static-route="winter-siege"],[data-static-route="canyon-clash"],[data-static-route="ginas-revenge"],[data-static-route="mercenary-prestige"],[data-static-route="endless-trial"],[data-static-route="fishing"],[data-static-route="snowplow"],[data-static-route="dreams"],[data-static-route="state-power"],[data-static-route="svs-prep"],[data-static-route="svs"]) {
   background-color:#020713 !important;
-  background-image:url("assets/cosmic-nebula-visible-v444.webp") !important;
+  background-image:linear-gradient(180deg,#242026,#111216) !important;
   background-position:center top !important;
   background-size:cover !important;
   background-repeat:no-repeat !important;
