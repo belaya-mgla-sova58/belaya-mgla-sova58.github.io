@@ -291,7 +291,7 @@ async function scenario(page,pathName,mode,record){
       // An impossible planned exchange must remain visible and prevent deduction.
       applied.gear.cap.from=-1;applied.gear.cap.to=-1;
       applied.exchanges=[[0,1000000]];
-      localStorage.setItem(key,JSON.stringify(applied));
+      localStorage.setItem(k,JSON.stringify(applied));
       await page.reload({waitUntil:'domcontentloaded',timeout:25000});
       await page.locator('#target').selectOption('0');
       await page.locator('#markDone').click();
