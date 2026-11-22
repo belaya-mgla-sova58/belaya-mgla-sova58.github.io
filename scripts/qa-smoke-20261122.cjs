@@ -348,6 +348,12 @@ async function scenario(page,pathName,mode,record){
       if(!/66\s*очк/.test(t10Rate||''))throw Error('Bonus 10% not reflected in visible unit points');
       const boosted=Number((await page.locator('#potential').textContent()||'').replace(/[^0-9]/g,''));
       if(boosted!==6600)throw Error('10% bonus did not increase 6000 points to 6600: '+boosted);
+      const refreshedPlan=await page.locator('#plan').textContent()||'';
+      if(!/6[\s\u00a0]*600/.test(refreshedPlan))throw Error('Plan did not update automatically after changing 10% bonus: '+refreshedPlan.slice(0,250));
+      await page.locator('#mainItems input[data-id="t10"]').fill('150');
+      const afterStock=await page.locator('#plan').textContent()||'';
+      if(!/9[\s\u00a0]*900/.test(afterStock))throw Error('Plan did not refresh after stock edit: '+afterStock.slice(0,250));
+      await page.locator('#mainItems input[data-id="t10"]').fill('100');
       await page.locator('#goals [data-goal="custom"]').click();
       await page.locator('#customGoal').fill('1');
       if(!/1\s*млн/.test((await page.locator('#target').textContent()||'').replace(/\u00a0/g,' ')))throw Error('Custom goal display is incorrect');
