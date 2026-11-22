@@ -154,7 +154,7 @@ function bulkSet(which){
  if(!confirm(`Установить ${which==='from'?'текущий':'целевой'} уровень «${idx<0?'Нет уровня':data[idx].label}» для ${qty} позиций?`))return;
  for(const [id] of positions(category)){
    const v=state[category][id];
-   if(which==='from'){v.from=Math.max(v.from,idx);v.to=Math.max(v.to,v.from)}
+   if(which==='from'){v.from=idx;v.to=Math.max(v.to,v.from)}
    else{v.to=Math.max(idx,v.from)}
  }
  save();renderSelects();calculate();clearOptimizerPreview();
