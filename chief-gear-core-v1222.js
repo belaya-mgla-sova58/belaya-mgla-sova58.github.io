@@ -449,11 +449,14 @@ function renderExtras(){
  const v=currentSlot(),valid=v.to>v.from;
  $('markDone').disabled=!valid;
  $('doneHelp').textContent=valid?'После улучшения можно обновить текущий уровень. При желании спишем затраченные материалы из запасов.':'Сначала выберите целевой уровень.';
- const available=pool(),planned=total.needs;
+ const exchange=exchangeBalance(),available=exchange.p,planned=total.needs;
  const remaining=Object.fromEntries(Object.keys(mats).map(k=>[k,Math.max(0,available[k]-planned[k])]));
  const overspent=Object.keys(mats).filter(k=>planned[k]>available[k]);
+ // Partial exchange chains are not a reliable source of spendable materials.
+ // Ask the player to fix the invalid operations before offering new targets.
+ const invalidExchanges=exchange.skipped>0;
  const opts=[];
- if(!overspent.length)for(const cat of ['gear','charm'])for(const [id,,name,troop] of positions(cat)){
+ if(!overspent.length&&!invalidExchanges)for(const cat of ['gear','charm'])for(const [id,,name,troop] of positions(cat)){
    const val=state[cat][id],arr=rows(cat),last=arr.length-1;
    // Existing targets reserve their materials first; offer only ADDITIONAL affordable stages.
    const start=Math.max(val.from,val.to);
@@ -467,18 +470,25 @@ function renderExtras(){
    opts.push({cat,id,name,troop,stage:arr[best].label,best,points:Math.round(points*(cat==='gear'?36:70)*(1+bonus/100)),power:arr[best].power-(start<0?0:arr[start].power)});
  }
  opts.sort((a,b)=>b.points-a.points||a.name.localeCompare(b.name,'ru'));
- $('affordableCount').textContent=overspent.length
+ $('affordableCount').textContent=invalidExchanges
+  ? '⚠️ В цепочке есть '+exchange.skipped+' недоступных обменов. Исправьте их в разделе «Обмен материалов», прежде чем подбирать дополнительные улучшения.'
+  :overspent.length
   ? 'В текущем плане не хватает материалов: '+overspent.map(k=>mats[k]).join(', ')+'. Сначала исправьте план.'
-  :opts.length?'Доступно дополнительных вариантов: '+opts.length+' из 24. Каждый вариант показан отдельно, добавление резервирует общий запас.':'Свободных материалов для дополнительных улучшений нет.';
+  :opts.length?'Доступно дополнительных вариантов: '+opts.length+' из 24. Варианты рассчитаны по одному: после добавления пересчитаем общий остаток.':'Свободных материалов для дополнительных улучшений нет.';
  const list=$('compare');list.replaceChildren();
- if(!opts.length){const empty=document.createElement('div');empty.className='nothing';empty.textContent=overspent.length?'Уменьшите уже выбранные цели или добавьте материалы.':'Добавьте материалы в «Мои запасы» или пересмотрите уже выбранные цели.';list.append(empty);return;}
+ if(!opts.length){const empty=document.createElement('div');empty.className='nothing';empty.textContent=invalidExchanges?'Проверьте цепочку обменов: недоступные шаги нельзя использовать как источник материалов.':overspent.length?'Уменьшите уже выбранные цели или добавьте материалы.':'Добавьте материалы в «Мои запасы» или пересмотрите уже выбранные цели.';list.append(empty);return;}
  for(const o of opts){
   const item=document.createElement('div');item.className='compareItem';
   const heading=document.createElement('strong');heading.textContent=o.name+' → '+o.stage;
   const row=document.createElement('div');row.className='compare-buttons';
   const detail=document.createElement('small');detail.textContent=o.troop+' · дополнительно +'+fmt(o.power)+' мощи · '+fmt(o.points)+' очков СВС';
   const btn=document.createElement('button');btn.type='button';btn.className='btn';btn.textContent='В план';btn.onclick=()=>{
-   const current=state[o.cat][o.id],needs=collect().needs,p=pool();
+   const balance=exchangeBalance();
+   if(balance.skipped){
+    alert('В цепочке есть недоступные обмены. Исправьте их, затем выберите улучшение заново.');
+    calculate();return;
+   }
+   const current=state[o.cat][o.id],needs=collect().needs,p=balance.p;
    const previous=materialCost(o.cat,current.from,current.to);
    const proposed=materialCost(o.cat,current.from,o.best);
    const shortages=Object.keys(mats).filter(k=>needs[k]-previous[k]+proposed[k]>p[k]);
