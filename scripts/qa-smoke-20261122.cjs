@@ -1206,6 +1206,45 @@ async function scenario(page,pathName,mode,record){
       return 'Shortage warning can be cancelled; confirming completes one slot exactly once while retaining other goals and updated shortages';
     });
   }
+  if(pathName==='/chief-gear-calculator.html'){
+    await task('chief_level_only_requires_confirm_and_preserves_inventory',async()=>{
+      const key='belaya-mgla-chief-calculator-v1';
+      await page.evaluate(k=>{
+        const state=JSON.parse(localStorage.getItem(k));
+        for(const slot of Object.values(state.gear))slot.from=slot.to=-1;
+        for(const slot of Object.values(state.charm))slot.from=slot.to=-1;
+        for(const mat of Object.keys(state.inventory))state.inventory[mat]=0;
+        state.inventory.alloy=25000;state.inventory.polish=2500;
+        state.gear.cap={from:-1,to:0};
+        state.gear.watch={from:-1,to:0};
+        state.exchanges=[];
+        localStorage.setItem(k,JSON.stringify(state));
+      },key);
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      await page.locator('#markDone').click();
+      const initial=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)),key);
+      let question='';
+      page.once('dialog',async d=>{question=d.message();await d.dismiss()});
+      await page.locator('#doneLevelOnly').click();
+      const rejected=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)),key);
+      if(!/БЕЗ списания материалов/.test(question)||JSON.stringify(rejected)!==JSON.stringify(initial))
+        throw Error('Level-only cancellation modified saved progress or did not warn');
+      if(!(await page.locator('#doneDialog').isVisible()))throw Error('Level-only cancellation closed dialog');
+      page.once('dialog',d=>d.accept());
+      await page.locator('#doneLevelOnly').click();
+      const saved=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)),key);
+      if(saved.gear.cap.from!==0||saved.gear.cap.to!==0||
+         saved.gear.watch.from!==-1||saved.gear.watch.to!==0||
+         JSON.stringify(saved.inventory)!==JSON.stringify(initial.inventory))
+        throw Error('Level-only update deducted inventory or altered another slot');
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      const restored=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)),key);
+      if(JSON.stringify(restored.inventory)!==JSON.stringify(initial.inventory)||
+         restored.gear.cap.from!==0||restored.gear.watch.to!==0)
+        throw Error('Level-only state changed after reload');
+      return 'Explicit non-deduct confirmation preserves inventory and all other targets; cancellation makes no changes';
+    });
+  }
   if(pathName==='/essence-mithril-calculator.html'){
     await task('essence_stock_inputs',async()=>{
       const essence=page.locator('#ecStockEssence'),mithril=page.locator('#ecStockMithril');
