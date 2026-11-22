@@ -1,113 +1,71 @@
-/* Белая Мгла | Mobile owl dismissal v1097.
-   Controls only Madam Ugu's homepage launcher, not content artwork. */
+/* Белая Мгла: мобильная сова у правого нижнего угла шапки.
+   Закрытие действует только до следующей перезагрузки страницы. */
 (function(){
  "use strict";
  if(!document.body || !document.body.classList.contains("is-home-route"))return;
  if(!window.matchMedia || !window.matchMedia("(max-width:820px)").matches)return;
+
  var owlId="madamUguLauncherV720";
- var key="bm-home-owl-hidden-v1097";
  var closeId="bmOwlDismissV1097";
- var restoreId="bmOwlRestoreV1097";
- var owl=null, close=null, restore=null, observer=null;
- function hidden(){try{return sessionStorage.getItem(key)==="1"}catch(_){return false}}
- function save(value){try{if(value)sessionStorage.setItem(key,"1");else sessionStorage.removeItem(key)}catch(_){}}
+ var hiddenForThisPage=false;
+ var owl=null, close=null, observer=null;
+ function hero(){return document.querySelector(".home-portal-hero-v1016") || document.querySelector(".home-stamped-hero-v441");}
  function css(){
   if(document.getElementById("bmOwlDismissStyleV1097"))return;
-  var s=document.createElement("style");s.id="bmOwlDismissStyleV1097";
-  s.textContent=[
-   "body.is-home-route #"+closeId+"{position:fixed!important;z-index:2147483645!important;display:grid!important;place-items:center!important;width:38px!important;height:38px!important;border:2px solid #f2d69c!important;border-radius:50%!important;background:rgba(29,19,47,.96)!important;color:#fff!important;font:700 24px/1 Arial,sans-serif!important;box-shadow:0 4px 16px #0009,0 0 9px #a26deb88!important;cursor:pointer!important;touch-action:manipulation!important;padding:0!important;opacity:1!important;visibility:visible!important;}",
-   "body.is-home-route #"+restoreId+"{position:fixed!important;right:10px!important;bottom:105px!important;z-index:2147483645!important;display:none!important;align-items:center!important;justify-content:center!important;min-width:105px!important;min-height:39px!important;padding:8px 11px!important;border:1px solid #e8c88d!important;border-radius:12px!important;background:#152a58!important;color:#fff!important;font:700 13px Arial,sans-serif!important;box-shadow:0 4px 14px #0008!important;cursor:pointer!important;}",
+  var style=document.createElement("style");
+  style.id="bmOwlDismissStyleV1097";
+  style.textContent=[
+   "@media (max-width:820px){",
+   "html:not(.force-desktop-root) body.is-home-route .home-portal-hero-v1016{position:relative!important;isolation:isolate!important;}",
+   "html:not(.force-desktop-root) body.is-home-route #"+owlId+"{position:absolute!important;left:auto!important;top:auto!important;right:5px!important;bottom:3px!important;width:84px!important;height:84px!important;min-width:0!important;max-width:84px!important;z-index:50!important;}",
+   "html:not(.force-desktop-root) body.is-home-route #"+owlId+" img{width:84px!important;height:84px!important;max-width:100%!important;object-fit:contain!important;}",
+   "html:not(.force-desktop-root) body.is-home-route #"+closeId+"{position:absolute!important;left:auto!important;top:auto!important;right:3px!important;bottom:67px!important;z-index:51!important;display:grid!important;place-items:center!important;width:25px!important;height:25px!important;min-width:25px!important;padding:0!important;border:1.5px solid #f2d69c!important;border-radius:50%!important;background:rgba(29,19,47,.96)!important;color:#fff!important;font:700 19px/1 Arial,sans-serif!important;box-shadow:0 3px 10px #0009!important;cursor:pointer!important;touch-action:manipulation!important;}",
    "html:not(.force-desktop-root) body.is-home-route #madamUguCloseLauncherV720{display:none!important;}",
    "body.is-home-route:has(#madamUguOverlayV720.is-open) #"+closeId+"{display:none!important;}",
-   "body.is-home-route.bm-owl-hidden-v1097 #"+owlId+"{display:none!important;visibility:hidden!important;pointer-events:none!important;}",
-   "body.is-home-route.bm-owl-hidden-v1097 #madamUguCloseLauncherV720{display:none!important;visibility:hidden!important;pointer-events:none!important;}",
-   "html body.is-home-route.bm-owl-hidden-v1097 #"+closeId+"{display:none!important;visibility:hidden!important;pointer-events:none!important;}",
-   "body.is-home-route.bm-owl-hidden-v1097 #"+restoreId+"{display:flex!important;}"
+   "body.is-home-route.bm-owl-hidden-v1097 #"+owlId+",body.is-home-route.bm-owl-hidden-v1097 #"+closeId+"{display:none!important;visibility:hidden!important;pointer-events:none!important;}",
+   "body.is-home-route #bmOwlRestoreV1097{display:none!important;}",
+   "}"
   ].join("\n");
-  document.head.appendChild(s);
+  document.head.appendChild(style);
  }
- function position(){
-  if(!owl||!close||document.body.classList.contains("bm-owl-hidden-v1097"))return;
-  var r=owl.getBoundingClientRect();
-  if(!r.width||!r.height){close.style.setProperty("display","none","important");return}
-  close.style.removeProperty("display");
-  var x=Math.min(window.innerWidth-42,Math.max(4,r.right-36));
-  var y=Math.min(window.innerHeight-42,Math.max(4,r.top+4));
-  close.style.setProperty("left",x+"px","important");
-  close.style.setProperty("top",y+"px","important");
- }
- function apply(value){
-  document.body.classList.toggle("bm-owl-hidden-v1097",value);
-  save(value);
-  // Keep the launcher and both possible close buttons synchronized.
-  var legacy=document.getElementById("madamUguCloseLauncherV720");
+ function apply(){
+  document.body.classList.toggle("bm-owl-hidden-v1097",hiddenForThisPage);
   if(owl){
-   if(value){owl.style.setProperty("display","none","important");owl.setAttribute("aria-hidden","true")}
-   else{owl.style.removeProperty("display");owl.removeAttribute("aria-hidden")}
+   if(hiddenForThisPage){owl.style.setProperty("display","none","important");owl.setAttribute("aria-hidden","true");}
+   else{owl.style.removeProperty("display");owl.removeAttribute("aria-hidden");}
   }
-  [close,legacy].forEach(function(btn){
-   if(!btn)return;
-   btn.style.setProperty("display","none","important");
-   btn.style.setProperty("visibility","hidden","important");
-   btn.style.setProperty("pointer-events","none","important");
-  });
-  if(restore){
-   restore.style.setProperty("display",value?"flex":"none","important");
-  }
-  if(!value)requestAnimationFrame(function(){
-   if(close){
-    close.style.removeProperty("display");
-    close.style.removeProperty("visibility");
-    close.style.removeProperty("pointer-events");
-   }
-   position();
-  });
+  if(close)close.style.setProperty("display",hiddenForThisPage?"none":"grid","important");
  }
  function install(){
-  owl=document.getElementById(owlId);
-  if(!owl)return false;
-  css();
-  // Other homepage scripts may remove and rebuild floating controls after initialization.
-  // Recover a detached close button instead of keeping a stale JS reference.
-  if(close && !close.isConnected)close=null;
-  if(restore && !restore.isConnected)restore=null;
-  if(!close){
-   close=document.createElement("button");
-   close.type="button";close.id=closeId;close.textContent="×";
-   close.setAttribute("aria-label","Закрыть Мадам Угу");
-   close.title="Закрыть Мадам Угу";
-   close.addEventListener("click",function(e){e.preventDefault();e.stopPropagation();apply(true)});
-   document.body.appendChild(close);
-  }
-  if(!restore){
-   restore=document.createElement("button");
-   restore.type="button";restore.id=restoreId;restore.textContent="🦉 Вернуть сову";
-   restore.addEventListener("click",function(e){e.preventDefault();apply(false)});
-   document.body.appendChild(restore);
-  }
-  apply(hidden());position();
-  requestAnimationFrame(position);
-  setTimeout(position,350);
-  window.addEventListener("resize",position,{passive:true});
-  window.addEventListener("scroll",position,{passive:true});
-  if(observer)observer.disconnect();
-  observer=new MutationObserver(function(){
-   var current=document.getElementById(owlId);
-   if(!current)return;
-   if(current!==owl || !close || !close.isConnected || !restore || !restore.isConnected){
-    if(!close || !close.isConnected)close=null;
-    if(!restore || !restore.isConnected)restore=null;
-    install();
+  var current=document.getElementById(owlId),target=hero();
+  if(!current || !target)return false;
+  css();owl=current;
+  if(owl.parentNode!==target)target.appendChild(owl);
+  if(!close || !close.isConnected){
+   close=document.getElementById(closeId);
+   if(!close){
+    close=document.createElement("button");
+    close.type="button";close.id=closeId;close.textContent="×";
+    close.setAttribute("aria-label","Закрыть сову до перезагрузки страницы");
+    close.title="Закрыть сову";
+    close.addEventListener("click",function(e){
+     e.preventDefault();e.stopPropagation();
+     hiddenForThisPage=true;apply();
+    });
    }
-  });
-  observer.observe(document.body,{childList:true});
+  }
+  if(close.parentNode!==target)target.appendChild(close);
+  var obsolete=document.getElementById("bmOwlRestoreV1097");
+  if(obsolete)obsolete.remove();
+  apply();
   return true;
  }
  function start(){
   if(install())return;
-  observer=new MutationObserver(function(){if(document.getElementById(owlId))install()});
+  if(observer)observer.disconnect();
+  observer=new MutationObserver(function(){if(install() && observer){observer.disconnect();observer=null;}});
   observer.observe(document.body,{childList:true,subtree:true});
-  window.addEventListener("load",function(){if(!owl)install()},{once:true});
+  window.addEventListener("load",install,{once:true});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});
  else start();
