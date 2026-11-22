@@ -61,16 +61,34 @@ async function scenario(page,pathName,mode,record){
         await page.locator('#sovaMobileCloseV986').click({timeout:5500});
         if(expanded!=='true')throw Error('Menu does not mark aria-expanded=true');
         if(bstyle && bstyle.display!=='none' && bstyle.visibility!=='hidden')throw Error('Bottom navigation remains visible over open drawer');
-        return 'Opens, hides bottom nav, closes';
+        if(await toggle.getAttribute('aria-expanded')!=='false')throw Error('Menu did not close after pressing X');
+        return 'Opens, hides bottom nav, closes using real X';
       });
     }
     await task('owl_close',async()=>{
       const launcher=page.locator('#madamUguLauncherV720');
-      if(!(await launcher.count()))return 'Owl not loaded in this viewport; separate design review';
-      const button=page.locator('#madamUguCloseLauncherV720');
-      if(!(await button.count()))throw Error('Owl close button missing');
-      const shown=await button.isVisible();
-      return 'Close control exists; visible='+shown;
+      await launcher.waitFor({state:'visible',timeout:8500});
+      if(mode==='android'){
+        const close=page.locator('#bmOwlDismissV1097');
+        const restore=page.locator('#bmOwlRestoreV1097');
+        await close.waitFor({state:'visible',timeout:7000});
+        await close.click({timeout:5500});
+        if(await launcher.isVisible())throw Error('Mobile owl remained visible after pressing X');
+        await restore.waitFor({state:'visible',timeout:4000});
+        await restore.click({timeout:5500});
+        await launcher.waitFor({state:'visible',timeout:5500});
+        await close.waitFor({state:'visible',timeout:5500});
+        return 'Mobile owl closes via X and reopens via restore control';
+      }
+      const toggle=page.locator('#madamUguCloseLauncherV720');
+      await toggle.waitFor({state:'visible',timeout:8000});
+      const folded=()=>launcher.evaluate(el=>el.classList.contains('pc-owl-collapsed-v966'));
+      const initial=await folded();
+      await toggle.click({timeout:5500});
+      if(await folded()===initial)throw Error('Desktop owl did not change collapsed state after click');
+      await toggle.click({timeout:5500});
+      if(await folded()!==initial)throw Error('Desktop owl did not return to initial state');
+      return 'Desktop owl expands and collapses by real control';
     });
   }
   if(pathName==='/news.html'){
@@ -206,4 +224,8 @@ async function inspect(browser,ctx,mode,pathName){
   const total={pages:all.length,failedPages:all.filter(x=>x.issues.length).length,failedScenarios:all.flatMap(x=>x.scenarios).filter(x=>!x.ok).length,brokenImages:all.reduce((a,x)=>a+(x.images.brokenViewport?.length||0),0),overflowPages:all.filter(x=>x.horizontalOverflow>8).length,errorPages:all.filter(x=>x.consoleErrors.length).length,assetErrorPages:all.filter(x=>x.assetErrors.length).length};
   fs.writeFileSync(path.join(output,'summary.json'),JSON.stringify(total,null,2));
   console.log('QA_TOTAL '+JSON.stringify(total));
+  if(total.failedPages>0){
+    console.error('QA_FAILED: '+total.failedPages+' of '+total.pages+' page/device checks reported issues. See uploaded qa-smoke-report.');
+    process.exitCode=1;
+  }
 })().catch(e=>{console.error('QA_FATAL '+String(e));process.exitCode=1});
