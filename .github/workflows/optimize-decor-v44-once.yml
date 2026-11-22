@@ -1,0 +1,82 @@
+name: One-time optimization of decorative owl PNGs
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/optimize-decor-v44-once.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Pillow
+        run: python -m pip install --quiet pillow
+      - name: Preserve transparent decorations as lighter WebP
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import re
+          names=[
+              'snowy-owl-feather-v44',
+              'silver-branch-left-v44',
+              'silver-branch-right-v44'
+          ]
+          total_before=0
+          total_after=0
+          for name in names:
+              png=Path('assets')/(name+'.png')
+              webp=Path('assets')/(name+'.webp')
+              assert png.is_file(), f'Original image missing: {png}'
+              with Image.open(png) as im:
+                  size=im.size
+                  alpha=('A' in im.getbands()) or ('transparency' in im.info)
+                  im.convert('RGBA').save(webp,format='WEBP',quality=91,alpha_quality=100,method=6)
+              with Image.open(webp) as converted:
+                  assert converted.size==size, f'Dimensions changed: {name}'
+                  assert not alpha or 'A' in converted.getbands(), f'Alpha lost: {name}'
+              before=png.stat().st_size
+              after=webp.stat().st_size
+              assert after<before, f'Not smaller: {name}, {before}->{after}'
+              total_before+=before
+              total_after+=after
+              print(f'IMAGE_OPTIMIZED {name}: {before} -> {after} bytes')
+          changed=[]
+          for page in list(Path('.').glob('*.html'))+list(Path('.').glob('*.css')):
+              old=page.read_text(encoding='utf-8')
+              new=old
+              for name in names:
+                  new=new.replace(name+'.png',name+'.webp')
+              if 'winter-ornaments-separated-v44.css' in new:
+                  new=re.sub(r'(winter-ornaments-separated-v44\.css\?v=)\d+',r'\g<1>82',new)
+              if new!=old:
+                  page.write_text(new,encoding='utf-8')
+                  changed.append(str(page))
+          print('CHANGED_REFERENCES', len(changed), ', '.join(changed[:35]))
+          print('DECOR_TOTAL_BYTES',total_before,total_after)
+          assert changed, 'No references were changed'
+          PY
+      - name: Commit optimized assets and references
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'Nothing to commit'
+            exit 0
+          fi
+          git commit -m "Сжать декоративные перья и ветви без изменения размеров и прозрачности"
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
