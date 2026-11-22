@@ -513,6 +513,49 @@ async function scenario(page,pathName,mode,record){
       return 'Both optimizer modes offer upgrades; applied plan stays within stock and persists on reload';
     });
   }
+  if(pathName==='/chief-gear-calculator.html'){
+    await task('chief_gear_t5_t6_set_thresholds',async()=>{
+      const scenarios=await page.evaluate(()=>{
+        const records=JSON.parse(document.getElementById('bm-game-data').textContent).records.filter(r=>r.kind==='gear');
+        const t5=records.findIndex(r=>r.label_ru==='Красное T5 · этап 0');
+        const t6=records.findIndex(r=>r.label_ru==='Красное T6 · этап 0');
+        if(t5<0||t6<0||typeof gearSetAt!=='function')throw Error('T5/T6 tiers or gear set calculation unavailable');
+        const ids=['cap','watch','coat','pants','ring','weapon'];
+        return [2,3,5,6].map(n=>{
+          const levels=Object.fromEntries(ids.map((id,i)=>[id,i<n?t6:t5]));
+          const result=gearSetAt(levels);
+          return {n,def:result.def,atk:result.atk};
+        });
+      });
+      const expected=[[2,20,20],[3,22,20],[5,22,20],[6,22,22]];
+      for(let i=0;i<expected.length;i++){
+        const [n,def,atk]=expected[i],actual=scenarios[i];
+        if(actual.n!==n||actual.def!==def||actual.atk!==atk)
+          throw Error('Wrong T5/T6 set threshold: '+JSON.stringify({expected:{n,def,atk},actual}));
+      }
+      const key='belaya-mgla-chief-calculator-v1';
+      await page.evaluate(k=>{
+        const s=JSON.parse(localStorage.getItem(k));
+        const records=JSON.parse(document.getElementById('bm-game-data').textContent).records.filter(r=>r.kind==='gear');
+        const t5=records.findIndex(r=>r.label_ru==='Красное T5 · этап 0');
+        const t6=records.findIndex(r=>r.label_ru==='Красное T6 · этап 0');
+        const ids=['cap','watch','coat','pants','ring','weapon'];
+        ids.forEach((id,i)=>{s.gear[id].from=t5;s.gear[id].to=i<3?t6:t5});
+        localStorage.setItem(k,JSON.stringify(s));
+      },key);
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      const ui=await page.evaluate(()=>({
+        defNow:document.getElementById('setDefNow').textContent,
+        atkNow:document.getElementById('setAtkNow').textContent,
+        defNext:document.getElementById('setDefNext').textContent,
+        atkNext:document.getElementById('setAtkNext').textContent
+      }));
+      if(!ui.defNow.includes('20%')||!ui.atkNow.includes('20%')||
+         !ui.defNext.includes('22%')||!ui.atkNext.includes('20%'))
+        throw Error('T5/T6 set bonuses not rendered correctly: '+JSON.stringify(ui));
+      return '2/3/5/6 T6 pieces retain T5 20% baseline; Defense rises at 3, Attack at 6; UI matches';
+    });
+  }
   if(pathName==='/essence-mithril-calculator.html'){
     await task('essence_stock_inputs',async()=>{
       const essence=page.locator('#ecStockEssence'),mithril=page.locator('#ecStockMithril');
