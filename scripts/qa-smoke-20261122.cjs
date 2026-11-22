@@ -342,6 +342,58 @@ async function scenario(page,pathName,mode,record){
       return 'One suggestion selected; total commitments stay within common stock';
     });
   }
+  if(pathName==='/chief-gear-calculator.html'){
+    await task('chief_optimizer_shared_stock_and_persistence',async()=>{
+      const key='belaya-mgla-chief-calculator-v1';
+      await page.evaluate(k=>{
+        const state=JSON.parse(localStorage.getItem(k));
+        const records=JSON.parse(document.getElementById('bm-game-data').textContent).records;
+        const first=records.find(r=>r.kind==='gear');
+        const columns={alloy:'alloy',polish:'polishing_solution',plans:'design_plans',amber:'lunar_amber',guides:'charm_guide',designs:'charm_design',secrets:'charm_secrets'};
+        for(const s of Object.values(state.gear))s.from=s.to=-1;
+        for(const s of Object.values(state.charm))s.from=s.to=-1;
+        for(const [k,col] of Object.entries(columns))state.inventory[k]=(first.cost[col]||0)*2;
+        state.exchanges=[];state.exchangeUnlocked={gear:false,charm:false};state.bonus=0;
+        localStorage.setItem(k,JSON.stringify(state));
+      },key);
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      for(const button of ['optSvs','optPower']){
+        await page.locator('#'+button).click({timeout:10000});
+        if(await page.locator('#applyOpt').isHidden())throw Error('Optimizer did not offer any upgrades: '+button);
+        if(!(await page.locator('#optList .opt-step').count()))throw Error('Optimizer did not list recommended upgrades');
+      }
+      page.once('dialog',d=>d.accept());
+      await page.locator('#applyOpt').click({timeout:5000});
+      const actual=await page.evaluate(k=>{
+        const state=JSON.parse(localStorage.getItem(k));
+        const records=JSON.parse(document.getElementById('bm-game-data').textContent).records;
+        const columns={alloy:'alloy',polish:'polishing_solution',plans:'design_plans',amber:'lunar_amber',guides:'charm_guide',designs:'charm_design',secrets:'charm_secrets'};
+        const used=Object.fromEntries(Object.keys(columns).map(x=>[x,0]));
+        let upgraded=0;
+        for(const kind of ['gear','charm']){
+          const rows=records.filter(r=>r.kind===kind);
+          for(const s of Object.values(state[kind])){
+            if(s.to>s.from)upgraded++;
+            for(let i=s.from+1;i<=s.to;i++)for(const [key,col] of Object.entries(columns))used[key]+=rows[i].cost[col]||0;
+          }
+        }
+        return {used,available:state.inventory,upgraded,targets:{
+          gear:Object.values(state.gear).map(s=>s.to),charm:Object.values(state.charm).map(s=>s.to)
+        }};
+      },key);
+      if(!actual.upgraded)throw Error('Applied optimizer plan has no upgrades');
+      for(const k of Object.keys(actual.used))
+        if(actual.used[k]>actual.available[k])throw Error('Optimizer overcommitted shared material: '+k);
+      if(!(await page.locator('#applyOpt').isHidden()))throw Error('Apply button stayed active after committing optimizer plan');
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      const restored=await page.evaluate(k=>{
+        const s=JSON.parse(localStorage.getItem(k));
+        return {gear:Object.values(s.gear).map(x=>x.to),charm:Object.values(s.charm).map(x=>x.to)};
+      },key);
+      if(JSON.stringify(restored)!==JSON.stringify(actual.targets))throw Error('Optimizer targets changed after reload');
+      return 'Both optimizer modes offer upgrades; applied plan stays within stock and persists on reload';
+    });
+  }
   if(pathName==='/essence-mithril-calculator.html'){
     await task('essence_stock_inputs',async()=>{
       const essence=page.locator('#ecStockEssence'),mithril=page.locator('#ecStockMithril');
