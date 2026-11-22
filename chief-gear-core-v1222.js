@@ -236,9 +236,26 @@ $('applyOpt').onclick=()=>{
     ||Object.keys(mats).some(k=>pool()[k]!==proposedOptimization.initial[k])){
    clearOptimizerPreview();alert('Уровни или запасы изменились. Запустите подбор ещё раз.');return;
  }
+ // Independently verify the full proposed plan against the CURRENT shared resource pool.
+ // This also catches stale/malformed targets before anything is saved.
+ const candidate=Object.fromEntries(Object.keys(mats).map(k=>[k,0]));
+ for(const t of proposedOptimization.targets){
+   const r=rows(t.cat),current=state[t.cat]?.[t.id];
+   if(!current||!Number.isInteger(t.to)||t.to<current.from||t.to>=r.length){
+     clearOptimizerPreview();alert('Предложенный план устарел или содержит недопустимый уровень. Запустите подбор заново.');return;
+   }
+   const cost=materialCost(t.cat,current.from,t.to);
+   for(const k of Object.keys(mats))candidate[k]+=cost[k];
+ }
+ const available=pool();
+ const deficit=Object.keys(mats).filter(k=>!Number.isSafeInteger(candidate[k])||candidate[k]>available[k]);
+ if(deficit.length){
+   clearOptimizerPreview();alert('Предложенный план превышает общие запасы: '+deficit.map(k=>mats[k]).join(', ')+'. Запустите подбор заново.');return;
+ }
  if(!confirm('Заменить ВСЕ текущие цели улучшения предложенным планом? Текущие уровни и запасы останутся прежними.'))return;
  for(const t of proposedOptimization.targets)state[t.cat][t.id].to=t.to;
  save();renderSelects();calculate();
+ proposedOptimization=null;$('applyOpt').hidden=true;
  $('optResult').textContent+=' План применён.';
 };
 
