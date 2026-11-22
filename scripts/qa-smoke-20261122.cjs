@@ -34,6 +34,8 @@ async function scenario(page,pathName,mode,record){
       const results=page.locator('.site-search-results-v426').first();
       const text=await results.textContent().catch(()=>'');
       await field.fill('');
+      await field.press('Escape');
+      if(await page.locator('.sova-search-panel.sova-search-visible').count())throw Error('Search panel remains open after Escape');
       if(!/медвед/i.test(text||''))throw Error('No matching search text for медведь: '+String(text).slice(0,140));
       return 'Search finds медведь';
     });
@@ -41,7 +43,16 @@ async function scenario(page,pathName,mode,record){
       const button=page.locator('#sovaSupportTrigger');
       await button.waitFor({state:'visible',timeout:7000});
       const modal=page.locator('#sovaSupportLayer');
-      await button.click({timeout:7000});
+      try{await button.click({timeout:6000})}
+      catch(e){
+        const diagnostic=await button.evaluate(el=>{
+          const r=el.getBoundingClientRect(),x=Math.max(0,Math.min(innerWidth-1,r.left+r.width/2)),y=Math.max(0,Math.min(innerHeight-1,r.top+r.height/2));
+          const top=document.elementFromPoint(x,y),style=getComputedStyle(el);
+          return {rect:{x:r.x,y:r.y,w:r.width,h:r.height},elementAtCenter:top?top.tagName+'#'+top.id+'.'+String(top.className).slice(0,80):null,position:style.position,zIndex:style.zIndex,bottom:style.bottom,opacity:style.opacity,pointerEvents:style.pointerEvents};
+        }).catch(err=>({inspectionError:String(err)}));
+        console.log('QA_GIFT_DIAG '+JSON.stringify(diagnostic));
+        throw Error('Gift owl not clickable: '+JSON.stringify(diagnostic).slice(0,195));
+      }
       if(!(await modal.isVisible()))throw Error('Donation dialog did not open');
       await modal.locator('.sova-support-close').click({timeout:3500});
       if(await modal.isVisible())throw Error('Donation dialog did not close');
