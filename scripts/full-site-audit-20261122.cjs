@@ -7,7 +7,7 @@ const origin=new URL('https://belaya-mgla-sova58.github.io/');
 const output=path.join(process.cwd(),'full-site-audit-output');
 fs.mkdirSync(output,{recursive:true});
 const allHtml=fs.readdirSync(process.cwd()).filter(p=>p.toLowerCase().endsWith('.html')).sort();
-const legacy=p=>/(-before-|approved-|moon-mirror-test|-test\.html|^google[0-9]|^yandex_|^404\.html)/i.test(p);
+const legacy=p=>p!=='buildings-before-fire.html'&&/(-before-|approved-|moon-mirror-test|-test\.html|^google[0-9]|^yandex_|^404\.html)/i.test(p);
 const pages=[...allHtml].sort((a,b)=>Number(legacy(a))-Number(legacy(b))||a.localeCompare(b));
 const records=[],start=Date.now();
 let screenshots=0;
