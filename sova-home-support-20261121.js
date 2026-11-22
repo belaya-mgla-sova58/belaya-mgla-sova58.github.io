@@ -86,6 +86,21 @@ function init(){
       bottom:calc(179px + env(safe-area-inset-bottom,0px))!important;
     }
   }
+  /* Approved placement: gift owl sits inside the banner, not at the screen bottom.
+     It is separate from the Madam Ugu fortune-teller. */
+  @media screen and (max-width:820px){
+    html:not(.force-desktop-root) body.is-home-route .home-portal-hero-v1016{position:relative!important;}
+    html:not(.force-desktop-root) body.is-home-route .home-portal-hero-v1016 > #sovaSupportTrigger{
+      position:absolute!important;right:7px!important;bottom:7px!important;
+      top:auto!important;left:auto!important;width:60px!important;height:60px!important;
+      z-index:110!important;padding:3px!important;
+    }
+  }
+  @media screen and (max-width:390px){
+    html:not(.force-desktop-root) body.is-home-route .home-portal-hero-v1016 > #sovaSupportTrigger{
+      width:53px!important;height:53px!important;right:5px!important;bottom:5px!important;
+    }
+  }
   @media(prefers-reduced-motion:reduce){
     html body.is-home-route #sovaSupportTrigger{
       animation:none!important;
@@ -96,7 +111,7 @@ function init(){
   `;
   document.head.append(style);
   const button=document.createElement('button');button.type='button';button.id='sovaSupportTrigger';button.title='Поддержать Сову в игре';button.setAttribute('aria-label','Поддержать Сову в игре');button.setAttribute('aria-haspopup','dialog');button.setAttribute('aria-expanded','false');button.setAttribute('aria-controls','sovaSupportLayer');
-  const img=document.createElement('img');img.src=OWL_SRC;img.alt='';img.width=80;img.height=80;img.decoding='async';button.append(img);document.body.append(button);
+  const img=document.createElement('img');img.src=OWL_SRC;img.alt='';img.width=80;img.height=80;img.decoding='async';button.append(img);hero.append(button);
   const layer=document.createElement('div');layer.id='sovaSupportLayer';layer.hidden=true;
   layer.innerHTML=`<div class="sova-support-shade" data-sova-close></div><section role="dialog" aria-modal="true" aria-labelledby="sovaSupportTitle" class="sova-support-dialog"><button class="sova-support-close" type="button" aria-label="Закрыть окошко" data-sova-close>×</button><img class="sova-support-owl" src="${OWL_SRC}" alt="Милая белая сова с подарком"><div class="sova-support-kicker">🦉 Маленькая совиная просьба</div><h2 class="sova-support-title" id="sovaSupportTitle">Сова не кит,<br><span>но тоже любит подарочки</span> 💜</h2><p>До китовых запасов мне далеко, зато энтузиазма хоть отбавляй! 😂</p><p>Если вдруг захотите порадовать Сову подарочком в игре, буду очень рада! 💜</p><div class="sova-support-id"><div class="sova-support-id-label">🎁 Мой игровой ID</div><div class="sova-support-id-row"><span class="sova-support-id-num">${GAME_ID}</span><button type="button" class="sova-support-copy" id="sovaSupportCopy">⧉ Копировать</button></div><div class="sova-support-status" role="status" aria-live="polite" id="sovaSupportStatus"></div></div><p class="sova-support-aside">Сова, конечно, птица гордая… но от маленькой порции доната крылья не отвалятся! 😏✨</p><div class="sova-support-thanks">Спасибо каждому за поддержку! ❤️</div></section>`;
   document.body.append(layer);
