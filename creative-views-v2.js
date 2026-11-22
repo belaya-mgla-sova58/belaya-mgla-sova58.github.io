@@ -22,34 +22,12 @@ async function read(id,el){
  catch(e){show(el,null);}
 }
 function storage(id){return 'sova58-creative-counted-v3:'+id;}
-async function article(id){
+/* Public counters are temporarily read-only until the verified backend is connected. */
+function article(id){
  var el=document.querySelector('[data-song-view-count] b');
- if(!el){
-   var head=document.querySelector('.creative-v349-article .creative-v349-head');
-   if(head){
-     var badge=document.createElement('div');badge.className='sova-creative-views-v2';
-     badge.innerHTML='<span aria-hidden="true">◉</span> Просмотры: <b>—</b>';
-     head.appendChild(badge);el=badge.querySelector('b');
-   }
- }
- if(!el)return;
- var stamp=0;try{stamp=Number(localStorage.getItem(storage(id))||0)||0;}catch(e){}
- if(stamp){read(id,el);return;}
- // Claim the daily visit before network I/O, preventing refresh and multi-tab races.
- var now=Date.now();try{localStorage.setItem(storage(id),String(now));}catch(e){}
- try{
-   var response=await fetch(url(id),{
-     method:'PUT',cache:'no-store',
-     headers:{'Content-Type':'application/json'},
-     body:JSON.stringify({'.sv':{'increment':1}})
-   });
-   if(!response.ok)throw Error('write '+response.status);
-   var n=await response.json();if(!valid(n))throw Error('invalid response');
-   show(el,n);
- }catch(e){
-   /* Never retry a possibly committed view. */
-   read(id,el);
- }
+ if(!el){var head=document.querySelector('.creative-v349-article .creative-v349-head');
+   if(head){var badge=document.createElement('div');badge.className='sova-creative-views-v2';badge.innerHTML='<span aria-hidden="true">◉</span> Просмотры: <b>—</b>';head.appendChild(badge);el=badge.querySelector('b');}}
+ if(el)read(id,el);
 }
 function init(){
  var page=location.pathname.split('/').pop().toLowerCase();
