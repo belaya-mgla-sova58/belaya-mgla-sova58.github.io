@@ -203,3 +203,17 @@ html body.modern-v424 .mobile-bottom-v424 img{
 html body.modern-v424 main#appMain .events-groups-v522 .guide-nav-card img{
  filter:none!important;-webkit-filter:none!important;opacity:1!important;
 }
+
+
+/* v16: the user removed the old cosmic page backdrop.
+   Keep illustrations inside guides, cards and hero covers untouched. */
+html body.modern-v424 .site-cosmic-background-v442,
+html body.modern-v424 .site-cosmic-background-v442::before,
+html body.modern-v424 .site-cosmic-background-v442::after{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  background:none!important;
+  background-image:none!important;
+  pointer-events:none!important;
+}
