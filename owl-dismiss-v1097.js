@@ -3,7 +3,7 @@
 (function(){
  "use strict";
  if(!document.body || !document.body.classList.contains("is-home-route"))return;
- if(!window.matchMedia || !window.matchMedia("(max-width:820px) and (pointer:coarse)").matches)return;
+ if(!window.matchMedia || !window.matchMedia("(max-width:820px)").matches)return;
  var owlId="madamUguLauncherV720";
  var key="bm-home-owl-hidden-v1097";
  var closeId="bmOwlDismissV1097";
@@ -82,6 +82,8 @@
    document.body.appendChild(restore);
   }
   apply(hidden());position();
+  requestAnimationFrame(position);
+  setTimeout(position,350);
   window.addEventListener("resize",position,{passive:true});
   window.addEventListener("scroll",position,{passive:true});
   if(observer)observer.disconnect();
