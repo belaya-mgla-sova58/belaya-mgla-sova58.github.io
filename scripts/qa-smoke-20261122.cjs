@@ -264,6 +264,22 @@ async function scenario(page,pathName,mode,record){
       if(reset!==0)throw Error('Reset did not clear stock points: '+reset);
       return 'All five days: '+counts.join('/')+' items; 10% bonus, goal, persistence and reset valid';
     });
+    await task('svs_f2p_saving_priority',async()=>{
+      await page.locator('#days [data-day="4"]').click();
+      await page.locator('#goals [data-goal="custom"]').click();
+      await page.locator('#customGoal').fill('0.1');
+      await page.locator('#bonus').fill('0');
+      await page.locator('#mainItems input[data-id="t10"]').fill('2000');
+      await page.locator('#mainItems input[data-id="mithril"]').fill('1');
+      await page.locator('#buildPlan').click();
+      const used=await page.locator('#plan li').allTextContents();
+      if(!used.some(x=>/T10/.test(x)))throw Error('Available T10 training not selected');
+      if(used.some(x=>/Мифрил/.test(x)))throw Error('Scarce Mithril selected although T10 training reaches goal');
+      if(!/Мифрил/.test(await page.locator('#plan').textContent()||''))throw Error('Unused Mithril not identified as saved');
+      page.once('dialog',d=>d.accept());
+      await page.locator('#reset').click();
+      return '100k-point goal reached with T10 training; Mithril saved';
+    });
   }
 }
 async function inspect(browser,ctx,mode,pathName){
