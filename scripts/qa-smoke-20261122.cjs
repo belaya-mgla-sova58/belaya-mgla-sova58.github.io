@@ -188,7 +188,11 @@ async function scenario(page,pathName,mode,record){
       await page.locator('#calc').click({timeout:4000});
       const content=await page.locator('#marches').textContent().catch(()=>'');
       if(!content || content.length<10)throw Error('No march calculation output');
-      return 'Result section generated ('+content.length+' characters)';
+      const heroSelectors=page.locator('#trio select.hsel');
+      if(await heroSelectors.count()!==3)throw Error('Expected 3 independently selectable hero slots');
+      const unlabeled=await heroSelectors.evaluateAll(nodes=>nodes.filter(el=>!el.getAttribute('aria-label')));
+      if(unlabeled.length)throw Error('Some bear lineup hero selectors have no accessibility labels');
+      return 'Result section generated ('+content.length+' characters), 3 hero selectors labeled';
     });
   }
   if(pathName==='/chief-gear-calculator.html'){
@@ -418,17 +422,17 @@ async function inspect(browser,ctx,mode,pathName){
         const c=getComputedStyle(el),r=el.getBoundingClientRect();
         return c.display!=='none'&&c.visibility!=='hidden'&&r.width>0&&r.height>0;
       };
-      const name=el=>(el.getAttribute('aria-label')||el.getAttribute('title')||el.getAttribute('aria-labelledby')||el.innerText||'').trim();
+      const name=el=>(el.getAttribute('aria-label')||el.getAttribute('title')||el.getAttribute('aria-labelledby')||el.textContent||el.innerText||'').trim();
       const unnamedButtons=[...document.querySelectorAll('button')].filter(el=>isVisible(el)&&!name(el))
         .slice(0,12).map(el=>({id:el.id,cls:String(el.className||'').slice(0,70)}));
-      const emptyLinks=[...document.querySelectorAll('a[href]')].filter(el=>isVisible(el)&&!name(el)&&!el.querySelector('img[alt]:not([alt=""])'))
+      const emptyLinks=[...document.querySelectorAll('a[href]')].filter(el=>!el.closest('details:not([open])')&&isVisible(el)&&!name(el)&&!el.querySelector('img[alt]:not([alt=""])'))
         .slice(0,12).map(el=>({href:el.getAttribute('href')?.slice(0,110)}));
       const unlabeledInputs=[...document.querySelectorAll('input:not([type=hidden]),select,textarea')].filter(el=>{
         if(!isVisible(el))return false;
         if(el.getAttribute('aria-label')||el.getAttribute('aria-labelledby')||el.getAttribute('title'))return false;
         if(el.labels?.length)return false;
         return true;
-      }).slice(0,12).map(el=>({id:el.id,type:el.type||el.tagName}));
+      }).slice(0,12).map(el=>({id:el.id,type:el.type||el.tagName,html:el.outerHTML.slice(0,260)}));
       return {duplicateIds:duplicates,unnamedButtons,emptyLinks,unlabeledInputs};
     });
     record.horizontalOverflow=data.overflow;
