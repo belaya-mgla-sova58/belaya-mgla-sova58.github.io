@@ -6,6 +6,11 @@ on:
     paths:
       - '.github/workflows/lighthouse-audit-20261122.yml'
       - 'scripts/lighthouse-summary-20261122.mjs'
+      - 'index.html'
+      - 'calculators.html'
+      - 'chief-gear-calculator.html'
+      - 'chief-gear-core-v1222.js'
+      - 'assets/sova-chief-*-v1223.*'
 permissions:
   contents: read
 concurrency:
