@@ -45,7 +45,9 @@ function attr(tag,name){
  const m=r.exec(tag);return m?(m[1]??m[2]??m[3]):null;
 }
 for(const f of html){
- for(const tag of content(f).match(/<(?:a|img|link|script|iframe|source|video|audio|track|object)\b[^>]*>/gi)||[]){
+ // Ignore illustrative tag names written in comments, CSS or inline JavaScript.
+ const clean=content(f).replace(/<!--[^]*?-->/g,'').replace(/(<style\b[^>]*>)[^]*?(<\/style>)/gi,'$1$2').replace(/(<script\b[^>]*>)[^]*?(<\/script>)/gi,'$1$2');
+ for(const tag of clean.match(/<(?:a|img|link|script|iframe|source|video|audio|track|object)\b[^>]*>/gi)||[]){
   const kind=(tag.match(/^<([a-z]+)/i)||[])[1].toLowerCase();
   if(kind==='img'&&!/\balt\s*=/i.test(tag))withoutAlt.push({file:f,tag:tag.slice(0,90)});
   const prop=['a','link'].includes(kind)?'href':kind==='object'?'data':'src';
