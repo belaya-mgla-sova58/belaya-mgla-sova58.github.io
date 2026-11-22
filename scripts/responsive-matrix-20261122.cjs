@@ -4,8 +4,8 @@ const {chromium,devices}=require('playwright');
 const fs=require('node:fs'),path=require('node:path');
 const ORIGIN='https://belaya-mgla-sova58.github.io';
 const PAGES=['/','/news.html','/events.html','/heroes.html','/hero-generations.html',
- '/gear.html','/experts.html','/pets.html','/calculators.html','/other.html',
- '/svs-prep.html','/svs-kopilka-test.html','/bear-helper.html',
+ '/newbie.html','/gear.html','/experts.html','/pets.html','/calculators.html','/other.html',
+ '/svs-prep.html','/fishing.html','/svs-kopilka-test.html','/bear-helper.html',
  '/furnace-calculator.html','/fire-furnace-calculator.html',
  '/chief-gear-calculator.html','/essence-mithril-calculator.html',
  '/winter-siege.html','/news-elena.html','/ogonek.html'];
@@ -71,6 +71,18 @@ const records=[];let screenshots=0;const sleep=ms=>new Promise(r=>setTimeout(r,m
      if(geom.inaccessibleHiddenH1)rec.issues.push('Home H1 is display:none and inaccessible to screen readers');
      if(geom.headingOffscreen)rec.issues.push('Page H1 completely outside viewport');
      if(rec.jsErrors.length)rec.issues.push('JS exceptions: '+rec.jsErrors.length);
+     if(width<=768 && ['/newbie.html','/heroes.html','/fishing.html','/svs.html'].includes(pathname)){
+       const reading=await page.evaluate(()=>{
+         const main=document.querySelector('main');
+         const textDetails=main?[...main.querySelectorAll('details')].filter(el=>!el.closest('form,[data-quiz],[data-calculator],.interactive-question,.quiz,.calc-panel')):[];
+         return {enabled:document.body.classList.contains('sova-mobile-reading-v1'),
+           count:textDetails.length,closed:textDetails.filter(el=>!el.open).length};
+       });
+       rec.guideReading=reading;
+       if(!reading.enabled)rec.issues.push('Mobile guide reading layout not enabled');
+       if(reading.closed>0)rec.issues.push('Mobile guide has '+reading.closed+' collapsed reading sections');
+     }
+
      if(pathname==='/'&&width<=768){
        try{
          const toggle=page.locator('#mobileMenuToggle');
@@ -111,6 +123,7 @@ const records=[];let screenshots=0;const sleep=ms=>new Promise(r=>setTimeout(r,m
   brokenImageChecks:records.filter(x=>x.brokenImages?.length).length,
   bottomNavOverflowChecks:records.filter(x=>x.bottomNavOverflow>8).length,
   mobileMenuNarrowChecks:records.filter(x=>x.issues.includes('Mobile menu buttons too narrow')).length,
+  mobileGuideReadingFailures:records.filter(x=>x.issues.some(y=>y.startsWith('Mobile guide'))).length,
   httpFailures:records.filter(x=>x.status!==200).length};
  fs.writeFileSync(path.join(OUT,'report.json'),JSON.stringify({total,records},null,2));
  console.log('MATRIX_TOTAL '+JSON.stringify(total));
