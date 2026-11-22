@@ -581,6 +581,24 @@ $('exchangeBtn').onclick=()=>{
   state.exchanges=before;
   exchangeFeedback('Обмен нельзя учесть из-за ограничений или недостатка материалов.');return;
  }
+ // Compare affordability before and after the proposed exchange. Warn only
+ // about NEW or increased deficits, keeping intentionally unfinished plans usable.
+ const required=collect().needs;
+ const worsening=Object.keys(mats).map(k=>{
+  const oldDeficit=Math.max(0,required[k]-current.p[k]);
+  const newDeficit=Math.max(0,required[k]-check.p[k]);
+  return [k,newDeficit-oldDeficit,newDeficit];
+ }).filter(([,increase])=>increase>0);
+ if(worsening.length){
+  const summary=worsening.map(([k,increase,total])=>
+   mats[k]+': нехватка увеличится на '+fmt(increase)+' (всего '+fmt(total)+')'
+  ).join('; ');
+  if(!confirm('Этот обмен ухудшит обеспеченность уже запланированных улучшений. '+summary+'. Всё равно добавить обмен?')){
+   state.exchanges=before;
+   exchangeFeedback('Обмен отменён: материалы сохранены для запланированных улучшений.');
+   return;
+  }
+ }
  exchangeFeedback('');
  save();calculate();clearOptimizerPreview();
 };
