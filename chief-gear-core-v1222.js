@@ -503,11 +503,28 @@ $('markDone').onclick=()=>{
 $('doneDeduct').onclick=()=>settleDone(true);
 $('doneLevelOnly').onclick=()=>settleDone(false);
 $('doneCancel').onclick=()=>$('doneDialog').close();
-$('svsGoal').oninput=e=>{const n=Number(e.target.value);state.charmWeeklyLimits=(state.charmWeeklyLimits&&typeof state.charmWeeklyLimits==='object'&&!Array.isArray(state.charmWeeklyLimits))?state.charmWeeklyLimits:{};
-for(const k of Object.keys(state.charmWeeklyLimits)){const n=Number(state.charmWeeklyLimits[k]);if(!Number.isSafeInteger(n)||n<0||n>1000000)delete state.charmWeeklyLimits[k];else state.charmWeeklyLimits[k]=n;}
-state.svsGoal=Number.isSafeInteger(n)&&n>=0?Math.min(n,1000000000000):0;save();renderExtras()};
+$('svsGoal').oninput=e=>{
+ const field=e.target,goal=validWholeInput(field.value,1000000000000);
+ if(goal===null||field.validity.badInput){
+  field.setCustomValidity('Введите целое неотрицательное количество очков до 1 000 000 000 000.');
+  field.setAttribute('aria-invalid','true');return;
+ }
+ field.setCustomValidity('');field.setAttribute('aria-invalid','false');
+ if(state.svsGoal!==goal){state.svsGoal=goal;save();renderExtras()}
+};
+$('svsGoal').onblur=e=>{
+ if(e.target.getAttribute('aria-invalid')!=='true')e.target.value=state.svsGoal||'';
+};
 $('clearPlan').onclick=()=>{if(!confirm('Очистить все запланированные улучшения? Текущие уровни и запасы сохранятся.'))return;for(const cat of ['gear','charm'])for(const id of Object.keys(state[cat]))state[cat][id].to=state[cat][id].from;save();renderSelects();calculate();clearOptimizerPreview()};
-$('clearItem').onclick=()=>{const v=currentSlot();v.to=v.from;save();renderSelects();calculate();clearOptimizerPreview()};$('gearTab').onclick=()=>setCategory('gear');$('charmTab').onclick=()=>setCategory('charm');for(const id of ['current','target'])$(id).onchange=e=>{const v=currentSlot(),val=Number(e.target.value);v[id==='current'?'from':'to']=val;if(v.to<v.from){v.to=v.from}save();renderSelects();calculate();clearOptimizerPreview()};$('bonus').value=state.bonus;$('bonus').oninput=e=>{state.bonus=Math.max(0,Math.min(500,Number(e.target.value)||0));save();calculate();clearOptimizerPreview()};
+$('clearItem').onclick=()=>{const v=currentSlot();v.to=v.from;save();renderSelects();calculate();clearOptimizerPreview()};$('gearTab').onclick=()=>setCategory('gear');$('charmTab').onclick=()=>setCategory('charm');for(const id of ['current','target'])$(id).onchange=e=>{const v=currentSlot(),val=Number(e.target.value);v[id==='current'?'from':'to']=val;if(v.to<v.from){v.to=v.from}save();renderSelects();calculate();clearOptimizerPreview()};$('bonus').value=state.bonus;$('bonus').oninput=e=>{
+ const field=e.target,raw=field.value.trim(),n=raw===''?0:Number(raw);
+ const valid=(raw===''||/^\d+(?:\.\d+)?$/.test(raw))&&Number.isFinite(n)&&n>=0&&n<=500;
+ field.setAttribute('aria-invalid',String(!valid));
+ field.setCustomValidity(valid?'':'Введите бонус от 0 до 500%, без отрицательных значений.');
+ if(!valid||state.bonus===n)return;
+ state.bonus=n;save();calculate();clearOptimizerPreview();
+};
+$('bonus').onblur=e=>{if(e.target.getAttribute('aria-invalid')!=='true')e.target.value=String(state.bonus)};
 $('recipe').onchange=()=>{updateLimitInput();updateExchangeInfo()};
 $('charmWeeklyLimit').onchange=()=>{const i=Number($('recipe').value);if(i<7)return;const input=$('charmWeeklyLimit'),v=input.value.trim();if(v===''){delete state.charmWeeklyLimits[String(i)];}else if(/^\d+$/.test(v)&&Number(v)<=1000000){state.charmWeeklyLimits[String(i)]=Number(v);}else{alert('Введите целый недельный лимит от 0 до 1 000 000.');updateLimitInput();return;}save();calculate();clearOptimizerPreview()};
 $('charmSuggestedLimit').onclick=()=>{const i=Number($('recipe').value);const suggested={7:500,8:500,9:50,10:50};if(!(i in suggested))return;state.charmWeeklyLimits[String(i)]=suggested[i];save();updateLimitInput();calculate();clearOptimizerPreview()};
