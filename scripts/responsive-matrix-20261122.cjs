@@ -71,6 +71,26 @@ const records=[];let screenshots=0;const sleep=ms=>new Promise(r=>setTimeout(r,m
      if(geom.inaccessibleHiddenH1)rec.issues.push('Home H1 is display:none and inaccessible to screen readers');
      if(geom.headingOffscreen)rec.issues.push('Page H1 completely outside viewport');
      if(rec.jsErrors.length)rec.issues.push('JS exceptions: '+rec.jsErrors.length);
+     if(pathname==='/'&&width<=768){
+       try{
+         const toggle=page.locator('#mobileMenuToggle');
+         if(await toggle.isVisible()){
+           await toggle.click({timeout:2500});
+           const sizes=await page.evaluate(()=>{
+             const nav=document.querySelector('.nav-wrap'),links=[...document.querySelectorAll('.nav-wrap > nav > a.route-link')];
+             if(!nav||!links.length)return null;
+             const n=nav.getBoundingClientRect();
+             return {width:Math.round(n.width),linkWidths:links.map(a=>Math.round(a.getBoundingClientRect().width))};
+           });
+           if(sizes){
+             rec.menuGeometry=sizes;
+             if(sizes.linkWidths.some(n=>n<sizes.width-50))rec.issues.push('Mobile menu buttons too narrow');
+           }
+           await page.locator('#sovaMobileCloseV986').click({timeout:2500}).catch(()=>{});
+         }
+       }catch(err){rec.issues.push('Mobile menu check: '+String(err).slice(0,110))}
+     }
+
      if(rec.issues.length&&screenshots<12){
        const label=(pathname==='/'?'home':pathname.replace(/[^\w-]+/g,'-'));
        const shot=width+'-'+label+'.jpg';
@@ -90,6 +110,7 @@ const records=[];let screenshots=0;const sleep=ms=>new Promise(r=>setTimeout(r,m
   overflowChecks:records.filter(x=>x.overflow>8).length,
   brokenImageChecks:records.filter(x=>x.brokenImages?.length).length,
   bottomNavOverflowChecks:records.filter(x=>x.bottomNavOverflow>8).length,
+  mobileMenuNarrowChecks:records.filter(x=>x.issues.includes('Mobile menu buttons too narrow')).length,
   httpFailures:records.filter(x=>x.status!==200).length};
  fs.writeFileSync(path.join(OUT,'report.json'),JSON.stringify({total,records},null,2));
  console.log('MATRIX_TOTAL '+JSON.stringify(total));
