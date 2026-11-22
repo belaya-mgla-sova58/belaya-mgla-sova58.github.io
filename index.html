@@ -1446,4 +1446,72 @@ html body.is-home-route.modern-v424 .nav-wrap img{
   }
 }
 </style>
+
+<style id="sova-menu-bugfix-v1255">
+@media screen and (max-width:820px){
+ html:not(.force-desktop-root) body.is-home-route.modern-v424 .nav-wrap,
+ html:not(.force-desktop-root) body.is-home-route.modern-v424.mobile-menu-open .nav-wrap,
+ html:not(.force-desktop-root) body.is-home-route.modern-v424.mobile-nav-open .nav-wrap {
+  width:min(84vw,320px)!important;
+  max-width:min(84vw,320px)!important;
+  padding:14px 12px 26px!important;
+  box-sizing:border-box!important;
+  display:flex!important;flex-direction:column!important;
+  align-items:stretch!important;
+  overflow-x:hidden!important;overflow-y:auto!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route.modern-v424 .nav-wrap > nav {
+  display:flex!important;position:static!important;
+  flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;
+  float:none!important;clear:both!important;
+  width:100%!important;max-width:none!important;min-width:0!important;
+  flex:0 0 auto!important;align-self:stretch!important;
+  margin:0!important;padding:0!important;gap:7px!important;
+  box-sizing:border-box!important;overflow:visible!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route.modern-v424 .nav-wrap > nav > a.route-link {
+  display:flex!important;flex:0 0 auto!important;
+  width:100%!important;max-width:none!important;min-width:0!important;
+  min-height:45px!important;height:auto!important;
+  align-self:stretch!important;
+  padding:9px 13px!important;margin:0!important;
+  box-sizing:border-box!important;align-items:center!important;justify-content:flex-start!important;
+  text-align:left!important;gap:12px!important;white-space:normal!important;
+  font-size:13px!important;line-height:1.4!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route.modern-v424 .nav-wrap > nav > a.route-link > img {
+  flex:0 0 26px!important;width:26px!important;height:26px!important;
+  max-width:26px!important;min-width:26px!important;object-fit:contain!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route.modern-v424 .nav-wrap > nav > a.route-link > span {
+  display:block!important;flex:1 1 auto!important;min-width:0!important;
+  text-align:left!important;font:inherit!important;white-space:normal!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route.modern-v424 .nav-wrap > .view-mode-v622 {
+  width:100%!important;max-width:none!important;min-width:0!important;
+  align-self:stretch!important;flex:0 0 auto!important;
+  margin:15px 0 0!important;box-sizing:border-box!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route.modern-v424 .nav-wrap #sovaMobileCloseV986 {
+  align-self:flex-end!important;float:none!important;margin:0 0 12px auto!important;flex:0 0 40px!important;
+ }
+ /* Display the banner exactly once: through its image, not a background copy. */
+ html:not(.force-desktop-root) body.is-home-route .home-portal-hero-v1016 {
+  background-image:none!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route .home-portal-hero-v1016::before,
+ html:not(.force-desktop-root) body.is-home-route .home-portal-hero-v1016::after {
+  background-image:none!important;
+ }
+ /* Darken the page behind an open drawer and prevent ghosting during scroll. */
+ html:not(.force-desktop-root) body.is-home-route:is(.mobile-menu-open,.mobile-nav-open) .mobile-nav-overlay {
+  position:fixed!important;inset:0!important;
+  background:rgba(8,7,13,.78)!important;
+  z-index:2147482990!important;
+ }
+ html:not(.force-desktop-root) body.is-home-route:is(.mobile-menu-open,.mobile-nav-open) {
+  overflow:hidden!important;
+ }
+}
+</style>
 </body></html>
