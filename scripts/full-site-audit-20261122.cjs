@@ -36,6 +36,16 @@ async function visit(browser,filename,mode){
    ? {...devices['Pixel 7'],serviceWorkers:'block',reducedMotion:'reduce'}
    : {viewport:{width:1440,height:900},deviceScaleFactor:1,serviceWorkers:'block',reducedMotion:'reduce'});
  const page=await context.newPage();
+  // Browser tests must not write counters, forms, or analytics events.
+  await page.route('**/*',route=>{
+    const request=route.request();
+    let hostname='';
+    try{hostname=new URL(request.url()).hostname}catch(e){}
+    if(!['GET','HEAD'].includes(request.method())||
+       /^(?:mc\.yandex\.(?:ru|com)|(?:www\.)?googletagmanager\.com|(?:www\.)?google-analytics\.com)$/i.test(hostname))
+      return route.abort();
+    return route.continue();
+  });
  const errors=[],httpErrors=[];
  page.on('pageerror',e=>errors.push(String(e).slice(0,180)));
  page.on('response',r=>{try{

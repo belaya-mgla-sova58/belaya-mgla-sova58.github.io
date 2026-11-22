@@ -290,6 +290,16 @@ async function scenario(page,pathName,mode,record){
 }
 async function inspect(browser,ctx,mode,pathName){
   const page=await ctx.newPage();
+  // Browser tests must not write counters, forms, or analytics events.
+  await page.route('**/*',route=>{
+    const request=route.request();
+    let hostname='';
+    try{hostname=new URL(request.url()).hostname}catch(e){}
+    if(!['GET','HEAD'].includes(request.method())||
+       /^(?:mc\.yandex\.(?:ru|com)|(?:www\.)?googletagmanager\.com|(?:www\.)?google-analytics\.com)$/i.test(hostname))
+      return route.abort();
+    return route.continue();
+  });
   const errors=[],requests=[];
   page.on('pageerror',e=>errors.push(String(e).slice(0,260)));
   page.on('response',res=>{try{
