@@ -482,3 +482,8 @@ html body.luxury-chronicle main#appMain,
 html body.luxury-chronicle .route-page.active{
   background-image:none!important;
 }
+
+/* Desktop sidebar geometry matches 250px navigation */
+@media screen and (min-width:1201px) and (hover:hover) and (pointer:fine){
+ html:not(.force-desktop-root) body.modern-v424{--desktop-sidebar:250px!important;}
+}
