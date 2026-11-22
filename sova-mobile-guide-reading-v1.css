@@ -1,0 +1,61 @@
+/* Белая мгла: читаемые раскрытые гайды на мобильных устройствах, v1. */
+@media screen and (max-width:820px){
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 {
+   -webkit-text-size-adjust:100%;
+   overflow-wrap:break-word;
+ }
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main :is(
+   .guide-section,.guide-page-v69,.guide-fold-body-v414,.section-content,
+   .section-frame,.hero-reading-layout-v1230,.hero-ref-card-v77,
+   .guide-card,.guide-panel,.content-card,.article-content,.reading-content,
+   .fishing-chronicle,.chronicle-content,.modern-panel-v424
+ ){
+   min-width:0!important;max-width:100%!important;box-sizing:border-box!important;
+ }
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main :is(
+   p,li,dd,dt,.guide-fold-body-v414,.section-content,.guide-copy,.article-body
+ ){
+   font-size:clamp(15.5px,4vw,17px)!important;
+   line-height:1.72!important;
+   letter-spacing:normal!important;
+   overflow-wrap:anywhere;
+ }
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main :is(h1,h2,h3,h4){
+   max-width:100%!important;
+   line-height:1.3!important;
+   overflow-wrap:anywhere!important;
+   text-wrap:balance;
+ }
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main h1{font-size:clamp(25px,6vw,34px)!important;}
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main h2{font-size:clamp(21px,5vw,27px)!important;}
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main h3{font-size:clamp(18px,4.5vw,23px)!important;}
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main :is(
+   .guide-section,.guide-fold-body-v414,.section-content,.hero-ref-card-v77
+ ){padding-inline:clamp(12px,3.5vw,22px)!important;}
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main :is(img,video,canvas,svg){
+   max-width:100%!important;
+ }
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main img{
+   height:auto;
+   object-fit:contain;
+ }
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main :is(pre,code){
+   white-space:pre-wrap;overflow-wrap:anywhere;
+ }
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main table{
+   border-collapse:collapse;
+   font-size:clamp(12px,3.2vw,15px);
+ }
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main :is(
+   .table-wrap,.table-responsive,.responsive-table,.ec-table-wrap,.guide-table-wrap
+ ){max-width:100%!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch;}
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main :is(
+   .guide-section,.section-frame,.hero-ref-card-v77
+ ){scroll-margin-top:76px;}
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main details>summary{
+   cursor:pointer;min-height:44px;touch-action:manipulation;
+ }
+ html:not(.force-desktop-root) body.sova-mobile-reading-v1 main :is(
+   .guide-fold-v414,.guide-section,.section-frame
+ ) + :is(.guide-fold-v414,.guide-section,.section-frame) {margin-top:12px!important;}
+}
