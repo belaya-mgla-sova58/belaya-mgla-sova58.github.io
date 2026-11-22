@@ -729,6 +729,44 @@ async function scenario(page,pathName,mode,record){
       return 'Both records reset to blank; even corrupted primary cannot resurrect old stock or upgrades';
     });
   }
+  if(pathName==='/chief-gear-calculator.html'&&mode==='desktop'){
+    await task('chief_calculates_when_browser_storage_is_disabled',async()=>{
+      const context=await page.context().browser().newContext();
+      let tab;
+      try{
+        tab=await context.newPage();
+        await tab.addInitScript(()=>{
+          for(const method of ['getItem','setItem','removeItem']){
+            Object.defineProperty(Storage.prototype,method,{configurable:true,value:()=>{
+              throw new DOMException('Storage is disabled for this test','SecurityError');
+            }});
+          }
+        });
+        await tab.goto('https://belaya-mgla-sova58.github.io/chief-gear-calculator.html',
+          {waitUntil:'domcontentloaded',timeout:30000});
+        await tab.locator('#current').waitFor({state:'visible',timeout:15000});
+        const notice=tab.locator('#storageStatus');
+        if(!(await notice.isVisible()))throw Error('No visible storage-disabled warning');
+        if(!/не разрешает сохранять/.test(await notice.textContent()||''))
+          throw Error('Storage warning does not explain persistence limitation');
+        await tab.locator('#current').selectOption('-1');
+        await tab.locator('#target').selectOption('0');
+        await tab.locator('#inv-alloy').fill('5000');
+        const result=await tab.evaluate(()=>({
+          power:document.getElementById('power')?.textContent,
+          goal:document.getElementById('totalPoints')?.textContent,
+          value:document.getElementById('inv-alloy')?.value,
+          selected:document.getElementById('target')?.value
+        }));
+        if(result.selected!=='0'||result.value!=='5000'||!/[1-9]/.test(result.power||'')||
+           !/[1-9]/.test(result.goal||''))
+          throw Error('Calculator became unusable with blocked storage: '+JSON.stringify(result));
+        return 'Warning is visible and manual upgrade calculation works without storage';
+      }finally{
+        await context.close();
+      }
+    });
+  }
   if(pathName==='/essence-mithril-calculator.html'){
     await task('essence_stock_inputs',async()=>{
       const essence=page.locator('#ecStockEssence'),mithril=page.locator('#ecStockMithril');
