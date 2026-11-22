@@ -257,6 +257,35 @@ function recommendation(mode){
     item.at=next;
   }
  }
+ // Independent verification of the entire optimizer output before offering it.
+ // This protects bundle planning against resource double-counting or a wrong
+ // power/score summary, without changing any game coefficients.
+ const checkNeeds=Object.fromEntries(Object.keys(mats).map(k=>[k,0]));
+ let checkPower=0,checkGearScore=0,checkCharmScore=0,checkSteps=0;
+ for(const item of all){
+   if(item.at<=item.start)continue;
+   const data=rows(item.cat);
+   if(!Number.isInteger(item.at)||item.at>=data.length){
+     clearOptimizerPreview();$('optResult').textContent='Не удалось проверить предложенные уровни. Повторите подбор.';return;
+   }
+   const costs=materialCost(item.cat,item.start,item.at);
+   for(const k of Object.keys(mats))checkNeeds[k]+=costs[k];
+   checkPower+=data[item.at].power-(item.start<0?0:data[item.start].power);
+   for(let i=item.start+1;i<=item.at;i++){
+     if(item.cat==='gear')checkGearScore+=data[i].score;
+     else checkCharmScore+=data[i].score;
+     checkSteps++;
+   }
+ }
+ const verified=Object.keys(mats).every(k=>
+   Number.isSafeInteger(checkNeeds[k])&&checkNeeds[k]<=initial[k]&&
+   Math.abs(initial[k]-checkNeeds[k]-remaining[k])<0.001
+ )&&Math.abs(checkPower-totalPower)<0.001&&
+   checkGearScore===totalGearScore&&checkCharmScore===totalCharmScore&&
+   checkSteps===changes;
+ if(!verified){
+   clearOptimizerPreview();$('optResult').textContent='Проверка подобранного плана обнаружила несоответствие расходов или очков. Изменения не применены.';return;
+ }
  const totalPoints=Math.round(totalGearScore*36*(1+bonus/100))+Math.round(totalCharmScore*70*(1+bonus/100));
  const setAtEnd=gearSetAt(Object.fromEntries(all.filter(x=>x.cat==='gear').map(x=>[x.id,x.at])));
  const extraDef=Math.max(0,setAtEnd.def-setAtStart.def),extraAtk=Math.max(0,setAtEnd.atk-setAtStart.atk);
