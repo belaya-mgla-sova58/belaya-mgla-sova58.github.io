@@ -131,8 +131,21 @@ function build(){
  var goal=target(),avail=relevant().filter(function(x){return count(x)>0}).slice();
  if(!avail.length){$("plan").innerHTML='<h3>Пока нечего считать</h3><p>Введи хотя бы одно количество. Остальные поля можно оставить пустыми.</p>';return;}
  var total=avail.reduce(function(s,x){return s+points(x)},0);
- // Prefer activity's best day; otherwise use shared stock only when required.
- avail.sort(function(a,b){return Number(b.best===state.day)-Number(a.best===state.day)||b.rate-a.rate});
+ // F2P plan: free gathering/hunting and troops already planned for completion first.
+ // Reserve scarce Mithril and Refined Fire Crystals unless other actions cannot meet the target.
+ function costPriority(x){
+   if(/^gather/.test(x.id)||/^beasts/.test(x.id)||x.id==="rallies")return 0;
+   if(/^t[0-9]+$/.test(x.id))return 1;
+   if(x.id==="books")return 2;
+   if(["mithril","refined","widgets"].indexOf(x.id)!==-1)return 8;
+   return 4;
+ }
+ avail.sort(function(a,b){
+   return costPriority(a)-costPriority(b)
+     || Number(b.best===state.day)-Number(a.best===state.day)
+     || a.days.length-b.days.length
+     || b.rate-a.rate;
+ });
  var remain=goal,selected=[],held=[];
  avail.forEach(function(x){
    if(remain<=0){held.push(x);return}
@@ -144,6 +157,7 @@ function build(){
    if(want<quantity)held.push(x);
  });
  var used=selected.reduce(function(s,x){return s+x.earned},0),html="<h3>"+(remain<=0?"План до выбранной цели":"План из доступных запасов")+"</h3>";
+ html+="<p class='note'>Сначала доступные действия и плановое обучение, а редкие материалы — только при необходимости. Учитывай, что охота требует выносливости, а обучение войск должно завершиться в нужный день.</p>";
  html+="<p class='"+(remain<=0?"ok":"low")+"'>"+(remain<=0?"Цель достижима по введённым значениям.":"Не хватает около "+fmt(remain)+" очк.")+"</p><ul>";
  selected.forEach(function(x){html+="<li><b>"+x.item.name+"</b>: "+x.amount.toLocaleString("ru-RU")+" "+x.item.unit+" → примерно "+fmt(x.earned)+" очк."+(x.item.best!==state.day?" <span class='muted'>(также пригодится в "+x.item.best+"-й день)</span>":"")+"</li>"});
  html+="</ul><p><b>Запланировано:</b> "+fmt(used)+" очк. из возможных "+fmt(total)+".</p>";
