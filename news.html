@@ -878,7 +878,62 @@ body.is-news-route .news-shell .news-feature-pair-v4 .tv-feature-58__stage{
 </style>
 <link rel="stylesheet" href="belaya-graphite-gold-ui-v1.css?v=1" data-graphite-gold-ui/>
 <link rel="stylesheet" href="belaya-no-blue-sitewide-v11.css?v=11" data-no-blue-sitewide/>
-<style id="news-ru-group-20261122">#news-ru + .news-category-grid{grid-template-columns:minmax(0,1fr)!important}#news-ru + .news-category-grid .news-category-card{min-height:105px}#news-stories{margin-top:24px}@media(max-width:700px){#news-ru + .news-category-grid .news-category-card{min-height:90px}}</style></head><body class="is-news-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="news"><a class="bm-skip-to-content-v1184" href="#appMain">Перейти к содержимому</a><div aria-hidden="true" class="site-cosmic-background-v442"></div><div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
+<style id="news-ru-group-20261122">#news-ru + .news-category-grid{grid-template-columns:minmax(0,1fr)!important}#news-ru + .news-category-grid .news-category-card{min-height:105px}#news-stories{margin-top:24px}@media(max-width:700px){#news-ru + .news-category-grid .news-category-card{min-height:90px}}</style><style id="news-directory-v20261122">
+/* Clear editorial taxonomy, without replacing artwork or counter scripts. */
+body.is-news-route .news-quick-nav-v20261122{
+ display:flex;flex-wrap:wrap;gap:9px;margin:0 0 22px;
+ padding:13px;border-radius:16px;border:1px solid rgba(216,188,137,.35);
+ background:linear-gradient(125deg,rgba(21,22,28,.84),rgba(43,36,35,.7));
+}
+body.is-news-route .news-quick-nav-v20261122 a{
+ display:inline-flex;align-items:center;justify-content:center;
+ min-height:42px;box-sizing:border-box;padding:9px 13px;
+ border-radius:10px;border:1px solid rgba(236,207,153,.37);
+ background:rgba(255,248,228,.075);color:#fff0d2!important;
+ text-decoration:none!important;font:700 13px/1.35 system-ui,Arial,sans-serif;
+ transition:background .15s ease,border-color .15s ease;
+}
+body.is-news-route .news-quick-nav-v20261122 a:hover{
+ background:rgba(235,195,128,.18);border-color:rgba(245,217,167,.8);
+}
+body.is-news-route .news-quick-nav-v20261122 a:focus-visible{
+ outline:3px solid #f6d69f;outline-offset:2px;
+}
+body.is-news-route .news-shell .news-categories-heading-v1[id]{scroll-margin-top:78px}
+body.is-news-route .news-shell .news-directory-single-v20261122{
+ grid-template-columns:minmax(0,1fr)!important;
+}
+body.is-news-route .news-shell .news-directory-creative-v20261122{
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+}
+body.is-news-route .news-shell .news-directory-ogonek-v20261122{
+ background:radial-gradient(ellipse at 86% 18%,rgba(233,180,109,.20),transparent 45%),linear-gradient(120deg,rgba(29,35,48,.94),rgba(55,38,43,.94))!important;
+}
+body.is-news-route .news-shell .news-directory-ogonek-v20261122 .news-category-link{
+ padding-right:20px!important;
+}
+body.is-news-route .news-shell .news-directory-ogonek-v20261122 small{
+ display:block;font-size:12px;font-weight:600;line-height:1.5;
+ color:#e7d9c1;margin-top:5px;
+}
+@media(max-width:760px){
+ html:not(.force-desktop-root) body.is-news-route .news-quick-nav-v20261122{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  padding:10px;gap:8px;margin-bottom:14px;border-radius:13px;
+ }
+ html:not(.force-desktop-root) body.is-news-route .news-quick-nav-v20261122 a{
+  min-width:0;font-size:12px;padding:10px 7px;min-height:44px;
+  overflow-wrap:break-word;text-align:center;
+ }
+ html:not(.force-desktop-root) body.is-news-route .news-quick-nav-v20261122 a:last-child{
+  grid-column:1/-1;
+ }
+ html:not(.force-desktop-root) body.is-news-route .news-shell .news-directory-creative-v20261122{
+  grid-template-columns:minmax(0,1fr)!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){body.is-news-route .news-quick-nav-v20261122 a{transition:none}}
+</style></head><body class="is-news-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="news"><a class="bm-skip-to-content-v1184" href="#appMain">Перейти к содержимому</a><div aria-hidden="true" class="site-cosmic-background-v442"></div><div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
 <button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
 <div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Новости</small></div>
 <a aria-label="На главную" href="index.html">⌂</a>
@@ -890,7 +945,19 @@ body.is-news-route .news-shell .news-feature-pair-v4 .tv-feature-58__stage{
 <button aria-label="Очистить поиск" class="site-search-clear-v426" type="button">×</button>
 </div>
 <div aria-label="Результаты поиска" class="site-search-results-v426" role="listbox"></div>
-</div><div class="route-page active news-page" data-route="news"><nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><span aria-current="page">Новости</span></nav><section class="page-heading-v424 frost-header-v431"><h1>Новости</h1><p>Обновления русской версии игры, сводки Елены и истории игроков. Выбирай интересующую рубрику.</p></section><section class="news-shell"><div class="news-page-heading"><span class="news-kicker">НОВОСТИ</span><div class="news-title-row"><img alt="" aria-hidden="true" class="news-title-icon" src="assets/news-owl-icon-v446.webp" width="54" height="54" decoding="async"/><h2>Истории и рубрики</h2></div></div><div class="tv-feature-58" aria-label="Спецвыпуск 58-го государства">
+</div><div class="route-page active news-page" data-route="news"><nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><span aria-current="page">Новости</span></nav><section class="page-heading-v424 frost-header-v431"><h1>Новости</h1><p>Обновления русской версии игры, сводки Елены и истории игроков. Выбирай интересующую рубрику.</p></section><section class="news-shell"><div class="news-page-heading"><span class="news-kicker">НОВОСТИ</span><div class="news-title-row"><img alt="" aria-hidden="true" class="news-title-icon" src="assets/news-owl-icon-v446.webp" width="54" height="54" decoding="async"/><h2>Все рубрики новостей</h2></div></div><nav class="news-quick-nav-v20261122" aria-label="Быстрый переход к рубрикам">
+<a href="#news-ru">🎮 Обновления RU</a>
+<a href="#news-elena">📰 Сводки Елены</a>
+<a href="#news-tv">🎙️ 58 ТВ</a>
+<a href="#news-creative">✍️ Интервью и творчество</a>
+<a href="#news-archive">🗂️ Архив событий</a>
+</nav>
+<div class="news-categories-heading-v1" id="news-ru"><h3>Обновления игры • RU</h3><p>Изменения и события русской версии игры, отдельно от авторских рубрик.</p></div><div class="news-category-grid"><div class="news-category-card ru"><a class="news-category-link" href="news-ru.html"><span>Новости RU</span></a></div></div>
+<div class="news-categories-heading-v1" id="news-elena"><h3>Сводки от Елены</h3><p>WhiteFox News: свежие выпуски и архив авторских сводок.</p></div>
+<div class="news-category-grid news-directory-single-v20261122"><div class="news-category-card elena">
+<a class="news-category-link" href="news-elena.html"><span>WhiteFox News</span></a><button aria-label="Поставить лайк" class="news-like-button news-card-like" data-like-key="news-elena-v2" style="position:absolute;right:12px;bottom:12px;z-index:999;display:flex!important;align-items:center;justify-content:center;gap:6px;min-width:58px;height:40px;padding:6px 10px;border:1px solid #ffd0d7;border-radius:999px;background:#ffffff;color:#5b3552;box-shadow:0 6px 15px rgba(36,24,70,.18);visibility:visible!important;opacity:1!important;pointer-events:auto!important;touch-action:manipulation;" type="button"><span aria-hidden="true" class="news-like-heart" style="display:inline-block!important;color:#e43145!important;font-size:24px!important;line-height:1!important;">♥</span><span aria-live="polite" class="news-like-count" style="display:inline-block!important;color:#5b3552!important;font-size:14px!important;font-weight:900!important;min-width:12px!important;">0</span></button></div></div>
+<div class="news-categories-heading-v1" id="news-tv"><h3>58 ТВ • специальные выпуски</h3><p>«Пусть говорят» и другие истории из жизни 58-го государства.</p></div>
+<div class="tv-feature-58" aria-label="Спецвыпуск 58-го государства">
   <a class="tv-feature-58__link" href="news-58-live.html">
     <span class="tv-feature-58__content">
       <span class="tv-feature-58__eyebrow"><span class="tv-feature-58__live-dot" aria-hidden="true"></span> 58 · ТВ <span class="tv-feature-58__divider" aria-hidden="true">|</span> ВЕЧЕРНИЙ ЭФИР</span>
@@ -911,6 +978,13 @@ body.is-news-route .news-shell .news-feature-pair-v4 .tv-feature-58__stage{
     <span class="tv-feature-58__views" aria-label="Просмотры спецвыпуска">👁 <b data-tvs-views>—</b> просмотров</span>
     <button class="tv-feature-58__like" type="button" data-tvs-like aria-label="Поставить лайк" aria-pressed="false"><span aria-hidden="true">♥</span><span data-tvs-like-label>Нравится</span><b data-tvs-like-count>—</b></button>
   </div>
-</div><div class="news-categories-heading-v1" id="news-ru"><h3>Обновления игры • RU</h3><p>Изменения и события русской версии игры, отдельно от авторских рубрик.</p></div><div class="news-category-grid"><div class="news-category-card ru"><a class="news-category-link" href="news-ru.html"><span>Новости RU</span></a></div></div><div class="news-categories-heading-v1" id="news-stories"><h3>Истории и рубрики</h3><p>Сводки Елены, интервью, творчество и специальные выпуски</p></div><div class="news-category-grid"><div class="news-category-card creative"><a class="news-category-link" href="news-halloween-2026.html"><span>Хэллоуин 2026</span></a></div><div class="news-category-card elena">
-<a class="news-category-link" href="news-elena.html"><span>WhiteFox News</span></a><button aria-label="Поставить лайк" class="news-like-button news-card-like" data-like-key="news-elena-v2" style="position:absolute;right:12px;bottom:12px;z-index:999;display:flex!important;align-items:center;justify-content:center;gap:6px;min-width:58px;height:40px;padding:6px 10px;border:1px solid #ffd0d7;border-radius:999px;background:#ffffff;color:#5b3552;box-shadow:0 6px 15px rgba(36,24,70,.18);visibility:visible!important;opacity:1!important;pointer-events:auto!important;touch-action:manipulation;" type="button"><span aria-hidden="true" class="news-like-heart" style="display:inline-block!important;color:#e43145!important;font-size:24px!important;line-height:1!important;">♥</span><span aria-live="polite" class="news-like-count" style="display:inline-block!important;color:#5b3552!important;font-size:14px!important;font-weight:900!important;min-width:12px!important;">0</span></button></div><div class="news-category-card creative creative-corner-fast-v1"><a class="news-category-link" href="creative-corner.html"><span>Творческий уголок</span></a><button aria-label="Поставить лайк" class="news-like-button news-card-like" data-like-key="creative-corner-v2" style="position:absolute;right:12px;bottom:12px;z-index:999;display:flex!important;align-items:center;justify-content:center;gap:6px;min-width:58px;height:40px;padding:6px 10px;border:1px solid #ffd0d7;border-radius:999px;background:#ffffff;color:#5b3552;box-shadow:0 6px 15px rgba(36,24,70,.18);visibility:visible!important;opacity:1!important;pointer-events:auto!important;touch-action:manipulation;" type="button"><span aria-hidden="true" class="news-like-heart" style="display:inline-block!important;color:#e43145!important;font-size:24px!important;line-height:1!important;">♥</span><span aria-live="polite" class="news-like-count" style="display:inline-block!important;color:#5b3552!important;font-size:14px!important;font-weight:900!important;min-width:12px!important;">0</span></button></div></div></section><div class="footer news-footer">Белая Мгла • Автор - Sova</div></div></main><button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button>
+</div>
+<div class="news-categories-heading-v1" id="news-creative"><h3>Интервью и творчество</h3><p>Беседы с игроками, рассказы и авторские работы.</p></div>
+<div class="news-category-grid news-directory-creative-v20261122">
+<div class="news-category-card creative creative-corner-fast-v1"><a class="news-category-link" href="creative-corner.html"><span>Творческий уголок</span></a><button aria-label="Поставить лайк" class="news-like-button news-card-like" data-like-key="creative-corner-v2" style="position:absolute;right:12px;bottom:12px;z-index:999;display:flex!important;align-items:center;justify-content:center;gap:6px;min-width:58px;height:40px;padding:6px 10px;border:1px solid #ffd0d7;border-radius:999px;background:#ffffff;color:#5b3552;box-shadow:0 6px 15px rgba(36,24,70,.18);visibility:visible!important;opacity:1!important;pointer-events:auto!important;touch-action:manipulation;" type="button"><span aria-hidden="true" class="news-like-heart" style="display:inline-block!important;color:#e43145!important;font-size:24px!important;line-height:1!important;">♥</span><span aria-live="polite" class="news-like-count" style="display:inline-block!important;color:#5b3552!important;font-size:14px!important;font-weight:900!important;min-width:12px!important;">0</span></button></div>
+<div class="news-category-card news-directory-ogonek-v20261122"><a class="news-category-link" href="ogonek.html"><span>К вам на огонёк<small>Интервью и истории игроков</small></span></a></div>
+</div>
+<div class="news-categories-heading-v1" id="news-archive"><h3>Архив событий</h3><p>Прошедшие мероприятия и материалы, которые хочется сохранить.</p></div>
+<div class="news-category-grid news-directory-single-v20261122"><div class="news-category-card creative"><a class="news-category-link" href="news-halloween-2026.html"><span>Хэллоуин 2026</span></a></div></div>
+</section><div class="footer news-footer">Белая Мгла • Автор - Sova</div></div></main><button aria-label="Наверх" class="back-to-top" id="backToTop">↑</button>
 <nav aria-label="Быстрая мобильная навигация" class="mobile-bottom-v424"><a data-v424-nav="home" href="index.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-home-v534.webp" width="32" height="32"/></span><b>Главная</b></a><a data-v424-nav="events" href="events.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-events-v534.webp" width="32" height="32"/></span><b>События</b></a><a data-v424-nav="heroes" href="heroes.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-heroes-v534.webp" width="32" height="32"/></span><b>Герои</b></a><a data-v424-nav="calc" href="calculators.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-calculator-v534.webp" width="32" height="32"/></span><b>Калькулятор</b></a><a data-v424-nav="knowledge" href="other.html"><span aria-hidden="true" class="mobile-nav-icon-v429"><img alt="" class="home-v531-icon mobile-nav-img-v429 v451-bottom-icon-img" decoding="async" src="assets/ui-knowledge-v534.webp" width="32" height="32"/></span><b>База знаний</b></a></nav><script defer="" src="pwa-install.js?v=1033"></script><script defer src="tv-special-stats-v2.js?v=4"></script><script defer src="ogonek-stats-v1.js?v=9"></script><link rel="stylesheet" href="belaya-unified-palette-v25.css?v=28" data-sova-unified-theme/></body></html>
