@@ -163,7 +163,7 @@ async function inspect(browser,ctx,mode,pathName){
       const doc=document.documentElement;
       const images=[...document.images].filter(el=>{const r=el.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0});
       return {title:document.title,overflow:Math.max(0,doc.scrollWidth-innerWidth),
-        images:{total:document.images.length,viewport:images.length,brokenViewport:images.filter(x=>x.complete&&x.naturalWidth===0).map(x=>x.currentSrc||x.src).slice(0,10)},
+        images:{total:document.images.length,viewport:images.length,brokenViewport:images.filter(x=>x.hasAttribute('src')&&x.getAttribute('src')&&getComputedStyle(x).visibility!=='hidden'&&x.complete&&x.naturalWidth===0).map(x=>x.currentSrc||x.src).slice(0,10)},
         navigation:{ttfbMs:nav?Math.round(nav.responseStart):null,dclMs:nav?Math.round(nav.domContentLoadedEventEnd):null,loadMs:nav?Math.round(nav.loadEventEnd):null},
         footerVisible:!!document.querySelector('nav.mobile-bottom-v424')};
     });
