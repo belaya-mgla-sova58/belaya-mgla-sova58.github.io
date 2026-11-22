@@ -654,6 +654,35 @@ async function scenario(page,pathName,mode,record){
       return 'All 24 levels, seven stocks, three exchange types, unlocks, custom limits, bonus, goal and calculation output persist';
     });
   }
+  if(pathName==='/chief-gear-calculator.html'){
+    await task('chief_recovers_corrupt_saved_record',async()=>{
+      const key='belaya-mgla-chief-calculator-v1',backup=key+'-backup-v1';
+      await page.locator('#gearTab').click();
+      await page.locator('#target').selectOption('0');
+      await page.locator('#inv-alloy').fill('1234567');
+      await page.locator('#bonus').fill('13');
+      const saved=await page.evaluate(({key,backup})=>({
+        primary:JSON.parse(localStorage.getItem(key)),
+        copied:JSON.parse(localStorage.getItem(backup))
+      }),{key,backup});
+      if(JSON.stringify(saved.primary)!==JSON.stringify(saved.copied))
+        throw Error('Backup does not match last saved primary data');
+      await page.evaluate(key=>localStorage.setItem(key,'{broken JSON'),key);
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      const recovered=await page.evaluate(({key,backup})=>({
+        stock:document.getElementById('inv-alloy')?.value,
+        bonus:document.getElementById('bonus')?.value,
+        target:document.getElementById('target')?.value,
+        backup:JSON.parse(localStorage.getItem(backup)),
+        storedPrimary:localStorage.getItem(key)
+      }),{key,backup});
+      if(recovered.stock!=='1234567'||recovered.bonus!=='13'||recovered.target!=='0')
+        throw Error('Corrupt primary did not recover saved fields: '+JSON.stringify(recovered).slice(0,260));
+      if(recovered.backup.inventory.alloy!==1234567||recovered.backup.gear.cap.to!==0)
+        throw Error('Backup inventory or level lost');
+      return 'Corrupt primary JSON recovered gear level, materials and bonus from independently saved backup';
+    });
+  }
   if(pathName==='/essence-mithril-calculator.html'){
     await task('essence_stock_inputs',async()=>{
       const essence=page.locator('#ecStockEssence'),mithril=page.locator('#ecStockMithril');
