@@ -59,8 +59,13 @@ const wait=ms=>new Promise(done=>setTimeout(done,ms));
         width:document.documentElement.scrollWidth,innerWidth,
         links,emptyAnchors:[...document.querySelectorAll('a[href="#"],a[href="javascript:void(0)"]')].length,
         unnamedButtons:[...document.querySelectorAll('button')].filter(b=>!b.textContent.trim()&&!b.getAttribute('aria-label')&&!b.getAttribute('title')).length,
-        timing:nav?{domContentLoaded:Math.round(nav.domContentLoadedEventEnd),
-          transferSize:nav.transferSize}:null};
+        timing:nav?{domContentLoadedMs:Math.round(nav.domContentLoadedEventEnd),
+          pageTransferBytes:nav.transferSize,
+          cssFiles:document.querySelectorAll('link[rel="stylesheet"]').length,
+          jsFiles:document.querySelectorAll('script[src]').length,
+          loadedAssetBytes:performance.getEntriesByType('resource')
+           .filter(x=>/\.(?:js|css)(?:\?|$)/.test(x.name))
+           .reduce((n,x)=>n+(x.transferSize||0),0)}:null};
       });
       if(!info.title.trim())entry.errors.push('Missing title');
       if(!info.description.trim())entry.errors.push('Missing meta description');
