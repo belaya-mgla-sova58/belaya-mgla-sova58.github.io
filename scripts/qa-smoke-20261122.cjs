@@ -556,6 +556,50 @@ async function scenario(page,pathName,mode,record){
       return '2/3/5/6 T6 pieces retain T5 20% baseline; Defense rises at 3, Attack at 6; UI matches';
     });
   }
+  if(pathName==='/chief-gear-calculator.html'){
+    await task('chief_optimizer_t6_bundle_threshold',async()=>{
+      const key='belaya-mgla-chief-calculator-v1';
+      await page.evaluate(k=>{
+        const s=JSON.parse(localStorage.getItem(k));
+        const gears=JSON.parse(document.getElementById('bm-game-data').textContent).records.filter(x=>x.kind==='gear');
+        const t5=gears.findIndex(x=>x.label_ru==='Красное T5 · этап 0');
+        const t6=gears.findIndex(x=>x.label_ru==='Красное T6 · этап 0');
+        if(t5<0||t6<=t5)throw Error('T5/T6 boundary absent');
+        for(const [i,id] of ['cap','watch','coat','pants','ring','weapon'].entries())
+          s.gear[id]={from:i<2?t6:t5,to:i<2?t6:t5};
+        for(const slot of Object.values(s.charm))slot.from=slot.to=-1;
+        const totals={alloy:0,polish:0,plans:0,amber:0};
+        for(const r of gears.slice(t5+1,t6+1)){
+          totals.alloy+=r.cost.alloy;totals.polish+=r.cost.polishing_solution;
+          totals.plans+=r.cost.design_plans;totals.amber+=r.cost.lunar_amber;
+        }
+        for(const id of Object.keys(s.inventory))s.inventory[id]=totals[id]||0;
+        s.exchanges=[];s.exchangeUnlocked={gear:false,charm:false};
+        s.bonus=0;
+        localStorage.setItem(k,JSON.stringify(s));
+      },key);
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      await page.locator('#optPower').click({timeout:12000});
+      const output=await page.locator('#optResult').textContent()||'';
+      if(!/защита \+2(?:[,.]0)?\s*п\.п\./i.test(output))
+        throw Error('Power optimizer missed affordable third T6 set threshold: '+output.slice(0,300));
+      if(await page.locator('#applyOpt').isHidden())throw Error('T6 bundle cannot be applied');
+      page.once('dialog',d=>d.accept());
+      await page.locator('#applyOpt').click();
+      const result=await page.evaluate(k=>{
+        const s=JSON.parse(localStorage.getItem(k));
+        const gears=JSON.parse(document.getElementById('bm-game-data').textContent).records.filter(x=>x.kind==='gear');
+        const t6=gears.findIndex(x=>x.label_ru==='Красное T6 · этап 0');
+        return {t6Count:Object.values(s.gear).filter(x=>x.to>=t6).length,
+          from:Object.values(s.gear).map(x=>x.from),
+          def:document.getElementById('setDefNext').textContent,
+          atk:document.getElementById('setAtkNext').textContent};
+      },key);
+      if(result.t6Count<3||!result.def.includes('22%')||!result.atk.includes('20%'))
+        throw Error('Applied optimizer did not unlock exactly the expected set threshold: '+JSON.stringify(result));
+      return 'Bundled improvement achieves 3-piece T6 Defense without consuming materials twice';
+    });
+  }
   if(pathName==='/essence-mithril-calculator.html'){
     await task('essence_stock_inputs',async()=>{
       const essence=page.locator('#ecStockEssence'),mithril=page.locator('#ecStockMithril');
