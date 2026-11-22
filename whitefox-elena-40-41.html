@@ -227,7 +227,7 @@
     let n;
     if(!localStorage.getItem(sessionKey)){
       localStorage.setItem(sessionKey,'1');
-      n=await inc();
+      n=await read(); // view updates paused until protected backend
     }else n=await read();
     const b=el.querySelector('b'); if(b) b.textContent=n;
   }
