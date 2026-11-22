@@ -435,6 +435,16 @@ async function inspect(browser,ctx,mode,pathName){
       }).slice(0,12).map(el=>({id:el.id,type:el.type||el.tagName,html:el.outerHTML.slice(0,260)}));
       return {duplicateIds:duplicates,unnamedButtons,emptyLinks,unlabeledInputs};
     });
+    // Accessibility regressions must fail the browser test, not remain invisible in logs.
+    const accessibility=record.accessibility;
+    if(accessibility.duplicateIds.length)
+      record.issues.push('Duplicate DOM ids: '+JSON.stringify(accessibility.duplicateIds).slice(0,190));
+    if(accessibility.unlabeledInputs.length)
+      record.issues.push('Visible inputs without accessible labels: '+JSON.stringify(accessibility.unlabeledInputs).slice(0,190));
+    if(accessibility.unnamedButtons.length)
+      record.issues.push('Visible buttons without accessible names: '+JSON.stringify(accessibility.unnamedButtons).slice(0,190));
+    if(accessibility.emptyLinks.length)
+      record.issues.push('Visible links without accessible names: '+JSON.stringify(accessibility.emptyLinks).slice(0,190));
     record.horizontalOverflow=data.overflow;
     record.images=data.images;
     record.navigation=data.navigation;
