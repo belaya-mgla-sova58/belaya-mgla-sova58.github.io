@@ -362,6 +362,23 @@ async function scenario(page,pathName,mode,record){
       if(await page.locator('#mainItems input[data-id="t10"]').inputValue()!=='100')throw Error('Stock amount not persisted after reload');
       if(await page.locator('#bonus').inputValue()!=='10')throw Error('Bonus not persisted after reload');
       if(await page.locator('#goals [data-goal="custom"]').getAttribute('aria-pressed')!=='true')throw Error('Custom goal not persisted after reload');
+      // Invalid persisted quantities must never become Infinity/NaN in the UI.
+      await page.evaluate(()=>{
+        const key=Object.keys(localStorage).find(k=>k.includes('svs')&&k.includes('kopilka'));
+        if(!key)throw Error('SvS storage key not found');
+        const saved=JSON.parse(localStorage.getItem(key));
+        saved.stock={...saved.stock,t10:'1e309',mithril:-100};
+        saved.custom='Infinity';saved.bonus='Infinity';
+        localStorage.setItem(key,JSON.stringify(saved));
+      });
+      await page.reload({waitUntil:'domcontentloaded'});
+      const safe=await page.evaluate(()=>({
+        bonus:document.querySelector('#bonus').value,
+        potential:document.querySelector('#potential').textContent,
+        t10:document.querySelector('#mainItems input[data-id="t10"]')?.value
+      }));
+      if(/Infinity|NaN|∞/.test(JSON.stringify(safe)))throw Error('Invalid stored values leaked into UI: '+JSON.stringify(safe));
+      if(Number(safe.t10)!==0)throw Error('Non-finite stock was not treated as zero: '+JSON.stringify(safe));
       page.once('dialog',d=>d.accept());
       await page.locator('#reset').click();
       const reset=Number((await page.locator('#potential').textContent()||'').replace(/[^0-9]/g,''));
