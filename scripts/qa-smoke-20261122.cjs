@@ -256,6 +256,13 @@ async function scenario(page,pathName,mode,record){
             samples.push(kind+':'+start+'..'+end);
           }
         }
+        const finalCharm=dataset.records.filter(x=>x.kind==='charm').at(-1);
+        if(!finalCharm||finalCharm.order!==75||!finalCharm.label_ru.includes('этап 1'))
+          errors.push('Level 18 must clearly indicate only its first verified stage');
+        if(dataset.status?.level_18_after_final_row!=='later_substages_reported_external_costs_not_verified')
+          errors.push('Unverified later level 18 stages must be explicitly disclosed');
+        if(dataset.status?.svs_gear_multiplier_reference!==36||dataset.status?.svs_charm_multiplier_reference!==70)
+          errors.push('Unexpected reference SvS scoring coefficients');
         return {counts,samples,errors:errors.slice(0,20),ruVerified:dataset.status?.ru_game_verified};
       });
       if(result.errors.length)throw Error('Upgrade table errors: '+JSON.stringify(result.errors));
