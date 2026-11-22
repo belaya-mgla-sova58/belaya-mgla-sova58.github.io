@@ -452,6 +452,7 @@ async function scenario(page,pathName,mode,record){
         await page.locator('#'+button).click({timeout:10000});
         if(await page.locator('#applyOpt').isHidden())throw Error('Optimizer did not offer any upgrades: '+button);
         if(!(await page.locator('#optList .opt-step').count()))throw Error('Optimizer did not list recommended upgrades');
+      if(/несоответствие расходов|Не удалось проверить/.test(await page.locator('#optResult').textContent()||''))throw Error('Independent optimizer verification rejected its own output');
       }
       page.once('dialog',d=>d.accept());
       await page.locator('#applyOpt').click({timeout:5000});
