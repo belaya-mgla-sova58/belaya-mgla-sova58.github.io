@@ -256,6 +256,20 @@ async function scenario(page,pathName,mode,record){
             samples.push(kind+':'+start+'..'+end);
           }
         }
+        // Cross-check the nine increments from level 17 to level 18
+        // against the independent FC Crazy aggregate (not a single step cost).
+        const charms=dataset.records.filter(x=>x.kind==='charm');
+        const from17=charms.findIndex(x=>x.label_ru==='Ур. 17');
+        const through18=charms.slice(from17+1);
+        const sum17to18=through18.reduce((acc,row)=>{
+          acc.guides+=row.cost.charm_guide;
+          acc.designs+=row.cost.charm_design;
+          acc.secrets+=row.cost.charm_secrets;
+          return acc;
+        },{guides:0,designs:0,secrets:0});
+        if(from17<0||through18.length!==9||sum17to18.guides!==1300||
+           sum17to18.designs!==1130||sum17to18.secrets!==180)
+          errors.push('17-to-18 charm aggregate differs from cross-checked 1300/1130/180: '+JSON.stringify(sum17to18));
         const finalCharm=dataset.records.filter(x=>x.kind==='charm').at(-1);
         if(!finalCharm||finalCharm.order!==75||!finalCharm.label_ru.includes('этап 1'))
           errors.push('Level 18 must clearly indicate only its first verified stage');
