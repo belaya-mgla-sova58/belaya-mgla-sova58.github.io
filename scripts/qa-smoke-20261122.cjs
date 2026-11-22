@@ -658,6 +658,7 @@ async function scenario(page,pathName,mode,record){
     await task('chief_recovers_corrupt_saved_record',async()=>{
       const key='belaya-mgla-chief-calculator-v1',backup=key+'-backup-v1';
       await page.locator('#gearTab').click();
+      await page.locator('#current').selectOption('-1');
       await page.locator('#target').selectOption('0');
       await page.locator('#inv-alloy').fill('1234567');
       await page.locator('#bonus').fill('13');
