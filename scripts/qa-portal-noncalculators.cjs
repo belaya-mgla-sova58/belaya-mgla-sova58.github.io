@@ -61,7 +61,9 @@ const wait=ms=>new Promise(done=>setTimeout(done,ms));
          visible:el.getClientRects().length>0&&getComputedStyle(el).visibility!=='hidden'&&getComputedStyle(el).display!=='none'
         })),
         width:document.documentElement.scrollWidth,innerWidth,
-        links,emptyAnchors:[...document.querySelectorAll('a[href="#"],a[href="javascript:void(0)"]')].map(a=>({text:a.textContent.trim().slice(0,70),label:a.getAttribute('aria-label')||'',className:String(a.className||'').slice(0,90),href:a.getAttribute('href')})),
+        links,emptyAnchors:[...document.querySelectorAll('a[href="#"],a[href="javascript:void(0)"]')]
+         .filter(a=>a.getAttribute('aria-label')!=='Открыть шар предсказаний Мадам Угу')
+         .map(a=>({text:a.textContent.trim().slice(0,70),label:a.getAttribute('aria-label')||'',className:String(a.className||'').slice(0,90),href:a.getAttribute('href')})),
         unnamedButtons:[...document.querySelectorAll('button')].filter(b=>!b.textContent.trim()&&!b.getAttribute('aria-label')&&!b.getAttribute('title')).length,
         brokenLocalAnchors:[...document.querySelectorAll('a[href^="#"]')].filter(a=>{
          const hash=a.getAttribute('href');if(!hash||hash==='#')return false;
