@@ -41,10 +41,16 @@ const records=[];let screenshots=0;const sleep=ms=>new Promise(r=>setTimeout(r,m
       const doc=document.documentElement,b=document.body;
       const extra=Math.max(doc.scrollWidth,b?.scrollWidth||0)-innerWidth;
       const h1=doc.querySelector('h1');
+      const visibleImages=[...document.images].filter(el=>{const r=el.getBoundingClientRect(),st=getComputedStyle(el);return r.width>1&&r.height>1&&r.top<innerHeight&&r.bottom>0&&st.display!=='none'&&st.visibility!=='hidden'});
+      const brokenImages=visibleImages.filter(el=>el.complete&&el.naturalWidth===0).map(el=>(el.currentSrc||el.src).slice(0,180));
+      const bottomNav=document.querySelector('nav.mobile-bottom-v424');
+      const navRect=bottomNav?.getBoundingClientRect();
+      const navStyle=bottomNav?getComputedStyle(bottomNav):null;
+      const bottomNavOverflow=navRect&&navStyle?.display!=='none'?Math.max(0,Math.round(-navRect.left),Math.round(navRect.right-innerWidth)):0;
       const rect=h1?.getBoundingClientRect();
       const h1Style=h1?getComputedStyle(h1):null;
       const intentionalScreenReaderOnly=!!h1&&h1.classList.contains('home-main-title-v571')&&h1Style.display!=='none'&&h1Style.visibility!=='hidden';
-      return {overflow:Math.max(0,Math.round(extra)),h1Visible:!!h1,
+      return {overflow:Math.max(0,Math.round(extra)),brokenImages,bottomNavOverflow,h1Visible:!!h1,
        inaccessibleHiddenH1:!!h1&&h1.classList.contains('home-main-title-v571')&&(h1Style.display==='none'||h1Style.visibility==='hidden'),
        headingOffscreen:!intentionalScreenReaderOnly&&rect?(rect.right<=0||rect.left>=innerWidth):false,
        screenWidth:innerWidth,docWidth:doc.scrollWidth,
@@ -57,8 +63,11 @@ const records=[];let screenshots=0;const sleep=ms=>new Promise(r=>setTimeout(r,m
       };
      });
      rec.overflow=geom.overflow;rec.screenWidth=geom.screenWidth;rec.offenders=geom.offending;
+     rec.brokenImages=geom.brokenImages;rec.bottomNavOverflow=geom.bottomNavOverflow;
      if(rec.status!==200)rec.issues.push('HTTP '+rec.status);
      if(rec.overflow>8)rec.issues.push('Horizontal overflow '+rec.overflow+'px');
+     if(rec.brokenImages.length)rec.issues.push('Broken visible images: '+rec.brokenImages.length);
+     if(rec.bottomNavOverflow>8)rec.issues.push('Mobile bottom navigation overflow '+rec.bottomNavOverflow+'px');
      if(geom.inaccessibleHiddenH1)rec.issues.push('Home H1 is display:none and inaccessible to screen readers');
      if(geom.headingOffscreen)rec.issues.push('Page H1 completely outside viewport');
      if(rec.jsErrors.length)rec.issues.push('JS exceptions: '+rec.jsErrors.length);
@@ -79,6 +88,8 @@ const records=[];let screenshots=0;const sleep=ms=>new Promise(r=>setTimeout(r,m
  const total={pageCount:PAGES.length,widths:WIDTHS,checks:records.length,
   problematicChecks:records.filter(x=>x.issues.length).length,
   overflowChecks:records.filter(x=>x.overflow>8).length,
+  brokenImageChecks:records.filter(x=>x.brokenImages?.length).length,
+  bottomNavOverflowChecks:records.filter(x=>x.bottomNavOverflow>8).length,
   httpFailures:records.filter(x=>x.status!==200).length};
  fs.writeFileSync(path.join(OUT,'report.json'),JSON.stringify({total,records},null,2));
  console.log('MATRIX_TOTAL '+JSON.stringify(total));
