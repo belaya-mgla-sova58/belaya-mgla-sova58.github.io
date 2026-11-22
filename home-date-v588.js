@@ -22,8 +22,8 @@ function ensureHomeHero(){
   img.height=744;
   img.decoding='async';
   img.setAttribute('fetchpriority','high');
-  img.src='belaya_mgla_new_header_2048.webp?v=20261122';
-  img.srcset='belaya_mgla_new_header_768.webp?v=20261122 768w, belaya_mgla_new_header_1280.webp?v=20261122 1280w, belaya_mgla_new_header_2048.webp?v=20261122 2048w';
+  img.src='belaya_mgla_selected_header_2048.jpg?v=20261122';
+  img.srcset='belaya_mgla_selected_header_768.jpg?v=20261122 768w, belaya_mgla_selected_header_1280.jpg?v=20261122 1280w, belaya_mgla_selected_header_2048.jpg?v=20261122 2048w';
   img.sizes='(max-width:820px) 100vw, 100vw';
   hero.innerHTML='';
   hero.appendChild(img);
