@@ -286,8 +286,11 @@ function renderExtras(){
 }
 function settleDone(deduct){
  const val=currentSlot();if(val.to<=val.from)return;
- if(deduct){const newPool=pool(),cost=materialCost(category,val.from,val.to);
+ if(deduct){
+  const balance=exchangeBalance(),newPool=balance.p,cost=materialCost(category,val.from,val.to);
+  if(balance.skipped)return alert('В плане есть обмены, которые нельзя выполнить. Исправьте их перед списанием, чтобы они не пропали.');
   if(!Object.keys(mats).every(k=>newPool[k]>=cost[k]))return alert('Для списания не хватает материалов. Обновите запасы или выберите «Только обновить уровень».');
+  if(state.exchanges.length&&!confirm('В расчёте использованы запланированные обмены ('+state.exchanges.length+'). Подтвердите только если эти обмены уже выполнены в игре: их результат будет включён в остатки, а список планов обмена очистится. Продолжить?'))return;
   for(const k of Object.keys(mats))newPool[k]-=cost[k];
   state.inventory=newPool;state.exchanges=[];
  }
@@ -296,10 +299,10 @@ function settleDone(deduct){
 $('markDone').onclick=()=>{
  const val=currentSlot();if(val.to<=val.from)return;
  const name=positions(category).find(x=>x[0]===selected)?.[2]||'Предмет';
- const cost=materialCost(category,val.from,val.to),p=pool();
- const canDeduct=Object.keys(mats).every(k=>p[k]>=cost[k]);
+ const cost=materialCost(category,val.from,val.to),balance=exchangeBalance(),p=balance.p;
+ const canDeduct=balance.skipped===0&&Object.keys(mats).every(k=>p[k]>=cost[k]);
  const costText=Object.entries(cost).filter(([,n])=>n>0).map(([k,n])=>mats[k]+': '+fmt(n)).join('; ');
- $('doneDescription').textContent=name+' → '+rows(category)[val.to].label+'. Расход: '+(costText||'0')+'. '+(canDeduct?'Вы можете списать материалы из запасов или только обновить уровень.':'На виртуальном балансе недостаточно материалов, поэтому доступно только обновление уровня без списания.');
+ $('doneDescription').textContent=name+' → '+rows(category)[val.to].label+'. Расход: '+(costText||'0')+'. '+(balance.skipped?'Некоторые обмены выполнить нельзя, поэтому списание недоступно, пока план обмена не исправлен.':canDeduct?(state.exchanges.length?'Баланс учитывает '+state.exchanges.length+' запланированных обменов. При списании потребуется отдельно подтвердить, что они уже выполнены в игре.':'Вы можете списать материалы из запасов или только обновить уровень.'):'На виртуальном балансе недостаточно материалов, поэтому доступно только обновление уровня без списания.');
  $('doneDeduct').disabled=!canDeduct;
  $('doneDialog').showModal();
 };
