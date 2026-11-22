@@ -116,6 +116,19 @@ async function scenario(page,pathName,mode,record){
           console.log('QA_OWL_DIAG '+JSON.stringify(detail));
           throw Error('Mobile owl X is not visible: '+JSON.stringify(detail).slice(0,440));
         }
+        const geometry=await page.evaluate(()=>{
+          const owl=document.getElementById('madamUguLauncherV720');
+          const close=document.getElementById('bmOwlDismissV1097');
+          const img=owl?.querySelector('img');
+          if(!owl||!close||!img)return null;
+          const a=img.getBoundingClientRect(),b=close.getBoundingClientRect(),o=owl.getBoundingClientRect();
+          return {image:{x:a.x,y:a.y,w:a.width,h:a.height},launcher:{x:o.x,y:o.y,w:o.width,h:o.height},
+            cross:{x:b.x,y:b.y,w:b.width,h:b.height},
+            centerVerticalDistance:Math.round(Math.abs(b.y+b.height/2-(a.y+a.height/2)))};
+        });
+        console.log('QA_OWL_GEOMETRY '+JSON.stringify(geometry));
+        if(geometry&&geometry.centerVerticalDistance>145)
+          throw Error('Mobile X is too far from Madam Ugu image: '+JSON.stringify(geometry).slice(0,220));
         await close.click({timeout:5500});
         if(await launcher.isVisible())throw Error('Mobile owl remained visible after pressing X');
         await restore.waitFor({state:'visible',timeout:4000});
