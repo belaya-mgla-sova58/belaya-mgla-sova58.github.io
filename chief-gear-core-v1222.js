@@ -21,9 +21,23 @@ const recipes=[['plans','amber',10,1,'10 проектных планов → 1 �
 // State is kept in the original test version's local-storage key so players retain their plans.
 const blank=()=>({gear:Object.fromEntries(gearSlots.map(s=>[s[0],{from:-1,to:-1}])),charm:Object.fromEntries(charmSlots.map(s=>[s[0],{from:-1,to:-1}])),inventory:Object.fromEntries(Object.keys(mats).map(k=>[k,0])),exchanges:[],exchangeUnlocked:{gear:false,charm:false},bonus:0,svsGoal:0,charmWeeklyLimits:{}});
 const key='belaya-mgla-chief-calculator-v1';const $=id=>document.getElementById(id);const fmt=n=>Math.round(n).toLocaleString('ru-RU');
-let state;try{state=JSON.parse(localStorage.getItem(key))||blank()}catch{state=blank()}
+// Keep a second valid snapshot: a corrupted localStorage record must not
+// erase the player's last successfully saved levels and materials.
+const backupKey=key+'-backup-v1';
+function readSaved(){
+ for(const storageKey of [key,backupKey]){
+  try{
+   const raw=localStorage.getItem(storageKey);
+   if(!raw)continue;
+   const parsed=JSON.parse(raw);
+   if(parsed&&typeof parsed==='object'&&!Array.isArray(parsed))return parsed;
+  }catch(e){/* try the independent backup */ }
+ }
+ return blank();
+}
+let state=readSaved();
 const defaultState=blank();if(!state||typeof state!=='object'||Array.isArray(state))state=blank();state={...defaultState,...state,inventory:{...defaultState.inventory,...(state.inventory&&typeof state.inventory==='object'&&!Array.isArray(state.inventory)?state.inventory:{})}};
-for(const cat of ['gear','charm']){state[cat]={...defaultState[cat],...state[cat]};for(const id of Object.keys(defaultState[cat])){const v=state[cat][id];const max=(cat==='gear'?G:C).length-1;const from=Number.isInteger(v?.from)?Math.max(-1,Math.min(max,v.from)):-1;const to=Number.isInteger(v?.to)?Math.max(from,Math.min(max,v.to)):from;state[cat][id]={from,to};}}
+for(const cat of ['gear','charm']){const savedSlots=state[cat]&&typeof state[cat]==='object'&&!Array.isArray(state[cat])?state[cat]:{};state[cat]={...defaultState[cat],...savedSlots};for(const id of Object.keys(defaultState[cat])){const v=state[cat][id];const max=(cat==='gear'?G:C).length-1;const from=Number.isInteger(v?.from)?Math.max(-1,Math.min(max,v.from)):-1;const to=Number.isInteger(v?.to)?Math.max(from,Math.min(max,v.to)):from;state[cat][id]={from,to};}}
 state.charmWeeklyLimits=(state.charmWeeklyLimits&&typeof state.charmWeeklyLimits==='object'&&!Array.isArray(state.charmWeeklyLimits))?state.charmWeeklyLimits:{};
 for(const k of Object.keys(state.charmWeeklyLimits)){const n=Number(state.charmWeeklyLimits[k]);if(!Number.isSafeInteger(n)||n<0||n>1000000)delete state.charmWeeklyLimits[k];else state.charmWeeklyLimits[k]=n;}
 state.svsGoal=Number.isSafeInteger(Number(state.svsGoal))?Math.max(0,Math.min(1000000000000,Number(state.svsGoal))):0;
@@ -31,7 +45,11 @@ state.exchangeUnlocked={gear:state.exchangeUnlocked?.gear===true,charm:state.exc
 state.exchanges=Array.isArray(state.exchanges)?state.exchanges.filter(v=>Array.isArray(v)&&Number.isInteger(v[0])&&recipes[v[0]]&&Number.isSafeInteger(v[1])&&v[1]>0&&v[1]<=1000000):[];
 for(const k of Object.keys(mats)){const n=Number(state.inventory[k]);state.inventory[k]=Number.isSafeInteger(n)&&n>=0?n:0;}
 state.bonus=Number.isFinite(Number(state.bonus))?Math.max(0,Math.min(500,Number(state.bonus))):0;
-let category='gear',selected='cap';const save=()=>{try{localStorage.setItem(key,JSON.stringify(state))}catch(e){/* private browsing */}};
+let category='gear',selected='cap';const save=()=>{
+ const snapshot=JSON.stringify(state);
+ try{localStorage.setItem(key,snapshot)}catch(e){/* private browsing */ }
+ try{localStorage.setItem(backupKey,snapshot)}catch(e){/* private browsing */ }
+};
 const currentSlot=()=>state[category][selected];const rows=cat=>cat==='gear'?G:C;const positions=cat=>cat==='gear'?gearSlots:charmSlots;
 function setCategory(cat){category=cat;selected=cat==='gear'?'cap':'cap-1';renderSlots();renderSelects();renderBulk();renderExtras()}
 function renderSlots(){for(const cat of ['gear','charm']){$(cat+'Tab').classList.toggle('active',category===cat);$(cat+'Tab').setAttribute('aria-selected',String(category===cat))}const holder=$('slots');holder.innerHTML='';for(const [id,emoji,name,troop] of positions(category)){const v=state[category][id],b=document.createElement('button');b.type='button';b.className='slot'+(id===selected?' active':'');b.setAttribute('aria-pressed',String(id===selected));const icon=document.createElement('span');icon.className='emoji';
