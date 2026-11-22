@@ -13,6 +13,16 @@ function init(){
   #sovaSupportTrigger:hover,#sovaSupportTrigger:focus-visible{transform:translateY(-3px) scale(1.04);box-shadow:0 0 0 4px rgba(41,21,47,.46),0 0 25px rgba(199,121,252,.68)!important}
   #sovaSupportTrigger:focus-visible{outline:3px solid #f8deac!important;outline-offset:3px}
   #sovaSupportTrigger img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;filter:none!important;max-width:none!important;max-height:none!important;background:none!important;border:none!important;box-shadow:none!important}
+  /* When the gift popup opens, hide the separate fortune-teller control behind it. */
+  body:has(#sovaSupportLayer:not([hidden])) #madamUguLauncherV720,
+  body:has(#sovaSupportLayer:not([hidden])) #bmOwlDismissV1097,
+  body:has(#sovaSupportLayer:not([hidden])) #madamUguCloseLauncherV720{
+    visibility:hidden!important;pointer-events:none!important;
+  }
+  @media(max-width:820px){
+    #sovaSupportLayer{padding:12px max(10px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px))!important;}
+    #sovaSupportLayer .sova-support-dialog{max-height:calc(100dvh - 26px - env(safe-area-inset-bottom,0px))!important;overscroll-behavior:contain;}
+  }
   #sovaSupportLayer[hidden]{display:none!important}
   #sovaSupportLayer{position:fixed!important;inset:0!important;z-index:2147482000!important;display:grid!important;place-items:center!important;padding:16px!important;font:400 14px/1.5 system-ui,-apple-system,Segoe UI,sans-serif!important;color:#f3e9ee!important;box-sizing:border-box!important}
   #sovaSupportLayer *,#sovaSupportLayer *::before,#sovaSupportLayer *::after{box-sizing:border-box}
