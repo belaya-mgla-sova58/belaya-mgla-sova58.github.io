@@ -1,0 +1,40 @@
+name: Full portal audit (all HTML, desktop and Android)
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/full-site-audit-20261122.cjs'
+      - '.github/workflows/full-site-audit-20261122.yml'
+permissions:
+  contents: read
+concurrency:
+  group: full-portal-audit
+  cancel-in-progress: true
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Check out entire published portal
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright and Chromium
+        run: |
+          npm install --no-save --no-package-lock --ignore-scripts playwright
+          npx playwright install --with-deps chromium
+      - name: Audit every HTML page on desktop and Android without writing visitor data
+        env:
+          AUDIT_WORKERS: '3'
+        run: node scripts/full-site-audit-20261122.cjs
+      - name: Upload compact findings and first issue screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-portal-audit-report
+          path: full-site-audit-output/
+          if-no-files-found: warn
+          retention-days: 14
