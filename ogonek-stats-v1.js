@@ -84,7 +84,7 @@
           if(cachedViews===null)display(viewsEl,null);
         }
       }
-      var countOne=isArticle&&!seen;
+      var countOne=false; // Automatic view writes paused until secure backend switch.
       if(countOne)try{localStorage.setItem(seenKey,'1')}catch(e){}
       // Firebase server-side increment is atomic; don't repeat a failed write,
       // since the server might have committed it before the response was lost.
