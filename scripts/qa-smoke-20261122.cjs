@@ -800,7 +800,8 @@ async function scenario(page,pathName,mode,record){
   if(pathName==='/chief-gear-calculator.html'){
     await task('chief_rejects_invalid_numeric_inputs',async()=>{
       const key='belaya-mgla-chief-calculator-v1';
-      await page.locator('#stockDetails summary').click().catch(()=>{});
+      if(!(await page.locator('#stockDetails').getAttribute('open')))
+        await page.locator('#stockDetails summary').click();
       await page.locator('#inv-alloy').fill('1500');
       for(const bad of ['-6','1.5','1000000000001']){
         await page.locator('#inv-alloy').fill(bad);
