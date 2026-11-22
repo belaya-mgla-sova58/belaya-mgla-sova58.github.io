@@ -95,9 +95,17 @@ function renderMini(){
  const baseStat=v.from<0?0:(Number(r[v.from].stat)||0);
  const statGain=(Number(r[v.to].stat)||0)-baseStat;
  if(statGain>0){const detail=document.createElement('span');detail.textContent='+'+statGain.toLocaleString('ru-RU',{maximumFractionDigits:2})+' п.п. к '+(category==='gear'?'атаке/защите соответствующих войск':'здоровью/смертоносности соответствующих войск')+' (по справочнику)';el.append(detail)}
- const balances=pool(),lacks=Object.entries(required).filter(([k,amount])=>amount>balances[k]);
- const warn=$('selectedWarning');warn.className='helper '+(lacks.length?'warn':'okhint');
- warn.textContent=lacks.length?'⚠️ Для этого улучшения не хватает: '+lacks.map(([k,amount])=>mats[k]+' '+fmt(amount-balances[k])).join(', ')+'.':'✓ По текущим запасам материалов на этот предмет хватает (без учёта других планов).';
+ // A single-item affordability message must reserve stock already needed
+ // by every OTHER planned slot. Otherwise the same alloy could appear free twice.
+ const balances=pool(),allPlanned=collect().needs;
+ const shortfalls=Object.entries(required).map(([k,amount])=>{
+  const reserved=Math.max(0,allPlanned[k]-amount);
+  return [k,Math.max(0,amount-Math.max(0,balances[k]-reserved))];
+ }).filter(([,missing])=>missing>0);
+ const warn=$('selectedWarning');warn.className='helper '+(shortfalls.length?'warn':'okhint');
+ warn.textContent=shortfalls.length
+  ?'⚠️ С учётом остальных запланированных улучшений не хватает: '+shortfalls.map(([k,missing])=>mats[k]+' '+fmt(missing)).join(', ')+'. Откройте «Мои запасы материалов» или уменьшите план.'
+  :'✓ Материалов хватает с учётом всех остальных улучшений в плане.';
  for(const [id,amount] of Object.entries(required)){if(!amount)continue;const m=document.createElement('div');m.className='selected-mat';m.append(materialHeading(id,mats[id]));const val=document.createElement('strong');val.textContent=fmt(amount);m.append(val);holder.append(m)}
 }
 function renderInventory(){const holder=$('inventory');holder.innerHTML='';for(const [id,name] of Object.entries(mats)){const el=document.createElement('div');el.className='stock';const label=document.createElement('label');label.htmlFor='inv-'+id;label.append(materialHeading(id,name));const input=document.createElement('input');input.type='number';input.id='inv-'+id;input.min='0';input.step='1';input.value=String(Math.max(0,Number(state.inventory[id])||0));input.addEventListener('input',()=>{state.inventory[id]=Math.max(0,Math.min(Number.MAX_SAFE_INTEGER,Math.floor(Number(input.value)||0)));save();calculate();clearOptimizerPreview()});el.append(label,input);holder.append(el)}}
