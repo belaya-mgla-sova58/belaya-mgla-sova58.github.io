@@ -1090,6 +1090,73 @@ async function scenario(page,pathName,mode,record){
       return 'Chained exchange output funds one upgrade only; failed chains block both affordability offers and automatic optimization';
     });
   }
+  if(pathName==='/chief-gear-calculator.html'){
+    await task('chief_multi_exchange_affordable_suggestions_no_double_spend',async()=>{
+      const key='belaya-mgla-chief-calculator-v1';
+      await page.evaluate(k=>{
+        const s=JSON.parse(localStorage.getItem(k));
+        for(const slot of Object.values(s.gear))slot.from=slot.to=-1;
+        for(const slot of Object.values(s.charm))slot.from=slot.to=-1;
+        for(const mat of Object.keys(s.inventory))s.inventory[mat]=0;
+        // 20 plans -> 30 polish and 3000 alloy through two ordered exchanges.
+        s.inventory.plans=20;s.exchanges=[[1,10],[2,10]];
+        s.exchangeUnlocked={gear:true,charm:false};
+        s.charmWeeklyLimits={};
+        localStorage.setItem(k,JSON.stringify(s));
+      },key);
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      const before=await page.evaluate(()=>({
+        pool:exchangeBalance().p,
+        skipped:exchangeBalance().skipped,
+        options:document.querySelectorAll('#compare .compareItem').length,
+        summary:document.getElementById('affordableCount').textContent
+      }));
+      if(before.skipped||before.pool.plans!==0||before.pool.alloy!==3000||
+         before.pool.polish!==30||before.options<2)
+        throw Error('Expected two exchange-funded gear upgrades: '+JSON.stringify(before));
+      for(let n=1;n<=2;n++){
+        const available=await page.locator('#compare .compareItem').count();
+        if(available<1)throw Error('Missing funded improvement '+n);
+        await page.locator('#compare .compareItem .compare-buttons button').first().click();
+        const progress=await page.evaluate(k=>{
+          const s=JSON.parse(localStorage.getItem(k));
+          const dataset=JSON.parse(document.getElementById('bm-game-data').textContent).records;
+          const steps={alloy:0,polish:0,plans:0,amber:0,guides:0,designs:0,secrets:0};
+          let upgraded=0;
+          for(const cat of ['gear','charm']){
+            const rows=dataset.filter(x=>x.kind===cat);
+            for(const slot of Object.values(s[cat])){
+              if(slot.to>slot.from)upgraded++;
+              for(let j=slot.from+1;j<=slot.to;j++){
+                const cost=rows[j].cost;
+                steps.alloy+=cost.alloy||0;steps.polish+=cost.polishing_solution||0;
+                steps.plans+=cost.design_plans||0;steps.amber+=cost.lunar_amber||0;
+                steps.guides+=cost.charm_guide||0;steps.designs+=cost.charm_design||0;
+                steps.secrets+=cost.charm_secrets||0;
+              }
+            }
+          }
+          return {upgraded,steps,pool:exchangeBalance().p};
+        },key);
+        if(progress.upgraded!==n)throw Error('Multiple suggestion clicks reused one target: '+JSON.stringify(progress));
+        for(const mat of Object.keys(progress.steps))if(progress.steps[mat]>progress.pool[mat])
+          throw Error('Materials double-spent after selecting '+n+' targets: '+mat);
+      }
+      const after=await page.evaluate(()=>({
+        count:document.querySelectorAll('#compare .compareItem').length,
+        info:document.getElementById('affordableCount').textContent
+      }));
+      if(after.count!==0)throw Error('Still offers unfunded third gear upgrade: '+JSON.stringify(after));
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      const saved=await page.evaluate(k=>({
+        upgrades:Object.values(JSON.parse(localStorage.getItem(k)).gear).filter(s=>s.to>s.from).length,
+        options:document.querySelectorAll('#compare .compareItem').length
+      }),key);
+      if(saved.upgrades!==2||saved.options!==0)
+        throw Error('Chain-funded target plan did not persist correctly: '+JSON.stringify(saved));
+      return 'Two sequential exchange-funded upgrades consume stocks once and prevent a third; plan persists on reload';
+    });
+  }
   if(pathName==='/essence-mithril-calculator.html'){
     await task('essence_stock_inputs',async()=>{
       const essence=page.locator('#ecStockEssence'),mithril=page.locator('#ecStockMithril');
