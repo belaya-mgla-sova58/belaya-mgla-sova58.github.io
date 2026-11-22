@@ -601,6 +601,59 @@ async function scenario(page,pathName,mode,record){
       return 'Bundled improvement achieves 3-piece T6 Defense without consuming materials twice';
     });
   }
+  if(pathName==='/chief-gear-calculator.html'){
+    await task('chief_complete_plan_reload_retains_every_setting',async()=>{
+      const key='belaya-mgla-chief-calculator-v1';
+      const expected=await page.evaluate(k=>{
+        const state=JSON.parse(localStorage.getItem(k));
+        const blankSlot={from:-1,to:-1};
+        for(const id of Object.keys(state.gear))state.gear[id]={...blankSlot};
+        for(const id of Object.keys(state.charm))state.charm[id]={...blankSlot};
+        state.gear.cap={from:0,to:2};
+        state.gear.watch={from:1,to:3};
+        state.charm['cap-1']={from:0,to:2};
+        state.charm['coat-2']={from:2,to:4};
+        state.inventory={alloy:123456,polish:2345,plans:234,amber:28,guides:345,designs:215,secrets:29};
+        state.exchanges=[[0,2],[1,3],[7,2]];
+        state.exchangeUnlocked={gear:true,charm:true};
+        state.bonus=14;
+        state.svsGoal=1234567;
+        state.charmWeeklyLimits={'7':500,'8':50,'9':20};
+        localStorage.setItem(k,JSON.stringify(state));
+        return state;
+      },key);
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      const actual=await page.evaluate(k=>{
+        const state=JSON.parse(localStorage.getItem(k));
+        const ids=['power','gearPoints','charmPoints','totalPoints','goalStatus','exchangeInfo'];
+        const displayed=Object.fromEntries(ids.map(id=>[id,document.getElementById(id)?.textContent||'']));
+        return {state,displayed,bonus:document.getElementById('bonus')?.value,
+          goal:document.getElementById('svsGoal')?.value,
+          gearUnlocked:document.getElementById('gearUnlocked')?.checked,
+          charmUnlocked:document.getElementById('charmUnlocked')?.checked};
+      },key);
+      for(const field of ['gear','charm','inventory','exchanges','exchangeUnlocked','bonus','svsGoal','charmWeeklyLimits'])
+        if(JSON.stringify(actual.state[field])!==JSON.stringify(expected[field]))
+          throw Error('Complex plan did not survive reload: '+field);
+      if(actual.bonus!=='14'||actual.goal!=='1234567'||!actual.gearUnlocked||!actual.charmUnlocked)
+        throw Error('Saved plan controls did not restore: '+JSON.stringify({bonus:actual.bonus,goal:actual.goal,gear:actual.gearUnlocked,charm:actual.charmUnlocked}));
+      for(const id of ['power','gearPoints','charmPoints','totalPoints'])
+        if(!Number.isFinite(Number(actual.displayed[id].replace(/[^0-9]/g,''))))
+          throw Error('Calculated field invalid after reload: '+id);
+      if(!/обмен/.test(actual.displayed.exchangeInfo.toLowerCase()))
+        throw Error('Exchange plan summary missing after reload');
+      if(!actual.displayed.goalStatus.trim())throw Error('SvS goal status missing after reload');
+      // The stored levels, resources and exchanges must also produce the
+      // same visible totals after a second reload without user interaction.
+      await page.reload({waitUntil:'domcontentloaded',timeout:25000});
+      const again=await page.evaluate(()=>Object.fromEntries(
+        ['power','gearPoints','charmPoints','totalPoints','goalStatus','exchangeInfo']
+          .map(id=>[id,document.getElementById(id)?.textContent||''])));
+      if(JSON.stringify(again)!==JSON.stringify(actual.displayed))
+        throw Error('Calculated plan summary changes between reloads');
+      return 'All 24 levels, seven stocks, three exchange types, unlocks, custom limits, bonus, goal and calculation output persist';
+    });
+  }
   if(pathName==='/essence-mithril-calculator.html'){
     await task('essence_stock_inputs',async()=>{
       const essence=page.locator('#ecStockEssence'),mithril=page.locator('#ecStockMithril');
