@@ -1,0 +1,29 @@
+name: Static audit - local links and CSS assets
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/static-links-audit-20261122.cjs'
+      - '.github/workflows/static-links-audit-20261122.yml'
+permissions:
+  contents: read
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate HTML references, images, stylesheets and anchor targets
+        run: node scripts/static-links-audit-20261122.cjs
+      - name: Save audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: static-links-audit-report
+          path: static-links-audit-output/
+          retention-days: 14
+          if-no-files-found: warn
