@@ -12,9 +12,22 @@
     !!main.querySelector(".guide-page-v69,.guide-fold-v414,.guide-section,.section-frame,.luxury-chronicle,.hero-reading-layout-v1230,.mobile-guide");
   if(!isGuide)return;
   document.body.classList.add("sova-mobile-reading-v1");
+  // Reading accordions are expanded, but interactive quizzes/forms retain their behavior.
   main.querySelectorAll("details").forEach(function(d){
-   if(d.closest("form,[data-quiz],[data-calculator],.interactive-question"))return;
+   if(d.closest("form,[data-quiz],[data-calculator],.interactive-question,.quiz,.calc-panel"))return;
+   if(d.querySelector("input,select,textarea,[contenteditable],button[data-action]"))return;
    d.open=true;
+  });
+  // Long guide data tables can scroll without forcing the entire page sideways.
+  main.querySelectorAll("table").forEach(function(table){
+   if(table.closest(".table-wrap,.table-responsive,.responsive-table,.ec-table-wrap,.guide-table-wrap,.sova-guide-table-scroll-v2"))return;
+   var wrapper=document.createElement("div");
+   wrapper.className="sova-guide-table-scroll-v2";
+   wrapper.setAttribute("role","region");
+   wrapper.setAttribute("aria-label","Таблица: прокручивайте влево и вправо");
+   wrapper.tabIndex=0;
+   table.parentNode.insertBefore(wrapper,table);
+   wrapper.appendChild(table);
   });
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});
