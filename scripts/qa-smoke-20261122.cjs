@@ -151,7 +151,25 @@ async function scenario(page,pathName,mode,record){
       if(await gear.getAttribute('aria-selected')!=='true')throw Error('Gear tab did not activate');
       const count=await page.locator('select#current option').count();
       if(count<2)throw Error('Gear level selection empty');
-      return 'Both tabs switch; '+count+' gear stages';
+      if(await page.locator('#slots button.slot').count()!==6)throw Error('Expected exactly 6 gear slots');
+      const imageHealth=await page.locator('#slots button.slot img').evaluateAll(async imgs=>{
+        return await Promise.all(imgs.map(async(img)=>{
+          img.loading='eager';
+          try{await img.decode();return {ok:img.naturalWidth>0,src:img.currentSrc.slice(0,85)}}
+          catch(e){return {ok:false,src:img.currentSrc.slice(0,85)}}
+        }));
+      });
+      if(imageHealth.some(i=>!i.ok))throw Error('Missing gear icon: '+JSON.stringify(imageHealth.filter(i=>!i.ok)).slice(0,160));
+      await charm.click({timeout:6000});
+      if(await page.locator('#slots button.slot').count()!==18)throw Error('Expected exactly 18 charm slots');
+      await gear.click({timeout:6000});
+      await page.locator('#target').selectOption('0');
+      const points=Number((await page.locator('#totalPoints').textContent()||'').replace(/[^0-9]/g,''));
+      if(!(points>0))throw Error('Upgrading first gear stage did not produce SvS points');
+      await page.locator('#clearItem').click();
+      const resetPoints=Number((await page.locator('#totalPoints').textContent()||'').replace(/[^0-9]/g,''));
+      if(resetPoints!==0)throw Error('Clearing upgrade did not restore zero planned points');
+      return '6 gear slots, 18 charm slots, 6 decoded icons; upgrade and reset valid';
     });
   }
   if(pathName==='/essence-mithril-calculator.html'){
