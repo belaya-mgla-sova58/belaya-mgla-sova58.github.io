@@ -111,7 +111,7 @@ function renderMini(){
 const maxMaterialStock=1000000000000;
 function validWholeInput(raw,max){
  if(raw.trim()==='')return 0;
- if(!/^\\d+$/.test(raw.trim()))return null;
+ if(!/^\d+$/.test(raw.trim()))return null;
  const n=Number(raw.trim());
  return Number.isSafeInteger(n)&&n>=0&&n<=max?n:null;
 }
