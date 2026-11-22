@@ -18,6 +18,20 @@
    if(d.querySelector("input,select,textarea,[contenteditable],button[data-action]"))return;
    d.open=true;
   });
+  // On a phone every textual guide is open by default; remove contradictory
+  // "short mode / expand all" hints without touching calculator controls.
+  main.querySelectorAll(".guide-fold-toolbar-v414").forEach(function(toolbar){
+    var msg=toolbar.querySelector("span");
+    if(msg && /Короткий режим|открывай только/i.test(msg.textContent)){
+      msg.textContent="Все разделы открыты. Листайте вниз или перейдите через содержание.";
+    }
+    var expandButton=toolbar.querySelector(".guide-fold-all-v414");
+    if(expandButton){
+      expandButton.hidden=true;
+      expandButton.setAttribute("aria-hidden","true");
+      expandButton.tabIndex=-1;
+    }
+  });
   // Long guide data tables can scroll without forcing the entire page sideways.
   main.querySelectorAll("table").forEach(function(table){
    if(table.closest(".table-wrap,.table-responsive,.responsive-table,.ec-table-wrap,.guide-table-wrap,.sova-guide-table-scroll-v2"))return;
