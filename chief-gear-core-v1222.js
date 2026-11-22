@@ -60,7 +60,7 @@ for(const k of Object.keys(state.charmWeeklyLimits)){const n=Number(state.charmW
 state.svsGoal=Number.isSafeInteger(Number(state.svsGoal))?Math.max(0,Math.min(1000000000000,Number(state.svsGoal))):0;
 state.exchangeUnlocked={gear:state.exchangeUnlocked?.gear===true,charm:state.exchangeUnlocked?.charm===true};
 state.exchanges=Array.isArray(state.exchanges)?state.exchanges.filter(v=>Array.isArray(v)&&Number.isInteger(v[0])&&recipes[v[0]]&&Number.isSafeInteger(v[1])&&v[1]>0&&v[1]<=1000000):[];
-for(const k of Object.keys(mats)){const n=Number(state.inventory[k]);state.inventory[k]=Number.isSafeInteger(n)&&n>=0?n:0;}
+for(const k of Object.keys(mats)){const n=Number(state.inventory[k]);state.inventory[k]=Number.isSafeInteger(n)&&n>=0&&n<=1000000000000?n:0;}
 state.bonus=Number.isFinite(Number(state.bonus))?Math.max(0,Math.min(500,Number(state.bonus))):0;
 let category='gear',selected='cap';const save=()=>{
  const snapshot=JSON.stringify(state);
@@ -108,7 +108,46 @@ function renderMini(){
   :'✓ Материалов хватает с учётом всех остальных улучшений в плане.';
  for(const [id,amount] of Object.entries(required)){if(!amount)continue;const m=document.createElement('div');m.className='selected-mat';m.append(materialHeading(id,mats[id]));const val=document.createElement('strong');val.textContent=fmt(amount);m.append(val);holder.append(m)}
 }
-function renderInventory(){const holder=$('inventory');holder.innerHTML='';for(const [id,name] of Object.entries(mats)){const el=document.createElement('div');el.className='stock';const label=document.createElement('label');label.htmlFor='inv-'+id;label.append(materialHeading(id,name));const input=document.createElement('input');input.type='number';input.id='inv-'+id;input.min='0';input.step='1';input.value=String(Math.max(0,Number(state.inventory[id])||0));input.addEventListener('input',()=>{state.inventory[id]=Math.max(0,Math.min(Number.MAX_SAFE_INTEGER,Math.floor(Number(input.value)||0)));save();calculate();clearOptimizerPreview()});el.append(label,input);holder.append(el)}}
+const maxMaterialStock=1000000000000;
+function validWholeInput(raw,max){
+ if(raw.trim()==='')return 0;
+ if(!/^\\d+$/.test(raw.trim()))return null;
+ const n=Number(raw.trim());
+ return Number.isSafeInteger(n)&&n>=0&&n<=max?n:null;
+}
+function inputValidation(input,message){
+ const invalid=Boolean(message);
+ input.setAttribute('aria-invalid',String(invalid));
+ input.setCustomValidity(message||'');
+ const note=input.parentElement?.querySelector('.input-error');
+ if(note){note.textContent=message||'';note.hidden=!invalid;}
+}
+function renderInventory(){
+ const holder=$('inventory');holder.replaceChildren();
+ for(const [id,name] of Object.entries(mats)){
+  const el=document.createElement('div');el.className='stock';
+  const label=document.createElement('label');label.htmlFor='inv-'+id;label.append(materialHeading(id,name));
+  const input=document.createElement('input');input.type='number';input.id='inv-'+id;input.min='0';input.max=String(maxMaterialStock);input.step='1';input.inputMode='numeric';
+  input.value=String(state.inventory[id]);
+  const note=document.createElement('small');note.className='input-error';note.id='inv-error-'+id;note.hidden=true;
+  input.setAttribute('aria-describedby',note.id);
+  input.addEventListener('input',()=>{
+   const amount=validWholeInput(input.value,maxMaterialStock);
+   if(amount===null||input.validity.badInput){
+    inputValidation(input,'Введите целое число от 0 до 1 000 000 000 000. Дробные и отрицательные запасы не учитываются.');
+    return;
+   }
+   inputValidation(input,'');
+   if(state.inventory[id]===amount)return;
+   state.inventory[id]=amount;save();calculate();clearOptimizerPreview();
+  });
+  input.addEventListener('blur',()=>{
+   if(input.getAttribute('aria-invalid')==='true')return;
+   input.value=String(state.inventory[id]);
+  });
+  el.append(label,input,note);holder.append(el);
+ }
+}
 function recipeGroup(i){return i<7?'gear':'charm'}
 function exchangeLimit(i){
  const published=recipes[i][5];
