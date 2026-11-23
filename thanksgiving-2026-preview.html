@@ -74,6 +74,20 @@ body .wrap .wiki-photo{width:100%;max-width:410px;justify-self:center;padding:10
 body .wrap .wiki-photo img{width:100%;height:auto;max-height:360px;object-fit:contain}
 body .wrap .hero-banner{max-width:960px;max-height:390px;object-fit:contain;margin:0 auto 20px}
 @media(max-width:600px){body .wrap .wiki-gallery{grid-template-columns:repeat(1,minmax(0,1fr));gap:12px}body .wrap .wiki-photo{max-width:100%;padding:6px}body .wrap .wiki-photo img{max-height:310px}body .wrap .wiki-photo figcaption{font-size:11px;line-height:1.35}body .wrap .hero-banner{max-height:280px}}
+
+/* Festive aurora header */
+body .wrap .hero{isolation:isolate;background:radial-gradient(ellipse at 82% 15%,rgba(255,206,115,.24),transparent 36%),radial-gradient(ellipse at 18% 88%,rgba(188,66,64,.35),transparent 48%),linear-gradient(125deg,#241a25 0%,#41253a 36%,#65362f 72%,#8c542c 100%)!important;border:2px solid rgba(255,208,132,.62)!important;box-shadow:0 0 0 5px rgba(122,71,40,.22),0 24px 65px rgba(10,7,17,.45),inset 0 0 75px rgba(255,198,108,.08)!important;text-align:center}
+body .wrap .hero:before{width:75%;height:80%;top:-38%;right:-16%;border-radius:50%;background:radial-gradient(ellipse,rgba(255,209,127,.32),rgba(255,209,127,0) 68%);filter:blur(10px)}
+body .wrap .hero:after{width:120%;height:140px;left:-10%;bottom:-70px;border-radius:50%;background:radial-gradient(ellipse,rgba(255,178,85,.18),transparent 72%)}
+body .wrap .hero-inner{max-width:100%;position:relative}
+body .wrap .hero-inner:before{content:"✦  ❄  ✧  ✦  ❄  ✧  ✦";display:block;color:#ffda9a;letter-spacing:.8em;font-size:clamp(13px,2vw,20px);margin-bottom:12px;opacity:.85}
+body .wrap .hero .eyebrow{font-size:clamp(11px,1.4vw,15px);letter-spacing:.22em;color:#ffe4ad;text-shadow:0 2px 14px rgba(255,178,83,.4)}
+body .wrap .hero h1{font-size:clamp(40px,7vw,78px);line-height:1.07;margin:16px auto;color:#fff4dc;text-shadow:0 3px 0 rgba(78,36,32,.75),0 8px 26px rgba(0,0,0,.48),0 0 35px rgba(255,195,113,.26)}
+body .wrap .hero .lead{margin:0 auto;max-width:670px;color:#fff0dc;font-size:clamp(15px,1.9vw,19px)}
+body .wrap .hero .hero-meta{justify-content:center}
+body .wrap .hero .pill{background:rgba(39,20,30,.65);border:1px solid rgba(255,218,152,.58);color:#ffe6b8;backdrop-filter:blur(4px)}
+body .wrap .hero .hero-banner{border:1px solid rgba(255,222,159,.45);box-shadow:0 12px 32px rgba(0,0,0,.28);border-radius:19px;max-width:900px}
+@media(max-width:600px){body .wrap .hero{padding:25px 16px!important}body .wrap .hero-inner:before{letter-spacing:.4em}body .wrap .hero h1{font-size:clamp(38px,10vw,58px)}body .wrap .hero .hero-banner{max-height:260px}}
 </style>
 </head>
 <body>
@@ -81,8 +95,8 @@ body .wrap .hero-banner{max-width:960px;max-height:390px;object-fit:contain;marg
 <div class="topline"><a href="index.html">← Белая мгла</a><span>Справочник события · 2026</span></div>
 <header class="hero">
 <div class="hero-inner"><img class="hero-banner" src="https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2026/11/15banner-scaled.jpg" alt="Официальный баннер праздника урожая" fetchpriority="high">
-<div class="eyebrow">Вечеринка северного сияния · Праздничное событие</div>
-<h1>День<br>благодарения</h1>
+<div class="eyebrow">❄ Праздничное событие в Whiteout Survival ❄</div>
+<h1>День благодарения</h1>
 <p class="lead">Праздничное событие в «Белой мгле»: собирайте деликатесы северного сияния, открывайте наборы, готовьте блюда и зарабатывайте личные и альянсовые очки трапезы.</p>
 <div class="hero-meta"><span class="pill">24–30 ноября · основное событие</span><span class="pill">1 декабря · вечеринка</span><span class="pill">Время московское</span></div>
 
