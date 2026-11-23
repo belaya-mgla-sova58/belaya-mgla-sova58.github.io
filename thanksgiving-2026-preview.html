@@ -67,6 +67,13 @@ body .wrap .quicknav a,body .wrap .quicknav a:visited{background:#493022!importa
 body .wrap .quicknav a:hover,body .wrap .quicknav a:focus-visible{background:#6a4229!important;color:#fff3d6!important}
 body .wrap .wiki-photo{background:#24160f!important;color:#efd2a5!important}
 body .wrap .wiki-photo figcaption{color:#efd2a5!important}
+
+/* Compact event photos: keep original proportions without oversized blocks */
+body .wrap .wiki-gallery{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;max-width:850px;margin:16px auto}
+body .wrap .wiki-photo{width:100%;max-width:270px;justify-self:center;padding:8px}
+body .wrap .wiki-photo img{width:100%;height:auto;max-height:230px;object-fit:contain}
+body .wrap .hero-banner{max-width:760px;max-height:280px;object-fit:contain;margin:0 auto 20px}
+@media(max-width:600px){body .wrap .wiki-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}body .wrap .wiki-photo{max-width:100%;padding:6px}body .wrap .wiki-photo img{max-height:180px}body .wrap .wiki-photo figcaption{font-size:11px;line-height:1.35}body .wrap .hero-banner{max-height:210px}}
 </style>
 </head>
 <body>
