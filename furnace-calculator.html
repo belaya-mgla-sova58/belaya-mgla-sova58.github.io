@@ -43,7 +43,16 @@
 </style>
 <link rel="stylesheet" href="belaya-graphite-gold-ui-v1.css?v=1" data-graphite-gold-ui/>
 <link rel="stylesheet" href="belaya-no-blue-sitewide-v11.css?v=11" data-no-blue-sitewide/>
-<link rel="stylesheet" href="belaya-layout-guard-v1.css?v=5" data-layout-guard="v1"/><link rel="stylesheet" href="sova-calc-mobile-readable-v1.css?v=1"/></head><body class="bm-calc-jewel-v89 is-other-route is-furnace-calc-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="furnace-calculator"><a class="bm-skip-to-content-v1184" href="#appMain">Перейти к содержимому</a><div aria-hidden="true" class="site-cosmic-background-v442"></div>
+<link rel="stylesheet" href="belaya-layout-guard-v1.css?v=5" data-layout-guard="v1"/><link rel="stylesheet" href="sova-calc-mobile-readable-v1.css?v=1"/><style id="simple-furnace-mode-v1">
+.simple-furnace-details,.simple-furnace-route{margin:12px 0;border:1px solid rgba(162,180,205,.38);border-radius:15px;padding:0;background:rgba(15,30,49,.46)}
+.simple-furnace-details>summary,.simple-furnace-route>summary{cursor:pointer;list-style:none;padding:16px 18px;font-size:15px;font-weight:750;color:#f1f4fb}
+.simple-furnace-details>summary::-webkit-details-marker,.simple-furnace-route>summary::-webkit-details-marker{display:none}
+.simple-furnace-details>summary:after,.simple-furnace-route>summary:after{content:"⌄";float:right}
+.simple-furnace-details[open]>summary:after,.simple-furnace-route[open]>summary:after{content:"⌃"}
+.simple-furnace-details>.calc-buildings-v379{margin:0 12px 12px!important}
+.simple-furnace-route>.calc-route-v378{margin:0 12px 12px!important}
+@media(max-width:700px){.simple-furnace-details>summary,.simple-furnace-route>summary{padding:14px 12px;font-size:14px}}
+</style></head><body class="bm-calc-jewel-v89 is-other-route is-furnace-calc-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="furnace-calculator"><a class="bm-skip-to-content-v1184" href="#appMain">Перейти к содержимому</a><div aria-hidden="true" class="site-cosmic-background-v442"></div>
 <div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
 <button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
 <div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div>
@@ -58,16 +67,16 @@
 <button aria-label="Очистить поиск" class="site-search-clear-v426" type="button">×</button>
 </div>
 <div aria-label="Результаты поиска" class="site-search-results-v426" role="listbox"></div>
-</div><div class="route-page active" data-route="furnace-calculator"><nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><span aria-current="page">Калькулятор Топки 20–30</span></nav><section class="page-heading-v424 frost-header-v431"><h1>Калькулятор Топки 20–30</h1><p>Выберите текущую Топку и цель. Калькулятор покажет, какие здания нужно улучшить сначала и сколько ресурсов потребуется на весь путь. Укажите реальн…</p></section>
+</div><div class="route-page active" data-route="furnace-calculator"><nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><span aria-current="page">Калькулятор Топки 20–30</span></nav><section class="page-heading-v424 frost-header-v431"><h1>Калькулятор Топки 20–30</h1><p>Выберите текущий уровень и цель. Результат появится сразу, без заполнения дополнительных полей.</p></section>
 <div class="guide-page-v69 furnace-calc-v379">
 <section class="calc-select-v378">
 <label><span>🔥 Моя Топка сейчас</span><select id="calcFrom"></select></label>
 <div aria-hidden="true" class="calc-arrow-v378">→</div>
 <label><span>🎯 Хочу Топку</span><select id="calcTo"></select></label>
 </section>
-<section class="calc-buildings-v379">
+<details class="simple-furnace-details"><summary>⚙️ Уточнить уровни зданий (необязательно)</summary><section class="calc-buildings-v379">
 <h2>🏘️ Уровни ваших зданий сейчас</h2>
-<p>Укажите реальные уровни. Тогда калькулятор не будет угадывать, что у вас уже прокачано.</p>
+<p>Для точного результата проверьте реальные уровни зданий. Без этого используется оценка по минимальным требованиям уже достигнутой топки.</p>
 <div class="calc-building-grid-v379">
 <label><span>🏛️ Посольство</span><select id="curEmbassy"></select></label>
 <label><span>🔬 Научный центр</span><select id="curResearch"></select></label>
@@ -75,8 +84,8 @@
 <label><span>🏹 Лагерь стрелков</span><select id="curMarksman"></select></label>
 <label><span>⚔️ Лагерь копейщиков</span><select id="curLancer"></select></label>
 </div>
-</section>
-<div class="calc-note-v378">💡 Меняете уровень любого здания — общая сумма и порядок улучшений пересчитываются сразу. Выбранные уровни сохраняются в этом браузере на вашем устройстве.</div>
+</section></details>
+<div class="calc-note-v378">💡 <b>Простой расчёт:</b> по умолчанию учитываются только обязательные улучшения от выбранной топки до цели. Это ориентировочная сумма: если здания уже улучшены выше минимума, затраты будут меньше. Точный результат можно получить в настройке уровней зданий.</div>
 <section class="calc-total-v378">
 <h2>📦 Всего потребуется</h2>
 <div class="calc-res-grid-v378">
@@ -86,10 +95,10 @@
 <div><span aria-hidden="true" class="catalog-game-icon ci-resource_iron"></span><b>Железо</b><strong id="totalIron">0</strong></div>
 </div>
 </section>
-<section class="calc-route-v378">
+<details class="simple-furnace-route"><summary>🏗️ Посмотреть порядок улучшений</summary><section class="calc-route-v378">
 <div class="calc-route-head-v378"><h2>🏗️ Что улучшать по порядку</h2><span id="calcStepCount"></span></div>
 <div class="calc-steps-v378" id="calcSteps"></div>
-</section>
+</section></details>
 <div class="calc-source-v378">Требования и базовые стоимости уровней 20–30 сверены по нескольким игровым справочникам. Для Топки 27 использовано значение 24 млн угля, которое совпадает в WhiteoutData, WOS Wiki, BlueStacks и 173Games. Огненные уровни будут отдельным калькулятором «по этапам».</div>
 <div class="v69-footer">Белая Мгла • Автор - Sova</div>
 </div>
@@ -112,6 +121,13 @@
  for(const [name,id] of Object.entries(ids)){const el=document.getElementById(id);const firstKnownLevel=name==='Посольство'?19:15;for(let n=firstKnownLevel;n<=29;n++)el.add(new Option('Ур. '+n,n));}
  from.value='20';to.value='25';
  const defaults={'curEmbassy':19,'curResearch':19,'curInfantry':19,'curMarksman':19,'curLancer':19};Object.entries(defaults).forEach(([id,v])=>document.getElementById(id).value=String(v));
+ // Auto-fill minimum prerequisites already implied by the current furnace level.
+ function fillBaseline(){
+   const current=+from.value;
+   const levels={'Посольство':19,'Научный центр':19,'Лагерь пехоты':19,'Лагерь стрелков':19,'Лагерь копейщиков':19};
+   for(let n=20;n<=current;n++){const q=req[n];if(q){levels[q[0]]=Math.max(levels[q[0]],q[1]);levels[q[2]]=Math.max(levels[q[2]],q[3]);}}
+   Object.entries(ids).forEach(([name,id])=>{const el=document.getElementById(id);el.value=String(Math.min(29,levels[name]));});
+ }
  const add=(a,b)=>a.map((v,i)=>v+b[i]);
  const fmt=n=>{const x=n*1e6;if(x>=1e9)return (x/1e9).toLocaleString('ru-RU',{maximumFractionDigits:2})+' млрд';if(x>=1e6)return (x/1e6).toLocaleString('ru-RU',{maximumFractionDigits:2})+' млн';if(x>=1e3)return Math.round(x/1e3).toLocaleString('ru-RU')+' тыс.';return Math.round(x).toLocaleString('ru-RU')};
  const resHtml=r=>`<span><i class="catalog-game-icon ci-resource_meat" aria-hidden="true"></i>${fmt(r[0])}</span><span><i class="catalog-game-icon ci-resource_wood" aria-hidden="true"></i>${fmt(r[1])}</span><span><i class="catalog-game-icon ci-resource_coal" aria-hidden="true"></i>${fmt(r[2])}</span><span><i class="catalog-game-icon ci-resource_iron" aria-hidden="true"></i>${fmt(r[3])}</span>`;
@@ -132,20 +148,24 @@
  // Remember the chosen furnace and supporting-building levels on this device.
  const progressKey='sova58-furnace-20-30-progress-v1';
  const controls=[from,to,...Object.values(ids).map(id=>document.getElementById(id))];
+ let restoredManual=false;
  try{
   const stored=JSON.parse(localStorage.getItem(progressKey)||'null');
   if(stored&&typeof stored==='object'){
    controls.forEach(el=>{
     const saved=stored[el.id];
-    if(typeof saved==='string'&&[...el.options].some(opt=>opt.value===saved))el.value=saved;
+    if(typeof saved==='string'&&[...el.options].some(opt=>opt.value===saved)){el.value=saved;if(el!==from&&el!==to)restoredManual=true;}
    });
   }
  }catch(e){/* Unavailable storage must not break the calculator. */}
+ if(!restoredManual)fillBaseline();
  function saveProgress(){
   try{localStorage.setItem(progressKey,JSON.stringify(Object.fromEntries(controls.map(el=>[el.id,el.value]))))}
   catch(e){/* Continue calculating if storage is disabled. */}
  }
- controls.forEach(el=>el.addEventListener('change',()=>{calc();saveProgress()}));
+ // Changing the furnace updates the estimated baseline. Manual levels are optional.
+ from.addEventListener('change',()=>{fillBaseline();calc();saveProgress()});
+ [to,...Object.values(ids).map(id=>document.getElementById(id))].forEach(el=>el.addEventListener('change',()=>{calc();saveProgress()}));
  calc();
 })();
 
