@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#191a20">
+<title>Сова-сканер ускорений · Белая мгла</title>
+<style>
+:root{color-scheme:dark;--bg:#15161b;--card:#23242a;--edge:#6d6354;--gold:#f5d9a8;--muted:#c7c7cf}
+*{box-sizing:border-box}body{font:15px/1.55 system-ui,Segoe UI,Arial,sans-serif;color:#f6f0e8;background:radial-gradient(ellipse at 65% -50%,#43404a,transparent 65%),var(--bg);margin:0}
+header{padding:22px max(16px,calc((100vw - 1280px)/2));border-bottom:1px solid #544d45}header h1{font-size:clamp(27px,3vw,37px);margin:5px 0;color:var(--gold)}header p{margin:0;max-width:920px;color:#ded9d2}
+a{color:var(--gold)}.crumb{font-size:12px}
+main{max-width:1280px;padding:18px 14px 50px;margin:auto}.layout{display:grid;grid-template-columns:minmax(0,.96fr) minmax(0,1.04fr);gap:16px;align-items:start}
+.card{background:linear-gradient(155deg,#292a30,#1c1e24);border:1px solid var(--edge);border-radius:17px;padding:17px;min-width:0}
+h2{font-size:19px;margin:0 0 12px}
+label{font-weight:750;font-size:13px;color:#f4e5c7}
+input[type=file]{display:block;width:100%;background:#16181e;border:1px dashed #bba078;border-radius:11px;padding:12px;color:#fff;margin:7px 0}
+button{font:inherit;font-weight:730;border:1px solid #9b8a75;border-radius:10px;background:#3b3b40;color:#fff;padding:10px 12px;cursor:pointer}
+button.primary{background:#805c27;border-color:#e1ba79}
+button:disabled{opacity:.48;cursor:not-allowed}
+.viewer{border:1px solid #494b55;background:#0d1018;border-radius:12px;margin:12px 0;padding:5px}
+#image{display:block;max-width:100%;width:100%;height:auto;cursor:crosshair;touch-action:none}
+#image[hidden]{display:none}
+.help{color:#c8c7cb;font-size:13px;line-height:1.6}
+.status{color:#f5d9a8;min-height:24px;font-size:13px}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;align-items:center}
+.items{display:grid;gap:10px}
+.item{display:grid;grid-template-columns:minmax(100px,1fr) repeat(3,minmax(57px,75px));gap:8px;border:1px solid #545356;background:#1a1d24;padding:12px;border-radius:12px;align-items:center}
+.item .name{font-weight:750;font-size:14px}
+.item .meta{font-size:11px;color:#bcbabe;line-height:1.4}
+.item input{border-radius:8px;border:1px solid #80715c;background:#101219;color:#fff;min-width:0;width:100%;padding:9px 4px;font-size:15px}
+.item label{font-size:10px;display:block;text-align:center}
+.item .field{min-width:0}
+.option{border:1px solid #514c42;background:#222226;padding:11px;border-radius:11px;font-size:13px;margin:11px 0}
+.option label{display:flex;gap:9px;align-items:start}
+.option input{margin-top:4px;accent-color:#deb273}
+.notice{font-size:13px;color:#dccdb3;line-height:1.6;border:1px solid #625942;border-radius:10px;padding:10px;margin:10px 0}
+details{border:1px solid #5a5148;border-radius:11px;padding:10px 12px;margin-top:12px}
+summary{color:#f7deb0;font-weight:750;cursor:pointer}
+#ocrRaw{max-height:185px;overflow:auto;white-space:pre-wrap;font:12px/1.5 ui-monospace,monospace}
+.pill{font-size:11px;padding:4px 8px;border:1px solid #a9926d;border-radius:999px;margin-left:7px}
+@media(max-width:870px){.layout{grid-template-columns:1fr}}
+@media(max-width:500px){.card{padding:12px}.item{grid-template-columns:minmax(85px,1fr) repeat(3,minmax(48px,60px));padding:8px;gap:4px}.item .name{font-size:12px}.item input{font-size:14px}.pill{display:inline-block}}
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/tesseract.js@7.0.0/dist/tesseract.min.js"></script>
+</head><body>
+<header><div class="crumb"><a href="index.html">Белая мгла</a> › <a href="sova-scanner-test.html">Сова-сканер</a> › Ускорения</div>
+<h1>🦉 Сканер ускорений <span class="pill">Тестовая версия</span></h1>
+<p>Загрузите один скриншот игровой «Сводки ресурсов и ускорений». Сова попробует считать шесть готовых строк, а вы проверите дни, часы и минуты перед передачей в «Совину копилку СВС».</p></header>
+<main><div class="layout">
+<section class="card">
+<h2>1. Сканируем сводку</h2>
+<label for="upload">Скриншот с открытой вкладкой «Ускорение»</label><input id="upload" type="file" accept="image/png,image/jpeg,image/webp">
+<p class="help">Если на скриншоте виден весь рабочий стол, выделите мышью или пальцем только голубое окно сводки: от его названия до нижних флажков. Если скриншот содержит одну таблицу, выделять ничего не нужно.</p>
+<div class="viewer"><canvas id="image" hidden aria-label="Выделите прямоугольник вокруг окна сводки"></canvas><p class="help" id="empty" style="padding:28px;text-align:center">Здесь появится ваш скриншот.</p></div>
+<div class="row"><button type="button" id="run" class="primary" disabled>🔎 Прочитать таблицу</button><button id="clear" disabled type="button">↺ Сбросить область</button></div>
+<p class="status" id="status" role="status" aria-live="polite">Загрузите изображение для начала.</p>
+<details><summary>Как работает распознавание?</summary><p class="help">После выделения окна Сова считывает шесть числовых строк справа. На первом запуске бесплатно скачивается OCR-модель для распознавания текста. Изображения остаются на устройстве и не отправляются на сервер «Белой мглы». Числа необходимо проверить, особенно на небольших или размытых скриншотах.</p></details>
+<details><summary>Исходный результат распознавания</summary><pre id="ocrRaw">Пока ничего нет.</pre></details>
+</section>
+<section class="card">
+<h2>2. Проверяем ускорения</h2>
+<p class="help">Единицы уже разделены: дни, часы и минуты. Нераспознанные строки остаются пустыми и <b>не будут перенесены</b> в калькулятор.</p>
+<div class="items" id="items"></div>
+<div class="option"><label><input id="includeStudy" type="checkbox">Перенести строку «Ускорение изучения» в категорию ускорений обучения экспертов. Отмечайте, только если это соответствует вашей версии игры.</label></div>
+<div class="notice">Общие ускорения нельзя автоматически прибавлять ко всем категориям: это один и тот же запас, который игрок может распределить между разными действиями. Ускорения лечения в калькулятор СВС тоже не передаются.</div>
+<div class="row"><button id="save" class="primary" type="button">✅ Перенести проверенные в Совину копилку</button><button id="copy" type="button">📋 Копировать сводку</button></div>
+<div class="status" id="saveStatus" role="status" aria-live="polite"></div>
+</section>
+</div></main>
+<script>
+(function(){
+"use strict";
+var rows=[
+ {name:"Общее ускорение",key:"general",transfer:null},
+ {name:"Тренировка войск",key:"training",transfer:"training"},
+ {name:"Строительство",key:"build",transfer:"build"},
+ {name:"Исследование",key:"research",transfer:"research"},
+ {name:"Изучение",key:"study",transfer:"expertfast"},
+ {name:"Лечение войск",key:"healing",transfer:null}
+];
+var $=function(id){return document.getElementById(id)},img=$("image"),ctx=img.getContext("2d");
+var photo=null,selection=null,start=null,worker=null,busy=false;
+var controls=[];
+rows.forEach(function(r,i){
+ var box=document.createElement("div");box.className="item";
+ var name=document.createElement("div");name.className="name";name.textContent=r.name;
+ var meta=document.createElement("div");meta.className="meta";meta.textContent="Строка "+(i+1);name.append(meta);box.append(name);
+ var inputs=[];
+ ["д.","ч.","мин."].forEach(function(label,j){
+  var wrap=document.createElement("div");wrap.className="field";
+  var lab=document.createElement("label");lab.textContent=label;lab.htmlFor="v-"+i+"-"+j;
+  var inp=document.createElement("input");inp.id=lab.htmlFor;inp.type="number";inp.inputMode="numeric";inp.min="0";inp.max=j===0?"100000":"59";inp.step="1";inp.placeholder="—";
+  wrap.append(lab,inp);box.append(wrap);inputs.push(inp);
+ });
+ controls.push(inputs);$("items").append(box);
+});
+function msg(m){$("status").textContent=m}
+function coords(e){
+ var r=img.getBoundingClientRect();
+ return{x:Math.max(0,Math.min(img.width,(e.clientX-r.left)*img.width/r.width)),y:Math.max(0,Math.min(img.height,(e.clientY-r.top)*img.height/r.height))};
+}
+function draw(){
+ if(!photo)return;
+ ctx.clearRect(0,0,img.width,img.height);ctx.drawImage(photo,0,0,img.width,img.height);
+ if(selection){
+  ctx.strokeStyle="#ffe2a2";ctx.lineWidth=Math.max(2,img.width/750);
+  ctx.fillStyle="rgba(224,177,91,.13)";
+  ctx.fillRect(selection.x,selection.y,selection.w,selection.h);
+  ctx.strokeRect(selection.x,selection.y,selection.w,selection.h);
+ }
+}
+$("upload").addEventListener("change",async function(e){
+ var f=e.target.files&&e.target.files[0];
+ if(!f||!f.type.startsWith("image/"))return;
+ var url=URL.createObjectURL(f),im=new Image();
+ try{
+  await new Promise(function(resolve,reject){im.onload=resolve;im.onerror=reject;im.src=url});
+  photo=im;
+  var scale=Math.min(1,2000/Math.max(im.naturalWidth,im.naturalHeight));
+  img.width=Math.round(im.naturalWidth*scale);img.height=Math.round(im.naturalHeight*scale);
+  selection=null;img.hidden=false;$("empty").hidden=true;
+  $("run").disabled=false;$("clear").disabled=false;draw();
+  msg("Снимок загружен. Выделите всю голубую таблицу, если на снимке есть рабочий стол.");
+ }catch(err){msg("Не удалось открыть изображение.")}finally{URL.revokeObjectURL(url)}
+});
+img.addEventListener("pointerdown",function(e){if(!photo||busy)return;e.preventDefault();start=coords(e);img.setPointerCapture(e.pointerId)});
+img.addEventListener("pointermove",function(e){if(!start)return;var p=coords(e);selection={x:Math.min(start.x,p.x),y:Math.min(start.y,p.y),w:Math.abs(start.x-p.x),h:Math.abs(start.y-p.y)};draw()});
+img.addEventListener("pointerup",function(e){if(!start)return;var p=coords(e);selection={x:Math.min(start.x,p.x),y:Math.min(start.y,p.y),w:Math.abs(start.x-p.x),h:Math.abs(start.y-p.y)};start=null;if(selection.w<40||selection.h<80)selection=null;draw()});
+$("clear").addEventListener("click",function(){selection=null;draw();msg("Выделение сброшено. Если изображение состоит только из окна сводки, можно распознавать целиком.")});
+function crop(rect){
+ var box=document.createElement("canvas"),ratioX=photo.naturalWidth/img.width,ratioY=photo.naturalHeight/img.height;
+ var x=Math.max(0,rect.x*ratioX),y=Math.max(0,rect.y*ratioY),w=Math.min(photo.naturalWidth-x,rect.w*ratioX),h=Math.min(photo.naturalHeight-y,rect.h*ratioY);
+ var zoom=Math.min(4,Math.max(2,640/w));
+ box.width=Math.max(64,Math.round(w*zoom));box.height=Math.max(28,Math.round(h*zoom));
+ var c=box.getContext("2d",{willReadFrequently:true});c.imageSmoothingQuality="high";
+ c.drawImage(photo,x,y,w,h,0,0,box.width,box.height);return box;
+}
+function numbers(text){
+ var cleaned=String(text||"").toLowerCase().replace(/[•·]/g,".").replace(/[\u00a0]/g," ").replace(/\s+/g," ");
+ // OCR commonly reads "д." as "д", "ч." as "ч" and "мин." as "мин".
+ var day=cleaned.match(/(\d{1,6})\s*д(?:\.|\b)/),hour=cleaned.match(/(\d{1,3})\s*ч(?:\.|\b)/),min=cleaned.match(/(\d{1,3})\s*мин(?:\.|\b)/);
+ if(!day&&!hour&&!min)return null;
+ var d=day?Number(day[1]):0,h=hour?Number(hour[1]):0,m=min?Number(min[1]):0;
+ if(d>100000||h>23||m>59)return null;
+ return [d,h,m];
+}
+function setRow(i,parsed){
+ if(!parsed)return;
+ controls[i].forEach(function(input,k){input.value=String(parsed[k]);input.style.borderColor="#d5b46b"});
+}
+async function getWorker(){
+ if(worker)return worker;
+ if(!window.Tesseract)throw Error("Библиотека OCR не загрузилась. Проверьте подключение к интернету.");
+ msg("Подключаю бесплатное распознавание...");
+ worker=await Tesseract.createWorker("rus+eng",1,{logger:function(x){if(x.status==="recognizing text")msg("Распознавание: "+Math.round((x.progress||0)*100)+"%")}});
+ await worker.setParameters({tessedit_pageseg_mode:Tesseract.PSM.SINGLE_LINE});
+ return worker;
+}
+$("run").addEventListener("click",async function(){
+ if(!photo||busy)return;busy=true;$("run").disabled=true;
+ var rect=selection||{x:0,y:0,w:img.width,h:img.height},results=[],hits=0;
+ try{
+  var w=await getWorker();
+  // Relative rows of the in-game modal, from the title to the bottom checkboxes.
+  // Each row is scanned separately, so similar headings cannot be confused.
+  for(var i=0;i<6;i++){
+   var y=rect.y+rect.h*(.244+i*.107),h=rect.h*.105;
+   var x=rect.x+rect.w*.62,ww=rect.w*.36;
+   var region=crop({x:x,y:y,w:ww,h:h});
+   var o=await w.recognize(region);
+   var txt=(o.data&&o.data.text||"").trim(),parsed=numbers(txt);
+   results.push((i+1)+". "+rows[i].name+": "+(txt||"—")+(parsed?" → "+parsed.join("/"):" (не распознано)"));
+   if(parsed){setRow(i,parsed);hits++}
+   msg("Прочитано "+(i+1)+" из 6 строк");
+  }
+  $("ocrRaw").textContent=results.join("\n");
+  msg("Сова предложила значения для "+hits+" из 6 строк. Обязательно проверьте дни, часы и минуты.");
+ }catch(err){msg("Ошибка распознавания: "+(err.message||String(err))+". Числа можно ввести вручную.")}
+ finally{busy=false;$("run").disabled=!photo}
+});
+function values(){
+ return rows.map(function(r,i){
+  var inp=controls[i],typed=inp.map(function(x){return x.value.trim()}),some=typed.some(Boolean);
+  if(!some)return null;
+  var v=typed.map(function(x){return x===""?0:Number(x)});
+  if(!v.every(function(x){return Number.isSafeInteger(x)&&x>=0})||v[0]>100000||v[1]>23||v[2]>59)return {error:r.name};
+  return {name:r.name,key:r.key,transfer:r.transfer,d:v[0],h:v[1],m:v[2],hours:(v[0]*24+v[1]+v[2]/60)};
+ });
+}
+$("copy").addEventListener("click",async function(){
+ var v=values().filter(Boolean),errors=v.filter(function(x){return x.error});
+ if(errors.length){$("saveStatus").textContent="Исправьте неверные значения.";return}
+ var text=v.map(function(x){return x.name+": "+x.d+" д. "+x.h+" ч. "+x.m+" мин."}).join("\n");
+ if(!text){$("saveStatus").textContent="Сначала укажите хотя бы одно количество.";return}
+ try{await navigator.clipboard.writeText(text);$("saveStatus").textContent="Сводка скопирована."}
+ catch(err){$("saveStatus").textContent="Копирование заблокировано браузером."}
+});
+$("save").addEventListener("click",function(){
+ var parsed=values().filter(Boolean);
+ if(parsed.some(function(x){return x.error})){$("saveStatus").textContent="Проверьте значения. Часы должны быть от 0 до 23, минуты от 0 до 59.";return}
+ var supported=parsed.filter(function(x){return x.transfer&&(x.key!=="study"||$("includeStudy").checked)});
+ if(!supported.length){$("saveStatus").textContent="Нет подтверждённых ускорений для переноса. Нужны строки тренировок, строительства или исследования.";return}
+ var message=supported.map(function(x){return x.name+": "+x.d+" д. "+x.h+" ч. "+x.m+" мин."}).join("\n");
+ if(!confirm("Заменить значения соответствующих ускорений в тестовой Совиной копилке?\n\n"+message))return;
+ try{
+  var key="bm-svs-kopilka-simple-v1",s;
+  try{s=JSON.parse(localStorage.getItem(key)||"null")}catch(err){s=null}
+  if(!s||typeof s!=="object"||Array.isArray(s))s={day:1,goal:5000000,custom:5,stock:{},bonus:0};
+  if(!s.stock||typeof s.stock!=="object"||Array.isArray(s.stock))s.stock={};
+  supported.forEach(function(x){s.stock[x.transfer]=Math.round(x.hours*10000)/10000});
+  localStorage.setItem(key,JSON.stringify(s));
+  location.href="svs-kopilka-test.html#chooseStock";
+ }catch(err){$("saveStatus").textContent="Не получилось сохранить данные на устройстве. Проверьте разрешение на хранение данных сайта."}
+});
+})();
+</script></body></html>
