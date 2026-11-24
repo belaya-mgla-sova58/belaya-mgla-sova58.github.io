@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="theme-color" content="#17191f"/>
+<meta name="description" content="Тестовый бесплатный Сова-сканер: чтение игровых скриншотов и передача запасов в калькулятор губернатора"/>
+<title>Сова-сканер · Белая мгла</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#13151a;color:#f3f0eb}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 50% -20%,#394059 0%,#17191f 45%,#111215 100%);min-height:100vh}
+a{color:#efcf94}
+header{padding:24px max(16px,calc((100vw - 1280px)/2));border-bottom:1px solid #4a4845;background:#17191edb}
+header .crumb{font-size:13px;color:#bfc2d2;margin-bottom:10px}
+h1{font-size:clamp(26px,3vw,40px);margin:0 0 8px;color:#ffe2a6}
+header p{color:#d7d4d0;max-width:850px;line-height:1.55;margin:0}
+main{max-width:1280px;margin:auto;padding:22px 16px 45px}
+.layout{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(320px,0.7fr);gap:17px;align-items:start}
+.card{border:1px solid #6a6154;border-radius:18px;background:linear-gradient(155deg,#28292e,#1b1c21);padding:18px;box-shadow:0 12px 26px #0002}
+h2{margin:0 0 12px;font-size:20px}
+h3{margin:15px 0 10px;font-size:16px}
+.muted{color:#c8c6c1;font-size:13px;line-height:1.5}
+.status{font-size:13px;line-height:1.5;color:#f6dba9;min-height:20px}
+button,.button{cursor:pointer;background:#393d46;border:1px solid #91806c;border-radius:10px;padding:11px 13px;color:#fff;font:inherit;font-weight:700;text-decoration:none;display:inline-block}
+button:hover,.button:hover{background:#53505a}
+button:disabled{opacity:.5;cursor:not-allowed}
+.primary{background:linear-gradient(140deg,#9b682c,#74501e);border-color:#ecba68;color:#fffaf0}
+.primary:hover{background:#9b682c}
+input[type=file]{width:100%;padding:13px;border:1px dashed #ad905d;border-radius:12px;background:#1d2027;color:#eee}
+label{display:block;font-size:13px;color:#eee6d7;font-weight:700;margin-bottom:7px}
+input[type=number],select{width:100%;font-size:16px;min-height:42px;padding:9px 10px;border-radius:10px;background:#14171d;color:#fff;border:1px solid #8a7960}
+.files{display:flex;flex-wrap:wrap;gap:7px;margin:11px 0}
+.files button{padding:8px 11px;font-size:12px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.files button.active{border-color:#fbd899;background:#5c4933}
+.viewer{position:relative;background:#080a0e;border:1px solid #46464a;border-radius:13px;overflow:hidden;min-height:140px;text-align:center}
+#shot{display:block;max-width:100%;width:auto;height:auto;margin:auto;touch-action:none;cursor:crosshair}
+.viewer-tip{padding:36px 12px;color:#bfc1ca;font-size:14px}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.crop{display:flex;gap:12px;align-items:center;min-height:86px;background:#171b22;border:1px solid #45454a;border-radius:12px;padding:9px;margin-bottom:14px}
+.crop canvas{width:114px;height:74px;object-fit:contain;background:#090a0c;max-width:114px;border-radius:6px}
+.crop .muted{flex:1}
+.fields{display:grid;grid-template-columns:1.15fr .85fr;gap:9px}
+.materials{display:grid;gap:8px;margin:10px 0}
+.material{display:grid;grid-template-columns:42px minmax(0,1fr) 126px;gap:8px;align-items:center;border:1px solid #49494c;background:#191a20;padding:8px;border-radius:11px}
+.material img{width:40px;height:40px;object-fit:contain}
+.material label{font-size:12px;margin:0;line-height:1.3}
+.material input{min-width:0}
+.smallnote{font-size:12px;line-height:1.5;color:#c3c7cb}
+.pill{display:inline-block;border:1px solid #857453;border-radius:99px;padding:3px 8px;color:#f6dea9;font-size:11px}
+.row{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+#rawText{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,monospace;color:#e3e6ef;font-size:12px;background:#11151a;border-radius:10px;padding:10px;max-height:175px;overflow:auto}
+details{border:1px solid #525159;border-radius:12px;padding:10px 12px;margin-top:12px}
+summary{cursor:pointer;color:#f3d9ab;font-weight:750}
+#numberChoices{display:flex;flex-wrap:wrap;gap:6px}
+#numberChoices button{font-size:12px;padding:6px}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #f1ce86;outline-offset:2px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}header{padding:19px 14px}}
+@media(max-width:500px){.card{padding:13px}.fields{grid-template-columns:1fr}.material{grid-template-columns:37px minmax(0,1fr) 106px}.material img{width:35px;height:35px}.material input{font-size:15px;padding:8px 5px}.crop canvas{width:90px;max-width:90px}}
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/tesseract.js@7.0.0/dist/tesseract.min.js"></script>
+</head>
+<body>
+<header>
+<div class="crumb"><a href="index.html">Белая мгла</a> › <a href="chief-gear-calculator.html">Калькулятор губернатора</a> › Сова-сканер</div>
+<h1>🦉 Сова-сканер <span class="pill">Тестовая версия</span></h1>
+<p>Бесплатное распознавание скриншотов с материалами губернатора. Картинки обрабатываются на вашем устройстве, без отправки на сервер. Сова читает надписи и числа, но игровые иконки пока нужно выбирать вручную.</p>
+</header>
+<main>
+<div class="layout">
+<section class="card" aria-label="Скриншот и распознавание">
+<h2>1. Загрузите скриншоты</h2>
+<label for="fileInput">Один или несколько скриншотов из игры</label>
+<input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp" multiple/>
+<p class="muted">Скриншоты не передаются на сервер. Для работы распознавания первый раз нужно скачать бесплатный OCR-движок и языковые файлы. Это может занять время.</p>
+<div class="files" id="files"></div>
+<div class="viewer" id="viewer"><div class="viewer-tip" id="viewerTip">Здесь появится выбранный скриншот</div><canvas id="shot" hidden aria-label="Выделите на скриншоте прямоугольник вокруг одного предмета и его числа"></canvas></div>
+<div class="toolbar">
+<button id="scanAll" type="button" disabled>✨ Попробовать распознать весь скриншот</button>
+<button id="resetCrop" type="button" disabled>↺ Сбросить выделение</button>
+</div>
+<div class="status" id="status" role="status" aria-live="polite">Загрузите изображение, чтобы начать.</div>
+<details><summary>Что делать, если Сова не узнаёт предмет?</summary>
+<p class="muted">Выделите пальцем или мышью область с цифрой рядом с нужной иконкой. Затем выберите название материала справа и нажмите «Прочитать выделенное». При ошибке цифру можно поправить вручную. Если на скриншоте нет текста с названием предмета, по одному OCR точно определить его иконку пока нельзя.</p>
+</details>
+<details><summary>Распознанный текст для проверки</summary><pre id="rawText">Пока ничего не распознано.</pre></details>
+</section>
+<aside class="card" aria-label="Проверка и передача запасов">
+<h2>2. Проверьте результат</h2>
+<p class="muted">Для сложных скриншотов выделите одну клетку вместе с количеством. Выберите материал и проверьте число.</p>
+<div class="crop"><canvas id="cropPreview" width="180" height="115" aria-label="Выделенная область"></canvas><div class="muted">Выделенная область. Если здесь ничего нет, протяните прямоугольник на скриншоте слева.</div></div>
+<div class="fields">
+<div><label for="selectedMaterial">Какой это материал?</label><select id="selectedMaterial"></select></div>
+<div><label for="detectedNumber">Количество</label><input id="detectedNumber" type="number" min="0" max="1000000000000" step="1" inputmode="numeric" placeholder="Число"/></div>
+</div>
+<div class="toolbar">
+<button id="scanCrop" type="button" disabled>🔎 Прочитать выделенное</button>
+<button id="addOne" type="button">＋ Добавить в список</button>
+</div>
+<div class="smallnote" id="cropText">При распознавании цифры появятся здесь. Ошибки можно исправить.</div>
+<div id="numberChoices"></div>
+<h3>3. Подтверждённые запасы</h3>
+<p class="smallnote">Пустые поля не изменят уже сохранённые запасы. Введите или исправьте количество перед передачей.</p>
+<div class="materials" id="materials"></div>
+<div class="toolbar"><button id="send" type="button" class="primary">✅ Передать в калькулятор губернатора</button></div>
+<p class="status" id="saveStatus" role="status" aria-live="polite"></p>
+<p class="smallnote">Это тестовый помощник, не полноценный обученный ИИ. Цифры на размытых скриншотах и привязку к иконкам всегда необходимо проверять.</p>
+</aside>
+</div>
+</main>
+<script>
+(function(){
+"use strict";
+var items=[
+ ["alloy","Упроченный сплав","assets/sova-chief-alloy-v1223.png",["сплав","alloy"]],
+ ["polish","Полировочный раствор","assets/sova-chief-polish-v1223.png",["раствор","polishing"]],
+ ["plans","Проектные планы","assets/sova-chief-plans-v1223.png",["планы","планов","design plan"]],
+ ["amber","Лунный янтарь","assets/sova-chief-amber-v1223.png",["янтар","amber"]],
+ ["guides","Руководство талисмана","assets/sova-chief-guides-v1223.png",["руковод","guide"]],
+ ["designs","Чертёж талисмана","assets/sova-chief-designs-v1223.png",["черт","blueprint"]],
+ ["secrets","Секреты самоцветов","assets/sova-chief-secrets-v1223.png",["секрет","secret"]]
+];
+var $=function(id){return document.getElementById(id)};
+var selected=0,images=[],worker=null,busy=false,dragStart=null,dragEnd=null,selection=null;
+var screen=$("shot"),ctx=screen.getContext("2d"),cropCanvas=$("cropPreview");
+var selectedMaterial=$("selectedMaterial"),detectedNumber=$("detectedNumber");
+items.forEach(function(item){
+ var o=document.createElement("option");o.value=item[0];o.textContent=item[1];selectedMaterial.append(o);
+ var el=document.createElement("div");el.className="material";
+ var img=document.createElement("img");img.src=item[2];img.alt="";
+ var label=document.createElement("label");label.htmlFor="mat-"+item[0];label.textContent=item[1];
+ var input=document.createElement("input");input.id="mat-"+item[0];input.type="number";input.min="0";input.max="1000000000000";input.step="1";input.inputMode="numeric";input.placeholder="Не указано";
+ el.append(img,label,input);$("materials").append(el);
+});
+function message(s){$("status").textContent=s}
+function valid(n){return Number.isSafeInteger(n)&&n>=0&&n<=1e12}
+function setInput(key,value){
+ var el=$("mat-"+key);if(!el||!valid(value))return;
+ el.value=String(value);
+ el.style.borderColor="#dda759";
+}
+function paint(){
+ if(!images[selected])return;
+ var img=images[selected].image;
+ ctx.clearRect(0,0,screen.width,screen.height);
+ ctx.drawImage(img,0,0,screen.width,screen.height);
+ if(selection){
+  ctx.fillStyle="rgba(230,174,79,.12)";ctx.strokeStyle="#ffdb8c";ctx.lineWidth=Math.max(2,screen.width/900);
+  ctx.fillRect(selection.x,selection.y,selection.w,selection.h);
+  ctx.strokeRect(selection.x,selection.y,selection.w,selection.h);
+ }
+}
+function showImage(idx){
+ selected=idx;selection=null;dragStart=null;dragEnd=null;
+ var img=images[idx].image;
+ var ratio=Math.min(1,2400/Math.max(img.naturalWidth,img.naturalHeight));
+ screen.width=Math.max(1,Math.round(img.naturalWidth*ratio));
+ screen.height=Math.max(1,Math.round(img.naturalHeight*ratio));
+ screen.hidden=false;$("viewerTip").hidden=true;$("scanAll").disabled=false;$("resetCrop").disabled=false;$("scanCrop").disabled=true;
+ $("files").querySelectorAll("button").forEach(function(el,i){el.classList.toggle("active",i===idx)});
+ cropCanvas.getContext("2d").clearRect(0,0,cropCanvas.width,cropCanvas.height);
+ $("cropText").textContent="Выделите область с цифрой на скриншоте.";
+ $("numberChoices").replaceChildren();detectedNumber.value="";
+ paint();
+}
+$("fileInput").addEventListener("change",async function(event){
+ var files=Array.from(event.target.files||[]).filter(function(f){return f.type.indexOf("image/")===0}).slice(0,8);
+ images=[];$("files").replaceChildren();
+ if(!files.length){message("Выберите изображения PNG, JPEG или WEBP.");return}
+ message("Читаю изображения...");
+ for(var i=0;i<files.length;i++){
+  try{
+   var url=URL.createObjectURL(files[i]);
+   var img=new Image();
+   await new Promise(function(resolve,reject){img.onload=resolve;img.onerror=reject;img.src=url});
+   URL.revokeObjectURL(url);
+   images.push({image:img,name:files[i].name});
+  }catch(e){message("Не удалось открыть файл "+files[i].name)}
+ }
+ images.forEach(function(file,idx){
+  var btn=document.createElement("button");btn.type="button";btn.textContent=(idx+1)+". "+file.name;btn.title=file.name;
+  btn.addEventListener("click",function(){showImage(idx)});$("files").append(btn);
+ });
+ if(images.length){showImage(0);message("Готово. Можно распознать весь скриншот или выделить цифру.")}else message("Изображения не загрузились.");
+});
+function pos(e){
+ var r=screen.getBoundingClientRect();
+ return{x:Math.max(0,Math.min(screen.width,(e.clientX-r.left)*screen.width/r.width)),
+        y:Math.max(0,Math.min(screen.height,(e.clientY-r.top)*screen.height/r.height))};
+}
+screen.addEventListener("pointerdown",function(e){
+ if(busy||!images.length)return;
+ e.preventDefault();dragStart=pos(e);dragEnd=dragStart;selection=null;screen.setPointerCapture(e.pointerId);
+});
+screen.addEventListener("pointermove",function(e){
+ if(!dragStart)return;dragEnd=pos(e);
+ selection={x:Math.min(dragStart.x,dragEnd.x),y:Math.min(dragStart.y,dragEnd.y),
+ w:Math.abs(dragStart.x-dragEnd.x),h:Math.abs(dragStart.y-dragEnd.y)};paint();
+});
+screen.addEventListener("pointerup",function(e){
+ if(!dragStart)return;
+ dragEnd=pos(e);selection={x:Math.min(dragStart.x,dragEnd.x),y:Math.min(dragStart.y,dragEnd.y),
+ w:Math.abs(dragStart.x-dragEnd.x),h:Math.abs(dragStart.y-dragEnd.y)};
+ dragStart=null;
+ if(selection.w<8||selection.h<8){selection=null;$("scanCrop").disabled=true;paint();return}
+ $("scanCrop").disabled=false;paint();renderCrop();
+});
+function renderCrop(){
+ if(!selection||!images[selected])return;
+ var s=selection,preview=cropCanvas.getContext("2d");
+ preview.clearRect(0,0,cropCanvas.width,cropCanvas.height);
+ preview.drawImage(screen,s.x,s.y,s.w,s.h,0,0,cropCanvas.width,cropCanvas.height);
+}
+$("resetCrop").addEventListener("click",function(){
+ selection=null;paint();$("scanCrop").disabled=true;
+ cropCanvas.getContext("2d").clearRect(0,0,cropCanvas.width,cropCanvas.height);
+ $("cropText").textContent="Выделите область с числом.";detectedNumber.value="";
+});
+function workCanvas(onlyCrop){
+ var s=onlyCrop&&selection?selection:{x:0,y:0,w:screen.width,h:screen.height};
+ var output=document.createElement("canvas");
+ var scale=Math.min(3,Math.max(1,1100/s.w));
+ output.width=Math.min(3000,Math.max(20,Math.round(s.w*scale)));
+ output.height=Math.min(3000,Math.max(20,Math.round(s.h*scale)));
+ var c=output.getContext("2d",{willReadFrequently:true});
+ c.drawImage(images[selected].image,s.x*images[selected].image.naturalWidth/screen.width,
+ s.y*images[selected].image.naturalHeight/screen.height,s.w*images[selected].image.naturalWidth/screen.width,
+ s.h*images[selected].image.naturalHeight/screen.height,0,0,output.width,output.height);
+ if(onlyCrop){
+  var pixels=c.getImageData(0,0,output.width,output.height),d=pixels.data;
+  for(var i=0;i<d.length;i+=4){var lum=.299*d[i]+.587*d[i+1]+.114*d[i+2];var v=lum>125?255:Math.max(0,lum*.65);d[i]=d[i+1]=d[i+2]=v}
+  c.putImageData(pixels,0,0);
+ }
+ return output;
+}
+async function getWorker(){
+ if(worker)return worker;
+ if(!window.Tesseract)throw Error("OCR-библиотека пока не загрузилась. Проверьте интернет и попробуйте ещё раз.");
+ message("Подключаю бесплатный распознаватель текста...");
+ worker=await Tesseract.createWorker("rus+eng",1,{
+  logger:function(info){if(info.status==="recognizing text")message("Распознавание: "+Math.round((info.progress||0)*100)+"%")}
+ });
+ return worker;
+}
+function candidates(text){
+ var joined=text.replace(/(\d)[ \u00a0](?=\d{3}(?:\D|$))/g,"$1");
+ var matched=joined.match(/\d[\d., \u00a0]{0,18}[kKкКмМmM]?/g)||[];
+ var nums=[];
+ matched.forEach(function(v){
+  var clean=v.trim().replace(/\s/g,"");
+  var unit=clean.match(/[kKкКмМmM]$/);
+  var multiplier=unit?(/[kKкК]/.test(unit[0])?1000:1000000):1;
+  if(unit)clean=clean.slice(0,-1);
+  var n;
+  if(multiplier!==1)n=Math.round(Number(clean.replace(",","."))*multiplier);
+  else n=Number(clean.replace(/[,.]/g,""));
+  if(valid(n)&&nums.indexOf(n)===-1)nums.push(n);
+ });
+ return nums;
+}
+function numberButtons(nums){
+ $("numberChoices").replaceChildren();
+ nums.slice(0,20).forEach(function(n){
+  var b=document.createElement("button");b.type="button";b.textContent=n.toLocaleString("ru-RU");
+  b.addEventListener("click",function(){detectedNumber.value=String(n)});$("numberChoices").append(b);
+ });
+}
+async function scan(isCrop){
+ if(busy||!images.length)return;
+ if(isCrop&&!selection)return;
+ busy=true;$("scanAll").disabled=true;$("scanCrop").disabled=true;
+ try{
+  var w=await getWorker();
+  var image=workCanvas(isCrop);
+  var result=await w.recognize(image);
+  var text=(result.data&&result.data.text||"").trim();
+  $("rawText").textContent=text||"Текст не найден";
+  var nums=candidates(text);numberButtons(nums);
+  if(isCrop){
+   if(nums.length)detectedNumber.value=String(nums[nums.length-1]);
+   $("cropText").textContent=text?"Найдено: "+text.replace(/\s+/g," ").slice(0,170):"Число не найдено. Введите вручную.";
+   message("Фрагмент прочитан. Проверьте число и добавьте его.");
+  }else{
+   var count=0;
+   var lines=text.split(/\n+/);
+   for(var i=0;i<lines.length;i++){
+    var line=lines[i].toLowerCase().replace(/ё/g,"е");
+    items.forEach(function(item){
+      if(!item[3].some(function(alias){return line.includes(alias.toLowerCase())}))return;
+      var localNums=candidates(lines.slice(i,Math.min(lines.length,i+2)).join(" "));
+      if(localNums.length){setInput(item[0],localNums[localNums.length-1]);count++}
+    });
+   }
+   if(count){message("Сова нашла "+count+" совпадений по названиям. Проверьте каждое количество справа.");}
+   else{message("Названия материалов не найдены. Это нормально для скриншотов только с иконками: выделите область с числом и выберите материал справа.");}
+  }
+ }catch(e){
+  message("Не удалось распознать: "+(e&&e.message?e.message:String(e)));
+ }finally{busy=false;$("scanAll").disabled=!images.length;$("scanCrop").disabled=!selection}
+}
+$("scanAll").addEventListener("click",function(){scan(false)});
+$("scanCrop").addEventListener("click",function(){scan(true)});
+$("addOne").addEventListener("click",function(){
+ var n=Number(detectedNumber.value);
+ if(detectedNumber.value.trim()===""||!valid(n)){$("cropText").textContent="Введите целое количество от 0 до 1 000 000 000 000.";return}
+ setInput(selectedMaterial.value,n);
+ $("cropText").textContent="Количество добавлено. Вы можете выделить следующий предмет.";
+});
+$("send").addEventListener("click",function(){
+ var values={},bad=false;
+ items.forEach(function(item){var el=$("mat-"+item[0]);if(el.value.trim()==="")return;var n=Number(el.value);if(!valid(n)){bad=true;return}values[item[0]]=n});
+ if(bad){$("saveStatus").textContent="Проверьте количество в полях: нужны целые неотрицательные числа.";return}
+ if(!Object.keys(values).length){$("saveStatus").textContent="Сначала добавьте хотя бы один материал.";return}
+ if(!confirm("Передать "+Object.keys(values).length+" подтверждённых значений в калькулятор? Сохранённые количества этих материалов будут заменены."))return;
+ try{
+  var key="belaya-mgla-chief-calculator-v1",backup=key+"-backup-v1",state;
+  try{state=JSON.parse(localStorage.getItem(key)||localStorage.getItem(backup)||"{}")}catch(e){state={}}
+  if(!state||typeof state!=="object"||Array.isArray(state))state={};
+  if(!state.inventory||typeof state.inventory!=="object"||Array.isArray(state.inventory))state.inventory={};
+  Object.assign(state.inventory,values);
+  localStorage.setItem(key,JSON.stringify(state));localStorage.setItem(backup,JSON.stringify(state));
+  location.href="chief-gear-calculator.html#stockDetails";
+ }catch(e){$("saveStatus").textContent="Браузер не разрешает сохранить запасы. Разрешите хранение данных сайта или перепишите значения вручную."}
+});
+})();
+</script>
+</body>
+</html>
