@@ -130,7 +130,16 @@ body.is-fire-furnace-calc-route #appMain .calc-refining-inner-v1 a{
 </style>
 <link rel="stylesheet" href="belaya-graphite-gold-ui-v1.css?v=1" data-graphite-gold-ui/>
 <link rel="stylesheet" href="belaya-no-blue-sitewide-v11.css?v=11" data-no-blue-sitewide/>
-<link rel="stylesheet" href="sova-calc-mobile-readable-v1.css?v=1"/></head><body class="bm-calc-jewel-v89 is-other-route is-fire-furnace-calc-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="fire-furnace-calculator"><a class="bm-skip-to-content-v1184" href="#appMain">Перейти к содержимому</a><div aria-hidden="true" class="site-cosmic-background-v442"></div>
+<link rel="stylesheet" href="sova-calc-mobile-readable-v1.css?v=1"/><style id="simple-furnace-mode-v1">
+.simple-furnace-details,.simple-furnace-route{margin:12px 0;border:1px solid rgba(162,180,205,.38);border-radius:15px;padding:0;background:rgba(15,30,49,.46)}
+.simple-furnace-details>summary,.simple-furnace-route>summary{cursor:pointer;list-style:none;padding:16px 18px;font-size:15px;font-weight:750;color:#f1f4fb}
+.simple-furnace-details>summary::-webkit-details-marker,.simple-furnace-route>summary::-webkit-details-marker{display:none}
+.simple-furnace-details>summary:after,.simple-furnace-route>summary:after{content:"⌄";float:right}
+.simple-furnace-details[open]>summary:after,.simple-furnace-route[open]>summary:after{content:"⌃"}
+.simple-furnace-details>.calc-buildings-v379{margin:0 12px 12px!important}
+.simple-furnace-route>.calc-route-v378{margin:0 12px 12px!important}
+@media(max-width:700px){.simple-furnace-details>summary,.simple-furnace-route>summary{padding:14px 12px;font-size:14px}}
+</style></head><body class="bm-calc-jewel-v89 is-other-route is-fire-furnace-calc-route site-hq-v407 modern-v422 modern-v424 star-glass-v436 cosmic-visible-v444" data-static-route="fire-furnace-calculator"><a class="bm-skip-to-content-v1184" href="#appMain">Перейти к содержимому</a><div aria-hidden="true" class="site-cosmic-background-v442"></div>
 <div aria-label="Мобильная навигация" class="mobile-topbar" id="mobileTopbar">
 <button aria-expanded="false" aria-label="Открыть меню" id="mobileMenuToggle" type="button">☰</button>
 <div class="mobile-topbar-title"><strong>БЕЛАЯ МГЛА</strong><small>Гайды</small></div>
@@ -145,16 +154,16 @@ body.is-fire-furnace-calc-route #appMain .calc-refining-inner-v1 a{
 <button aria-label="Очистить поиск" class="site-search-clear-v426" type="button">×</button>
 </div>
 <div aria-label="Результаты поиска" class="site-search-results-v426" role="listbox"></div>
-</div><div class="route-page active" data-route="fire-furnace-calculator"><nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><span aria-current="page">Огненная Топка • Этапы 1–10</span></nav><section class="page-heading-v424 frost-header-v431"><h1>Огненная Топка • Этапы 1–10</h1><p>Калькулятор считает путь от Топки 30 до FC10: необходимые здания, обычные ресурсы, Огненные и Очищенные кристаллы.</p></section>
+</div><div class="route-page active" data-route="fire-furnace-calculator"><nav aria-label="Хлебные крошки" class="breadcrumbs-v409"><a href="index.html">Главная</a><span aria-hidden="true" class="breadcrumbs-sep-v409">›</span><span aria-current="page">Огненная Топка • Этапы 1–10</span></nav><section class="page-heading-v424 frost-header-v431"><h1>Огненная Топка • Этапы 1–10</h1><p>Выберите текущий уровень и цель. Результат появится сразу, без заполнения дополнительных полей.</p></section>
 <div class="guide-page-v69 furnace-calc-v379 fire-calc-v380">
 <section class="calc-select-v378">
 <label><span>🔥 Моя Огненная Топка сейчас</span><select id="fireFrom"></select></label>
 <div aria-hidden="true" class="calc-arrow-v378">→</div>
 <label><span>🎯 Хочу</span><select id="fireTo"></select></label>
 </section>
-<section class="calc-buildings-v379 fire-buildings-v380">
+<details class="simple-furnace-details"><summary>⚙️ Уточнить уровни зданий (необязательно)</summary><section class="calc-buildings-v379 fire-buildings-v380">
 <h2>🏘️ Где сейчас обязательные здания</h2>
-<p>Укажите реальные уровни зданий. Для Посольства и Научного центра доступны уровни 29 и 30. Уже завершённые улучшения не войдут в повторный расчёт.</p>
+<p>Для точного результата проверьте реальные уровни зданий. Без этого используется оценка по обязательным требованиям текущего уровня топки. Уже завершённые улучшения не должны учитываться повторно.</p>
 <div class="calc-building-grid-v379">
 <label><span>🏛️ Посольство</span><select id="fireEmbassy"></select></label>
 <label><span>🔬 Научный центр</span><select id="fireResearch"></select></label>
@@ -162,8 +171,8 @@ body.is-fire-furnace-calc-route #appMain .calc-refining-inner-v1 a{
 <label><span>🏹 Лагерь стрелков</span><select id="fireMarksman"></select></label>
 <label><span>⚔️ Лагерь копейщиков</span><select id="fireLancer"></select></label>
 </div>
-</section>
-<div class="calc-note-v378">💡 Один полный огненный этап состоит из 5 улучшений. Поэтому внутри списка будут «шаг 1/5» … «шаг 5/5».</div>
+</section></details>
+<div class="calc-note-v378">💡 <b>Простой расчёт:</b> по умолчанию учитываются только обязательные улучшения от выбранной топки до цели. Это ориентировочная сумма: если здания уже улучшены выше минимума, затраты будут меньше. Точный результат можно получить в настройке уровней зданий.</div>
 <section class="calc-total-v378">
 <h2>📦 Всего потребуется</h2>
 <div class="calc-res-grid-v378 fire-total-v380">
@@ -175,7 +184,7 @@ body.is-fire-furnace-calc-route #appMain .calc-refining-inner-v1 a{
 </div>
 </section>
 
-<details class="calc-refining-v1" open>
+<details class="calc-refining-v1">
 <summary>💠 Сколько Огненных кристаллов уйдёт на очистку?</summary>
 <div class="calc-refining-inner-v1">
 <p>Если для построек нужны Очищенные кристаллы, их можно получать суперочисткой в Лаборатории кристаллов. <b>Результат случайный</b>, поэтому ниже показан ориентир по среднему результату и наихудшему варианту, а не гарантированная фиксированная цена.</p>
@@ -201,10 +210,10 @@ body.is-fire-furnace-calc-route #appMain .calc-refining-inner-v1 a{
 <p class="calc-refining-fine-v1">Бонусы, игровые награды и уже выполненные суперочистки не учитываются. Суперочистка доступна только после открытия соответствующей системы в государстве. Источники: <a href="https://www.whiteoutsurvival.wiki/refinement-in-crystal-laboratory/" target="_blank" rel="noopener noreferrer">таблица суперочистки</a>, <a href="https://www.reddit.com/r/whiteoutsurvival/comments/1rr2w50/please_explain_cost_strategy_refining_fire_crystal/" target="_blank" rel="noopener noreferrer">опыт игроков</a>.</p>
 </div>
 </details>
-<section class="calc-route-v378">
+<details class="simple-furnace-route"><summary>🏗️ Посмотреть порядок улучшений</summary><section class="calc-route-v378">
 <div class="calc-route-head-v378"><h2>🏗️ Что улучшать по порядку</h2><span id="fireStepCount"></span></div>
 <div class="calc-steps-v378" id="fireSteps"></div>
-</section>
+</section></details>
 <div class="calc-source-v378">Данные FC1–FC10 повторно проверены по WhiteoutData и WoS Atlas (таблица от 30.10.2026). Учтены пять шагов каждого этапа и обязательные здания. Очищенные кристаллы требуются начиная с перехода FC5 → FC6. Затраты на их получение обменом, время строительства, скидки и необязательные здания не входят в расчёт. Обычные ресурсы показаны по справочным таблицам: в разных источниках встречаются расхождения, особенно по Посольству. Перед крупным улучшением сверяйте стоимость с интерфейсом RU-версии.</div>
 <div class="v69-footer">Белая Мгла • Автор - Sova</div>
 </div>
@@ -238,6 +247,13 @@ body.is-fire-furnace-calc-route #appMain .calc-refining-inner-v1 a{
  fillProgress(document.getElementById('fireEmbassy'),10,true);fillProgress(document.getElementById('fireInfantry'),10);fillProgress(document.getElementById('fireMarksman'),10);fillProgress(document.getElementById('fireLancer'),10);
  const research=document.getElementById('fireResearch');research.add(new Option('Уровень 29','-1'));research.add(new Option('Уровень 30','0'));research.value='0';
  from.value='0';to.value='5';Object.values(ids).forEach(id=>document.getElementById(id).value='0');
+ // Minimal prerequisite levels implied by an already finished furnace step.
+ function fillBaseline(){
+   const cur=+from.value;
+   const levels={'Посольство':0,'Научный центр':0,'Лагерь пехоты':0,'Лагерь стрелков':0,'Лагерь копейщиков':0};
+   for(let stage=1;stage<=Math.ceil(cur/5);stage++)for(const [name,level] of prereq[stage])levels[name]=Math.max(levels[name],level);
+   Object.entries(ids).forEach(([name,id])=>document.getElementById(id).value=String(levels[name]));
+ }
  const fmt=n=>{const x=n*1e6;if(x>=1e9)return (x/1e9).toLocaleString('ru-RU',{maximumFractionDigits:3})+' млрд';if(x>=1e6)return (x/1e6).toLocaleString('ru-RU',{maximumFractionDigits:3})+' млн';if(x>=1e3)return Math.round(x/1e3).toLocaleString('ru-RU')+' тыс.';return Math.round(x).toLocaleString('ru-RU')};
 
 // Forecast refining Fire Crystals into Refined Fire Crystals (from a fresh weekly reset).
@@ -305,6 +321,7 @@ refineStrategy.addEventListener('change',()=>updateRefining(refineBuildFC,refine
  // Remember the player's own building levels and refining preferences on this device.
  const savedKey='sova58-fire-furnace-progress-v1';
  const controls=[from,to,...Object.values(ids).map(id=>document.getElementById(id)),refineOwned,refineStrategy];
+ let restoredManual=false;
  try{
   const stored=JSON.parse(localStorage.getItem(savedKey)||'null');
   if(stored&&typeof stored==='object'){
@@ -312,18 +329,20 @@ refineStrategy.addEventListener('change',()=>updateRefining(refineBuildFC,refine
     const value=stored[el.id];
     if(typeof value!=='string')return;
     if(el.tagName==='SELECT'){
-     if([...el.options].some(opt=>opt.value===value))el.value=value;
+     if([...el.options].some(opt=>opt.value===value)){el.value=value;if(Object.values(ids).includes(el.id))restoredManual=true;}
     }else if(/^\d{1,7}$/.test(value)&&Number(value)<=1000000){
      el.value=value;
     }
    });
   }
  }catch(e){/* Storage may be unavailable; calculations still work. */}
+ if(!restoredManual)fillBaseline();
  const saveProgress=()=>{
   try{localStorage.setItem(savedKey,JSON.stringify(Object.fromEntries(controls.map(el=>[el.id,el.value]))));}
   catch(e){/* Ignore disabled storage. */}
  };
- [from,to,...Object.values(ids).map(id=>document.getElementById(id))].forEach(el=>el.addEventListener('change',()=>{calc();saveProgress()}));
+ from.addEventListener('change',()=>{fillBaseline();calc();saveProgress()});
+ [to,...Object.values(ids).map(id=>document.getElementById(id))].forEach(el=>el.addEventListener('change',()=>{calc();saveProgress()}));
  refineOwned.addEventListener('input',saveProgress);
  // Keep the displayed inventory consistent with the bounded number used in the calculation.
  refineOwned.addEventListener('change',()=>{
