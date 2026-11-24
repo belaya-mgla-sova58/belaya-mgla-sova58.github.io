@@ -137,7 +137,7 @@ function crop(rect){
 function numbers(text){
  var cleaned=String(text||"").toLowerCase().replace(/[•·]/g,".").replace(/[\u00a0]/g," ").replace(/\s+/g," ");
  // OCR commonly reads "д." as "д", "ч." as "ч" and "мин." as "мин".
- var day=cleaned.match(/(\d{1,6})\s*д(?:\.|\b)/),hour=cleaned.match(/(\d{1,3})\s*ч(?:\.|\b)/),min=cleaned.match(/(\d{1,3})\s*мин(?:\.|\b)/);
+ var day=cleaned.match(/(\d{1,6})\s*д\.?/),hour=cleaned.match(/(\d{1,3})\s*ч\.?/),min=cleaned.match(/(\d{1,3})\s*мин\.?/);
  if(!day&&!hour&&!min)return null;
  var d=day?Number(day[1]):0,h=hour?Number(hour[1]):0,m=min?Number(min[1]):0;
  if(d>100000||h>23||m>59)return null;
