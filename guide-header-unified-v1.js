@@ -50,8 +50,10 @@ function navigation(){
 function cover(slug){
  var section=document.createElement("section");section.className="sova-guide-cover-v1";
  section.setAttribute("aria-label","Обложка гайда");
- var image=document.createElement("img");image.src="assets/"+(pics[slug]||"sova58-header-cosmic-v1182.jpg");
+ if(pics[slug]){
+ var image=document.createElement("img");image.src="assets/"+pics[slug];
  image.alt="";image.loading="eager";image.decoding="async";section.append(image);
+ }
  return section;
 }
 function init(){
