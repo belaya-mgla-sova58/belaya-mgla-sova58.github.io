@@ -28,6 +28,14 @@ body.winter-siege-chronicle :is(#toc,#mobileToc) a{display:flex;align-items:cent
 @media(min-width:1100px){body.winter-siege-chronicle main.page{width:100%!important;max-width:none!important;grid-template-columns:220px minmax(0,1fr) 250px!important;gap:20px!important}body.winter-siege-chronicle .main{width:100%!important;max-width:none!important}}
 @media(max-width:680px){body.winter-siege-chronicle .siege-steps{grid-template-columns:1fr}body.winter-siege-chronicle .siege-title{padding:15px}}
 body.winter-siege-chronicle :is(#toc,#mobileToc) a.photo-planet-link::before,body.winter-siege-chronicle :is(#toc,#mobileToc) a.photo-planet-link::after{content:none!important;display:none!important;background:none!important}
+
+/* Animated original snowflakes, without legacy planet artwork. */
+@keyframes bmSiegeSnowflakeTurn{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes bmSiegeSnowflakeGlow{0%,100%{opacity:.78}50%{opacity:1}}
+html body.winter-siege-chronicle :is(#toc,#mobileToc) a img.section-snowflake{animation:bmSiegeSnowflakeTurn 18s linear infinite,bmSiegeSnowflakeGlow 3s ease-in-out infinite!important;transform-origin:center!important;filter:hue-rotate(var(--snow-hue,0deg)) drop-shadow(0 0 4px currentColor)!important}
+html body.winter-siege-chronicle :is(#toc,#mobileToc) a:nth-child(even) img.section-snowflake{animation-direction:reverse,normal!important}
+html body.winter-siege-chronicle :is(#toc,#mobileToc) a:is(:hover,.active) img.section-snowflake{animation-duration:8s,1.8s!important}
+@media(prefers-reduced-motion:reduce){html body.winter-siege-chronicle :is(#toc,#mobileToc) a img.section-snowflake{animation:none!important}}
 </style>
 </head>
 <body class="luxury-chronicle bear-chronicle winter-siege-chronicle">
