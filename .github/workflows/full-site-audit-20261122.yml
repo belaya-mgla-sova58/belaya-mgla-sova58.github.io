@@ -9,6 +9,7 @@ on:
       - '**/*.js'
       - '**/*.svg'
       - 'scripts/full-site-audit-20261122.cjs'
+      - 'scripts/qa-static-preflight.cjs'
       - '.github/workflows/full-site-audit-20261122.yml'
       - 'whitefox-elena-44-45.html'
       - 'winter-siege.html'
@@ -30,6 +31,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Check all published HTML pages and internal links
+        run: node scripts/qa-static-preflight.cjs
       - name: Install Playwright and Chromium
         run: |
           npm install --no-save --no-package-lock --ignore-scripts playwright
