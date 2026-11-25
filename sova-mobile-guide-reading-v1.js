@@ -119,7 +119,7 @@ if(window.__bmStickyContentsV1)return;window.__bmStickyContentsV1=true;
 function init(){
  if(!document.body.classList.contains("bm-unified-guides-v1"))return;
  var main=document.querySelector("main");if(!main)return;
- var source=main.querySelector(".aside-guide #toc,.page-toc-links-v409,#mobileToc");
+ var source=main.querySelector(".aside-guide #toc")||main.querySelector(".page-toc-links-v409")||main.querySelector("#mobileToc");
  if(!source||!source.querySelector("a[href^='#']"))return;
  if(document.getElementById("bm-sticky-contents-v1"))return;
  var style=document.createElement("style");style.textContent=`
@@ -135,11 +135,13 @@ html body.bm-unified-guides-v1 #bm-sticky-contents-v1 .portal-label{min-width:0;
 html body.bm-unified-guides-v1 #bm-sticky-contents-v1 button{color:#f0d5a9;background:#302d31;border:1px solid #786956;border-radius:10px;padding:10px 12px;font:700 14px/1.3 system-ui;cursor:pointer}
 @media(min-width:1100px){
  html body.bm-unified-guides-v1.luxury-chronicle,html body.bm-unified-guides-v1.luxury-chronicle main.page{overflow-x:clip!important;overflow-y:visible!important}
- html body.bm-unified-guides-v1.luxury-chronicle main.page>.aside-guide{position:sticky!important;top:16px!important;align-self:start!important;height:auto!important;max-height:calc(100dvh - 32px)!important;display:flex!important;flex-direction:column;overflow:hidden!important}
+ html body.bm-unified-guides-v1.luxury-chronicle.bm-has-fixed-toc main.page>.aside-guide{display:none!important}
+ html body.bm-unified-guides-v1.luxury-chronicle.bm-has-fixed-toc main.page{grid-template-columns:210px minmax(0,1fr) 250px!important}
+ html body.bm-unified-guides-v1.luxury-chronicle.bm-has-fixed-toc main.page>.main{grid-column:2!important}
  html body.bm-unified-guides-v1.luxury-chronicle .aside-guide #toc{max-height:none!important;min-height:0;overflow-y:auto!important;overscroll-behavior:contain}
  html body.bm-unified-guides-v1.modern-v424.bm-has-fixed-toc main#appMain>.route-page.active{padding-right:270px!important;box-sizing:border-box!important}
- html body.bm-unified-guides-v1.modern-v424 #bm-sticky-contents-v1{display:flex;flex-direction:column;position:fixed;top:18px;right:16px;width:244px;max-height:calc(100dvh - 36px);z-index:30;background:linear-gradient(145deg,#302d31,#1d1d21);border:1px solid #786956;border-radius:16px;padding:12px;box-sizing:border-box;box-shadow:0 12px 30px #0005}
- html body.bm-unified-guides-v1.modern-v424 #bm-sticky-contents-v1 button{display:none}
+ html body.bm-unified-guides-v1.bm-has-fixed-toc #bm-sticky-contents-v1{display:flex!important;flex-direction:column!important;position:fixed!important;top:18px!important;right:16px!important;bottom:auto!important;width:244px!important;max-height:calc(100dvh - 36px)!important;z-index:1000!important;background:linear-gradient(145deg,#302d31,#1d1d21);border:1px solid #786956;border-radius:16px;padding:12px;box-sizing:border-box;box-shadow:0 12px 30px #0005}
+ html body.bm-unified-guides-v1 #bm-sticky-contents-v1 button{display:none}
  html body.bm-unified-guides-v1 #bm-sticky-contents-v1 h2{font-size:17px;color:#f0d5a9;margin:0 0 10px}
  html body.bm-unified-guides-v1.modern-v424.bm-has-fixed-toc .page-toc-v409{display:none!important}
 }
@@ -163,6 +165,10 @@ html body.bm-unified-guides-v1 #bm-sticky-contents-v1 button{color:#f0d5a9;backg
  links.addEventListener("click",function(e){if(e.target.closest("a"))close()});
  document.addEventListener("keydown",function(e){if(e.key==="Escape")close()});
  document.body.appendChild(panel);document.body.classList.add("bm-has-fixed-toc");
+ // A body-level fixed panel is independent of the article scroll container.
+ function positionPanel(){if(!matchMedia("(min-width:1100px)").matches)return;var header=document.querySelector("body > .sova-guide-topnav-v1,body > header.header");var y=header?Math.max(18,header.getBoundingClientRect().bottom+12):18;var top=Math.min(y,Math.max(18,innerHeight-220));panel.style.setProperty("top",top+"px","important");panel.style.setProperty("max-height","calc(100dvh - "+(top+18)+"px)","important")}
+ function adaptPanel(){if(matchMedia("(min-width:1100px)").matches)positionPanel();else{panel.style.removeProperty("top");panel.style.removeProperty("max-height")}}
+ window.addEventListener("resize",adaptPanel,{passive:true});window.addEventListener("scroll",positionPanel,{passive:true});adaptPanel();
  if("IntersectionObserver" in window){var map=new Map();links.querySelectorAll("a").forEach(function(a){var target=document.getElementById(decodeURIComponent(a.hash.slice(1)));if(target)map.set(target,a)});var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){links.querySelectorAll("a.active").forEach(function(a){a.classList.remove("active")});map.get(e.target).classList.add("active")}})},{rootMargin:"-15% 0px -65% 0px"});map.forEach(function(a,target){obs.observe(target)})}
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
