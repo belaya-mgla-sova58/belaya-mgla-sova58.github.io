@@ -110,3 +110,61 @@ function setup(){
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",setup,{once:true});else setup();
 window.addEventListener("load",setup,{once:true});
 })();
+
+
+/* Persistent contents: desktop sidebar, compact mobile drawer. */
+(function(){
+"use strict";
+if(window.__bmStickyContentsV1)return;window.__bmStickyContentsV1=true;
+function init(){
+ if(!document.body.classList.contains("bm-unified-guides-v1"))return;
+ var main=document.querySelector("main");if(!main)return;
+ var source=main.querySelector(".aside-guide #toc,.page-toc-links-v409,#mobileToc");
+ if(!source||!source.querySelector("a[href^='#']"))return;
+ if(document.getElementById("bm-sticky-contents-v1"))return;
+ var style=document.createElement("style");style.textContent=`
+html body.bm-unified-guides-v1 #bm-sticky-contents-v1{display:none}
+html body.bm-unified-guides-v1 #bm-sticky-contents-v1 .bm-sticky-links{overflow-y:auto;overscroll-behavior:contain;min-height:0;scrollbar-width:thin;display:flex;flex-direction:column;gap:4px}
+html body.bm-unified-guides-v1 #bm-sticky-contents-v1 a{display:flex;align-items:center;gap:9px;padding:8px 5px;border-radius:8px;color:#eeeae7!important;text-decoration:none!important;line-height:1.35;font-size:13px;flex-shrink:0}
+html body.bm-unified-guides-v1 #bm-sticky-contents-v1 a.active,html body.bm-unified-guides-v1 #bm-sticky-contents-v1 a:hover{background:#4b4542;outline:1px solid #786956}
+html body.bm-unified-guides-v1 #bm-sticky-contents-v1 a::before,html body.bm-unified-guides-v1 #bm-sticky-contents-v1 a::after{content:none!important;display:none!important}
+html body.bm-unified-guides-v1 #bm-sticky-contents-v1 img.section-snowflake{width:27px!important;height:27px!important;flex:0 0 27px!important;object-fit:contain;animation:bmSiegeSnowflakeTurn 18s linear infinite,bmSiegeSnowflakeGlow 3s ease-in-out infinite!important;filter:hue-rotate(var(--snow-hue,0deg)) drop-shadow(0 0 4px currentColor)!important}
+html body.bm-unified-guides-v1 #bm-sticky-contents-v1 a:nth-child(even) img{animation-direction:reverse,normal!important}
+html body.bm-unified-guides-v1 #bm-sticky-contents-v1 a:is(:hover,.active) img{animation-duration:8s,1.8s!important}
+html body.bm-unified-guides-v1 #bm-sticky-contents-v1 .portal-label{min-width:0;overflow-wrap:anywhere}
+html body.bm-unified-guides-v1 #bm-sticky-contents-v1 button{color:#f0d5a9;background:#302d31;border:1px solid #786956;border-radius:10px;padding:10px 12px;font:700 14px/1.3 system-ui;cursor:pointer}
+@media(min-width:1100px){
+ html body.bm-unified-guides-v1.luxury-chronicle,html body.bm-unified-guides-v1.luxury-chronicle main.page{overflow-x:clip!important;overflow-y:visible!important}
+ html body.bm-unified-guides-v1.luxury-chronicle main.page>.aside-guide{position:sticky!important;top:16px!important;align-self:start!important;height:auto!important;max-height:calc(100dvh - 32px)!important;display:flex!important;flex-direction:column;overflow:hidden!important}
+ html body.bm-unified-guides-v1.luxury-chronicle .aside-guide #toc{max-height:none!important;min-height:0;overflow-y:auto!important;overscroll-behavior:contain}
+ html body.bm-unified-guides-v1.modern-v424.bm-has-fixed-toc main#appMain>.route-page.active{padding-right:270px!important;box-sizing:border-box!important}
+ html body.bm-unified-guides-v1.modern-v424 #bm-sticky-contents-v1{display:flex;flex-direction:column;position:fixed;top:18px;right:16px;width:244px;max-height:calc(100dvh - 36px);z-index:30;background:linear-gradient(145deg,#302d31,#1d1d21);border:1px solid #786956;border-radius:16px;padding:12px;box-sizing:border-box;box-shadow:0 12px 30px #0005}
+ html body.bm-unified-guides-v1.modern-v424 #bm-sticky-contents-v1 button{display:none}
+ html body.bm-unified-guides-v1 #bm-sticky-contents-v1 h2{font-size:17px;color:#f0d5a9;margin:0 0 10px}
+ html body.bm-unified-guides-v1.modern-v424.bm-has-fixed-toc .page-toc-v409{display:none!important}
+}
+@media(max-width:1099px){
+ html body.bm-unified-guides-v1 #bm-sticky-contents-v1{display:flex;flex-direction:column;position:fixed;right:12px;bottom:calc(80px + env(safe-area-inset-bottom,0px));z-index:45;width:min(300px,calc(100vw - 24px));max-height:55dvh;align-items:stretch;pointer-events:none}
+ html body.bm-unified-guides-v1 #bm-sticky-contents-v1 button{align-self:flex-end;pointer-events:auto;box-shadow:0 4px 15px #0006}
+ html body.bm-unified-guides-v1 #bm-sticky-contents-v1 h2{display:none}
+ html body.bm-unified-guides-v1 #bm-sticky-contents-v1 .bm-sticky-links{display:none}
+ html body.bm-unified-guides-v1 #bm-sticky-contents-v1.bm-open .bm-sticky-links{display:flex;pointer-events:auto;background:#242327;border:1px solid #786956;border-radius:14px;padding:10px;margin-bottom:8px;box-shadow:0 10px 30px #0007}
+ html body.bm-unified-guides-v1:is(.mobile-menu-open,.mobile-nav-open) #bm-sticky-contents-v1{display:none}
+}
+@media(prefers-reduced-motion:reduce){html body.bm-unified-guides-v1 #bm-sticky-contents-v1 img.section-snowflake{animation:none!important}}
+`;document.head.appendChild(style);
+ var panel=document.createElement("aside");panel.id="bm-sticky-contents-v1";panel.setAttribute("aria-label","Содержание гайда");
+ var title=document.createElement("h2");title.textContent="Содержание гайда";panel.appendChild(title);
+ var links=document.createElement("nav");links.className="bm-sticky-links";links.id="bm-sticky-contents-links-v1";links.setAttribute("aria-label","Разделы гайда");
+ source.querySelectorAll("a[href^='#']").forEach(function(a){var clone=a.cloneNode(true);clone.removeAttribute("id");clone.removeAttribute("style");links.appendChild(clone)});
+ panel.appendChild(links);var button=document.createElement("button");button.type="button";button.textContent="✦ Содержание";button.setAttribute("aria-expanded","false");button.setAttribute("aria-controls",links.id);panel.appendChild(button);
+ function close(){panel.classList.remove("bm-open");button.setAttribute("aria-expanded","false")}
+ button.addEventListener("click",function(){var open=panel.classList.toggle("bm-open");button.setAttribute("aria-expanded",String(open))});
+ links.addEventListener("click",function(e){if(e.target.closest("a"))close()});
+ document.addEventListener("keydown",function(e){if(e.key==="Escape")close()});
+ document.body.appendChild(panel);document.body.classList.add("bm-has-fixed-toc");
+ if("IntersectionObserver" in window){var map=new Map();links.querySelectorAll("a").forEach(function(a){var target=document.getElementById(decodeURIComponent(a.hash.slice(1)));if(target)map.set(target,a)});var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){links.querySelectorAll("a.active").forEach(function(a){a.classList.remove("active")});map.get(e.target).classList.add("active")}})},{rootMargin:"-15% 0px -65% 0px"});map.forEach(function(a,target){obs.observe(target)})}
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
+window.addEventListener("load",init,{once:true});
+})();
