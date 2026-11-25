@@ -3,8 +3,9 @@
 "use strict";
 if(window.__sovaUnifiedGuideHeaderV1)return;
 window.__sovaUnifiedGuideHeaderV1=true;
-var pages=new Set("alliance-championship alliance-mobilization alliance-showdown arena armament-competition beacon bear brothers-in-arms buildings buildings-before-fire buildings-after-fire canyon-clash castle cheats crazy-joe dreams endless-trial exploration faq farm fishing forts foundry frostfire-mine furnace-1-30 furnace-extra-buildings furnace-fc1-5 furnace-fc5-10 ginas-revenge governor governor-orders island labyrinth mails mercenary-prestige newbie president-guide research resources skhvatka snowplow state-positions state-power state-transfer svs svs-prep troops troops-guide tundra-trade-route".split(" "));
+var pages=new Set("other alliance state-58 winter-siege alliance-championship alliance-mobilization alliance-showdown arena armament-competition beacon bear brothers-in-arms buildings buildings-before-fire buildings-after-fire canyon-clash castle cheats crazy-joe dreams endless-trial exploration faq farm fishing forts foundry frostfire-mine furnace-1-30 furnace-extra-buildings furnace-fc1-5 furnace-fc5-10 ginas-revenge governor governor-orders island labyrinth mails mercenary-prestige newbie president-guide research resources skhvatka snowplow state-positions state-power state-transfer svs svs-prep troops troops-guide tundra-trade-route".split(" "));
 var pics={
+"winter-siege":"winter-siege-cosmic-v1207.jpg",
 "alliance-championship":"alliance-championship-cosmic-v1198.jpg",
 "alliance-mobilization":"alliance-mobilization-cosmic-v1199.jpg",
 "alliance-showdown":"alliance-showdown-cosmic-v1197.jpg",
@@ -59,7 +60,7 @@ function init(){
  var chronicle=document.body.classList.contains("luxury-chronicle");
  var main=chronicle?document.querySelector("main.page > section.main"):document.querySelector("main#appMain .route-page.active");
  if(!main)return;
- var heading=chronicle?main.querySelector(":scope > h1"):main.querySelector(":scope > section.page-heading-v424");
+ var heading=chronicle?main.querySelector(":scope > h1, :scope > .event-banner h1"):main.querySelector(":scope > section.page-heading-v424");
  if(!heading)return;
  var css=document.createElement("link");css.rel="stylesheet";css.href="guide-header-unified-v1.css?v=1";
  css.setAttribute("data-sova-guide-cover-v1","");document.head.append(css);
