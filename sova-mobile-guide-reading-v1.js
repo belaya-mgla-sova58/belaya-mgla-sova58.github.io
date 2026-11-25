@@ -64,3 +64,31 @@
   document.head.appendChild(s);
  }catch(e){/* Keep original guide usable. */}
 })();
+
+
+/* TOC: one star per item, no heading emoji or old decorative icon. */
+(function(){
+ "use strict";
+ function normalize(){
+  var nodes=document.querySelectorAll("body.luxury-chronicle #toc a[href^='#'],body.luxury-chronicle #mobileToc a[href^='#'],main .page-toc-links-v409 a[href^='#']");
+  if(!nodes.length)return;
+  if(!document.getElementById("sova-toc-stars-style")){
+   var style=document.createElement("style");style.id="sova-toc-stars-style";
+   style.textContent="html body a.sova-toc-star-v1::before,html body a.sova-toc-star-v1::after{content:none!important;display:none!important;background:none!important}html body a.sova-toc-star-v1{display:flex!important;align-items:center!important;gap:9px!important;background-image:none!important}html body a.sova-toc-star-v1 .sova-toc-star-mark{display:inline-block!important;flex:0 0 auto;color:#e6c58f!important;-webkit-text-fill-color:#e6c58f!important;font:normal 17px/1 'Segoe UI Symbol',sans-serif!important}html body a.sova-toc-star-v1 .sova-toc-star-text{min-width:0;overflow-wrap:anywhere}";
+   document.head.appendChild(style);
+  }
+  nodes.forEach(function(a){
+   if(a.classList.contains("sova-toc-star-v1"))return;
+   var label=a.querySelector(".portal-label")||a;
+   var name=label.textContent.replace(/^[\s\p{Extended_Pictographic}\p{Emoji_Presentation}\uFE0E\uFE0F\u200D\u2605\u2606\u2726\u2727\u2744\u20E3]+/u,"").trim();
+   if(!name)return;
+   var mark=document.createElement("span");mark.className="sova-toc-star-mark";mark.setAttribute("aria-hidden","true");mark.textContent="★";
+   var txt=document.createElement("span");txt.className="sova-toc-star-text";txt.textContent=name;
+   a.replaceChildren(mark,txt);a.classList.add("sova-toc-star-v1");a.setAttribute("aria-label",name);
+  });
+  document.querySelectorAll("body.luxury-chronicle .aside-guide>h2").forEach(function(h){if(/Снежный указатель/i.test(h.textContent))h.textContent="Содержание гайда"});
+  document.querySelectorAll("body.luxury-chronicle .aside-guide>p").forEach(function(el){if(/Цвет снежинки/i.test(el.textContent))el.hidden=true});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",normalize,{once:true});else normalize();
+ window.addEventListener("load",normalize,{once:true});
+})();
