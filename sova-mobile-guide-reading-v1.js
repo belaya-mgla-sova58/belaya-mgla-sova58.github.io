@@ -165,10 +165,46 @@ html body.bm-unified-guides-v1 #bm-sticky-contents-v1 button{color:#f0d5a9;backg
  links.addEventListener("click",function(e){if(e.target.closest("a"))close()});
  document.addEventListener("keydown",function(e){if(e.key==="Escape")close()});
  document.body.appendChild(panel);document.body.classList.add("bm-has-fixed-toc");
- // A body-level fixed panel is independent of the article scroll container.
- function positionPanel(){if(!matchMedia("(min-width:1100px)").matches)return;var header=document.querySelector("body > .sova-guide-topnav-v1,body > header.header");var y=header?Math.max(18,header.getBoundingClientRect().bottom+12):18;var top=Math.min(y,Math.max(18,innerHeight-220));panel.style.setProperty("top",top+"px","important");panel.style.setProperty("max-height","calc(100dvh - "+(top+18)+"px)","important")}
- function adaptPanel(){if(matchMedia("(min-width:1100px)").matches)positionPanel();else{panel.style.removeProperty("top");panel.style.removeProperty("max-height")}}
- window.addEventListener("resize",adaptPanel,{passive:true});window.addEventListener("scroll",positionPanel,{passive:true});adaptPanel();
+
+ // Same docking/portal mechanism as gear.html: retain the column and move
+ // the panel to body only when the guide reaches the viewport top.
+ var chronicle=document.body.classList.contains("luxury-chronicle");
+ var layout=chronicle?main:main.querySelector(".route-page.active");
+ var original=chronicle?source.closest(".aside-guide"):source.closest(".page-toc-v409");
+ var slot=document.createElement("div");slot.className="bm-toc-docking-slot";slot.setAttribute("aria-hidden","true");
+ if(chronicle&&original)original.parentNode.insertBefore(slot,original);
+ else if(layout)layout.appendChild(slot);
+ if(!layout)return;
+ var dockingStyle=document.createElement("style");dockingStyle.textContent=`
+ @media(min-width:921px){
+ html body.bm-unified-guides-v1.bm-has-fixed-toc.luxury-chronicle main.page{display:grid!important;grid-template-columns:210px minmax(0,1fr) 250px!important;gap:20px!important}
+ html body.bm-unified-guides-v1.bm-has-fixed-toc.luxury-chronicle main.page>.main{grid-column:2!important;grid-row:1!important}
+ html body.bm-unified-guides-v1.bm-has-fixed-toc.luxury-chronicle main.page>.aside-guide{display:none!important}
+ html body.bm-unified-guides-v1.bm-has-fixed-toc.luxury-chronicle main.page>.bm-toc-docking-slot{grid-column:3!important;grid-row:1!important;align-self:stretch!important;min-width:0!important}
+ html body.bm-unified-guides-v1.bm-has-fixed-toc.modern-v424 main#appMain>.route-page.active{position:relative!important;padding-right:270px!important;box-sizing:border-box!important}
+ html body.bm-unified-guides-v1.bm-has-fixed-toc.modern-v424 .bm-toc-docking-slot{position:absolute!important;right:0!important;width:244px!important;top:var(--bm-toc-start,0px)!important;min-height:1px}
+ html body.bm-unified-guides-v1.bm-has-fixed-toc.modern-v424 .page-toc-v409{display:none!important}
+ html body.bm-unified-guides-v1.bm-has-fixed-toc #bm-sticky-contents-v1{display:flex!important;flex-direction:column!important;position:relative!important;inset:auto!important;width:100%!important;max-height:calc(100vh - 28px)!important;z-index:10050!important;pointer-events:auto!important;background:linear-gradient(155deg,#242226,#111114)!important;border:1px solid rgba(195,177,150,.42)!important;border-radius:11px!important;padding:12px!important;box-sizing:border-box!important;box-shadow:0 13px 30px #0006!important;transform:none!important;overflow:hidden!important}
+ html body.bm-unified-guides-v1.bm-has-fixed-toc>#bm-sticky-contents-v1.bm-toc-floating{position:fixed!important;top:14px!important;bottom:auto!important;right:auto!important;left:var(--bm-toc-left)!important;width:var(--bm-toc-width)!important}
+ html body.bm-unified-guides-v1.bm-has-fixed-toc #bm-sticky-contents-v1 h2{display:block!important;font-size:17px;color:#f0d5a9;margin:0 0 10px}
+ html body.bm-unified-guides-v1.bm-has-fixed-toc #bm-sticky-contents-v1 button{display:none!important}
+ html body.bm-unified-guides-v1.bm-has-fixed-toc #bm-sticky-contents-v1 .bm-sticky-links{display:flex!important;overflow-y:auto!important;min-height:0!important;pointer-events:auto!important}
+ }
+ @media(max-width:920px){html body.bm-unified-guides-v1 .bm-toc-docking-slot{display:none!important}}
+ `;document.head.appendChild(dockingStyle);
+ var media=matchMedia("(min-width:921px)"),frame=0;
+ function dock(){panel.classList.remove("bm-toc-floating");if(panel.parentNode!==slot)slot.appendChild(panel)}
+ function draw(){frame=0;
+ if(!media.matches){panel.classList.remove("bm-toc-floating");if(panel.parentNode!==document.body)document.body.appendChild(panel);return}
+ if(!chronicle){var article=layout.querySelector(".guide-page-v69,.section,.faq-wrap");if(article)slot.style.setProperty("--bm-toc-start",Math.max(0,article.getBoundingClientRect().top-layout.getBoundingClientRect().top)+"px")}
+ if(!panel.classList.contains("bm-toc-floating"))dock();
+ var rect=slot.getBoundingClientRect(),guide=layout.getBoundingClientRect(),height=Math.min(panel.scrollHeight,innerHeight-28);
+ if(rect.top>14||guide.bottom<=14+height){dock();return}
+ if(panel.parentNode!==document.body){slot.style.minHeight=Math.max(panel.offsetHeight,1)+"px";document.body.appendChild(panel)}
+ panel.classList.add("bm-toc-floating");panel.style.setProperty("--bm-toc-left",rect.left+"px");panel.style.setProperty("--bm-toc-width",rect.width+"px");
+ }
+ function update(){if(!frame)frame=requestAnimationFrame(draw)}
+ window.addEventListener("scroll",update,{passive:true});window.addEventListener("resize",update,{passive:true});if(media.addEventListener)media.addEventListener("change",update);update();
  if("IntersectionObserver" in window){var map=new Map();links.querySelectorAll("a").forEach(function(a){var target=document.getElementById(decodeURIComponent(a.hash.slice(1)));if(target)map.set(target,a)});var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){links.querySelectorAll("a.active").forEach(function(a){a.classList.remove("active")});map.get(e.target).classList.add("active")}})},{rootMargin:"-15% 0px -65% 0px"});map.forEach(function(a,target){obs.observe(target)})}
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
