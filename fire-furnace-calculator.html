@@ -184,6 +184,7 @@ body.is-fire-furnace-calc-route #appMain .calc-refining-inner-v1 a{
 </div>
 </section>
 
+<section class="calc-total-v378 fire-per-building-v1" id="firePerBuilding"><h2>Расчёт по каждому зданию</h2><p>Отдельно выбирайте текущий и желаемый уровень. Стоимость одного здания не включает обязательные улучшения других зданий. Общий маршрут топки выше остаётся отдельным расчётом.</p><div class="fire-building-cards" id="fireBuildingCards"></div><div class="fire-building-sum" id="fireBuildingSum" aria-live="polite"></div><p class="fire-building-foot">Научный центр: доступны данные только для 29 → 30. Для остальных зданий используются существующие справочные значения калькулятора; они не являются подтверждением точной стоимости в RU-версии. Время и скидки не учтены.</p></section>
 <details class="calc-refining-v1">
 <summary>💠 Сколько Огненных кристаллов уйдёт на очистку?</summary>
 <div class="calc-refining-inner-v1">
@@ -337,6 +338,40 @@ refineStrategy.addEventListener('change',()=>updateRefining(refineBuildFC,refine
   }
  }catch(e){/* Storage may be unavailable; calculations still work. */}
  if(!restoredManual)fillBaseline();
+
+// Independent per-building calculator: separate current/target values, no prerequisite costs.
+const buildingCards=document.getElementById('fireBuildingCards');
+const buildingSum=document.getElementById('fireBuildingSum');
+const independentNames=['Огненная Топка','Посольство','Лагерь пехоты','Лагерь стрелков','Лагерь копейщиков','Научный центр'];
+const independentKey='sova58-fire-building-independent-v1';
+let independentSaved={};try{independentSaved=JSON.parse(localStorage.getItem(independentKey)||'{}')||{}}catch(e){}
+const independentRows=independentNames.map((name,index)=>{
+ const card=document.createElement('article');card.className='fire-building-card';
+ card.innerHTML='<h3>'+name+'</h3><div class="fire-building-controls"><label>Сейчас<select aria-label="'+name+': текущий уровень"></select></label><label>Цель<select aria-label="'+name+': целевой уровень"></select></label></div><div class="fire-building-result" aria-live="polite"></div>';
+ buildingCards.appendChild(card);const [a,b]=card.querySelectorAll('select');
+ const min=(name==='Посольство'||name==='Научный центр')?-1:0,max=name==='Научный центр'?0:50;
+ for(let n=min;n<=max;n++){a.add(new Option(label(n),String(n)));b.add(new Option(label(n),String(n)))}
+ const defaultStart=name==='Огненная Топка'?+from.value:+document.getElementById(ids[name]).value;
+ a.value=String(Math.max(min,Math.min(max,defaultStart)));b.value=a.value;
+ const saved=independentSaved[name];if(Array.isArray(saved)){if([...a.options].some(o=>o.value===String(saved[0])))a.value=String(saved[0]);if([...b.options].some(o=>o.value===String(saved[1])))b.value=String(saved[1]);}
+ a.addEventListener('change',renderIndependent);b.addEventListener('change',renderIndependent);
+ return {name,a,b,result:card.querySelector('.fire-building-result')};
+});
+function independentResources(cost){const names=['Мясо','Древесина','Уголь','Железо','Огненные кристаллы','Очищенные кристаллы'];return '<dl>'+names.map((name,i)=>'<div><dt>'+name+'</dt><dd>'+(i<4?fmt(cost[i]):compactCount(cost[i]))+'</dd></div>').join('')+'</dl>'}
+function renderIndependent(){
+ let total=R(0,0,0,0,0),saved={};
+ independentRows.forEach(({name,a,b,result})=>{
+  const start=+a.value;if(+b.value<start)b.value=a.value;
+  [...b.options].forEach(o=>o.disabled=+o.value<start);
+  const end=+b.value,cost=name==='Огненная Топка'?rangeCost(name,start,end):supportCost(name,start,end);
+  total=add(total,cost);saved[name]=[start,end];
+  result.innerHTML=independentResources(cost);
+ });
+ buildingSum.innerHTML='<h3>Итого по выбранным зданиям</h3>'+independentResources(total);
+ try{localStorage.setItem(independentKey,JSON.stringify(saved))}catch(e){}
+}
+renderIndependent();
+
  const saveProgress=()=>{
   try{localStorage.setItem(savedKey,JSON.stringify(Object.fromEntries(controls.map(el=>[el.id,el.value]))));}
   catch(e){/* Ignore disabled storage. */}
@@ -406,4 +441,19 @@ html body.is-fire-furnace-calc-route main#appMain details.calc-refining-v1[open]
     font-size:15px!important;
   }
 }
+</style><style id="fire-per-building-style-v1">
+html body main#appMain .fire-per-building-v1{margin:18px 0!important;padding:18px!important;background:#242327!important;border:1px solid #786956!important;border-radius:14px!important;color:#eee5da!important}
+html body main#appMain .fire-per-building-v1 h2,html body main#appMain .fire-per-building-v1 h3{color:#f0d5a9!important;-webkit-text-fill-color:#f0d5a9!important;margin:0 0 12px!important}
+html body main#appMain .fire-per-building-v1 p{color:#e8e1d8!important;font-size:15px!important;line-height:1.55!important}
+.fire-building-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:12px}
+html body main#appMain .fire-building-card,html body main#appMain .fire-building-sum{padding:14px!important;border:1px solid #786956!important;border-radius:10px!important;background:#302d32!important;min-width:0}
+.fire-building-sum{margin-top:14px}
+.fire-building-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fire-building-controls label{min-width:0;color:#e8e1d8!important;font-size:14px!important}
+html body main#appMain .fire-building-controls select{display:block;width:100%;min-width:0;background:#211f24!important;color:#fff5e6!important;border:1px solid #786956!important;border-radius:7px;padding:9px 6px;font-size:14px!important}
+.fire-building-result dl,.fire-building-sum dl{margin:12px 0 0;display:grid;gap:4px}
+.fire-building-result dl div,.fire-building-sum dl div{display:flex;align-items:baseline;justify-content:space-between;gap:10px;border-bottom:1px solid #51463d;padding:5px 0}
+html body main#appMain .fire-per-building-v1 dt{color:#e8e1d8!important;font-size:14px!important}
+html body main#appMain .fire-per-building-v1 dd{color:#f0d5a9!important;margin:0;font-weight:700;white-space:nowrap;font-size:15px!important}
+@media(max-width:420px){html body main#appMain .fire-per-building-v1{padding:12px!important}.fire-building-controls{grid-template-columns:1fr}}
 </style></body></html>
