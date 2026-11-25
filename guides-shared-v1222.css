@@ -1252,3 +1252,26 @@ html body.luxury-chronicle :is(a,button,summary):focus-visible{outline-color:#ed
 @media(prefers-reduced-motion:reduce){
  html body.modern-v424 :is(.guide-nav-card,.modern-topic-card-v424){transition:none!important}
 }
+
+/* Shared event-heading emoji markers; only templates verified to have plain section titles. */
+body.luxury-chronicle.fishing-chronicle{--bm-section-emoji:"🎣"}
+body.luxury-chronicle.joe-chronicle{--bm-section-emoji:"🛡️"}
+body.luxury-chronicle.foundry-chronicle{--bm-section-emoji:"🏭"}
+body.luxury-chronicle.canyon-chronicle{--bm-section-emoji:"⚔️"}
+body.luxury-chronicle.castle-chronicle{--bm-section-emoji:"🏰"}
+body.luxury-chronicle.svs-chronicle{--bm-section-emoji:"⚔️"}
+body.luxury-chronicle.svs-prep-chronicle{--bm-section-emoji:"📋"}
+body.luxury-chronicle.showdown-chronicle{--bm-section-emoji:"🏆"}
+body.luxury-chronicle.frostfire-chronicle{--bm-section-emoji:"⛏️"}
+body.luxury-chronicle.championship-chronicle{--bm-section-emoji:"🏆"}
+body.luxury-chronicle.mobilization-chronicle{--bm-section-emoji:"🎯"}
+body.luxury-chronicle.brothers-chronicle{--bm-section-emoji:"⚔️"}
+body.luxury-chronicle.dreams-chronicle{--bm-section-emoji:"🌙"}
+body.luxury-chronicle.endless-trial-chronicle{--bm-section-emoji:"🧭"}
+body.luxury-chronicle.gina-chronicle{--bm-section-emoji:"🐾"}
+body.luxury-chronicle.mercenary-prestige-chronicle{--bm-section-emoji:"⚔️"}
+body.luxury-chronicle.snowplow-chronicle{--bm-section-emoji:"❄️"}
+body.luxury-chronicle.tundra-chronicle{--bm-section-emoji:"🚚"}
+body.luxury-chronicle.state-power-chronicle{--bm-section-emoji:"🏆"}
+body.luxury-chronicle:is(.fishing-chronicle,.joe-chronicle,.foundry-chronicle,.canyon-chronicle,.castle-chronicle,.svs-chronicle,.svs-prep-chronicle,.showdown-chronicle,.frostfire-chronicle,.championship-chronicle,.mobilization-chronicle,.brothers-chronicle,.dreams-chronicle,.endless-trial-chronicle,.gina-chronicle,.mercenary-prestige-chronicle,.snowplow-chronicle,.tundra-chronicle,.state-power-chronicle) .section-frame .summary-title::before{content:var(--bm-section-emoji);display:inline-block;margin-inline-end:.48em;font-family:"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif!important;font-weight:400;font-size:.92em;line-height:1;vertical-align:baseline;-webkit-text-fill-color:initial!important;filter:none!important;text-shadow:none!important}
+body.luxury-chronicle .section-frame .summary-title{font-family:Inter,system-ui,-apple-system,"Segoe UI","Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif}
