@@ -58,7 +58,7 @@ function cover(slug){
 }
 function init(){
  var slug=decodeURIComponent(location.pathname.split("/").pop()||"").replace(/\.html$/i,"").toLowerCase();
- if(!pages.has(slug)||document.querySelector(".sova-guide-cover-v1"))return;
+ if(slug==="state-transfer"||!pages.has(slug)||document.querySelector(".sova-guide-cover-v1"))return;
  var chronicle=document.body.classList.contains("luxury-chronicle");
  var main=chronicle?document.querySelector("main.page > section.main"):document.querySelector("main#appMain .route-page.active");
  if(!main)return;
