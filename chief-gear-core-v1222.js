@@ -199,11 +199,11 @@ function updateExchangeInfo(){
 }
 function collect(){const needs=Object.fromEntries(Object.keys(mats).map(k=>[k,0]));let power=0,gs=0,cs=0,count=0;for(const cat of ['gear','charm'])for(const [id] of positions(cat)){const v=state[cat][id],r=rows(cat);if(v.to<=v.from)continue;count++;power+=r[v.to].power-(v.from<0?0:r[v.from].power);for(let i=v.from+1;i<=v.to;i++){for(const k of Object.keys(mats))needs[k]+=r[i][k]||0;if(cat==='gear')gs+=r[i].score;else cs+=r[i].score}}return{needs,power,gs,cs,count}}
 // Matching-quality set bonuses, tracked as independent Defense (3) and Attack (6) thresholds.
-const gearSetTiers=[['Зелёное',5],['Синее',5.5],['Фиолетовое',6],['Фиолетовое T1',6.5],['Золотое',7],['Золотое T1',8],['Золотое T2',9],['Красное',10],['Красное T1',12],['Красное T2',14],['Красное T3',16],['Красное T4',18],['Красное T5',20],['Красное T6',22]];
+const gearSetTiers=[['Зелёное',5],['Синее',5.5],['Фиолетовое',6],['Великие С1',6.5],['Золотое',7],['Золотое С1',8],['Золотое С2',9],['Красное',10],['Красное С1',12],['Красное С2',14],['Красное С3',16],['Красное С4',18],['Красное С5',20],['Красное С6',22]];
 function gearTierAt(index){
  if(index<0||index>=G.length)return -1;
- const name=G[index].label;
- // Test longer sub-tier names first, otherwise "Красное T6" would match "Красное".
+ const name=G[index].label.replace(/\bT([1-6])\b/g,'С$1').replace(/^Фиолетовое С1/,'Великие С1');
+ // Test longer sub-tier names first, otherwise "Красное С6" would match "Красное".
  for(let t=gearSetTiers.length-1;t>=0;t--)if(name.startsWith(gearSetTiers[t][0]))return t;
  return -1;
 }
