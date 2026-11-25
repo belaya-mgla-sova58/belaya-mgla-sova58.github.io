@@ -184,7 +184,7 @@ body.is-fire-furnace-calc-route #appMain .calc-refining-inner-v1 a{
 </div>
 </section>
 
-<section class="calc-total-v378 fire-per-building-v1" id="firePerBuilding"><h2>Расчёт по каждому зданию</h2><p>Отдельно выбирайте текущий и желаемый уровень. Стоимость одного здания не включает обязательные улучшения других зданий. Общий маршрут топки выше остаётся отдельным расчётом.</p><div class="fire-building-cards" id="fireBuildingCards"></div><div class="fire-building-sum" id="fireBuildingSum" aria-live="polite"></div><p class="fire-building-foot">Научный центр: доступны данные только для 29 → 30. Для остальных зданий используются существующие справочные значения калькулятора; они не являются подтверждением точной стоимости в RU-версии. Время и скидки не учтены.</p></section>
+<section class="calc-total-v378 fire-per-building-v1" id="firePerBuilding"><h2>Расчёт по каждому зданию</h2><p>Отдельно выбирайте текущий и желаемый уровень. Стоимость одного здания не включает обязательные улучшения других зданий. Общий маршрут топки выше остаётся отдельным расчётом.</p><div class="fire-building-cards" id="fireBuildingCards"></div><div class="fire-building-sum" id="fireBuildingSum" aria-live="polite"></div><p class="fire-building-foot">Военная академия рассчитывается с ОТ-1 до ОТ-10 (стоимость первоначального открытия не включена), Научный центр — с 29 до 30. Медпункт и Командный центр: <a href="https://whiteoutdata.com/buildings/infirmary/" target="_blank" rel="noopener">таблица Медпункта</a>, <a href="https://whiteoutdata.com/buildings/command-center/" target="_blank" rel="noopener">таблица Командного центра</a>; <a href="https://wiki.wosforge.org/wiki/War_Academy" target="_blank" rel="noopener">таблица Академии</a>. Справочные данные международной версии, возможны отличия в RU. Время, скидки и требования других зданий не учтены.</p></section>
 <details class="calc-refining-v1">
 <summary>💠 Сколько Огненных кристаллов уйдёт на очистку?</summary>
 <div class="calc-refining-inner-v1">
@@ -234,13 +234,24 @@ body.is-fire-furnace-calc-route #appMain .calc-refining-inner-v1 a{
  const lateFurnace=[B(96,96,19,4.8,200,10,100,20),B(100,100,21,5.4,240,15,120,30),B(130,130,26,6.6,240,20,120,40),B(140,140,29,7.2,280,30,140,60),B(160,160,33,8.4,350,70,175,140)];
  const lateEmbassy=[B(19,19,3.8,.96,50,2,25,5),B(21,21,4.3,1,60,3,30,7),B(26,26,5.3,1.3,60,5,30,10),B(29,29,5.8,1.4,70,7,35,15),B(33,33,6.7,1.6,87,17,43,35)];
  const lateCamp=[B(33,33,6.7,1.6,90,4,45,9),B(38,38,7.6,1.9,108,6,54,13),B(46,46,9.3,2.3,108,9,54,19),B(50,50,10,2.5,126,13,63,27),B(59,59,11,2.9,157,31,78,63)];
+
+// Independent building cost ladders. Resources in millions; crystals in units.
+// WhiteoutData: Infirmary and Command Center; WOS Forge: War Academy.
+const infirmary=[R(16,16,3.3,.84,26),R(18,18,3.6,.9,31),R(19,19,3.9,.99,47),R(20,20,4.1,1,56),R(21,21,4.2,1,67)];
+const command=[R(20,20,4,1,26),R(21,21,4.3,1,31),R(23,23,4.7,1.1,47),R(24,24,4.9,1.2,56),R(25,25,5,1.2,67)];
+const lateInfirmary=[B(24,24,4.8,1.2,40,2,20,4),B(27,27,5.4,1.3,48,3,24,6),B(33,33,6.6,1.6,48,4,24,8),B(36,36,7.2,1.8,56,6,28,12),B(42,42,8.4,2.1,70,14,35,28)];
+const lateCommand=[B(29,29,5.8,1.4,40,2,20,4),B(32,32,6.5,1.5,48,3,24,6),B(39,39,7.9,1.9,48,4,24,8),B(43,43,8.7,2.1,56,6,28,12),B(50,50,10,2.5,70,14,35,28)];
+const academy=[null,R(36,36,7.2,1.8,71),R(39,39,7.9,1.9,107),R(41,41,8.2,2,126),R(42,42,8.4,2.1,150)];
+const lateAcademy=[B(48,48,9.6,2.4,90,4,45,9),B(54,54,10,2.7,108,6,54,13),B(66,66,13,3.3,108,9,54,19),B(72,72,14,3.6,126,13,63,27),B(84,84,16,4.2,157,31,78,63)];
+const extraLadders={'Медпункт':[infirmary,lateInfirmary],'Командный центр':[command,lateCommand],'Военная академия':[academy,lateAcademy]};
+
  // Furnace stage prerequisites: level needed before beginning each stage.
  const prereq={1:[['Посольство',0],['Научный центр',0]],2:[['Посольство',5],['Лагерь копейщиков',5]],3:[['Посольство',10],['Лагерь пехоты',10]],4:[['Посольство',15],['Лагерь стрелков',15]],5:[['Посольство',20],['Лагерь копейщиков',20]],6:[['Посольство',25],['Лагерь пехоты',25]],7:[['Посольство',30],['Лагерь стрелков',30]],8:[['Посольство',35],['Лагерь копейщиков',35]],9:[['Посольство',40],['Лагерь пехоты',40]],10:[['Посольство',45],['Лагерь стрелков',45]]};
  const ids={'Посольство':'fireEmbassy','Научный центр':'fireResearch','Лагерь пехоты':'fireInfantry','Лагерь стрелков':'fireMarksman','Лагерь копейщиков':'fireLancer'};
  const icon={'Посольство':'🏛️','Научный центр':'🔬','Лагерь пехоты':'🛡️','Лагерь стрелков':'🏹','Лагерь копейщиков':'⚔️','Огненная Топка':'🔥'};
  const table={'Посольство':embassy,'Лагерь пехоты':camp,'Лагерь стрелков':camp,'Лагерь копейщиков':camp};
  const base30={'Посольство':R(60,60,12,3,0),'Научный центр':R(120,120,24,6,0)};
- const costFor=(name,n)=>{if(name==='Посольство' && n===1)return R(13,13,2.7,.679,33);const tier=Math.ceil(n/5);if(tier<=5)return name==='Огненная Топка'?furnace[tier-1]:table[name][tier-1];return (name==='Огненная Топка'?lateFurnace:name==='Посольство'?lateEmbassy:lateCamp)[tier-6][(n-1)%5];};
+ const costFor=(name,n)=>{if(name==='Посольство' && n===1)return R(13,13,2.7,.679,33);const tier=Math.ceil(n/5);if(extraLadders[name])return tier<=5?extraLadders[name][0][tier-1]:extraLadders[name][1][tier-6][(n-1)%5];if(tier<=5)return name==='Огненная Топка'?furnace[tier-1]:table[name][tier-1];return (name==='Огненная Топка'?lateFurnace:name==='Посольство'?lateEmbassy:lateCamp)[tier-6][(n-1)%5];};
  const label=n=>{if(n===-1)return 'Уровень 29';if(n===0)return 'Уровень 30';const stage=Math.ceil(n/5),step=((n-1)%5)+1;return step===5?`Этап ${stage} завершён`:`Этап ${stage} • шаг ${step}/5`;};
  const fillProgress=(el,maxStage=4,allow29=false)=>{if(allow29)el.add(new Option('Уровень 29','-1'));el.add(new Option('Уровень 30','0'));for(let n=1;n<=maxStage*5;n++)el.add(new Option(label(n),String(n)));};
  from.add(new Option('Топка 30','0'));for(let n=1;n<=50;n++)from.add(new Option(label(n),String(n)));
@@ -342,16 +353,16 @@ refineStrategy.addEventListener('change',()=>updateRefining(refineBuildFC,refine
 // Independent per-building calculator: separate current/target values, no prerequisite costs.
 const buildingCards=document.getElementById('fireBuildingCards');
 const buildingSum=document.getElementById('fireBuildingSum');
-const independentNames=['Огненная Топка','Посольство','Лагерь пехоты','Лагерь стрелков','Лагерь копейщиков','Научный центр'];
+const independentNames=['Огненная Топка','Посольство','Лагерь пехоты','Лагерь стрелков','Лагерь копейщиков','Медпункт','Командный центр','Военная академия','Научный центр'];
 const independentKey='sova58-fire-building-independent-v1';
 let independentSaved={};try{independentSaved=JSON.parse(localStorage.getItem(independentKey)||'{}')||{}}catch(e){}
 const independentRows=independentNames.map((name,index)=>{
  const card=document.createElement('article');card.className='fire-building-card';
  card.innerHTML='<h3>'+name+'</h3><div class="fire-building-controls"><label>Сейчас<select aria-label="'+name+': текущий уровень"></select></label><label>Цель<select aria-label="'+name+': целевой уровень"></select></label></div><div class="fire-building-result" aria-live="polite"></div>';
  buildingCards.appendChild(card);const [a,b]=card.querySelectorAll('select');
- const min=(name==='Посольство'||name==='Научный центр')?-1:0,max=name==='Научный центр'?0:50;
+ const min=name==='Военная академия'?5:(name==='Посольство'||name==='Научный центр')?-1:0,max=name==='Научный центр'?0:50;
  for(let n=min;n<=max;n++){a.add(new Option(label(n),String(n)));b.add(new Option(label(n),String(n)))}
- const defaultStart=name==='Огненная Топка'?+from.value:+document.getElementById(ids[name]).value;
+ const defaultStart=name==='Огненная Топка'?+from.value:ids[name]?+document.getElementById(ids[name]).value:min;
  a.value=String(Math.max(min,Math.min(max,defaultStart)));b.value=a.value;
  const saved=independentSaved[name];if(Array.isArray(saved)){if([...a.options].some(o=>o.value===String(saved[0])))a.value=String(saved[0]);if([...b.options].some(o=>o.value===String(saved[1])))b.value=String(saved[1]);}
  a.addEventListener('change',renderIndependent);b.addEventListener('change',renderIndependent);
