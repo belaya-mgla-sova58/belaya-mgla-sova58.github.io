@@ -128,8 +128,8 @@ function init(){
       </div>
     </div>
     <div class="ugu720-actions"><button class="ugu720-btn ugu720-copy" type="button">📋 Скопировать предсказание</button></div>
-    <div class="ugu720-details"><button class="ugu720-btn ugu720-detailsbtn" type="button">Подробнее</button><div class="ugu720-detailsbody"><strong class="ugu720-detailstitle">Как работает шар</strong><div class="ugu720-detailstext">Большинство знаков обычные. Иногда Мадам Угу показывает редкое предсказание, а ещё реже появляется руна.</div><div class="ugu720-booknote">📖 Книжечка Мадам Угу хранит все уникальные предсказания навсегда. В 00:00 сбрасываются только дневные попытки, а сама книга и достижения остаются.</div></div></div>
-    <div class="ugu720-history"><button class="ugu720-btn ugu720-historybtn" type="button">Книжечка Мадам Угу 📖</button><div class="ugu720-historybody"><div class="ugu720-bookmeta"><div class="ugu720-bookcount">Собрано <span class="ugu720-bookcountnum">0</span> из 100</div><div class="ugu720-booksub">Редкие: <span class="ugu720-rarecount">0</span> • Руны: <span class="ugu720-runecount">0</span></div><div class="ugu720-progress"><div class="ugu720-progressfill"></div></div></div><div class="ugu720-booksectiontitle">Достижения</div><div class="ugu720-achievementslist"></div><div class="ugu720-booksectiontitle">Собранные предсказания</div><div class="ugu720-bookitems"></div></div></div>
+    <div class="ugu720-details"><button class="ugu720-btn ugu720-detailsbtn" type="button">Подробнее</button><div class="ugu720-detailsbody"><strong class="ugu720-detailstitle">Как работает шар</strong><div class="ugu720-detailstext">Большинство знаков обычные. Иногда Мадам Угу показывает редкое предсказание, а ещё реже появляется руна.</div><div class="ugu720-booknote">📖 В коллекции считаются только разные предсказания. Повторные знаки сохраняются в статистике, но не увеличивают счётчик. В 00:00 сбрасываются только дневные попытки.</div></div></div>
+    <div class="ugu720-history"><button class="ugu720-btn ugu720-historybtn" type="button">Книжечка Мадам Угу 📖</button><div class="ugu720-historybody"><div class="ugu720-bookmeta"><div class="ugu720-bookcount">Собрано уникальных знаков: <span class="ugu720-bookcountnum">0</span> из 100</div><div class="ugu720-booksub">Редкие: <span class="ugu720-rarecount">0</span> • Руны: <span class="ugu720-runecount">0</span></div><div class="ugu720-progress"><div class="ugu720-progressfill"></div></div></div><div class="ugu720-booksectiontitle">Достижения</div><div class="ugu720-achievementslist"></div><div class="ugu720-booksectiontitle">Собранные предсказания</div><div class="ugu720-bookitems"></div></div></div>
     <p class="ugu720-hint">Некоторые знаки встречаются крайне редко.</p>`;
   panel.appendChild(inner);overlay.appendChild(panel);overlay.appendChild(close);document.body.appendChild(overlay);
 
@@ -156,7 +156,7 @@ function init(){
     }
   }catch(e){}
   var common=['Ресурсы ещё пригодятся. Не спеши устраивать им торжественные проводы.','Удача любит нормальный состав чуть больше, чем красивую цифру силы.','Одна кнопка будет выглядеть особенно заманчиво. Мадам Угу уже подозревает, чем это закончится.'];
-  fetch('fortune-phrases.txt?v=8',{cache:'no-store'}).then(function(r){return r.ok?r.text():Promise.reject()}).then(function(t){var a=t.split(/\r?\n/).map(function(x){return x.trim()}).filter(Boolean);if(a.length){common=a;renderBook();}}).catch(function(){});
+  fetch('fortune-phrases.txt?v=9',{cache:'no-store'}).then(function(r){return r.ok?r.text():Promise.reject()}).then(function(t){var a=t.split(/\r?\n/).map(function(x){return x.trim()}).filter(Boolean);if(a.length){common=a;renderBook();}}).catch(function(){});
   var rare=['✨ Судьба оставляет дверь открытой. Постарайся хотя бы не пройти мимо.','✨ То, что долго не складывалось, внезапно может сдвинуться. Игра иногда делает вид, что помогает.','✨ Один правильный выбор окажется важнее десяти мелких. Да, придётся выбирать.'];
   var runes=[['ᚠ','Феху','ᚠ Руна Феху. Береги то, что уже накоплено.'],['ᚢ','Уруз','ᚢ Руна Уруз. Силы больше, чем тебе кажется.'],['ᚱ','Райдо','ᚱ Руна Райдо. Путь уже начался.'],['ᚷ','Гебо','ᚷ Руна Гебо. Хорошее приходит через обмен и союз.'],['ᛃ','Йера','ᛃ Руна Йера. Всё созревает в своё время.'],['ᛉ','Альгиз','ᛉ Руна Альгиз. Защита окажется важнее лишней самоуверенности.']];
 
@@ -191,13 +191,13 @@ function init(){
   function achievements(stats){
     return [
       {title:'Первый знак',desc:'Получить первое предсказание',done:stats.totalUnique>=1},
-      {title:'Начало коллекции',desc:'Собрать 5 из 100',done:stats.commonCount>=5},
-      {title:'Любопытная сова',desc:'Собрать 10 из 100',done:stats.commonCount>=10},
-      {title:'Читатель судьбы',desc:'Собрать 25 из 100',done:stats.commonCount>=25},
-      {title:'Хранитель страниц',desc:'Собрать 50 из 100',done:stats.commonCount>=50},
-      {title:'Архивариус Угу',desc:'Собрать 75 из 100',done:stats.commonCount>=75},
-      {title:'Книга почти полна',desc:'Собрать 90 из 100',done:stats.commonCount>=90},
-      {title:'Все нити судьбы',desc:'Собрать 100 из 100',done:stats.commonCount>=100},
+      {title:'Начало коллекции',desc:'Собрать 5 из 100',done:stats.totalUnique>=5},
+      {title:'Любопытная сова',desc:'Собрать 10 из 100',done:stats.totalUnique>=10},
+      {title:'Читатель судьбы',desc:'Собрать 25 из 100',done:stats.totalUnique>=25},
+      {title:'Хранитель страниц',desc:'Собрать 50 из 100',done:stats.totalUnique>=50},
+      {title:'Архивариус Угу',desc:'Собрать 75 из 100',done:stats.totalUnique>=75},
+      {title:'Книга почти полна',desc:'Собрать 90 из 100',done:stats.totalUnique>=90},
+      {title:'Все нити судьбы',desc:'Собрать 100 из 100',done:stats.totalUnique>=100},
       {title:'Редкая находка',desc:'Получить первое редкое предсказание',done:stats.rareCount>=1},
       {title:'Коллекционер редкостей',desc:'Собрать 5 разных редких предсказаний',done:stats.rareCount>=5},
       {title:'Знак рун',desc:'Впервые получить руну',done:stats.runeCount>=1},
@@ -213,9 +213,9 @@ function init(){
     ];
   }
   function renderBook(){
-    var b=bookState(),stats=bookStats(b),pct=Math.max(0,Math.min(100,(stats.commonCount/BOOK_TOTAL)*100));
+    var b=bookState(),stats=bookStats(b),pct=Math.max(0,Math.min(100,(stats.totalUnique/BOOK_TOTAL)*100));
     history.classList.add('show');
-    if(bookCountNum)bookCountNum.textContent=stats.commonCount;
+    if(bookCountNum)bookCountNum.textContent=stats.totalUnique;
     if(rareCountEl)rareCountEl.textContent=stats.rareCount;
     if(runeCountEl)runeCountEl.textContent=stats.runeCount;
     if(progressFill)progressFill.style.width=pct+'%';
