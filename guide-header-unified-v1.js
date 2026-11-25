@@ -58,7 +58,7 @@ function cover(slug){
 }
 function init(){
  var slug=decodeURIComponent(location.pathname.split("/").pop()||"").replace(/\.html$/i,"").toLowerCase();
- if(slug==="state-transfer"||!pages.has(slug)||document.querySelector(".sova-guide-cover-v1"))return;
+ if(new Set("newbie buildings buildings-before-fire buildings-after-fire furnace-1-30 furnace-fc1-5 furnace-fc5-10 furnace-extra-buildings troops faq research resources state-transfer".split(" ")).has(slug)||document.querySelector(".transfer-heading,.furnace-compact-heading,.kb-build-heading")||!pages.has(slug)||document.querySelector(".sova-guide-cover-v1"))return;
  var chronicle=document.body.classList.contains("luxury-chronicle");
  var main=chronicle?document.querySelector("main.page > section.main"):document.querySelector("main#appMain .route-page.active");
  if(!main)return;
