@@ -59,7 +59,7 @@ function init(){
  var chronicle=document.body.classList.contains("luxury-chronicle");
  var main=chronicle?document.querySelector("main.page > section.main"):document.querySelector("main#appMain .route-page.active");
  if(!main)return;
- var heading=chronicle?main.querySelector(":scope > h1.sr-title"):main.querySelector(":scope > section.page-heading-v424");
+ var heading=chronicle?main.querySelector(":scope > h1"):main.querySelector(":scope > section.page-heading-v424");
  if(!heading)return;
  var css=document.createElement("link");css.rel="stylesheet";css.href="guide-header-unified-v1.css?v=1";
  css.setAttribute("data-sova-guide-cover-v1","");document.head.append(css);
