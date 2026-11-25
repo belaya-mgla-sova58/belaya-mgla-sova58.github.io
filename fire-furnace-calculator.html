@@ -184,13 +184,14 @@ body.is-fire-furnace-calc-route #appMain .calc-refining-inner-v1 a{
 </div>
 </section>
 
-<section class="calc-total-v378 fire-per-building-v1" id="firePerBuilding"><h2>Расчёт по каждому зданию</h2><p>Отдельно выбирайте текущий и желаемый уровень. Стоимость одного здания не включает обязательные улучшения других зданий. Общий маршрут топки выше остаётся отдельным расчётом.</p><div class="fire-building-cards" id="fireBuildingCards"></div><div class="fire-building-sum" id="fireBuildingSum" aria-live="polite"></div><p class="fire-building-foot">Военная академия рассчитывается с ОТ-1 до ОТ-10 (стоимость первоначального открытия не включена), Научный центр — с 29 до 30. Медпункт и Командный центр: <a href="https://whiteoutdata.com/buildings/infirmary/" target="_blank" rel="noopener">таблица Медпункта</a>, <a href="https://whiteoutdata.com/buildings/command-center/" target="_blank" rel="noopener">таблица Командного центра</a>; <a href="https://wiki.wosforge.org/wiki/War_Academy" target="_blank" rel="noopener">таблица Академии</a>. Справочные данные международной версии, возможны отличия в RU. Время, скидки и требования других зданий не учтены.</p></section>
+<section class="fire-per-building-v1 bm-route-budget-v1"><h2>Запасы и остаток для общего маршрута</h2><p>Запасы вводятся ниже, в блоке отдельных зданий. Этот итог не складывается с отдельным расчётом.</p><div id="bmRouteBudget"></div></section>
+<section class="calc-total-v378 fire-per-building-v1" id="firePerBuilding"><h2>Расчёт по каждому зданию</h2><p>Отдельно выбирайте текущий и желаемый уровень. Стоимость одного здания не включает обязательные улучшения других зданий. Общий маршрут топки выше остаётся отдельным расчётом.</p><div class="fire-building-cards" id="fireBuildingCards"></div><div class="fire-building-sum bm-stock-v1"><h3>Ваши запасы</h3><p>Введите количество в единицах, например 1000000 = 1 млн. Запасы вычитаются из общего итога, а не из каждого здания отдельно.</p><div class="bm-stock-grid"><label>Мясо<input id="bmBuildingStock0" type="number" inputmode="numeric" min="0" step="1" max="9007199254740991" value="0"/></label><label>Древесина<input id="bmBuildingStock1" type="number" inputmode="numeric" min="0" step="1" max="9007199254740991" value="0"/></label><label>Уголь<input id="bmBuildingStock2" type="number" inputmode="numeric" min="0" step="1" max="9007199254740991" value="0"/></label><label>Железо<input id="bmBuildingStock3" type="number" inputmode="numeric" min="0" step="1" max="9007199254740991" value="0"/></label><label>Огненные кристаллы<input id="bmBuildingStock4" type="number" inputmode="numeric" min="0" step="1" max="9007199254740991" value="0"/></label><label>Очищенные кристаллы<input id="refineOwned" type="number" inputmode="numeric" min="0" step="1" max="1000000" value="0"/></label></div></div><div class="fire-building-sum" id="fireBuildingSum" aria-live="polite"></div><p class="fire-building-foot">Военная академия рассчитывается с ОТ-1 до ОТ-10 (стоимость первоначального открытия не включена), Научный центр — с 29 до 30. Медпункт и Командный центр: <a href="https://whiteoutdata.com/buildings/infirmary/" target="_blank" rel="noopener">таблица Медпункта</a>, <a href="https://whiteoutdata.com/buildings/command-center/" target="_blank" rel="noopener">таблица Командного центра</a>; <a href="https://wiki.wosforge.org/wiki/War_Academy" target="_blank" rel="noopener">таблица Академии</a>. Справочные данные международной версии, возможны отличия в RU. Время и требования других зданий не учтены.</p></section>
 <details class="calc-refining-v1">
 <summary>💠 Сколько Огненных кристаллов уйдёт на очистку?</summary>
 <div class="calc-refining-inner-v1">
 <p>Если для построек нужны Очищенные кристаллы, их можно получать суперочисткой в Лаборатории кристаллов. <b>Результат случайный</b>, поэтому ниже показан ориентир по среднему результату и наихудшему варианту, а не гарантированная фиксированная цена.</p>
 <div class="calc-refining-controls-v1">
-<label>💠 Уже есть Очищенных кристаллов<input id="refineOwned" type="number" inputmode="numeric" min="0" max="1000000" step="1" value="0"/></label>
+<label>Что рассчитываем<select id="refineBasis"><option value="buildings">Выбранные здания</option><option value="route">Общий маршрут Топки</option></select></label>
 <label>📅 Стратегия обмена за неделю<select id="refineStrategy">
 <option value="1">Экономия: по 1 в день (7 за неделю)</option>
 <option value="14">Умеренная: 14 после сброса + по 1 в другие 6 дней</option>
@@ -206,7 +207,7 @@ body.is-fire-furnace-calc-route #appMain .calc-refining-inner-v1 a{
 <div><span>Количество суперочисток</span><strong id="refineCount">0</strong><small>При выбранном плане</small></div>
 </div>
 <p class="calc-refining-caption-v1" id="refineSummary">Измените параметры для расчёта.</p>
-<div class="calc-refining-guarantee-v1" id="refineWorst"></div>
+<div class="calc-refining-guarantee-v1" id="refineWorst"></div><p id="refineShortage" aria-live="polite"></p>
 <p class="calc-refining-fine-v1">Механика: до <b>100 суперочисток в неделю</b>. Обмены 1–20 стоят по 20 Огненных кристаллов, 21–40 по 50, 41–60 по 100, 61–80 по 130 и 81–100 по 160. Первая суперочистка каждого дня со скидкой 50%. Обмен приносит от 1 до 12 Очищенных кристаллов в зависимости от ступени и удачи. Расчёт начинается <b>с новой игровой недели</b> и предполагает, что другие обмены на этой неделе ещё не выполнялись.</p>
 <p class="calc-refining-fine-v1">Бонусы, игровые награды и уже выполненные суперочистки не учитываются. Суперочистка доступна только после открытия соответствующей системы в государстве. Источники: <a href="https://www.whiteoutsurvival.wiki/refinement-in-crystal-laboratory/" target="_blank" rel="noopener noreferrer">таблица суперочистки</a>, <a href="https://www.reddit.com/r/whiteoutsurvival/comments/1rr2w50/please_explain_cost_strategy_refining_fire_crystal/" target="_blank" rel="noopener noreferrer">опыт игроков</a>.</p>
 </div>
@@ -252,10 +253,10 @@ const extraLadders={'Медпункт':[infirmary,lateInfirmary],'Командн
  const table={'Посольство':embassy,'Лагерь пехоты':camp,'Лагерь стрелков':camp,'Лагерь копейщиков':camp};
  const base30={'Посольство':R(60,60,12,3,0),'Научный центр':R(120,120,24,6,0)};
  const costFor=(name,n)=>{if(name==='Посольство' && n===1)return R(13,13,2.7,.679,33);const tier=Math.ceil(n/5);if(extraLadders[name])return tier<=5?extraLadders[name][0][tier-1]:extraLadders[name][1][tier-6][(n-1)%5];if(tier<=5)return name==='Огненная Топка'?furnace[tier-1]:table[name][tier-1];return (name==='Огненная Топка'?lateFurnace:name==='Посольство'?lateEmbassy:lateCamp)[tier-6][(n-1)%5];};
- const label=n=>{if(n===-1)return 'Уровень 29';if(n===0)return 'Уровень 30';const stage=Math.ceil(n/5),step=((n-1)%5)+1;return step===5?`Этап ${stage} завершён`:`Этап ${stage} • шаг ${step}/5`;};
+ const label=n=>{if(n===-1)return 'Уровень 29';if(n===0)return 'Уровень 30';const stage=Math.ceil(n/5),step=((n-1)%5)+1;return step===5?`ОТ-${stage}`:stage===1?`30 • шаг ${step}/5`:`ОТ-${stage-1}.${step}`;};
  const fillProgress=(el,maxStage=4,allow29=false)=>{if(allow29)el.add(new Option('Уровень 29','-1'));el.add(new Option('Уровень 30','0'));for(let n=1;n<=maxStage*5;n++)el.add(new Option(label(n),String(n)));};
  from.add(new Option('Топка 30','0'));for(let n=1;n<=50;n++)from.add(new Option(label(n),String(n)));
- for(let s=1;s<=10;s++)to.add(new Option('Этап '+s,String(s*5)));
+ for(let s=1;s<=10;s++)to.add(new Option('ОТ-'+s,String(s*5)));
  fillProgress(document.getElementById('fireEmbassy'),10,true);fillProgress(document.getElementById('fireInfantry'),10);fillProgress(document.getElementById('fireMarksman'),10);fillProgress(document.getElementById('fireLancer'),10);
  const research=document.getElementById('fireResearch');research.add(new Option('Уровень 29','-1'));research.add(new Option('Уровень 30','0'));research.value='0';
  from.value='0';to.value='5';Object.values(ids).forEach(id=>document.getElementById(id).value='0');
@@ -269,7 +270,7 @@ const extraLadders={'Медпункт':[infirmary,lateInfirmary],'Командн
  const fmt=n=>{const x=n*1e6;if(x>=1e9)return (x/1e9).toLocaleString('ru-RU',{maximumFractionDigits:3})+' млрд';if(x>=1e6)return (x/1e6).toLocaleString('ru-RU',{maximumFractionDigits:3})+' млн';if(x>=1e3)return Math.round(x/1e3).toLocaleString('ru-RU')+' тыс.';return Math.round(x).toLocaleString('ru-RU')};
 
 // Forecast refining Fire Crystals into Refined Fire Crystals (from a fresh weekly reset).
-const refineOwned=document.getElementById('refineOwned'),refineStrategy=document.getElementById('refineStrategy');
+const refineOwned=document.getElementById('refineOwned'),refineStrategy=document.getElementById('refineStrategy'),refineBasis=document.getElementById('refineBasis');
 let refineBuildFC=0,refineBuildRFC=0;
 const refineTiersCost=[20,50,100,130,160];
 const refineTiersExpected=[1.45,2.15,3.18,3.435,3.71];
@@ -306,6 +307,7 @@ function updateRefining(buildFC,buildRFC){
  document.getElementById('refineFC').textContent=compactCount(average.spent);
  document.getElementById('refineGrand').textContent=compactCount(buildFC+average.spent);
  document.getElementById('refineCount').textContent=compactCount(average.pulls);
+ document.getElementById('refineShortage').textContent=average.fulfilled?'Не хватает обычных огненных кристаллов с учётом строительства и прогнозируемой очистки: '+compactCount(Math.max(0,buildFC+average.spent-readStocks()[4])):'Полный расход пока не определён.';
  document.getElementById('refineSummary').textContent=needed===0?
   'В выбранном маршруте уже хватает Очищенных кристаллов. Дополнительные обмены не требуются.':
   average.fulfilled?
@@ -327,12 +329,12 @@ refineStrategy.addEventListener('change',()=>updateRefining(refineBuildFC,refine
    if(((next-1)%5)===0){for(const [name,need] of prereq[stage]){const have=lv[name] ?? 0;if(have<need){const cost=supportCost(name,have,need);out.push({name,from:have,to:need,cost,kind:'pre'});total=add(total,cost);lv[name]=need;}}}
    const cost=costFor('Огненная Топка',next);out.push({name:'Огненная Топка',from:furnacePos,to:next,cost,kind:'furnace'});total=add(total,cost);furnacePos=next;
   }
-  document.getElementById('fMeat').textContent=fmt(total[0]);document.getElementById('fWood').textContent=fmt(total[1]);document.getElementById('fCoal').textContent=fmt(total[2]);document.getElementById('fIron').textContent=fmt(total[3]);document.getElementById('fCrystal').textContent=Math.round(total[4]).toLocaleString('ru-RU');document.getElementById('fRefined').textContent=Math.round(total[5]).toLocaleString('ru-RU');document.getElementById('fireStepCount').textContent=cur>=50?'FC10 достигнут':out.length+' шагов';updateRefining(total[4],total[5]);
+  document.getElementById('fMeat').textContent=fmt(total[0]);document.getElementById('fWood').textContent=fmt(total[1]);document.getElementById('fCoal').textContent=fmt(total[2]);document.getElementById('fIron').textContent=fmt(total[3]);document.getElementById('fCrystal').textContent=Math.round(total[4]).toLocaleString('ru-RU');document.getElementById('fRefined').textContent=Math.round(total[5]).toLocaleString('ru-RU');document.getElementById('fireStepCount').textContent=cur>=50?'FC10 достигнут':out.length+' шагов';routeBudget=total;refreshBudgets();
   stepsEl.innerHTML=cur>=50?'<div class="calc-note-v378">🔥 Максимальный этап FC10 уже достигнут. Выберите более ранний уровень для нового расчёта.</div>':out.map((x,i)=>`<article class="calc-step-v378 ${x.kind==='furnace'?'is-furnace':''}"><div class="calc-step-num-v378">${i+1}</div><div class="calc-step-body-v378"><div class="calc-step-title-v378"><span>${icon[x.name]}</span><b>${x.name}</b><strong>${label(x.from)} → ${label(x.to)}</strong></div><div class="calc-step-res-v378 fire-step-res-v380">${resHtml(x.cost)}</div>${x.kind==='furnace'&&x.to%5===0?'<div class="calc-ready-v378">Этап завершён ✓</div>':''}</div></article>`).join('');
  }
  // Remember the player's own building levels and refining preferences on this device.
  const savedKey='sova58-fire-furnace-progress-v1';
- const controls=[from,to,...Object.values(ids).map(id=>document.getElementById(id)),refineOwned,refineStrategy];
+ const controls=[from,to,...Object.values(ids).map(id=>document.getElementById(id)),refineOwned,refineStrategy,refineBasis];
  let restoredManual=false;
  try{
   const stored=JSON.parse(localStorage.getItem(savedKey)||'null');
@@ -368,6 +370,26 @@ const independentRows=independentNames.map((name,index)=>{
  a.addEventListener('change',renderIndependent);b.addEventListener('change',renderIndependent);
  return {name,a,b,result:card.querySelector('.fire-building-result')};
 });
+
+ const budgetNames=["Мясо","Древесина","Уголь","Железо","Огненные кристаллы","Очищенные кристаллы"],stockInputs=["bmBuildingStock0","bmBuildingStock1","bmBuildingStock2","bmBuildingStock3","bmBuildingStock4","refineOwned"].map(id=>document.getElementById(id));
+ const budgetKey='sova58-building-stocks-fire-v1';
+ let routeBudget=R(0,0,0,0,0),independentBudget=R(0,0,0,0,0);
+ const countBudget=x=>Math.round(x).toLocaleString('ru-RU');
+ const cleanStock=(x,i)=>Math.max(0,Math.min(Number(stockInputs[i].max)||Number.MAX_SAFE_INTEGER,Math.floor(Number(x)||0)));
+ function readStocks(){return stockInputs.map((el,i)=>cleanStock(el.value,i))}
+ function budgetTable(cost){
+  const stocks=readStocks(),needed=cost.map((x,i)=>Math.round(x*(i<4?1e6:1)));
+  return '<div class="bm-budget-table-wrap"><table class="bm-budget-table"><thead><tr><th>Материал</th><th>Нужно</th><th>Есть</th><th>Не хватает</th></tr></thead><tbody>'+budgetNames.map((n,i)=>'<tr><th scope="row">'+n+'</th><td>'+countBudget(needed[i])+'</td><td>'+countBudget(stocks[i])+'</td><td>'+countBudget(Math.max(0,needed[i]-stocks[i]))+'</td></tr>').join('')+'</tbody></table></div>';
+ }
+ function refreshBudgets(){
+  document.getElementById('bmRouteBudget').innerHTML=budgetTable(routeBudget);
+  buildingSum.innerHTML='<h3>Итого по выбранным зданиям</h3>'+budgetTable(independentBudget);
+  const chosen=refineBasis.value==='route'?routeBudget:independentBudget;updateRefining(chosen[4],chosen[5]);
+ }
+ try{const saved=JSON.parse(localStorage.getItem(budgetKey)||'null');if(Array.isArray(saved))stockInputs.forEach((el,i)=>{if(saved[i]!=null)el.value=String(cleanStock(saved[i],i))})}catch(e){}
+ function saveStocks(){try{localStorage.setItem(budgetKey,JSON.stringify(readStocks()))}catch(e){}}
+ stockInputs.forEach((el,i)=>{el.addEventListener('input',()=>{refreshBudgets();saveStocks()});el.addEventListener('change',()=>{el.value=String(cleanStock(el.value,i));refreshBudgets();saveStocks()})});
+ 
 function independentResources(cost){const names=['Мясо','Древесина','Уголь','Железо','Огненные кристаллы','Очищенные кристаллы'];return '<dl>'+names.map((name,i)=>'<div><dt>'+name+'</dt><dd>'+(i<4?fmt(cost[i]):compactCount(cost[i]))+'</dd></div>').join('')+'</dl>'}
 function renderIndependent(){
  let total=R(0,0,0,0,0),saved={};
@@ -378,7 +400,7 @@ function renderIndependent(){
   total=add(total,cost);saved[name]=[start,end];
   result.innerHTML=independentResources(cost);
  });
- buildingSum.innerHTML='<h3>Итого по выбранным зданиям</h3>'+independentResources(total);
+ independentBudget=total;refreshBudgets();
  try{localStorage.setItem(independentKey,JSON.stringify(saved))}catch(e){}
 }
 renderIndependent();
@@ -399,6 +421,7 @@ renderIndependent();
   saveProgress();
  });
  refineStrategy.addEventListener('change',saveProgress);
+ refineBasis.addEventListener('change',()=>{refreshBudgets();saveProgress()});
  calc();
 })();
 </script>
@@ -467,4 +490,15 @@ html body main#appMain .fire-building-controls select{display:block;width:100%;m
 html body main#appMain .fire-per-building-v1 dt{color:#e8e1d8!important;font-size:14px!important}
 html body main#appMain .fire-per-building-v1 dd{color:#f0d5a9!important;margin:0;font-weight:700;white-space:nowrap;font-size:15px!important}
 @media(max-width:420px){html body main#appMain .fire-per-building-v1{padding:12px!important}.fire-building-controls{grid-template-columns:1fr}}
-</style></body></html>
+</style><style id="bm-building-stock-v1">
+ html body main#appMain .bm-route-budget-v1{padding:16px!important;margin:12px 0 18px!important}
+ .bm-stock-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:10px}
+ html body main#appMain .bm-stock-grid label{display:grid;gap:5px;color:#eee5da!important;font-size:14px!important}
+ html body main#appMain .bm-stock-grid input{box-sizing:border-box;width:100%;min-width:0;padding:10px;background:#211f24!important;color:#fff5e6!important;border:1px solid #786956!important;border-radius:7px;font-size:16px!important}
+ .bm-budget-table-wrap{overflow-x:auto;max-width:100%}
+ html body main#appMain .bm-budget-table{width:100%;border-collapse:collapse;color:#eee5da!important;font-size:14px!important}
+ html body main#appMain .bm-budget-table th,html body main#appMain .bm-budget-table td{background:transparent!important;border-bottom:1px solid #51463d!important;padding:8px 6px!important;text-align:right;color:#eee5da!important;white-space:nowrap}
+ html body main#appMain .bm-budget-table th:first-child{text-align:left;white-space:normal}
+ html body main#appMain .bm-budget-table td:last-child{color:#f0d5a9!important;font-weight:700}
+ @media(max-width:520px){html body main#appMain .bm-budget-table{font-size:12px!important}html body main#appMain .bm-budget-table th,html body main#appMain .bm-budget-table td{padding:6px 3px!important}}
+ </style></body></html>
