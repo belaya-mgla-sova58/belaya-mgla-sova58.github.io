@@ -74,6 +74,7 @@ body{min-height:100vh;color:#f7f1ff;overflow-x:hidden}
 .history-item{padding:8px 9px;border-radius:10px;background:rgba(116,75,161,.14);border:1px solid rgba(222,199,255,.14)}
 .history-tag{display:block;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#bca9e5;margin-bottom:3px}
 .hint{margin:8px 0 0;color:#aa9ab9;font-size:11.5px}
+.book-progress{margin:4px auto 6px;font-weight:700;color:#f7dda9;font-size:12px;text-align:center;line-height:1.4}
 .feather{position:fixed;z-index:9999;pointer-events:none;width:20px;height:64px;opacity:0;filter:drop-shadow(0 2px 2px rgba(0,0,0,.16)) drop-shadow(0 0 5px rgba(238,231,255,.35));transform-origin:50% 70%;will-change:transform,opacity}
 .feather svg{display:block;width:100%;height:100%;overflow:visible}
 @keyframes featherFly{0%{opacity:0;transform:translate(var(--x),var(--y)) rotate(var(--r0)) scale(.58)}10%{opacity:.95}42%{transform:translate(calc(var(--x) + var(--dx1)),calc(var(--y) + var(--dy1))) rotate(var(--rm)) scale(.9)}100%{opacity:0;transform:translate(calc(var(--x) + var(--dx2)),calc(var(--y) + var(--dy2))) rotate(var(--r1)) scale(1)}}
@@ -86,6 +87,7 @@ body{min-height:100vh;color:#f7f1ff;overflow-x:hidden}
 <h1 class="title">Шар предсказаний</h1>
 <div class="greeting"><strong>Мадам Угу приветствует тебя ✨</strong><br>Коснись шара и открой своё предсказание.</div>
 <div class="counter" id="counter">✨ Доступно предсказаний: 2 из 2</div>
+<div class="book-progress" id="bookProgress" role="status" aria-live="polite">📖 В книжечке: 0 из 100</div>
 <div class="orb-wrap">
 <div class="nebula"></div><div class="orbit"></div><div class="orbit2"></div><div class="orbit3"></div>
 <i class="planet p1"></i><i class="planet p2"></i><i class="planet p3"></i>
@@ -101,9 +103,9 @@ body{min-height:100vh;color:#f7f1ff;overflow-x:hidden}
 </div></section></main>
 <script>
 (function(){
-const MAX=2,KEY='sova58-predictions-cosmic-v1';
+const MAX=2,KEY='sova58-predictions-cosmic-v1',BOOKKEY='sova58-predictions-book-v1',BOOK_TOTAL=100;
 let common=['Ресурсы ещё пригодятся. Не спеши устраивать им торжественные проводы.','Удача любит нормальный состав чуть больше, чем красивую цифру силы.','Одна кнопка будет выглядеть особенно заманчиво. Мадам Угу уже подозревает, чем это закончится.'];
-fetch('fortune-phrases.txt?v=8').then(r=>r.ok?r.text():Promise.reject()).then(t=>{const a=t.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);if(a.length)common=a}).catch(()=>{});
+fetch('fortune-phrases.txt?v=9',{cache:'no-store'}).then(r=>r.ok?r.text():Promise.reject()).then(t=>{const a=t.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);if(a.length)common=a}).catch(()=>{});
 const rare=[
 {text:'✨ Судьба оставляет дверь открытой. Постарайся хотя бы не пройти мимо.',detail:'Редкое предсказание. Неожиданная возможность может оказаться полезнее привычного плана.'},
 {text:'✨ То, что долго не складывалось, внезапно может сдвинуться. Игра иногда делает вид, что помогает.',detail:'Редкое предсказание. Подходящий момент может появиться там, где раньше всё стояло на месте.'},
@@ -117,13 +119,73 @@ const runes=[
 {symbol:'ᛃ',name:'Йера',text:'ᛃ Руна Йера. Всё созревает в своё время.',detail:'Йера связана с результатом накопленных усилий.'},
 {symbol:'ᛉ',name:'Альгиз',text:'ᛉ Руна Альгиз. Защита окажется важнее лишней самоуверенности.',detail:'Альгиз означает осторожность и защиту.'}
 ];
+const bookProgress=document.getElementById('bookProgress');
 const orb=document.getElementById('orb'),message=document.getElementById('message'),counter=document.getElementById('counter'),kind=document.getElementById('kind'),runeSymbol=document.getElementById('runeSymbol'),actions=document.getElementById('actions'),copyBtn=document.getElementById('copyBtn'),details=document.getElementById('details'),detailsBtn=document.getElementById('detailsBtn'),detailsTitle=document.getElementById('detailsTitle'),detailsText=document.getElementById('detailsText'),history=document.getElementById('history'),historyBtn=document.getElementById('historyBtn'),historyList=document.getElementById('historyList');
 let busy=false,lastText='',feathersEnabled=true;
 function dayKey(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
 function readState(){try{const v=JSON.parse(localStorage.getItem(KEY)||'{}');return v.day===dayKey()?v:{day:dayKey(),count:0,items:[]}}catch(e){return{day:dayKey(),count:0,items:[]}}}
 function saveState(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+function getBook(){
+ try{
+  const raw=JSON.parse(localStorage.getItem(BOOKKEY)||'{}');
+  const b=raw&&typeof raw==='object'&&!Array.isArray(raw)?raw:{};
+  return {
+   items:Array.isArray(b.items)?b.items:[],
+   counts:(b.counts&&typeof b.counts==='object'&&!Array.isArray(b.counts))?b.counts:{},
+   openDays:Array.isArray(b.openDays)?b.openDays:[],
+   bookOpens:Number(b.bookOpens)||0,
+   repeats:Number(b.repeats)||0,
+   fullUseDays:Array.isArray(b.fullUseDays)?b.fullUseDays:[],
+   midnightVisits:Array.isArray(b.midnightVisits)?b.midnightVisits:[]
+  };
+ }catch(e){return {items:[],counts:{},openDays:[],bookOpens:0,repeats:0,fullUseDays:[],midnightVisits:[]}}
+}
+function writeBook(b){try{localStorage.setItem(BOOKKEY,JSON.stringify(b));return true}catch(e){return false}}
+function recordBook(kind,text,used){
+ const b=getBook(),d=dayKey(),key=String(text||'').trim();
+ if(!key)return false;
+ const existing=b.items.some(it=>it&&it.text===key);
+ b.counts[key]=(Number(b.counts[key])||0)+1;
+ if(b.counts[key]>1)b.repeats=(Number(b.repeats)||0)+1;
+ if(!existing)b.items.push({kind:kind,text:key});
+ if(b.openDays.indexOf(d)===-1)b.openDays.push(d);
+ if(used>=MAX&&b.fullUseDays.indexOf(d)===-1)b.fullUseDays.push(d);
+ const now=new Date();
+ if(now.getHours()===0&&now.getMinutes()<=30&&b.midnightVisits.indexOf(d)===-1)b.midnightVisits.push(d);
+ return writeBook(b);
+}
+// Older standalone orb pages wrote only the two daily items.
+// Recover them once without creating duplicates or wiping existing collections.
+function migrateRecentDailySigns(){
+ const key='sova58-ugu-book-daily-migration-v2';
+ try{if(localStorage.getItem(key)==='1')return}catch(e){}
+ const daily=readState(),b=getBook();
+ let changed=false;
+ (Array.isArray(daily.items)?daily.items:[]).forEach(function(it){
+  if(!it||typeof it.text!=='string'||!it.text.trim())return;
+  const phrase=it.text.trim();
+  if(!b.items.some(old=>old&&old.text===phrase)){
+   b.items.push({text:phrase,kind:String(it.kind||'Обычное')});
+   b.counts[phrase]=Math.max(1,Number(b.counts[phrase])||0);
+   changed=true;
+  }
+ });
+ if(!changed||writeBook(b)){
+  try{localStorage.setItem(key,'1')}catch(e){}
+ }
+}
+migrateRecentDailySigns();
 function renderHistory(){const s=readState(),items=(s.items||[]).slice(-2);if(!items.length){history.classList.remove('show','open');return}history.classList.add('show');historyList.innerHTML=items.map(x=>'<div class="history-item"><span class="history-tag">'+x.kind+'</span>'+x.text.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</div>').join('')}
-function refresh(){const s=readState(),left=Math.max(0,MAX-s.count);counter.textContent='✨ Доступно предсказаний: '+left+' из '+MAX;renderHistory()}
+function refresh(){
+ const s=readState(),left=Math.max(0,MAX-s.count),b=getBook(),all=b.items.length;
+ counter.textContent='✨ Доступно предсказаний: '+left+' из '+MAX;
+ if(bookProgress){
+  const rares=b.items.filter(it=>it&&it.kind==='Редкое').length;
+  const runes=b.items.filter(it=>it&&String(it.kind||'').indexOf('Руна ')===0).length;
+  bookProgress.textContent='📖 В книжечке: '+all+' из '+BOOK_TOTAL+' · Редкие: '+rares+' · Руны: '+runes;
+ }
+ renderHistory();
+}
 function showDetails(title,text){details.classList.add('show');details.classList.remove('open');detailsTitle.textContent=title;detailsText.textContent=text;detailsBtn.textContent='Подробнее'}
 detailsBtn.onclick=()=>{details.classList.toggle('open');detailsBtn.textContent=details.classList.contains('open')?'Скрыть':'Подробнее'};
 historyBtn.onclick=()=>history.classList.toggle('open');
@@ -143,7 +205,7 @@ function reveal(e){
    if(roll<.05){const x=runes[Math.floor(Math.random()*runes.length)];text=x.text;tag='Руна '+x.name;kind.textContent='Редкая руна';kind.classList.add('show');runeSymbol.textContent=x.symbol;runeSymbol.classList.add('show');orb.classList.add('is-rune');showDetails('Руна '+x.name,x.detail)}
    else if(roll<.17){const x=rare[Math.floor(Math.random()*rare.length)];text=x.text;tag='Редкое';kind.textContent='Редкое';kind.classList.add('show');orb.classList.add('is-rare');showDetails('Редкое предсказание',x.detail)}
    else{text=common[Math.floor(Math.random()*common.length)];showDetails('Предсказание','Это обычное предсказание шара. Иногда самый простой знак оказывается самым точным.')}
-   s.count++;s.items=(s.items||[]).slice(-1);s.items.push({kind:tag,text});saveState(s);lastText=text;actions.classList.add('show');message.style.whiteSpace='normal';message.textContent=text;message.classList.remove('hide','reveal');void message.offsetWidth;message.classList.add('reveal');refresh()
+   s.count++;s.items=(s.items||[]).slice(-1);s.items.push({kind:tag,text});saveState(s);recordBook(tag,text,s.count);lastText=text;actions.classList.add('show');message.style.whiteSpace='normal';message.textContent=text;message.classList.remove('hide','reveal');void message.offsetWidth;message.classList.add('reveal');refresh()
  },700);
  setTimeout(()=>{orb.classList.remove('is-reading');busy=false},1350)
 }
