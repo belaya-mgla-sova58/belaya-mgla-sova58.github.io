@@ -3,7 +3,7 @@
 const BM_DATA=JSON.parse(document.getElementById('bm-game-data').textContent);
 const G=BM_DATA.records.filter(r=>r.kind==='gear').map(r=>({label:r.label_ru,alloy:r.cost.alloy,polish:r.cost.polishing_solution,plans:r.cost.design_plans,amber:r.cost.lunar_amber,power:r.power_total,score:r.upgrade_score,stat:r.stat_total_percent}));
 const C=BM_DATA.records.filter(r=>r.kind==='charm').map(r=>({label:r.label_ru,guides:r.cost.charm_guide,designs:r.cost.charm_design,secrets:r.cost.charm_secrets,power:r.power_total,score:r.upgrade_score,stat:r.stat_total_percent}));
-if(G.length!==150||C.length!==75)throw new Error('Ошибка таблицы переходов');
+if(G.length!==150||C.length!==75)throw new Error('Не удалось выполнить расчёт.');
 const gearSlots=[['cap','◈','Головной убор','Копейщики'],['watch','◷','Часы','Копейщики'],['coat','▣','Верхняя одежда','Пехота'],['pants','▥','Штаны','Пехота'],['ring','◉','Кольцо','Стрелки'],['weapon','⚔','Оружие','Стрелки']];
 const gearImages={cap:'Cap',watch:'Watch',coat:'Coat',pants:'Pants',ring:'Ring',weapon:'Weapon'};
 const catalogGearImages={pants:'assets/sova-chief-pants-v1223.webp',cap:'assets/sova-chief-cap-v1223.png',watch:'assets/sova-chief-watch-v1223.png',coat:'assets/sova-chief-coat-v1223.png',ring:'assets/sova-chief-ring-v1223.png',weapon:'assets/sova-chief-weapon-v1223.png'};
@@ -370,7 +370,7 @@ function recommendation(mode){
    if(item.at<=item.start)continue;
    const data=rows(item.cat);
    if(!Number.isInteger(item.at)||item.at>=data.length){
-     clearOptimizerPreview();$('optResult').textContent='Не удалось проверить предложенные уровни. Повторите подбор.';return;
+     clearOptimizerPreview();$('optResult').textContent='Не удалось подобрать улучшения. Попробуйте ещё раз.';return;
    }
    const costs=materialCost(item.cat,item.start,item.at);
    for(const k of Object.keys(mats))checkNeeds[k]+=costs[k];
