@@ -47,3 +47,20 @@
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});
  else init();
 })();
+
+
+/* Shared Winter Siege-style header on guide pages, without altering catalog or calculators. */
+(function(){
+ try{
+  if(document.querySelector('script[data-sova-guide-cover-loader-v1]'))return;
+  var hasGuide=document.body&&(
+   document.body.classList.contains('luxury-chronicle')||
+   !!document.querySelector('main#appMain .route-page.active > section.page-heading-v424')
+  );
+  if(!hasGuide)return;
+  var s=document.createElement('script');
+  s.src='guide-header-unified-v1.js?v=1';s.defer=true;
+  s.setAttribute('data-sova-guide-cover-loader-v1','');
+  document.head.appendChild(s);
+ }catch(e){/* Keep original guide usable. */}
+})();
