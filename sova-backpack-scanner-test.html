@@ -146,24 +146,32 @@ function draw(){
  });ctx.restore();
  el("counter").textContent=list.length+" ячеек";
 }
-function crop(c,bottom){
+function crop(c,bottom,narrow){
  var out=document.createElement("canvas");
- var iw=imgs[active].img.naturalWidth,ih=imgs[active].img.naturalHeight;
- var scaleX=iw/canvas.width,scaleY=ih/canvas.height;
- var x=c.x*scaleX,y=(c.y+(bottom?.57*c.h:0))*scaleY;
- var w=c.w*scaleX,h=(bottom?.43*c.h:c.h)*scaleY;
- out.width=Math.max(25,Math.round(w*(bottom?3:1)));
- out.height=Math.max(25,Math.round(h*(bottom?3:1)));
- out.getContext("2d",{willReadFrequently:true}).drawImage(imgs[active].img,x,y,w,h,0,0,out.width,out.height);
+ var original=imgs[active].img,scaleX=original.naturalWidth/canvas.width,scaleY=original.naturalHeight/canvas.height;
+ // Numbers in this four-column game inventory sit at the bottom right.
+ // Never scan the centre of the icon as a number.
+ var left=bottom?(narrow?.58:.22):0;
+ var top=bottom?.66:0;
+ var width=bottom?(narrow?.40:.77):1;
+ var height=bottom?.32:1;
+ var x=(c.x+left*c.w)*scaleX,y=(c.y+top*c.h)*scaleY;
+ var w=c.w*width*scaleX,h=c.h*height*scaleY;
+ var zoom=bottom?5:1;
+ out.width=Math.max(25,Math.round(w*zoom));
+ out.height=Math.max(25,Math.round(h*zoom));
+ var context=out.getContext("2d",{willReadFrequently:true});
+ context.imageSmoothingEnabled=true;context.imageSmoothingQuality="high";
+ context.drawImage(original,x,y,w,h,0,0,out.width,out.height);
  return out;
 }
 function safeCount(v){return Number.isSafeInteger(v)&&v>=0&&v<=1000000000000}
 function numberOf(text){
- var match=(text||"").match(/[\d][\d\s.,]*/g)||[];
- var numbers=match.map(function(s){
-  var clean=s.replace(/[^\d]/g,"");return clean?Number(clean):NaN;
- }).filter(safeCount);
- return numbers.length?numbers[numbers.length-1]:null;
+ var lines=String(text||"").replace(/\u00a0/g," ").trim().split(/\n+/).map(function(s){return s.trim()}).filter(Boolean);
+ // Do not turn icon details or multiple fragments into invented huge quantities.
+ if(lines.length!==1||!/^\d[\d\s.,]*$/.test(lines[0]))return null;
+ var raw=lines[0].replace(/[^\d]/g,""),number=raw?Number(raw):NaN;
+ return safeCount(number)?number:null;
 }
 function render(){
  var all=cells(),parent=el("items");
@@ -181,7 +189,7 @@ function render(){
   select.setAttribute("aria-label","Название для предмета "+(i+1));
   names.forEach(function(name){var o=document.createElement("option");o.value=name;o.textContent=name;select.append(o)});
   select.value=rec.kind;select.addEventListener("change",function(){rec.kind=select.value});
-  var guess=document.createElement("div");guess.className="guess";guess.textContent=rec.raw?"OCR: "+rec.raw.slice(0,40):"Нужно проверить";
+  var guess=document.createElement("div");guess.className="guess";guess.textContent=(rec.review?rec.review+" · ":"")+(rec.raw?"OCR: "+rec.raw.slice(0,40):"Нужно проверить");
   body.append(number,count,select,guess);box.append(icon,body);parent.append(box);
  });
  el("copy").disabled=!all.length;el("csv").disabled=!all.length;
@@ -233,18 +241,32 @@ el("scan").addEventListener("click",async function(){
   var w=await initWorker();
   for(var i=0;i<list.length;i++){
    note("Читаю предмет "+(i+1)+" из "+list.length+" · найдено "+found+" значений");
-   var image=crop(list[i],true);
-   var out=await w.recognize(image);
-   var text=(out.data&&out.data.text||"").trim();
-   var value=numberOf(text);
+   var narrowScan=await w.recognize(crop(list[i],true,true));
+   var narrowText=(narrowScan.data&&narrowScan.data.text||"").trim(),narrowValue=numberOf(narrowText);
+   var narrowConfidence=Number(narrowScan.data&&narrowScan.data.confidence||0);
+   var wideText="",wideValue=null,wideConfidence=0;
+   // A wide number may not fit the tighter box, so double-check longer or doubtful reads.
+   if(narrowValue===null||String(narrowValue).length>=3||narrowConfidence<55){
+     var wideScan=await w.recognize(crop(list[i],true,false));
+     wideText=(wideScan.data&&wideScan.data.text||"").trim();
+     wideValue=numberOf(wideText);
+     wideConfidence=Number(wideScan.data&&wideScan.data.confidence||0);
+   }
+   var conflicting=narrowValue!==null&&wideValue!==null&&narrowValue!==wideValue;
+   var value=null;
+   if(!conflicting){
+     if(narrowValue!==null&&narrowConfidence>=55)value=narrowValue;
+     else if(wideValue!==null&&wideConfidence>=60)value=wideValue;
+   }
    records[i]=records[i]||{kind:"Не определено",amount:"",raw:""};
-   records[i].raw=text.replace(/\s+/g," ").slice(0,40);
+   records[i].raw=(narrowText+(wideText?" / "+wideText:"")).replace(/\s+/g," ").slice(0,40);
+   records[i].review=conflicting?"Спорное число, введите вручную":(value!==null?"Предложено OCR, проверьте":"Не удалось надёжно прочитать");
    if(value!==null){records[i].amount=String(value);found++}
-   raw.push((i+1)+": "+(text||"не найдено")+" → "+(value!==null?value:"?"));
+   raw.push((i+1)+": "+(narrowText||"не найдено")+(wideText?" / "+wideText:"")+" → "+(value!==null?value:(conflicting?"спорно":"?")));
    if(i%4===3||i===list.length-1){render();await new Promise(function(resolve){setTimeout(resolve,0)})}
   }
   el("raw").textContent=raw.join("\n");
-  note("Сова прочитала "+found+" из "+list.length+" количеств. Проверьте каждую цифру перед использованием.");
+  note("Сова предложила "+found+" из "+list.length+" количеств. Это не подтверждённые значения: проверьте каждую цифру перед использованием.");
  }catch(err){note("Не получилось распознать: "+(err.message||err)+". Можно заполнить числа вручную.")}
  finally{busy=false;el("scan").disabled=false;el("rebuild").disabled=false}
 });
