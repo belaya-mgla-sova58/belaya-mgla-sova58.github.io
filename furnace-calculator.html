@@ -95,7 +95,8 @@
 <div><span aria-hidden="true" class="catalog-game-icon ci-resource_iron"></span><b>Железо</b><strong id="totalIron">0</strong></div>
 </div>
 </section>
-<section class="calc-total-v378 fire-per-building-v1" id="normalPerBuilding"><h2>Расчёт по каждому зданию</h2><p>Выберите текущий и желаемый уровень от 1 до 30. Стоимость других зданий не включается. Общий маршрут Топки 20–30 выше рассчитывается отдельно.</p><div class="fire-building-cards" id="normalBuildingCards"></div><div class="fire-building-sum" id="normalBuildingSum" aria-live="polite"></div><p class="fire-building-foot">Базовые справочные стоимости, без скидок. Уровень 1 считается уже построенным. Для Топки 27 оставлено 24 млн угля. Для лагерей на 30-м уровне источники расходятся по железу: 5,8 млн для пехоты и стрелков, 5,2 млн для копейщиков по таблицам WhiteoutData. Данные округлены источником и не подтверждены непосредственно в RU-версии.</p></section>
+<section class="fire-per-building-v1 bm-route-budget-v1"><h2>Запасы и остаток для общего маршрута</h2><p>Запасы вводятся ниже, в блоке отдельных зданий. Этот итог не складывается с отдельным расчётом.</p><div id="bmRouteBudget"></div></section>
+<section class="calc-total-v378 fire-per-building-v1" id="normalPerBuilding"><h2>Расчёт по каждому зданию</h2><p>Выберите текущий и желаемый уровень от 1 до 30. Стоимость других зданий не включается. Общий маршрут Топки 20–30 выше рассчитывается отдельно.</p><div class="fire-building-cards" id="normalBuildingCards"></div><div class="fire-building-sum bm-stock-v1"><h3>Ваши запасы</h3><p>Введите количество в единицах, например 1000000 = 1 млн. Запасы вычитаются из общего итога, а не из каждого здания отдельно.</p><div class="bm-stock-grid"><label>Мясо<input id="bmBuildingStock0" type="number" inputmode="numeric" min="0" step="1" max="9007199254740991" value="0"/></label><label>Древесина<input id="bmBuildingStock1" type="number" inputmode="numeric" min="0" step="1" max="9007199254740991" value="0"/></label><label>Уголь<input id="bmBuildingStock2" type="number" inputmode="numeric" min="0" step="1" max="9007199254740991" value="0"/></label><label>Железо<input id="bmBuildingStock3" type="number" inputmode="numeric" min="0" step="1" max="9007199254740991" value="0"/></label></div></div><div class="fire-building-sum" id="normalBuildingSum" aria-live="polite"></div><p class="fire-building-foot">Базовые справочные стоимости, без скидок. Уровень 1 считается уже построенным. Для Топки 27 оставлено 24 млн угля. Для лагерей на 30-м уровне источники расходятся по железу: 5,8 млн для пехоты и стрелков, 5,2 млн для копейщиков по таблицам WhiteoutData. Данные округлены источником и не подтверждены непосредственно в RU-версии.</p></section>
 <details class="simple-furnace-route"><summary>🏗️ Посмотреть порядок улучшений</summary><section class="calc-route-v378">
 <div class="calc-route-head-v378"><h2>🏗️ Что улучшать по порядку</h2><span id="calcStepCount"></span></div>
 <div class="calc-steps-v378" id="calcSteps"></div>
@@ -146,6 +147,7 @@
    }
    const fc=furnace[f];out.push({name:'Топка',from:f-1,to:f,cost:fc,kind:'furnace'});total=add(total,fc);
   }
+  routeBudget=total;refreshBudgets();
   document.getElementById('totalMeat').textContent=fmt(total[0]);document.getElementById('totalWood').textContent=fmt(total[1]);document.getElementById('totalCoal').textContent=fmt(total[2]);document.getElementById('totalIron').textContent=fmt(total[3]);document.getElementById('calcStepCount').textContent=a>=30?'Топка 30 достигнута':out.length+' шагов';
   stepsEl.innerHTML=a>=30?'<div class="calc-note-v378">🔥 Максимальный обычный уровень Топки (30) уже достигнут. Для дальнейшей прокачки перейдите в <a href="fire-furnace-calculator.html">калькулятор Огненной топки</a>.</div>':out.map((x,i)=>`<article class="calc-step-v378 ${x.kind==='furnace'?'is-furnace':''}"><div class="calc-step-num-v378">${i+1}</div><div class="calc-step-body-v378"><div class="calc-step-title-v378"><span>${icon[x.name]}</span><b>${x.name}</b><strong>${x.from} → ${x.to}</strong></div><div class="calc-step-res-v378">${resHtml(x.cost)}</div>${x.kind==='furnace'?'<div class="calc-ready-v378">После обязательных зданий можно запускать Топку</div>':''}</div></article>`).join('');
  }
@@ -177,8 +179,28 @@
  a.addEventListener('change',renderIndependent);b.addEventListener('change',renderIndependent);
  return {name,costs,a,b,result:card.querySelector('.fire-building-result')};
  });
- function exactResources(cost){return '<dl>'+['Мясо','Древесина','Уголь','Железо'].map((name,i)=>'<div><dt>'+name+'</dt><dd>'+Math.round(cost[i]*1000000).toLocaleString('ru-RU')+'</dd></div>').join('')+'</dl>'}
- function renderIndependent(){let total=R(0,0,0,0),saved={};for(const {name,costs,a,b,result} of rows){const start=+a.value;if(+b.value<start)b.value=a.value;[...b.options].forEach(o=>o.disabled=+o.value<start);let cost=R(0,0,0,0);for(let n=start+1;n<=+b.value;n++)cost=add(cost,costs[n]);total=add(total,cost);saved[name]=[start,+b.value];result.innerHTML=exactResources(cost);}sumEl.innerHTML='<h3>Итого по выбранным зданиям</h3>'+exactResources(total);try{localStorage.setItem(independentKey,JSON.stringify(saved))}catch(e){}}
+ 
+ const budgetNames=["Мясо","Древесина","Уголь","Железо"],stockInputs=["bmBuildingStock0","bmBuildingStock1","bmBuildingStock2","bmBuildingStock3"].map(id=>document.getElementById(id));
+ const budgetKey='sova58-building-stocks-normal-v1';
+ let routeBudget=R(0,0,0,0),independentBudget=R(0,0,0,0);
+ const countBudget=x=>Math.round(x).toLocaleString('ru-RU');
+ const cleanStock=(x,i)=>Math.max(0,Math.min(Number(stockInputs[i].max)||Number.MAX_SAFE_INTEGER,Math.floor(Number(x)||0)));
+ function readStocks(){return stockInputs.map((el,i)=>cleanStock(el.value,i))}
+ function budgetTable(cost){
+  const stocks=readStocks(),needed=cost.map((x,i)=>Math.round(x*(i<4?1e6:1)));
+  return '<div class="bm-budget-table-wrap"><table class="bm-budget-table"><thead><tr><th>Материал</th><th>Нужно</th><th>Есть</th><th>Не хватает</th></tr></thead><tbody>'+budgetNames.map((n,i)=>'<tr><th scope="row">'+n+'</th><td>'+countBudget(needed[i])+'</td><td>'+countBudget(stocks[i])+'</td><td>'+countBudget(Math.max(0,needed[i]-stocks[i]))+'</td></tr>').join('')+'</tbody></table></div>';
+ }
+ function refreshBudgets(){
+  document.getElementById('bmRouteBudget').innerHTML=budgetTable(routeBudget);
+  sumEl.innerHTML='<h3>Итого по выбранным зданиям</h3>'+budgetTable(independentBudget);
+  
+ }
+ try{const saved=JSON.parse(localStorage.getItem(budgetKey)||'null');if(Array.isArray(saved))stockInputs.forEach((el,i)=>{if(saved[i]!=null)el.value=String(cleanStock(saved[i],i))})}catch(e){}
+ function saveStocks(){try{localStorage.setItem(budgetKey,JSON.stringify(readStocks()))}catch(e){}}
+ stockInputs.forEach((el,i)=>{el.addEventListener('input',()=>{refreshBudgets();saveStocks()});el.addEventListener('change',()=>{el.value=String(cleanStock(el.value,i));refreshBudgets();saveStocks()})});
+ 
+function exactResources(cost){return '<dl>'+['Мясо','Древесина','Уголь','Железо'].map((name,i)=>'<div><dt>'+name+'</dt><dd>'+Math.round(cost[i]*1000000).toLocaleString('ru-RU')+'</dd></div>').join('')+'</dl>'}
+ function renderIndependent(){let total=R(0,0,0,0),saved={};for(const {name,costs,a,b,result} of rows){const start=+a.value;if(+b.value<start)b.value=a.value;[...b.options].forEach(o=>o.disabled=+o.value<start);let cost=R(0,0,0,0);for(let n=start+1;n<=+b.value;n++)cost=add(cost,costs[n]);total=add(total,cost);saved[name]=[start,+b.value];result.innerHTML=exactResources(cost);}independentBudget=total;refreshBudgets();try{localStorage.setItem(independentKey,JSON.stringify(saved))}catch(e){}}
  renderIndependent();
 
  function saveProgress(){
@@ -281,4 +303,15 @@ html body main#appMain .fire-building-controls select{display:block;width:100%;m
 html body main#appMain .fire-per-building-v1 dt{color:#e8e1d8!important;font-size:14px!important}
 html body main#appMain .fire-per-building-v1 dd{color:#f0d5a9!important;margin:0;font-weight:700;white-space:nowrap;font-size:15px!important}
 @media(max-width:420px){html body main#appMain .fire-per-building-v1{padding:12px!important}.fire-building-controls{grid-template-columns:1fr}}
-</style></body></html>
+</style><style id="bm-building-stock-v1">
+ html body main#appMain .bm-route-budget-v1{padding:16px!important;margin:12px 0 18px!important}
+ .bm-stock-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:10px}
+ html body main#appMain .bm-stock-grid label{display:grid;gap:5px;color:#eee5da!important;font-size:14px!important}
+ html body main#appMain .bm-stock-grid input{box-sizing:border-box;width:100%;min-width:0;padding:10px;background:#211f24!important;color:#fff5e6!important;border:1px solid #786956!important;border-radius:7px;font-size:16px!important}
+ .bm-budget-table-wrap{overflow-x:auto;max-width:100%}
+ html body main#appMain .bm-budget-table{width:100%;border-collapse:collapse;color:#eee5da!important;font-size:14px!important}
+ html body main#appMain .bm-budget-table th,html body main#appMain .bm-budget-table td{background:transparent!important;border-bottom:1px solid #51463d!important;padding:8px 6px!important;text-align:right;color:#eee5da!important;white-space:nowrap}
+ html body main#appMain .bm-budget-table th:first-child{text-align:left;white-space:normal}
+ html body main#appMain .bm-budget-table td:last-child{color:#f0d5a9!important;font-weight:700}
+ @media(max-width:520px){html body main#appMain .bm-budget-table{font-size:12px!important}html body main#appMain .bm-budget-table th,html body main#appMain .bm-budget-table td{padding:6px 3px!important}}
+ </style></body></html>
