@@ -3,7 +3,7 @@
 "use strict";
 if(window.__sovaUnifiedGuideHeaderV1)return;
 window.__sovaUnifiedGuideHeaderV1=true;
-var pages=new Set("alliance-championship alliance-mobilization alliance-showdown arena armament-competition beacon bear brothers-in-arms buildings buildings-before-fire buildings-after-fire canyon-clash castle cheats crazy-joe daily-chest dreams endless-trial exploration faq farm fishing forts foundry frostfire-mine furnace-1-30 furnace-extra-buildings furnace-fc1-5 furnace-fc5-10 ginas-revenge governor governor-orders island labyrinth mails mercenary-prestige newbie president-guide research resources skhvatka snowplow state-positions state-power state-transfer svs svs-prep troops troops-guide tundra-trade-route".split(" "));
+var pages=new Set("alliance-championship alliance-mobilization alliance-showdown arena armament-competition beacon bear brothers-in-arms buildings buildings-before-fire buildings-after-fire canyon-clash castle cheats crazy-joe dreams endless-trial exploration faq farm fishing forts foundry frostfire-mine furnace-1-30 furnace-extra-buildings furnace-fc1-5 furnace-fc5-10 ginas-revenge governor governor-orders island labyrinth mails mercenary-prestige newbie president-guide research resources skhvatka snowplow state-positions state-power state-transfer svs svs-prep troops troops-guide tundra-trade-route".split(" "));
 var pics={
 "alliance-championship":"alliance-championship-cosmic-v1198.jpg",
 "alliance-mobilization":"alliance-mobilization-cosmic-v1199.jpg",
