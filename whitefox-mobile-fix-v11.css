@@ -141,3 +141,39 @@
    transform:none!important
  }
 }
+
+
+/* WhiteFox universal contrast v12 (2026-11-26).
+   Both editorial templates and archive, desktop + mobile.
+   Preserve publication HTML, counter keys and scripts. */
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell :is(.whitefox-story-block,.wf-new-story,.wf-new-sidepanel,.whitefox-mini-card),
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell :is(.whitefox-story-block,.wf-new-story,.wf-new-sidepanel,.whitefox-mini-card) :is(h1,h2,h3,h4,p,li,ul,ol,strong,em,blockquote,.whitefox-block-label,.whitefox-quote,.whitefox-question-v557,.whitefox-romance-item-v557,.whitefox-romance-final-v557,.whitefox-editor-note-v557){color:#24374c!important;-webkit-text-fill-color:#24374c!important;opacity:1!important;text-shadow:none!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell :is(.whitefox-story-block,.wf-new-story,.wf-new-sidepanel,.whitefox-mini-card) :is(p,li,.whitefox-question-v557,.whitefox-romance-item-v557){font-size:clamp(15px,1.05vw,17px)!important;line-height:1.75!important;overflow-wrap:break-word!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell :is(.whitefox-story-block,.wf-new-story,.wf-new-sidepanel,.whitefox-mini-card) :is(h2,h3,h4){line-height:1.35!important;overflow-wrap:break-word!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell .wf-new-story>h3::before{color:#574223!important;-webkit-text-fill-color:#574223!important;opacity:1!important;text-shadow:none!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell .whitefox-story-signature{background:#fff9ed!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell .whitefox-story-signature :is(small,strong,span){color:#24374c!important;-webkit-text-fill-color:#24374c!important;opacity:1!important;text-shadow:none!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell :is(.wf-new-sidepanel a,.wf-new-nav a,.whitefox-week42-jump-v558 a){background:#fffaf0!important;color:#294563!important;-webkit-text-fill-color:#294563!important;opacity:1!important;text-shadow:none!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell :is(.whitefox-story-head,.wf-new-head){background:linear-gradient(145deg,#172b44,#263e58)!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell :is(.whitefox-story-head,.wf-new-head) :is(h1,h2,h3,p,.whitefox-week,.whitefox-author,.whitefox-kicker,.wf-new-meta,.wf-new-kicker,.wfx-edition,.wfix-frontispiece,.wfx-seal b){color:#fff1cf!important;-webkit-text-fill-color:#fff1cf!important;opacity:1!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell :is(.whitefox-head-like-v557,.news-like-button){background:#fffaf0!important;color:#24374c!important;-webkit-text-fill-color:#24374c!important;opacity:1!important;text-shadow:none!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell :is(.whitefox-head-like-v557,.news-like-button) :is(span,b){color:#24374c!important;-webkit-text-fill-color:#24374c!important;opacity:1!important;text-shadow:none!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell :is(.whitefox-head-like-v557 .heart,.news-like-heart){color:#b52f57!important;-webkit-text-fill-color:#b52f57!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell :is(.anon-comments-hint-v557,.anon-comments-empty-v557,.anon-comments-status-v557,.anon-comments-count-v557,.anon-comment-text-v557,.anon-comment-meta-v557,.wfx-letters-caption){color:#384b61!important;-webkit-text-fill-color:#384b61!important;opacity:1!important;text-shadow:none!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell .anon-comments-status-v557.error{color:#a52548!important;-webkit-text-fill-color:#a52548!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell .anon-comments-form-v557 textarea{background:#fff!important;color:#24374c!important;-webkit-text-fill-color:#24374c!important;opacity:1!important;text-shadow:none!important;color-scheme:light;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell .anon-comments-form-v557 textarea::placeholder{color:#54677a!important;-webkit-text-fill-color:#54677a!important;opacity:1!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell .anon-comments-submit-v557{background:#315f99!important;color:#fff!important;-webkit-text-fill-color:#fff!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell .wf-new-note{background:#fff9ed!important;color:#384b61!important;-webkit-text-fill-color:#384b61!important;opacity:1!important;text-shadow:none!important;padding:10px!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell .wfix-paper-ticker>span{color:#614c2f!important;-webkit-text-fill-color:#614c2f!important;opacity:1!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell .whitefox-index .whitefox-publication-row{background:linear-gradient(130deg,#fffefa,#f3e4cc)!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell .whitefox-index .whitefox-publication-row :is(.whitefox-elena-card-title,.whitefox-elena-card-week,.whitefox-elena-card-kicker,.whitefox-elena-card-hint,.whitefox-elena-card-hint span,.wfx-archive-stamp){color:#24374c!important;-webkit-text-fill-color:#24374c!important;opacity:1!important;text-shadow:none!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell .whitefox-index .whitefox-publication-row .wfx-archive-medal{background:radial-gradient(circle,#2d4669,#0e2039)!important;color:#fff1cf!important;-webkit-text-fill-color:#fff1cf!important;opacity:1!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell .whitefox-index .whitefox-card-stat-v557{background:#fffaf0!important;color:#24374c!important;-webkit-text-fill-color:#24374c!important;opacity:1!important;text-shadow:none!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell .whitefox-index .whitefox-card-stat-v557 b{color:#24374c!important;-webkit-text-fill-color:#24374c!important;opacity:1!important;text-shadow:none!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell .whitefox-index .whitefox-index-badge-q-v557{background:#e8f3ff!important;color:#244a70!important;-webkit-text-fill-color:#244a70!important;}
+html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell .whitefox-index .whitefox-index-badge-r-v557{background:#ffe5ef!important;color:#812c53!important;-webkit-text-fill-color:#812c53!important;}
+@media(max-width:820px){
+ html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell :is(.whitefox-story-block,.wf-new-story,.wf-new-sidepanel,.whitefox-mini-card) :is(p,li,.whitefox-question-v557,.whitefox-romance-item-v557){font-size:15px!important;line-height:1.7!important;}
+ html body.news-top-whitefox.modern-v424 main#appMain .route-page.news-page .news-shell :is(.whitefox-story-block,.wf-new-story,.wf-new-sidepanel){min-width:0!important;overflow-wrap:break-word!important;}
+}
