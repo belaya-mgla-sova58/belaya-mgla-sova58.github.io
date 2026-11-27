@@ -77,5 +77,6 @@ body.skhvatka-chronicle .skhvatka-steps{grid-template-columns:repeat(2,minmax(0,
 <script>
 (function(){const progress=document.getElementById('readProgress'),top=document.getElementById('toTop');function update(){const y=window.scrollY,h=document.documentElement.scrollHeight-window.innerHeight;progress.style.width=(h>0?Math.min(100,y/h*100):0)+'%';top.classList.toggle('show',y>500)}window.addEventListener('scroll',update,{passive:true});window.addEventListener('load',update);top.addEventListener('click',()=>window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'}));if('IntersectionObserver'in window){const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)document.querySelectorAll('[data-target]').forEach(a=>a.classList.toggle('active',a.dataset.target===e.target.id))}),{rootMargin:'-35% 0px -45% 0px'});document.querySelectorAll('.section-frame[id]').forEach(e=>observer.observe(e))}update()})();
 </script>
+<script defer src="guide-header-unified-v1.js?v=20261128-skhvatka"></script>
 <script defer src="sova-mobile-guide-reading-v1.js?v=4"></script>
 </body></html>
