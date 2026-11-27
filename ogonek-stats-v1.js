@@ -3,7 +3,8 @@
  'use strict';
  const BASE='https://belaya-mgla-likes-default-rtdb.firebaseio.com/likes/';
  function init(root,id){
-  const likeKey=id==='zimbabe'?'k-vam-na-ogonek-zimbabe-v1':'k-vam-na-ogonek-barash-v1';
+  const likeKeys={zimbabe:'k-vam-na-ogonek-zimbabe-v1',barash:'k-vam-na-ogonek-barash-v1','mish-gun':'k-vam-na-ogonek-mish-gun-v1'};
+  const likeKey=likeKeys[id];if(!likeKey)return;
   const url=BASE+encodeURIComponent(likeKey)+'.json';
   const likedKey='belaya-mgla-firebase-liked-'+likeKey;
   const button=root.querySelector('[data-ogonek-like]');
