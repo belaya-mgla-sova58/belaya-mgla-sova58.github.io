@@ -78,5 +78,24 @@ body.skhvatka-chronicle .skhvatka-steps{grid-template-columns:repeat(2,minmax(0,
 (function(){const progress=document.getElementById('readProgress'),top=document.getElementById('toTop');function update(){const y=window.scrollY,h=document.documentElement.scrollHeight-window.innerHeight;progress.style.width=(h>0?Math.min(100,y/h*100):0)+'%';top.classList.toggle('show',y>500)}window.addEventListener('scroll',update,{passive:true});window.addEventListener('load',update);top.addEventListener('click',()=>window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'}));if('IntersectionObserver'in window){const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)document.querySelectorAll('[data-target]').forEach(a=>a.classList.toggle('active',a.dataset.target===e.target.id))}),{rootMargin:'-35% 0px -45% 0px'});document.querySelectorAll('.section-frame[id]').forEach(e=>observer.observe(e))}update()})();
 </script>
 <script defer src="guide-header-unified-v1.js?v=20261128-skhvatka"></script>
+<script id="skhvatka-cover-image-v1264">
+(function(){
+ function ensure(){
+  var cover=document.querySelector('main.page > .main > .sova-guide-cover-v1');
+  if(!cover)return;
+  var img=cover.querySelector(':scope > img');
+  if(!img){img=document.createElement('img');cover.insertBefore(img,cover.firstChild);}
+  if(img.getAttribute('src')!=='assets/skhvatka-banner.webp')img.setAttribute('src','assets/skhvatka-banner.webp');
+  img.alt='Иллюстрация события «Схватка»';img.width=2172;img.height=724;img.loading='eager';img.decoding='async';
+  observer.disconnect();
+ }
+ var observer=new MutationObserver(ensure);
+ observer.observe(document.querySelector('main.page > .main'),{childList:true});
+ ensure();
+})();
+</script>
+<style>
+html body.skhvatka-chronicle main.page>.main>.sova-guide-cover-v1>img{display:block!important;width:100%!important;height:auto!important;max-height:none!important;aspect-ratio:3/1!important;object-fit:contain!important;opacity:1!important}
+</style>
 <script defer src="sova-mobile-guide-reading-v1.js?v=4"></script>
 </body></html>
