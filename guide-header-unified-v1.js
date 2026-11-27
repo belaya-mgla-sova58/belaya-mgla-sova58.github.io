@@ -6,6 +6,7 @@ window.__sovaUnifiedGuideHeaderV1=true;
 var pages=new Set("state-58 winter-siege alliance-championship alliance-mobilization alliance-showdown arena armament-competition beacon bear brothers-in-arms buildings buildings-before-fire buildings-after-fire canyon-clash castle cheats crazy-joe dreams endless-trial exploration faq farm fishing forts foundry frostfire-mine furnace-1-30 furnace-extra-buildings furnace-fc1-5 furnace-fc5-10 ginas-revenge governor governor-orders island labyrinth mails mercenary-prestige newbie president-guide research resources skhvatka snowplow state-positions state-power state-transfer svs svs-prep troops troops-guide tundra-trade-route".split(" "));
 var pics={
 "winter-siege":"winter-siege-cosmic-v1207.jpg",
+"skhvatka":"skhvatka-banner.webp",
 "alliance-championship":"alliance-championship-cosmic-v1198.jpg",
 "alliance-mobilization":"alliance-mobilization-cosmic-v1199.jpg",
 "alliance-showdown":"alliance-showdown-cosmic-v1197.jpg",
