@@ -231,7 +231,7 @@ function renderRank(){
  const list=MAIN_JOINERS.map(name=>pool().find(h=>h.name===name)).filter(Boolean);
  box.innerHTML='<b>⭐ Четыре основных героя для вступления</b><div class="rank-list">'+list.map(h=>'<div class="rank-item"><span>'+h.name+'</span><small>'+firstLabel(h,5)+'</small></div>').join('')+'</div><div class="calc-helper-explanation">Джеронимо подходит, если не занят в собственном сборе. Другие варианты доступны в раскрывающемся блоке. Это подсказка по навыкам, а не точный рейтинг урона.</div>';
 }
-document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');mode=b.dataset.mode;$('heroes').classList.toggle('hide',mode==='troops');$('ownedPanel').classList.toggle('hide',mode==='lead');$('modeText').textContent=mode==='mixed'?'1-й марш — свой сбор, остальные — присоединения.':mode==='join'?'Проверяем первого героя вступления и его 1-й экспедиционный навык.':mode==='lead'?'Проверяем героев собственного сбора.':'Герои не учитываются.';fillHeroes()});$('gen').onchange=fillHeroes;document.querySelectorAll('#ratios .chip').forEach(b=>b.onclick=()=>{document.querySelectorAll('#ratios .chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');ratio=b.dataset.r});
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');mode=b.dataset.mode;$('heroes').classList.toggle('hide',mode==='troops');$('ownedPanel').classList.toggle('hide',mode==='lead');$('modeText').textContent=mode==='mixed'?'1-й марш — свой сбор, остальные — присоединения.':mode==='join'?'Проверяем первого героя вступления и его 1-й экспедиционный навык.':mode==='lead'?'Проверяем героев собственного сбора.':'Герои не учитываются.';fillHeroes()});$('gen').onchange=fillHeroes;document.querySelectorAll('#ratios .chip').forEach(b=>b.onclick=()=>{document.querySelectorAll('#ratios .chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');ratio=b.dataset.r;refreshBearResult()});
 // Allocate troops using the real army inventory. No damage formula is assumed.
 const sum=a=>a.reduce((acc,x)=>acc+x,0);
 function partsOf(n,r){const raw=r.map(p=>n*p/100),out=raw.map(Math.floor);let remain=n-sum(out);let order=[0,1,2].sort((a,b)=>(raw[b]-Math.floor(raw[b]))-(raw[a]-Math.floor(raw[a]))||([2,1,0].indexOf(a)-[2,1,0].indexOf(b)));for(let k=0;k<remain;k++)out[order[k%3]]++;return out}
@@ -277,7 +277,8 @@ function distribute(army,n,capacity,r,policy){
  return {rows,allocated,used:sum(allocated),left:total-sum(allocated),perMarch:Math.floor(sum(allocated)/n)};
 }
 function realRatio(row){let total=sum(row);return total?row.map(x=>Math.round(x*1000/total)/10).join('/'):'0/0/0'}
-function calc(){
+function refreshBearResult(){if($('out').classList.contains('show'))calc(false)}
+function calc(scroll=true){
  const raw=['inf','lan','mar','cap'].map(id=>Number($(id).value));
  const valid=raw.every(v=>Number.isFinite(v)&&Number.isInteger(v)&&v>=0&&v<=1000000000);
  if(!valid){
@@ -296,8 +297,11 @@ function calc(){
  let actual=realRatio(output.allocated),different=actual.split('/').some((v,i)=>Math.abs(Number(v)-r[i])>1.1);
  $('why').className='note'+(policy==='fill'&&different?' calc-warning':'');
  $('why').textContent=policy==='keep'?
-  'Пропорция '+r.join('/')+' сохраняется насколько возможно с округлением до целых войск. Свободно '+fmt(left)+' войск. Для лучшего заполнения можно переключиться в режим максимального использования.':
+  'Выбрано '+r.join('/')+'. Фактическое соотношение '+actual+'. Свободно '+fmt(left)+' войск. Марши могут быть неполными, чтобы сохранить пропорцию. Для лучшего заполнения можно переключиться в режим максимального использования.':
   'Использовано '+fmt(used)+' войск. Фактическое общее соотношение '+actual+'; '+(different?'из-за ограниченного запаса типов войск оно отличается от выбранного.':'выбранная схема в целом сохранена.');
+ const fullTarget=partsOf(cap,r).map(x=>x*n);const lacking=fullTarget.map((x,i)=>x>army[i]?ROLE_NAMES[i]+' (не хватает '+fmt(x-army[i])+')':null).filter(Boolean);
+ if(lacking.length)$('why').textContent+=' Для полного заполнения всех маршей по выбранной схеме недостаточно: '+lacking.join(', ')+'.';
+ if(r[2]>0&&output.allocated[2]===army[2]&&army[2]>0)$('why').textContent+=' Использован весь доступный запас стрелков — увеличение их доли не добавит новых стрелков.';
  if(ratio==='auto')$('why').textContent+=' Авто подбирает доступный вариант по количеству войск, а не по прогнозу урона.';
  const joiners=selectedJoiners(),joinUsed=new Set(),ranks=joiners.filter(x=>x.hero.kind!=='bad');
  $('marches').innerHTML=rows.map((row,i)=>{
@@ -308,10 +312,12 @@ function calc(){
   else{let pick=ranks.find(x=>!joinUsed.has(x.hero.name));if(pick){joinUsed.add(pick.hero.name);heroDescription='👥 Первый герой: '+pick.hero.name+' (навык '+pick.level+'). '+firstLabel(pick.hero,pick.level)}else heroDescription='👥 Без героя. Не назначайте случайный неподходящий первый навык высокого уровня.'}
   return '<div class="march"><h3>Марш '+(i+1)+' · '+fmt(sum(row))+'</h3><div class="note">'+heroDescription+'</div><small class="march-ratio">Фактическое соотношение: '+realRatio(row)+'</small><div class="troops">'+[['🛡 Пехота',row[0]],['🗡 Копейщики',row[1]],['🏹 Стрелки',row[2]]].map(x=>'<div class="troop"><small>'+x[0]+'</small><b>'+fmt(x[1])+'</b></div>').join('')+'</div></div>';
  }).join('');
- $('out').scrollIntoView({behavior:'smooth',block:'start'});
+ if(scroll)$('out').scrollIntoView({behavior:'smooth',block:'start'});
 }
-$('distribution').onchange=()=>{$('distributionExplain').textContent=$('distribution').value==='keep'?'Сохраняет пропорцию во всех маршах, но может оставить часть армии свободной.':'Заполняет марши по вместимости и распределяет дефицитные типы равномерно. Фактические проценты могут измениться.'};
-$('calc').onclick=calc;fillHeroes();
+$('distribution').onchange=()=>{$('distributionExplain').textContent=$('distribution').value==='keep'?'Сохраняет пропорцию во всех маршах, но может оставить часть армии свободной.':'Заполняет марши по вместимости и распределяет дефицитные типы равномерно. Фактические проценты могут измениться.';refreshBearResult()};
+$('calc').onclick=()=>calc(true);fillHeroes();
+['inf','lan','mar','cap'].forEach(id=>$(id).addEventListener('input',refreshBearResult));
+$('mc').addEventListener('change',refreshBearResult);
 // Keep the player's troop inputs and chosen ratio on this device between visits.
 (function restoreBearSettings(){
  const key='sova58-bear-helper-settings-v1';
