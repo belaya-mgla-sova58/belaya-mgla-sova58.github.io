@@ -140,10 +140,10 @@ body.bm-calc-jewel-v89 .troop :is(strong,b,span,small){
 <section class="hero"><div class="hero-title"><div class="bear-orb">🐻</div><div><h1>Калькулятор Медведя</h1><p>Готовые составы маршей по твоим запасам войск. <a class="helper-guide-link" href="bear.html">Все пояснения о навыках и тактиках →</a></p></div></div><div class="tabs" id="tabs"><button class="active" data-mode="mixed">🔥+👥 Создаю и присоединяюсь</button><button data-mode="join">👥 Присоединяюсь</button><button data-mode="lead">🔥 Создаю сбор</button><button data-mode="troops">⚔️ Только войска</button></div></section>
 <section class="card" id="heroes"><div class="section-head"><div class="step-title"><span class="step-dot">1</span><h2>Герои</h2></div><span class="mini-badge">только 1–3 поколение</span></div><div class="row"><div class="field"><label for="gen">До какого поколения открыты герои</label><select id="gen"><option value="1">1 поколение</option><option value="2">2 поколение</option><option value="3" selected>3 поколение</option></select></div><div class="field"><label>Что проверяем</label><div class="note" id="modeText" style="margin-top:0">1-й марш — свой сбор, остальные — присоединения.</div></div></div><div class="priority-box"><strong>Первый герой при вступлении решает бонус рейда.</strong><small>Уровень его 1-го экспедиционного навыка учитывается отдельно.</small></div><div class="priority-box rule-blue"><strong>Синие герои не повышают урон по Медведю.</strong><small>Первым для усиления урона не рекомендуются. Во 2-м и 3-м слоте допустимы, если помогают увеличить вместимость марша.</small></div><div class="trio" id="trio"></div><div class="legend"><span class="lg-good">✓ подходит</span><span class="lg-warn">● ситуативный</span><span class="lg-bad">✕ не подходит</span><span class="lg-blue">◆ синий только 2–3</span></div><div class="status" id="heroStatus"></div><div class="hero-count" id="heroCount"></div><details class="owned-box" id="ownedPanel" open><summary>👥 Мои доступные герои для вступления</summary><p>Выбери доступных героев и уровень их первого навыка. Основных всего четыре, дополнительные скрыты ниже. Если герой уже занят в твоём сборе, помощник не назначит его повторно. Марши без подходящего героя будут отмечены «Без героя».</p><div id="ownedRoster" class="owned-wrap"></div><div class="note" id="ownedNote">Герои не выбраны. Присоединения будут показаны с пометкой «Без героя».</div></details></section>
 <section class="card"><div class="section-head"><div class="step-title"><span class="step-dot">2</span><h2>Войска</h2></div></div><div class="grid3"><div class="field"><label for="inf">🛡 Пехота</label><input id="inf" type="number" inputmode="numeric" min="0" max="1000000000" step="1" value="188000"></div><div class="field"><label for="lan">🗡 Копейщики</label><input id="lan" type="number" inputmode="numeric" min="0" max="1000000000" step="1" value="162000"></div><div class="field"><label for="mar">🏹 Стрелки</label><input id="mar" type="number" inputmode="numeric" min="0" max="1000000000" step="1" value="203000"></div></div></section>
-<section class="card"><div class="section-head"><div class="step-title"><span class="step-dot">3</span><h2>Марши</h2></div></div><div class="row"><div class="field"><label for="mc">Количество маршей</label><select id="mc"><option>3</option><option>4</option><option>5</option><option selected>6</option><option>7</option><option>8</option></select></div><div class="field"><label for="cap">Вместимость одного марша</label><input id="cap" type="number" inputmode="numeric" min="1" max="1000000000" step="1" value="125000"></div></div></section>
+<section class="card"><div class="section-head"><div class="step-title"><span class="step-dot">3</span><h2>Марши</h2></div></div><div class="row"><div class="field"><label for="mc">Количество маршей</label><select id="mc"><option>3</option><option>4</option><option>5</option><option selected>6</option><option>7</option><option>8</option></select></div><div class="field"><label for="cap">Вместимость одного марша</label><input id="cap" type="number" inputmode="numeric" min="1" max="1000000000" step="1" value="125000"></div></div><div class="row" style="margin-top:14px"><div class="field"><label for="capSource">Откуда взята вместимость?</label><select id="capSource"><option value="bear" selected>Уже на Мишке (со всеми бонусами)</option><option value="normal">Обычный марш / палатка (питомцы включены)</option></select></div><div class="field" id="cyrilleField" hidden><label for="cyrilleLevel">Сирилль · Погибель медведя (4-й навык)</label><select id="cyrilleLevel"><option value="0">Нет навыка / не открыт</option><option value="1">1 ур. · +3 000 войск</option><option value="2">2 ур. · +6 000 войск</option><option value="3">3 ур. · +9 000 войск</option><option value="4">4 ур. · +12 000 войск</option><option value="5">5 ур. · +15 000 войск</option><option value="6">6 ур. · +18 000 войск</option><option value="7">7 ур. · +21 000 войск</option><option value="8">8 ур. · +24 000 войск</option><option value="9">9 ур. · +27 000 войск</option><option value="10">10 ур. · +30 000 войск</option></select></div></div><div id="bearCapacityInfo" class="note" aria-live="polite" style="margin-top:12px"></div><details class="owned-box"><summary>Почему сохранённой формации не хватает войск?</summary><p>Перед охотой включи нужные питомцы и прочие усиления вместимости. Если вводишь обычную вместимость, калькулятор добавит только бонус 4-го навыка Сирилль. Если вводишь вместимость прямо из окна отправки на Мишку, ничего дополнительно не прибавляется.</p><p>Формация, сохранённая по процентам, может заполняться до большей вместимости на охоте. Для неполных маршей используй рассчитанное количество каждого типа войск, а не только проценты. Проверь фактический состав каждого марша при отправлении. Если герои дают разную вместимость, текущий расчёт с одной общей вместимостью не заменяет проверку каждого отряда.</p><p>В разделе «Войска» вводи только свободные войска, доступные для отправления. Бонус к вместимости всего сбора не увеличивает твой личный марш. <a href="expert-cyrille-preview.html">Подробнее о Сирилль ›</a></p></details></section>
 <section class="card"><div class="section-head"><div class="step-title"><span class="step-dot">4</span><h2>Соотношение</h2></div></div><div class="chips" id="ratios"><button class="chip active" data-r="auto">⚙️ Авто</button><button class="chip" data-r="10,30,60">10/30/60</button><button class="chip" data-r="10,20,70">10/20/70</button><button class="chip" data-r="10,15,75">10/15/75</button><button class="chip" data-r="10,10,80">10/10/80</button><button class="chip" data-r="5,5,90">5/5/90</button><button class="chip" data-r="1,4,95">🧪 1/4/95</button><button class="chip" data-r="0,0,100">🧪 100% стрелков</button></div>
 <div class="row" style="margin-top:14px"><div class="field"><label for="distribution">Как распределять войска</label><select id="distribution"><option value="keep" selected>Сохранять пропорцию во всех маршах</option><option value="fill">Использовать максимум доступных войск</option><option value="priority">Приоритет стрелков — сначала первый марш</option></select></div><div class="field"><label>Что означают режимы</label><div class="note" id="distributionExplain" style="margin-top:0">Пропорции сохраняются, но часть войск может остаться свободной.</div></div></div>
-<div id="bearRatioPreview" class="note" aria-live="polite" style="margin-top:14px"></div><div class="actions"><button class="primary" id="calc">Рассчитать</button></div><p style="font-size:12px;opacity:.8;margin:8px 0 0">Версия расчёта: 28.11.2026 · 3</p></section>
+<div id="bearRatioPreview" class="note" aria-live="polite" style="margin-top:14px"></div><div class="actions"><button class="primary" id="calc">Рассчитать</button></div><p style="font-size:12px;opacity:.8;margin:8px 0 0">Версия расчёта: 28.11.2026 · 4</p></section>
 <section class="out" id="out"><div class="section-head"><div class="step-title"><span class="step-dot">✓</span><h2>Твой план на Мишку</h2></div></div><div class="summary"><div><small>Используем</small><b id="used">0</b></div><div><small>Войск всего</small><b id="all">0</b></div><div><small>Схема</small><b id="scheme">—</b></div><div><small>Осталось</small><b id="leftover">0</b></div></div><div id="why" class="note"></div><div id="marches" class="marches"></div></section></div>
 <script>
 const $=id=>document.getElementById(id),fmt=n=>Math.round(n).toLocaleString('ru-RU');
@@ -286,10 +286,28 @@ function distribute(army,n,capacity,r,policy){
  return {rows,allocated,used:sum(allocated),left:total-sum(allocated),perMarch:Math.floor(sum(allocated)/n)};
 }
 function realRatio(row){let total=sum(row);return total?row.map(x=>Math.round(x*1000/total)/10).join('/'):'0/0/0'}
+function effectiveCapacity(base,source,level){return base+(source==='normal'?3000*level:0)}
+function bearCapacity(){
+ const base=Number($('cap').value),source=$('capSource').value,level=Number($('cyrilleLevel').value);
+ const valid=Number.isSafeInteger(base)&&base>0&&base<=1000000000&&Number.isInteger(level)&&level>=0&&level<=10;
+ return {valid,base,source,level,bonus:source==='normal'?3000*level:0,cap:valid?effectiveCapacity(base,source,level):0};
+}
+function updateCapacityInfo(){
+ const c=bearCapacity();$('cyrilleField').hidden=c.source!=='normal';$('cyrilleField').style.display=c.source==='normal'?'':'none';
+ $('cap').labels[0].textContent=c.source==='normal'?'Обычная вместимость с активными питомцами':'Фактическая вместимость на Мишке';
+ const n=Number($('mc').value),box=$('bearCapacityInfo');
+ if(!c.valid){box.textContent='Укажи корректную вместимость одного марша.';return}
+ box.textContent=c.source==='normal'?'Обычный марш: '+fmt(c.base)+' · Сирилль: +'+fmt(c.bonus)+' · На Мишке: '+fmt(c.cap)+' войск на марш. Для '+n+' полных маршей потребуется '+fmt(c.cap*n)+' войск'+(c.bonus?' (на '+fmt(c.bonus*n)+' больше, чем в палатках)':'')+'.':'В расчёте '+fmt(c.cap)+' войск на марш. Бонус Сирилль и активных питомцев повторно не прибавляется. Для '+n+' полных маршей потребуется '+fmt(c.cap*n)+' войск.';
+}
+function formationWarning(army,n,cap,r){
+ const target=partsOf(cap,r),missing=target.map((v,i)=>Math.max(0,v*n-army[i]));
+ return {target,missing};
+}
 function ratioPreview(){
+ updateCapacityInfo();
  const raw=['inf','lan','mar','cap'].map(id=>Number($(id).value)),n=Number($('mc').value),box=$('bearRatioPreview');
- if(!raw.every(v=>Number.isSafeInteger(v)&&v>=0&&v<=1000000000)||!raw[3]||!n){box.textContent='Введите корректное количество войск и вместимость.';return}
- const army=raw.slice(0,3),cap=raw[3],r=ratio==='auto'?autoR(army,n,cap):ratio.split(',').map(Number);
+ if(!raw.every(v=>Number.isSafeInteger(v)&&v>=0&&v<=1000000000)||!bearCapacity().valid||!n){box.textContent='Введите корректное количество войск и вместимость.';return}
+ const army=raw.slice(0,3),cap=bearCapacity().cap,r=ratio==='auto'?autoR(army,n,cap):ratio.split(',').map(Number);
  const result=distribute(army,n,cap,r,$('distribution').value),target=partsOf(cap,r)[2],counts=result.rows.map(row=>row[2]),low=Math.min(...counts),high=Math.max(...counts),available=army[2];
  const line=low===high?fmt(low):fmt(low)+'–'+fmt(high);
  const priority=$('distribution').value==='priority';
@@ -297,6 +315,8 @@ function ratioPreview(){
  box.textContent='Выбрано '+r.join('/')+' · Стрелков на полный марш: '+fmt(target)+' · Фактически на марш: '+line+' · Всего отправляем стрелков: '+fmt(result.allocated[2])+' из '+fmt(available)+'.';
  if(priority){const others=counts.slice(1);box.textContent='Выбрано '+r.join('/')+' · Цель стрелков на полный марш: '+fmt(target)+' · Первый марш: '+fmt(counts[0])+' стрелков, всего '+fmt(sum(result.rows[0]))+' войск'+(others.length?' · Остальные марши: по '+fmt(others[0])+' стрелков':'')+' · Отправляем '+fmt(result.allocated[2])+' из '+fmt(available)+' стрелков.';}
  if(shortage>0)box.textContent+=' Не хватает '+fmt(shortage)+' стрелков для всех '+n+' полных маршей с выбранной пропорцией. '+(target>0&&Math.floor(available/target)>=1?'По запасу стрелков хватит максимум на '+Math.min(n,Math.floor(available/target))+' полных марша(ей); учитывай также пехоту и копейщиков.':'');
+ const c=bearCapacity(),formation=formationWarning(army,n,cap,r);
+ if(c.bonus>0){const old=partsOf(c.base,r);const extra=formation.target.map((v,i)=>v-old[i]);box.textContent+=' По сравнению с обычной полной формацией каждый полный марш на Мишке требует дополнительно: пехота '+fmt(extra[0])+', копейщики '+fmt(extra[1])+', стрелки '+fmt(extra[2])+'.';}
  if(!priority&&target>0&&available-result.allocated[2]<n&&shortage>0)box.textContent+=' Почти весь запас стрелков уже распределён: процент может расти за счёт уменьшения пехоты и копейщиков, а не количества стрелков.';
 }
 let bearReady=false;
@@ -311,7 +331,7 @@ function calc(scroll=true){
   $('why').textContent='Проверьте ввод: нужны целые числа от 0 до 1 000 000 000. Слишком большие и дробные значения не поддерживаются.';
   $('marches').innerHTML='';return;
  }
- let army=raw.slice(0,3),n=+ $('mc').value,cap=raw[3],total=sum(army);
+ let army=raw.slice(0,3),n=+ $('mc').value,cap=bearCapacity().cap,total=sum(army);
  $('out').classList.add('show');
  if(!cap||!total){$('all').textContent=fmt(total);$('used').textContent='0';$('leftover').textContent=fmt(total);$('scheme').textContent='—';$('why').textContent='Введите войска и вместимость каждого марша.';$('marches').innerHTML='';return}
  let r=ratio==='auto'?autoR(army,n,cap):ratio.split(',').map(Number),policy=$('distribution').value;
@@ -324,6 +344,7 @@ function calc(scroll=true){
   policy==='keep'?
   'Выбрано '+r.join('/')+'. Фактическое соотношение '+actual+'. Свободно '+fmt(left)+' войск. Марши могут быть неполными, чтобы сохранить пропорцию. Для лучшего заполнения можно переключиться в режим максимального использования.':
   'Использовано '+fmt(used)+' войск. Фактическое общее соотношение '+actual+'; '+(different?'из-за ограниченного запаса типов войск оно отличается от выбранного.':'выбранная схема в целом сохранена.');
+ const c=bearCapacity();if(c.bonus>0)$('why').textContent+=' Учтён бонус Сирилль: +'+fmt(c.bonus)+' к каждому маршу. Обычная вместимость '+fmt(c.base)+', на Мишке '+fmt(cap)+'.';
  const fullTarget=partsOf(cap,r).map(x=>x*n);const lacking=fullTarget.map((x,i)=>x>army[i]?ROLE_NAMES[i]+' (не хватает '+fmt(x-army[i])+')':null).filter(Boolean);
  if(lacking.length)$('why').textContent+=' Для полного заполнения всех маршей по выбранной схеме недостаточно: '+lacking.join(', ')+'.';
  if(policy!=='priority'&&r[2]>0&&army[2]>0&&army[2]-output.allocated[2]<(policy==='keep'?n:1)&&fullTarget[2]>army[2])$('why').textContent+=' Доступные стрелки уже распределены с учётом округления. Увеличение процента может уменьшить другие типы войск, не увеличивая число стрелков. Попробуй уменьшить количество маршей.';
@@ -342,11 +363,12 @@ function calc(scroll=true){
 $('distribution').onchange=()=>{$('distributionExplain').textContent=$('distribution').value==='keep'?'Сохраняет пропорцию во всех маршах, но может оставить часть армии свободной.':'Заполняет марши по вместимости и распределяет дефицитные типы равномерно. Фактические проценты могут измениться.';if($('distribution').value==='priority')$('distributionExplain').textContent='Первый марш (свой сбор в смешанном режиме) получает войска по выбранной пропорции до вместимости. Остаток делится между другими маршами с той же пропорцией; они могут быть неполными. Лишние войска остаются свободными.';refreshBearResult()};
 $('calc').onclick=()=>{ratioPreview();calc(true)};fillHeroes();
 ['inf','lan','mar','cap'].forEach(id=>$(id).addEventListener('input',refreshBearResult));
+['capSource','cyrilleLevel'].forEach(id=>$(id).addEventListener('change',refreshBearResult));
 $('mc').addEventListener('change',refreshBearResult);
 // Keep the player's troop inputs and chosen ratio on this device between visits.
 (function restoreBearSettings(){
  const key='sova58-bear-helper-settings-v1';
- const ids=['inf','lan','mar','cap','mc','distribution'];
+ const ids=['inf','lan','mar','cap','mc','distribution','capSource','cyrilleLevel'];
  function save(){
   try{
    const values=Object.fromEntries(ids.map(id=>[id,$(id).value]));
