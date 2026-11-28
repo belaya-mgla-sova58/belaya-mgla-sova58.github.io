@@ -2,6 +2,7 @@
 // NEVER put service_role, sb_secret_, admin passwords or CAPTCHA secret here.
 window.SOVA_MAIL_CONFIG = Object.freeze({
  enabled:false,
+ publicLauncher:false,
  url:"",
  publishableKey:"",
  turnstileSiteKey:""
