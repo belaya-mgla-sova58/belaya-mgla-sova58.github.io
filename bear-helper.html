@@ -143,7 +143,7 @@ body.bm-calc-jewel-v89 .troop :is(strong,b,span,small){
 <section class="card"><div class="section-head"><div class="step-title"><span class="step-dot">3</span><h2>Марши</h2></div></div><div class="row"><div class="field"><label for="mc">Количество маршей</label><select id="mc"><option>3</option><option>4</option><option>5</option><option selected>6</option><option>7</option><option>8</option></select></div><div class="field"><label for="cap">Вместимость одного марша</label><input id="cap" type="number" inputmode="numeric" min="1" max="1000000000" step="1" value="125000"></div></div></section>
 <section class="card"><div class="section-head"><div class="step-title"><span class="step-dot">4</span><h2>Соотношение</h2></div></div><div class="chips" id="ratios"><button class="chip active" data-r="auto">⚙️ Авто</button><button class="chip" data-r="10,30,60">10/30/60</button><button class="chip" data-r="10,20,70">10/20/70</button><button class="chip" data-r="10,15,75">10/15/75</button><button class="chip" data-r="10,10,80">10/10/80</button><button class="chip" data-r="5,5,90">5/5/90</button><button class="chip" data-r="1,4,95">🧪 1/4/95</button><button class="chip" data-r="0,0,100">🧪 100% стрелков</button></div>
 <div class="row" style="margin-top:14px"><div class="field"><label for="distribution">Как распределять войска</label><select id="distribution"><option value="keep" selected>Сохранять пропорцию во всех маршах</option><option value="fill">Использовать максимум доступных войск</option></select></div><div class="field"><label>Что означают режимы</label><div class="note" id="distributionExplain" style="margin-top:0">Пропорции сохраняются, но часть войск может остаться свободной.</div></div></div>
-<div class="actions"><button class="primary" id="calc">Рассчитать</button></div></section>
+<div id="bearRatioPreview" class="note" aria-live="polite" style="margin-top:14px"></div><div class="actions"><button class="primary" id="calc">Рассчитать</button></div><p style="font-size:12px;opacity:.8;margin:8px 0 0">Версия расчёта: 28.11.2026 · 2</p></section>
 <section class="out" id="out"><div class="section-head"><div class="step-title"><span class="step-dot">✓</span><h2>Твой план на Мишку</h2></div></div><div class="summary"><div><small>Используем</small><b id="used">0</b></div><div><small>Войск всего</small><b id="all">0</b></div><div><small>Схема</small><b id="scheme">—</b></div><div><small>Осталось</small><b id="leftover">0</b></div></div><div id="why" class="note"></div><div id="marches" class="marches"></div></section></div>
 <script>
 const $=id=>document.getElementById(id),fmt=n=>Math.round(n).toLocaleString('ru-RU');
@@ -277,7 +277,19 @@ function distribute(army,n,capacity,r,policy){
  return {rows,allocated,used:sum(allocated),left:total-sum(allocated),perMarch:Math.floor(sum(allocated)/n)};
 }
 function realRatio(row){let total=sum(row);return total?row.map(x=>Math.round(x*1000/total)/10).join('/'):'0/0/0'}
-function refreshBearResult(){if($('out').classList.contains('show'))calc(false)}
+function ratioPreview(){
+ const raw=['inf','lan','mar','cap'].map(id=>Number($(id).value)),n=Number($('mc').value),box=$('bearRatioPreview');
+ if(!raw.every(v=>Number.isSafeInteger(v)&&v>=0&&v<=1000000000)||!raw[3]||!n){box.textContent='Введите корректное количество войск и вместимость.';return}
+ const army=raw.slice(0,3),cap=raw[3],r=ratio==='auto'?autoR(army,n,cap):ratio.split(',').map(Number);
+ const result=distribute(army,n,cap,r,$('distribution').value),target=partsOf(cap,r)[2],counts=result.rows.map(row=>row[2]),low=Math.min(...counts),high=Math.max(...counts),available=army[2];
+ const line=low===high?fmt(low):fmt(low)+'–'+fmt(high);
+ let shortage=target*n-available;
+ box.textContent='Выбрано '+r.join('/')+' · Стрелков на полный марш: '+fmt(target)+' · Фактически на марш: '+line+' · Всего отправляем стрелков: '+fmt(result.allocated[2])+' из '+fmt(available)+'.';
+ if(shortage>0)box.textContent+=' Не хватает '+fmt(shortage)+' стрелков для всех '+n+' полных маршей с выбранной пропорцией. '+(target>0&&Math.floor(available/target)>=1?'По запасу стрелков хватит максимум на '+Math.min(n,Math.floor(available/target))+' полных марша(ей); учитывай также пехоту и копейщиков.':'');
+ if(target>0&&available-result.allocated[2]<n&&shortage>0)box.textContent+=' Почти весь запас стрелков уже распределён: процент может расти за счёт уменьшения пехоты и копейщиков, а не количества стрелков.';
+}
+let bearReady=false;
+function refreshBearResult(){ratioPreview();if(bearReady)calc(false)}
 function calc(scroll=true){
  const raw=['inf','lan','mar','cap'].map(id=>Number($(id).value));
  const valid=raw.every(v=>Number.isFinite(v)&&Number.isInteger(v)&&v>=0&&v<=1000000000);
@@ -301,7 +313,7 @@ function calc(scroll=true){
   'Использовано '+fmt(used)+' войск. Фактическое общее соотношение '+actual+'; '+(different?'из-за ограниченного запаса типов войск оно отличается от выбранного.':'выбранная схема в целом сохранена.');
  const fullTarget=partsOf(cap,r).map(x=>x*n);const lacking=fullTarget.map((x,i)=>x>army[i]?ROLE_NAMES[i]+' (не хватает '+fmt(x-army[i])+')':null).filter(Boolean);
  if(lacking.length)$('why').textContent+=' Для полного заполнения всех маршей по выбранной схеме недостаточно: '+lacking.join(', ')+'.';
- if(r[2]>0&&output.allocated[2]===army[2]&&army[2]>0)$('why').textContent+=' Использован весь доступный запас стрелков — увеличение их доли не добавит новых стрелков.';
+ if(r[2]>0&&army[2]>0&&army[2]-output.allocated[2]<(policy==='keep'?n:1)&&fullTarget[2]>army[2])$('why').textContent+=' Доступные стрелки уже распределены с учётом округления. Увеличение процента может уменьшить другие типы войск, не увеличивая число стрелков. Попробуй уменьшить количество маршей.';
  if(ratio==='auto')$('why').textContent+=' Авто подбирает доступный вариант по количеству войск, а не по прогнозу урона.';
  const joiners=selectedJoiners(),joinUsed=new Set(),ranks=joiners.filter(x=>x.hero.kind!=='bad');
  $('marches').innerHTML=rows.map((row,i)=>{
@@ -315,7 +327,7 @@ function calc(scroll=true){
  if(scroll)$('out').scrollIntoView({behavior:'smooth',block:'start'});
 }
 $('distribution').onchange=()=>{$('distributionExplain').textContent=$('distribution').value==='keep'?'Сохраняет пропорцию во всех маршах, но может оставить часть армии свободной.':'Заполняет марши по вместимости и распределяет дефицитные типы равномерно. Фактические проценты могут измениться.';refreshBearResult()};
-$('calc').onclick=()=>calc(true);fillHeroes();
+$('calc').onclick=()=>{ratioPreview();calc(true)};fillHeroes();
 ['inf','lan','mar','cap'].forEach(id=>$(id).addEventListener('input',refreshBearResult));
 $('mc').addEventListener('change',refreshBearResult);
 // Keep the player's troop inputs and chosen ratio on this device between visits.
@@ -397,4 +409,5 @@ $('mc').addEventListener('change',refreshBearResult);
  $('trio').addEventListener('change',saveHeroes);
  $('ownedRoster').addEventListener('change',saveHeroes);
 })();
+bearReady=true;ratioPreview();
 </script><link rel="stylesheet" href="belaya-unified-palette-v25.css?v=27" data-sova-unified-theme/></body></html>
