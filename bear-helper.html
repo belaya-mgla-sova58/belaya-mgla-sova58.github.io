@@ -142,8 +142,8 @@ body.bm-calc-jewel-v89 .troop :is(strong,b,span,small){
 <section class="card"><div class="section-head"><div class="step-title"><span class="step-dot">2</span><h2>Войска</h2></div></div><div class="grid3"><div class="field"><label for="inf">🛡 Пехота</label><input id="inf" type="number" inputmode="numeric" min="0" max="1000000000" step="1" value="188000"></div><div class="field"><label for="lan">🗡 Копейщики</label><input id="lan" type="number" inputmode="numeric" min="0" max="1000000000" step="1" value="162000"></div><div class="field"><label for="mar">🏹 Стрелки</label><input id="mar" type="number" inputmode="numeric" min="0" max="1000000000" step="1" value="203000"></div></div></section>
 <section class="card"><div class="section-head"><div class="step-title"><span class="step-dot">3</span><h2>Марши</h2></div></div><div class="row"><div class="field"><label for="mc">Количество маршей</label><select id="mc"><option>3</option><option>4</option><option>5</option><option selected>6</option><option>7</option><option>8</option></select></div><div class="field"><label for="cap">Вместимость одного марша</label><input id="cap" type="number" inputmode="numeric" min="1" max="1000000000" step="1" value="125000"></div></div></section>
 <section class="card"><div class="section-head"><div class="step-title"><span class="step-dot">4</span><h2>Соотношение</h2></div></div><div class="chips" id="ratios"><button class="chip active" data-r="auto">⚙️ Авто</button><button class="chip" data-r="10,30,60">10/30/60</button><button class="chip" data-r="10,20,70">10/20/70</button><button class="chip" data-r="10,15,75">10/15/75</button><button class="chip" data-r="10,10,80">10/10/80</button><button class="chip" data-r="5,5,90">5/5/90</button><button class="chip" data-r="1,4,95">🧪 1/4/95</button><button class="chip" data-r="0,0,100">🧪 100% стрелков</button></div>
-<div class="row" style="margin-top:14px"><div class="field"><label for="distribution">Как распределять войска</label><select id="distribution"><option value="keep" selected>Сохранять пропорцию во всех маршах</option><option value="fill">Использовать максимум доступных войск</option></select></div><div class="field"><label>Что означают режимы</label><div class="note" id="distributionExplain" style="margin-top:0">Пропорции сохраняются, но часть войск может остаться свободной.</div></div></div>
-<div id="bearRatioPreview" class="note" aria-live="polite" style="margin-top:14px"></div><div class="actions"><button class="primary" id="calc">Рассчитать</button></div><p style="font-size:12px;opacity:.8;margin:8px 0 0">Версия расчёта: 28.11.2026 · 2</p></section>
+<div class="row" style="margin-top:14px"><div class="field"><label for="distribution">Как распределять войска</label><select id="distribution"><option value="keep" selected>Сохранять пропорцию во всех маршах</option><option value="fill">Использовать максимум доступных войск</option><option value="priority">Приоритет стрелков — сначала первый марш</option></select></div><div class="field"><label>Что означают режимы</label><div class="note" id="distributionExplain" style="margin-top:0">Пропорции сохраняются, но часть войск может остаться свободной.</div></div></div>
+<div id="bearRatioPreview" class="note" aria-live="polite" style="margin-top:14px"></div><div class="actions"><button class="primary" id="calc">Рассчитать</button></div><p style="font-size:12px;opacity:.8;margin:8px 0 0">Версия расчёта: 28.11.2026 · 3</p></section>
 <section class="out" id="out"><div class="section-head"><div class="step-title"><span class="step-dot">✓</span><h2>Твой план на Мишку</h2></div></div><div class="summary"><div><small>Используем</small><b id="used">0</b></div><div><small>Войск всего</small><b id="all">0</b></div><div><small>Схема</small><b id="scheme">—</b></div><div><small>Осталось</small><b id="leftover">0</b></div></div><div id="why" class="note"></div><div id="marches" class="marches"></div></section></div>
 <script>
 const $=id=>document.getElementById(id),fmt=n=>Math.round(n).toLocaleString('ru-RU');
@@ -254,6 +254,15 @@ function autoR(army,n,cap){
 }
 function distribute(army,n,capacity,r,policy){
  const total=sum(army);
+ if(policy==='priority'){
+  // Reserve the first march at the selected ratio before sharing the remainder.
+  const first=partsOf(balancedMax(army,1,capacity,r),r);
+  const remaining=army.map((x,i)=>x-first[i]);
+  const rest=n>1?distribute(remaining,n-1,capacity,r,'keep').rows:[];
+  const rows=[first,...rest],allocated=[0,1,2].map(i=>sum(rows.map(row=>row[i])));
+  const used=sum(allocated);
+  return {rows,allocated,used,left:total-used,perMarch:Math.floor(used/n)};
+ }
  if(policy==='keep'){
   const per=partsOf(balancedMax(army,n,capacity,r),r);
   const rows=Array.from({length:n},()=>[...per]),allocated=per.map(x=>x*n),used=sum(allocated);
@@ -283,10 +292,12 @@ function ratioPreview(){
  const army=raw.slice(0,3),cap=raw[3],r=ratio==='auto'?autoR(army,n,cap):ratio.split(',').map(Number);
  const result=distribute(army,n,cap,r,$('distribution').value),target=partsOf(cap,r)[2],counts=result.rows.map(row=>row[2]),low=Math.min(...counts),high=Math.max(...counts),available=army[2];
  const line=low===high?fmt(low):fmt(low)+'–'+fmt(high);
+ const priority=$('distribution').value==='priority';
  let shortage=target*n-available;
  box.textContent='Выбрано '+r.join('/')+' · Стрелков на полный марш: '+fmt(target)+' · Фактически на марш: '+line+' · Всего отправляем стрелков: '+fmt(result.allocated[2])+' из '+fmt(available)+'.';
+ if(priority){const others=counts.slice(1);box.textContent='Выбрано '+r.join('/')+' · Цель стрелков на полный марш: '+fmt(target)+' · Первый марш: '+fmt(counts[0])+' стрелков, всего '+fmt(sum(result.rows[0]))+' войск'+(others.length?' · Остальные марши: по '+fmt(others[0])+' стрелков':'')+' · Отправляем '+fmt(result.allocated[2])+' из '+fmt(available)+' стрелков.';}
  if(shortage>0)box.textContent+=' Не хватает '+fmt(shortage)+' стрелков для всех '+n+' полных маршей с выбранной пропорцией. '+(target>0&&Math.floor(available/target)>=1?'По запасу стрелков хватит максимум на '+Math.min(n,Math.floor(available/target))+' полных марша(ей); учитывай также пехоту и копейщиков.':'');
- if(target>0&&available-result.allocated[2]<n&&shortage>0)box.textContent+=' Почти весь запас стрелков уже распределён: процент может расти за счёт уменьшения пехоты и копейщиков, а не количества стрелков.';
+ if(!priority&&target>0&&available-result.allocated[2]<n&&shortage>0)box.textContent+=' Почти весь запас стрелков уже распределён: процент может расти за счёт уменьшения пехоты и копейщиков, а не количества стрелков.';
 }
 let bearReady=false;
 function refreshBearResult(){ratioPreview();if(bearReady)calc(false)}
@@ -308,12 +319,14 @@ function calc(scroll=true){
  $('all').textContent=fmt(total);$('used').textContent=fmt(used);$('leftover').textContent=fmt(left);$('scheme').textContent=r.join('/');
  let actual=realRatio(output.allocated),different=actual.split('/').some((v,i)=>Math.abs(Number(v)-r[i])>1.1);
  $('why').className='note'+(policy==='fill'&&different?' calc-warning':'');
- $('why').textContent=policy==='keep'?
+ $('why').textContent=policy==='priority'?
+  'Первый марш получает войска в первую очередь по схеме '+r.join('/')+'. В нём '+fmt(sum(rows[0]))+' войск, включая '+fmt(rows[0][2])+' стрелков. '+(sum(rows[0])<cap?'Даже для первого марша не хватает войск нужных типов. ':'')+(n>1?'Остаток распределён равномерно между '+(n-1)+' маршами с сохранением пропорции. ':'')+'Свободно '+fmt(left)+' войск.':
+  policy==='keep'?
   'Выбрано '+r.join('/')+'. Фактическое соотношение '+actual+'. Свободно '+fmt(left)+' войск. Марши могут быть неполными, чтобы сохранить пропорцию. Для лучшего заполнения можно переключиться в режим максимального использования.':
   'Использовано '+fmt(used)+' войск. Фактическое общее соотношение '+actual+'; '+(different?'из-за ограниченного запаса типов войск оно отличается от выбранного.':'выбранная схема в целом сохранена.');
  const fullTarget=partsOf(cap,r).map(x=>x*n);const lacking=fullTarget.map((x,i)=>x>army[i]?ROLE_NAMES[i]+' (не хватает '+fmt(x-army[i])+')':null).filter(Boolean);
  if(lacking.length)$('why').textContent+=' Для полного заполнения всех маршей по выбранной схеме недостаточно: '+lacking.join(', ')+'.';
- if(r[2]>0&&army[2]>0&&army[2]-output.allocated[2]<(policy==='keep'?n:1)&&fullTarget[2]>army[2])$('why').textContent+=' Доступные стрелки уже распределены с учётом округления. Увеличение процента может уменьшить другие типы войск, не увеличивая число стрелков. Попробуй уменьшить количество маршей.';
+ if(policy!=='priority'&&r[2]>0&&army[2]>0&&army[2]-output.allocated[2]<(policy==='keep'?n:1)&&fullTarget[2]>army[2])$('why').textContent+=' Доступные стрелки уже распределены с учётом округления. Увеличение процента может уменьшить другие типы войск, не увеличивая число стрелков. Попробуй уменьшить количество маршей.';
  if(ratio==='auto')$('why').textContent+=' Авто подбирает доступный вариант по количеству войск, а не по прогнозу урона.';
  const joiners=selectedJoiners(),joinUsed=new Set(),ranks=joiners.filter(x=>x.hero.kind!=='bad');
  $('marches').innerHTML=rows.map((row,i)=>{
@@ -322,11 +335,11 @@ function calc(scroll=true){
   else if(mode==='lead')heroDescription=i===0?'🔥 Свой сбор: '+(heroValues().filter(Boolean).join(' + ')||'выберите тройку героев выше'):'🔥 Другой собственный сбор: герои не назначены';
   else if(mode==='mixed'&&i===0)heroDescription='🔥 Свой сбор: '+(heroValues().filter(Boolean).join(' + ')||'выберите тройку героев выше');
   else{let pick=ranks.find(x=>!joinUsed.has(x.hero.name));if(pick){joinUsed.add(pick.hero.name);heroDescription='👥 Первый герой: '+pick.hero.name+' (навык '+pick.level+'). '+firstLabel(pick.hero,pick.level)}else heroDescription='👥 Без героя. Не назначайте случайный неподходящий первый навык высокого уровня.'}
-  return '<div class="march"><h3>Марш '+(i+1)+' · '+fmt(sum(row))+'</h3><div class="note">'+heroDescription+'</div><small class="march-ratio">Фактическое соотношение: '+realRatio(row)+'</small><div class="troops">'+[['🛡 Пехота',row[0]],['🗡 Копейщики',row[1]],['🏹 Стрелки',row[2]]].map(x=>'<div class="troop"><small>'+x[0]+'</small><b>'+fmt(x[1])+'</b></div>').join('')+'</div></div>';
+  return '<div class="march'+(policy==='priority'&&i===0?' priority-march':'')+'"><h3>Марш '+(i+1)+(policy==='priority'&&i===0?' · ⭐ Приоритетный':'')+' · '+fmt(sum(row))+'</h3><div class="note">'+heroDescription+'</div><small class="march-ratio">Фактическое соотношение: '+realRatio(row)+'</small><div class="troops">'+[['🛡 Пехота',row[0]],['🗡 Копейщики',row[1]],['🏹 Стрелки',row[2]]].map(x=>'<div class="troop"><small>'+x[0]+'</small><b>'+fmt(x[1])+'</b></div>').join('')+'</div></div>';
  }).join('');
  if(scroll)$('out').scrollIntoView({behavior:'smooth',block:'start'});
 }
-$('distribution').onchange=()=>{$('distributionExplain').textContent=$('distribution').value==='keep'?'Сохраняет пропорцию во всех маршах, но может оставить часть армии свободной.':'Заполняет марши по вместимости и распределяет дефицитные типы равномерно. Фактические проценты могут измениться.';refreshBearResult()};
+$('distribution').onchange=()=>{$('distributionExplain').textContent=$('distribution').value==='keep'?'Сохраняет пропорцию во всех маршах, но может оставить часть армии свободной.':'Заполняет марши по вместимости и распределяет дефицитные типы равномерно. Фактические проценты могут измениться.';if($('distribution').value==='priority')$('distributionExplain').textContent='Первый марш (свой сбор в смешанном режиме) получает войска по выбранной пропорции до вместимости. Остаток делится между другими маршами с той же пропорцией; они могут быть неполными. Лишние войска остаются свободными.';refreshBearResult()};
 $('calc').onclick=()=>{ratioPreview();calc(true)};fillHeroes();
 ['inf','lan','mar','cap'].forEach(id=>$(id).addEventListener('input',refreshBearResult));
 $('mc').addEventListener('change',refreshBearResult);
@@ -410,4 +423,4 @@ $('mc').addEventListener('change',refreshBearResult);
  $('ownedRoster').addEventListener('change',saveHeroes);
 })();
 bearReady=true;ratioPreview();
-</script><link rel="stylesheet" href="belaya-unified-palette-v25.css?v=27" data-sova-unified-theme/></body></html>
+</script><link rel="stylesheet" href="belaya-unified-palette-v25.css?v=27" data-sova-unified-theme/><style>html body .march.priority-march{border:2px solid #d5ab69!important;box-shadow:0 0 15px rgba(213,171,105,.18)!important}html body .march.priority-march h3{color:#f4d5a2!important}</style></body></html>
